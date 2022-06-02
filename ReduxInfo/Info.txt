@@ -1,0 +1,30 @@
+The application state will be the players level, xp, inventory, loot inventory, quest progress
+All the above information will be contained in the redux store 
+?(do i use 1 big store for everything, or can i use multiple?)
+
+The action object to update state will be the result of each player action
+cut wood (gain xp, get item), kill monster (gain xp in multiple skills, set item into loot inventory), complete quest step, etc
+
+this will then be dispatched to the store to update the state
+
+subscribers will be the players level interface and inventory interfaces
+
+!============================== right from the tutorial
+? pausing this for now until i get further into the tutorial lol
+define initialState as inventory and xp
+const initialState = {
+  logs: 0,
+  ashes: 0,
+  woodcuttingXP: 0,
+  firemakingXP: 0
+}
+
+for woodcutting - gain a log, and woodcuttingXP
+function gainLogs(state = initialState, action) {
+  return { ...state, logs: state.logs + 1, woodcuttingXP: state.woodcuttingXP + 25 }
+}
+
+for firemaking - lose a log, gain ashes, gain firemakingXP
+function burnLogs(state = initialState, action) {
+    return { ...state, logs: state.logs -1, ashes: state.ashes + 1, firemakingXP: state.firemakingXP + 25 }
+}

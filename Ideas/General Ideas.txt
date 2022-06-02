@@ -1,0 +1,47 @@
+Google: 'can i use set interval in react'
+https://devtrium.com/posts/set-interval-react
+
+we can implement the idea of difficulty by lowering(easier) or raising(harder) the number randNum is compared to
+
+
+
+
+Gathering skill loop:
+walk to resource 
+gather resource
+ - repeat until inventory is full
+ walk to bank ( instant deposit to make things easy ) 
+ walk back to location
+
+
+time taken to walk can be halved by using run energy
+every (or every other) tick of the timer is a chance to get a resource
+chance of gathering resources increased with higher level, equipment, other future buffs
+
+
+EX: woodcutting runs on a 1 sec timer, lvl 1 with bronze axe gives a 20% chance to get a log
+go through X loops to fill inventory, then start walking back to bank
+
+
+Combat: (Non-Boss)
+
+each location will have a combat option, showing the monsters in the current location in some interface
+this interface will also show
+- their level compared to the player's level
+- time the player can stay in combat
+- their loot
+- slayer level requirement if any
+
+
+use combat skills (or combat level) and gear to generate some number
+use monster combat stats to determine to generate some number
+subtract monster number from player number, and translate this to some time a player can stay and kill monsters
+monsters take some amount of time to kill, based on their stats
+
+every kill will add some loot to a loot table
+player can add some items to their inventory while in combat
+
+after players time is up, the player can add items from loot table to their inventory
+
+LATER: consumables can add to player time
+

@@ -1,0 +1,28 @@
+Lumbridge Town
+Man lvl 2
+Woman lvl 2
+Giant Spider lvl 2
+Goblin lvl 2
+
+Lumbridge Farm
+Chicken lvl 1
+Cow lvl 4
+
+Lumbridge Swamp
+Spider lvl 1
+Giant Rat lvl 7
+Giant Rat lvl 9
+Swamp Frog lvl 16
+
+Lumbridge Catacombs
+Warped Cockroack lvl 1
+Warped Bat lvl 1
+Corpse Spider lvl 4
+Warped Fly lvl 7
+Crawling Corpse Torso lvl 9
+Warped Rat lvl 12
+Skeleton lvl 15
+Corpse Archer lvl 18
+Skoblin lvl 19
+Corpse Mage lvl 21
+Dragith Nurn lvl 26

@@ -1,0 +1,43 @@
+SKILLS LIST
+
+COMBAT
+Attack
+Strength
+Defence
+Ranged
+Magic
+Prayer
+Constitution
+Summoning
+
+
+GATHERING
+Mining - tin, copper
+Fishing - trout, salmon, pike, crayfish, shrimp, anchovies
+Woodcutting - normal, oak, willow, yew
+Farming - Tree patch
+Hunter
+Divination
+Archaeology
+
+
+ARTISAN
+Herblore
+Crafting - spinnign wheel
+Fletching
+Smithing - furnace and anvil
+Cooking - range
+Firemaking
+Runecrafting - water
+Construction
+
+
+
+
+
+SUPPORT
+Dungeoneering
+Agility - NONE
+Thieving - men, women, stalls, thieving guild
+Slayer
+Invention

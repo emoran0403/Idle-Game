@@ -1,0 +1,48 @@
+Quests:
+each location will have a quest option, showing the quests that are started in that location
+this interface will also show
+- quests the player can start now
+- unattained levels the player needs before starting the quest
+- previous quest requirements (if space allows)
+- the time required to complete each quest
+- rewards
+- quests requiring combat will be noted with some icon
+
+!================================================================
+
+Quests:
+- Just run down a timer to complete the quest
+- Difficulty, length, skill requirements, item requirements, and enemies to defeat will contribute to the timer
+- assign some number to each difficulty
+- assign some number to each length
+- use the number of skill requirements as a small multiplier
+- use the actual skill level requirements as a number
+- assign some number to the amount of items required
+- assign some number based on the combat level of the enemies to defeat
+- maybe count the headers on the wiki, and the number of p tags following them for the number of 'steps' in the quest
+
+!================================================================
+
+Actual Guide Page:
+?Count the headers to translate into time
+
+document.getElementsByClassName('mw-headline') will grab the headers
+10 headers need to be subtracted from this value as they correspond to the headers below:
+Official description, overview, rewards, Achievements, Required for completing, Transcript, Gallery, Credits, Update history, Trivia
+
+!================================================================
+
+Quick Guide Page:
+?Count the individual steps to translate into time
+
+document.getElementsByClassName('lighttable checklist') will grab the tables containing the steps listed
+.children gives the ul
+.children gives the li (with a div, this div is the 'uncheck all' button)
+thus, .length -1 will give the number of steps
+
+??? subtract 2 from length, as the first 2 are item checklists
+OR keep that to represent the time taken to get those items
+
+
+
+

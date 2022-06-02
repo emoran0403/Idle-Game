@@ -1,0 +1,4 @@
+Fix the level up function
+check the xp functions
+
+implement redux to keep track of the massive amount of state we're gonna have

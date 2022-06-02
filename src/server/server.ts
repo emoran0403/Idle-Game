@@ -1,9 +1,10 @@
-import * as express from 'express';
-import apiRouter from './routes';
+import * as express from "express";
+import apiRouter from "./routes";
 
 const app = express();
 
-app.use(express.static('public'));
+app.use(express.static("public"));
+app.use(express.json()); // body parser ftw just in case lol
 app.use(apiRouter);
 
 const port = process.env.PORT || 3000;
