@@ -1,0 +1,78 @@
+@Store
+?(do i use 1 big store for everything, or can i use multiple?)
+# you'll only have a single store in a Redux application. 
+The application state will be the players level, xp, inventory, loot inventory, quest progress
+All the above information will be contained in the redux store 
+
+
+The action object to update state will be the result of each player action
+cut wood (gain xp, get item), kill monster (gain xp in multiple skills, set item into loot inventory), complete quest step, etc
+
+this will then be dispatched to the store to update the state
+
+subscribers will be the players level interface and inventory interfaces
+
+
+
+@Reducer Functions - These will handle the action object to update state
+? how many things is it ok to do in one function?
+
+? do i need a separate function for each kind of xp update / item update
+#Redux reducers are typically split apart based on the section of the Redux state that they update.
+# - https://redux.js.org/tutorials/fundamentals/part-3-state-actions-reducers#splitting-reducers
+
+I can have slices for xp, levels, etc
+
+
+function gainLogs(state = initialState, action) {
+  return { ...state, logs: state.logs + 1, woodcuttingXP: state.woodcuttingXP + 25 }
+}
+
+
+@Action Objects - basically what will be sent to the store upon each game action
+? Is it ok to put an object in as the payload?
+
+The type field should be a readable string, and is usually written as 'feature/eventName'
+type: 'feature/eventName',
+payload: 'other info here'
+
+
+const addTodoAction = {
+  type: 'todos/todoAdded',
+  payload: 'Buy milk'
+}
+
+@Dispatch
+*The Redux store has a method called dispatch. 
+*The only way to update the state is to call store.dispatch() and pass in an action object. 
+*The store will run its reducer function and save the new state value inside
+*and we can call getState() to retrieve the updated value:
+
+I can probably make xp gain and item gain / loss functions by wrapping the dispatch function
+
+store.dispatch({ type: 'counter/incremented' })
+
+console.log(store.getState())
+
+@Selectors
+*Selectors are functions that know how to extract specific pieces of information from a store state value. 
+*As an application grows bigger, this can help avoid repeating logic as different parts of the app need to read the same data
+I can probably use this to display the levels in the levels interface
+? if so, do i even need to save levels in state?
+
+@App state vs UI state
+*App state goes in the store, UI state can live in the component
+Think of App state as the xp and levels and other player stats the game will run one
+UI state would be anything that changes the UI, like toggling a view on or off
+UI - clicking the skilling button to view the available skilling options in a location
+
+@Designing the State Structure
+*With Redux, our application state is always kept in plain JavaScript objects and arrays.
+*That means you may not put other things into the Redux state - no class instances,
+*built-in JS types like Map / Set Promise / Date, functions, or anything else that is not plain JS data.
+This shouldn't be a problem
+
+@Creating a Store with Enhancers
+I can enhance a dispatcher to log the event to the chatbox
+@he Redux core includes a compose function that can be used to merge multiple enhancers together
+might need this for quests, since they give multiple xp updates!
