@@ -1,6 +1,7 @@
 import store from "./src/client/Redux/store";
 
 export interface AppProps {}
+export interface NoProps {}
 export interface CounterProps {}
 export interface InventoryProps {}
 export interface WoodcuttingCompProps {}
