@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const ButtonCounter = createSlice({
   name: "button1",
   initialState: {
-    value: 0,
+    value: 10,
   },
   reducers: {
     incrementByAmount: (state, action) => {
