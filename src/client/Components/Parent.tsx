@@ -8,14 +8,14 @@ const Parent = (props: Types.NoProps) => {
   useEffect(() => {}, []);
 
   return (
-    <>
-      <div>This is Parent</div>
+    <div className="border border-secondary mx-2">
+      <div className="text-center">This is Parent</div>
 
-      <div className="d-flex p-2 justify-content-around">
+      <div className="d-flex p-2 mx-2 justify-content-around">
         <SiblingA />
         <SiblingB />
       </div>
-    </>
+    </div>
   );
 };
 
