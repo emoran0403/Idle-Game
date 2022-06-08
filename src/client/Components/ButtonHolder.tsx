@@ -18,7 +18,7 @@ const ButtonHolder = (props: Types.NoProps) => {
           <button type="button" className="btn btn-primary mx-1" onClick={() => setAmount(amount - 1)}>
             -
           </button>
-          <input
+          {/* <input
             className="form-control"
             value={amount}
             onChange={(e) => {
@@ -27,7 +27,7 @@ const ButtonHolder = (props: Types.NoProps) => {
           />
           <button type="button" className="btn btn-primary mx-1" onClick={() => console.log(`Add to all buttons was pressed: ${amount}`)}>
             Add to all buttons
-          </button>
+          </button> */}
         </div>
       </div>
     </div>
