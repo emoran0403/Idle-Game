@@ -23,7 +23,9 @@ export interface IListOfLogs {
 
 //! this can probably be improved
 export interface ButtonSlice {
-  buttons: { value: number };
+  buttons1?: { value: number };
+  buttons2?: { value: number };
+  buttons3?: { value: number };
 }
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

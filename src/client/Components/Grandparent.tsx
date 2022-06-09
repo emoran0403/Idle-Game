@@ -3,7 +3,7 @@ import * as React from "react";
 import { useEffect } from "react";
 import Parent from "./Parent";
 import ButtonHolder from "./ButtonHolder";
-import Increase from "./Increase";
+import ChangeAll from "./ChangeAll";
 
 const Grandparent = (props: Types.NoProps) => {
   useEffect(() => {}, []);
@@ -14,7 +14,7 @@ const Grandparent = (props: Types.NoProps) => {
       <div className="d-flex p-2 justify-content-center">
         <Parent />
         <ButtonHolder />
-        <Increase />
+        <ChangeAll />
       </div>
     </div>
   );
