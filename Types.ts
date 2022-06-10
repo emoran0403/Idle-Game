@@ -28,6 +28,10 @@ export interface ButtonSlice {
   buttons3?: { value: number };
 }
 
+export interface IStateExperience {
+  [key: string]: number;
+}
+
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
