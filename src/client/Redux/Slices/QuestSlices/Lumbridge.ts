@@ -13,7 +13,31 @@ export const Quests_Lumbridge = createSlice({
       {
         name: "Cook's Assistant",
         stepsComplete: 0,
-        stepsTotal: 10,
+        stepsTotal: 123456789,
+        complete: false,
+      },
+      {
+        name: "Myths of the White Lands",
+        stepsComplete: 0,
+        stepsTotal: 123456789,
+        complete: false,
+      },
+      {
+        name: "The Restless Ghost",
+        stepsComplete: 0,
+        stepsTotal: 123456789,
+        complete: false,
+      },
+      {
+        name: "The Blood Pact",
+        stepsComplete: 0,
+        stepsTotal: 123456789,
+        complete: false,
+      },
+      {
+        name: "Buyers and Cellars",
+        stepsComplete: 0,
+        stepsTotal: 123456789,
         complete: false,
       },
     ],
@@ -46,7 +70,7 @@ export const Quests_Lumbridge = createSlice({
       }
     },
 
-    //! can i do this instead of making 2 separat reducers?
+    //! can i do this instead of making 2 separate reducers?
     incrementQuestStepAndCheckIfCompleted: (state, action) => {
       const questNameFromAction: string = action.type; // decide which quest needs incrementing
       // go through all the quests...
@@ -71,3 +95,18 @@ export const Quests_Lumbridge = createSlice({
 export const { incrementQuestStep } = Quests_Lumbridge.actions;
 
 export default Quests_Lumbridge.reducer;
+
+//! what is a good way to store the level requirements and previous quest requirements for a given quest?
+
+const bigQuestyBoyFullOfInfo = {
+  name: "Cook's Assistant",
+  stepsComplete: 0,
+  stepsTotal: 123456789,
+  questPoints: 123456789,
+  complete: false,
+  combatRequirements: false,
+  questRequirements: ["quest1", "quest2", "quest3"],
+  levelRequirements: [{ skill1: 1, skill2: 2, skill3: 3 }],
+  experienceRewards: [{ skill1: 1, skill2: 2, skill3: 3 }],
+  itemRewards: [{ item1: 1, item2: 2, item3: 3 }],
+};
