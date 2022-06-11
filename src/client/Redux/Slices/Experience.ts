@@ -10,7 +10,7 @@ export const Experience = createSlice({
   },
   reducers: {
     // this is the only reducer needed, experience can only increase
-    gainXP: (state: Types.IStateExperience, action) => {
+    gainXP: (state: Types.IFlatObjectOfNums, action) => {
       const skill: string = action.type; // decide which skill to gain the experience
       const experienceGained: number = Number(action.payload); // this will be the amount of experience gained
 

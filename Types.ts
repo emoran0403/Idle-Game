@@ -28,8 +28,15 @@ export interface ButtonSlice {
   buttons3?: { value: number };
 }
 
-export interface IStateExperience {
+export interface IFlatObjectOfNums {
   [key: string]: number;
+}
+
+export interface IStateQuest {
+  name: string;
+  stepsComplete: number;
+  stepsTotal: number;
+  complete: boolean;
 }
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
