@@ -10,19 +10,19 @@ import Inventory from "./RightColumn/Inventory";
 import ActiveBuffs from "./RightColumn/ActiveBuffs";
 import WornEquipment from "./RightColumn/WornEquipment";
 
-const Main = (props: Types.NoProps) => {
+const GameContainer = (props: Types.NoProps) => {
   useEffect(() => {}, []);
   //<div className=""></div>
   return (
     <div className="container">
       <div className="row justify-content-center">Title Here</div>
-      <div id="game" className="row justify-content-lg-center">
+      <div id="gamecontainer" className="row justify-content-lg-center">
         <div id="left-column" className="col-lg-3">
           <Levels />
           <QuestList />
         </div>
 
-        <div id="middle-column" className="col-lg-3">
+        <div id="middle-column" className="col-lg-6">
           <NavigationArea />
           <ActivityArea />
           <ActivityButtons />
@@ -38,4 +38,4 @@ const Main = (props: Types.NoProps) => {
   );
 };
 
-export default Main;
+export default GameContainer;

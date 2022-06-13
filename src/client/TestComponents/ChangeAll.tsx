@@ -1,9 +1,9 @@
 import * as Types from "../../../Types";
 import * as React from "react";
 import { useDispatch } from "react-redux"; // import to allow dispatching of events
-import { increment1, decrement1, incrementByAmount1 } from "../Redux/Slices/Button1"; // these are the actions we will be dispatching
-import { increment2, decrement2, incrementByAmount2 } from "../Redux/Slices/Button2"; // these are the actions we will be dispatching
-import { increment3, decrement3, incrementByAmount3 } from "../Redux/Slices/Button3"; // these are the actions we will be dispatching
+import { increment1, decrement1, incrementByAmount1 } from "../Redux/Slices/TestSlices/Button1"; // these are the actions we will be dispatching
+import { increment2, decrement2, incrementByAmount2 } from "../Redux/Slices/TestSlices/Button2"; // these are the actions we will be dispatching
+import { increment3, decrement3, incrementByAmount3 } from "../Redux/Slices/TestSlices/Button3"; // these are the actions we will be dispatching
 import { useState } from "react";
 
 const Increase = (props: Types.NoProps) => {

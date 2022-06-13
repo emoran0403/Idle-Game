@@ -1,12 +1,13 @@
 import * as React from "react";
 import * as Types from "../../Types";
+import GameContainer from "./GameComponents/GameContainer";
 import Grandparent from "./TestComponents/Grandparent";
 
 const App = (props: Types.AppProps) => {
   return (
     <main className="container my-5">
-      <h1 className="text-center">Welcome to APP!</h1>
-      <Grandparent />
+      {/* <h1 className="text-center">Welcome to APP!</h1> */}
+      <GameContainer />
     </main>
   );
 };

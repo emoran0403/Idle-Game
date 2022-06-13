@@ -32,6 +32,16 @@ export interface IFlatObjectOfNums {
   [key: string]: number;
 }
 
+export interface ISkillList {
+  Woodcutting: number;
+  Firemaking: number;
+  Attack: number;
+  Strength: number;
+  Defense: number;
+  Consitution: number;
+  Prayer: number;
+}
+
 export interface IStateQuest {
   name: string;
   stepsComplete: number;
@@ -43,3 +53,14 @@ export interface IStateQuest {
 export type RootState = ReturnType<typeof store.getState>;
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch;
+
+export interface AllState {
+  Experience: ISkillList;
+  Bank: IBankList;
+}
+
+export interface IBankList {
+  Coins: number;
+  Logs: number;
+  Ashes: number;
+}
