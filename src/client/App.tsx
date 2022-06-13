@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as Types from "../../Types";
-import Grandparent from "./Components/Grandparent";
+import Grandparent from "./TestComponents/Grandparent";
 
 const App = (props: Types.AppProps) => {
   return (
