@@ -44,31 +44,31 @@ export const Quests_Lumbridge = createSlice({
   },
   reducers: {
     // use this when we need to increment a quest steps count
-    incrementQuestStep: (state, action) => {
-      const questNameFromAction: string = action.type; // decide which quest needs incrementing
-      // go through all the quests...
-      for (let i = 1; i < state.QuestArray.length; i++) {
-        let currentQuest = state.QuestArray[i]; // rename it for better context
-        // ...until we find the quest name that matches the quest name from the action
-        if (currentQuest.name === questNameFromAction) {
-          // increment the steps counter
-          currentQuest.stepsComplete += 1;
-        }
-      }
-    },
+    // incrementQuestStep: (state, action) => {
+    //   const questNameFromAction: string = action.type; // decide which quest needs incrementing
+    //   // go through all the quests...
+    //   for (let i = 1; i < state.QuestArray.length; i++) {
+    //     let currentQuest = state.QuestArray[i]; // rename it for better context
+    //     // ...until we find the quest name that matches the quest name from the action
+    //     if (currentQuest.name === questNameFromAction) {
+    //       // increment the steps counter
+    //       currentQuest.stepsComplete += 1;
+    //     }
+    //   }
+    // },
 
-    markQuestAsComplete: (state, action) => {
-      const questNameFromAction: string = action.type; // decide which quest needs to be marked as complete
-      // go through all the quests...
-      for (let i = 1; i < state.QuestArray.length; i++) {
-        let currentQuest = state.QuestArray[i]; // rename it for better context
-        // ...until we find the quest name that matches the quest name from the action
-        if (currentQuest.name === questNameFromAction) {
-          // mark the quest as complete
-          currentQuest.complete = true;
-        }
-      }
-    },
+    // markQuestAsComplete: (state, action) => {
+    //   const questNameFromAction: string = action.type; // decide which quest needs to be marked as complete
+    //   // go through all the quests...
+    //   for (let i = 1; i < state.QuestArray.length; i++) {
+    //     let currentQuest = state.QuestArray[i]; // rename it for better context
+    //     // ...until we find the quest name that matches the quest name from the action
+    //     if (currentQuest.name === questNameFromAction) {
+    //       // mark the quest as complete
+    //       currentQuest.complete = true;
+    //     }
+    //   }
+    // },
 
     //! can i do this instead of making 2 separate reducers?
     incrementQuestStepAndCheckIfCompleted: (state, action) => {
@@ -92,7 +92,7 @@ export const Quests_Lumbridge = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { incrementQuestStep } = Quests_Lumbridge.actions;
+export const { incrementQuestStepAndCheckIfCompleted } = Quests_Lumbridge.actions;
 
 export default Quests_Lumbridge.reducer;
 
@@ -103,9 +103,20 @@ const bigQuestyBoyFullOfInfo = {
   stepsTotal: 123456789,
   questPoints: 123456789,
   complete: false,
-  combatRequirements: false,
+  combatRequirements: 0,
   questRequirements: ["quest1", "quest2", "quest3"],
   levelRequirements: [{ skill1: 1, skill2: 2, skill3: 3 }],
   experienceRewards: [{ skill1: 1, skill2: 2, skill3: 3 }],
   itemRewards: [{ item1: 1, item2: 2, item3: 3 }],
 };
+
+// use this to grab the quest steps for each quest under the quick guide:
+// must be from the https://runescape.wiki/ site, not the fandom wiki
+// use for quest steps
+// [...document.getElementsByClassName("lighttable checklist")].map(div => div.firstElementChild.children.length).reduce((a,b) => a+b,0)
+
+// use this to get the quest points:
+// [...document.getElementsByTagName("a")].filter(item => item.title==="Quest points")[0].parentElement.textContent.split(" ")[0]
+
+// use this for the combatRequirements
+// [...document.getElementsByClassName("questdetails-info")].reverse()[0].children[0].children[0].textContent!=='None'

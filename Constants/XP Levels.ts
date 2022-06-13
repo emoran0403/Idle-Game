@@ -1,43 +1,19 @@
-const levelUpTable: number[][] = [
-  [0, 0],
-  [1, 0],
-  [2, 83],
-  [3, 174],
-  [4, 276],
-  [5, 388],
-  [6, 512],
-  [7, 650],
-  [8, 801],
-  [9, 969],
-  [10, 1154],
-  [11, 1358],
-  [12, 1584],
-  [13, 1833],
-  [14, 2107],
-  [15, 2411],
-  [16, 2746],
-  [17, 3115],
-  [18, 3523],
-  [19, 3973],
-  [20, 4470],
-  [21, 5018],
-  [22, 5624],
-  [23, 6291],
-  [24, 7028],
-  [25, 7842],
-  [26, 8740],
-  [27, 9730],
-  [28, 10824],
-  [29, 12031],
-  [30, 13363],
-  [31, 14833],
-  [32, 16456],
-  [33, 18247],
-  [34, 20244],
-  [35, 22406],
-  [36, 24815],
-  [37, 27473],
-  [38, 30408],
-  [39, 33648],
-  [40, 37224],
+const levelUpTable: number[] = [
+  0, 83, 174, 276, 388, 512, 650, 801, 969, 1154, 1358, 1584, 1833, 2107, 2411, 2746, 3115, 3523, 3973, 4470, 5018, 5624, 6291, 7028, 7842,
+  8740, 9730, 10824, 12031, 13363, 14833, 16456, 18247, 20244, 22406, 24815, 27473, 30408, 33648, 37224,
 ];
+
+levelUpTable.filter((num) => num < 1000).length; // will return level based on experience
+
+// import {getLevel} from this
+export const getLevel = (XP: number): number => {
+  return levelUpTable.filter((num) => num < XP).length;
+};
+
+// use one import or the other
+
+// export default function getLevel2 (XP: number): number  {
+//   return levelUpTable.filter((num) => num < XP).length;
+// };
+
+// import * as showLevel from this

@@ -4,15 +4,15 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 const Levels = (props: Types.NoProps) => {
-  const state = useSelector((state) => state) as Types.AllState;
+  const Experience = useSelector((state: Types.AllState) => state.Experience) as Types.ISkillList;
 
   useEffect(() => {}, []);
   return (
     <div className="card">
       <div className="card-body">
         <h5 className="card-header text-center">Levels</h5>
-        <div>Woodcutting XP: {state.Experience.Woodcutting}</div>
-        <div>Firemaking XP: {state.Experience.Firemaking}</div>
+        <div>Woodcutting XP: {Experience.Woodcutting}</div>
+        <div>Firemaking XP: {Experience.Firemaking}</div>
       </div>
     </div>
   );
