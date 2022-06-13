@@ -97,7 +97,6 @@ export const { incrementQuestStep } = Quests_Lumbridge.actions;
 export default Quests_Lumbridge.reducer;
 
 //! what is a good way to store the level requirements and previous quest requirements for a given quest?
-
 const bigQuestyBoyFullOfInfo = {
   name: "Cook's Assistant",
   stepsComplete: 0,

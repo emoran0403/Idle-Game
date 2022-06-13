@@ -23,7 +23,15 @@ export const Bank = createSlice({
     removeItemFromBank: (state: Types.IFlatObjectOfNums, action) => {
       const item: string = action.type; // decide which item to remove
       const amount: number = Number(action.payload); // this will be the number of items removed from the bank
-      state[item] -= amount; // subtract the item from state, then reassign (ty immer)
+
+      //! this will need to add to the player inventory
+      if (state[item] - amount >= 0) {
+        // prevent the removal of an amount that would result in a negative
+        state[item] -= amount; // subtract the item from state
+      } else {
+        // remove all of that item, setting state to 0
+        state[item] = 0;
+      }
     },
   },
 });

@@ -7,6 +7,11 @@ export const Experience = createSlice({
     //list of skills, starting at 0 experience
     Woodcutting: 0,
     Firemaking: 0,
+    Attack: 0,
+    Strength: 0,
+    Defense: 0,
+    Consitution: 0,
+    Prayer: 0,
   },
   reducers: {
     // this is the only reducer needed, experience can only increase
