@@ -1,18 +1,19 @@
 import * as Types from "../../../../Types";
 import * as React from "react";
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { getLevel } from "../../../../Constants/XP Levels";
 
 const Levels = (props: Types.NoProps) => {
   const Experience = useSelector((state: Types.AllState) => state.Experience) as Types.ISkillList;
-
-  useEffect(() => {}, []);
   return (
     <div className="card">
       <div className="card-body">
         <h5 className="card-header text-center">Levels</h5>
-        <div>Woodcutting XP: {Experience.Woodcutting}</div>
-        <div>Firemaking XP: {Experience.Firemaking}</div>
+        <div>Woodcutting Xp: {Experience.Woodcutting}</div>
+        <div>Woodcutting Lv: {getLevel(Experience.Woodcutting)}</div>
+
+        <div>Firemaking Xp: {Experience.Firemaking}</div>
+        <div>Firemaking Xp: {getLevel(Experience.Firemaking)}</div>
       </div>
     </div>
   );
