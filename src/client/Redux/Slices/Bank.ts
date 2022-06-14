@@ -9,7 +9,6 @@ export const Bank = createSlice({
     //list of items in the bank, starting at 0
     Coins: 0,
     Logs: 0,
-    Ashes: 0,
   },
   reducers: {
     // use this when we need to add an item to the bank
