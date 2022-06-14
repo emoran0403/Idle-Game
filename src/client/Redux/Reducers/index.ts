@@ -5,8 +5,10 @@ import buttons3Reducer from "../Slices/TestSlices/Button3";
 import experienceReducer from "../Slices/Experience";
 import bankreducer from "../Slices/Bank";
 import inventoryReducer from "../Slices/Inventory";
-import currentLocation from "../Slices/CurrentLocation";
-import currentActivity from "../Slices/CurrentActivity";
+import currentLocationReducer from "../Slices/CurrentLocation";
+import currentActivityReducer from "../Slices/CurrentActivity";
+import resourcesReducer from "../Slices/Resources";
+import walletReducer from "../Slices/Wallet";
 
 export default combineReducers({
   buttons1: buttons1Reducer,
@@ -15,6 +17,8 @@ export default combineReducers({
   Experience: experienceReducer,
   Bank: bankreducer,
   Inventory: inventoryReducer,
-  CurrentLocation: currentLocation,
-  CurrentActivity: currentActivity,
+  CurrentLocation: currentLocationReducer,
+  CurrentActivity: currentActivityReducer,
+  Resources: resourcesReducer,
+  Wallet: walletReducer,
 });

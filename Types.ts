@@ -21,6 +21,11 @@ export interface IListOfLogs {
   [key: string]: ILog;
 }
 
+// Infer the `RootState` and `AppDispatch` types from the store itself
+export type RootState = ReturnType<typeof store.getState>;
+// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
+export type AppDispatch = typeof store.dispatch;
+
 //! this can probably be improved
 export interface ButtonSlice {
   buttons1?: { value: number };
@@ -45,6 +50,7 @@ export interface ISkillList {
   Prayer: number;
 }
 
+//! revamp this
 export interface IStateQuest {
   name: string;
   stepsComplete: number;
@@ -52,14 +58,13 @@ export interface IStateQuest {
   complete: boolean;
 }
 
-// Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof store.getState>;
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-export type AppDispatch = typeof store.dispatch;
-
 export interface AllState {
   Experience: ISkillList;
   Bank: IBankList;
+  Inventory: I_Inventory;
+  CurrentLocation: ICurrentLocation;
+  CurrentActivity: ICurrentActivity;
+  Resources: IResources;
 }
 
 export interface IBankList {
@@ -67,3 +72,32 @@ export interface IBankList {
   Logs: number;
   Ashes: number;
 }
+
+export interface I_Inventory {
+  Coins: number;
+  [key: string]: number;
+}
+
+export interface ICurrentLocation {
+  Lumbridge: boolean;
+  Bank: boolean;
+}
+
+export interface ICurrentActivity {
+  Banking: boolean;
+  Woodcutting: boolean;
+  Firemaking: boolean;
+  Combat: boolean;
+}
+
+export interface IResources {
+  Banking: boolean;
+  Dropping: boolean;
+}
+
+// Experience: experienceReducer,
+//   Bank: bankreducer,
+//   Inventory: inventoryReducer,
+//   CurrentLocation: currentLocationReducer,
+//   CurrentActivity: currentActivityReducer,
+//   Resources: resourcesReducer,

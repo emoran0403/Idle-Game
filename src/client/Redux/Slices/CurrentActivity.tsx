@@ -33,3 +33,5 @@ export const CurrentActivity = createSlice({
 export const { setActivity: setLocation } = CurrentActivity.actions;
 
 export default CurrentActivity.reducer;
+
+//! need to add a walking / traveling option
