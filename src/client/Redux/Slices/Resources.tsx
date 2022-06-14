@@ -10,17 +10,12 @@ export const Resources = createSlice({
   },
   reducers: {
     // this is the only reducer needed as the player can only do 1 thing at a time
-    setResources: (state: Types.IFlatObjectOfBooleans, action) => {
-      const option: string = action.type; // decide which option the player has chosen
-
-      // iterate over each choice in state
-      for (let choice in state) {
-        // set each choice to false
-        state[choice] = false;
-        // if the choice matches the option the player has picked,
-        if (state[choice] === state[option]) {
-          // then set this option to true
-          state[option] = true;
+    setResources: (state: Types.IFlatObjectOfBooleans) => {
+      for (let [key, value] of Object.entries(state)) {
+        if (value === true) {
+          state[key] = false;
+        } else {
+          state[key] = true;
         }
       }
     },
