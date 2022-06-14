@@ -31,6 +31,9 @@ export interface ButtonSlice {
 export interface IFlatObjectOfNums {
   [key: string]: number;
 }
+export interface IFlatObjectOfBooleans {
+  [key: string]: boolean;
+}
 
 export interface ISkillList {
   Woodcutting: number;
