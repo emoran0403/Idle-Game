@@ -10,10 +10,10 @@ export const getLevel = (XP: number): number => {
   return levelUpTable.filter((num) => num < XP).length;
 };
 
-// use one import or the other
+export const percentToNextLevel = (XP: number): number => {
+  let nextLevelIndex = levelUpTable.filter((num) => num < XP).length;
+  let xpNeeded = levelUpTable[nextLevelIndex] - levelUpTable[nextLevelIndex - 1];
+  let delta = levelUpTable[nextLevelIndex] - XP;
 
-// export default function getLevel2 (XP: number): number  {
-//   return levelUpTable.filter((num) => num < XP).length;
-// };
-
-// import * as showLevel from this
+  return Math.floor(((xpNeeded - delta) / xpNeeded) * 100) || 0;
+};

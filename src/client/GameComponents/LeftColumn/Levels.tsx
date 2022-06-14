@@ -1,19 +1,110 @@
 import * as Types from "../../../../Types";
 import * as React from "react";
 import { useSelector } from "react-redux";
-import { getLevel } from "../../../../Constants/XP Levels";
+import { getLevel, percentToNextLevel } from "../../../../Constants/XP Levels";
+import { useEffect, useState } from "react";
 
 const Levels = (props: Types.NoProps) => {
+  const [toolTipText, setToolTipText] = useState<string>("");
+  const [tipsToShow, setTipsToShow] = useState<Types.IFlatObjectOfBooleans>({});
+  const [totalExperience, setTotalExperience] = useState<number>(0);
+  const [totalLevel, setTotalLevel] = useState<number>(0);
+
   const Experience = useSelector((state: Types.AllState) => state.Experience) as Types.ISkillList;
+
+  const handleSetToolTip = (name: string, XP: number) => {
+    const XPBarPercent = percentToNextLevel(XP);
+    const text = `${name} ${XPBarPercent}%`;
+
+    const temp: Types.IFlatObjectOfBooleans = {};
+    for (let key of Object.keys(Experience)) {
+      temp[key] = false;
+    }
+    temp[name] = true;
+
+    setToolTipText(text);
+    setTipsToShow(temp);
+  };
+
+  const handleRemoveToolTip = () => {
+    const temp: Types.IFlatObjectOfBooleans = {};
+    for (let key of Object.keys(Experience)) {
+      temp[key] = false;
+    }
+    setTipsToShow(temp);
+  };
+
+  useEffect(() => {
+    let localTotalLevel: number = 0;
+    let localTotalExperience: number = 0;
+
+    for (let value of Object.values(Experience)) {
+      localTotalExperience += value;
+      localTotalLevel += getLevel(value);
+    }
+    setTotalExperience(localTotalExperience);
+    setTotalLevel(localTotalLevel);
+
+    const temp: Types.IFlatObjectOfBooleans = {};
+    for (let key of Object.keys(Experience)) {
+      temp[key] = false;
+    }
+    setTipsToShow(temp);
+  }, []);
+
   return (
     <div className="card">
       <div className="card-body">
         <h5 className="card-header text-center">Levels</h5>
-        <div>Woodcutting Xp: {Experience.Woodcutting}</div>
-        <div>Woodcutting Lv: {getLevel(Experience.Woodcutting)}</div>
 
-        <div>Firemaking Xp: {Experience.Firemaking}</div>
-        <div>Firemaking Xp: {getLevel(Experience.Firemaking)}</div>
+        <div className="d-flex row">
+          <h6 className="card-subtitle text-muted">Combat Level </h6>
+          <h6 className="card-subtitle text-muted">Total Levels {totalLevel}</h6>
+          <h6 className="card-subtitle text-muted">Total Experience {totalExperience.toLocaleString("en-US")}</h6>
+        </div>
+
+        {Object.entries(Experience).map(([skill, xp]) => (
+          <div
+            key={`skill-minicomponent-${skill}`}
+            onMouseEnter={() => {
+              handleSetToolTip(skill, xp);
+            }}
+            onMouseLeave={handleRemoveToolTip}
+          >
+            {tipsToShow[skill] ? (
+              <div className="d-flex">
+                <div style={{ position: "absolute", zIndex: 999, color: "#f0ae40", fontWeight: "bold", textShadow: "2px 2px 4px black" }}>
+                  {toolTipText}
+                </div>
+
+                <span
+                  style={{
+                    backgroundColor: "#00ff00",
+                    width: `${percentToNextLevel(xp)}%`,
+                    display: "inline-block",
+                    color: "#00ff00",
+                  }}
+                >
+                  -
+                </span>
+                <span
+                  style={{
+                    backgroundColor: "red",
+                    width: `${100 - percentToNextLevel(xp)}%`,
+                    display: "inline-block",
+                    color: "red",
+                  }}
+                >
+                  _
+                </span>
+              </div>
+            ) : (
+              <div>
+                <div>icon Lv: {getLevel(xp)}</div>
+              </div>
+            )}
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -21,5 +112,4 @@ const Levels = (props: Types.NoProps) => {
 
 export default Levels;
 
-//! how can i convert an object to an array, so that i can map over the keys and display their values?
-//! I want to eventually map over the experience, dynamically calculate levels, and show a bar graph of progress to the next level
+//! once we have icons, we wrap the parent with the icon dimensions
