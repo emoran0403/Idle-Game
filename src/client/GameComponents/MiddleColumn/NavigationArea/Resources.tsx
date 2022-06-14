@@ -1,7 +1,7 @@
 import * as Types from "../../../../../Types";
 import * as React from "react";
-import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { setResources } from "../../../Redux/Slices/Resources";
 
 const Resources = (props: Types.NoProps) => {
   const state = useSelector((state: Types.AllState) => state.Resources) as Types.IResources;
@@ -17,14 +17,15 @@ const Resources = (props: Types.NoProps) => {
       resourcesForButton = key;
     }
   }
-  useEffect(() => {}, []);
+
   return (
     <div>
       <div>Currently {resourcesToDisplay} Resources</div>
       <button
         className="btn btn-primary"
         onClick={() => {
-          console.log(`you clicked to toggle drop/bank resources`);
+          dispatch(setResources());
+          console.log(`you toggled resources`);
         }}
       >
         {resourcesForButton.substring(0, 4)} Resources

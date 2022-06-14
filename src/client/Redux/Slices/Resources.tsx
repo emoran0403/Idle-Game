@@ -23,6 +23,6 @@ export const Resources = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setResources: setLocation } = Resources.actions;
+export const { setResources } = Resources.actions;
 
 export default Resources.reducer;
