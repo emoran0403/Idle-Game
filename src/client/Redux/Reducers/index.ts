@@ -6,6 +6,7 @@ import experienceReducer from "../Slices/Experience";
 import bankreducer from "../Slices/Bank";
 import inventoryReducer from "../Slices/Inventory";
 import currentLocation from "../Slices/CurrentLocation";
+import currentActivity from "../Slices/CurrentActivity";
 
 export default combineReducers({
   buttons1: buttons1Reducer,
@@ -15,4 +16,5 @@ export default combineReducers({
   Bank: bankreducer,
   Inventory: inventoryReducer,
   CurrentLocation: currentLocation,
+  CurrentActivity: currentActivity,
 });
