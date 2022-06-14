@@ -15,8 +15,8 @@ const CurrentLocation = (props: Types.NoProps) => {
   useEffect(() => {}, []);
   return (
     <div>
-      <div>This is CurrentLocation</div>
-      <div>{locationToDisplay}</div>
+      {locationToDisplay === "Lumbridge" && <div>You are in {locationToDisplay}</div>}
+      {locationToDisplay === "Bank" && <div>You are at a {locationToDisplay}</div>}
     </div>
   );
 };
