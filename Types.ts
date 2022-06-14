@@ -36,6 +36,7 @@ export interface ButtonSlice {
 export interface IFlatObjectOfNums {
   [key: string]: number;
 }
+
 export interface IFlatObjectOfBooleans {
   [key: string]: boolean;
 }
@@ -74,8 +75,8 @@ export interface IBankList {
 }
 
 export interface I_Inventory {
-  Coins: number;
-  [key: string]: number;
+  quantity: number;
+  items: { [key: string]: number };
 }
 
 export interface ICurrentLocation {
