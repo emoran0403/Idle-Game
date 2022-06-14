@@ -16,8 +16,8 @@ const CurrentActivity = (props: Types.NoProps) => {
   useEffect(() => {}, []);
   return (
     <div>
-      <div>This is CurrentActivity</div>
-      <div>{activityToDisplay}</div>
+      {activityToDisplay !== "Combat" && <div>You are currently {activityToDisplay}</div>}
+      {activityToDisplay === "Combat" && <div>You are currently in {activityToDisplay}</div>}
     </div>
   );
 };

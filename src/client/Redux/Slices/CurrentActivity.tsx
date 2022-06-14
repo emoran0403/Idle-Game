@@ -30,7 +30,7 @@ export const CurrentActivity = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setActivity: setLocation } = CurrentActivity.actions;
+export const { setActivity } = CurrentActivity.actions;
 
 export default CurrentActivity.reducer;
 
