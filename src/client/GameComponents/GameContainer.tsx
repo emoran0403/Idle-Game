@@ -9,6 +9,7 @@ import ActivityButtons from "./MiddleColumn/ActivityButtonsBar";
 import Inventory from "./RightColumn/Inventory";
 import ActiveBuffs from "./RightColumn/ActiveBuffs";
 import WornEquipment from "./RightColumn/WornEquipment";
+import Resources from "./MiddleColumn/Resources";
 
 const GameContainer = (props: Types.NoProps) => {
   useEffect(() => {}, []);
@@ -26,6 +27,7 @@ const GameContainer = (props: Types.NoProps) => {
           <NavigationArea />
           <ActivityArea />
           <ActivityButtons />
+          <Resources />
         </div>
 
         <div id="right-column" className="col-lg-3">
