@@ -1,6 +1,9 @@
-import * as Types from "../../../../Types";
+import * as Types from "../../../../../Types";
 import * as React from "react";
 import { useEffect } from "react";
+import Resources from "./Resources";
+import CurrentLocation from "./CurrentLocation";
+import CurrentActivity from "./CurrentActivity";
 
 const NavigationArea = (props: Types.NoProps) => {
   useEffect(() => {}, []);
@@ -14,8 +17,9 @@ const NavigationArea = (props: Types.NoProps) => {
       >
         World Map Button
       </button>
-      <div>Current Location</div>
-      <div>Current Activity</div>
+      <CurrentLocation />
+      <CurrentActivity />
+      <Resources />
     </div>
   );
 };
