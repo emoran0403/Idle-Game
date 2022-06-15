@@ -1,6 +1,13 @@
 import * as Types from "../../../../Types";
 import * as React from "react";
 
+//! all but clues should read from a constant file - how to structure that file for each location?
+//! clues should check the bank state for a clue scroll
+//! based on these conditions, apply the disabled attribute to those activities that are not present in the current location
+
+// these buttons will need to hide the activity area, and display the corresponding panel in place of the activity are
+// when the back button is clicked, return to the activity area
+
 const ActivityButtons = (props: Types.NoProps) => {
   return (
     <div className="d-flex">
@@ -37,6 +44,7 @@ const ActivityButtons = (props: Types.NoProps) => {
         Combat
       </button>
       <button
+        disabled
         onClick={() => {
           console.log("you clicked Bosses");
         }}
@@ -46,6 +54,7 @@ const ActivityButtons = (props: Types.NoProps) => {
       </button>
 
       <button
+        disabled
         onClick={() => {
           console.log("you clicked Minigames");
         }}
@@ -55,6 +64,7 @@ const ActivityButtons = (props: Types.NoProps) => {
       </button>
 
       <button
+        disabled
         onClick={() => {
           console.log("you clicked Clues");
         }}
@@ -67,5 +77,3 @@ const ActivityButtons = (props: Types.NoProps) => {
 };
 
 export default ActivityButtons;
-
-//! these buttons will need to hide the activity area, and display the corresponding panel in place of the activity are
