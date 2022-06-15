@@ -12,6 +12,22 @@ const Levels = (props: Types.NoProps) => {
 
   const Experience = useSelector((state: Types.AllState) => state.Experience) as Types.ISkillList;
 
+  const showCombatLevel = () => {
+    let att: number = getLevel(Experience.Attack);
+    let str: number = getLevel(Experience.Strength);
+    let mag: number = getLevel(Experience.Magic);
+    let rng: number = getLevel(Experience.Ranged);
+    let def: number = getLevel(Experience.Defense);
+    let con: number = getLevel(Experience.Consitution);
+    let pray: number = getLevel(Experience.Prayer);
+    let summ: number = getLevel(Experience.Summoning);
+
+    const combatLevel = Math.floor(
+      ((13 / 10) * Math.max(att + str, 2 * mag, 2 * rng) + def + con + Math.floor(0.5 * pray) + Math.floor(0.5 * summ)) / 4
+    );
+    return combatLevel;
+  };
+
   const handleSetToolTip = (name: string, XP: number) => {
     const XPBarPercent = percentToNextLevel(XP);
     const text = `${name} ${XPBarPercent}%`;
@@ -58,7 +74,7 @@ const Levels = (props: Types.NoProps) => {
         <h5 className="card-header text-center">Levels</h5>
 
         <div className="d-flex row">
-          <h6 className="card-subtitle text-muted">Combat Level </h6>
+          <h6 className="card-subtitle text-muted">Combat Level {showCombatLevel()}</h6>
           <h6 className="card-subtitle text-muted">Total Levels {totalLevel}</h6>
           <h6 className="card-subtitle text-muted">Total Experience {totalExperience.toLocaleString("en-US")}</h6>
         </div>

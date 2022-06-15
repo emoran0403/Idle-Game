@@ -49,6 +49,9 @@ export interface ISkillList {
   Defense: number;
   Consitution: number;
   Prayer: number;
+  Summoning: number;
+  Ranged: number;
+  Magic: number;
 }
 
 //! revamp this
