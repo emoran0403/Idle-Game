@@ -98,10 +98,3 @@ export interface IResources {
   Banking: boolean;
   Dropping: boolean;
 }
-
-// Experience: experienceReducer,
-//   Bank: bankreducer,
-//   Inventory: inventoryReducer,
-//   CurrentLocation: currentLocationReducer,
-//   CurrentActivity: currentActivityReducer,
-//   Resources: resourcesReducer,

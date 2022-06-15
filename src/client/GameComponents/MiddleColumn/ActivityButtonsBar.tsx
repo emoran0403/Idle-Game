@@ -1,9 +1,7 @@
 import * as Types from "../../../../Types";
 import * as React from "react";
-import { useEffect } from "react";
 
 const ActivityButtons = (props: Types.NoProps) => {
-  useEffect(() => {}, []);
   return (
     <div className="d-flex">
       <button
@@ -46,8 +44,28 @@ const ActivityButtons = (props: Types.NoProps) => {
       >
         Bosses
       </button>
+
+      <button
+        onClick={() => {
+          console.log("you clicked Minigames");
+        }}
+        className="btn btn-info flex-fill"
+      >
+        Minigames
+      </button>
+
+      <button
+        onClick={() => {
+          console.log("you clicked Clues");
+        }}
+        className="btn btn-info flex-fill"
+      >
+        Clues
+      </button>
     </div>
   );
 };
 
 export default ActivityButtons;
+
+//! these buttons will need to hide the activity area, and display the corresponding panel in place of the activity are
