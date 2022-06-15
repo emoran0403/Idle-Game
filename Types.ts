@@ -21,6 +21,20 @@ export interface IListOfLogs {
   [key: string]: ILog;
 }
 
+export interface IFish {
+  name: string;
+  levelReqFishing: number;
+  XPGivenFishing: number;
+  levelReqCooking: number;
+  XPGivenCooking: number;
+  stopBurnLevel: number;
+  value: number;
+}
+
+export interface IListOfFish {
+  [key: string]: IFish;
+}
+
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
