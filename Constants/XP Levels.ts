@@ -7,11 +7,11 @@ const levelUpTable: number[] = [
 
 // import {getLevel} from this
 export const getLevel = (XP: number): number => {
-  return levelUpTable.filter((num) => num < XP).length;
+  return levelUpTable.filter((num) => num < XP).length + 1;
 };
 
 export const percentToNextLevel = (XP: number): number => {
-  let nextLevelIndex = levelUpTable.filter((num) => num < XP).length;
+  let nextLevelIndex = levelUpTable.filter((num) => num < XP).length + 1;
   let xpNeeded = levelUpTable[nextLevelIndex] - levelUpTable[nextLevelIndex - 1];
   let delta = levelUpTable[nextLevelIndex] - XP;
 
