@@ -18,7 +18,6 @@ const ListOfFish: Types.IListOfFish = {
     stopBurnLevel: 12345,
     value: 12345,
   },
-
   anchovies: {
     name: `anchovies`,
     levelReqFishing: 15,
@@ -28,7 +27,6 @@ const ListOfFish: Types.IListOfFish = {
     stopBurnLevel: 12345,
     value: 12345,
   },
-
   trout: {
     name: `trout`,
     levelReqFishing: 20,
@@ -38,7 +36,6 @@ const ListOfFish: Types.IListOfFish = {
     stopBurnLevel: 12345,
     value: 12345,
   },
-
   salmon: {
     name: `salmon`,
     levelReqFishing: 30,
@@ -48,7 +45,6 @@ const ListOfFish: Types.IListOfFish = {
     stopBurnLevel: 58,
     value: 92,
   },
-
   pike: {
     name: `pike`,
     levelReqFishing: 25,

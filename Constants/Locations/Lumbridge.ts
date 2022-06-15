@@ -5,7 +5,7 @@ export const Lumbridge = {
   Skills: {
     Woodcutting: [`logs`, `oak`, `willow`, `yew`],
     Mining: [`tin`, `copper`],
-    Fishing: [`trout`, `salmon`, `pike`, `crayfish`, `shrimp`, `anchovies`],
+    Fishing: [`crayfish`, `shrimp`, `anchovies`, `trout`, `pike`, `salmon`],
   },
   Combat: [`man`, `woman`, `giant spider`, `goblin`, `chicken`, `cow`, `spider`, `giant rat`, `swamp frog`],
 };
