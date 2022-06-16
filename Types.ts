@@ -112,3 +112,16 @@ export interface IResources {
   Banking: boolean;
   Dropping: boolean;
 }
+
+export interface IAllQuestInfo {
+  name: string;
+  stepsComplete: number;
+  stepsTotal: number;
+  questPoints: number;
+  complete: boolean;
+  combatRequirements: number;
+  questRequirements: string[];
+  levelRequirements: IFlatObjectOfNums;
+  experienceRewards: IFlatObjectOfNums;
+  itemRewards: string[];
+}

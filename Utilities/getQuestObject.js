@@ -1,3 +1,9 @@
+// use this to grab the quest steps for each quest under the quick guide:
+// must be from the https://runescape.wiki/ site, not the fandom wiki
+/**
+ * I made this tool to be saved as a bookmark, click the bookmark to run the function, and open the console for the quest info object.
+ * The item rewards will need to be entered manually, since they are variable
+ */
 (() => {
   const QUESTINFO = {
     name: document.title.replace("Quick guide for ", "").replace(" - The RuneScape Wiki", ""),
@@ -64,7 +70,7 @@
   console.log(QUESTINFO);
 })();
 
-let pizza = {
+let ExampleQuestInfo = {
   name: "Fate of the Gods",
   stepsComplete: 0,
   stepsTotal: 28,
