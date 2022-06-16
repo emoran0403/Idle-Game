@@ -123,5 +123,5 @@ export interface IAllQuestInfo {
   questRequirements: string[];
   levelRequirements: IFlatObjectOfNums;
   experienceRewards: IFlatObjectOfNums;
-  itemRewards: string[];
+  itemRewards: IFlatObjectOfNums;
 }

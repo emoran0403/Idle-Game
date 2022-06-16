@@ -1,5 +1,6 @@
 // use this to grab the quest steps for each quest under the quick guide:
 // must be from the https://runescape.wiki/ site, not the fandom wiki
+
 /**
  * I made this tool to be saved as a bookmark, click the bookmark to run the function, and open the console for the quest info object.
  * The item rewards will need to be entered manually, since they are variable
@@ -14,9 +15,9 @@
       .map((div) => div.firstElementChild.children.length)
       .reduce((a, b) => a + b, 0),
 
-    questPoints: [...document.getElementsByTagName("a")]
-      .filter((item) => item.title === "Quest points")[0]
-      .parentElement.textContent.split(" ")[0],
+    questPoints: Number(
+      [...document.getElementsByTagName("a")].filter((item) => item.title === "Quest points")[0].parentElement.textContent.split(" ")[0]
+    ),
 
     complete: false,
 
@@ -26,21 +27,30 @@
       )
     ),
 
-    questRequirements: [
-      ...document
-        .getElementsByClassName("questreq ")[0]
-        .children[0].children[1].firstChild.children[0].children[0].getElementsByTagName("li"),
-    ].map((li) => li.children[0].innerText.trimEnd()),
+    questRequirements: (() => {
+      let requirementsExist = document.getElementsByClassName("questreq ")[0];
+
+      if (requirementsExist) {
+        let requirements = [
+          ...document
+            .getElementsByClassName("questreq ")[0]
+            .children[0].children[1].firstChild.children[0].children[0].getElementsByTagName("li"),
+        ].map((li) => li.children[0].innerText.trimEnd());
+        return requirements;
+      } else {
+        return [];
+      }
+    })(),
 
     levelRequirements: (() => {
-      const wow = {};
+      const temp = {};
 
       const images = [...document.getElementById("rs-qc-form").parentElement.getElementsByTagName("img")];
       images
         .filter((el) => el.alt && el.alt !== "Quest.png")
         .map((img) => img.parentElement.parentElement.innerText.split(/[^\w+]/).filter((x) => x))
-        .forEach((pair) => (wow[pair[1]] = Number(pair[0])));
-      return wow;
+        .forEach((pair) => (temp[pair[1]] = Number(pair[0])));
+      return temp;
     })(),
 
     experienceRewards: (() => {
@@ -59,12 +69,14 @@
       return temp;
     })(),
 
-    itemRewards: [
-      ...document.getElementById("Rewards").parentElement.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling
-        .children,
-    ]
-      .map((child) => child.innerText)
-      .filter((string) => string.toLowerCase().includes("lamp")),
+    itemRewards: {
+      ...[
+        ...document.getElementById("Rewards").parentElement.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling
+          .children,
+      ]
+        .map((child) => child.innerText)
+        .filter((string) => string.toLowerCase().includes("lamp")),
+    },
   };
 
   console.log(QUESTINFO);
