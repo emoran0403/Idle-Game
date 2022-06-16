@@ -125,3 +125,22 @@ export interface IAllQuestInfo {
   experienceRewards: IFlatObjectOfNums;
   itemRewards: IFlatObjectOfNums;
 }
+
+export interface ILocationSummary {
+  Quests: string[];
+  Skills: {
+    Mining?: string[];
+    Fishing?: string[];
+    Woodcutting?: string[];
+    Farming?: string[];
+    Hunter?: string[];
+    Divination?: string[];
+    Archaeology?: string[];
+    Runecrafting?: string[];
+    Construction?: string[];
+    Summoning?: string[];
+    Agility?: string[];
+    Thieving?: string[];
+  };
+  Combat: string[];
+}

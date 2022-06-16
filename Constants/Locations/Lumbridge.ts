@@ -1,6 +1,6 @@
 import * as Types from "../../Types";
 
-export const Lumbridge = {
+export const Lumbridge: Types.ILocationSummary = {
   Quests: ["Cook's Assistant", "Myths of the White Lands", "The Restless Ghost", "The Lost Tribe", "The Blood Pact", "Buyers and Cellars"],
   Skills: {
     Woodcutting: [`logs`, `oak`, `willow`, `yew`],
