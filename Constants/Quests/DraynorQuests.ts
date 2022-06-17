@@ -11,7 +11,6 @@ export const DraynorQuests: Types.IQuestInfo[] = [
   {
     name: "A Fairy Tale I - Growing Pains",
     location: "Draynor",
-    stepsComplete: 0,
     stepsTotal: 35,
     questPoints: 2,
     complete: false,
@@ -28,7 +27,6 @@ export const DraynorQuests: Types.IQuestInfo[] = [
   {
     name: "A Fairy Tale II - Cure a Queen",
     location: "Draynor",
-    stepsComplete: 0,
     stepsTotal: 36,
     questPoints: 2,
     complete: false,
@@ -55,7 +53,6 @@ export const DraynorQuests: Types.IQuestInfo[] = [
   {
     name: "Vampyre Slayer",
     location: "Draynor",
-    stepsComplete: 0,
     stepsTotal: 23,
     questPoints: 3,
     complete: false,
@@ -70,7 +67,6 @@ export const DraynorQuests: Types.IQuestInfo[] = [
   {
     name: "Ernest the Chicken",
     location: "Draynor",
-    stepsComplete: 0,
     stepsTotal: 40,
     questPoints: 4,
     complete: false,
@@ -83,7 +79,6 @@ export const DraynorQuests: Types.IQuestInfo[] = [
   {
     name: "Animal Magnetism",
     location: "Draynor",
-    stepsComplete: 0,
     stepsTotal: 52,
     questPoints: 1,
     complete: false,
@@ -107,7 +102,6 @@ export const DraynorQuests: Types.IQuestInfo[] = [
   {
     name: "Love Story",
     location: "Draynor",
-    stepsComplete: 0,
     stepsTotal: 44,
     questPoints: 2,
     complete: false,
@@ -156,7 +150,6 @@ export const DraynorQuests: Types.IQuestInfo[] = [
   {
     name: "Swept Away",
     location: "Draynor",
-    stepsComplete: 0,
     stepsTotal: 30,
     questPoints: 2,
     complete: false,
@@ -169,7 +162,6 @@ export const DraynorQuests: Types.IQuestInfo[] = [
   {
     name: "Missing My Mummy",
     location: "Draynor",
-    stepsComplete: 0,
     stepsTotal: 45,
     questPoints: 1,
     complete: false,
@@ -197,7 +189,6 @@ export const DraynorQuests: Types.IQuestInfo[] = [
   {
     name: "Stolen Hearts",
     location: "Draynor",
-    stepsComplete: 0,
     stepsTotal: 29,
     questPoints: 3,
     complete: false,

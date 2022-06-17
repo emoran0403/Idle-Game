@@ -3,52 +3,64 @@ import * as Types from "../../../../../Types";
 
 //object[key] is how we can access an object's value by passing in a key
 
-export const Quests_Lumbridge = createSlice({
-  name: "Quests_Lumbridge",
+export const Quests_Draynor = createSlice({
+  name: "Quests_Draynor",
   initialState: {
     // refer to state as state.QuestArray
     // with an array, i can add more quests later
-    LumbridgeQuestArray: [
+    DraynorQuestArray: [
       {
-        name: "Cook's Assistant",
+        name: "A Fairy Tale I - Growing Pains",
         stepsComplete: 0,
-        stepsTotal: 20,
+        stepsTotal: 35,
         complete: false,
       },
       {
-        name: "Myths of the White Lands",
+        name: "A Fairy Tale II - Cure a Queen",
         stepsComplete: 0,
-        stepsTotal: 113,
+        stepsTotal: 36,
         complete: false,
       },
       {
-        name: "The Restless Ghost",
+        name: "Vampyre Slayer",
         stepsComplete: 0,
-        stepsTotal: 14,
+        stepsTotal: 23,
         complete: false,
       },
       {
-        name: "The Lost Tribe",
+        name: "Ernest the Chicken",
         stepsComplete: 0,
-        stepsTotal: 33,
+        stepsTotal: 40,
         complete: false,
       },
       {
-        name: "The Blood Pact",
+        name: "Animal Magnetism",
         stepsComplete: 0,
-        stepsTotal: 17,
+        stepsTotal: 52,
         complete: false,
       },
       {
-        name: "Buyers and Cellars",
+        name: "Love Story",
         stepsComplete: 0,
-        stepsTotal: 15,
+        stepsTotal: 44,
         complete: false,
       },
       {
-        name: "Lost City",
+        name: "Swept Away",
         stepsComplete: 0,
-        stepsTotal: 26,
+        stepsTotal: 30,
+        complete: false,
+      },
+      {
+        name: "Missing My Mummy",
+        stepsComplete: 0,
+        stepsTotal: 45,
+        complete: false,
+      },
+      {
+        name: "Stolen Hearts",
+        stepsComplete: 0,
+        stepsTotal: 29,
         complete: false,
       },
     ],
@@ -57,8 +69,8 @@ export const Quests_Lumbridge = createSlice({
     incrementQuestStepAndCheckIfCompleted: (state, action) => {
       const questNameFromAction: string = action.type; // decide which quest needs incrementing
       // go through all the quests...
-      for (let i = 1; i < state.LumbridgeQuestArray.length; i++) {
-        let currentQuest = state.LumbridgeQuestArray[i]; // rename it for better context
+      for (let i = 1; i < state.DraynorQuestArray.length; i++) {
+        let currentQuest = state.DraynorQuestArray[i]; // rename it for better context
         // ...until we find the quest name that matches the quest name from the action
         if (currentQuest.name === questNameFromAction) {
           // increment the steps counter
@@ -75,6 +87,6 @@ export const Quests_Lumbridge = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { incrementQuestStepAndCheckIfCompleted } = Quests_Lumbridge.actions;
+export const { incrementQuestStepAndCheckIfCompleted } = Quests_Draynor.actions;
 
-export default Quests_Lumbridge.reducer;
+export default Quests_Draynor.reducer;

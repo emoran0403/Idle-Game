@@ -7,11 +7,14 @@ import * as Types from "../../Types";
  * ANYCOMBAT: attack, strength, defense, constitution, magic, range, prayer, summoning
  */
 
+//! i need to match the quest name from static list to the quest name from state,
+//! and compose a new object with the stepsComplete key added in
+//! from there i can calc a % or other things
+
 export const LumbridgeQuests: Types.IQuestInfo[] = [
   {
     name: "Cook's Assistant",
     location: "Lumbridge",
-    stepsComplete: 0,
     stepsTotal: 20,
     questPoints: 1,
     complete: false,
@@ -26,7 +29,6 @@ export const LumbridgeQuests: Types.IQuestInfo[] = [
   {
     name: "Myths of the White Lands",
     location: "Lumbridge",
-    stepsComplete: 0,
     stepsTotal: 113,
     questPoints: 2,
     complete: false,
@@ -39,7 +41,6 @@ export const LumbridgeQuests: Types.IQuestInfo[] = [
   {
     name: "The Restless Ghost",
     location: "Lumbridge",
-    stepsComplete: 0,
     stepsTotal: 14,
     questPoints: 1,
     complete: false,
@@ -54,7 +55,6 @@ export const LumbridgeQuests: Types.IQuestInfo[] = [
   {
     name: "The Lost Tribe",
     location: "Lumbridge",
-    stepsComplete: 0,
     stepsTotal: 33,
     questPoints: 1,
     complete: false,
@@ -73,7 +73,6 @@ export const LumbridgeQuests: Types.IQuestInfo[] = [
   {
     name: "The Blood Pact",
     location: "Lumbridge",
-    stepsComplete: 0,
     stepsTotal: 17,
     questPoints: 1,
     complete: false,
@@ -92,7 +91,6 @@ export const LumbridgeQuests: Types.IQuestInfo[] = [
   {
     name: "Buyers and Cellars",
     location: "Lumbridge",
-    stepsComplete: 0,
     stepsTotal: 15,
     questPoints: 1,
     complete: false,
@@ -109,7 +107,6 @@ export const LumbridgeQuests: Types.IQuestInfo[] = [
   {
     name: "Lost City",
     location: "Lumbridge",
-    stepsComplete: 0,
     stepsTotal: 26,
     questPoints: 3,
     complete: false,
@@ -123,5 +120,3 @@ export const LumbridgeQuests: Types.IQuestInfo[] = [
     itemRewards: {},
   },
 ];
-
-const temp = {};

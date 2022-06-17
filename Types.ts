@@ -68,7 +68,6 @@ export interface ISkillList {
   Magic: number;
 }
 
-//! revamp this
 export interface IStateQuest {
   name: string;
   stepsComplete: number;
@@ -83,6 +82,8 @@ export interface AllState {
   CurrentLocation: ICurrentLocation;
   CurrentActivity: ICurrentActivity;
   Resources: IResources;
+  Quests_Lumbridge: IStateQuest[];
+  Quests_Draynor: IStateQuest[];
 }
 
 export interface IBankList {
@@ -116,7 +117,6 @@ export interface IResources {
 export interface IQuestInfo {
   name: string;
   location: string;
-  stepsComplete: number;
   stepsTotal: number;
   questPoints: number;
   complete: boolean;

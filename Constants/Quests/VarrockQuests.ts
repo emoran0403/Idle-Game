@@ -11,7 +11,6 @@ export const VarrockQuests: Types.IQuestInfo[] = [
   {
     name: "Dragon Slayer",
     location: "Varrock",
-    stepsComplete: 0,
     stepsTotal: 53,
     questPoints: 2,
     complete: false,

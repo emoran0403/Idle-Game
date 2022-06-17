@@ -9,6 +9,8 @@ import currentLocationReducer from "../Slices/CurrentLocation";
 import currentActivityReducer from "../Slices/CurrentActivity";
 import resourcesReducer from "../Slices/Resources";
 import walletReducer from "../Slices/Wallet";
+import lumbridgequestReducer from "../Slices/QuestSlices/Lumbridge";
+import draynorquestReducer from "../Slices/QuestSlices/Draynor";
 
 export default combineReducers({
   buttons1: buttons1Reducer,
@@ -21,4 +23,6 @@ export default combineReducers({
   CurrentActivity: currentActivityReducer,
   Resources: resourcesReducer,
   Wallet: walletReducer,
+  Quests_Lumbridge: lumbridgequestReducer,
+  Quests_Draynor: draynorquestReducer,
 });
