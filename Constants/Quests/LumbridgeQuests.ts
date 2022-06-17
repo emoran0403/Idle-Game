@@ -1,4 +1,11 @@
 import * as Types from "../../Types";
+/**
+ * EXPERIENCE REWARDS
+ * sometimes reward a prismatic lamp, allowing the player to choose the skill in which they gain xp
+ * ANY: any skill
+ * MAINCOMBAT: attack, strength, defense, constitution, magic, range
+ * ANYCOMBAT: attack, strength, defense, constitution, magic, range, prayer, summoning
+ */
 
 const LumbridgeQuests: Types.IAllQuestInfo[] = [
   {
@@ -99,4 +106,22 @@ const LumbridgeQuests: Types.IAllQuestInfo[] = [
     },
     itemRewards: {},
   },
+  {
+    name: "Lost City",
+    location: "Lumbridge",
+    stepsComplete: 0,
+    stepsTotal: 26,
+    questPoints: 3,
+    complete: false,
+    combatRequirements: 63,
+    questRequirements: [],
+    levelRequirements: {
+      Crafting: 31,
+      Woodcutting: 36,
+    },
+    experienceRewards: {},
+    itemRewards: {},
+  },
 ];
+
+const temp = {};
