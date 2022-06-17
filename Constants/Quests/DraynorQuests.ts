@@ -215,3 +215,5 @@ export const DraynorQuests: Types.IQuestInfo[] = [
 ];
 
 const temp = {};
+
+//! get the quests from the wizards tower

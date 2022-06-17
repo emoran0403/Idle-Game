@@ -7,5 +7,3 @@ const man = {
   XPGivenCombatStyle: 25,
   XPGivenConstitution: 8,
 };
-
-//! start here next

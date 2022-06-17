@@ -151,3 +151,9 @@ export interface ILocationSummary {
   };
   Combat: string[];
 }
+
+export interface IAllLocations {
+  Lumbridge: ILocationSummary;
+  Draynor: ILocationSummary;
+  // Varrock: ILocationSummary;
+}

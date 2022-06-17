@@ -9,3 +9,17 @@ export const AllQuests: Types.IAllQuests = {
   Draynor: DraynorQuests,
   Varrock: VarrockQuests,
 };
+
+/**
+ *
+ * import * as Types from "../../Types";
+ *
+ * EXPERIENCE REWARDS
+ * sometimes reward a prismatic lamp, allowing the player to choose the skill in which they gain xp
+ * ANY: any skill
+ * MAINCOMBAT: attack, strength, defense, constitution, magic, range
+ * ANYCOMBAT: attack, strength, defense, constitution, magic, range, prayer, summoning
+ *
+ * export const LOCATIONNAMEHEREQuests: Types.IQuestInfo[] = []
+ * const temp = {};
+ */
