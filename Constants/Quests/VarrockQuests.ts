@@ -6,7 +6,8 @@ import * as Types from "../../Types";
  * MAINCOMBAT: attack, strength, defense, constitution, magic, range
  * ANYCOMBAT: attack, strength, defense, constitution, magic, range, prayer, summoning
  */
-const LumbridgeQuests: Types.IAllQuestInfo[] = [
+
+export const VarrockQuests: Types.IQuestInfo[] = [
   {
     name: "Dragon Slayer",
     location: "Varrock",

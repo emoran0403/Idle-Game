@@ -113,7 +113,7 @@ export interface IResources {
   Dropping: boolean;
 }
 
-export interface IAllQuestInfo {
+export interface IQuestInfo {
   name: string;
   location: string;
   stepsComplete: number;
@@ -125,6 +125,12 @@ export interface IAllQuestInfo {
   levelRequirements: IFlatObjectOfNums;
   experienceRewards: IFlatObjectOfNums;
   itemRewards: IFlatObjectOfNums;
+}
+
+export interface IAllQuests {
+  Lumbridge: IQuestInfo[];
+  Draynor: IQuestInfo[];
+  Varrock: IQuestInfo[];
 }
 
 export interface ILocationSummary {

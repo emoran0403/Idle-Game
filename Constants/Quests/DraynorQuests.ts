@@ -7,7 +7,7 @@ import * as Types from "../../Types";
  * ANYCOMBAT: attack, strength, defense, constitution, magic, range, prayer, summoning
  */
 
-const DraynorQuests: Types.IAllQuestInfo[] = [
+export const DraynorQuests: Types.IQuestInfo[] = [
   {
     name: "A Fairy Tale I - Growing Pains",
     location: "Draynor",

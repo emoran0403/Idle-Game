@@ -7,7 +7,7 @@ import * as Types from "../../Types";
  * ANYCOMBAT: attack, strength, defense, constitution, magic, range, prayer, summoning
  */
 
-const LumbridgeQuests: Types.IAllQuestInfo[] = [
+export const LumbridgeQuests: Types.IQuestInfo[] = [
   {
     name: "Cook's Assistant",
     location: "Lumbridge",
