@@ -7,10 +7,6 @@ import * as Types from "../../Types";
  * ANYCOMBAT: attack, strength, defense, constitution, magic, range, prayer, summoning
  */
 
-//! i need to match the quest name from static list to the quest name from state,
-//! and compose a new object with the stepsComplete key added in
-//! from there i can calc a % or other things
-
 export const LumbridgeQuests: Types.IQuestInfo[] = [
   {
     name: "Cook's Assistant",

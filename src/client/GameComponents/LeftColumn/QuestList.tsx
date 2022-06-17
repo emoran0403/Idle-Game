@@ -47,24 +47,100 @@ export default QuestList;
 
 // console.log(wow);
 
-const temp = {
-  name: "Cook's Assistant",
-  location: "Lumbridge",
-  stepsTotal: 20,
-  questPoints: 1,
-  complete: false,
-  combatRequirements: 0,
-  questRequirements: [],
-  levelRequirements: {},
-  experienceRewards: {
-    Cooking: 300,
+const temp = [
+  {
+    name: "Cook's Assistant",
+    location: "Lumbridge",
+    stepsTotal: 20,
+    questPoints: 1,
+    complete: false,
+    combatRequirements: 0,
+    questRequirements: [],
+    levelRequirements: {},
+    experienceRewards: {
+      Cooking: 300,
+    },
+    itemRewards: { Coins: 500, Sardines: 20 },
   },
-  itemRewards: { Coins: 500, Sardines: 20 },
-};
+  {
+    name: "Myths of the White Lands",
+    location: "Lumbridge",
+    stepsTotal: 113,
+    questPoints: 2,
+    complete: false,
+    combatRequirements: 0,
+    questRequirements: [],
+    levelRequirements: {},
+    experienceRewards: { ANY: 500 },
+    itemRewards: { Coins: 5000 },
+  },
+];
 
-const wow = {
-  name: "Cook's Assistant",
-  stepsComplete: 0,
-  stepsTotal: 20,
-  complete: false,
-};
+const wow = [
+  {
+    name: "Cook's Assistant",
+    stepsComplete: 0,
+    stepsTotal: 20,
+    complete: false,
+  },
+  {
+    name: "Myths of the White Lands",
+    stepsComplete: 0,
+    stepsTotal: 113,
+    complete: false,
+  },
+];
+// temp grabs the list of quests from constants
+// wow grabs the list of quests from state
+// compositeArray matches the names together, and adds the current stepsComplete, so that it can be displayed
+let compositeArray: any = [];
+
+for (let i = 0; i < wow.length; i++) {
+  for (let j = 0; j < temp.length; j++) {
+    if (wow[j].name === temp[i].name) {
+      let compositeQuest = { ...temp[i], stepsComplete: wow[j].stepsComplete };
+      compositeArray.push(compositeQuest);
+      continue;
+    }
+  }
+}
+
+console.log(compositeArray);
+
+[
+  {
+    name: "Cook's Assistant",
+    location: "Lumbridge",
+    stepsTotal: 20,
+    questPoints: 1,
+    complete: false,
+    combatRequirements: 0,
+    questRequirements: [],
+    levelRequirements: {},
+    experienceRewards: {
+      Cooking: 300,
+    },
+    itemRewards: {
+      Coins: 500,
+      Sardines: 20,
+    },
+    stepsComplete: 0,
+  },
+  {
+    name: "Myths of the White Lands",
+    location: "Lumbridge",
+    stepsTotal: 113,
+    questPoints: 2,
+    complete: false,
+    combatRequirements: 0,
+    questRequirements: [],
+    levelRequirements: {},
+    experienceRewards: {
+      ANY: 500,
+    },
+    itemRewards: {
+      Coins: 5000,
+    },
+    stepsComplete: 0,
+  },
+];
