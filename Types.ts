@@ -115,6 +115,7 @@ export interface IResources {
 
 export interface IAllQuestInfo {
   name: string;
+  location: string;
   stepsComplete: number;
   stepsTotal: number;
   questPoints: number;

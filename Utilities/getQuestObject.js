@@ -8,6 +8,7 @@
 (() => {
   const QUESTINFO = {
     name: document.title.replace("Quick guide for ", "").replace(" - The RuneScape Wiki", ""),
+    location: document.getElementsByClassName("questdetails-info")[0].lastElementChild.innerText,
 
     stepsComplete: 0,
 

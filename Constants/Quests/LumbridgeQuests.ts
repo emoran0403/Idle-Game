@@ -3,6 +3,7 @@ import * as Types from "../../Types";
 const LumbridgeQuests: Types.IAllQuestInfo[] = [
   {
     name: "Cook's Assistant",
+    location: "Lumbridge",
     stepsComplete: 0,
     stepsTotal: 20,
     questPoints: 1,
@@ -17,6 +18,7 @@ const LumbridgeQuests: Types.IAllQuestInfo[] = [
   },
   {
     name: "Myths of the White Lands",
+    location: "Lumbridge",
     stepsComplete: 0,
     stepsTotal: 113,
     questPoints: 2,
@@ -29,6 +31,7 @@ const LumbridgeQuests: Types.IAllQuestInfo[] = [
   },
   {
     name: "The Restless Ghost",
+    location: "Lumbridge",
     stepsComplete: 0,
     stepsTotal: 14,
     questPoints: 1,
@@ -43,6 +46,7 @@ const LumbridgeQuests: Types.IAllQuestInfo[] = [
   },
   {
     name: "The Lost Tribe",
+    location: "Lumbridge",
     stepsComplete: 0,
     stepsTotal: 33,
     questPoints: 1,
@@ -61,6 +65,7 @@ const LumbridgeQuests: Types.IAllQuestInfo[] = [
   },
   {
     name: "The Blood Pact",
+    location: "Lumbridge",
     stepsComplete: 0,
     stepsTotal: 17,
     questPoints: 1,
@@ -79,6 +84,7 @@ const LumbridgeQuests: Types.IAllQuestInfo[] = [
   },
   {
     name: "Buyers and Cellars",
+    location: "Lumbridge",
     stepsComplete: 0,
     stepsTotal: 15,
     questPoints: 1,
