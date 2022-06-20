@@ -18,4 +18,5 @@ export const DraynorSummary: Types.ILocationSummary = {
     Fishing: [`shrimp`, `anchovies`, `sardine`, `herring`],
   },
   Combat: [],
+  Bosses: [],
 };

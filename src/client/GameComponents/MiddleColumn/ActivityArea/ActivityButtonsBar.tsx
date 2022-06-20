@@ -7,6 +7,11 @@ import * as React from "react";
 
 // these buttons will need to hide the activity area, and display the corresponding panel in place of the activity are
 // when the back button is clicked, return to the activity area
+// skills, quests, combat, and bosses read from a constant file - under location info
+// bank is always enabled
+// minigames read from a constant file
+// clues will check the bank to see if there is a cluescroll
+//@ disable bosses, minigames, and clues for now
 
 const ActivityButtons = (props: Types.ActivityButtonsProps) => {
   return (
@@ -48,6 +53,7 @@ const ActivityButtons = (props: Types.ActivityButtonsProps) => {
         Combat
       </button>
       <button
+        disabled
         onClick={() => {
           props.handleUpdateDisplay(`bosses`);
           console.log("you clicked Bosses");
@@ -58,6 +64,7 @@ const ActivityButtons = (props: Types.ActivityButtonsProps) => {
       </button>
 
       <button
+        disabled
         onClick={() => {
           props.handleUpdateDisplay(`minigames`);
           console.log("you clicked Minigames");
@@ -68,6 +75,7 @@ const ActivityButtons = (props: Types.ActivityButtonsProps) => {
       </button>
 
       <button
+        disabled
         onClick={() => {
           props.handleUpdateDisplay(`clues`);
           console.log("you clicked Clues");

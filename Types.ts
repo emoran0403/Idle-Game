@@ -153,6 +153,7 @@ export interface ILocationSummary {
     Thieving?: string[];
   };
   Combat: string[];
+  Bosses: string[];
 }
 
 export interface IAllLocations {

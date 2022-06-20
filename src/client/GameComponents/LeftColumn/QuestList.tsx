@@ -8,8 +8,8 @@ const QuestList = (props: Types.NoProps) => {
   const AllQuestsFlat: Types.IQuestInfo[] = [...Object.values(AllQuests)].flat(); // This represents all the quests as a flat array
   const { LumbridgeQuestArray } = useSelector((state: Types.AllState) => state.Quests_Lumbridge) as Types.IStateQuest[]; // this represents all the quests coming from state
   const [compositeQuestArray, setCompositeQuestArray] = useState<Types.ICompositeQuest[]>([]);
-  console.log(useSelector((state: Types.AllState) => state.Quests_Lumbridge));
-  console.log(LumbridgeQuestArray);
+  // console.log(useSelector((state: Types.AllState) => state.Quests_Lumbridge));
+  // console.log(LumbridgeQuestArray);
 
   //! compositeQuestArray is now being populated, but there are TS errors
   //!   {LumbridgeQuestArray: Array(7)} is the return from useSelector((state: Types.AllState) => state.Quests_Lumbridge)

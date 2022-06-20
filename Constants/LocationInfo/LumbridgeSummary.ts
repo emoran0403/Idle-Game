@@ -8,4 +8,5 @@ export const LumbridgeSummary: Types.ILocationSummary = {
     Fishing: [`crayfish`, `shrimp`, `anchovies`, `sardine`, `herring`, `trout`, `pike`, `salmon`],
   },
   Combat: [`man`, `woman`, `giant spider`, `goblin`, `chicken`, `cow`, `spider`, `giant rat`, `swamp frog`],
+  Bosses: [],
 };
