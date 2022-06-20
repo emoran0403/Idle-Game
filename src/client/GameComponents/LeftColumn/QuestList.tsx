@@ -1,25 +1,44 @@
 import * as Types from "../../../../Types";
 import * as React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { AllQuests } from "../../../../Constants/Quests/";
 import { useSelector } from "react-redux";
 
 const QuestList = (props: Types.NoProps) => {
-  const AllQuestsFlat = [...Object.values(AllQuests)].flat();
-  const Progress = useSelector((state: Types.AllState) => state.Quests_Lumbridge) as Types.IStateQuest[];
-  // console.log(Progress);
+  const AllQuestsFlat: Types.IQuestInfo[] = [...Object.values(AllQuests)].flat(); // This represents all the quests as a flat array
+  const { LumbridgeQuestArray } = useSelector((state: Types.AllState) => state.Quests_Lumbridge) as Types.IStateQuest[]; // this represents all the quests coming from state
+  const [compositeQuestArray, setCompositeQuestArray] = useState<Types.ICompositeQuest[]>([]);
+  console.log(useSelector((state: Types.AllState) => state.Quests_Lumbridge));
+  console.log(LumbridgeQuestArray);
 
-  useEffect(() => {}, []);
+  //! compositeQuestArray is now being populated, but there are TS errors
+  //!   {LumbridgeQuestArray: Array(7)} is the return from useSelector((state: Types.AllState) => state.Quests_Lumbridge)
+  //! I need to deconstruct LumbridgeQuestArray out of the return to access the array directly
+
+  useEffect(() => {
+    let tempCompArray: Types.ICompositeQuest[] = [];
+    for (let i = 0; i < AllQuestsFlat.length; i++) {
+      for (let j = 0; j < LumbridgeQuestArray.length; j++) {
+        if (LumbridgeQuestArray[j].name === AllQuestsFlat[i].name) {
+          let compositeQuest = { ...AllQuestsFlat[i], stepsComplete: LumbridgeQuestArray[j].stepsComplete };
+          tempCompArray.push(compositeQuest);
+          continue; // once we find our match, continue to the next iteration
+        }
+      }
+    }
+    setCompositeQuestArray(tempCompArray);
+  }, []);
+
   return (
     <div className="card">
       <div className="card-body">
         <h5 className="card-header text-center">Quest List</h5>
-        {AllQuestsFlat.map((quest) => (
+        {compositeQuestArray?.map((quest) => (
           <div key={`quest-list-${quest.name}`} className="card">
             <div className="card-body">
               <h5 className="card-subtitle text-muted">{quest.name}</h5>
-
-              {quest.complete && <div>Completed!</div>}
+              {/* //! quest.complete not working as expected */}
+              {quest.complete && <div>100%</div>}
               {!quest.complete && (
                 <div>
                   In Progress : {quest.stepsComplete} / {quest.stepsTotal}
@@ -44,103 +63,3 @@ export default QuestList;
 // };
 
 // const wow = [...Object.values(example)].flat();
-
-// console.log(wow);
-
-const temp: Types.IQuestInfo[] = [
-  {
-    name: "Cook's Assistant",
-    location: "Lumbridge",
-    stepsTotal: 20,
-    questPoints: 1,
-    complete: false,
-    combatRequirements: 0,
-    questRequirements: [],
-    levelRequirements: {},
-    experienceRewards: {
-      Cooking: 300,
-    },
-    itemRewards: { Coins: 500, Sardines: 20 },
-  },
-  {
-    name: "Myths of the White Lands",
-    location: "Lumbridge",
-    stepsTotal: 113,
-    questPoints: 2,
-    complete: false,
-    combatRequirements: 0,
-    questRequirements: [],
-    levelRequirements: {},
-    experienceRewards: { ANY: 500 },
-    itemRewards: { Coins: 5000 },
-  },
-];
-
-const wow: Types.IStateQuest[] = [
-  {
-    name: "Cook's Assistant",
-    stepsComplete: 0,
-    stepsTotal: 20,
-    complete: false,
-  },
-  {
-    name: "Myths of the White Lands",
-    stepsComplete: 0,
-    stepsTotal: 113,
-    complete: false,
-  },
-];
-// temp grabs the list of quests from constants
-// wow grabs the list of quests from state
-// compositeArray matches the names together, and adds the current stepsComplete, so that it can be displayed
-let compositeArray: Types.ICompositeQuest[] = [];
-
-for (let i = 0; i < wow.length; i++) {
-  for (let j = 0; j < temp.length; j++) {
-    if (wow[j].name === temp[i].name) {
-      let compositeQuest = { ...temp[i], stepsComplete: wow[j].stepsComplete };
-      compositeArray.push(compositeQuest);
-      continue;
-    }
-  }
-}
-
-console.log(compositeArray);
-
-[
-  {
-    name: "Cook's Assistant",
-    location: "Lumbridge",
-    stepsTotal: 20,
-    questPoints: 1,
-    complete: false,
-    combatRequirements: 0,
-    questRequirements: [],
-    levelRequirements: {},
-    experienceRewards: {
-      Cooking: 300,
-    },
-    itemRewards: {
-      Coins: 500,
-      Sardines: 20,
-    },
-    stepsComplete: 0,
-  },
-  {
-    name: "Myths of the White Lands",
-    location: "Lumbridge",
-    stepsTotal: 113,
-    questPoints: 2,
-    complete: false,
-    combatRequirements: 0,
-    questRequirements: [],
-    levelRequirements: {},
-    experienceRewards: {
-      ANY: 500,
-    },
-    itemRewards: {
-      Coins: 5000,
-    },
-    stepsComplete: 0,
-  },
-];

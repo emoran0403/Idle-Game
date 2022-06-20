@@ -11,9 +11,9 @@ export const Quests_Lumbridge = createSlice({
     LumbridgeQuestArray: [
       {
         name: "Cook's Assistant",
-        stepsComplete: 0,
+        stepsComplete: 20,
         stepsTotal: 20,
-        complete: false,
+        complete: true,
       },
       {
         name: "Myths of the White Lands",
