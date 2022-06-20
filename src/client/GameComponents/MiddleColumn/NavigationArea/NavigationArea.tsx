@@ -8,7 +8,7 @@ import CurrentActivity from "./CurrentActivity";
 const NavigationArea = (props: Types.NoProps) => {
   useEffect(() => {}, []);
   return (
-    <div className="d-flex">
+    <div className="d-flex border border-dark border-2 rounded-3">
       <button
         onClick={() => {
           console.log("you clicked World Map Button");

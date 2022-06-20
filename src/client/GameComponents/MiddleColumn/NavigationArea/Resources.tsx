@@ -19,7 +19,7 @@ const Resources = (props: Types.NoProps) => {
   }
 
   return (
-    <div>
+    <div className="text-center border border-dark border-2 rounded-3">
       <div>Currently {resourcesToDisplay} Resources</div>
       <button
         className="btn btn-primary"

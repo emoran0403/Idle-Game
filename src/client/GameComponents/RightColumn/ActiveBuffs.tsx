@@ -5,7 +5,7 @@ import { useEffect } from "react";
 const ActiveBuffs = (props: Types.NoProps) => {
   useEffect(() => {}, []);
   return (
-    <div>
+    <div className="border border-dark border-2 rounded-3">
       <div>This is ActiveBuffs</div>
     </div>
   );

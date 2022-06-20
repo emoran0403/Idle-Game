@@ -17,18 +17,18 @@ const GameContainer = (props: Types.NoProps) => {
     <div className="container">
       <div className="row justify-content-center">Title Here</div>
       <div id="gamecontainer" className="row justify-content-lg-center">
-        <div id="left-column" className="col-lg-3">
+        <div id="left-column" className="col-lg-3 border border-dark border-2 rounded-3">
           <Levels />
           <QuestList />
         </div>
 
-        <div id="middle-column" className="col-lg-6">
+        <div id="middle-column" className="col-lg-6 border border-dark border-2 rounded-3">
           <NavigationArea />
-          <ActivityArea />
           <ActivityButtons />
+          <ActivityArea />
         </div>
 
-        <div id="right-column" className="col-lg-3">
+        <div id="right-column" className="col-lg-3 border border-dark border-2 rounded-3">
           <Inventory />
           <ActiveBuffs />
           <WornEquipment />

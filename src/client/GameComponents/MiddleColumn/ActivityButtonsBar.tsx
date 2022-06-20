@@ -10,7 +10,7 @@ import * as React from "react";
 
 const ActivityButtons = (props: Types.NoProps) => {
   return (
-    <div className="d-flex">
+    <div className="d-flex border border-dark border-2 rounded-3">
       <button
         onClick={() => {
           console.log("you clicked Skills");

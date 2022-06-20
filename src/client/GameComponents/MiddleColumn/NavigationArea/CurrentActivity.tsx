@@ -15,7 +15,7 @@ const CurrentActivity = (props: Types.NoProps) => {
 
   useEffect(() => {}, []);
   return (
-    <div>
+    <div className="text-center border border-dark border-2 rounded-3">
       {activityToDisplay !== "Combat" && <div>You are currently {activityToDisplay}</div>}
       {activityToDisplay === "Combat" && <div>You are currently in {activityToDisplay}</div>}
     </div>

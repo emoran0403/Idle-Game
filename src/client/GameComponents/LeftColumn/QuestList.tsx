@@ -30,7 +30,7 @@ const QuestList = (props: Types.NoProps) => {
   }, []);
 
   return (
-    <div className="card">
+    <div className="card border border-dark border-2 rounded-3">
       <div className="card-body">
         <h5 className="card-header text-center">Quest List</h5>
         {compositeQuestArray?.map((quest) => (

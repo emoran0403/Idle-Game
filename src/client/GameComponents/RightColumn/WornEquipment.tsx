@@ -5,7 +5,7 @@ import { useEffect } from "react";
 const WornEquipment = (props: Types.NoProps) => {
   useEffect(() => {}, []);
   return (
-    <div>
+    <div className="border border-dark border-2 rounded-3">
       <div>This is WornEquipment</div>
     </div>
   );
