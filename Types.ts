@@ -157,3 +157,8 @@ export interface IAllLocations {
   Draynor: ILocationSummary;
   // Varrock: ILocationSummary;
 }
+
+//This will be the type used for quests displayed in the Quest List component and the Quests in Area panel
+export interface ICompositeQuest extends IQuestInfo {
+  stepsComplete: number;
+}

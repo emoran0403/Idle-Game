@@ -47,7 +47,7 @@ export default QuestList;
 
 // console.log(wow);
 
-const temp = [
+const temp: Types.IQuestInfo[] = [
   {
     name: "Cook's Assistant",
     location: "Lumbridge",
@@ -76,7 +76,7 @@ const temp = [
   },
 ];
 
-const wow = [
+const wow: Types.IStateQuest[] = [
   {
     name: "Cook's Assistant",
     stepsComplete: 0,
@@ -93,7 +93,7 @@ const wow = [
 // temp grabs the list of quests from constants
 // wow grabs the list of quests from state
 // compositeArray matches the names together, and adds the current stepsComplete, so that it can be displayed
-let compositeArray: any = [];
+let compositeArray: Types.ICompositeQuest[] = [];
 
 for (let i = 0; i < wow.length; i++) {
   for (let j = 0; j < temp.length; j++) {
