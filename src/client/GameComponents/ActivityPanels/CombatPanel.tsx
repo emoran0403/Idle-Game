@@ -5,7 +5,7 @@ import { useEffect } from "react";
 const CombatPanel = (props: Types.NoProps) => {
   useEffect(() => {}, []);
   return (
-    <div>
+    <div className="card border border-dark border-2 rounded-3">
       <div>This is CombatPanel</div>
     </div>
   );

@@ -7,7 +7,7 @@ import { useEffect } from "react";
 const SkillsPanel = (props: Types.NoProps) => {
   useEffect(() => {}, []);
   return (
-    <div className="container">
+    <div className="container card border border-dark border-2 rounded-3">
       <div className="row justify-content-lg-center">
         <div className="col-lg-3 justify-content-lg-center">
           <button className="btn btn-primary" onClick={() => {}}>
@@ -21,7 +21,7 @@ const SkillsPanel = (props: Types.NoProps) => {
           {/* Each of these cards need to come from the skills available at the current location */}
           <div className="card">
             <div className="card-body">
-              <img>Icon here</img>
+              {/* <img>Icon here</img> */}
               <h5 className="card-title">Skill Name here</h5>
               <p className="card-text">Show the skill level here</p>
             </div>
