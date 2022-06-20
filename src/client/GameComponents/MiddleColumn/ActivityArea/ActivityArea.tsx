@@ -38,6 +38,13 @@ const ActivityArea = (props: Types.NoProps) => {
           clues: <CluesPanel />,
         }[display]
       }
+
+      {
+        {
+          wow: 3,
+          pizza: 2,
+        }[`wow`]
+      }
     </div>
   );
 };

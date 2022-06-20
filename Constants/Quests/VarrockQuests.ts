@@ -13,7 +13,6 @@ export const VarrockQuests: Types.IQuestInfo[] = [
     location: "Varrock",
     stepsTotal: 53,
     questPoints: 2,
-    complete: false,
     combatRequirements: 63,
     questRequirements: [],
     levelRequirements: {},

@@ -78,19 +78,30 @@ export interface IStateQuest {
   complete: boolean;
 }
 
+export interface ListOfSkills {
+  Current: `Woodcutting` | `Firemaking` | `Mining` | `Fishing`;
+}
+
+export type bigwow = `Woodcutting` | `Firemaking` | `Mining` | `Fishing`;
+
 export interface AllState {
   Experience: ISkillList;
   Bank: IBankList;
   Inventory: I_Inventory;
   CurrentLocation: ICurrentLocation;
-  CurrentActivity: ICurrentActivity;
+  CurrentSkill: ListOfSkills;
   Resources: IResources;
   Quests_Lumbridge: LumbridgeQuestSliceCrap;
-  Quests_Draynor: IStateQuest[];
+  Quests_Draynor: DraynorQuestSliceCrap;
 }
 
+//! will need to make more of these for each location's quests
 export interface LumbridgeQuestSliceCrap {
   LumbridgeQuestArray: IStateQuest[];
+}
+
+export interface DraynorQuestSliceCrap {
+  DraynorQuestArray: IStateQuest[];
 }
 
 export interface IBankList {
@@ -102,11 +113,6 @@ export interface IBankList {
 export interface I_Inventory {
   quantity: number;
   items: { [key: string]: number };
-}
-
-export interface ICurrentLocation {
-  Lumbridge: boolean;
-  Bank: boolean;
 }
 
 export interface ICurrentActivity {
@@ -126,7 +132,6 @@ export interface IQuestInfo {
   location: string;
   stepsTotal: number;
   questPoints: number;
-  complete: boolean;
   combatRequirements: number;
   questRequirements: string[];
   levelRequirements: IFlatObjectOfNums;
@@ -140,33 +145,69 @@ export interface IAllQuests {
   Varrock: IQuestInfo[];
 }
 
+//@ copy this and trim it down to match the location summary
 export interface ILocationSummary {
   Quests: string[];
+  Skills: LocationSkills;
+  Combat: string[];
+  Bosses: string[];
+}
+
+export interface ILumbridgeLocationSummary {
+  Quests: string[];
   Skills: {
-    Mining?: string[];
-    Fishing?: string[];
-    Woodcutting?: string[];
-    Farming?: string[];
-    Hunter?: string[];
-    Divination?: string[];
-    Archaeology?: string[];
-    Runecrafting?: string[];
-    Construction?: string[];
-    Summoning?: string[];
-    Agility?: string[];
-    Thieving?: string[];
+    Mining: string[];
+    Fishing: string[];
+    Woodcutting: string[];
   };
   Combat: string[];
   Bosses: string[];
 }
 
+export interface IDraynorLocationSummary {
+  Quests: string[];
+  Skills: {
+    Mining: string[];
+    Fishing: string[];
+    Woodcutting: string[];
+  };
+  Combat: string[];
+  Bosses: string[];
+}
+
+export interface LocationSkills extends dyamicwow {
+  Mining: string[];
+  Fishing: string[];
+  Woodcutting: string[];
+  Farming: string[];
+  Firemaking: string[];
+  Hunter: string[];
+  Divination: string[];
+  Archaeology: string[];
+  Runecrafting: string[];
+  Construction: string[];
+  Summoning: string[];
+  Agility: string[];
+  Thieving: string[];
+}
+
+export interface dyamicwow {
+  [pizza: string]: string[];
+}
+
 export interface IAllLocations {
-  Lumbridge: ILocationSummary;
-  Draynor: ILocationSummary;
+  Lumbridge: ILumbridgeLocationSummary;
+  Draynor: IDraynorLocationSummary;
   // Varrock: ILocationSummary;
 }
 
 //This will be the type used for quests displayed in the Quest List component and the Quests in Area panel
 export interface ICompositeQuest extends IQuestInfo {
   stepsComplete: number;
+  complete: boolean;
+}
+
+//@ extend this as needed to account for future locations
+export interface ICurrentLocation {
+  Current: `Lumbridge` | `Draynor`;
 }

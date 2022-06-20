@@ -17,7 +17,7 @@ export const Quests_Lumbridge = createSlice({
       },
       {
         name: "Myths of the White Lands",
-        stepsComplete: 0,
+        stepsComplete: 15,
         stepsTotal: 113,
         complete: false,
       },
