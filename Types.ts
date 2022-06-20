@@ -85,8 +85,12 @@ export interface AllState {
   CurrentLocation: ICurrentLocation;
   CurrentActivity: ICurrentActivity;
   Resources: IResources;
-  Quests_Lumbridge: IStateQuest[];
+  Quests_Lumbridge: LumbridgeQuestSliceCrap;
   Quests_Draynor: IStateQuest[];
+}
+
+export interface LumbridgeQuestSliceCrap {
+  LumbridgeQuestArray: IStateQuest[];
 }
 
 export interface IBankList {
