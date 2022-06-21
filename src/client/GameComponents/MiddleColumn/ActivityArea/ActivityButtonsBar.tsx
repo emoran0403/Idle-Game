@@ -13,7 +13,7 @@ import * as React from "react";
 // clues will check the bank to see if there is a cluescroll
 //@ disable bosses, minigames, and clues for now
 
-const ActivityButtons = (props: Types.ActivityButtonsProps) => {
+const ActivityButtons = (props: Types.ActivitiesProps) => {
   return (
     <div className="d-flex border border-dark border-2 rounded-3">
       <button

@@ -1,20 +1,17 @@
 import * as Types from "../../../../Types";
 import * as React from "react";
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { AllLocations } from "../../../../Constants/LocationInfo";
 
 //! this needs to pull from some single source of truth showing all the skills available, and their resources based on the current location from state
 
-const SkillsPanel = (props: Types.NoProps) => {
+const SkillsPanel = (props: Types.ActivitiesProps) => {
+  // This grabs the current location from state
   const { Current } = useSelector((state: Types.AllState) => state.CurrentLocation) as Types.ICurrentLocation;
 
-  //Location is a string denoting the players current location
-
+  // This chooses the current location from AllLocations
   const wow = AllLocations[Current] as Types.ILocationSummary;
   console.log(wow);
-
-  useEffect(() => {}, []);
 
   return (
     <div className="container card border border-dark border-2 rounded-3">
