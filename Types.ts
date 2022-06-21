@@ -116,8 +116,7 @@ export interface IBankList {
 }
 
 export interface I_Inventory {
-  quantity: number;
-  items: { [key: string]: number };
+  Current: string[];
 }
 
 export interface ICurrentActivity {

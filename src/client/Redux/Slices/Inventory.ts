@@ -1,31 +1,31 @@
 import { createSlice } from "@reduxjs/toolkit";
 import * as Types from "../../../../Types";
+import { useSelector } from "react-redux";
+
+const resourcesStatus = useSelector((state: Types.AllState) => state.Resources) as Types.IResources;
 
 //object[key] is how we can access an object's value by passing in a key
 
 export const Inventory = createSlice({
   name: "inventory",
   initialState: {
-    quantity: 0,
-    items: {},
+    Current: [],
   },
   reducers: {
     /**
      * This will need to respect the players resources setting - to bank or not to bank, that is the question
      */
     // use this when we need to add an item to the inventory
+
     addItemToInventory: (state: Types.I_Inventory, action) => {
-      const item: string = action.payload.item;
-      const amount: number = Number(action.payload.amount); // this will be the number of items added to the inventory
-      // adds the entire of the inventory space, accounting for mixed items
-      const inventorySpace: number = Number(state.quantity);
-      const playerIsBanking: boolean = true; //@ will need to grab this from state
+      const item: string = action.payload.item; // the item to push into the inventory
+      const inventorySpace: number = Number(state.Current.length); // the amount of occupied space in the inventory
 
       // check if the player is banking or dropping items
-      if (playerIsBanking) {
+      if (resourcesStatus.Banking) {
         //Decide if the inventory has space
         if (inventorySpace < 28) {
-          state.items[item] += amount; // add the item to state, then reassign
+          state.Current.push(item); // add the item to state, then reassign
           if (inventorySpace + 1 === 28) {
             //@ this will need to trigger the player to move to the bank to deposit if the inventory is full
             // go to bank here
@@ -37,17 +37,14 @@ export const Inventory = createSlice({
     },
 
     // use this when we need to remove an item from the inventory
-    removeItemFromInventory: (state: Types.I_Inventory, action) => {
-      const item: string = action.payload.item;
-      const amount: number = Number(action.payload.amount); // this will be the number of items added to the inventory
+    removeItemFromInventory: (state: Types.I_Inventory) => {
+      //array.shift() for each item in the array will remove the first item every time (first item for UI/UX reasons)
 
-      //@ this will need to add to the player Bank if the player is depositing the inventory into the bank
-      if (state.items[item] - amount >= 0) {
-        // prevent the removal of an amount that would result in a negative
-        state.items[item] -= amount; // subtract the item from state
-      } else {
-        // remove all of that item, setting state to 0
-        state.items[item] = 0;
+      for (let i = 0; i < state.Current.length; i++) {
+        const item = state.Current.shift(); // pop removes the item from the inventory array,
+
+        //search bank for the item, then increment the amount by 1
+        //@ this will need to add to the player Bank if the player is depositing the inventory into the bank
       }
     },
   },
