@@ -38,13 +38,6 @@ const ActivityArea = (props: Types.NoProps) => {
           clues: <CluesPanel handleUpdateDisplay={handleUpdateDisplay} />,
         }[display]
       }
-
-      {
-        {
-          wow: 3,
-          pizza: 2,
-        }[`wow`]
-      }
     </div>
   );
 };

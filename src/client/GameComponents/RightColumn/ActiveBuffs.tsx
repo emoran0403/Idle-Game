@@ -7,6 +7,7 @@ const ActiveBuffs = (props: Types.NoProps) => {
   return (
     <div className="border border-dark border-2 rounded-3">
       <div>This is ActiveBuffs</div>
+      <div>ActiveBuffs is not part of the minimum viable product, but it needed a spot</div>
     </div>
   );
 };
