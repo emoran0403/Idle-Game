@@ -91,8 +91,13 @@ export interface AllState {
   CurrentLocation: ICurrentLocation;
   CurrentSkill: ListOfSkills;
   Resources: IResources;
+  Wallet: IWallet;
   Quests_Lumbridge: LumbridgeQuestSliceCrap;
   Quests_Draynor: DraynorQuestSliceCrap;
+}
+
+export interface IWallet {
+  Coins: number;
 }
 
 //! will need to make more of these for each location's quests

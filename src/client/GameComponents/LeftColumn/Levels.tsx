@@ -71,13 +71,14 @@ const Levels = (props: Types.NoProps) => {
   return (
     <div className="card border border-dark border-2 rounded-3">
       <div className="card-body">
-        <h5 className="card-header text-center">Levels</h5>
-
-        <div className="d-flex row">
-          <h6 className="card-subtitle text-muted">Combat Level {showCombatLevel()}</h6>
-          <h6 className="card-subtitle text-muted">Total Levels {totalLevel}</h6>
-          <h6 className="card-subtitle text-muted">Total Experience {totalExperience.toLocaleString("en-US")}</h6>
-        </div>
+        <h5 className="card-header text-center">
+          Levels
+          <div className="d-flex row">
+            <h6 className="card-subtitle text-muted">Combat Level: {showCombatLevel()}</h6>
+            <h6 className="card-subtitle text-muted">Total Levels: {totalLevel}</h6>
+            <h6 className="card-subtitle text-muted">Total Experience: {totalExperience.toLocaleString("en-US")}</h6>
+          </div>
+        </h5>
 
         {Object.entries(Experience).map(([skill, xp]) => (
           <div
