@@ -29,13 +29,13 @@ const ActivityArea = (props: Types.NoProps) => {
       {
         {
           activityDisplay: <ActivityDisplay />,
-          skills: <SkillsPanel />,
-          quests: <QuestPanel />,
-          bank: <BankPanel />,
-          combat: <CombatPanel />,
-          bosses: <BossesPanel />,
-          minigames: <MinigamePanel />,
-          clues: <CluesPanel />,
+          skills: <SkillsPanel handleUpdateDisplay={handleUpdateDisplay} />,
+          quests: <QuestPanel handleUpdateDisplay={handleUpdateDisplay} />,
+          bank: <BankPanel handleUpdateDisplay={handleUpdateDisplay} />,
+          combat: <CombatPanel handleUpdateDisplay={handleUpdateDisplay} />,
+          bosses: <BossesPanel handleUpdateDisplay={handleUpdateDisplay} />,
+          minigames: <MinigamePanel handleUpdateDisplay={handleUpdateDisplay} />,
+          clues: <CluesPanel handleUpdateDisplay={handleUpdateDisplay} />,
         }[display]
       }
 

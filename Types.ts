@@ -7,7 +7,7 @@ export interface InventoryProps {}
 export interface WoodcuttingCompProps {}
 export interface FletchingCompProps {}
 export interface FiremakingCompProps {}
-export interface ActivityButtonsProps {
+export interface ActivitiesProps {
   handleUpdateDisplay: Function;
 }
 

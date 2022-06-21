@@ -7,6 +7,14 @@ const MinigamePanel = (props: Types.ActivitiesProps) => {
   return (
     <div className="card border border-dark border-2 rounded-3">
       <div>This is MinigamePanel</div>
+      <button
+        className="btn btn-primary"
+        onClick={() => {
+          props.handleUpdateDisplay(`activityDisplay`);
+        }}
+      >
+        Back
+      </button>
     </div>
   );
 };

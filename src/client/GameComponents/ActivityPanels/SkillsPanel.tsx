@@ -17,7 +17,12 @@ const SkillsPanel = (props: Types.ActivitiesProps) => {
     <div className="container card border border-dark border-2 rounded-3">
       <div className="row justify-content-lg-center">
         <div className="col-lg-3 justify-content-lg-center">
-          <button className="btn btn-primary" onClick={() => {}}>
+          <button
+            className="btn btn-primary"
+            onClick={() => {
+              props.handleUpdateDisplay(`activityDisplay`);
+            }}
+          >
             Back
           </button>
         </div>
