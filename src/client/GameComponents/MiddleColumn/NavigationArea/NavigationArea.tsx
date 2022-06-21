@@ -3,7 +3,7 @@ import * as React from "react";
 import { useEffect } from "react";
 import Resources from "./Resources";
 import CurrentLocation from "./CurrentLocation";
-import CurrentActivity from "./CurrentActivity";
+import CurrentSkill from "./CurrentSkill";
 
 const NavigationArea = (props: Types.NoProps) => {
   useEffect(() => {}, []);
@@ -18,7 +18,7 @@ const NavigationArea = (props: Types.NoProps) => {
         World Map Button
       </button>
       <CurrentLocation />
-      <CurrentActivity />
+      <CurrentSkill />
       <Resources />
     </div>
   );
