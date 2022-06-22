@@ -42,8 +42,8 @@ const SkillsPanel = (props: Types.ActivitiesProps) => {
   const WoodcuttingOptions = (resourceArray: string[]) => {
     return (
       <div className="card-title border border-dark border-1 rounded-3">
-        <div className="text-center">Woodcutting Level {WoodcuttingLevel}</div>
-        <div className="d-flex flex-row">
+        <h6 className="text-center">Woodcutting Level {WoodcuttingLevel}</h6>
+        <div className="d-flex flex-row flex-wrap">
           {resourceArray.map((resource) => (
             <div key={`resource-list-${resource}`} className="card border mb-3">
               <div className="card-body text">
@@ -63,8 +63,8 @@ const SkillsPanel = (props: Types.ActivitiesProps) => {
   const FishingOptions = (resourceArray: string[]) => {
     return (
       <div className="card-title border border-dark border-1 rounded-3">
-        <div className="text-center">Fishing Level {FishingLevel}</div>
-        <div className="d-flex flex-row">
+        <h6 className="text-center">Fishing Level {FishingLevel}</h6>
+        <div className="d-flex flex-row flex-wrap">
           {resourceArray.map((resource) => (
             <div key={`resource-list-${resource}`} className="card border mb-3">
               <div className="card-body text">
@@ -85,19 +85,12 @@ const SkillsPanel = (props: Types.ActivitiesProps) => {
     <div className="container card border border-dark border-2 rounded-3">
       {panelHeaderJSX()}
       <div className="row justify-content-lg-center">
-        <div>
-          <div className="card">
-            <div className="card-body">
-              {WoodcuttingOptions(currentLocationSummary.Skills.Woodcutting)}
-              <div className="card-title border border-dark border-1 rounded-3">
-                <div className="text-center">Mining</div>
-                <div>{/* functiongoeshere */}</div>
-              </div>
-              {FishingOptions(currentLocationSummary.Skills.Fishing)}
-            </div>
+        <div className="card">
+          <div className="card-body">
+            {WoodcuttingOptions(currentLocationSummary.Skills.Woodcutting)}
+            {FishingOptions(currentLocationSummary.Skills.Fishing)}
           </div>
         </div>
-        <div className="col-lg-9 justify-content-lg-center"></div>
       </div>
     </div>
   );

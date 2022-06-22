@@ -51,6 +51,23 @@ export interface IListOfFish {
   herring: IFish;
 }
 
+export interface IOre {
+  name: string;
+  levelReqMining: number;
+  XPGivenMining: number;
+  levelReqSmithing: number;
+  XPGivenSmithing: number;
+  value: number;
+}
+
+export interface IListOfOres {
+  tin: IOre;
+  copper: IOre;
+  iron: IOre;
+  coal: IOre;
+  mithril: IOre;
+}
+
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
