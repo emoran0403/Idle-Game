@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import * as Types from "../../../../Types";
 import { useSelector } from "react-redux";
 
-const resourcesStatus = useSelector((state: Types.AllState) => state.Resources) as Types.IResources;
+// const resourcesStatus = useSelector((state: Types.AllState) => state.Resources) as Types.IResources;
+let resourcesStatus = true;
 
 //object[key] is how we can access an object's value by passing in a key
 
@@ -22,7 +23,7 @@ export const Inventory = createSlice({
       const inventorySpace: number = Number(state.Current.length); // the amount of occupied space in the inventory
 
       // check if the player is banking or dropping items
-      if (resourcesStatus.Banking) {
+      if (resourcesStatus) {
         //Decide if the inventory has space
         if (inventorySpace < 28) {
           state.Current.push(item); // add the item to state, then reassign

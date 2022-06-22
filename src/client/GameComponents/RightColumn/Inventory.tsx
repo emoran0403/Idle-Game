@@ -13,7 +13,10 @@ const Inventory = (props: Types.NoProps) => {
     <div className="card border border-dark border-2 rounded-3">
       <div className="card">
         <h5 className="card-header text-center">
-          Inventory<h6 className="card-subtitle text-muted">Coins: {Wallet.Coins}</h6>
+          Inventory
+          <div>
+            <h6 className="card-subtitle text-muted">Coins: {Wallet.Coins}</h6>
+          </div>
         </h5>
       </div>
     </div>

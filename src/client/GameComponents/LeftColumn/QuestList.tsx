@@ -36,7 +36,9 @@ const QuestList = (props: Types.NoProps) => {
       <div className="card-body">
         <h5 className="card-header text-center">
           Quest List
-          <h6 className="card-subtitle text-muted">quests complete / quests total</h6>
+          <div className="card-subtitle text-muted">
+            <h6>quests complete / quests total</h6>
+          </div>
         </h5>
         {compositeQuestArray?.map((quest) => (
           <div key={`quest-list-${quest.name}`} className="card">
