@@ -45,7 +45,12 @@ const SkillsPanel = (props: Types.ActivitiesProps) => {
         <h6 className="text-center">Woodcutting Level {WoodcuttingLevel}</h6>
         <div className="d-flex flex-row flex-wrap">
           {resourceArray.map((resource) => (
-            <div key={`resource-list-${resource}`} className="card border mb-3">
+            <div
+              key={`resource-list-${resource}`}
+              className={`card border mb-3 ${
+                WoodcuttingLevel >= ListOfLogs[resource as keyof Types.IListOfLogs].levelReqWoodcutting ? `bg-success` : `bg-danger`
+              }`}
+            >
               <div className="card-body text">
                 <h5 className="card-title">{resource}</h5>
                 <div className="card-text">
@@ -66,7 +71,12 @@ const SkillsPanel = (props: Types.ActivitiesProps) => {
         <h6 className="text-center">Fishing Level {FishingLevel}</h6>
         <div className="d-flex flex-row flex-wrap">
           {resourceArray.map((resource) => (
-            <div key={`resource-list-${resource}`} className="card border mb-3">
+            <div
+              key={`resource-list-${resource}`}
+              className={`card border mb-3 ${
+                FishingLevel >= ListOfFish[resource as keyof Types.IListOfFish].levelReqFishing ? `bg-success` : `bg-danger`
+              }`}
+            >
               <div className="card-body text">
                 <h5 className="card-title">{resource}</h5>
                 <div className="card-text">

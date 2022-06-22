@@ -3,12 +3,17 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { AllQuests } from "../../../../Constants/Quests";
+import { getLevel } from "../../../../Constants/XP Levels";
 
 const QuestPanel = (props: Types.ActivitiesProps) => {
   // This grabs the current location from state
   const { Current } = useSelector((state: Types.AllState) => state.CurrentLocation) as Types.ICurrentLocation;
+  // gets the player's experience
+  const Experience = useSelector((state: Types.AllState) => state.Experience) as Types.ISkillList;
 
+  getLevel(Experience.Attack);
   const panelHeaderJSX = () => {
+    // returns the JSX for the panel header
     return (
       <div className="row justify-content-lg-center">
         <div className="col-lg-3 justify-content-lg-center">
@@ -24,6 +29,29 @@ const QuestPanel = (props: Types.ActivitiesProps) => {
         <div className="col-lg-9 justify-content-lg-center">Quests in {Current}</div>
       </div>
     );
+  };
+
+  const handleQuestStyle = (quest: Types.IQuestInfo) => {
+    /**
+     * based on the players level and quests complete, this function will style the background color
+     * of each quest card to indicate met or missing requirements
+     */
+    let meetsLevelRequirements = false;
+    let meetsQuestRequirements = false;
+    const arrayofskillnamesfromquestreqs = Object.keys(quest.levelRequirements);
+    console.log(arrayofskillnamesfromquestreqs);
+
+    arrayofskillnamesfromquestreqs.forEach((levelReq) => {
+      const mylevel = getLevel(Experience[levelReq as keyof Types.ISkillList]);
+      const reqlevel = quest.levelRequirements[levelReq];
+      console.log({ levelReq, mylevel, reqlevel });
+    });
+
+    if (arrayofskillnamesfromquestreqs.length === 0) {
+      //if there are no quest reqs, style
+    } else {
+      //then there are skill reqs, and run thru them
+    }
   };
 
   // This represents all the quests as a flat array
@@ -43,7 +71,7 @@ const QuestPanel = (props: Types.ActivitiesProps) => {
   const [compositeQuestArray, setCompositeQuestArray] = useState<Types.ICompositeQuest[]>([]);
 
   useEffect(() => {
-    console.log(AllQuestsFromStateFlat);
+    // console.log(AllQuestsFromStateFlat);
     let tempCompArray: Types.ICompositeQuest[] = [];
     for (let i = 0; i < AllQuestsFlat.length; i++) {
       for (let j = 0; j < AllQuestsFromStateFlat.length; j++) {

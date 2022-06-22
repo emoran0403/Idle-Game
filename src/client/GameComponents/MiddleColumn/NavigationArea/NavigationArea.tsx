@@ -13,7 +13,7 @@ const NavigationArea = (props: Types.NoProps) => {
         onClick={() => {
           console.log("you clicked World Map Button");
         }}
-        className="btn btn-info flex-fill"
+        className="btn btn-primary flex-fill"
       >
         World Map Button
       </button>

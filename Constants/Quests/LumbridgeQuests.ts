@@ -27,7 +27,7 @@ export const LumbridgeQuests: Types.IQuestInfo[] = [
     stepsTotal: 113,
     questPoints: 2,
     combatRequirements: 0,
-    questRequirements: [],
+    questRequirements: ["Cook's Assistant"],
     levelRequirements: {},
     experienceRewards: { ANY: 500 },
     itemRewards: { Coins: 5000 },
@@ -68,7 +68,7 @@ export const LumbridgeQuests: Types.IQuestInfo[] = [
     stepsTotal: 17,
     questPoints: 1,
     combatRequirements: 1,
-    questRequirements: [],
+    questRequirements: ["The Restless Ghost"],
     levelRequirements: {},
     experienceRewards: {
       Attack: 100,

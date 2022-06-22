@@ -21,7 +21,7 @@ const ActivityButtons = (props: Types.ActivitiesProps) => {
           props.handleUpdateDisplay(`skills`);
           console.log("you clicked Skills");
         }}
-        className="btn btn-info flex-fill"
+        className="btn btn-primary flex-fill"
       >
         Skills
       </button>
@@ -30,7 +30,7 @@ const ActivityButtons = (props: Types.ActivitiesProps) => {
           props.handleUpdateDisplay(`quests`);
           console.log("you clicked Quests");
         }}
-        className="btn btn-info flex-fill"
+        className="btn btn-primary flex-fill"
       >
         Quests
       </button>
@@ -39,7 +39,7 @@ const ActivityButtons = (props: Types.ActivitiesProps) => {
           props.handleUpdateDisplay(`bank`);
           console.log("you clicked Bank");
         }}
-        className="btn btn-info flex-fill"
+        className="btn btn-primary flex-fill"
       >
         Bank
       </button>
@@ -48,7 +48,7 @@ const ActivityButtons = (props: Types.ActivitiesProps) => {
           props.handleUpdateDisplay(`combat`);
           console.log("you clicked Combat");
         }}
-        className="btn btn-info flex-fill"
+        className="btn btn-primary flex-fill"
       >
         Combat
       </button>
@@ -58,7 +58,7 @@ const ActivityButtons = (props: Types.ActivitiesProps) => {
           props.handleUpdateDisplay(`bosses`);
           console.log("you clicked Bosses");
         }}
-        className="btn btn-info flex-fill"
+        className="btn btn-primary flex-fill"
       >
         Bosses
       </button>
@@ -69,7 +69,7 @@ const ActivityButtons = (props: Types.ActivitiesProps) => {
           props.handleUpdateDisplay(`minigames`);
           console.log("you clicked Minigames");
         }}
-        className="btn btn-info flex-fill"
+        className="btn btn-primary flex-fill"
       >
         Minigames
       </button>
@@ -80,7 +80,7 @@ const ActivityButtons = (props: Types.ActivitiesProps) => {
           props.handleUpdateDisplay(`clues`);
           console.log("you clicked Clues");
         }}
-        className="btn btn-info flex-fill"
+        className="btn btn-primary flex-fill"
       >
         Clues
       </button>
