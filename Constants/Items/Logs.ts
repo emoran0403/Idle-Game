@@ -1,5 +1,5 @@
 import * as Types from "../../Types";
-const ListOfLogs: Types.IListOfLogs = {
+export const ListOfLogs: Types.IListOfLogs = {
   logs: {
     name: `logs`,
     levelReqWoodcutting: 1,

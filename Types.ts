@@ -21,7 +21,13 @@ export interface ILog {
 }
 
 export interface IListOfLogs {
-  [key: string]: ILog;
+  logs: ILog;
+  oak: ILog;
+  willow: ILog;
+  maple: ILog;
+  yew: ILog;
+  magic: ILog;
+  elder: ILog;
 }
 
 export interface IFish {

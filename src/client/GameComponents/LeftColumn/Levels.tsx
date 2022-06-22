@@ -10,6 +10,7 @@ const Levels = (props: Types.NoProps) => {
   const [totalExperience, setTotalExperience] = useState<number>(0);
   const [totalLevel, setTotalLevel] = useState<number>(0);
 
+  // gets the player's experience
   const Experience = useSelector((state: Types.AllState) => state.Experience) as Types.ISkillList;
 
   const showCombatLevel = () => {

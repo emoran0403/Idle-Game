@@ -2,6 +2,7 @@ import * as Types from "../../../../Types";
 import * as React from "react";
 import { useSelector } from "react-redux";
 import { AllLocations } from "../../../../Constants/LocationInfo";
+import { ListOfLogs } from "../../../../Constants/Items/Logs";
 
 //! this needs to pull from some single source of truth showing all the skills available, and their resources based on the current location from state
 
@@ -9,12 +10,14 @@ const SkillsPanel = (props: Types.ActivitiesProps) => {
   // This grabs the current location from state
   const { Current } = useSelector((state: Types.AllState) => state.CurrentLocation) as Types.ICurrentLocation;
 
-  // This chooses the current location from AllLocations
-  const wow = AllLocations[Current] as Types.ILocationSummary;
-  console.log(wow);
+  // This chooses the current location summary from AllLocations
+  const currentLocationSummary = AllLocations[Current] as Types.ILocationSummary;
 
-  return (
-    <div className="container card border border-dark border-2 rounded-3">
+  // gets the player's experience
+  const Experience = useSelector((state: Types.AllState) => state.Experience) as Types.ISkillList;
+
+  const panelHeaderJSX = () => {
+    return (
       <div className="row justify-content-lg-center">
         <div className="col-lg-3 justify-content-lg-center">
           <button
@@ -28,25 +31,44 @@ const SkillsPanel = (props: Types.ActivitiesProps) => {
         </div>
         <div className="col-lg-9 justify-content-lg-center">Skills</div>
       </div>
+    );
+  };
+
+  const WoodcuttingSkillCardJSX = (resourceArray: string[]) => {
+    return resourceArray.map((resource) => (
+      <div key={`resource-list-${resource}`} className="card border mb-3">
+        <div className="card-body text">
+          <h5 className="card-title">{resource}</h5>
+          <div className="card-text">
+            <div>Level {ListOfLogs[resource as keyof Types.IListOfLogs].levelReqWoodcutting}</div>
+            <div>{ListOfLogs[resource as keyof Types.IListOfLogs].XPGivenWoodcutting} XP</div>
+          </div>
+        </div>
+      </div>
+    ));
+  };
+
+  return (
+    <div className="container card border border-dark border-2 rounded-3">
+      {panelHeaderJSX()}
       <div className="row justify-content-lg-center">
         <div>
-          {/* Each of these cards need to come from the skills available at the current location */}
-          {(Object.keys(wow.Skills) as unknown as Types.ListOfSkills[]).map((skill) => (
-            <div className="card">
-              <div className="card-body">
-                {/* <img>Icon here</img> */}
-                <h5 className="card-title">
-                  <span>{skill}</span>
-                  {/* @ts-ignore */}
-                  {wow.Skills[skill].map((str: Types.ListOfSkills) => (
-                    <button className="border border-dark border-1 rounded-3">{str}</button>
-                  ))}
-                </h5>
-                {/* <p className="card-text">Show the skill level here</p> */}
+          <div className="card">
+            <div className="card-body">
+              <div className="card-title border border-dark border-1 rounded-3">
+                <div className="text-center">Woodcutting - put level here too!</div>
+                <div className="d-flex flex-row">{WoodcuttingSkillCardJSX(currentLocationSummary.Skills.Woodcutting)}</div>
+              </div>
+              <div className="card-title border border-dark border-1 rounded-3">
+                <div className="text-center">Mining</div>
+                <div>{/* functiongoeshere */}</div>
+              </div>
+              <div className="card-title border border-dark border-1 rounded-3">
+                <div className="text-center">Fishing</div>
+                <div>{/* functiongoeshere */}</div>
               </div>
             </div>
-          ))}
-          {/* End of card */}
+          </div>
         </div>
         <div className="col-lg-9 justify-content-lg-center"></div>
       </div>
