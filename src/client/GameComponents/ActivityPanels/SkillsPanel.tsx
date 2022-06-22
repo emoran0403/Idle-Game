@@ -87,8 +87,10 @@ const SkillsPanel = (props: Types.ActivitiesProps) => {
       <div className="row justify-content-lg-center">
         <div className="card">
           <div className="card-body">
+            {/* panel specific content goes here */}
             {WoodcuttingOptions(currentLocationSummary.Skills.Woodcutting)}
             {FishingOptions(currentLocationSummary.Skills.Fishing)}
+            {/* end of panel specific content */}
           </div>
         </div>
       </div>

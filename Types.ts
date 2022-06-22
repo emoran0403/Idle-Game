@@ -127,6 +127,11 @@ export interface AllState {
   Quests_Draynor: DraynorQuestSliceCrap;
 }
 
+export interface AllStateQuestSlices {
+  Quests_Lumbridge: LumbridgeQuestSliceCrap;
+  Quests_Draynor: DraynorQuestSliceCrap;
+}
+
 export interface IWallet {
   Coins: number;
 }

@@ -11,21 +11,23 @@ import ActivityArea from "./MiddleColumn/ActivityArea/ActivityArea";
 
 const GameContainer = (props: Types.NoProps) => {
   useEffect(() => {}, []);
+  //! scale the columns to the viewport size
+  //! scale the components to the parent column size
   return (
     <div className="container">
       <div className="row justify-content-center">Title Here</div>
       <div id="gamecontainer" className="row justify-content-lg-center">
-        <div id="left-column" className="col-lg-3 border border-dark border-2 rounded-3">
+        <div id="left-column" className="col-lg-3 border border-dark border-2 rounded-3" style={{ height: "90vh", position: "relative" }}>
           <Levels />
           <QuestList />
         </div>
 
-        <div id="middle-column" className="col-lg-6 border border-dark border-2 rounded-3">
+        <div id="middle-column" className="col-lg-6 border border-dark border-2 rounded-3" style={{ height: "90vh" }}>
           <NavigationArea />
           <ActivityArea />
         </div>
 
-        <div id="right-column" className="col-lg-3 border border-dark border-2 rounded-3">
+        <div id="right-column" className="col-lg-3 border border-dark border-2 rounded-3" style={{ height: "90vh" }}>
           <Inventory />
           <ActiveBuffs />
           <WornEquipment />
