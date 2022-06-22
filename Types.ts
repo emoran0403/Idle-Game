@@ -41,7 +41,14 @@ export interface IFish {
 }
 
 export interface IListOfFish {
-  [key: string]: IFish;
+  shrimp: IFish;
+  crayfish: IFish;
+  anchovies: IFish;
+  trout: IFish;
+  salmon: IFish;
+  pike: IFish;
+  sardine: IFish;
+  herring: IFish;
 }
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
@@ -65,6 +72,7 @@ export interface IFlatObjectOfBooleans {
 }
 
 export interface ISkillList {
+  Fishing: number;
   Woodcutting: number;
   Firemaking: number;
   Attack: number;
@@ -163,6 +171,7 @@ export interface ILocationSummary {
   Bosses: string[];
 }
 
+//! do i really need this?
 export interface ILumbridgeLocationSummary {
   Quests: string[];
   Skills: {
@@ -174,6 +183,7 @@ export interface ILumbridgeLocationSummary {
   Bosses: string[];
 }
 
+//! do i really need this?
 export interface IDraynorLocationSummary {
   Quests: string[];
   Skills: {
@@ -185,7 +195,7 @@ export interface IDraynorLocationSummary {
   Bosses: string[];
 }
 
-export interface LocationSkills extends dyamicwow {
+export interface LocationSkills {
   Mining: string[];
   Fishing: string[];
   Woodcutting: string[];
@@ -199,10 +209,6 @@ export interface LocationSkills extends dyamicwow {
   Summoning: string[];
   Agility: string[];
   Thieving: string[];
-}
-
-export interface dyamicwow {
-  [pizza: string]: string[];
 }
 
 export interface IAllLocations {

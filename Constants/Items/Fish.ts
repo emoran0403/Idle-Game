@@ -1,13 +1,13 @@
 import * as Types from "../../Types";
-const ListOfFish: Types.IListOfFish = {
+export const ListOfFish: Types.IListOfFish = {
   shrimp: {
     name: `shrimp`,
     levelReqFishing: 1,
     XPGivenFishing: 10,
     levelReqCooking: 1,
     XPGivenCooking: 30,
-    stopBurnLevel: 12345,
-    value: 12345,
+    stopBurnLevel: 34,
+    value: 6,
   },
   crayfish: {
     name: `crayfish`,
@@ -15,8 +15,8 @@ const ListOfFish: Types.IListOfFish = {
     XPGivenFishing: 10,
     levelReqCooking: 1,
     XPGivenCooking: 30,
-    stopBurnLevel: 12345,
-    value: 12345,
+    stopBurnLevel: 34,
+    value: 5,
   },
   anchovies: {
     name: `anchovies`,
@@ -24,8 +24,8 @@ const ListOfFish: Types.IListOfFish = {
     XPGivenFishing: 40,
     levelReqCooking: 1,
     XPGivenCooking: 30,
-    stopBurnLevel: 12345,
-    value: 12345,
+    stopBurnLevel: 34,
+    value: 16,
   },
   trout: {
     name: `trout`,
@@ -33,8 +33,8 @@ const ListOfFish: Types.IListOfFish = {
     XPGivenFishing: 50,
     levelReqCooking: 15,
     XPGivenCooking: 70,
-    stopBurnLevel: 12345,
-    value: 12345,
+    stopBurnLevel: 50,
+    value: 20,
   },
   salmon: {
     name: `salmon`,
@@ -51,7 +51,25 @@ const ListOfFish: Types.IListOfFish = {
     XPGivenFishing: 60,
     levelReqCooking: 20,
     XPGivenCooking: 80,
-    stopBurnLevel: 12345,
-    value: 12345,
+    stopBurnLevel: 53,
+    value: 25,
+  },
+  sardine: {
+    name: `sardine`,
+    levelReqFishing: 5,
+    XPGivenFishing: 20,
+    levelReqCooking: 1,
+    XPGivenCooking: 40,
+    stopBurnLevel: 38,
+    value: 10,
+  },
+  herring: {
+    name: `herring`,
+    levelReqFishing: 25,
+    XPGivenFishing: 60,
+    levelReqCooking: 20,
+    XPGivenCooking: 80,
+    stopBurnLevel: 41,
+    value: 16,
   },
 };
