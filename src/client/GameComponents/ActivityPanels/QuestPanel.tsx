@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { AllQuests } from "../../../../Constants/Quests";
 import { getLevel } from "../../../../Constants/XP Levels";
+import { info } from "sass";
 
 const QuestPanel = (props: Types.ActivitiesProps) => {
   // This grabs the current location from state
@@ -28,7 +29,6 @@ const QuestPanel = (props: Types.ActivitiesProps) => {
   // we establish an array of composite quests, pulling in the progress from state, and the static info from the summary
   const [compositeQuestArray, setCompositeQuestArray] = useState<Types.ICompositeQuest[]>([]);
 
-  getLevel(Experience.Attack);
   const panelHeaderJSX = () => {
     // returns the JSX for the panel header
     return (
@@ -58,37 +58,41 @@ const QuestPanel = (props: Types.ActivitiesProps) => {
     /**
      * we initialize arrayOfSkillNamesFromQuestReqs to get an array of skill names.
      * we use this to index the Experience from state, and the quest level requirements
+     * if a quest has no level requirements, it will be an empty array
      */
-    //
     const arrayOfSkillNamesFromQuestReqs = Object.keys(quest.levelRequirements);
-    // will be used to hold the results of checking player level against the quest requirements
-    let tempArrayOfBooleansForLevelReqs: boolean[] = [];
-
-
-    // run through each level requirement
-    arrayOfSkillNamesFromQuestReqs.forEach((levelReq) => {
-      // find the player's level in that skill
-      const mylevel = getLevel(Experience[levelReq as keyof Types.ISkillList]);
-      // find the level requirement from that quest
-      const reqlevel = quest.levelRequirements[levelReq];
-
-// push the result of evaluating the players levels against the level req
-tempArrayOfBooleansForLevelReqs.push(mylevel >= reqlevel)
-      
 
     /**
-     * Array.every() returns true or false based on every element passing a test implemented by the given function
-     * the test function determins if the given element is true or false and returns that value
-     * since Array.every() returns true or false, we can set meetsLevelRequirements to the return value
+     * if there are level reqs, then we check if the player meets them, setting meetsLevelRequirements to true if the player meets them
+     * else there are no level reqs then we set meetLevelRequirements to true
      */
-    meetsLevelRequirements = tempArrayOfBooleansForLevelReqs.every((bool) => {
-      return bool ? true: false;
-    });
+    if (arrayOfSkillNamesFromQuestReqs.length) {
+      // will be used to hold the results of checking player level against the quest requirements
+      let tempArrayOfBooleansForLevelReqs: boolean[] = [];
 
-    if (arrayOfSkillNamesFromQuestReqs.length === 0) {
-      //if there are no quest reqs, style
+      // run through each level requirement
+      arrayOfSkillNamesFromQuestReqs.forEach((levelReq) => {
+        // find the player's level in that skill
+        const mylevel = getLevel(Experience[levelReq as keyof Types.ISkillList]);
+
+        // find the level requirement from that quest
+        const reqlevel = quest.levelRequirements[levelReq];
+
+        // push the result of evaluating the players levels against the level req
+        tempArrayOfBooleansForLevelReqs.push(mylevel >= reqlevel);
+      });
+
+      /**
+       * Array.every() returns true or false based on every element passing a test implemented by the given function
+       * the test function determins if the given element is true or false and returns that value
+       * since Array.every() returns true or false, we can set meetsLevelRequirements to the return value
+       */
+      meetsLevelRequirements = tempArrayOfBooleansForLevelReqs.every((bool) => {
+        return bool ? true : false;
+      });
     } else {
-      //then there are skill reqs, and run thru them
+      // else there are no level reqs then we set meetLevelRequirements to true
+      meetsLevelRequirements = true;
     }
 
     // based on the conditions, return a background color
