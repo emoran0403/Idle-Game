@@ -19,7 +19,7 @@ const ActivityButtons = (props: Types.ActivitiesProps) => {
       <button
         onClick={() => {
           props.handleUpdateDisplay(`skills`);
-          console.log("you clicked Skills");
+          // console.log("you clicked Skills");
         }}
         className="btn btn-primary flex-fill"
       >
@@ -28,7 +28,7 @@ const ActivityButtons = (props: Types.ActivitiesProps) => {
       <button
         onClick={() => {
           props.handleUpdateDisplay(`quests`);
-          console.log("you clicked Quests");
+          // console.log("you clicked Quests");
         }}
         className="btn btn-primary flex-fill"
       >
@@ -37,7 +37,7 @@ const ActivityButtons = (props: Types.ActivitiesProps) => {
       <button
         onClick={() => {
           props.handleUpdateDisplay(`bank`);
-          console.log("you clicked Bank");
+          // console.log("you clicked Bank");
         }}
         className="btn btn-primary flex-fill"
       >
@@ -46,7 +46,7 @@ const ActivityButtons = (props: Types.ActivitiesProps) => {
       <button
         onClick={() => {
           props.handleUpdateDisplay(`combat`);
-          console.log("you clicked Combat");
+          // console.log("you clicked Combat");
         }}
         className="btn btn-primary flex-fill"
       >
@@ -56,7 +56,7 @@ const ActivityButtons = (props: Types.ActivitiesProps) => {
         disabled
         onClick={() => {
           props.handleUpdateDisplay(`bosses`);
-          console.log("you clicked Bosses");
+          // console.log("you clicked Bosses");
         }}
         className="btn btn-primary flex-fill"
       >
@@ -67,7 +67,7 @@ const ActivityButtons = (props: Types.ActivitiesProps) => {
         disabled
         onClick={() => {
           props.handleUpdateDisplay(`minigames`);
-          console.log("you clicked Minigames");
+          // console.log("you clicked Minigames");
         }}
         className="btn btn-primary flex-fill"
       >
@@ -78,7 +78,7 @@ const ActivityButtons = (props: Types.ActivitiesProps) => {
         disabled
         onClick={() => {
           props.handleUpdateDisplay(`clues`);
-          console.log("you clicked Clues");
+          // console.log("you clicked Clues");
         }}
         className="btn btn-primary flex-fill"
       >

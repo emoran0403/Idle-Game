@@ -55,13 +55,14 @@ const QuestPanel = (props: Types.ActivitiesProps) => {
      */
     let meetsLevelRequirements = true; // this gets set to false if the player does not meet the level requirements
     let meetsQuestRequirements = true; // this gets set to false if the player does not meet the requirements
+
+    const arrayOfSkillNamesFromQuestReqs = Object.keys(quest.levelRequirements);
     /**
      * we initialize arrayOfSkillNamesFromQuestReqs to get an array of skill names.
      * we use this to index the Experience from state, and the quest level requirements
      * if a quest has no level requirements, it will be an empty array
      */
-    const arrayOfSkillNamesFromQuestReqs = Object.keys(quest.levelRequirements);
-
+    //@ check if the player meets the level requirements
     try {
       if (arrayOfSkillNamesFromQuestReqs.length) {
         // run through each level requirement
@@ -71,7 +72,7 @@ const QuestPanel = (props: Types.ActivitiesProps) => {
 
           // find the level requirement from that quest
           const reqlevel = quest.levelRequirements[levelReq];
-          console.log({ mylevel, reqlevel, wow: mylevel >= reqlevel });
+          // console.log({ mylevel, reqlevel, wow: mylevel >= reqlevel });
 
           if (mylevel <= reqlevel) {
             meetsLevelRequirements = false;
@@ -84,15 +85,19 @@ const QuestPanel = (props: Types.ActivitiesProps) => {
       // console.log(error);
     }
 
+    //@ check if the player meets the quest requirements
     try {
       quest.questRequirements.forEach((questName) => {
-        // iterate over all quest requirements
+        // iterate over all quests from the requirements
         AllQuestsFromStateFlat.forEach((questFromState) => {
           // iterate over all quests from state
           if (questFromState.name === questName) {
-            // if the name matches, push the .complete value to an array of booleans
+            // if the name matches, check the status of questFromState.complete
+            //! here somewhere
+            console.log({ quest, w: questFromState.complete });
             if (!questFromState.complete) {
               // if the quest is not complete, throw an error to 'break' out of the loop and 'continue' on
+              // console.log(`made it here from ${questFromState.name}`);
               throw new Error(`Player does not meet a quest requirement`);
             }
           }
@@ -101,21 +106,22 @@ const QuestPanel = (props: Types.ActivitiesProps) => {
     } catch (error) {
       // console.log(error);
     }
+    // console.log({ name: quest.name, questReqs: quest.questRequirements, meetsLevelRequirements, meetsQuestRequirements });
 
-    // based on the conditions, return a background color
-    if (meetsLevelRequirements && meetsQuestRequirements) {
+    //@ based on the conditions, return a background color
+    if (meetsLevelRequirements.toString() === "true" && meetsQuestRequirements.toString() === "true") {
       // has levels and has quests = green background
 
       return `bg-success`;
-    } else if (meetsLevelRequirements && meetsQuestRequirements) {
+    } else if (meetsLevelRequirements.toString() === "false" && meetsQuestRequirements.toString() === "true") {
       // missing levels and has quests = yellow background
 
       return `bg-yellowlol`;
-    } else if (meetsLevelRequirements && meetsQuestRequirements) {
+    } else if (meetsLevelRequirements.toString() === "true" && meetsQuestRequirements.toString() === "false") {
       // has levels and missing quests = orange background
 
       return `bg-orangelol`;
-    } else if (meetsLevelRequirements && meetsQuestRequirements) {
+    } else if (meetsLevelRequirements.toString() === "false" && meetsQuestRequirements.toString() === "false") {
       // missing levels and missing quests = red background
       return `bg-danger`;
     }
