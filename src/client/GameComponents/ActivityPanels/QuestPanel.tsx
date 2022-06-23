@@ -36,8 +36,23 @@ const QuestPanel = (props: Types.ActivitiesProps) => {
      * based on the players level and quests complete, this function will style the background color
      * of each quest card to indicate met or missing requirements
      */
-    let meetsLevelRequirements = false;
-    let meetsQuestRequirements = false;
+    let meetsLevelRequirements = false; // need a way to set this to true if there are no level requirements
+    let meetsQuestRequirements = false; // need a way to set this to true if there are no quest requirements
+
+    if ((meetsLevelRequirements = true) && (meetsQuestRequirements = true)) {
+      // has levels and has quests = green background
+      return `bg-success`;
+    } else if ((meetsLevelRequirements = false) && (meetsQuestRequirements = true)) {
+      // missing levels and has quests = yellow background
+      return `bg-yellow`;
+    } else if ((meetsLevelRequirements = true) && (meetsQuestRequirements = false)) {
+      // has levels and missing quests = orange background
+      return `bg-orange`;
+    } else if ((meetsLevelRequirements = false) && (meetsQuestRequirements = false)) {
+      // missing levels and missing quests = red background
+      return `bg-danger`;
+    }
+
     const arrayofskillnamesfromquestreqs = Object.keys(quest.levelRequirements);
     console.log(arrayofskillnamesfromquestreqs);
 
