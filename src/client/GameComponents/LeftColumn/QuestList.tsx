@@ -22,7 +22,7 @@ const QuestList = (props: Types.NoProps) => {
   const [compositeQuestArray, setCompositeQuestArray] = useState<Types.ICompositeQuest[]>([]);
 
   useEffect(() => {
-    console.log(AllQuestsFromStateFlat);
+    // console.log(AllQuestsFromStateFlat);
     let tempCompArray: Types.ICompositeQuest[] = [];
     for (let i = 0; i < AllQuestsFlat.length; i++) {
       for (let j = 0; j < AllQuestsFromStateFlat.length; j++) {
