@@ -21,6 +21,7 @@ export const LumbridgeQuests: Types.IQuestInfo[] = [
     },
     itemRewards: { Coins: 500, Sardines: 20 },
   },
+  //! myths does not have any quest requirements, this was just for testing purposes
   {
     name: "Myths of the White Lands",
     location: "Lumbridge",
@@ -62,6 +63,8 @@ export const LumbridgeQuests: Types.IQuestInfo[] = [
     },
     itemRewards: {},
   },
+  //! blood pact does not have anyquest requirements, this was just for testing purposes
+
   {
     name: "The Blood Pact",
     location: "Lumbridge",

@@ -19,11 +19,11 @@ const QuestList = (props: Types.NoProps) => {
   //@spread out future quests into the AllQuestsFromStateFlat array
 
   // we establish an array of composite quests, pulling in the progress from state, and the static info from the summary
-  const [compositeQuestArray, setCompositeQuestArray] = useState<Types.ICompositeQuest[]>([]);
+  const [compositeQuestArray, setCompositeQuestArray] = useState<Types.ICompositeQuestInfo[]>([]);
 
   useEffect(() => {
     // console.log(AllQuestsFromStateFlat);
-    let tempCompArray: Types.ICompositeQuest[] = [];
+    let tempCompArray: Types.ICompositeQuestInfo[] = [];
     for (let i = 0; i < AllQuestsFlat.length; i++) {
       for (let j = 0; j < AllQuestsFromStateFlat.length; j++) {
         if (AllQuestsFromStateFlat[j].name === AllQuestsFlat[i].name) {

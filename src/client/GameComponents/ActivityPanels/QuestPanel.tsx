@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { AllQuests } from "../../../../Constants/Quests";
 import { getLevel } from "../../../../Constants/XP Levels";
-import { info } from "sass";
+import e from "express";
 
 const QuestPanel = (props: Types.ActivitiesProps) => {
   // This grabs the current location from state
@@ -27,7 +27,7 @@ const QuestPanel = (props: Types.ActivitiesProps) => {
   //@spread out future quests into the AllQuestsFromStateFlat array
 
   // we establish an array of composite quests, pulling in the progress from state, and the static info from the summary
-  const [compositeQuestArray, setCompositeQuestArray] = useState<Types.ICompositeQuest[]>([]);
+  const [compositeQuestArray, setCompositeQuestArray] = useState<Types.ICompositeQuestInfo[]>([]);
 
   const panelHeaderJSX = () => {
     // returns the JSX for the panel header
@@ -48,13 +48,13 @@ const QuestPanel = (props: Types.ActivitiesProps) => {
     );
   };
 
-  const handleQuestStyle = (quest: Types.IQuestInfo) => {
+  const handleQuestStyle = (quest: Types.ICompositeQuestInfo) => {
     /**
      * based on the players level and quests complete, this function will style the background color
      * of each quest card to indicate met or missing requirements
      */
-    let meetsLevelRequirements = false; // need a way to set this to true if there are no level requirements
-    let meetsQuestRequirements = false; // need a way to set this to true if there are no quest requirements
+    let meetsLevelRequirements = true; // this gets set to false if the player does not meet the level requirements
+    let meetsQuestRequirements = true; // this gets set to false if the player does not meet the requirements
     /**
      * we initialize arrayOfSkillNamesFromQuestReqs to get an array of skill names.
      * we use this to index the Experience from state, and the quest level requirements
@@ -62,55 +62,61 @@ const QuestPanel = (props: Types.ActivitiesProps) => {
      */
     const arrayOfSkillNamesFromQuestReqs = Object.keys(quest.levelRequirements);
 
-    /**
-     * if there are level reqs, then we check if the player meets them, setting meetsLevelRequirements to true if the player meets them
-     * else there are no level reqs then we set meetLevelRequirements to true
-     */
-    if (arrayOfSkillNamesFromQuestReqs.length) {
-      // will be used to hold the results of checking player level against the quest requirements
-      let tempArrayOfBooleansForLevelReqs: boolean[] = [];
+    try {
+      if (arrayOfSkillNamesFromQuestReqs.length) {
+        // run through each level requirement
+        arrayOfSkillNamesFromQuestReqs.forEach((levelReq) => {
+          // find the player's level in that skill
+          const mylevel = getLevel(Experience[levelReq as keyof Types.ISkillList]);
 
-      // run through each level requirement
-      arrayOfSkillNamesFromQuestReqs.forEach((levelReq) => {
-        // find the player's level in that skill
-        const mylevel = getLevel(Experience[levelReq as keyof Types.ISkillList]);
+          // find the level requirement from that quest
+          const reqlevel = quest.levelRequirements[levelReq];
+          console.log({ mylevel, reqlevel, wow: mylevel >= reqlevel });
 
-        // find the level requirement from that quest
-        const reqlevel = quest.levelRequirements[levelReq];
+          if (mylevel <= reqlevel) {
+            meetsLevelRequirements = false;
+            // throwing an error allows us to 'break' out of this forEach, since we cannot 'continue' across the function boundary
+            throw new Error(`Player does not meet a level requirement`);
+          }
+        });
+      }
+    } catch (error) {
+      // console.log(error);
+    }
 
-        // push the result of evaluating the players levels against the level req
-        tempArrayOfBooleansForLevelReqs.push(mylevel >= reqlevel);
+    try {
+      quest.questRequirements.forEach((questName) => {
+        // iterate over all quest requirements
+        AllQuestsFromStateFlat.forEach((questFromState) => {
+          // iterate over all quests from state
+          if (questFromState.name === questName) {
+            // if the name matches, push the .complete value to an array of booleans
+            if (!questFromState.complete) {
+              // if the quest is not complete, throw an error to 'break' out of the loop and 'continue' on
+              throw new Error(`Player does not meet a quest requirement`);
+            }
+          }
+        });
       });
-
-      /**
-       * Array.every() returns true or false based on every element passing a test implemented by the given function
-       * the test function determins if the given element is true or false and returns that value
-       * since Array.every() returns true or false, we can set meetsLevelRequirements to the return value
-       */
-      meetsLevelRequirements = tempArrayOfBooleansForLevelReqs.every((bool) => {
-        return bool ? true : false;
-      });
-    } else {
-      // else there are no level reqs then we set meetLevelRequirements to true
-      meetsLevelRequirements = true;
+    } catch (error) {
+      // console.log(error);
     }
 
     // based on the conditions, return a background color
-    if ((meetsLevelRequirements = true) && (meetsQuestRequirements = true)) {
+    if (meetsLevelRequirements && meetsQuestRequirements) {
       // has levels and has quests = green background
 
       return `bg-success`;
-    } else if ((meetsLevelRequirements = false) && (meetsQuestRequirements = true)) {
+    } else if (meetsLevelRequirements && meetsQuestRequirements) {
       // missing levels and has quests = yellow background
 
       return `bg-yellowlol`;
-    } else if ((meetsLevelRequirements = true) && (meetsQuestRequirements = false)) {
+    } else if (meetsLevelRequirements && meetsQuestRequirements) {
       // has levels and missing quests = orange background
 
       return `bg-orangelol`;
-    } else if ((meetsLevelRequirements = false) && (meetsQuestRequirements = false)) {
+    } else if (meetsLevelRequirements && meetsQuestRequirements) {
       // missing levels and missing quests = red background
-
       return `bg-danger`;
     }
   };
@@ -120,7 +126,7 @@ const QuestPanel = (props: Types.ActivitiesProps) => {
      * this useEffect shuffles the quest array coming from constants and the quest array coming from state together
      * adding in the stateful keys to the constant quest info
      */
-    let tempCompArray: Types.ICompositeQuest[] = [];
+    let tempCompArray: Types.ICompositeQuestInfo[] = [];
     for (let i = 0; i < AllQuestsFlat.length; i++) {
       // run through all quests from constants
       for (let j = 0; j < AllQuestsFromStateFlat.length; j++) {
@@ -149,7 +155,7 @@ const QuestPanel = (props: Types.ActivitiesProps) => {
       {compositeQuestArray
         ?.filter((quest) => quest.location === Current)
         .map((quest) => (
-          <div key={`quest-list-${quest.name}`} className="card">
+          <div key={`quest-list-${quest.name}`} className={`card ${handleQuestStyle(quest)}`}>
             <div className="card-body">
               <h5 className="card-subtitle text-muted">{quest.name}</h5>
               {quest.complete && <div>100%</div>}
