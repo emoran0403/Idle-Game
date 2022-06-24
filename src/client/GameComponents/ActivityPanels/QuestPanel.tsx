@@ -72,7 +72,6 @@ const QuestPanel = (props: Types.ActivitiesProps) => {
 
           // find the level requirement from that quest
           const reqlevel = quest.levelRequirements[levelReq];
-          // console.log({ mylevel, reqlevel, wow: mylevel >= reqlevel });
 
           if (mylevel <= reqlevel) {
             meetsLevelRequirements = false;
@@ -81,33 +80,38 @@ const QuestPanel = (props: Types.ActivitiesProps) => {
           }
         });
       }
-    } catch (error) {
-      // console.log(error);
-    }
+    } catch (error) {}
 
     //@ check if the player meets the quest requirements
-    try {
-      quest.questRequirements.forEach((questName) => {
-        // iterate over all quests from the requirements
-        AllQuestsFromStateFlat.forEach((questFromState) => {
-          // iterate over all quests from state
-          if (questFromState.name === questName) {
-            // if the name matches, check the status of questFromState.complete
-            //! here somewhere
-            console.log({ quest, w: questFromState.complete });
-            if (!questFromState.complete) {
-              // if the quest is not complete, throw an error to 'break' out of the loop and 'continue' on
-              // console.log(`made it here from ${questFromState.name}`);
-              throw new Error(`Player does not meet a quest requirement`);
-            }
-          }
-        });
-      });
-    } catch (error) {
-      // console.log(error);
-    }
-    // console.log({ name: quest.name, questReqs: quest.questRequirements, meetsLevelRequirements, meetsQuestRequirements });
+    if (quest.questRequirements) {
+      // if there are quest requirements, we need to check if the player meets the requirements
+      // if not, then we can just skip the quest requirements section
 
+      // a list of all quest names from state - we initialize the list to see if a quest reuqirement is available in state
+      const AllQuestNamesFromState = AllQuestsFromStateFlat.map((quest) => quest.name);
+
+      for (const questName of quest.questRequirements) {
+        // iterate over all quests from the requirements
+
+        for (let i = 0; i < AllQuestsFromStateFlat.length; i++) {
+          // iterate over all quests from state
+
+          /**
+           * If the quest is not available in the game, (it is not found in list of quests in state)
+           * Or if we find that quest in state, and it is not complete,
+           * then we fail the quest requirements and may break for effeciency
+           */
+          if (
+            !AllQuestNamesFromState.includes(questName) ||
+            (AllQuestsFromStateFlat[i].name === questName && !AllQuestsFromStateFlat[i].complete)
+          ) {
+            // if we find a quest from state and the quest is not complete
+            meetsQuestRequirements = false;
+            break;
+          }
+        }
+      }
+    }
     //@ based on the conditions, return a background color
     if (meetsLevelRequirements.toString() === "true" && meetsQuestRequirements.toString() === "true") {
       // has levels and has quests = green background
