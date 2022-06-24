@@ -92,6 +92,22 @@ export interface IListOfRunes {
   soul: IRune;
 }
 
+export interface IArrow {
+  name: string;
+  levelReqRanged: number;
+  damage: number;
+  value: number;
+}
+
+export interface IListOfArrows {
+  bronzeArrow: IArrow;
+  ironArrow: IArrow;
+  steelArrow: IArrow;
+  mithrilArrow: IArrow;
+  adamantArrow: IArrow;
+  runeArrow: IArrow;
+}
+
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
