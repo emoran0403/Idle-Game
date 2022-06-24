@@ -165,9 +165,9 @@ const QuestPanel = (props: Types.ActivitiesProps) => {
       {compositeQuestArray
         ?.filter((quest) => quest.location === Current)
         .map((quest) => (
-          <div key={`quest-list-${quest.name}`} className={`card ${handleQuestStyle(quest)}`}>
+          <div key={`quest-list-${quest.name}`} className="card border border-dark border-1 rounded-3">
             <div className="card-body">
-              <h5 className="card-subtitle text-muted">{quest.name}</h5>
+              <h5 className={`card-subtitle text-muted ${handleQuestStyle(quest)}`}>{quest.name}</h5>
               {quest.complete && <div>100%</div>}
               {!quest.complete && (
                 <div>
