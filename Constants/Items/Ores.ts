@@ -1,6 +1,5 @@
 import * as Types from "../../Types";
 
-//! start here lol
 export const ListOfOres = {
   tin: {
     name: `tin`,

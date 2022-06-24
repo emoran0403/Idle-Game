@@ -68,6 +68,30 @@ export interface IListOfOres {
   mithril: IOre;
 }
 
+export interface IRune {
+  name: string;
+  levelReqRunecrafting: number;
+  XPGivenRunecrafting: number;
+  value: number;
+}
+
+export interface IListOfRunes {
+  air: IRune;
+  mind: IRune;
+  water: IRune;
+  earth: IRune;
+  fire: IRune;
+  body: IRune;
+  cosmic: IRune;
+  chaos: IRune;
+  astral: IRune;
+  nature: IRune;
+  law: IRune;
+  death: IRune;
+  blood: IRune;
+  soul: IRune;
+}
+
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}

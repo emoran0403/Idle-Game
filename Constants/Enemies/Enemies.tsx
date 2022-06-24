@@ -7,3 +7,12 @@ const man = {
   XPGivenCombatStyle: 25,
   XPGivenConstitution: 8,
 };
+
+/**
+ * coins
+ * ammunition
+ * runes
+ * fish
+ * logs
+ *
+ */
