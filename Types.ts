@@ -289,3 +289,11 @@ export interface ICompositeQuestInfo extends IQuestInfo {
 export interface ICurrentLocation {
   Current: `Lumbridge` | `Draynor`;
 }
+
+export interface IChatLog {
+  timeStamp: string;
+  message: string;
+  tags: ChatLogTag;
+}
+
+export type ChatLogTag = `Woodcutting` | `Monster Drop` | `Rare Item` | `Level Up` | `Gained XP`;
