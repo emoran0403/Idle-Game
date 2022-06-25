@@ -296,4 +296,4 @@ export interface IChatLog {
   tags: ChatLogTag[];
 }
 
-export type ChatLogTag = `Woodcutting` | `Monster Drop` | `Rare Item` | `Level Up` | `Gained XP` | `Welcome` | `Quest Completed`;
+export type ChatLogTag = `Gained Resource` | `Monster Drop` | `Rare Item` | `Level Up` | `Gained XP` | `Welcome` | `Quest Completed`;
