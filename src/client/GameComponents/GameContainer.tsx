@@ -8,6 +8,7 @@ import Inventory from "./RightColumn/Inventory";
 import ActiveBuffs from "./RightColumn/ActiveBuffs";
 import WornEquipment from "./RightColumn/WornEquipment";
 import ActivityArea from "./MiddleColumn/ActivityArea/ActivityArea";
+import ChatWindow from "./LeftColumn/ChatWindow";
 
 const GameContainer = (props: Types.NoProps) => {
   useEffect(() => {}, []);
@@ -20,6 +21,7 @@ const GameContainer = (props: Types.NoProps) => {
         <div id="left-column" className="col-lg-3 border border-dark border-2 rounded-3" style={{ height: "90vh", position: "relative" }}>
           <Levels />
           <QuestList />
+          <ChatWindow />
         </div>
 
         <div id="middle-column" className="col-lg-6 border border-dark border-2 rounded-3" style={{ height: "90vh" }}>
