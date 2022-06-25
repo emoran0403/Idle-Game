@@ -15,6 +15,8 @@ const ChatWindow = (props: Types.NoProps) => {
     },
   ]);
 
+  const [showingChat, setShowingChat] = useState<boolean>(true);
+
   const handleNewChatLog = (message: string, tags: Types.ChatLogTag[]) => {
     // create a newLog object by generating a timestamp, and the given message and tags array
     let newLog: Types.IChatLog = {
@@ -34,16 +36,50 @@ const ChatWindow = (props: Types.NoProps) => {
     }
   };
 
-  return (
-    <div className="card border border-dark border-2 rounded-3" style={{ overflowY: "auto", position: "relative", height: "33%" }}>
-      <div className="card-body">
-        <h6>This is ChatWindow</h6>
+  const showChatJSX = () => {
+    return (
+      <div>
         {chatLogArray.map((chatLog) => (
           <div className="d-flex flex-row justify-content-between" key={`ChatLog-at-${chatLog.timeStamp}`}>
             <div className="badge rounded-pill bg-primary">{chatLog.timeStamp}</div>
             <div className="text-wrap">{chatLog.message}</div>
           </div>
         ))}
+      </div>
+    );
+  };
+
+  //! add a way to filter by tags
+  const showFiltersJSX = () => {
+    return (
+      <div>
+        <div>this is filters</div>
+      </div>
+    );
+  };
+
+  return (
+    <div className="card border border-dark border-2 rounded-3" style={{ overflowY: "auto", position: "relative", height: "33%" }}>
+      <div className="card-body">
+        <div className="d-flex flex-row justify-content-evenly card-header">
+          <button
+            onClick={() => {
+              setShowingChat(true);
+            }}
+            className="btn btn-primary"
+          >
+            Chat
+          </button>
+          <button
+            onClick={() => {
+              setShowingChat(false);
+            }}
+            className="btn btn-primary"
+          >
+            Filters
+          </button>
+        </div>
+        {showingChat ? showChatJSX() : showFiltersJSX()}
       </div>
     </div>
   );
