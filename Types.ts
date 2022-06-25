@@ -293,7 +293,7 @@ export interface ICurrentLocation {
 export interface IChatLog {
   timeStamp: string;
   message: string;
-  tags: ChatLogTag;
+  tags: ChatLogTag[];
 }
 
-export type ChatLogTag = `Woodcutting` | `Monster Drop` | `Rare Item` | `Level Up` | `Gained XP`;
+export type ChatLogTag = `Woodcutting` | `Monster Drop` | `Rare Item` | `Level Up` | `Gained XP` | `Welcome` | `Quest Completed`;
