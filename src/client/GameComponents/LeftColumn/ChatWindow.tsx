@@ -15,31 +15,6 @@ const ChatWindow = (props: Types.NoProps) => {
       message: `Welcome to the game!`,
       tags: [`Welcome`],
     },
-    {
-      timeStamp: Dayjs().format("HH:mm:ss"),
-      message: `Welcome to the game!`,
-      tags: [`Gained Resource`],
-    },
-    {
-      timeStamp: Dayjs().format("HH:mm:ss"),
-      message: `Welcome to the game!`,
-      tags: [`Monster Drop`],
-    },
-    {
-      timeStamp: Dayjs().format("HH:mm:ss"),
-      message: `Welcome to the game!`,
-      tags: [`Rare Item`],
-    },
-    {
-      timeStamp: Dayjs().format("HH:mm:ss"),
-      message: `Welcome to the game!`,
-      tags: [`Level Up`],
-    },
-    {
-      timeStamp: Dayjs().format("HH:mm:ss"),
-      message: `Welcome to the game!`,
-      tags: [`Gained XP`],
-    },
   ]);
 
   // this will hold the chatLogs that will be displayed
