@@ -7,7 +7,7 @@ export const Wallet = createSlice({
   name: "wallet",
   initialState: {
     // wallet only holds coins
-    Coins: 0,
+    coins: 0,
   },
   reducers: {
     // use this when we need to add coins to the wallet

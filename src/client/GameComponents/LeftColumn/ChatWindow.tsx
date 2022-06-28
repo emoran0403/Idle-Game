@@ -3,8 +3,6 @@ import * as React from "react";
 import Dayjs from "dayjs";
 import { useEffect, useState } from "react";
 
-//! add a way to filter by tags
-
 //! multiple components need to be able to add to this - pass a function in props
 const ChatWindow = (props: Types.NoProps) => {
   // initialize the chatLogArray with a default welcome message
@@ -47,7 +45,7 @@ const ChatWindow = (props: Types.NoProps) => {
     return (
       <div>
         {displayedChatLogArray.map((chatLog, i) => (
-          <div className="d-flex flex-row justify-content-between" key={`ChatLog-at-${chatLog.timeStamp} + ${i}`}>
+          <div className="d-flex flex-row justify-content-between" key={`ChatLog-at-${chatLog.timeStamp}`}>
             <div className="badge rounded-pill bg-primary">{chatLog.timeStamp}</div>
             <div className="text-wrap">{chatLog.message}</div>
           </div>

@@ -15,7 +15,7 @@ export const DraynorSummary: Types.IDraynorLocationSummary = {
   Skills: {
     Woodcutting: [`logs`, `oak`, `willow`, `yew`],
     Mining: [`clay`],
-    Fishing: [`shrimp`, `sardine`, `anchovies`, `herring`],
+    Fishing: [`raw_shrimp`, `raw_sardine`, `raw_anchovies`, `raw_herring`],
   },
   Combat: [],
   Bosses: [],

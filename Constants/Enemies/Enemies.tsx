@@ -14,5 +14,10 @@ const man = {
  * runes
  * fish
  * logs
- *
+ */
+
+//!
+/**
+ * add a drop function to roll drops
+ * define tables for drops based on ammunition, runes, fish...
  */

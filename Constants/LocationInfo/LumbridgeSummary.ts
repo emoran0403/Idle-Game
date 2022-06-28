@@ -5,7 +5,7 @@ export const LumbridgeSummary: Types.ILumbridgeLocationSummary = {
   Skills: {
     Woodcutting: [`logs`, `oak`, `willow`, `yew`],
     Mining: [`clay`, `tin`, `copper`, `iron`, `coal`],
-    Fishing: [`crayfish`, `shrimp`, `sardine`, `anchovies`, `trout`, `herring`, `pike`, `salmon`],
+    Fishing: [`raw_crayfish`, `raw_shrimp`, `raw_sardine`, `raw_anchovies`, `raw_trout`, `raw_herring`, `raw_pike`, `raw_salmon`],
   },
   Combat: [`man`, `woman`, `giant spider`, `goblin`, `chicken`, `cow`, `spider`, `giant rat`, `swamp frog`],
   Bosses: [],

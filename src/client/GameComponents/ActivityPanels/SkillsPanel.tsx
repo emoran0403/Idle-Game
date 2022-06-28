@@ -5,11 +5,15 @@ import { AllLocations } from "../../../../Constants/LocationInfo";
 import { ListOfLogs } from "../../../../Constants/Items/Logs";
 import { getLevel } from "../../../../Constants/XP Levels";
 import { ListOfFish } from "../../../../Constants/Items/Fish";
+import { useDispatch } from "react-redux";
+import { setResource } from "../../Redux/Slices/CurrentResource";
+import { setSkill } from "../../Redux/Slices/CurrentSkill";
 
 //@ this needs to pull from some single source of truth showing all the skills available, and their resources based on the current location from state
 //! how can i conditionall set the background color for each of the skilling options based on the player's current level?
 
 const SkillsPanel = (props: Types.ActivitiesProps) => {
+  const dispatch = useDispatch();
   // This grabs the current location from state
   const { Current } = useSelector((state: Types.AllState) => state.CurrentLocation) as Types.ICurrentLocation;
 
@@ -41,11 +45,16 @@ const SkillsPanel = (props: Types.ActivitiesProps) => {
 
   const WoodcuttingOptions = (resourceArray: string[]) => {
     return (
-      <div className="card-title border border-dark border-1 rounded-3">
+      <div onClick={() => {}} className="card-title border border-dark border-1 rounded-3">
         <h6 className="text-center">Woodcutting Level {WoodcuttingLevel}</h6>
         <div className="d-flex flex-row flex-wrap">
           {resourceArray.map((resource) => (
             <div
+              role={`button`}
+              onClick={(e) => {
+                dispatch(setResource(resource));
+                dispatch(setSkill(`Woodcutting`));
+              }}
               key={`resource-list-${resource}`}
               className={`card border mb-3 ${
                 WoodcuttingLevel >= ListOfLogs[resource as keyof Types.IListOfLogs].levelReqWoodcutting ? `bg-success` : `bg-danger`
@@ -72,6 +81,11 @@ const SkillsPanel = (props: Types.ActivitiesProps) => {
         <div className="d-flex flex-row flex-wrap">
           {resourceArray.map((resource) => (
             <div
+              role={`button`}
+              onClick={(e) => {
+                dispatch(setResource(resource));
+                dispatch(setSkill(`Fishing`));
+              }}
               key={`resource-list-${resource}`}
               className={`card border mb-3 ${
                 FishingLevel >= ListOfFish[resource as keyof Types.IListOfFish].levelReqFishing ? `bg-success` : `bg-danger`
@@ -92,7 +106,12 @@ const SkillsPanel = (props: Types.ActivitiesProps) => {
   };
 
   return (
-    <div className="container card border border-dark border-2 rounded-3">
+    <div
+      onClick={() => {
+        console.log(`wow`);
+      }}
+      className="container card border border-dark border-2 rounded-3"
+    >
       {panelHeaderJSX()}
       <div className="row justify-content-lg-center">
         <div className="card">

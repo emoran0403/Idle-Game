@@ -30,6 +30,21 @@ export interface IListOfLogs {
   elder: ILog;
 }
 
+export interface IBankItem {
+  name: string;
+  amount: number;
+}
+
+export interface ILogBankSlice {
+  logs: IBankItem;
+  oak: IBankItem;
+  willow: IBankItem;
+  maple: IBankItem;
+  yew: IBankItem;
+  magic: IBankItem;
+  elder: IBankItem;
+}
+
 export interface IFish {
   name: string;
   levelReqFishing: number;
@@ -40,15 +55,26 @@ export interface IFish {
   value: number;
 }
 
+export interface IFishBankSlice {
+  raw_shrimp: IBankItem;
+  raw_crayfish: IBankItem;
+  raw_anchovies: IBankItem;
+  raw_trout: IBankItem;
+  raw_salmon: IBankItem;
+  raw_pike: IBankItem;
+  raw_sardine: IBankItem;
+  raw_herring: IBankItem;
+}
+
 export interface IListOfFish {
-  shrimp: IFish;
-  crayfish: IFish;
-  anchovies: IFish;
-  trout: IFish;
-  salmon: IFish;
-  pike: IFish;
-  sardine: IFish;
-  herring: IFish;
+  raw_shrimp: IFish;
+  raw_crayfish: IFish;
+  raw_anchovies: IFish;
+  raw_trout: IFish;
+  raw_salmon: IFish;
+  raw_pike: IFish;
+  raw_sardine: IFish;
+  raw_herring: IFish;
 }
 
 export interface IOre {
@@ -155,12 +181,34 @@ export interface ListOfSkills {
 
 export type bigwow = `Woodcutting` | `Firemaking` | `Mining` | `Fishing`;
 
+export interface ICurrentResource {
+  Current:
+    | `none`
+    | `raw_shrimp`
+    | `raw_crayfish`
+    | `raw_anchovies`
+    | `raw_trout`
+    | `raw_salmon`
+    | `raw_pike`
+    | `raw_sardine`
+    | `raw_herring`
+    | `logs`
+    | `oak`
+    | `willow`
+    | `maple`
+    | `yew`
+    | `magic`
+    | `elder`;
+}
+
 export interface AllState {
   Experience: ISkillList;
-  Bank: IBankList;
+  Bank_Fish: IFishBankSlice;
+  Bank_Logs: ILogBankSlice;
   Inventory: I_Inventory;
   CurrentLocation: ICurrentLocation;
   CurrentSkill: ListOfSkills;
+  CurrentResource: ICurrentResource;
   Resources: IResources;
   Wallet: IWallet;
   Quests_Lumbridge: LumbridgeQuestSliceCrap;
@@ -173,7 +221,7 @@ export interface AllStateQuestSlices {
 }
 
 export interface IWallet {
-  Coins: number;
+  coins: number;
 }
 
 //! will need to make more of these for each location's quests
@@ -183,12 +231,6 @@ export interface LumbridgeQuestSliceCrap {
 
 export interface DraynorQuestSliceCrap {
   DraynorQuestArray: IStateQuest[];
-}
-
-export interface IBankList {
-  Coins: number;
-  Logs: number;
-  Ashes: number;
 }
 
 export interface I_Inventory {

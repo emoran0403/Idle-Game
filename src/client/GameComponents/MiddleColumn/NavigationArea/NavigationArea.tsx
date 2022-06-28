@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Resources from "./Resources";
 import CurrentLocation from "./CurrentLocation";
 import CurrentSkill from "./CurrentSkill";
+import CurrentResource from "./CurrentResource";
 
 const NavigationArea = (props: Types.NoProps) => {
   useEffect(() => {}, []);
@@ -19,6 +20,7 @@ const NavigationArea = (props: Types.NoProps) => {
       </button>
       <CurrentLocation />
       <CurrentSkill />
+      <CurrentResource />
       <Resources />
     </div>
   );
