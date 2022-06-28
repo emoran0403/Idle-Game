@@ -1,23 +1,54 @@
 import * as Types from "../../../../Types";
 import * as React from "react";
 import Dayjs from "dayjs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-//! work this just like chirper
+//! add a way to filter by tags
+
 //! multiple components need to be able to add to this - pass a function in props
 const ChatWindow = (props: Types.NoProps) => {
   // initialize the chatLogArray with a default welcome message
+  // this will hold ALL chatLogs, a subset of which will be displayed based on the current filter settings
   const [chatLogArray, setChatLogArray] = useState<Types.IChatLog[]>([
     {
       timeStamp: Dayjs().format("HH:mm:ss"),
       message: `Welcome to the game!`,
       tags: [`Welcome`],
     },
+    {
+      timeStamp: Dayjs().format("HH:mm:ss"),
+      message: `Welcome to the game!`,
+      tags: [`Gained Resource`],
+    },
+    {
+      timeStamp: Dayjs().format("HH:mm:ss"),
+      message: `Welcome to the game!`,
+      tags: [`Monster Drop`],
+    },
+    {
+      timeStamp: Dayjs().format("HH:mm:ss"),
+      message: `Welcome to the game!`,
+      tags: [`Rare Item`],
+    },
+    {
+      timeStamp: Dayjs().format("HH:mm:ss"),
+      message: `Welcome to the game!`,
+      tags: [`Level Up`],
+    },
+    {
+      timeStamp: Dayjs().format("HH:mm:ss"),
+      message: `Welcome to the game!`,
+      tags: [`Gained XP`],
+    },
   ]);
+
+  // this will hold the chatLogs that will be displayed
+  const [displayedChatLogArray, setdisplayedChatLogArray] = useState<Types.IChatLog[]>([]);
 
   const [showingChat, setShowingChat] = useState<boolean>(true);
   const [tagsToHide, setTagsToHide] = useState<Types.ChatLogTag[]>([]);
 
+  //@ use this to add to the chat log array
   const handleNewChatLog = (message: string, tags: Types.ChatLogTag[]) => {
     // create a newLog object by generating a timestamp, and the given message and tags array
     let newLog: Types.IChatLog = {
@@ -40,8 +71,8 @@ const ChatWindow = (props: Types.NoProps) => {
   const showChatJSX = () => {
     return (
       <div>
-        {chatLogArray.map((chatLog) => (
-          <div className="d-flex flex-row justify-content-between" key={`ChatLog-at-${chatLog.timeStamp}`}>
+        {displayedChatLogArray.map((chatLog, i) => (
+          <div className="d-flex flex-row justify-content-between" key={`ChatLog-at-${chatLog.timeStamp} + ${i}`}>
             <div className="badge rounded-pill bg-primary">{chatLog.timeStamp}</div>
             <div className="text-wrap">{chatLog.message}</div>
           </div>
@@ -49,8 +80,6 @@ const ChatWindow = (props: Types.NoProps) => {
       </div>
     );
   };
-
-  //! add a way to filter by tags
 
   const addOrRemoveFilters = (tagToToggle: Types.ChatLogTag) => {
     // if the tagToToggle exists in the array, remove it
@@ -156,6 +185,16 @@ const ChatWindow = (props: Types.NoProps) => {
     );
   };
 
+  // if tagsToHide changes, we need to add / remove chat logs based on the new settings
+  useEffect(() => {
+    // make a copy of the chatLogArray
+    let tempChatLogArray: Types.IChatLog[] = [...chatLogArray];
+    // filter out those logs whose tags are included in the array of tags to hide
+    // set the new chatLogArray to state
+    tempChatLogArray.filter((chatLog) => !tagsToHide.includes(chatLog.tags[0]));
+    setdisplayedChatLogArray(tempChatLogArray);
+  }, [tagsToHide]);
+
   return (
     <div className="card border border-dark border-2 rounded-3" style={{ overflowY: "auto", position: "relative", height: "33%" }}>
       <div className="card-body">
@@ -177,7 +216,8 @@ const ChatWindow = (props: Types.NoProps) => {
             Filters
           </button>
         </div>
-        {showingChat ? showChatJSX() : showFiltersJSX()}
+        {showingChat && showChatJSX()}
+        {!showingChat && showFiltersJSX()}
       </div>
     </div>
   );

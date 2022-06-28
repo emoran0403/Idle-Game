@@ -296,4 +296,5 @@ export interface IChatLog {
   tags: ChatLogTag[];
 }
 
+//@ chatLogs may only have 1 tag - if this is changed, then the filter logic needs to be updated
 export type ChatLogTag = `Gained Resource` | `Monster Drop` | `Rare Item` | `Level Up` | `Gained XP` | `Welcome` | `Quest Completed`;
