@@ -191,8 +191,8 @@ const ChatWindow = (props: Types.NoProps) => {
     let tempChatLogArray: Types.IChatLog[] = [...chatLogArray];
     // filter out those logs whose tags are included in the array of tags to hide
     // set the new chatLogArray to state
-    tempChatLogArray.filter((chatLog) => !tagsToHide.includes(chatLog.tags[0]));
-    setdisplayedChatLogArray(tempChatLogArray);
+    let chatLogsToShow = tempChatLogArray.filter((chatLog) => !tagsToHide.includes(chatLog.tags[0]));
+    setdisplayedChatLogArray(chatLogsToShow);
   }, [tagsToHide]);
 
   return (
