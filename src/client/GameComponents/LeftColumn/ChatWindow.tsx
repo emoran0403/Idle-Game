@@ -4,7 +4,7 @@ import Dayjs from "dayjs";
 import { useState } from "react";
 
 //! work this just like chirper
-//! multiple components need to be able to add to this - export a function in props
+//! multiple components need to be able to add to this - pass a function in props
 const ChatWindow = (props: Types.NoProps) => {
   // initialize the chatLogArray with a default welcome message
   const [chatLogArray, setChatLogArray] = useState<Types.IChatLog[]>([
@@ -65,18 +65,37 @@ const ChatWindow = (props: Types.NoProps) => {
     }
   };
 
+  const removeAllFilters = () => {
+    let tagsToHideTemp = [...tagsToHide];
+    tagsToHideTemp.splice(0, 100); // from the fist index, delete 100 items, since this is more than the number of items in the array, all items will be removed
+    setTagsToHide([...tagsToHideTemp]);
+  };
+
+  const addAllFilters = () => {
+    let allFilters: Types.ChatLogTag[] = [`Gained Resource`, `Monster Drop`, `Rare Item`, `Level Up`, `Gained XP`, `Quest Completed`];
+    setTagsToHide([...allFilters]);
+  };
+
   const showFiltersJSX = () => {
     return (
       <div>
         <div>
-          <span>Filtering out: </span>
-
-          {tagsToHide.length === 0 && <span>Nothing</span>}
-          {tagsToHide.map((tag) => (
-            <span key={`Filtering-out-${tag}`}>{tag}, </span>
-          ))}
-        </div>
-        <div>
+          <button
+            onClick={() => {
+              removeAllFilters();
+            }}
+            className="btn btn-light"
+          >
+            Remove all filters
+          </button>
+          <button
+            onClick={() => {
+              addAllFilters();
+            }}
+            className="btn btn-light"
+          >
+            Add all filters
+          </button>
           <button
             onClick={() => {
               addOrRemoveFilters(`Gained Resource`);
@@ -117,6 +136,21 @@ const ChatWindow = (props: Types.NoProps) => {
           >
             Quest Completed
           </button>
+          <button
+            onClick={() => {
+              addOrRemoveFilters(`Monster Drop`);
+            }}
+            className="btn btn-primary"
+          >
+            Monster Drop
+          </button>
+        </div>
+        <div>
+          <span>Filtering out: </span>
+          {tagsToHide.length === 0 && <span>Nothing</span>}
+          {tagsToHide.map((tag) => (
+            <span key={`Filtering-out-${tag}`}>{tag}, </span>
+          ))}
         </div>
       </div>
     );
