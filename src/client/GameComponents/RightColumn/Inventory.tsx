@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 const Inventory = (props: Types.NoProps) => {
   const Wallet = useSelector((state: Types.AllState) => state.Wallet) as Types.IWallet;
-  const Inventory = useSelector((state: Types.AllState) => state.Inventory) as Types.I_Inventory;
+  const { Current } = useSelector((state: Types.AllState) => state.Inventory) as Types.I_Inventory;
 
   useEffect(() => {}, []);
 
@@ -18,9 +18,9 @@ const Inventory = (props: Types.NoProps) => {
             <h6 className="card-subtitle text-muted">Coins: {Wallet.coins}</h6>
           </div>
           <div className="d-flex flex-wrap justify-content-center">
-            {[...Array(28)].map((_, i) => (
+            {Current.map((item, i) => (
               <div className="border border-2 m-1">
-                <span className={`${i % 2 && `invisible`}`}>wow</span>
+                <span className={`${i % 2 && `invisible`}`}>{item}</span>
               </div>
             ))}
           </div>

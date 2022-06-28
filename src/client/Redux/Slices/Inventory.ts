@@ -10,7 +10,7 @@ let resourcesStatus = true;
 export const Inventory = createSlice({
   name: "inventory",
   initialState: {
-    Current: [],
+    Current: [`logs`],
   },
   reducers: {
     /**
