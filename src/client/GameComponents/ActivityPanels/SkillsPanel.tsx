@@ -26,6 +26,7 @@ const SkillsPanel = (props: Types.ActivitiesProps) => {
   let FishingLevel: number = getLevel(Experience.Fishing);
 
   const panelHeaderJSX = () => {
+    // returns the JSX for the panel header
     return (
       <div className="row justify-content-lg-center">
         <div className="col-lg-3 justify-content-lg-center">

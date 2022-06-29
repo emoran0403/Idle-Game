@@ -5,6 +5,8 @@ import { AllQuests } from "../../../../Constants/Quests/";
 import { useSelector } from "react-redux";
 import { ProgressBar } from "react-bootstrap";
 
+//! use a useeffect to 'animate' the progress bars
+
 const QuestList = (props: Types.NoProps) => {
   // This represents all the quests as a flat array
   const AllQuestsFlat: Types.IQuestInfo[] = [...Object.values(AllQuests)].flat();

@@ -160,7 +160,7 @@ const QuestPanel = (props: Types.ActivitiesProps) => {
   }, []);
 
   return (
-    <div className="card border border-dark border-2 rounded-3">
+    <div className="container border border-dark border-2 rounded-3">
       {panelHeaderJSX()}
       {compositeQuestArray
         ?.filter((quest) => quest.location === Current)
