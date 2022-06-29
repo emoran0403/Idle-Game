@@ -56,21 +56,19 @@ const Levels = (props: Types.NoProps) => {
 
         {Object.entries(Experience).map(([skill, xp]) => (
           <div key={`${skill}-progress-bar-div`}>
-            <div>
-              <div>{`${skill} Lv. ${getLevel(xp)}`}</div>
-              <ProgressBar>
-                <ProgressBar
-                  striped
-                  variant="success"
-                  label={`${percentToNextLevel(xp)}%`}
-                  now={percentToNextLevel(xp)}
-                  key={`${skill}-progress-bar`}
-                  min={0}
-                  max={100}
-                />
-                <ProgressBar variant="danger" now={100 - percentToNextLevel(xp)} key={2} min={0} max={100} />
-              </ProgressBar>
-            </div>
+            <div>{`${skill} Lv. ${getLevel(xp)}`}</div>
+            <ProgressBar>
+              <ProgressBar
+                striped
+                variant="success"
+                label={`${percentToNextLevel(xp)}%`}
+                now={percentToNextLevel(xp)}
+                key={`${skill}-progress-bar`}
+                min={0}
+                max={100}
+              />
+              <ProgressBar variant="danger" now={100 - percentToNextLevel(xp)} key={2} min={0} max={100} />
+            </ProgressBar>
           </div>
         ))}
       </div>

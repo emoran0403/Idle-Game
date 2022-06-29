@@ -3,6 +3,7 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 import { AllQuests } from "../../../../Constants/Quests/";
 import { useSelector } from "react-redux";
+import { ProgressBar } from "react-bootstrap";
 
 const QuestList = (props: Types.NoProps) => {
   // This represents all the quests as a flat array
@@ -54,12 +55,21 @@ const QuestList = (props: Types.NoProps) => {
           <div key={`quest-list-${quest.name}`} className="card">
             <div className="card-body">
               <h5 className="card-subtitle text-muted">{quest.name}</h5>
-              {quest.complete && <div>100%</div>}
-              {!quest.complete && (
-                <div>
-                  In Progress : {quest.stepsComplete} / {quest.stepsTotal}
-                </div>
-              )}
+
+              <div key={`${quest.name}-progress-bar-div`}>
+                <ProgressBar>
+                  <ProgressBar
+                    striped
+                    variant="success"
+                    label={`${Math.trunc((quest.stepsComplete / quest.stepsTotal) * 100)}%`}
+                    now={quest.stepsComplete}
+                    key={`${quest.name}-progress-bar`}
+                    min={0}
+                    max={quest.stepsTotal}
+                  />
+                  <ProgressBar variant="danger" now={quest.stepsTotal - quest.stepsComplete} key={2} min={0} max={quest.stepsTotal} />
+                </ProgressBar>
+              </div>
             </div>
           </div>
         ))}
@@ -69,6 +79,7 @@ const QuestList = (props: Types.NoProps) => {
 };
 
 export default QuestList;
+//! reset all quest state and experience to zero, aside from Constitution, that default is lvl 10
 
 // let example = {
 //   aa: [{ a: 1 }, { a: 2 }, { a: 3 }, { a: 4 }, { a: 5 }],
