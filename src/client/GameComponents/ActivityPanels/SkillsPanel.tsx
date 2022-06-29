@@ -49,14 +49,14 @@ const SkillsPanel = (props: Types.ActivitiesProps) => {
         <h6 className="text-center">Woodcutting Level {WoodcuttingLevel}</h6>
         <div className="d-flex flex-row flex-wrap">
           {resourceArray.map((resource) => (
-            <div
-              role={`button`}
+            <button
+              disabled={WoodcuttingLevel < ListOfLogs[resource as keyof Types.IListOfLogs].levelReqWoodcutting ? true : false}
               onClick={(e) => {
                 dispatch(setResource(resource));
                 dispatch(setSkill(`Woodcutting`));
               }}
               key={`resource-list-${resource}`}
-              className={`card border mb-3 ${
+              className={`btn border mb-3 ${
                 WoodcuttingLevel >= ListOfLogs[resource as keyof Types.IListOfLogs].levelReqWoodcutting ? `bg-success` : `bg-danger`
               }`}
             >
@@ -67,7 +67,7 @@ const SkillsPanel = (props: Types.ActivitiesProps) => {
                   <div>{ListOfLogs[resource as keyof Types.IListOfLogs].XPGivenWoodcutting} XP</div>
                 </div>
               </div>
-            </div>
+            </button>
           ))}
         </div>
       </div>
@@ -80,14 +80,14 @@ const SkillsPanel = (props: Types.ActivitiesProps) => {
         <h6 className="text-center">Fishing Level {FishingLevel}</h6>
         <div className="d-flex flex-row flex-wrap">
           {resourceArray.map((resource) => (
-            <div
-              role={`button`}
+            <button
+              disabled={FishingLevel < ListOfFish[resource as keyof Types.IListOfFish].levelReqFishing ? true : false}
               onClick={(e) => {
                 dispatch(setResource(resource));
                 dispatch(setSkill(`Fishing`));
               }}
               key={`resource-list-${resource}`}
-              className={`card border mb-3 ${
+              className={`btn border mb-3 ${
                 FishingLevel >= ListOfFish[resource as keyof Types.IListOfFish].levelReqFishing ? `bg-success` : `bg-danger`
               }`}
             >
@@ -98,7 +98,7 @@ const SkillsPanel = (props: Types.ActivitiesProps) => {
                   <div>{ListOfFish[resource as keyof Types.IListOfFish].XPGivenFishing} XP</div>
                 </div>
               </div>
-            </div>
+            </button>
           ))}
         </div>
       </div>
@@ -106,12 +106,7 @@ const SkillsPanel = (props: Types.ActivitiesProps) => {
   };
 
   return (
-    <div
-      onClick={() => {
-        console.log(`wow`);
-      }}
-      className="container card border border-dark border-2 rounded-3"
-    >
+    <div className="container card border border-dark border-2 rounded-3">
       {panelHeaderJSX()}
       <div className="row justify-content-lg-center">
         <div className="card">

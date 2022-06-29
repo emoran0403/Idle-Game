@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 const CurrentResource = (props: Types.NoProps) => {
   const state = useSelector((state: Types.AllState) => state.CurrentResource.Current);
-  console.log(state);
+  // console.log(state);
   useEffect(() => {}, []);
   return (
     <div className="text-center border border-dark border-2 rounded-3">
