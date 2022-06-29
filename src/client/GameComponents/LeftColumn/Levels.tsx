@@ -6,8 +6,6 @@ import { useEffect, useState } from "react";
 import { ProgressBar } from "react-bootstrap";
 
 const Levels = (props: Types.NoProps) => {
-  const [toolTipText, setToolTipText] = useState<string>("");
-  const [tipsToShow, setTipsToShow] = useState<Types.IFlatObjectOfBooleans>({});
   const [totalExperience, setTotalExperience] = useState<number>(0);
   const [totalLevel, setTotalLevel] = useState<number>(0);
 
@@ -30,28 +28,6 @@ const Levels = (props: Types.NoProps) => {
     return combatLevel;
   };
 
-  const handleSetToolTip = (name: string, XP: number) => {
-    const XPBarPercent = percentToNextLevel(XP);
-    const text = `${name} ${XPBarPercent}%`;
-
-    const temp: Types.IFlatObjectOfBooleans = {};
-    for (let key of Object.keys(Experience)) {
-      temp[key] = false;
-    }
-    temp[name] = true;
-
-    setToolTipText(text);
-    setTipsToShow(temp);
-  };
-
-  const handleRemoveToolTip = () => {
-    const temp: Types.IFlatObjectOfBooleans = {};
-    for (let key of Object.keys(Experience)) {
-      temp[key] = false;
-    }
-    setTipsToShow(temp);
-  };
-
   useEffect(() => {
     // totals the experience and levels of the player.
     // sets state for tooltips
@@ -64,12 +40,6 @@ const Levels = (props: Types.NoProps) => {
     }
     setTotalExperience(localTotalExperience);
     setTotalLevel(localTotalLevel);
-
-    const temp: Types.IFlatObjectOfBooleans = {};
-    for (let key of Object.keys(Experience)) {
-      temp[key] = false;
-    }
-    setTipsToShow(temp);
   }, []);
 
   return (
