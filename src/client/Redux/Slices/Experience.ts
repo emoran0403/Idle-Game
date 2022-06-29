@@ -6,7 +6,7 @@ export const Experience = createSlice({
   initialState: {
     //list of skills, starting at 0 experience
     Woodcutting: 5000,
-    Firemaking: 174,
+    Firemaking: 90,
     Fishing: 0,
     Attack: 0,
     Strength: 0,

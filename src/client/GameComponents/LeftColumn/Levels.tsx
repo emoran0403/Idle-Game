@@ -3,6 +3,7 @@ import * as React from "react";
 import { useSelector } from "react-redux";
 import { getLevel, percentToNextLevel } from "../../../../Constants/XP Levels";
 import { useEffect, useState } from "react";
+import { ProgressBar } from "react-bootstrap";
 
 const Levels = (props: Types.NoProps) => {
   const [toolTipText, setToolTipText] = useState<string>("");
@@ -52,6 +53,8 @@ const Levels = (props: Types.NoProps) => {
   };
 
   useEffect(() => {
+    // totals the experience and levels of the player.
+    // sets state for tooltips
     let localTotalLevel: number = 0;
     let localTotalExperience: number = 0;
 
@@ -82,45 +85,22 @@ const Levels = (props: Types.NoProps) => {
         </h5>
 
         {Object.entries(Experience).map(([skill, xp]) => (
-          <div
-            key={`skill-minicomponent-${skill}`}
-            onMouseEnter={() => {
-              handleSetToolTip(skill, xp);
-            }}
-            onMouseLeave={handleRemoveToolTip}
-          >
-            {tipsToShow[skill] ? (
-              <div className="d-flex">
-                <div style={{ position: "absolute", zIndex: 999, color: "#f0ae40", fontWeight: "bold", textShadow: "2px 2px 4px black" }}>
-                  {toolTipText}
-                </div>
-
-                <span
-                  style={{
-                    backgroundColor: "#00ff00",
-                    width: `${percentToNextLevel(xp)}%`,
-                    display: "inline-block",
-                    color: "#00ff00",
-                  }}
-                >
-                  -
-                </span>
-                <span
-                  style={{
-                    backgroundColor: "red",
-                    width: `${100 - percentToNextLevel(xp)}%`,
-                    display: "inline-block",
-                    color: "red",
-                  }}
-                >
-                  _
-                </span>
-              </div>
-            ) : (
-              <div>
-                <div>icon Lv: {getLevel(xp)}</div>
-              </div>
-            )}
+          <div key={`${skill}-progress-bar-div`}>
+            <div>
+              <div>{`${skill} Lv. ${getLevel(xp)}`}</div>
+              <ProgressBar>
+                <ProgressBar
+                  striped
+                  variant="success"
+                  label={`${percentToNextLevel(xp)}%`}
+                  now={percentToNextLevel(xp)}
+                  key={`${skill}-progress-bar`}
+                  min={0}
+                  max={100}
+                />
+                <ProgressBar variant="danger" now={100 - percentToNextLevel(xp)} key={2} min={0} max={100} />
+              </ProgressBar>
+            </div>
           </div>
         ))}
       </div>

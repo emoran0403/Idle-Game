@@ -18,11 +18,11 @@ const Inventory = (props: Types.NoProps) => {
             <h6 className="card-subtitle text-muted">Coins: {Wallet.coins}</h6>
           </div>
           <div className="d-flex flex-wrap justify-content-center">
-            {Current.map((item, i) => (
+            {/* {Current.map((item, i) => (
               <div className="border border-2 m-1">
                 <span className={`${i % 2 && `invisible`}`}>{item}</span>
               </div>
-            ))}
+            ))} */}
           </div>
         </h5>
       </div>
