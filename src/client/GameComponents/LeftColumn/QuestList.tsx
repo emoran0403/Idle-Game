@@ -23,8 +23,6 @@ const QuestList = (props: Types.NoProps) => {
   const [compositeQuestArray, setCompositeQuestArray] = useState<Types.ICompositeQuestInfo[]>([]);
   const [completedQuestCounter, setCompletedQuestCounter] = useState<number>(0);
 
-  //! i need to make a count of all the quests that are complete
-
   useEffect(() => {
     //@ This use effect combines the static quest info from constants with the dynamic quest info from state,
     //@ and increments a count of completed quests
@@ -98,7 +96,7 @@ const QuestList = (props: Types.NoProps) => {
                   <ProgressBar
                     striped
                     variant="success"
-                    label={`${Math.trunc((quest.stepsComplete / quest.stepsTotal) * 100)}%`}
+                    label={`${Math.round((quest.stepsComplete / quest.stepsTotal) * 100)}%`}
                     now={quest.stepsComplete}
                     key={`${quest.name}-progress-bar`}
                     min={0}
@@ -116,7 +114,7 @@ const QuestList = (props: Types.NoProps) => {
 };
 
 export default QuestList;
-//! reset all quest state and experience to zero, aside from Constitution, that default is lvl 10
+//! before deploying - reset all quest state and experience to zero, aside from Constitution, that default is lvl 10
 
 // let example = {
 //   aa: [{ a: 1 }, { a: 2 }, { a: 3 }, { a: 4 }, { a: 5 }],

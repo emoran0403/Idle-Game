@@ -17,3 +17,6 @@ export const percentToNextLevel = (XP: number): number => {
 
   return Math.floor(((xpNeeded - delta) / xpNeeded) * 100) || 0;
 };
+
+//! change this so that if the player never reaches 100% to the next level
+// if the player is right at the threshold, exactly at 100%, use the next level's xp to determine progress
