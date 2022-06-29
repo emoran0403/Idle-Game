@@ -9,24 +9,31 @@ const QuestList = (props: Types.NoProps) => {
   // This represents all the quests as a flat array
   const AllQuestsFlat: Types.IQuestInfo[] = [...Object.values(AllQuests)].flat();
 
-  // this represents all the quests coming from state
+  // this represents all the Lumbridge quests coming from state
   const { LumbridgeQuestArray } = useSelector((state: Types.AllState) => state.Quests_Lumbridge);
 
-  // this represents all the quests coming from state
+  // this represents all the Draynor quests coming from state
   const { DraynorQuestArray } = useSelector((state: Types.AllState) => state.Quests_Draynor);
 
-  // spread out all the quests from state into a flat array
   const AllQuestsFromStateFlat = [...LumbridgeQuestArray, ...DraynorQuestArray];
   //@spread out future quests into the AllQuestsFromStateFlat array
+  // AllQuestsFromStateFlat.length represents the total number of quests implemented
 
   // we establish an array of composite quests, pulling in the progress from state, and the static info from the summary
   const [compositeQuestArray, setCompositeQuestArray] = useState<Types.ICompositeQuestInfo[]>([]);
+  const [completedQuestCounter, setCompletedQuestCounter] = useState<number>(0);
+
+  //! i need to make a count of all the quests that are complete
 
   useEffect(() => {
+    //@ This use effect combines the static quest info from constants with the dynamic quest info from state,
+    //@ and increments a count of completed quests
     // console.log(AllQuestsFromStateFlat);
     let tempCompArray: Types.ICompositeQuestInfo[] = [];
+    let questCompleteCounter: number = 0;
     for (let i = 0; i < AllQuestsFlat.length; i++) {
       for (let j = 0; j < AllQuestsFromStateFlat.length; j++) {
+        // if the quest names match, create a composed quest, then push it into the array
         if (AllQuestsFromStateFlat[j].name === AllQuestsFlat[i].name) {
           let compositeQuest = {
             ...AllQuestsFlat[i],
@@ -34,12 +41,22 @@ const QuestList = (props: Types.NoProps) => {
             complete: AllQuestsFromStateFlat[j].complete,
           };
           tempCompArray.push(compositeQuest);
-          continue; // once we find our match, continue to the next iteration
+          continue; // there will only be one match, and once we find our match, continue to the next iteration
         }
       }
     }
     // console.log(tempCompArray);
+
+    // if the quest is complete, increment the counter
+    for (let k = 0; k < AllQuestsFromStateFlat.length; k++)
+      if (AllQuestsFromStateFlat[k].complete) {
+        questCompleteCounter++;
+      }
+
+    setCompletedQuestCounter(questCompleteCounter);
     setCompositeQuestArray(tempCompArray);
+    // console.log(questCompleteCounter);
+    // console.log(AllQuestsFromStateFlat.length);
   }, []);
 
   return (
@@ -48,7 +65,27 @@ const QuestList = (props: Types.NoProps) => {
         <h5 className="card-header text-center">
           Quest List
           <div className="card-subtitle text-muted">
-            <h6>quests complete / quests total</h6>
+            <h6>
+              Completion
+              <ProgressBar>
+                <ProgressBar
+                  striped
+                  variant="success"
+                  label={`${Math.round((completedQuestCounter / AllQuestsFromStateFlat.length) * 100)}%`}
+                  now={completedQuestCounter}
+                  key={`quest-completion-progress-bar`}
+                  min={0}
+                  max={AllQuestsFromStateFlat.length}
+                />
+                <ProgressBar
+                  variant="danger"
+                  now={AllQuestsFromStateFlat.length - completedQuestCounter}
+                  key={2}
+                  min={0}
+                  max={AllQuestsFromStateFlat.length}
+                />
+              </ProgressBar>
+            </h6>
           </div>
         </h5>
         {compositeQuestArray?.map((quest) => (

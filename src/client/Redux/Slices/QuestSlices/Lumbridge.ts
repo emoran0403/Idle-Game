@@ -13,13 +13,13 @@ export const Quests_Lumbridge = createSlice({
         name: "Cook's Assistant",
         stepsComplete: 10,
         stepsTotal: 20,
-        complete: false,
+        complete: true,
       },
       {
         name: "Myths of the White Lands",
         stepsComplete: 100,
         stepsTotal: 113,
-        complete: false,
+        complete: true,
       },
       {
         name: "The Restless Ghost",
