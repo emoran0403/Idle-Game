@@ -89,8 +89,51 @@ const executeHit = () => {
   // calculates the hitchance, determines if a hit happens, rolls for damage
 };
 
-const damageDealt = () => {
+let strengthLevel: number = 1;
+
+const damageDealt = (
+  style: string,
+  mainHand: boolean,
+  damageMainHand: number,
+  offHand: boolean,
+  damageOffHand: number,
+  twoHanded: boolean,
+  damageTwoHanded: number,
+  boosts: number = 1
+) => {
   // calculates the potential damageDealt based on combat variables
+  // abilities deal between 20% to 100% of their maximum damage - use this with the random number
+  // will need to pull levels from state
+  let damage: number = 0;
+
+  switch (style) {
+    case `melee`: {
+      if (mainHand) {
+        // if there is a mainhand weapon equipped, use the expression to add to the damage
+        damage += (2.5 * strengthLevel + damageMainHand) * boosts;
+      }
+      if (offHand) {
+        // if there is a offhand weapon equipped, use the expression to add to the damage
+        damage += (1.25 * strengthLevel + damageOffHand) * (0.5 * boosts);
+      }
+      if (twoHanded) {
+        // if there is a twohanded weapon equipped, use the expression to add to the damage
+        damage += (3.75 * strengthLevel + damageTwoHanded) * (1.5 * boosts);
+      }
+      if (!mainHand && !offHand && !twoHanded) {
+        // if there is no weapon equipped, use the expression to add to the damage
+        damage += 3.75 * strengthLevel * boosts;
+      }
+      break;
+    }
+    case `magic`: {
+      // magic
+      break;
+    }
+    case `ranged`: {
+      // ranged
+    }
+  }
 };
 
 /**
