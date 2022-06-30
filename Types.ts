@@ -392,7 +392,13 @@ export interface IListOfMeleeBodies {
   adamantplatebody: IArmorItem;
   runeplatebody: IArmorItem;
 }
-export interface IListOfMagicBodies {}
+export interface IListOfMagicBodies {
+  wizardrobetop: IArmorItem;
+  imphiderobetop: IArmorItem;
+  spidersilkrobetop: IArmorItem;
+  batwingtorso: IArmorItem;
+  splitbarkbody: IArmorItem;
+}
 export interface IListOfRangedBodies {
   leatherbody: IArmorItem;
   hardleatherbody: IArmorItem;
@@ -415,7 +421,13 @@ export interface IListOfMeleeLegs {
   adamantplatelegs: IArmorItem;
   runeplatelegs: IArmorItem;
 }
-export interface IListOfMagicLegs {}
+export interface IListOfMagicLegs {
+  wizardrobeskirt: IArmorItem;
+  imphiderobebottom: IArmorItem;
+  spidersilkrobebottom: IArmorItem;
+  batwinglegs: IArmorItem;
+  splitbarklegs: IArmorItem;
+}
 export interface IListOfRangedLegs {
   leatherchaps: IArmorItem;
   hardleatherchaps: IArmorItem;
@@ -438,7 +450,13 @@ export interface IListOfMeleeFeet {
   adamantarmouredboots: IArmorItem;
   runearmouredboots: IArmorItem;
 }
-export interface IListOfMagicFeet {}
+export interface IListOfMagicFeet {
+  wizardboots: IArmorItem;
+  imphideboots: IArmorItem;
+  spidersilkboots: IArmorItem;
+  batwingboots: IArmorItem;
+  splitbarkboots: IArmorItem;
+}
 export interface IListOfRangedFeet {
   leatherboots: IArmorItem;
   hardleatherboots: IArmorItem;
@@ -461,7 +479,13 @@ export interface IListOfMeleeHands {
   adamantgauntlets: IArmorItem;
   runegauntlets: IArmorItem;
 }
-export interface IListOfMagicHands {}
+export interface IListOfMagicHands {
+  wizardgloves: IArmorItem;
+  imphidegloves: IArmorItem;
+  spidersilkgloves: IArmorItem;
+  batwinggloves: IArmorItem;
+  splitbarkgauntlets: IArmorItem;
+}
 export interface IListOfRangedHands {
   leathervambraces: IArmorItem;
   hardleathergloves: IArmorItem;
