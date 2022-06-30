@@ -5,33 +5,10 @@
  * I made this tool to be saved as a bookmark, click the bookmark to run the function, and open the console for the armor info object.
  */
 
+// Value isn't standard, so I will need to enter it manually
+
 (() => {
-  // the value in the table may be off a little, so we need to do some checking
-  //! this is not quite right yet :/
-  let valueat15 = Number(
-    document
-      .getElementsByClassName(`plainlinks rsw-infobox no-parenthesis-style infobox-item`)[0]
-      .children[0].children[15].textContent.slice(5, -6)
-  );
-
-  let valueat16 = Number(
-    document
-      .getElementsByClassName(`plainlinks rsw-infobox no-parenthesis-style infobox-item`)[0]
-      .children[0].children[16].textContent.slice(5, -6)
-  );
-
-  let finalValue = `manualdataentryughhghh`;
-
-  if (!isNaN(valueat15)) {
-    // this happens when valueat15 returns NaN
-    finalValue = valueat16;
-  }
-  if (!isNaN(valueat16)) {
-    // this happens when valueat16 returns NaN
-    finalValue = valueat15;
-  }
-
-  const armorInfo = {
+  let ARMORINFO = {
     name: document.title.replaceAll(` `, ``).split(`-`)[0].toLowerCase(),
 
     levelReqDefence: Number(
@@ -52,7 +29,7 @@
     prayerPointsExtra: Number(
       document.getElementsByClassName("plainlinks infobox-bonuses wikitable")[0].children[0].children[6].children[4].textContent
     ),
-    // the damage reduction number has a variable length, so cut from the start and end of the string to get the number
+
     damageReduction: Number(
       document
         .getElementsByClassName("plainlinks infobox-bonuses wikitable")[0]
@@ -69,11 +46,10 @@
       document.getElementsByClassName("plainlinks infobox-bonuses wikitable")[0].children[0].children[10].children[4].textContent
     ),
 
-    //! child 15 or 16
-    value: finalValue,
+    value: 0,
   };
 
-  console.log(armorInfo);
+  console.log(ARMORINFO);
 })();
 
 let exampleArmorInfo = {
@@ -89,7 +65,6 @@ let exampleArmorInfo = {
   styleBonusMagic: 0,
   value: 168,
 };
-
 /**
  * table document.getElementsByClassName('plainlinks infobox-bonuses wikitable')[0]
  * table Body document.getElementsByClassName('plainlinks infobox-bonuses wikitable')[0].children[0]
