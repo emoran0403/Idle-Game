@@ -70,7 +70,7 @@ const listOfRangedBodies = {
   },
 };
 
-export const headGear: Types.IArmorSlotBody = {
+export const bodySlot: Types.IArmorSlotBody = {
   melee: listOfMeleeBodies,
   magic: listOfMagicBodies,
   ranged: listOfRangedBodies,

@@ -402,7 +402,13 @@ export interface IArmorSlotBody {
 
 export interface IListOfMeleeLegs {}
 export interface IListOfMagicLegs {}
-export interface IListOfRangedLegs {}
+export interface IListOfRangedLegs {
+  leatherchaps: IArmorItem;
+  hardleatherchaps: IArmorItem;
+  studdedchaps: IArmorItem;
+  carapacelegs: IArmorItem;
+  greendragonhidechaps: IArmorItem;
+}
 
 export interface IArmorSlotLegs {
   melee: IListOfMeleeLegs;
@@ -412,7 +418,13 @@ export interface IArmorSlotLegs {
 
 export interface IListOfMeleeFeet {}
 export interface IListOfMagicFeet {}
-export interface IListOfRangedFeet {}
+export interface IListOfRangedFeet {
+  leatherboots: IArmorItem;
+  hardleatherboots: IArmorItem;
+  studdedleatherboots: IArmorItem;
+  carapaceboots: IArmorItem;
+  greendragonhideboots: IArmorItem;
+}
 
 export interface IArmorSlotFeet {
   melee: IListOfMeleeFeet;
@@ -422,7 +434,13 @@ export interface IArmorSlotFeet {
 
 export interface IListOfMeleeHands {}
 export interface IListOfMagicHands {}
-export interface IListOfRangedHands {}
+export interface IListOfRangedHands {
+  leathervambraces: IArmorItem;
+  hardleathergloves: IArmorItem;
+  studdedleathergloves: IArmorItem;
+  carapacegloves: IArmorItem;
+  greendragonhidevambraces: IArmorItem;
+}
 
 export interface IArmorSlotHands {
   melee: IListOfMeleeHands;
