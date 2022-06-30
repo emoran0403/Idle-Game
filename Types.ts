@@ -355,6 +355,11 @@ export interface IArmorItem {
   value: number;
 }
 
-export interface IListOfArmorItems {
-  [key: string]: IArmorItem;
+export interface IListOfMeleeHeads {
+  bronzefullhelm: IArmorItem;
+  ironfullhelm: IArmorItem;
+  steelfullhelm: IArmorItem;
+  mithrilfullhelm: IArmorItem;
+  adamantfullhelm: IArmorItem;
+  runefullhelm: IArmorItem;
 }

@@ -1,6 +1,6 @@
 import * as Types from "../../Types";
 
-const listOfMeleeHeads: Types.IListOfArmorItems = {
+const listOfMeleeHeads: Types.IListOfMeleeHeads = {
   bronzefullhelm: {
     name: `bronzefullhelm`,
     levelReqDefence: 1,
