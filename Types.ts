@@ -340,3 +340,21 @@ export interface IChatLog {
 
 //@ chatLogs may only have 1 tag - if this is changed, then the filter logic needs to be updated
 export type ChatLogTag = `Gained Resource` | `Monster Drop` | `Rare Item` | `Level Up` | `Gained XP` | `Welcome` | `Quest Completed`;
+
+export interface IArmorItem {
+  name: string;
+  levelReqDefence: number;
+  tier: number;
+  armor: number;
+  lifePointsExtra: number;
+  prayerPointsExtra: number;
+  damageReduction: number;
+  styleBonusMelee: number;
+  styleBonusRanged: number;
+  styleBonusMagic: number;
+  value: number;
+}
+
+export interface IListOfArmorItems {
+  [key: string]: IArmorItem;
+}
