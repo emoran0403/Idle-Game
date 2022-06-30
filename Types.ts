@@ -499,3 +499,24 @@ export interface IArmorSlotHands {
   magic: IListOfMagicHands;
   ranged: IListOfRangedHands;
 }
+
+export interface IBodySlotSlice {
+  playerOwnsbronzeplatebody: boolean;
+  playerOwnsironplatebody: boolean;
+  playerOwnssteelplatebody: boolean;
+  playerOwnsmithrilplatebody: boolean;
+  playerOwnsadamantplatebody: boolean;
+  playerOwnsruneplatebody: boolean;
+
+  playerOwnswizardrobetop: boolean;
+  playerOwnsimphiderobetop: boolean;
+  playerOwnsspidersilkrobetop: boolean;
+  playerOwnsbatwingtorso: boolean;
+  playerOwnssplitbarkbody: boolean;
+
+  playerOwnsleatherbody: boolean;
+  playerOwnshardleatherbody: boolean;
+  playerOwnsstuddedbody: boolean;
+  playerOwnscarapacetorso: boolean;
+  playerOwnsgreendragonhidebody: boolean;
+}
