@@ -384,7 +384,14 @@ export interface IArmorSlotHead {
   ranged: IListOfRangedHeads;
 }
 
-export interface IListOfMeleeBodies {}
+export interface IListOfMeleeBodies {
+  bronzeplatebody: IArmorItem;
+  ironplatebody: IArmorItem;
+  steelplatebody: IArmorItem;
+  mithrilplatebody: IArmorItem;
+  adamantplatebody: IArmorItem;
+  runeplatebody: IArmorItem;
+}
 export interface IListOfMagicBodies {}
 export interface IListOfRangedBodies {
   leatherbody: IArmorItem;
@@ -400,7 +407,14 @@ export interface IArmorSlotBody {
   ranged: IListOfRangedBodies;
 }
 
-export interface IListOfMeleeLegs {}
+export interface IListOfMeleeLegs {
+  bronzeplatelegs: IArmorItem;
+  ironplatelegs: IArmorItem;
+  steelplatelegs: IArmorItem;
+  mithrilplatelegs: IArmorItem;
+  adamantplatelegs: IArmorItem;
+  runeplatelegs: IArmorItem;
+}
 export interface IListOfMagicLegs {}
 export interface IListOfRangedLegs {
   leatherchaps: IArmorItem;
@@ -416,7 +430,14 @@ export interface IArmorSlotLegs {
   ranged: IListOfRangedLegs;
 }
 
-export interface IListOfMeleeFeet {}
+export interface IListOfMeleeFeet {
+  bronzearmouredboots: IArmorItem;
+  ironarmouredboots: IArmorItem;
+  steelarmouredboots: IArmorItem;
+  mithrilarmouredboots: IArmorItem;
+  adamantarmouredboots: IArmorItem;
+  runearmouredboots: IArmorItem;
+}
 export interface IListOfMagicFeet {}
 export interface IListOfRangedFeet {
   leatherboots: IArmorItem;
@@ -432,7 +453,14 @@ export interface IArmorSlotFeet {
   ranged: IListOfRangedFeet;
 }
 
-export interface IListOfMeleeHands {}
+export interface IListOfMeleeHands {
+  bronzegauntlets: IArmorItem;
+  irongauntlets: IArmorItem;
+  steelgauntlets: IArmorItem;
+  mithrilgauntlets: IArmorItem;
+  adamantgauntlets: IArmorItem;
+  runegauntlets: IArmorItem;
+}
 export interface IListOfMagicHands {}
 export interface IListOfRangedHands {
   leathervambraces: IArmorItem;
