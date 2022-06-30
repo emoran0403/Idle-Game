@@ -363,3 +363,25 @@ export interface IListOfMeleeHeads {
   adamantfullhelm: IArmorItem;
   runefullhelm: IArmorItem;
 }
+
+export interface IListOfMagicHeads {
+  wizardhat: IArmorItem;
+  imphidehood: IArmorItem;
+  spidersilkhood: IArmorItem;
+  batwinghood: IArmorItem;
+  splitbarkhelm: IArmorItem;
+}
+
+export interface IListOfRangedHeads {
+  leathercowl: IArmorItem;
+  hardleathercowl: IArmorItem;
+  studdedleathercoif: IArmorItem;
+  carapacehelm: IArmorItem;
+  greendragonhidecoif: IArmorItem;
+}
+
+export interface IArmorSlotHead {
+  melee: IListOfMeleeHeads;
+  magic: IListOfMagicHeads;
+  ranged: IListOfRangedHeads;
+}
