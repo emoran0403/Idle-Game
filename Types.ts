@@ -363,7 +363,6 @@ export interface IListOfMeleeHeads {
   adamantfullhelm: IArmorItem;
   runefullhelm: IArmorItem;
 }
-
 export interface IListOfMagicHeads {
   wizardhat: IArmorItem;
   imphidehood: IArmorItem;
@@ -371,7 +370,6 @@ export interface IListOfMagicHeads {
   batwinghood: IArmorItem;
   splitbarkhelm: IArmorItem;
 }
-
 export interface IListOfRangedHeads {
   leathercowl: IArmorItem;
   hardleathercowl: IArmorItem;
@@ -384,4 +382,50 @@ export interface IArmorSlotHead {
   melee: IListOfMeleeHeads;
   magic: IListOfMagicHeads;
   ranged: IListOfRangedHeads;
+}
+
+export interface IListOfMeleeBodies {}
+export interface IListOfMagicBodies {}
+export interface IListOfRangedBodies {
+  leatherbody: IArmorItem;
+  hardleatherbody: IArmorItem;
+  studdedbody: IArmorItem;
+  carapacetorso: IArmorItem;
+  greendragonhidebody: IArmorItem;
+}
+
+export interface IArmorSlotBody {
+  melee: IListOfMeleeBodies;
+  magic: IListOfMagicBodies;
+  ranged: IListOfRangedBodies;
+}
+
+export interface IListOfMeleeLegs {}
+export interface IListOfMagicLegs {}
+export interface IListOfRangedLegs {}
+
+export interface IArmorSlotLegs {
+  melee: IListOfMeleeLegs;
+  magic: IListOfMagicLegs;
+  ranged: IListOfRangedLegs;
+}
+
+export interface IListOfMeleeFeet {}
+export interface IListOfMagicFeet {}
+export interface IListOfRangedFeet {}
+
+export interface IArmorSlotFeet {
+  melee: IListOfMeleeFeet;
+  magic: IListOfMagicFeet;
+  ranged: IListOfRangedFeet;
+}
+
+export interface IListOfMeleeHands {}
+export interface IListOfMagicHands {}
+export interface IListOfRangedHands {}
+
+export interface IArmorSlotHands {
+  melee: IListOfMeleeHands;
+  magic: IListOfMagicHands;
+  ranged: IListOfRangedHands;
 }

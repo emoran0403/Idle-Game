@@ -2,4 +2,76 @@ import * as Types from "../../Types";
 
 const listOfMeleeBodies = {};
 const listOfMagicBodies = {};
-const listOfRangedBodies = {};
+const listOfRangedBodies = {
+  leatherbody: {
+    name: "leatherbody",
+    levelReqDefence: 0,
+    tier: 5,
+    armor: 34.5,
+    lifePointsExtra: 0,
+    prayerPointsExtra: 0,
+    damageReduction: 0.1,
+    styleBonusMelee: 0,
+    styleBonusRanged: 0,
+    styleBonusMagic: 0,
+    value: 21,
+  },
+  hardleatherbody: {
+    name: "hardleatherbody",
+    levelReqDefence: 10,
+    tier: 10,
+    armor: 46.4,
+    lifePointsExtra: 0,
+    prayerPointsExtra: 0,
+    damageReduction: 0.2,
+    styleBonusMelee: 0,
+    styleBonusRanged: 0,
+    styleBonusMagic: 0,
+    value: 170,
+  },
+  studdedbody: {
+    name: "studdedbody",
+    levelReqDefence: 20,
+    tier: 20,
+    armor: 72.6,
+    lifePointsExtra: 0,
+    prayerPointsExtra: 0,
+    damageReduction: 0.4,
+    styleBonusMelee: 0,
+    styleBonusRanged: 0,
+    styleBonusMagic: 0,
+    value: 850,
+  },
+  carapacetorso: {
+    name: "carapacetorso",
+    levelReqDefence: 30,
+    tier: 30,
+    armor: 104.4,
+    lifePointsExtra: 0,
+    prayerPointsExtra: 0,
+    damageReduction: 0.6,
+    styleBonusMelee: 0,
+    styleBonusRanged: 0,
+    styleBonusMagic: 0,
+    value: 900,
+  },
+  greendragonhidebody: {
+    name: "greendragonhidebody",
+    levelReqDefence: 40,
+    tier: 40,
+    armor: 144.4,
+    lifePointsExtra: 0,
+    prayerPointsExtra: 0,
+    damageReduction: 0.8,
+    styleBonusMelee: 0,
+    styleBonusRanged: 0,
+    styleBonusMagic: 0,
+    value: 7800,
+  },
+};
+
+export const headGear: Types.IArmorSlotBody = {
+  melee: listOfMeleeBodies,
+  magic: listOfMagicBodies,
+  ranged: listOfRangedBodies,
+};
