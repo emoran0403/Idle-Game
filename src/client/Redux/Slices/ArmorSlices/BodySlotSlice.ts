@@ -34,6 +34,6 @@ export const BodySlotSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { playerNowOwnsItem: setResources } = BodySlotSlice.actions;
+export const { playerNowOwnsItem } = BodySlotSlice.actions;
 
 export default BodySlotSlice.reducer;

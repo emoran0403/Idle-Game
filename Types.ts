@@ -520,3 +520,87 @@ export interface IBodySlotSlice {
   playerOwnscarapacetorso: boolean;
   playerOwnsgreendragonhidebody: boolean;
 }
+
+export interface IHandSlotSlice {
+  playerOwnsbronzegauntlets: boolean;
+  playerOwnsirongauntlets: boolean;
+  playerOwnssteelgauntlets: boolean;
+  playerOwnsmithrilgauntlets: boolean;
+  playerOwnsadamantgauntlets: boolean;
+  playerOwnsrunegauntlets: boolean;
+
+  playerOwnswizardgloves: boolean;
+  playerOwnsimphidegloves: boolean;
+  playerOwnsspidersilkgloves: boolean;
+  playerOwnsbatwinggloves: boolean;
+  playerOwnssplitbarkgauntlets: boolean;
+
+  playerOwnsleathervambraces: boolean;
+  playerOwnshardleathergloves: boolean;
+  playerOwnsstuddedleathergloves: boolean;
+  playerOwnscarapacegloves: boolean;
+  playerOwnsgreendragonhidevambraces: boolean;
+}
+
+export interface IFeetSlotSlice {
+  playerOwnsbronzearmouredboots: boolean;
+  playerOwnsironarmouredboots: boolean;
+  playerOwnssteelarmouredboots: boolean;
+  playerOwnsmithrilarmouredboots: boolean;
+  playerOwnsadamantarmouredboots: boolean;
+  playerOwnsrunearmouredboots: boolean;
+
+  playerOwnswizardboots: boolean;
+  playerOwnsimphideboots: boolean;
+  playerOwnsspidersilkboots: boolean;
+  playerOwnsbatwingboots: boolean;
+  playerOwnssplitbarkboots: boolean;
+
+  playerOwnsleatherboots: boolean;
+  playerOwnshardleatherboots: boolean;
+  playerOwnsstuddedleatherboots: boolean;
+  playerOwnscarapaceboots: boolean;
+  playerOwnsgreendragonhideboots: boolean;
+}
+
+export interface IHeadSlotSlice {
+  playerOwnsbronzefullhelm: boolean;
+  playerOwnsironfullhelm: boolean;
+  playerOwnssteelfullhelm: boolean;
+  playerOwnsmithrilfullhelm: boolean;
+  playerOwnsadamantfullhelm: boolean;
+  playerOwnsrunefullhelm: boolean;
+
+  playerOwnswizardhat: boolean;
+  playerOwnsimphidehood: boolean;
+  playerOwnsspidersilkhood: boolean;
+  playerOwnsbatwinghood: boolean;
+  playerOwnssplitbarkhelm: boolean;
+
+  playerOwnsleathercowl: boolean;
+  playerOwnshardleathercowl: boolean;
+  playerOwnsstuddedleathercoif: boolean;
+  playerOwnscarapacehelm: boolean;
+  playerOwnsgreendragonhidecoif: boolean;
+}
+
+export interface ILegsSlotSlice {
+  playerOwnsbronzeplatelegs: boolean;
+  playerOwnsironplatelegs: boolean;
+  playerOwnssteelplatelegs: boolean;
+  playerOwnsmithrilplatelegs: boolean;
+  playerOwnsadamantplatelegs: boolean;
+  playerOwnsruneplatelegs: boolean;
+
+  playerOwnswizardrobeskirt: boolean;
+  playerOwnsimphiderobebottom: boolean;
+  playerOwnsspidersilkrobebottom: boolean;
+  playerOwnsbatwinglegs: boolean;
+  playerOwnssplitbarklegs: boolean;
+
+  playerOwnsleatherchaps: boolean;
+  playerOwnshardleatherchaps: boolean;
+  playerOwnsstuddedchaps: boolean;
+  playerOwnscarapacelegs: boolean;
+  playerOwnsgreendragonhidechaps: boolean;
+}
