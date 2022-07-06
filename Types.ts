@@ -354,7 +354,7 @@ export interface IArmorItem {
   styleBonusMagic: number;
   value: number;
 }
-
+/*********************************************************************************************************************** */
 export interface IListOfMeleeHeads {
   bronzefullhelm: IArmorItem;
   ironfullhelm: IArmorItem;
@@ -383,6 +383,27 @@ export interface IArmorSlotHead {
   magic: IListOfMagicHeads;
   ranged: IListOfRangedHeads;
 }
+export interface IHeadSlotSlice {
+  playerOwnsbronzefullhelm: boolean;
+  playerOwnsironfullhelm: boolean;
+  playerOwnssteelfullhelm: boolean;
+  playerOwnsmithrilfullhelm: boolean;
+  playerOwnsadamantfullhelm: boolean;
+  playerOwnsrunefullhelm: boolean;
+
+  playerOwnswizardhat: boolean;
+  playerOwnsimphidehood: boolean;
+  playerOwnsspidersilkhood: boolean;
+  playerOwnsbatwinghood: boolean;
+  playerOwnssplitbarkhelm: boolean;
+
+  playerOwnsleathercowl: boolean;
+  playerOwnshardleathercowl: boolean;
+  playerOwnsstuddedleathercoif: boolean;
+  playerOwnscarapacehelm: boolean;
+  playerOwnsgreendragonhidecoif: boolean;
+}
+/*********************************************************************************************************************** */
 
 export interface IListOfMeleeBodies {
   bronzeplatebody: IArmorItem;
@@ -412,6 +433,27 @@ export interface IArmorSlotBody {
   magic: IListOfMagicBodies;
   ranged: IListOfRangedBodies;
 }
+export interface IBodySlotSlice {
+  playerOwnsbronzeplatebody: boolean;
+  playerOwnsironplatebody: boolean;
+  playerOwnssteelplatebody: boolean;
+  playerOwnsmithrilplatebody: boolean;
+  playerOwnsadamantplatebody: boolean;
+  playerOwnsruneplatebody: boolean;
+
+  playerOwnswizardrobetop: boolean;
+  playerOwnsimphiderobetop: boolean;
+  playerOwnsspidersilkrobetop: boolean;
+  playerOwnsbatwingtorso: boolean;
+  playerOwnssplitbarkbody: boolean;
+
+  playerOwnsleatherbody: boolean;
+  playerOwnshardleatherbody: boolean;
+  playerOwnsstuddedbody: boolean;
+  playerOwnscarapacetorso: boolean;
+  playerOwnsgreendragonhidebody: boolean;
+}
+/*********************************************************************************************************************** */
 
 export interface IListOfMeleeLegs {
   bronzeplatelegs: IArmorItem;
@@ -441,6 +483,27 @@ export interface IArmorSlotLegs {
   magic: IListOfMagicLegs;
   ranged: IListOfRangedLegs;
 }
+export interface ILegsSlotSlice {
+  playerOwnsbronzeplatelegs: boolean;
+  playerOwnsironplatelegs: boolean;
+  playerOwnssteelplatelegs: boolean;
+  playerOwnsmithrilplatelegs: boolean;
+  playerOwnsadamantplatelegs: boolean;
+  playerOwnsruneplatelegs: boolean;
+
+  playerOwnswizardrobeskirt: boolean;
+  playerOwnsimphiderobebottom: boolean;
+  playerOwnsspidersilkrobebottom: boolean;
+  playerOwnsbatwinglegs: boolean;
+  playerOwnssplitbarklegs: boolean;
+
+  playerOwnsleatherchaps: boolean;
+  playerOwnshardleatherchaps: boolean;
+  playerOwnsstuddedchaps: boolean;
+  playerOwnscarapacelegs: boolean;
+  playerOwnsgreendragonhidechaps: boolean;
+}
+/*********************************************************************************************************************** */
 
 export interface IListOfMeleeFeet {
   bronzearmouredboots: IArmorItem;
@@ -470,6 +533,27 @@ export interface IArmorSlotFeet {
   magic: IListOfMagicFeet;
   ranged: IListOfRangedFeet;
 }
+export interface IFeetSlotSlice {
+  playerOwnsbronzearmouredboots: boolean;
+  playerOwnsironarmouredboots: boolean;
+  playerOwnssteelarmouredboots: boolean;
+  playerOwnsmithrilarmouredboots: boolean;
+  playerOwnsadamantarmouredboots: boolean;
+  playerOwnsrunearmouredboots: boolean;
+
+  playerOwnswizardboots: boolean;
+  playerOwnsimphideboots: boolean;
+  playerOwnsspidersilkboots: boolean;
+  playerOwnsbatwingboots: boolean;
+  playerOwnssplitbarkboots: boolean;
+
+  playerOwnsleatherboots: boolean;
+  playerOwnshardleatherboots: boolean;
+  playerOwnsstuddedleatherboots: boolean;
+  playerOwnscarapaceboots: boolean;
+  playerOwnsgreendragonhideboots: boolean;
+}
+/*********************************************************************************************************************** */
 
 export interface IListOfMeleeHands {
   bronzegauntlets: IArmorItem;
@@ -499,28 +583,6 @@ export interface IArmorSlotHands {
   magic: IListOfMagicHands;
   ranged: IListOfRangedHands;
 }
-
-export interface IBodySlotSlice {
-  playerOwnsbronzeplatebody: boolean;
-  playerOwnsironplatebody: boolean;
-  playerOwnssteelplatebody: boolean;
-  playerOwnsmithrilplatebody: boolean;
-  playerOwnsadamantplatebody: boolean;
-  playerOwnsruneplatebody: boolean;
-
-  playerOwnswizardrobetop: boolean;
-  playerOwnsimphiderobetop: boolean;
-  playerOwnsspidersilkrobetop: boolean;
-  playerOwnsbatwingtorso: boolean;
-  playerOwnssplitbarkbody: boolean;
-
-  playerOwnsleatherbody: boolean;
-  playerOwnshardleatherbody: boolean;
-  playerOwnsstuddedbody: boolean;
-  playerOwnscarapacetorso: boolean;
-  playerOwnsgreendragonhidebody: boolean;
-}
-
 export interface IHandSlotSlice {
   playerOwnsbronzegauntlets: boolean;
   playerOwnsirongauntlets: boolean;
@@ -541,66 +603,41 @@ export interface IHandSlotSlice {
   playerOwnscarapacegloves: boolean;
   playerOwnsgreendragonhidevambraces: boolean;
 }
+/*********************************************************************************************************************** */
 
-export interface IFeetSlotSlice {
-  playerOwnsbronzearmouredboots: boolean;
-  playerOwnsironarmouredboots: boolean;
-  playerOwnssteelarmouredboots: boolean;
-  playerOwnsmithrilarmouredboots: boolean;
-  playerOwnsadamantarmouredboots: boolean;
-  playerOwnsrunearmouredboots: boolean;
+export interface IListOfMeleeCapes {}
+export interface IListOfMagicCapes {}
+export interface IListOfRangedCapes {}
+export interface IListOfTypelessCapes {}
 
-  playerOwnswizardboots: boolean;
-  playerOwnsimphideboots: boolean;
-  playerOwnsspidersilkboots: boolean;
-  playerOwnsbatwingboots: boolean;
-  playerOwnssplitbarkboots: boolean;
+export interface IArmorSlotBack {
+  melee: IListOfMeleeCapes;
+  magic: IListOfMagicCapes;
+  ranged: IListOfRangedCapes;
+  hybrid: IListOfTypelessCapes;
+}
+/*********************************************************************************************************************** */
+export interface IListOfMeleeRings {}
+export interface IListOfMagicRings {}
+export interface IListOfRangedRings {}
+export interface IListOfTypelessRings {}
 
-  playerOwnsleatherboots: boolean;
-  playerOwnshardleatherboots: boolean;
-  playerOwnsstuddedleatherboots: boolean;
-  playerOwnscarapaceboots: boolean;
-  playerOwnsgreendragonhideboots: boolean;
+export interface IArmorSlotRing {
+  melee: IListOfMeleeRings;
+  magic: IListOfMagicRings;
+  ranged: IListOfRangedRings;
+  hybrid: IListOfTypelessRings;
 }
 
-export interface IHeadSlotSlice {
-  playerOwnsbronzefullhelm: boolean;
-  playerOwnsironfullhelm: boolean;
-  playerOwnssteelfullhelm: boolean;
-  playerOwnsmithrilfullhelm: boolean;
-  playerOwnsadamantfullhelm: boolean;
-  playerOwnsrunefullhelm: boolean;
+/*********************************************************************************************************************** */
+export interface IListOfMeleeNecks {}
+export interface IListOfMagicNecks {}
+export interface IListOfRangedNecks {}
+export interface IListOfTypelessNecks {}
 
-  playerOwnswizardhat: boolean;
-  playerOwnsimphidehood: boolean;
-  playerOwnsspidersilkhood: boolean;
-  playerOwnsbatwinghood: boolean;
-  playerOwnssplitbarkhelm: boolean;
-
-  playerOwnsleathercowl: boolean;
-  playerOwnshardleathercowl: boolean;
-  playerOwnsstuddedleathercoif: boolean;
-  playerOwnscarapacehelm: boolean;
-  playerOwnsgreendragonhidecoif: boolean;
-}
-
-export interface ILegsSlotSlice {
-  playerOwnsbronzeplatelegs: boolean;
-  playerOwnsironplatelegs: boolean;
-  playerOwnssteelplatelegs: boolean;
-  playerOwnsmithrilplatelegs: boolean;
-  playerOwnsadamantplatelegs: boolean;
-  playerOwnsruneplatelegs: boolean;
-
-  playerOwnswizardrobeskirt: boolean;
-  playerOwnsimphiderobebottom: boolean;
-  playerOwnsspidersilkrobebottom: boolean;
-  playerOwnsbatwinglegs: boolean;
-  playerOwnssplitbarklegs: boolean;
-
-  playerOwnsleatherchaps: boolean;
-  playerOwnshardleatherchaps: boolean;
-  playerOwnsstuddedchaps: boolean;
-  playerOwnscarapacelegs: boolean;
-  playerOwnsgreendragonhidechaps: boolean;
+export interface IArmorSlotNeck {
+  melee: IListOfMeleeNecks;
+  magic: IListOfMagicNecks;
+  ranged: IListOfRangedNecks;
+  hybrid: IListOfTypelessNecks;
 }

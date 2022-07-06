@@ -215,8 +215,6 @@ const listOfRangedHeads: Types.IListOfRangedHeads = {
   },
 };
 
-//! fill this out, maybe 1 or 2 for each style and slot
-
 export const headSlot: Types.IArmorSlotHead = {
   melee: listOfMeleeHeads,
   magic: listOfMagicHeads,
