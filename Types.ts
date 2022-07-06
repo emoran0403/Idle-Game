@@ -635,16 +635,35 @@ export interface IBackSlotSlice {
   playerOwnsobsidiancape: boolean;
 }
 /*********************************************************************************************************************** */
-export interface IListOfMeleeRings {}
-export interface IListOfMagicRings {}
-export interface IListOfRangedRings {}
-export interface IListOfTypelessRings {}
+export interface IListOfMeleeRings {
+  warriorring: IArmorItem;
+}
+export interface IListOfMagicRings {
+  seersring: IArmorItem;
+}
+export interface IListOfRangedRings {
+  archerring: IArmorItem;
+}
+export interface IListOfTypelessRings {
+  ringofpotency: IArmorItem;
+  ringofwealth: IArmorItem;
+  berserkerring: IArmorItem;
+}
 
 export interface IArmorSlotRing {
   melee: IListOfMeleeRings;
   magic: IListOfMagicRings;
   ranged: IListOfRangedRings;
   hybrid: IListOfTypelessRings;
+}
+
+export interface IRingSlotSlice {
+  warriorring: boolean;
+  seersring: boolean;
+  archerring: boolean;
+  ringofpotency: boolean;
+  ringofwealth: boolean;
+  berserkerring: boolean;
 }
 
 /*********************************************************************************************************************** */

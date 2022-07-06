@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import * as Types from "../../../../../Types";
 
-export const BodySlotSlice = createSlice({
-  name: "bodyslotslice",
+export const BackSlotSlice = createSlice({
+  name: "backslotslice",
   initialState: {
     //list of armor for the back slot, describing if the player owns the item or not
 
@@ -22,6 +22,6 @@ export const BodySlotSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { playerNowOwnsItem } = BodySlotSlice.actions;
+export const { playerNowOwnsItem } = BackSlotSlice.actions;
 
-export default BodySlotSlice.reducer;
+export default BackSlotSlice.reducer;

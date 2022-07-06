@@ -19,6 +19,7 @@ import feetSlotSliceReducer from "../Slices/ArmorSlices/FeetSlotSlice";
 import headSlotSliceReducer from "../Slices/ArmorSlices/HeadSlotSlice";
 import legsSlotSliceReducer from "../Slices/ArmorSlices/LegsSlotSlice";
 import BackSlotSliceReducer from "../Slices/ArmorSlices/BackSlotSlice";
+import RingSlotSliceReducer from "../Slices/ArmorSlices/RingSlotSlice";
 
 export default combineReducers({
   buttons1: buttons1Reducer,
@@ -41,4 +42,5 @@ export default combineReducers({
   HeadSlot: headSlotSliceReducer,
   LegsSlot: legsSlotSliceReducer,
   BackSlot: BackSlotSliceReducer,
+  RingSlot: RingSlotSliceReducer,
 });
