@@ -760,30 +760,30 @@ export interface IArmorSlotTwoHand {
   ranged: IListOfRangedTwoHand;
 }
 export interface ITwoHandSlotSlice {
-  bronze2hsword: boolean;
-  iron2hsword: boolean;
-  steel2hsword: boolean;
-  mithril2hsword: boolean;
-  adamant2hsword: boolean;
-  rune2hsword: boolean;
+  playerOwnsbronze2hsword: boolean;
+  playerOwnsiron2hsword: boolean;
+  playerOwnssteel2hsword: boolean;
+  playerOwnsmithril2hsword: boolean;
+  playerOwnsadamant2hsword: boolean;
+  playerOwnsrune2hsword: boolean;
 
-  staffofair: boolean;
-  staffofwater: boolean;
-  staffofearth: boolean;
-  staffoffire: boolean;
-  airbattlestaff: boolean;
-  waterbattlestaff: boolean;
-  earthbattlestaff: boolean;
-  firebattlestaff: boolean;
-  mysticairstaff: boolean;
-  mysticwaterstaff: boolean;
-  mysticearthstaff: boolean;
-  mysticfirestaff: boolean;
+  playerOwnsstaffofair: boolean;
+  playerOwnsstaffofwater: boolean;
+  playerOwnsstaffofearth: boolean;
+  playerOwnsstaffoffire: boolean;
+  playerOwnsairbattlestaff: boolean;
+  playerOwnswaterbattlestaff: boolean;
+  playerOwnsearthbattlestaff: boolean;
+  playerOwnsfirebattlestaff: boolean;
+  playerOwnsmysticairstaff: boolean;
+  playerOwnsmysticwaterstaff: boolean;
+  playerOwnsmysticearthstaff: boolean;
+  playerOwnsmysticfirestaff: boolean;
 
-  shortbow: boolean;
-  oakshortbow: boolean;
-  willowshortbow: boolean;
-  mapleshortbow: boolean;
-  yewshortbow: boolean;
-  magicshortbow: boolean;
+  playerOwnsshortbow: boolean;
+  playerOwnsoakshortbow: boolean;
+  playerOwnswillowshortbow: boolean;
+  playerOwnsmapleshortbow: boolean;
+  playerOwnsyewshortbow: boolean;
+  playerOwnsmagicshortbow: boolean;
 }

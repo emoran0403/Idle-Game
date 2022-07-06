@@ -6,37 +6,37 @@ export const TwoHandSlotSlice = createSlice({
   initialState: {
     //list of armor for the back slot, describing if the player owns the item or not
 
-    bronze2hsword: false,
-    iron2hsword: false,
-    steel2hsword: false,
-    mithril2hsword: false,
-    adamant2hsword: false,
-    rune2hsword: false,
+    playerOwnsbronze2hsword: false,
+    playerOwnsiron2hsword: false,
+    playerOwnssteel2hsword: false,
+    playerOwnsmithril2hsword: false,
+    playerOwnsadamant2hsword: false,
+    playerOwnsrune2hsword: false,
 
-    staffofair: false,
-    staffofwater: false,
-    staffofearth: false,
-    staffoffire: false,
-    airbattlestaff: false,
-    waterbattlestaff: false,
-    earthbattlestaff: false,
-    firebattlestaff: false,
-    mysticairstaff: false,
-    mysticwaterstaff: false,
-    mysticearthstaff: false,
-    mysticfirestaff: false,
+    playerOwnsstaffofair: false,
+    playerOwnsstaffofwater: false,
+    playerOwnsstaffofearth: false,
+    playerOwnsstaffoffire: false,
+    playerOwnsairbattlestaff: false,
+    playerOwnswaterbattlestaff: false,
+    playerOwnsearthbattlestaff: false,
+    playerOwnsfirebattlestaff: false,
+    playerOwnsmysticairstaff: false,
+    playerOwnsmysticwaterstaff: false,
+    playerOwnsmysticearthstaff: false,
+    playerOwnsmysticfirestaff: false,
 
-    shortbow: false,
-    oakshortbow: false,
-    willowshortbow: false,
-    mapleshortbow: false,
-    yewshortbow: false,
-    magicshortbow: false,
+    playerOwnsshortbow: false,
+    playerOwnsoakshortbow: false,
+    playerOwnswillowshortbow: false,
+    playerOwnsmapleshortbow: false,
+    playerOwnsyewshortbow: false,
+    playerOwnsmagicshortbow: false,
   },
   reducers: {
     // this is the only reducer needed as the player will only be able to acquire armor, not sell them
     playerNowOwnsItem: (state: Types.ITwoHandSlotSlice, action) => {
-      state[action.payload] = true;
+      state[action.payload as keyof Types.ITwoHandSlotSlice] = true;
     },
   },
 });

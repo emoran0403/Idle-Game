@@ -28,7 +28,7 @@ export const LegsSlotSlice = createSlice({
   reducers: {
     // this is the only reducer needed as the player will only be able to acquire armor, not sell them
     playerNowOwnsItem: (state: Types.ILegsSlotSlice, action) => {
-      state[action.payload] = true;
+      state[action.payload as keyof Types.ILegsSlotSlice] = true;
     },
   },
 });
