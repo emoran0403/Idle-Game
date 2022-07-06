@@ -605,16 +605,34 @@ export interface IHandSlotSlice {
 }
 /*********************************************************************************************************************** */
 
-export interface IListOfMeleeCapes {}
-export interface IListOfMagicCapes {}
-export interface IListOfRangedCapes {}
-export interface IListOfTypelessCapes {}
+export interface IListOfMeleeCapes {
+  bladestormdrape: IArmorItem;
+}
+export interface IListOfMagicCapes {
+  spellstormdrape: IArmorItem;
+}
+export interface IListOfRangedCapes {
+  arrowstormdrape: IArmorItem;
+}
+export interface IListOfTypelessCapes {
+  pathfindercape: IArmorItem;
+  teamcape: IArmorItem;
+  obsidiancape: IArmorItem;
+}
 
 export interface IArmorSlotBack {
   melee: IListOfMeleeCapes;
   magic: IListOfMagicCapes;
   ranged: IListOfRangedCapes;
   hybrid: IListOfTypelessCapes;
+}
+export interface IBackSlotSlice {
+  playerOwnsbladestormdrape: boolean;
+  playerOwnsspellstormdrape: boolean;
+  playerOwnsarrowstormdrape: boolean;
+  playerOwnspathfindercape: boolean;
+  playerOwnsteamcape: boolean;
+  playerOwnsobsidiancape: boolean;
 }
 /*********************************************************************************************************************** */
 export interface IListOfMeleeRings {}
