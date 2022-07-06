@@ -6,12 +6,12 @@ export const RingSlotSlice = createSlice({
   initialState: {
     //list of armor for the back slot, describing if the player owns the item or not
 
-    warriorring: false,
-    seersring: false,
-    archerring: false,
-    ringofpotency: false,
-    ringofwealth: false,
-    berserkerring: false,
+    playerOwnswarriorring: false,
+    playerOwnsseersring: false,
+    playerOwnsarcherring: false,
+    playerOwnsringofpotency: false,
+    playerOwnsringofwealth: false,
+    playerOwnsberserkerring: false,
   },
   reducers: {
     // this is the only reducer needed as the player will only be able to acquire armor, not sell them

@@ -656,25 +656,46 @@ export interface IArmorSlotRing {
   ranged: IListOfRangedRings;
   hybrid: IListOfTypelessRings;
 }
-
 export interface IRingSlotSlice {
-  warriorring: boolean;
-  seersring: boolean;
-  archerring: boolean;
-  ringofpotency: boolean;
-  ringofwealth: boolean;
-  berserkerring: boolean;
+  playerOwnswarriorring: boolean;
+  playerOwnsseersring: boolean;
+  playerOwnsarcherring: boolean;
+  playerOwnsringofpotency: boolean;
+  playerOwnsringofwealth: boolean;
+  playerOwnsberserkerring: boolean;
 }
 
 /*********************************************************************************************************************** */
-export interface IListOfMeleeNecks {}
-export interface IListOfMagicNecks {}
-export interface IListOfRangedNecks {}
-export interface IListOfTypelessNecks {}
+export interface IListOfMeleeNecks {
+  amuletofstrength: IArmorItem;
+}
+export interface IListOfMagicNecks {
+  amuletofmagic: IArmorItem;
+}
+export interface IListOfRangedNecks {
+  amuletofaccuracy: IArmorItem;
+}
+export interface IListOfTypelessNecks {
+  holysymbol: IArmorItem;
+  amuletofdefence: IArmorItem;
+  amuletofpower: IArmorItem;
+  amuletofglory: IArmorItem;
+  amuletoffury: IArmorItem;
+}
 
 export interface IArmorSlotNeck {
   melee: IListOfMeleeNecks;
   magic: IListOfMagicNecks;
   ranged: IListOfRangedNecks;
   hybrid: IListOfTypelessNecks;
+}
+export interface INeckSlotSlice {
+  playerOwnsamuletofstrength: boolean;
+  playerOwnsamuletofmagic: boolean;
+  playerOwnsamuletofaccuracy: boolean;
+  playerOwnsholysymbol: boolean;
+  playerOwnsamuletofdefence: boolean;
+  playerOwnsamuletofpower: boolean;
+  playerOwnsamuletofglory: boolean;
+  playerOwnsamuletoffury: boolean;
 }

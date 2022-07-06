@@ -1,9 +1,117 @@
 import * as Types from "../../Types";
 
-const listOfMeleeNecks = {};
-const listOfMagicNecks = {};
-const listOfRangedNecks = {};
-const listOfTypelessNecks = {};
+const listOfMeleeNecks = {
+  amuletofstrength: {
+    name: "amuletofstrength",
+    levelReqDefence: 0,
+    tier: 0,
+    armor: 0,
+    lifePointsExtra: 0,
+    prayerPointsExtra: 0,
+    damageReduction: 0,
+    styleBonusMelee: 18.7,
+    styleBonusRanged: 0,
+    styleBonusMagic: 0,
+    value: 2025,
+  },
+};
+const listOfMagicNecks = {
+  amuletofmagic: {
+    name: "amuletofmagic",
+    levelReqDefence: 0,
+    tier: 0,
+    armor: 0,
+    lifePointsExtra: 0,
+    prayerPointsExtra: 0,
+    damageReduction: 0,
+    styleBonusMelee: 0,
+    styleBonusRanged: 0,
+    styleBonusMagic: 18.7,
+    value: 900,
+  },
+};
+const listOfRangedNecks = {
+  amuletofaccuracy: {
+    name: "amuletofaccuracy",
+    levelReqDefence: 0,
+    tier: 0,
+    armor: 0,
+    lifePointsExtra: 0,
+    prayerPointsExtra: 0,
+    damageReduction: 0,
+    styleBonusMelee: 0,
+    styleBonusRanged: 15.8,
+    styleBonusMagic: 0,
+    value: 5000,
+  },
+};
+const listOfTypelessNecks = {
+  holysymbol: {
+    name: "holysymbol",
+    levelReqDefence: 0,
+    tier: 0,
+    armor: 0,
+    lifePointsExtra: 0,
+    prayerPointsExtra: 8,
+    damageReduction: 0,
+    styleBonusMelee: 0,
+    styleBonusRanged: 0,
+    styleBonusMagic: 0,
+    value: 300,
+  },
+  amuletofdefence: {
+    name: "amuletofdefence",
+    levelReqDefence: 20,
+    tier: 0,
+    armor: 6.3,
+    lifePointsExtra: 0,
+    prayerPointsExtra: 0,
+    damageReduction: 0,
+    styleBonusMelee: 8.7,
+    styleBonusRanged: 8.7,
+    styleBonusMagic: 8.7,
+    value: 1275,
+  },
+  amuletofpower: {
+    name: "amuletofpower",
+    levelReqDefence: 0,
+    tier: 0,
+    armor: 0,
+    lifePointsExtra: 0,
+    prayerPointsExtra: 1,
+    damageReduction: 0,
+    styleBonusMelee: 15.8,
+    styleBonusRanged: 15.8,
+    styleBonusMagic: 15.8,
+    value: 3525,
+  },
+  amuletofglory: {
+    name: "amuletofglory",
+    levelReqDefence: 0,
+    tier: 0,
+    armor: 0,
+    lifePointsExtra: 0,
+    prayerPointsExtra: 2,
+    damageReduction: 0,
+    styleBonusMelee: 26.7,
+    styleBonusRanged: 26.7,
+    styleBonusMagic: 26.7,
+    value: 17625,
+  },
+  amuletoffury: {
+    name: "amuletoffury",
+    levelReqDefence: 0,
+    tier: 0,
+    armor: 0,
+    lifePointsExtra: 0,
+    prayerPointsExtra: 3,
+    damageReduction: 0,
+    styleBonusMelee: 32.7,
+    styleBonusRanged: 32.7,
+    styleBonusMagic: 32.7,
+    value: 202000,
+  },
+};
 
 export const neckSlot: Types.IArmorSlotNeck = {
   melee: listOfMeleeNecks,
