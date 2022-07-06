@@ -354,6 +354,28 @@ export interface IArmorItem {
   styleBonusMagic: number;
   value: number;
 }
+
+export type SpellElement = `none` | `air` | `fire` | `water` | `earth`;
+
+export interface IWeaponItem {
+  levelReqAttack: number;
+  levelReqStrength: number;
+  levelReqMagic: number;
+  levelReqRanged: number;
+  damage: number;
+  accuracy: number;
+  staffElement: SpellElement;
+  name: string;
+  tier: number;
+  armor: number;
+  lifePointsExtra: number;
+  prayerPointsExtra: number;
+  damageReduction: number;
+  styleBonusMelee: number;
+  styleBonusRanged: number;
+  styleBonusMagic: number;
+  value: number;
+}
 /*********************************************************************************************************************** */
 export interface IListOfMeleeHeads {
   bronzefullhelm: IArmorItem;
@@ -698,4 +720,70 @@ export interface INeckSlotSlice {
   playerOwnsamuletofpower: boolean;
   playerOwnsamuletofglory: boolean;
   playerOwnsamuletoffury: boolean;
+}
+/*********************************************************************************************************************** */
+
+export interface IListOfMeleeTwoHand {
+  bronze2hsword: IWeaponItem;
+  iron2hsword: IWeaponItem;
+  steel2hsword: IWeaponItem;
+  mithril2hsword: IWeaponItem;
+  adamant2hsword: IWeaponItem;
+  rune2hsword: IWeaponItem;
+}
+export interface IListOfMagicTwoHand {
+  staffofair: IWeaponItem;
+  staffofwater: IWeaponItem;
+  staffofearth: IWeaponItem;
+  staffoffire: IWeaponItem;
+  airbattlestaff: IWeaponItem;
+  waterbattlestaff: IWeaponItem;
+  earthbattlestaff: IWeaponItem;
+  firebattlestaff: IWeaponItem;
+  mysticairstaff: IWeaponItem;
+  mysticwaterstaff: IWeaponItem;
+  mysticearthstaff: IWeaponItem;
+  mysticfirestaff: IWeaponItem;
+}
+export interface IListOfRangedTwoHand {
+  shortbow: IWeaponItem;
+  oakshortbow: IWeaponItem;
+  willowshortbow: IWeaponItem;
+  mapleshortbow: IWeaponItem;
+  yewshortbow: IWeaponItem;
+  magicshortbow: IWeaponItem;
+}
+
+export interface IArmorSlotTwoHand {
+  melee: IListOfMeleeTwoHand;
+  magic: IListOfMagicTwoHand;
+  ranged: IListOfRangedTwoHand;
+}
+export interface ITwoHandSlotSlice {
+  bronze2hsword: boolean;
+  iron2hsword: boolean;
+  steel2hsword: boolean;
+  mithril2hsword: boolean;
+  adamant2hsword: boolean;
+  rune2hsword: boolean;
+
+  staffofair: boolean;
+  staffofwater: boolean;
+  staffofearth: boolean;
+  staffoffire: boolean;
+  airbattlestaff: boolean;
+  waterbattlestaff: boolean;
+  earthbattlestaff: boolean;
+  firebattlestaff: boolean;
+  mysticairstaff: boolean;
+  mysticwaterstaff: boolean;
+  mysticearthstaff: boolean;
+  mysticfirestaff: boolean;
+
+  shortbow: boolean;
+  oakshortbow: boolean;
+  willowshortbow: boolean;
+  mapleshortbow: boolean;
+  yewshortbow: boolean;
+  magicshortbow: boolean;
 }

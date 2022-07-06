@@ -87,7 +87,7 @@ const listOfTypelessRings = {
   },
 };
 
-export const neckSlot: Types.IArmorSlotRing = {
+export const ringSlot: Types.IArmorSlotRing = {
   melee: listOfMeleeRings,
   magic: listOfMagicRings,
   ranged: listOfRangedRings,
