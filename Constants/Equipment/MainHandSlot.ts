@@ -298,7 +298,7 @@ const listOfRangedMainHands = {
   },
 };
 
-export const mainHandSlot = {
+export const MainHandSlot = {
   melee: listOfMeleeMainHands,
   magic: listOfMagicMainHands,
   ranged: listOfRangedMainHands,

@@ -1,6 +1,6 @@
 import * as Types from "../../Types";
 
-export const emptyItem: Types.ICompositeArmorItem = {
+export const EmptyItem: Types.ICompositeArmorItem = {
   name: "none",
   displayName: `None`,
   playerOwnsThisItem: true,

@@ -231,7 +231,7 @@ const listOfRangedHands: Types.IListOfRangedHands = {
   },
 };
 
-export const handsSlot: Types.IArmorSlotHands = {
+export const HandsSlot: Types.IArmorSlotHands = {
   melee: listOfMeleeHands,
   magic: listOfMagicHands,
   ranged: listOfRangedHands,

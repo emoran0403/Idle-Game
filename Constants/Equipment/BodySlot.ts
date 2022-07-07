@@ -231,7 +231,7 @@ const listOfRangedBodies: Types.IListOfRangedBodies = {
   },
 };
 
-export const bodySlot: Types.IArmorSlotBody = {
+export const BodySlot: Types.IArmorSlotBody = {
   melee: listOfMeleeBodies,
   magic: listOfMagicBodies,
   ranged: listOfRangedBodies,

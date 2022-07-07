@@ -93,7 +93,7 @@ const listOfTypelessCapes: Types.IListOfTypelessCapes = {
   },
 };
 
-export const backSlot: Types.IArmorSlotBack = {
+export const BackSlot: Types.IArmorSlotBack = {
   melee: listOfMeleeCapes,
   magic: listOfMagicCapes,
   ranged: listOfRangedCapes,

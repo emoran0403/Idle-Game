@@ -40,11 +40,11 @@ export default combineReducers({
   Quests_Draynor: draynorquestReducer,
   BodySlot: bodySlotSliceReducer,
   HandSlot: handSlotSliceReducer,
-  FeetFlot: feetSlotSliceReducer,
+  FeetSlot: feetSlotSliceReducer,
   HeadSlot: headSlotSliceReducer,
   LegsSlot: legsSlotSliceReducer,
   BackSlot: BackSlotSliceReducer,
   RingSlot: RingSlotSliceReducer,
   NeckSlot: NeckSlotSliceReducer,
-  TwoHandSlow: TwoHandSlotSliceReducer,
+  TwoHandSlot: TwoHandSlotSliceReducer,
 });

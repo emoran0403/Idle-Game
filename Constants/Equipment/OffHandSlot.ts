@@ -5,7 +5,7 @@ const listOfMeleeOffHands = {};
 const listOfMagicOffHands = {};
 const listOfRangedOffHands = {};
 
-export const mainHandSlot = {
+export const OffHandSlot = {
   melee: listOfMeleeOffHands,
   magic: listOfMagicOffHands,
   ranged: listOfRangedOffHands,

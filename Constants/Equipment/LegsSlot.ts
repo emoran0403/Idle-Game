@@ -231,7 +231,7 @@ const listOfRangedLegs: Types.IListOfRangedLegs = {
   },
 };
 
-export const legSlot: Types.IArmorSlotLegs = {
+export const LegsSlot: Types.IArmorSlotLegs = {
   melee: listOfMeleeLegs,
   magic: listOfMagicLegs,
   ranged: listOfRangedLegs,

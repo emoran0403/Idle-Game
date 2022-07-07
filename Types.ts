@@ -201,7 +201,7 @@ export interface ICurrentResource {
     | `elder`;
 }
 
-export interface AllState {
+export interface AllState extends AllSlots {
   Experience: ISkillList;
   Bank_Fish: IFishBankSlice;
   Bank_Logs: ILogBankSlice;
@@ -213,6 +213,9 @@ export interface AllState {
   Wallet: IWallet;
   Quests_Lumbridge: LumbridgeQuestSliceCrap;
   Quests_Draynor: DraynorQuestSliceCrap;
+}
+
+export interface AllSlots {
   BackSlot: IBackSlotSlice;
   BodySlot: IBodySlotSlice;
   FeetSlot: IFeetSlotSlice;
@@ -223,6 +226,17 @@ export interface AllState {
   RingSlot: IRingSlotSlice;
   TwoHandSlot: ITwoHandSlotSlice;
 }
+
+export type AllSliceKeys =
+  | IBackSlotSlice
+  | IBodySlotSlice
+  | IFeetSlotSlice
+  | IHandSlotSlice
+  | IHeadSlotSlice
+  | ILegsSlotSlice
+  | INeckSlotSlice
+  | IRingSlotSlice
+  | ITwoHandSlotSlice;
 
 export interface AllStateQuestSlices {
   Quests_Lumbridge: LumbridgeQuestSliceCrap;
@@ -370,8 +384,14 @@ export interface ICompositeArmorItem extends IArmorItem {
 }
 
 export type SpellElement = `none` | `air` | `fire` | `water` | `earth`;
+export type WeaponStyle = `melee` | `magic` | `ranged`;
+
+export interface ICompositeWeaponItem extends IWeaponItem {
+  playerOwnsThisItem: boolean;
+}
 
 export interface IWeaponItem {
+  thisWeaponStyle: WeaponStyle;
   levelReqAttack: number;
   levelReqStrength: number;
   levelReqMagic: number;

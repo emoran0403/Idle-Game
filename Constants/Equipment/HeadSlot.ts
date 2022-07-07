@@ -231,7 +231,7 @@ const listOfRangedHeads: Types.IListOfRangedHeads = {
   },
 };
 
-export const headSlot: Types.IArmorSlotHead = {
+export const HeadSlot: Types.IArmorSlotHead = {
   melee: listOfMeleeHeads,
   magic: listOfMagicHeads,
   ranged: listOfRangedHeads,

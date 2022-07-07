@@ -4,6 +4,7 @@ const listOfMeleeTwoHanders: Types.IListOfMeleeTwoHand = {
   bronze2hsword: {
     name: "bronze2hsword",
     displayName: `Bronze 2h sword`,
+    thisWeaponStyle: `melee`,
     levelReqAttack: 1,
     levelReqStrength: 0,
     levelReqMagic: 0,
@@ -24,6 +25,7 @@ const listOfMeleeTwoHanders: Types.IListOfMeleeTwoHand = {
   iron2hsword: {
     name: "iron2hsword",
     displayName: `Iron 2h sword`,
+    thisWeaponStyle: `melee`,
     levelReqAttack: 10,
     levelReqStrength: 0,
     levelReqMagic: 0,
@@ -44,6 +46,7 @@ const listOfMeleeTwoHanders: Types.IListOfMeleeTwoHand = {
   steel2hsword: {
     name: "steel2hsword",
     displayName: `Steel 2h sword`,
+    thisWeaponStyle: `melee`,
     levelReqAttack: 20,
     levelReqStrength: 0,
     levelReqMagic: 0,
@@ -64,6 +67,7 @@ const listOfMeleeTwoHanders: Types.IListOfMeleeTwoHand = {
   mithril2hsword: {
     name: "mithril2hsword",
     displayName: `Mithril 2h sword`,
+    thisWeaponStyle: `melee`,
     levelReqAttack: 30,
     levelReqStrength: 0,
     levelReqMagic: 0,
@@ -84,6 +88,7 @@ const listOfMeleeTwoHanders: Types.IListOfMeleeTwoHand = {
   adamant2hsword: {
     name: "adamant2hsword",
     displayName: `Adamant 2h sword`,
+    thisWeaponStyle: `melee`,
     levelReqAttack: 40,
     levelReqStrength: 0,
     levelReqMagic: 0,
@@ -104,6 +109,7 @@ const listOfMeleeTwoHanders: Types.IListOfMeleeTwoHand = {
   rune2hsword: {
     name: "rune2hsword",
     displayName: `Rune 2h sword`,
+    thisWeaponStyle: `melee`,
     levelReqAttack: 50,
     levelReqStrength: 0,
     levelReqMagic: 0,
@@ -126,6 +132,7 @@ const listOfMagicTwoHanders: Types.IListOfMagicTwoHand = {
   staffofair: {
     name: "staffofair",
     displayName: `Staff of air`,
+    thisWeaponStyle: `magic`,
     levelReqAttack: 0,
     levelReqStrength: 0,
     levelReqMagic: 0,
@@ -146,6 +153,7 @@ const listOfMagicTwoHanders: Types.IListOfMagicTwoHand = {
   staffofwater: {
     name: "staffofwater",
     displayName: `Staff of water`,
+    thisWeaponStyle: `magic`,
     levelReqAttack: 0,
     levelReqStrength: 0,
     levelReqMagic: 0,
@@ -166,6 +174,7 @@ const listOfMagicTwoHanders: Types.IListOfMagicTwoHand = {
   staffofearth: {
     name: "staffofearth",
     displayName: `Staff of earth`,
+    thisWeaponStyle: `magic`,
     levelReqAttack: 0,
     levelReqStrength: 0,
     levelReqMagic: 0,
@@ -186,6 +195,7 @@ const listOfMagicTwoHanders: Types.IListOfMagicTwoHand = {
   staffoffire: {
     name: "staffoffire",
     displayName: `Staff of fire`,
+    thisWeaponStyle: `magic`,
     levelReqAttack: 0,
     levelReqStrength: 0,
     levelReqMagic: 0,
@@ -206,6 +216,7 @@ const listOfMagicTwoHanders: Types.IListOfMagicTwoHand = {
   airbattlestaff: {
     name: "airbattlestaff",
     displayName: `Air battlestaff`,
+    thisWeaponStyle: `magic`,
     levelReqAttack: 0,
     levelReqStrength: 0,
     levelReqMagic: 30,
@@ -226,6 +237,7 @@ const listOfMagicTwoHanders: Types.IListOfMagicTwoHand = {
   waterbattlestaff: {
     name: "waterbattlestaff",
     displayName: `Water battlestaff`,
+    thisWeaponStyle: `magic`,
     levelReqAttack: 0,
     levelReqStrength: 0,
     levelReqMagic: 30,
@@ -246,6 +258,7 @@ const listOfMagicTwoHanders: Types.IListOfMagicTwoHand = {
   earthbattlestaff: {
     name: "earthbattlestaff",
     displayName: `Earth battlestaff`,
+    thisWeaponStyle: `magic`,
     levelReqAttack: 0,
     levelReqStrength: 0,
     levelReqMagic: 30,
@@ -266,6 +279,7 @@ const listOfMagicTwoHanders: Types.IListOfMagicTwoHand = {
   firebattlestaff: {
     name: "firebattlestaff",
     displayName: `Fire battlestaff`,
+    thisWeaponStyle: `magic`,
     levelReqAttack: 0,
     levelReqStrength: 0,
     levelReqMagic: 30,
@@ -286,6 +300,7 @@ const listOfMagicTwoHanders: Types.IListOfMagicTwoHand = {
   mysticairstaff: {
     name: "mysticairstaff",
     displayName: `Mystic air staff`,
+    thisWeaponStyle: `magic`,
     levelReqAttack: 0,
     levelReqStrength: 0,
     levelReqMagic: 40,
@@ -306,6 +321,7 @@ const listOfMagicTwoHanders: Types.IListOfMagicTwoHand = {
   mysticwaterstaff: {
     name: "mysticwaterstaff",
     displayName: `Mystic water staff`,
+    thisWeaponStyle: `magic`,
     levelReqAttack: 0,
     levelReqStrength: 0,
     levelReqMagic: 40,
@@ -326,6 +342,7 @@ const listOfMagicTwoHanders: Types.IListOfMagicTwoHand = {
   mysticearthstaff: {
     name: "mysticearthstaff",
     displayName: `Mystic earth staff`,
+    thisWeaponStyle: `magic`,
     levelReqAttack: 0,
     levelReqStrength: 0,
     levelReqMagic: 40,
@@ -346,6 +363,7 @@ const listOfMagicTwoHanders: Types.IListOfMagicTwoHand = {
   mysticfirestaff: {
     name: "mysticfirestaff",
     displayName: `Mystic fire staff`,
+    thisWeaponStyle: `magic`,
     levelReqAttack: 0,
     levelReqStrength: 0,
     levelReqMagic: 40,
@@ -368,6 +386,7 @@ const listOfRangedTwoHanders: Types.IListOfRangedTwoHand = {
   shortbow: {
     name: "shortbow",
     displayName: `Shortbow`,
+    thisWeaponStyle: `ranged`,
     levelReqAttack: 0,
     levelReqStrength: 0,
     levelReqMagic: 0,
@@ -388,6 +407,7 @@ const listOfRangedTwoHanders: Types.IListOfRangedTwoHand = {
   oakshortbow: {
     name: "oakshortbow",
     displayName: `Oak shortbow`,
+    thisWeaponStyle: `ranged`,
     levelReqAttack: 0,
     levelReqStrength: 0,
     levelReqMagic: 0,
@@ -408,6 +428,7 @@ const listOfRangedTwoHanders: Types.IListOfRangedTwoHand = {
   willowshortbow: {
     name: "willowshortbow",
     displayName: `Willow shortbow`,
+    thisWeaponStyle: `ranged`,
     levelReqAttack: 0,
     levelReqStrength: 0,
     levelReqMagic: 0,
@@ -428,6 +449,7 @@ const listOfRangedTwoHanders: Types.IListOfRangedTwoHand = {
   mapleshortbow: {
     name: "mapleshortbow",
     displayName: `Maple shortbow`,
+    thisWeaponStyle: `ranged`,
     levelReqAttack: 0,
     levelReqStrength: 0,
     levelReqMagic: 0,
@@ -448,6 +470,7 @@ const listOfRangedTwoHanders: Types.IListOfRangedTwoHand = {
   yewshortbow: {
     name: "yewshortbow",
     displayName: `Yew shortbow`,
+    thisWeaponStyle: `ranged`,
     levelReqAttack: 0,
     levelReqStrength: 0,
     levelReqMagic: 0,
@@ -468,6 +491,7 @@ const listOfRangedTwoHanders: Types.IListOfRangedTwoHand = {
   magicshortbow: {
     name: "magicshortbow",
     displayName: `Magic shortbow`,
+    thisWeaponStyle: `ranged`,
     levelReqAttack: 0,
     levelReqStrength: 0,
     levelReqMagic: 0,
@@ -487,7 +511,7 @@ const listOfRangedTwoHanders: Types.IListOfRangedTwoHand = {
   },
 };
 
-export const twoHandSlot: Types.IArmorSlotTwoHand = {
+export const TwoHandSlot: Types.IArmorSlotTwoHand = {
   melee: listOfMeleeTwoHanders,
   magic: listOfMagicTwoHanders,
   ranged: listOfRangedTwoHanders,

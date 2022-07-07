@@ -6,10 +6,10 @@ export const BodySlotSlice = createSlice({
   initialState: {
     //list of armor for the body slot, describing if the player owns the item or not
 
-    playerOwnsbronzeplatebody: false,
-    playerOwnsironplatebody: false,
-    playerOwnssteelplatebody: false,
-    playerOwnsmithrilplatebody: false,
+    playerOwnsbronzeplatebody: true,
+    playerOwnsironplatebody: true,
+    playerOwnssteelplatebody: true,
+    playerOwnsmithrilplatebody: true,
     playerOwnsadamantplatebody: false,
     playerOwnsruneplatebody: false,
 

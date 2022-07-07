@@ -121,7 +121,7 @@ const listOfTypelessNecks: Types.IListOfTypelessNecks = {
   },
 };
 
-export const neckSlot: Types.IArmorSlotNeck = {
+export const NeckSlot: Types.IArmorSlotNeck = {
   melee: listOfMeleeNecks,
   magic: listOfMagicNecks,
   ranged: listOfRangedNecks,
