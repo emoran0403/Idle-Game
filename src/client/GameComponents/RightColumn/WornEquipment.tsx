@@ -4,10 +4,13 @@ import { useEffect } from "react";
 import { headSlot } from "../../../../Constants/Equipment/HeadSlot";
 import { useSelector } from "react-redux";
 import { emptyItem } from "../../../../Constants/Equipment/EmptyItem";
+import { getLevel } from "../../../../Constants/XP Levels";
 
 const WornEquipment = (props: Types.NoProps) => {
   // headsFromState is the state object containing the booleans signifying if the player owns an item
   const headsFromState = useSelector((state: Types.AllState) => state.HeadSlot) as Types.IHeadSlotSlice;
+
+  const Experience = useSelector((state: Types.AllState) => state.Experience) as Types.ISkillList;
 
   // headsFromConstants is an array of each headpiece for the head slot
   let headsFromConstants: Types.IArmorItem[] = [
@@ -46,7 +49,14 @@ const WornEquipment = (props: Types.NoProps) => {
         {/* Head Equipment Slot */}
         <select>
           {compositeHeads.map((headItem) => (
-            <option key={`Head-Item-${headItem.name}`}>{headItem.displayName}</option>
+            <option
+              value={headItem.name}
+              disabled={!headItem.playerOwnsThisItem || getLevel(Experience.Defense) < headItem.levelReqDefence}
+              key={`Head-Item-${headItem.name}`}
+              // style={{}}
+            >
+              {headItem.displayName}
+            </option>
           ))}
         </select>
       </div>
