@@ -1,8 +1,9 @@
 import * as Types from "../../Types";
 
-const listOfMeleeNecks = {
+const listOfMeleeNecks: Types.IListOfMeleeNecks = {
   amuletofstrength: {
     name: "amuletofstrength",
+    displayName: `Amulet of strength`,
     levelReqDefence: 0,
     tier: 0,
     armor: 0,
@@ -15,9 +16,10 @@ const listOfMeleeNecks = {
     value: 2025,
   },
 };
-const listOfMagicNecks = {
+const listOfMagicNecks: Types.IListOfMagicNecks = {
   amuletofmagic: {
     name: "amuletofmagic",
+    displayName: `Amulet of magic`,
     levelReqDefence: 0,
     tier: 0,
     armor: 0,
@@ -30,9 +32,10 @@ const listOfMagicNecks = {
     value: 900,
   },
 };
-const listOfRangedNecks = {
+const listOfRangedNecks: Types.IListOfRangedNecks = {
   amuletofaccuracy: {
     name: "amuletofaccuracy",
+    displayName: `Amulet of accuracy`,
     levelReqDefence: 0,
     tier: 0,
     armor: 0,
@@ -45,9 +48,10 @@ const listOfRangedNecks = {
     value: 5000,
   },
 };
-const listOfTypelessNecks = {
+const listOfTypelessNecks: Types.IListOfTypelessNecks = {
   holysymbol: {
     name: "holysymbol",
+    displayName: `Holy symbol`,
     levelReqDefence: 0,
     tier: 0,
     armor: 0,
@@ -61,6 +65,7 @@ const listOfTypelessNecks = {
   },
   amuletofdefence: {
     name: "amuletofdefence",
+    displayName: `Amulet of defence`,
     levelReqDefence: 20,
     tier: 0,
     armor: 6.3,
@@ -74,6 +79,7 @@ const listOfTypelessNecks = {
   },
   amuletofpower: {
     name: "amuletofpower",
+    displayName: `Amulet of power`,
     levelReqDefence: 0,
     tier: 0,
     armor: 0,
@@ -87,6 +93,7 @@ const listOfTypelessNecks = {
   },
   amuletofglory: {
     name: "amuletofglory",
+    displayName: `Amulet of glory`,
     levelReqDefence: 0,
     tier: 0,
     armor: 0,
@@ -100,6 +107,7 @@ const listOfTypelessNecks = {
   },
   amuletoffury: {
     name: "amuletoffury",
+    displayName: `Amulet of fury`,
     levelReqDefence: 0,
     tier: 0,
     armor: 0,

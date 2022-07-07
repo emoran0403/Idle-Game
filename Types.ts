@@ -343,6 +343,7 @@ export type ChatLogTag = `Gained Resource` | `Monster Drop` | `Rare Item` | `Lev
 
 export interface IArmorItem {
   name: string;
+  displayName: string;
   levelReqDefence: number;
   tier: number;
   armor: number;
@@ -366,6 +367,7 @@ export interface IWeaponItem {
   accuracy: number;
   staffElement: SpellElement;
   name: string;
+  displayName: string;
   tier: number;
   armor: number;
   lifePointsExtra: number;

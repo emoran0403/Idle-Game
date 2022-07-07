@@ -1,8 +1,9 @@
 import * as Types from "../../Types";
 
-const listOfMeleeCapes = {
+const listOfMeleeCapes: Types.IListOfMeleeCapes = {
   bladestormdrape: {
     name: "bladestormdrape",
+    displayName: `Bladestorm drape`,
     levelReqDefence: 0,
     tier: 10,
     armor: 4.5,
@@ -15,9 +16,10 @@ const listOfMeleeCapes = {
     value: 250,
   },
 };
-const listOfMagicCapes = {
+const listOfMagicCapes: Types.IListOfMagicCapes = {
   spellstormdrape: {
-    name: "spellstormdrape",
+    name: "Spellstorm drape",
+    displayName: ``,
     levelReqDefence: 0,
     tier: 10,
     armor: 4.5,
@@ -30,9 +32,10 @@ const listOfMagicCapes = {
     value: 250,
   },
 };
-const listOfRangedCapes = {
+const listOfRangedCapes: Types.IListOfRangedCapes = {
   arrowstormdrape: {
-    name: "arrowstormdrape",
+    name: "Arrowstorm drape",
+    displayName: ``,
     levelReqDefence: 0,
     tier: 10,
     armor: 4.5,
@@ -45,9 +48,10 @@ const listOfRangedCapes = {
     value: 250,
   },
 };
-const listOfTypelessCapes = {
+const listOfTypelessCapes: Types.IListOfTypelessCapes = {
   pathfindercape: {
-    name: "pathfindercape",
+    name: "Pathfinder cape",
+    displayName: ``,
     levelReqDefence: 0,
     tier: 21,
     armor: 4.8,
@@ -60,7 +64,8 @@ const listOfTypelessCapes = {
     value: 1,
   },
   teamcape: {
-    name: "teamcape",
+    name: "Team cape",
+    displayName: ``,
     levelReqDefence: 0,
     tier: 21,
     armor: 3.3,
@@ -73,7 +78,8 @@ const listOfTypelessCapes = {
     value: 50,
   },
   obsidiancape: {
-    name: "obsidiancape",
+    name: "Obsidian cape",
+    displayName: ``,
     levelReqDefence: 0,
     tier: 55,
     armor: 18.8,

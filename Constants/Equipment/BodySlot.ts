@@ -1,8 +1,9 @@
 import * as Types from "../../Types";
 
-const listOfMeleeBodies = {
+const listOfMeleeBodies: Types.IListOfMeleeBodies = {
   bronzeplatebody: {
     name: "bronzeplatebody",
+    displayName: `Bronze platebody`,
     levelReqDefence: 1,
     tier: 5,
     armor: 34.5,
@@ -16,6 +17,7 @@ const listOfMeleeBodies = {
   },
   ironplatebody: {
     name: "ironplatebody",
+    displayName: `Iron platebody`,
     levelReqDefence: 10,
     tier: 10,
     armor: 46.4,
@@ -29,6 +31,7 @@ const listOfMeleeBodies = {
   },
   steelplatebody: {
     name: "steelplatebody",
+    displayName: `Steel platebody`,
     levelReqDefence: 20,
     tier: 20,
     armor: 72.6,
@@ -42,6 +45,7 @@ const listOfMeleeBodies = {
   },
   mithrilplatebody: {
     name: "mithrilplatebody",
+    displayName: `Mithril platebody`,
     levelReqDefence: 30,
     tier: 30,
     armor: 104.4,
@@ -55,6 +59,7 @@ const listOfMeleeBodies = {
   },
   adamantplatebody: {
     name: "adamantplatebody",
+    displayName: `Adamant platebody`,
     levelReqDefence: 40,
     tier: 40,
     armor: 144.4,
@@ -68,6 +73,7 @@ const listOfMeleeBodies = {
   },
   runeplatebody: {
     name: "runeplatebody",
+    displayName: `Rune platebody`,
     levelReqDefence: 50,
     tier: 50,
     armor: 195.5,
@@ -80,9 +86,10 @@ const listOfMeleeBodies = {
     value: 4168,
   },
 };
-const listOfMagicBodies = {
+const listOfMagicBodies: Types.IListOfMagicBodies = {
   wizardrobetop: {
     name: "wizardrobetop",
+    displayName: `Wizard robe top`,
     levelReqDefence: 0,
     tier: 1,
     armor: 25.3,
@@ -96,6 +103,7 @@ const listOfMagicBodies = {
   },
   imphiderobetop: {
     name: "imphiderobetop",
+    displayName: `Imphide robe top`,
     levelReqDefence: 10,
     tier: 10,
     armor: 46.4,
@@ -109,6 +117,7 @@ const listOfMagicBodies = {
   },
   spidersilkrobetop: {
     name: "spidersilkrobetop",
+    displayName: `Spider silk robe top`,
     levelReqDefence: 20,
     tier: 20,
     armor: 72.6,
@@ -122,6 +131,7 @@ const listOfMagicBodies = {
   },
   batwingtorso: {
     name: "batwingtorso",
+    displayName: `Batwing torso`,
     levelReqDefence: 30,
     tier: 30,
     armor: 104.4,
@@ -135,6 +145,7 @@ const listOfMagicBodies = {
   },
   splitbarkbody: {
     name: "splitbarkbody",
+    displayName: `Splitbark body`,
     levelReqDefence: 40,
     tier: 40,
     armor: 144.4,
@@ -147,9 +158,10 @@ const listOfMagicBodies = {
     value: 45000,
   },
 };
-const listOfRangedBodies = {
+const listOfRangedBodies: Types.IListOfRangedBodies = {
   leatherbody: {
     name: "leatherbody",
+    displayName: `Leather body`,
     levelReqDefence: 0,
     tier: 5,
     armor: 34.5,
@@ -163,6 +175,7 @@ const listOfRangedBodies = {
   },
   hardleatherbody: {
     name: "hardleatherbody",
+    displayName: `Hardleather body`,
     levelReqDefence: 10,
     tier: 10,
     armor: 46.4,
@@ -176,6 +189,7 @@ const listOfRangedBodies = {
   },
   studdedbody: {
     name: "studdedbody",
+    displayName: `Studded body`,
     levelReqDefence: 20,
     tier: 20,
     armor: 72.6,
@@ -189,6 +203,7 @@ const listOfRangedBodies = {
   },
   carapacetorso: {
     name: "carapacetorso",
+    displayName: `Carapace torso`,
     levelReqDefence: 30,
     tier: 30,
     armor: 104.4,
@@ -202,6 +217,7 @@ const listOfRangedBodies = {
   },
   greendragonhidebody: {
     name: "greendragonhidebody",
+    displayName: `Green dragonhide body`,
     levelReqDefence: 40,
     tier: 40,
     armor: 144.4,

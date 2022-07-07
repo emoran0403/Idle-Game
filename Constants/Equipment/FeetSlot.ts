@@ -1,8 +1,9 @@
 import * as Types from "../../Types";
 
-const listOfMeleeFeet = {
+const listOfMeleeFeet: Types.IListOfMeleeFeet = {
   bronzearmouredboots: {
     name: "bronzearmouredboots",
+    displayName: `Bronze armoured boots`,
     levelReqDefence: 1,
     tier: 5,
     armor: 7.5,
@@ -16,6 +17,7 @@ const listOfMeleeFeet = {
   },
   ironarmouredboots: {
     name: "ironarmouredboots",
+    displayName: `Iron armoured boots`,
     levelReqDefence: 10,
     tier: 10,
     armor: 10.1,
@@ -29,6 +31,7 @@ const listOfMeleeFeet = {
   },
   steelarmouredboots: {
     name: "steelarmouredboots",
+    displayName: `Steel armoured boots`,
     levelReqDefence: 20,
     tier: 20,
     armor: 15.8,
@@ -42,6 +45,7 @@ const listOfMeleeFeet = {
   },
   mithrilarmouredboots: {
     name: "mithrilarmouredboots",
+    displayName: `Mithril armoured boots`,
     levelReqDefence: 30,
     tier: 30,
     armor: 22.7,
@@ -55,6 +59,7 @@ const listOfMeleeFeet = {
   },
   adamantarmouredboots: {
     name: "adamantarmouredboots",
+    displayName: `Adamant armoured boots`,
     levelReqDefence: 40,
     tier: 40,
     armor: 31.4,
@@ -68,6 +73,7 @@ const listOfMeleeFeet = {
   },
   runearmouredboots: {
     name: "runearmouredboots",
+    displayName: `Rune armoured boots`,
     levelReqDefence: 50,
     tier: 50,
     armor: 42.5,
@@ -80,9 +86,10 @@ const listOfMeleeFeet = {
     value: 834,
   },
 };
-const listOfMagicFeet = {
+const listOfMagicFeet: Types.IListOfMagicFeet = {
   wizardboots: {
     name: "wizardboots",
+    displayName: `Wizard boots`,
     levelReqDefence: 1,
     tier: 5,
     armor: 7.5,
@@ -96,6 +103,7 @@ const listOfMagicFeet = {
   },
   imphideboots: {
     name: "imphideboots",
+    displayName: `Imphide boots`,
     levelReqDefence: 10,
     tier: 10,
     armor: 10.1,
@@ -109,6 +117,7 @@ const listOfMagicFeet = {
   },
   spidersilkboots: {
     name: "spidersilkboots",
+    displayName: `Spider silk boots`,
     levelReqDefence: 20,
     tier: 20,
     armor: 15.8,
@@ -122,6 +131,7 @@ const listOfMagicFeet = {
   },
   batwingboots: {
     name: "batwingboots",
+    displayName: `Batwing boots`,
     levelReqDefence: 30,
     tier: 30,
     armor: 22.7,
@@ -135,6 +145,7 @@ const listOfMagicFeet = {
   },
   splitbarkboots: {
     name: "splitbarkboots",
+    displayName: `Splitbark boots`,
     levelReqDefence: 40,
     tier: 40,
     armor: 31.4,
@@ -147,9 +158,10 @@ const listOfMagicFeet = {
     value: 5000,
   },
 };
-const listOfRangedFeet = {
+const listOfRangedFeet: Types.IListOfRangedFeet = {
   leatherboots: {
     name: "leatherboots",
+    displayName: `Leather boots`,
     levelReqDefence: 0,
     tier: 1,
     armor: 5.5,
@@ -163,6 +175,7 @@ const listOfRangedFeet = {
   },
   hardleatherboots: {
     name: "hardleatherboots",
+    displayName: `Hard leather boots`,
     levelReqDefence: 10,
     tier: 5,
     armor: 7.5,
@@ -176,6 +189,7 @@ const listOfRangedFeet = {
   },
   studdedleatherboots: {
     name: "studdedleatherboots",
+    displayName: `Studded leather boots`,
     levelReqDefence: 20,
     tier: 20,
     armor: 15.8,
@@ -189,6 +203,7 @@ const listOfRangedFeet = {
   },
   carapaceboots: {
     name: "carapaceboots",
+    displayName: `Carapace boots`,
     levelReqDefence: 30,
     tier: 30,
     armor: 22.7,
@@ -202,6 +217,7 @@ const listOfRangedFeet = {
   },
   greendragonhideboots: {
     name: "greendragonhideboots",
+    displayName: `Green dragonhide boots`,
     levelReqDefence: 40,
     tier: 40,
     armor: 31.4,

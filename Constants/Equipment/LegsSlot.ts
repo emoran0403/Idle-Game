@@ -1,8 +1,9 @@
 import * as Types from "../../Types";
 
-const listOfMeleeLegs = {
+const listOfMeleeLegs: Types.IListOfMeleeLegs = {
   bronzeplatelegs: {
     name: "bronzeplatelegs",
+    displayName: `Bronze platelegs`,
     levelReqDefence: 1,
     tier: 5,
     armor: 33,
@@ -16,6 +17,7 @@ const listOfMeleeLegs = {
   },
   ironplatelegs: {
     name: "ironplatelegs",
+    displayName: `Iron platelegs`,
     levelReqDefence: 10,
     tier: 10,
     armor: 44.4,
@@ -29,6 +31,7 @@ const listOfMeleeLegs = {
   },
   steelplatelegs: {
     name: "steelplatelegs",
+    displayName: `Steel platelegs`,
     levelReqDefence: 20,
     tier: 20,
     armor: 69.5,
@@ -42,6 +45,7 @@ const listOfMeleeLegs = {
   },
   mithrilplatelegs: {
     name: "mithrilplatelegs",
+    displayName: `Mithril platelegs`,
     levelReqDefence: 30,
     tier: 30,
     armor: 99.8,
@@ -55,6 +59,7 @@ const listOfMeleeLegs = {
   },
   adamantplatelegs: {
     name: "adamantplatelegs",
+    displayName: `Adamant platelegs`,
     levelReqDefence: 40,
     tier: 40,
     armor: 138.1,
@@ -68,6 +73,7 @@ const listOfMeleeLegs = {
   },
   runeplatelegs: {
     name: "runeplatelegs",
+    displayName: `Rune platelegs`,
     levelReqDefence: 50,
     tier: 50,
     armor: 187,
@@ -80,9 +86,10 @@ const listOfMeleeLegs = {
     value: 2501,
   },
 };
-const listOfMagicLegs = {
+const listOfMagicLegs: Types.IListOfMagicLegs = {
   wizardrobeskirt: {
     name: "wizardrobeskirt",
+    displayName: `Wizard robe skirt`,
     levelReqDefence: 0,
     tier: 5,
     armor: 33,
@@ -96,6 +103,7 @@ const listOfMagicLegs = {
   },
   imphiderobebottom: {
     name: "imphiderobebottom",
+    displayName: `Imphide robe bottom`,
     levelReqDefence: 10,
     tier: 10,
     armor: 44.4,
@@ -109,6 +117,7 @@ const listOfMagicLegs = {
   },
   spidersilkrobebottom: {
     name: "spidersilkrobebottom",
+    displayName: `Spider silk robe bottom`,
     levelReqDefence: 20,
     tier: 20,
     armor: 69.5,
@@ -122,6 +131,7 @@ const listOfMagicLegs = {
   },
   batwinglegs: {
     name: "batwinglegs",
+    displayName: `Batwing legs`,
     levelReqDefence: 30,
     tier: 30,
     armor: 99.8,
@@ -135,6 +145,7 @@ const listOfMagicLegs = {
   },
   splitbarklegs: {
     name: "splitbarklegs",
+    displayName: `Splitbark legs`,
     levelReqDefence: 40,
     tier: 40,
     armor: 138.1,
@@ -147,9 +158,10 @@ const listOfMagicLegs = {
     value: 40000,
   },
 };
-const listOfRangedLegs = {
+const listOfRangedLegs: Types.IListOfRangedLegs = {
   leatherchaps: {
     name: "leatherchaps",
+    displayName: `Leather chaps`,
     levelReqDefence: 0,
     tier: 5,
     armor: 33,
@@ -163,6 +175,7 @@ const listOfRangedLegs = {
   },
   hardleatherchaps: {
     name: "hardleatherchaps",
+    displayName: `Hard leather chaps`,
     levelReqDefence: 10,
     tier: 10,
     armor: 44.4,
@@ -176,6 +189,7 @@ const listOfRangedLegs = {
   },
   studdedchaps: {
     name: "studdedchaps",
+    displayName: `Studded chaps`,
     levelReqDefence: 20,
     tier: 20,
     armor: 69.5,
@@ -189,6 +203,7 @@ const listOfRangedLegs = {
   },
   carapacelegs: {
     name: "carapacelegs",
+    displayName: `Carapace legs`,
     levelReqDefence: 30,
     tier: 30,
     armor: 99.8,
@@ -202,6 +217,7 @@ const listOfRangedLegs = {
   },
   greendragonhidechaps: {
     name: "greendragonhidechaps",
+    displayName: `Green dragonhide chaps`,
     levelReqDefence: 40,
     tier: 40,
     armor: 138.1,

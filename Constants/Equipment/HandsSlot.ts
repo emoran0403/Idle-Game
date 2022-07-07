@@ -1,8 +1,9 @@
 import * as Types from "../../Types";
 
-const listOfMeleeHands = {
+const listOfMeleeHands: Types.IListOfMeleeHands = {
   bronzegauntlets: {
     name: "bronzegauntlets",
+    displayName: `Bronze gauntlets`,
     levelReqDefence: 1,
     tier: 5,
     armor: 7.5,
@@ -16,6 +17,7 @@ const listOfMeleeHands = {
   },
   irongauntlets: {
     name: "irongauntlets",
+    displayName: `Iron gauntlets`,
     levelReqDefence: 10,
     tier: 10,
     armor: 10.1,
@@ -29,6 +31,7 @@ const listOfMeleeHands = {
   },
   steelgauntlets: {
     name: "steelgauntlets",
+    displayName: `Steel gauntlets`,
     levelReqDefence: 20,
     tier: 20,
     armor: 15.8,
@@ -42,6 +45,7 @@ const listOfMeleeHands = {
   },
   mithrilgauntlets: {
     name: "mithrilgauntlets",
+    displayName: `Mithril gauntlets`,
     levelReqDefence: 30,
     tier: 30,
     armor: 22.7,
@@ -55,6 +59,7 @@ const listOfMeleeHands = {
   },
   adamantgauntlets: {
     name: "adamantgauntlets",
+    displayName: `Adamant gauntlets`,
     levelReqDefence: 40,
     tier: 40,
     armor: 31.4,
@@ -68,6 +73,7 @@ const listOfMeleeHands = {
   },
   runegauntlets: {
     name: "runegauntlets",
+    displayName: `Rune gauntlets`,
     levelReqDefence: 50,
     tier: 50,
     armor: 42.5,
@@ -80,9 +86,10 @@ const listOfMeleeHands = {
     value: 834,
   },
 };
-const listOfMagicHands = {
+const listOfMagicHands: Types.IListOfMagicHands = {
   wizardgloves: {
     name: "wizardgloves",
+    displayName: `Wizard gloves`,
     levelReqDefence: 1,
     tier: 5,
     armor: 7.5,
@@ -96,6 +103,7 @@ const listOfMagicHands = {
   },
   imphidegloves: {
     name: "imphidegloves",
+    displayName: `Imphide gloves`,
     levelReqDefence: 10,
     tier: 10,
     armor: 10.1,
@@ -109,6 +117,7 @@ const listOfMagicHands = {
   },
   spidersilkgloves: {
     name: "spidersilkgloves",
+    displayName: `Spider silk gloves`,
     levelReqDefence: 20,
     tier: 20,
     armor: 15.8,
@@ -122,6 +131,7 @@ const listOfMagicHands = {
   },
   batwinggloves: {
     name: "batwinggloves",
+    displayName: `Batwing gloves`,
     levelReqDefence: 30,
     tier: 30,
     armor: 22.7,
@@ -135,6 +145,7 @@ const listOfMagicHands = {
   },
   splitbarkgauntlets: {
     name: "splitbarkgauntlets",
+    displayName: `Splitbark gauntlets`,
     levelReqDefence: 40,
     tier: 40,
     armor: 31.4,
@@ -147,9 +158,10 @@ const listOfMagicHands = {
     value: 5000,
   },
 };
-const listOfRangedHands = {
+const listOfRangedHands: Types.IListOfRangedHands = {
   leathervambraces: {
     name: "leathervambraces",
+    displayName: `Leather vambraces`,
     levelReqDefence: 0,
     tier: 1,
     armor: 5.5,
@@ -163,6 +175,7 @@ const listOfRangedHands = {
   },
   hardleathergloves: {
     name: "hardleathergloves",
+    displayName: `Hard leather gloves`,
     levelReqDefence: 10,
     tier: 10,
     armor: 10.1,
@@ -176,6 +189,7 @@ const listOfRangedHands = {
   },
   studdedleathergloves: {
     name: "studdedleathergloves",
+    displayName: `Studded leather gloves`,
     levelReqDefence: 20,
     tier: 20,
     armor: 15.8,
@@ -189,6 +203,7 @@ const listOfRangedHands = {
   },
   carapacegloves: {
     name: "carapacegloves",
+    displayName: `Carapace gloves`,
     levelReqDefence: 30,
     tier: 30,
     armor: 22.7,
@@ -202,6 +217,7 @@ const listOfRangedHands = {
   },
   greendragonhidevambraces: {
     name: "greendragonhidevambraces",
+    displayName: `Green dragonhide vambraces`,
     levelReqDefence: 40,
     tier: 40,
     armor: 31.4,

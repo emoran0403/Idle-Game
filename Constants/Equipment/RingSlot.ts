@@ -1,8 +1,9 @@
 import * as Types from "../../Types";
 
-const listOfMeleeRings = {
+const listOfMeleeRings: Types.IListOfMeleeRings = {
   warriorring: {
     name: "warriorring",
+    displayName: `Warrior ring`,
     levelReqDefence: 0,
     tier: 0,
     armor: 0,
@@ -15,9 +16,10 @@ const listOfMeleeRings = {
     value: 10000,
   },
 };
-const listOfMagicRings = {
+const listOfMagicRings: Types.IListOfMagicRings = {
   seersring: {
     name: "seersring",
+    displayName: `Seers ring`,
     levelReqDefence: 0,
     tier: 0,
     armor: 0,
@@ -30,9 +32,10 @@ const listOfMagicRings = {
     value: 10000,
   },
 };
-const listOfRangedRings = {
+const listOfRangedRings: Types.IListOfRangedRings = {
   archerring: {
     name: "archerring",
+    displayName: `Archer ring`,
     levelReqDefence: 0,
     tier: 0,
     armor: 0,
@@ -45,9 +48,10 @@ const listOfRangedRings = {
     value: 10000,
   },
 };
-const listOfTypelessRings = {
+const listOfTypelessRings: Types.IListOfTypelessRings = {
   ringofpotency: {
     name: "ringofpotency",
+    displayName: `Ring of potency`,
     levelReqDefence: 0,
     tier: 20,
     armor: 3.0,
@@ -61,6 +65,7 @@ const listOfTypelessRings = {
   },
   ringofwealth: {
     name: "ringofwealth",
+    displayName: `Ring of wealth`,
     levelReqDefence: 0,
     tier: 40,
     armor: 0,
@@ -74,6 +79,7 @@ const listOfTypelessRings = {
   },
   berserkerring: {
     name: "berserkerring",
+    displayName: `Berserker ring`,
     levelReqDefence: 0,
     tier: 30,
     armor: 5.1,

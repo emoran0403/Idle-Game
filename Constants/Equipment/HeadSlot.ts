@@ -3,6 +3,7 @@ import * as Types from "../../Types";
 const listOfMeleeHeads: Types.IListOfMeleeHeads = {
   bronzefullhelm: {
     name: `bronzefullhelm`,
+    displayName: `Bronze full helm`,
     levelReqDefence: 1,
     tier: 5,
     armor: 5,
@@ -16,6 +17,7 @@ const listOfMeleeHeads: Types.IListOfMeleeHeads = {
   },
   ironfullhelm: {
     name: "ironfullhelm",
+    displayName: `Iron full helm`,
     levelReqDefence: 10,
     tier: 10,
     armor: 40.4,
@@ -29,6 +31,7 @@ const listOfMeleeHeads: Types.IListOfMeleeHeads = {
   },
   steelfullhelm: {
     name: "steelfullhelm",
+    displayName: `Steel full helm`,
     levelReqDefence: 20,
     tier: 20,
     armor: 63.2,
@@ -42,6 +45,7 @@ const listOfMeleeHeads: Types.IListOfMeleeHeads = {
   },
   mithrilfullhelm: {
     name: "mithrilfullhelm",
+    displayName: `Mithril full helm`,
     levelReqDefence: 30,
     tier: 30,
     armor: 90.8,
@@ -55,6 +59,7 @@ const listOfMeleeHeads: Types.IListOfMeleeHeads = {
   },
   adamantfullhelm: {
     name: "adamantfullhelm",
+    displayName: `Adamant full helm`,
     levelReqDefence: 40,
     tier: 40,
     armor: 125.6,
@@ -68,6 +73,7 @@ const listOfMeleeHeads: Types.IListOfMeleeHeads = {
   },
   runefullhelm: {
     name: "runefullhelm",
+    displayName: `Rune full helm`,
     levelReqDefence: 50,
     tier: 50,
     armor: 170,
@@ -83,6 +89,7 @@ const listOfMeleeHeads: Types.IListOfMeleeHeads = {
 const listOfMagicHeads: Types.IListOfMagicHeads = {
   wizardhat: {
     name: "wizardhat",
+    displayName: `Wizard hat`,
     levelReqDefence: 0,
     tier: 1,
     armor: 22,
@@ -96,6 +103,7 @@ const listOfMagicHeads: Types.IListOfMagicHeads = {
   },
   imphidehood: {
     name: "imphidehood",
+    displayName: `Imphide hood`,
     levelReqDefence: 10,
     tier: 10,
     armor: 40.4,
@@ -109,6 +117,7 @@ const listOfMagicHeads: Types.IListOfMagicHeads = {
   },
   spidersilkhood: {
     name: "spidersilkhood",
+    displayName: `Spider silk hood`,
     levelReqDefence: 20,
     tier: 20,
     armor: 63.2,
@@ -122,6 +131,7 @@ const listOfMagicHeads: Types.IListOfMagicHeads = {
   },
   batwinghood: {
     name: "batwinghood",
+    displayName: `Batwing hood`,
     levelReqDefence: 30,
     tier: 30,
     armor: 90.8,
@@ -135,6 +145,7 @@ const listOfMagicHeads: Types.IListOfMagicHeads = {
   },
   splitbarkhelm: {
     name: "splitbarkhelm",
+    displayName: `Splitbark helm`,
     levelReqDefence: 40,
     tier: 40,
     armor: 125.6,
@@ -150,6 +161,7 @@ const listOfMagicHeads: Types.IListOfMagicHeads = {
 const listOfRangedHeads: Types.IListOfRangedHeads = {
   leathercowl: {
     name: "leathercowl",
+    displayName: `Leather cowl`,
     levelReqDefence: 0,
     tier: 5,
     armor: 30,
@@ -163,6 +175,7 @@ const listOfRangedHeads: Types.IListOfRangedHeads = {
   },
   hardleathercowl: {
     name: "hardleathercowl",
+    displayName: `Hard leather cowl`,
     levelReqDefence: 0,
     tier: 10,
     armor: 40.4,
@@ -176,6 +189,7 @@ const listOfRangedHeads: Types.IListOfRangedHeads = {
   },
   studdedleathercoif: {
     name: "studdedleathercoif",
+    displayName: `Studded leather coif`,
     levelReqDefence: 20,
     tier: 20,
     armor: 63.2,
@@ -189,6 +203,7 @@ const listOfRangedHeads: Types.IListOfRangedHeads = {
   },
   carapacehelm: {
     name: "carapacehelm",
+    displayName: `Carapace helm`,
     levelReqDefence: 30,
     tier: 30,
     armor: 90.8,
@@ -202,6 +217,7 @@ const listOfRangedHeads: Types.IListOfRangedHeads = {
   },
   greendragonhidecoif: {
     name: "greendragonhidecoif",
+    displayName: `Green dragonhide coif`,
     levelReqDefence: 40,
     tier: 40,
     armor: 125.6,
