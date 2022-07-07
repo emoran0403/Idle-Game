@@ -365,6 +365,10 @@ export interface IArmorItem {
   value: number;
 }
 
+export interface ICompositeArmorItem extends IArmorItem {
+  playerOwnsThisItem: boolean;
+}
+
 export type SpellElement = `none` | `air` | `fire` | `water` | `earth`;
 
 export interface IWeaponItem {
