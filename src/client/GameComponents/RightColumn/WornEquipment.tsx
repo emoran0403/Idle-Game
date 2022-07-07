@@ -2,17 +2,18 @@ import * as Types from "../../../../Types";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { headSlot } from "../../../../Constants/Equipment/HeadSlot";
+import { bodySlot } from "../../../../Constants/Equipment/BodySlot";
 import { useSelector } from "react-redux";
 import { emptyItem } from "../../../../Constants/Equipment/EmptyItem";
 import { getLevel } from "../../../../Constants/XP Levels";
-import { info } from "sass";
-import { text } from "express";
 
 const WornEquipment = (props: Types.NoProps) => {
   const [currentHeadSlotItem, setCurrentHeadSlotItem] = useState<string>();
+  const [currentBodySlotItem, setCurrentBodySlotItem] = useState<string>();
 
   // headsFromState is the state object containing the booleans signifying if the player owns an item
   const headsFromState = useSelector((state: Types.AllState) => state.HeadSlot) as Types.IHeadSlotSlice;
+  const bodiesFromState = useSelector((state: Types.AllState) => state.BodySlot) as Types.IBodySlotSlice;
 
   const Experience = useSelector((state: Types.AllState) => state.Experience) as Types.ISkillList;
 
@@ -23,7 +24,15 @@ const WornEquipment = (props: Types.NoProps) => {
     ...Object.values(headSlot.ranged),
   ];
 
+  // bodiesFromConstants is an array of each headpiece for the head slot
+  let bodiesFromConstants: Types.IArmorItem[] = [
+    ...Object.values(bodySlot.melee),
+    ...Object.values(bodySlot.magic),
+    ...Object.values(bodySlot.ranged),
+  ];
+
   let compositeHeads: Types.ICompositeArmorItem[] = [emptyItem];
+  let compositeBodies: Types.ICompositeArmorItem[] = [emptyItem];
 
   for (let i = 0; i < headsFromConstants.length; i++) {
     // i goes thru each head from constants...
@@ -36,6 +45,12 @@ const WornEquipment = (props: Types.NoProps) => {
 
     // push the items into an array so that we can map over it to make selector options
     compositeHeads.push(tempHead);
+  }
+
+  for (let i = 0; i < bodiesFromConstants.length; i++) {
+    let playerOwnsThisItem: boolean = bodiesFromState[`playerOwns${bodiesFromConstants[i].name}` as keyof Types.IBodySlotSlice];
+    let tempBody: Types.ICompositeArmorItem = { ...bodiesFromConstants[i], playerOwnsThisItem };
+    compositeBodies.push(tempBody);
   }
 
   const handleSelectorStyle = (equipment: Types.ICompositeArmorItem) => {
@@ -75,6 +90,23 @@ const WornEquipment = (props: Types.NoProps) => {
               className={`${handleSelectorStyle(headItem)}`}
             >
               {headItem.displayName}
+            </option>
+          ))}
+        </select>
+
+        {/* Body Equipment Slot */}
+        <label className="text-center" htmlFor="bodySlot">
+          Body Slot:
+        </label>
+        <select onChange={(e) => setCurrentBodySlotItem(e.target.value)} className="form-select" name="bodySlot" id="bodySlot">
+          {compositeBodies.map((bodyItem) => (
+            <option
+              value={bodyItem.name}
+              disabled={!(bodyItem.playerOwnsThisItem && getLevel(Experience.Defense) >= bodyItem.levelReqDefence)}
+              key={`Body-Item-${bodyItem.name}`}
+              className={`${handleSelectorStyle(bodyItem)}`}
+            >
+              {bodyItem.displayName}
             </option>
           ))}
         </select>
