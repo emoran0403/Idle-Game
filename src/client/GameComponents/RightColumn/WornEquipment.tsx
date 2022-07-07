@@ -1,12 +1,16 @@
 import * as Types from "../../../../Types";
 import * as React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { headSlot } from "../../../../Constants/Equipment/HeadSlot";
 import { useSelector } from "react-redux";
 import { emptyItem } from "../../../../Constants/Equipment/EmptyItem";
 import { getLevel } from "../../../../Constants/XP Levels";
+import { info } from "sass";
+import { text } from "express";
 
 const WornEquipment = (props: Types.NoProps) => {
+  const [currentHeadSlotItem, setCurrentHeadSlotItem] = useState<string>();
+
   // headsFromState is the state object containing the booleans signifying if the player owns an item
   const headsFromState = useSelector((state: Types.AllState) => state.HeadSlot) as Types.IHeadSlotSlice;
 
@@ -18,7 +22,6 @@ const WornEquipment = (props: Types.NoProps) => {
     ...Object.values(headSlot.magic),
     ...Object.values(headSlot.ranged),
   ];
-  // console.log(headsFromConstants);
 
   let compositeHeads: Types.ICompositeArmorItem[] = [emptyItem];
 
@@ -35,25 +38,41 @@ const WornEquipment = (props: Types.NoProps) => {
     compositeHeads.push(tempHead);
   }
 
-  // console.log(compositeHeads);
+  const handleSelectorStyle = (equipment: Types.ICompositeArmorItem) => {
+    if (equipment.playerOwnsThisItem && getLevel(Experience.Defense) >= equipment.levelReqDefence) {
+      // has levels and owns item = green background
 
-  // done i need to get each slot's worth of equipment, and shuffle them together with their counterpart in state to add the playerOwns- property
-  // once that property is added, i can then selectively add a disabled tag
-  // i also need to add a disabled tag based on the level requirements of the item
+      return `bg-success`;
+    } else if (equipment.playerOwnsThisItem.valueOf() == false && getLevel(Experience.Defense) >= equipment.levelReqDefence) {
+      // missing levels and owns item = yellow background
+
+      return `bg-yellowlol`;
+    } else if (equipment.playerOwnsThisItem && getLevel(Experience.Defense) < equipment.levelReqDefence) {
+      // has levels and does not own item = orange background
+
+      return `bg-orangelol`;
+    } else if (equipment.playerOwnsThisItem.valueOf() == false && getLevel(Experience.Defense) < equipment.levelReqDefence) {
+      // missing levels and does not own item = red background
+      return `bg-danger`;
+    }
+  };
 
   useEffect(() => {}, []);
   return (
     <div className="border border-dark border-2 rounded-3">
       <h5 className="card-header text-center">WornEquipment</h5>
-      <div>
+      <div className="d-flex flex-column">
         {/* Head Equipment Slot */}
-        <select>
+        <label className="text-center" htmlFor="headSlot">
+          Head Slot:
+        </label>
+        <select onChange={(e) => setCurrentHeadSlotItem(e.target.value)} className="form-select" name="headSlot" id="headSlot">
           {compositeHeads.map((headItem) => (
             <option
               value={headItem.name}
-              disabled={!headItem.playerOwnsThisItem || getLevel(Experience.Defense) < headItem.levelReqDefence}
+              disabled={!(headItem.playerOwnsThisItem && getLevel(Experience.Defense) >= headItem.levelReqDefence)}
               key={`Head-Item-${headItem.name}`}
-              // style={{}}
+              className={`${handleSelectorStyle(headItem)}`}
             >
               {headItem.displayName}
             </option>
@@ -65,3 +84,8 @@ const WornEquipment = (props: Types.NoProps) => {
 };
 
 export default WornEquipment;
+// gotta love truth tables lol
+//  tt = t -> f
+//  tf = f -> t
+//  ft = f -> t
+//  ff = f -> t

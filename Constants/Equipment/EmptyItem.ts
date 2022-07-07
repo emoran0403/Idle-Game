@@ -4,7 +4,7 @@ export const emptyItem: Types.ICompositeArmorItem = {
   name: "none",
   displayName: `None`,
   playerOwnsThisItem: true,
-  levelReqDefence: 0,
+  levelReqDefence: -1,
   tier: 0,
   armor: 0,
   lifePointsExtra: 0,

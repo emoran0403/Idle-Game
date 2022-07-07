@@ -23,7 +23,7 @@ export const HeadSlotSlice = createSlice({
     playerOwnshardleathercowl: false,
     playerOwnsstuddedleathercoif: false,
     playerOwnscarapacehelm: false,
-    playerOwnsgreendragonhidecoif: false,
+    playerOwnsgreendragonhidecoif: true,
   },
   reducers: {
     // this is the only reducer needed as the player will only be able to acquire armor, not sell them
