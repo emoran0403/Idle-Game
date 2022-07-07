@@ -3,6 +3,7 @@ import * as React from "react";
 import { useEffect } from "react";
 import { headSlot } from "../../../../Constants/Equipment/HeadSlot";
 import { useSelector } from "react-redux";
+import { emptyItem } from "../../../../Constants/Equipment/EmptyItem";
 
 const WornEquipment = (props: Types.NoProps) => {
   // headsFromState is the state object containing the booleans signifying if the player owns an item
@@ -16,7 +17,7 @@ const WornEquipment = (props: Types.NoProps) => {
   ];
   // console.log(headsFromConstants);
 
-  let compositeHeads: Types.ICompositeArmorItem[] = [];
+  let compositeHeads: Types.ICompositeArmorItem[] = [emptyItem];
 
   for (let i = 0; i < headsFromConstants.length; i++) {
     // i goes thru each head from constants...
@@ -43,7 +44,11 @@ const WornEquipment = (props: Types.NoProps) => {
       <h5 className="card-header text-center">WornEquipment</h5>
       <div>
         {/* Head Equipment Slot */}
-        <select>{}</select>
+        <select>
+          {compositeHeads.map((headItem) => (
+            <option key={`Head-Item-${headItem.name}`}>{headItem.displayName}</option>
+          ))}
+        </select>
       </div>
     </div>
   );

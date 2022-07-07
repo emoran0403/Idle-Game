@@ -18,8 +18,8 @@ const listOfMeleeCapes: Types.IListOfMeleeCapes = {
 };
 const listOfMagicCapes: Types.IListOfMagicCapes = {
   spellstormdrape: {
-    name: "Spellstorm drape",
-    displayName: ``,
+    name: "spellstormdrape",
+    displayName: `Spellstorm drape`,
     levelReqDefence: 0,
     tier: 10,
     armor: 4.5,
@@ -34,8 +34,8 @@ const listOfMagicCapes: Types.IListOfMagicCapes = {
 };
 const listOfRangedCapes: Types.IListOfRangedCapes = {
   arrowstormdrape: {
-    name: "Arrowstorm drape",
-    displayName: ``,
+    name: "arrowstormdrape",
+    displayName: `Arrowstorm drape`,
     levelReqDefence: 0,
     tier: 10,
     armor: 4.5,
@@ -50,8 +50,8 @@ const listOfRangedCapes: Types.IListOfRangedCapes = {
 };
 const listOfTypelessCapes: Types.IListOfTypelessCapes = {
   pathfindercape: {
-    name: "Pathfinder cape",
-    displayName: ``,
+    name: "pathfindercape",
+    displayName: `Pathfinder cape`,
     levelReqDefence: 0,
     tier: 21,
     armor: 4.8,
@@ -64,8 +64,8 @@ const listOfTypelessCapes: Types.IListOfTypelessCapes = {
     value: 1,
   },
   teamcape: {
-    name: "Team cape",
-    displayName: ``,
+    name: "teamcape",
+    displayName: `Team cape`,
     levelReqDefence: 0,
     tier: 21,
     armor: 3.3,
@@ -78,8 +78,8 @@ const listOfTypelessCapes: Types.IListOfTypelessCapes = {
     value: 50,
   },
   obsidiancape: {
-    name: "Obsidian cape",
-    displayName: ``,
+    name: "obsidiancape",
+    displayName: `Obsidian cape`,
     levelReqDefence: 0,
     tier: 55,
     armor: 18.8,
