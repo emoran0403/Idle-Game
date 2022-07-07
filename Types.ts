@@ -213,6 +213,15 @@ export interface AllState {
   Wallet: IWallet;
   Quests_Lumbridge: LumbridgeQuestSliceCrap;
   Quests_Draynor: DraynorQuestSliceCrap;
+  BackSlot: IBackSlotSlice;
+  BodySlot: IBodySlotSlice;
+  FeetSlot: IFeetSlotSlice;
+  HandSlot: IHandSlotSlice;
+  HeadSlot: IHeadSlotSlice;
+  LegsSlot: ILegsSlotSlice;
+  NeckSlot: INeckSlotSlice;
+  RingSlot: IRingSlotSlice;
+  TwoHandSlot: ITwoHandSlotSlice;
 }
 
 export interface AllStateQuestSlices {
