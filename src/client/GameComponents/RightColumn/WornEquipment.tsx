@@ -13,7 +13,7 @@ import { useSelector } from "react-redux";
 import { EmptyItem } from "../../../../Constants/Equipment/EmptyItem";
 import { getLevel } from "../../../../Constants/XP Levels";
 
-const WornEquipment = (props: Types.NoProps) => {
+const WornEquipment = (props: Types.WornEquipmentCompProps) => {
   //@ currentEquipment is the collection of all the currently worn equipment - use this for combat purposes
   const [currentEquipment, setCurrentEquipment] = useState<{}>({
     BackSlot: `none`,
@@ -131,12 +131,13 @@ const WornEquipment = (props: Types.NoProps) => {
       compositeItems.push(tempItem);
     }
 
+    const itemHasBeenEquipped = (e: React.ChangeEvent<HTMLSelectElement>) => {
+      setCurrentEquipment({ ...currentEquipment, [e.target.name]: e.target.value });
+      props.newChatLog(`Equipped ${e.target.value}`, `Equipment Swap`);
+    };
+
     return (
-      <select
-        onChange={(e) => setCurrentEquipment({ ...currentEquipment, [e.target.name]: e.target.value })}
-        className="form-select"
-        name={`${slotString}`}
-      >
+      <select onChange={(e) => itemHasBeenEquipped(e)} className="form-select" name={`${slotString}`}>
         {compositeItems.map((Item) => (
           <option
             value={Item.name}

@@ -1,50 +1,19 @@
 import * as Types from "../../../../Types";
 import * as React from "react";
-import Dayjs from "dayjs";
 import { useEffect, useState } from "react";
 
 //! multiple components need to be able to add to this - pass a function in props
-const ChatWindow = (props: Types.NoProps) => {
-  // initialize the chatLogArray with a default welcome message
-  // this will hold ALL chatLogs, a subset of which will be displayed based on the current filter settings
-  const [chatLogArray, setChatLogArray] = useState<Types.IChatLog[]>([
-    {
-      timeStamp: Dayjs().format("HH:mm:ss"),
-      message: `Welcome to the game!`,
-      tags: [`Welcome`],
-    },
-  ]);
-
+const ChatWindow = (props: Types.ChatWindowCompProps) => {
   // this will hold the chatLogs that will be displayed
   const [displayedChatLogArray, setdisplayedChatLogArray] = useState<Types.IChatLog[]>([]);
 
   const [showingChat, setShowingChat] = useState<boolean>(true);
   const [tagsToHide, setTagsToHide] = useState<Types.ChatLogTag[]>([]);
 
-  //@ use this to add to the chat log array
-  const handleNewChatLog = (message: string, tags: Types.ChatLogTag[]) => {
-    // create a newLog object by generating a timestamp, and the given message and tags array
-    let newLog: Types.IChatLog = {
-      timeStamp: Dayjs().format("HH:mm:ss"),
-      message,
-      tags,
-    };
-
-    // we only want to hold the most recent 50 logs, removing the oldest
-    if (chatLogArray.length >= 50) {
-      let tempchatLogArray = [...chatLogArray]; // clone chatLogArray into a temp array
-      tempchatLogArray.shift(); // remove the first item (don't assign this, as it returns the removed element)
-      tempchatLogArray.push(newLog); // adds the new log to the end of the array
-      setChatLogArray(tempchatLogArray); // updates the chatLogArray with the new log
-    } else {
-      setChatLogArray([...chatLogArray, newLog]);
-    }
-  };
-
   const showChatJSX = () => {
     return (
       <div>
-        {displayedChatLogArray.map((chatLog, i) => (
+        {displayedChatLogArray.map((chatLog) => (
           <div className="d-flex flex-row justify-content-between" key={`ChatLog-at-${chatLog.timeStamp}`}>
             <div className="badge rounded-pill bg-primary">{chatLog.timeStamp}</div>
             <div className="text-wrap">{chatLog.message}</div>
@@ -178,10 +147,10 @@ const ChatWindow = (props: Types.NoProps) => {
   // if tagsToHide changes, we need to add / remove chat logs based on the new settings
   useEffect(() => {
     // make a copy of the chatLogArray
-    let tempChatLogArray: Types.IChatLog[] = [...chatLogArray];
+    let tempChatLogArray: Types.IChatLog[] = [...props.chatLogArray];
     // filter out those logs whose tags are included in the array of tags to hide
     // set the new chatLogArray to state
-    let chatLogsToShow = tempChatLogArray.filter((chatLog) => !tagsToHide.includes(chatLog.tags[0]));
+    let chatLogsToShow = tempChatLogArray.filter((chatLog) => !tagsToHide.includes(chatLog.tags));
     setdisplayedChatLogArray(chatLogsToShow);
   }, [tagsToHide]);
 

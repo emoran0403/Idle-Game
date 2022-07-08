@@ -15,6 +15,10 @@ export interface WornEquipmentCompProps {
   newChatLog: Function;
 }
 
+export interface ChatWindowCompProps {
+  chatLogArray: IChatLog[];
+}
+
 export interface ILog {
   name: string;
   levelReqWoodcutting: number;
@@ -362,7 +366,7 @@ export interface ICurrentLocation {
 export interface IChatLog {
   timeStamp: string;
   message: string;
-  tags: ChatLogTag[];
+  tags: ChatLogTag;
 }
 
 //@ chatLogs may only have 1 tag - if this is changed, then the filter logic needs to be updated
