@@ -171,7 +171,8 @@ const QuestPanel = (props: Types.ActivitiesProps) => {
               {quest.complete && <div>100%</div>}
               {!quest.complete && (
                 <div>
-                  In Progress : {quest.stepsComplete} / {quest.stepsTotal}
+                  <button className="btn btn-primary mx-2">{quest.stepsComplete ? `Resume quest` : `Begin quest`}</button>In Progress :{" "}
+                  {quest.stepsComplete} / {quest.stepsTotal}
                 </div>
               )}
             </div>
