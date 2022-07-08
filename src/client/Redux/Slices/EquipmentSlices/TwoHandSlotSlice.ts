@@ -6,32 +6,32 @@ export const TwoHandSlotSlice = createSlice({
   initialState: {
     //list of armor for the back slot, describing if the player owns the item or not
 
-    playerOwnsbronze2hsword: false,
-    playerOwnsiron2hsword: false,
-    playerOwnssteel2hsword: false,
+    playerOwnsbronze2hsword: true,
+    playerOwnsiron2hsword: true,
+    playerOwnssteel2hsword: true,
     playerOwnsmithril2hsword: false,
     playerOwnsadamant2hsword: false,
     playerOwnsrune2hsword: false,
 
     playerOwnsstaffofair: false,
     playerOwnsstaffofwater: false,
-    playerOwnsstaffofearth: false,
+    playerOwnsstaffofearth: true,
     playerOwnsstaffoffire: false,
     playerOwnsairbattlestaff: false,
     playerOwnswaterbattlestaff: false,
-    playerOwnsearthbattlestaff: false,
+    playerOwnsearthbattlestaff: true,
     playerOwnsfirebattlestaff: false,
     playerOwnsmysticairstaff: false,
     playerOwnsmysticwaterstaff: false,
-    playerOwnsmysticearthstaff: false,
+    playerOwnsmysticearthstaff: true,
     playerOwnsmysticfirestaff: false,
 
-    playerOwnsshortbow: false,
-    playerOwnsoakshortbow: false,
+    playerOwnsshortbow: true,
+    playerOwnsoakshortbow: true,
     playerOwnswillowshortbow: false,
     playerOwnsmapleshortbow: false,
-    playerOwnsyewshortbow: false,
-    playerOwnsmagicshortbow: false,
+    playerOwnsyewshortbow: true,
+    playerOwnsmagicshortbow: true,
   },
   reducers: {
     // this is the only reducer needed as the player will only be able to acquire armor, not sell them

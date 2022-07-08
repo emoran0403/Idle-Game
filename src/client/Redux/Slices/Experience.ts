@@ -8,14 +8,14 @@ export const Experience = createSlice({
     Woodcutting: 5000,
     Firemaking: 90,
     Fishing: 0,
-    Attack: 0,
+    Attack: 10000,
     Strength: 0,
     Defense: 10000,
     Consitution: 1358,
     Prayer: 0,
     Summoning: 0,
-    Ranged: 0,
-    Magic: 0,
+    Ranged: 15000,
+    Magic: 20000,
   },
   reducers: {
     // this is the only reducer needed, experience can only increase

@@ -822,3 +822,5 @@ export interface ITwoHandSlotSlice {
   playerOwnsyewshortbow: boolean;
   playerOwnsmagicshortbow: boolean;
 }
+
+export type IEquipmentSlotOptions = IArmorSlotBody | IArmorSlotHead | IArmorSlotLegs | IArmorSlotHands | IArmorSlotFeet | IArmorSlotTwoHand;
