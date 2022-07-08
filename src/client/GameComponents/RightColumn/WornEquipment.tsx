@@ -159,7 +159,7 @@ const WornEquipment = (props: Types.WornEquipmentCompProps) => {
 
         //if slot is not none, and e.target.value is not none, we are swapping to a new item
       } else if (currentEquipment[e.target.name] !== `none` && e.target.value !== `none`) {
-        props.newChatLog(`Swapping to ${newlyEquippedItemDisplayName}`, `Equipment Swap`);
+        props.newChatLog(`Swapped to ${newlyEquippedItemDisplayName}`, `Equipment Swap`);
       }
 
       setCurrentEquipment({ ...currentEquipment, [e.target.name]: e.target.value });
