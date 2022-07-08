@@ -152,7 +152,7 @@ const ChatWindow = (props: Types.ChatWindowCompProps) => {
     // set the new chatLogArray to state
     let chatLogsToShow = tempChatLogArray.filter((chatLog) => !tagsToHide.includes(chatLog.tags));
     setdisplayedChatLogArray(chatLogsToShow);
-  }, [tagsToHide]);
+  }, [tagsToHide, props.chatLogArray]);
 
   return (
     <div className="card border border-dark border-2 rounded-3" style={{ overflowY: "auto", position: "relative", height: "33%" }}>
