@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { AllQuests } from "../../../../Constants/Quests";
 import { getLevel } from "../../../../Constants/XP Levels";
-import e from "express";
 
+//! handleQuestStyle and handleQuestButtonDisplay have repeated logic that could be improved
 const QuestPanel = (props: Types.ActivitiesProps) => {
   // This grabs the current location from state
   const { Current } = useSelector((state: Types.AllState) => state.CurrentLocation) as Types.ICurrentLocation;
@@ -243,7 +243,8 @@ const QuestPanel = (props: Types.ActivitiesProps) => {
               {quest.complete && <div>100%</div>}
               {!quest.complete && (
                 <div>
-                  {handleQuestButtonDisplay(quest)}In Progress : {quest.stepsComplete} / {quest.stepsTotal}
+                  {handleQuestButtonDisplay(quest)} {quest.stepsComplete ? `In Progress: ` : `Not Started`} : {quest.stepsComplete} /
+                  {` ${quest.stepsTotal}`}
                 </div>
               )}
             </div>

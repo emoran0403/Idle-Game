@@ -43,7 +43,7 @@ const ChatWindow = (props: Types.ChatWindowCompProps) => {
     setTagsToHide([...tagsToHideTemp]);
   };
 
-  //@ if adding more tags, add them here as well
+  //@ if adding more tags, add them here
   const addAllFilters = () => {
     let allFilters: Types.ChatLogTag[] = [
       `Gained Resource`,
@@ -53,10 +53,11 @@ const ChatWindow = (props: Types.ChatWindowCompProps) => {
       `Gained XP`,
       `Quest Completed`,
       `Equipment Swap`,
+      `Activity Swap`,
     ];
     setTagsToHide([...allFilters]);
   };
-
+  //@ if adding more tags, make another button
   const showFiltersJSX = () => {
     return (
       <div>
@@ -132,6 +133,15 @@ const ChatWindow = (props: Types.ChatWindowCompProps) => {
             className="btn btn-primary"
           >
             Equipment Swap
+          </button>
+
+          <button
+            onClick={() => {
+              addOrRemoveFilters(`Activity Swap`);
+            }}
+            className="btn btn-primary"
+          >
+            Activity Swap
           </button>
         </div>
         <div>

@@ -378,7 +378,8 @@ export type ChatLogTag =
   | `Gained XP`
   | `Welcome`
   | `Quest Completed`
-  | `Equipment Swap`;
+  | `Equipment Swap`
+  | `Activity Swap`;
 
 export interface IArmorItem {
   name: string;
