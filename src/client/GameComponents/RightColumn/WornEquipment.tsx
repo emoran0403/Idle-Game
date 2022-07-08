@@ -132,14 +132,37 @@ const WornEquipment = (props: Types.WornEquipmentCompProps) => {
     }
 
     const itemHasBeenEquipped = (e: React.ChangeEvent<HTMLSelectElement>) => {
-      setCurrentEquipment({ ...currentEquipment, [e.target.name]: e.target.value });
-      let itemName: string = ``;
+      //! string type is not good enough
+      let newlyEquippedItemDisplayName: string = ``;
+      let oldEquippedItemDisplayName: string = ``;
+
+      // go thru all the composite items so we can set the context of the old and new items
       for (let i = 0; i < compositeItems.length; i++) {
+        // if we match the .name to the newly equipped item, set the display name
         if (compositeItems[i].name === e.target.value) {
-          itemName = compositeItems[i].displayName;
+          newlyEquippedItemDisplayName = compositeItems[i].displayName;
         }
-        props.newChatLog(`Equipped ${itemName}`, `Equipment Swap`);
+
+        // if we match the .name to the old equipped item, set the display name
+        if (compositeItems[i].name === currentEquipment[e.target.name]) {
+          oldEquippedItemDisplayName = compositeItems[i].displayName;
+        }
       }
+
+      // if slot is none, we are equipping an item
+      if (currentEquipment[e.target.name] === `none`) {
+        props.newChatLog(`Equipped ${newlyEquippedItemDisplayName}`, `Equipment Swap`);
+
+        // if slot is not none, and e.target.value is none, we are unequipping an item
+      } else if (currentEquipment[e.target.name] !== `none` && e.target.value === `none`) {
+        props.newChatLog(`Unequipped ${oldEquippedItemDisplayName}`, `Equipment Swap`);
+
+        //if slot is not none, and e.target.value is not none, we are swapping to a new item
+      } else if (currentEquipment[e.target.name] !== `none` && e.target.value !== `none`) {
+        props.newChatLog(`Swapping to ${newlyEquippedItemDisplayName}`, `Equipment Swap`);
+      }
+
+      setCurrentEquipment({ ...currentEquipment, [e.target.name]: e.target.value });
     };
 
     return (
