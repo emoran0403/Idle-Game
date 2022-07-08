@@ -133,7 +133,13 @@ const WornEquipment = (props: Types.WornEquipmentCompProps) => {
 
     const itemHasBeenEquipped = (e: React.ChangeEvent<HTMLSelectElement>) => {
       setCurrentEquipment({ ...currentEquipment, [e.target.name]: e.target.value });
-      props.newChatLog(`Equipped ${e.target.value}`, `Equipment Swap`);
+      let itemName: string = ``;
+      for (let i = 0; i < compositeItems.length; i++) {
+        if (compositeItems[i].name === e.target.value) {
+          itemName = compositeItems[i].displayName;
+        }
+        props.newChatLog(`Equipped ${itemName}`, `Equipment Swap`);
+      }
     };
 
     return (
