@@ -11,7 +11,6 @@ import ActivityArea from "./MiddleColumn/ActivityArea/ActivityArea";
 import ChatWindow from "./LeftColumn/ChatWindow";
 
 const GameContainer = (props: Types.NoProps) => {
-  useEffect(() => {}, []);
   //! scale the columns to the viewport size
   //! scale the components to the parent column size
   return (

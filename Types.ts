@@ -11,6 +11,10 @@ export interface ActivitiesProps {
   handleUpdateDisplay: Function;
 }
 
+export interface WornEquipmentCompProps {
+  newChatLog: Function;
+}
+
 export interface ILog {
   name: string;
   levelReqWoodcutting: number;
@@ -362,7 +366,15 @@ export interface IChatLog {
 }
 
 //@ chatLogs may only have 1 tag - if this is changed, then the filter logic needs to be updated
-export type ChatLogTag = `Gained Resource` | `Monster Drop` | `Rare Item` | `Level Up` | `Gained XP` | `Welcome` | `Quest Completed`;
+export type ChatLogTag =
+  | `Gained Resource`
+  | `Monster Drop`
+  | `Rare Item`
+  | `Level Up`
+  | `Gained XP`
+  | `Welcome`
+  | `Quest Completed`
+  | `Equipment Swap`;
 
 export interface IArmorItem {
   name: string;

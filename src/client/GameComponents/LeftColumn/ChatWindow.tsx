@@ -73,8 +73,17 @@ const ChatWindow = (props: Types.NoProps) => {
     setTagsToHide([...tagsToHideTemp]);
   };
 
+  //@ if adding more tags, add them here as well
   const addAllFilters = () => {
-    let allFilters: Types.ChatLogTag[] = [`Gained Resource`, `Monster Drop`, `Rare Item`, `Level Up`, `Gained XP`, `Quest Completed`];
+    let allFilters: Types.ChatLogTag[] = [
+      `Gained Resource`,
+      `Monster Drop`,
+      `Rare Item`,
+      `Level Up`,
+      `Gained XP`,
+      `Quest Completed`,
+      `Equipment Swap`,
+    ];
     setTagsToHide([...allFilters]);
   };
 
@@ -145,6 +154,14 @@ const ChatWindow = (props: Types.NoProps) => {
             className="btn btn-primary"
           >
             Monster Drop
+          </button>
+          <button
+            onClick={() => {
+              addOrRemoveFilters(`Equipment Swap`);
+            }}
+            className="btn btn-primary"
+          >
+            Equipment Swap
           </button>
         </div>
         <div>

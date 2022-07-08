@@ -41,6 +41,7 @@ const WornEquipment = (props: Types.NoProps) => {
     // if the equipment is a piece of armor, it will have a defence level
     // based on the style, determine if the player has the appropriate offensive levels
 
+    //! I can probably tidy this up a bit, but it works for now
     if (`levelReqDefence` in equipment) {
       // check if the player owns the armor, and has the appropriate defence level
       if (equipment.playerOwnsThisItem && getLevel(Experience.Defense) >= equipment.levelReqDefence) {
@@ -180,7 +181,6 @@ const WornEquipment = (props: Types.NoProps) => {
     <div className="border border-dark border-2 rounded-3">
       <h5 className="card-header text-center">WornEquipment</h5>
       <div className="d-flex flex-column">
-        Head Equipment Slot
         <div className="text-center">Head Slot:</div>
         {displaySelectorTag(headsFromState, HeadSlot, `HeadSlot`)}
         <div className="text-center">Body Slot:</div>
@@ -204,10 +204,3 @@ export default WornEquipment;
 //  tf = f -> t
 //  ft = f -> t
 //  ff = f -> t
-
-/**
- * `levelReqDefence` in item => item is a piece of armor
- * so we check if it is owned. and if the player has the def level req met
- *
- *
- */
