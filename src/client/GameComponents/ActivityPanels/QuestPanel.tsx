@@ -131,6 +131,78 @@ const QuestPanel = (props: Types.ActivitiesProps) => {
     }
   };
 
+  const handleQuestButtonDisplay = (quest: Types.ICompositeQuestInfo) => {
+    /**
+     * based on the players level and quests complete, this function will style the background color
+     * of each quest card to indicate met or missing requirements
+     */
+    let meetsLevelRequirements = true; // this gets set to false if the player does not meet the level requirements
+    let meetsQuestRequirements = true; // this gets set to false if the player does not meet the requirements
+
+    const arrayOfSkillNamesFromQuestReqs = Object.keys(quest.levelRequirements);
+    /**
+     * we initialize arrayOfSkillNamesFromQuestReqs to get an array of skill names.
+     * we use this to index the Experience from state, and the quest level requirements
+     * if a quest has no level requirements, it will be an empty array
+     */
+    //@ check if the player meets the level requirements
+    try {
+      if (arrayOfSkillNamesFromQuestReqs.length) {
+        // run through each level requirement
+        arrayOfSkillNamesFromQuestReqs.forEach((levelReq) => {
+          // find the player's level in that skill
+          const mylevel = getLevel(Experience[levelReq as keyof Types.ISkillList]);
+
+          // find the level requirement from that quest
+          const reqlevel = quest.levelRequirements[levelReq];
+
+          if (mylevel <= reqlevel) {
+            meetsLevelRequirements = false;
+            // throwing an error allows us to 'break' out of this forEach, since we cannot 'continue' across the function boundary
+            throw new Error(`Player does not meet a level requirement`);
+          }
+        });
+      }
+    } catch (error) {}
+
+    //@ check if the player meets the quest requirements
+    if (quest.questRequirements) {
+      // if there are quest requirements, we need to check if the player meets the requirements
+      // if not, then we can just skip the quest requirements section
+
+      // a list of all quest names from state - we initialize the list to see if a quest reuqirement is available in state
+      const AllQuestNamesFromState = AllQuestsFromStateFlat.map((quest) => quest.name);
+
+      for (const questName of quest.questRequirements) {
+        // iterate over all quests from the requirements
+
+        for (let i = 0; i < AllQuestsFromStateFlat.length; i++) {
+          // iterate over all quests from state
+
+          /**
+           * If the quest is not available in the game, (it is not found in list of quests in state)
+           * Or if we find that quest in state, and it is not complete,
+           * then we fail the quest requirements and may break for effeciency
+           */
+          if (
+            !AllQuestNamesFromState.includes(questName) ||
+            (AllQuestsFromStateFlat[i].name === questName && !AllQuestsFromStateFlat[i].complete)
+          ) {
+            // if we find a quest from state and the quest is not complete
+            meetsQuestRequirements = false;
+            break;
+          }
+        }
+      }
+    }
+
+    if (meetsLevelRequirements.toString() === "true" && meetsQuestRequirements.toString() === "true") {
+      // has levels and has quests = green background
+
+      return <button className="btn btn-primary mx-2">{quest.stepsComplete ? `Resume quest` : `Begin quest`}</button>;
+    }
+  };
+
   useEffect(() => {
     /**
      * this useEffect shuffles the quest array coming from constants and the quest array coming from state together
@@ -171,8 +243,7 @@ const QuestPanel = (props: Types.ActivitiesProps) => {
               {quest.complete && <div>100%</div>}
               {!quest.complete && (
                 <div>
-                  <button className="btn btn-primary mx-2">{quest.stepsComplete ? `Resume quest` : `Begin quest`}</button>In Progress :{" "}
-                  {quest.stepsComplete} / {quest.stepsTotal}
+                  {handleQuestButtonDisplay(quest)}In Progress : {quest.stepsComplete} / {quest.stepsTotal}
                 </div>
               )}
             </div>
