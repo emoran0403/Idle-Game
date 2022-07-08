@@ -450,6 +450,7 @@ export interface IListOfRangedHeads {
   carapacehelm: IArmorItem;
   greendragonhidecoif: IArmorItem;
 }
+export type IListOfAllHeads = IListOfMeleeHeads | IListOfMagicHeads | IListOfRangedHeads;
 
 export interface IArmorSlotHead {
   melee: IListOfMeleeHeads;
@@ -500,6 +501,7 @@ export interface IListOfRangedBodies {
   carapacetorso: IArmorItem;
   greendragonhidebody: IArmorItem;
 }
+export type IListOfAllBodies = IListOfMeleeBodies | IListOfMagicBodies | IListOfRangedBodies;
 
 export interface IArmorSlotBody {
   melee: IListOfMeleeBodies;
@@ -550,6 +552,7 @@ export interface IListOfRangedLegs {
   carapacelegs: IArmorItem;
   greendragonhidechaps: IArmorItem;
 }
+export type IListOfAllLegs = IListOfMeleeLegs | IListOfMagicLegs | IListOfRangedLegs;
 
 export interface IArmorSlotLegs {
   melee: IListOfMeleeLegs;
@@ -600,6 +603,7 @@ export interface IListOfRangedFeet {
   carapaceboots: IArmorItem;
   greendragonhideboots: IArmorItem;
 }
+export type IListOfAllFeet = IListOfMeleeFeet | IListOfMagicFeet | IListOfRangedFeet;
 
 export interface IArmorSlotFeet {
   melee: IListOfMeleeFeet;
@@ -650,6 +654,7 @@ export interface IListOfRangedHands {
   carapacegloves: IArmorItem;
   greendragonhidevambraces: IArmorItem;
 }
+export type IListOfAllHands = IListOfMeleeHands | IListOfMagicHands | IListOfRangedHands;
 
 export interface IArmorSlotHands {
   melee: IListOfMeleeHands;
@@ -692,6 +697,7 @@ export interface IListOfTypelessCapes {
   teamcape: IArmorItem;
   obsidiancape: IArmorItem;
 }
+export type IListOfAllCapes = IListOfMeleeCapes | IListOfMagicCapes | IListOfRangedCapes | IListOfTypelessCapes;
 
 export interface IArmorSlotBack {
   melee: IListOfMeleeCapes;
@@ -722,6 +728,7 @@ export interface IListOfTypelessRings {
   ringofwealth: IArmorItem;
   berserkerring: IArmorItem;
 }
+export type IListOfAllRings = IListOfMeleeRings | IListOfMagicRings | IListOfRangedRings | IListOfTypelessRings;
 
 export interface IArmorSlotRing {
   melee: IListOfMeleeRings;
@@ -755,6 +762,7 @@ export interface IListOfTypelessNecks {
   amuletofglory: IArmorItem;
   amuletoffury: IArmorItem;
 }
+export type IListOfAllNecks = IListOfMeleeNecks | IListOfMagicNecks | IListOfRangedNecks | IListOfTypelessNecks;
 
 export interface IArmorSlotNeck {
   melee: IListOfMeleeNecks;
@@ -804,6 +812,7 @@ export interface IListOfRangedTwoHand {
   yewshortbow: IWeaponItem;
   magicshortbow: IWeaponItem;
 }
+export type IListOfAllTwoHand = IListOfMeleeTwoHand | IListOfMagicTwoHand | IListOfRangedTwoHand;
 
 export interface IArmorSlotTwoHand {
   melee: IListOfMeleeTwoHand;
@@ -840,3 +849,15 @@ export interface ITwoHandSlotSlice {
 }
 
 export type IEquipmentSlotOptions = IArmorSlotBody | IArmorSlotHead | IArmorSlotLegs | IArmorSlotHands | IArmorSlotFeet | IArmorSlotTwoHand;
+
+export interface ICurrentEquipment {
+  BackSlot: `none` | IListOfAllCapes;
+  BodySlot: `none` | IListOfAllBodies;
+  FeetSlot: `none` | IListOfAllFeet;
+  HandsSlot: `none` | IListOfAllHands;
+  HeadSlot: `none` | IListOfAllHeads;
+  LegsSlot: `none` | IListOfAllLegs;
+  NeckSlot: `none` | IListOfAllNecks;
+  RingSlot: `none` | IListOfAllRings;
+  TwoHandSlot: `none` | IListOfAllTwoHand;
+}
