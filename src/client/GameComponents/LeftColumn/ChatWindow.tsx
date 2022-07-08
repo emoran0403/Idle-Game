@@ -2,7 +2,8 @@ import * as Types from "../../../../Types";
 import * as React from "react";
 import { useEffect, useState } from "react";
 
-//! multiple components need to be able to add to this - pass a function in props
+//@ multiple components need to be able to add to this - pass a function in props
+//! style buttons to show user which filters are applied
 const ChatWindow = (props: Types.ChatWindowCompProps) => {
   // this will hold the chatLogs that will be displayed
   const [displayedChatLogArray, setdisplayedChatLogArray] = useState<Types.IChatLog[]>([]);
