@@ -58,7 +58,7 @@ const GameContainer = (props: Types.NoProps) => {
 
         <div id="middle-column" className="col-lg-6 border border-dark border-2 rounded-3" style={{ height: "90vh" }}>
           <NavigationArea />
-          <ActivityArea />
+          <ActivityArea newChatLog={handleNewChatLog} />
         </div>
 
         <div id="right-column" className="col-lg-3 border border-dark border-2 rounded-3" style={{ height: "90vh" }}>

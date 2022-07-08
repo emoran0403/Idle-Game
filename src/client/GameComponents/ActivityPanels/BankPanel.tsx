@@ -3,7 +3,7 @@ import * as React from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
-const BankPanel = (props: Types.ActivitiesProps) => {
+const BankPanel = (props: Types.BankPanelProps) => {
   const bank_logs = useSelector((state: Types.AllState) => state.Bank_Logs) as Types.ILogBankSlice;
   const bank_fish = useSelector((state: Types.AllState) => state.Bank_Fish) as Types.IFishBankSlice;
 

@@ -3,7 +3,7 @@ import * as React from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
-const CombatPanel = (props: Types.ActivitiesProps) => {
+const CombatPanel = (props: Types.CombatPanelProps) => {
   // This grabs the current location from state
   const { Current } = useSelector((state: Types.AllState) => state.CurrentLocation) as Types.ICurrentLocation;
 

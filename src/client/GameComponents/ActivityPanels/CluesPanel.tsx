@@ -2,7 +2,7 @@ import * as Types from "../../../../Types";
 import * as React from "react";
 import { useEffect } from "react";
 
-const CluesPanel = (props: Types.ActivitiesProps) => {
+const CluesPanel = (props: Types.CluesPanelProps) => {
   useEffect(() => {}, []);
   return (
     <div className="card border border-dark border-2 rounded-3">

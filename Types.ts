@@ -7,11 +7,52 @@ export interface InventoryProps {}
 export interface WoodcuttingCompProps {}
 export interface FletchingCompProps {}
 export interface FiremakingCompProps {}
-export interface ActivitiesProps {
+
+export interface QuestPanelCompProps {
   handleUpdateDisplay: Function;
+  newChatLog: Function;
+}
+
+export interface SkillsPanelCompProps {
+  handleUpdateDisplay: Function;
+  newChatLog: Function;
+}
+
+export interface ActivityButtonsCompProps {
+  handleUpdateDisplay: Function;
+  newChatLog?: Function;
+}
+
+export interface MinigamePanelCompProps {
+  handleUpdateDisplay: Function;
+  newChatLog: Function;
+}
+
+export interface BossesPanelProps {
+  handleUpdateDisplay: Function;
+  newChatLog: Function;
+}
+
+export interface CombatPanelProps {
+  handleUpdateDisplay: Function;
+  newChatLog: Function;
+}
+
+export interface BankPanelProps {
+  handleUpdateDisplay: Function;
+  newChatLog: Function;
+}
+
+export interface CluesPanelProps {
+  handleUpdateDisplay: Function;
+  newChatLog: Function;
 }
 
 export interface WornEquipmentCompProps {
+  newChatLog: Function;
+}
+
+export interface ActivityAreaCompProps {
   newChatLog: Function;
 }
 

@@ -6,7 +6,7 @@ import { AllQuests } from "../../../../Constants/Quests";
 import { getLevel } from "../../../../Constants/XP Levels";
 
 //! handleQuestStyle and handleQuestButtonDisplay have repeated logic that could be improved
-const QuestPanel = (props: Types.ActivitiesProps) => {
+const QuestPanel = (props: Types.QuestPanelCompProps) => {
   // This grabs the current location from state
   const { Current } = useSelector((state: Types.AllState) => state.CurrentLocation) as Types.ICurrentLocation;
 

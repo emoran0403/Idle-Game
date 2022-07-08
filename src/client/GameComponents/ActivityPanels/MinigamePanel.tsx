@@ -2,7 +2,7 @@ import * as Types from "../../../../Types";
 import * as React from "react";
 import { useEffect } from "react";
 
-const MinigamePanel = (props: Types.ActivitiesProps) => {
+const MinigamePanel = (props: Types.MinigamePanelCompProps) => {
   useEffect(() => {}, []);
   return (
     <div className="card border border-dark border-2 rounded-3">
