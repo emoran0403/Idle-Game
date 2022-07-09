@@ -56,6 +56,12 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
               onClick={(e) => {
                 dispatch(setResource(resource));
                 dispatch(setSkill(`Woodcutting`));
+                // send a contextual message to the chat window
+                // if the last log contains the resource, don't send it
+                if (resource === props.chatLogArray[props.chatLogArray.length - 1].message.substring(12)) {
+                  return;
+                }
+                props.newChatLog(`Now cutting ${resource}`, `Activity Swap`);
               }}
               key={`resource-list-${resource}`}
               className={`btn border mb-3 ${
@@ -87,6 +93,13 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
               onClick={(e) => {
                 dispatch(setResource(resource));
                 dispatch(setSkill(`Fishing`));
+
+                // send a contextual message to the chat window
+                // if the last log contains the resource, don't send it
+                if (resource === props.chatLogArray[props.chatLogArray.length - 1].message.substring(12)) {
+                  return;
+                }
+                props.newChatLog(`Now fishing ${resource}`, `Activity Swap`);
               }}
               key={`resource-list-${resource}`}
               className={`btn border mb-3 ${

@@ -17,6 +17,7 @@ export interface QuestPanelCompProps {
 export interface SkillsPanelCompProps {
   handleUpdateDisplay: Function;
   newChatLog: Function;
+  chatLogArray: IChatLog[];
 }
 
 export interface ActivityButtonsCompProps {
