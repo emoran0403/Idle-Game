@@ -28,7 +28,7 @@ const ActivityArea = (props: Types.ActivityAreaCompProps) => {
         {
           activityDisplay: <ActivityDisplay />,
           skills: <SkillsPanel handleUpdateDisplay={handleUpdateDisplay} newChatLog={props.newChatLog} />,
-          quests: <QuestPanel handleUpdateDisplay={handleUpdateDisplay} newChatLog={props.newChatLog} />,
+          quests: <QuestPanel handleUpdateDisplay={handleUpdateDisplay} newChatLog={props.newChatLog} chatLogArray={props.chatLogArray} />,
           bank: <BankPanel handleUpdateDisplay={handleUpdateDisplay} newChatLog={props.newChatLog} />,
           combat: <CombatPanel handleUpdateDisplay={handleUpdateDisplay} newChatLog={props.newChatLog} />,
           bosses: <BossesPanel handleUpdateDisplay={handleUpdateDisplay} newChatLog={props.newChatLog} />,

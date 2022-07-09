@@ -173,6 +173,7 @@ const ChatWindow = (props: Types.ChatWindowCompProps) => {
     // set the new chatLogArray to state
     let chatLogsToShow = tempChatLogArray.filter((chatLog) => !tagsToHide.includes(chatLog.tags)).reverse();
     setdisplayedChatLogArray(chatLogsToShow);
+    console.log(chatLogsToShow);
   }, [tagsToHide, props.chatLogArray]);
 
   return (

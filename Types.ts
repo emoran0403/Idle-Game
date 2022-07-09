@@ -11,6 +11,7 @@ export interface FiremakingCompProps {}
 export interface QuestPanelCompProps {
   handleUpdateDisplay: Function;
   newChatLog: Function;
+  chatLogArray: IChatLog[];
 }
 
 export interface SkillsPanelCompProps {
@@ -54,6 +55,7 @@ export interface WornEquipmentCompProps {
 
 export interface ActivityAreaCompProps {
   newChatLog: Function;
+  chatLogArray: IChatLog[];
 }
 
 export interface ChatWindowCompProps {

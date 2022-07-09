@@ -32,9 +32,15 @@ const GameContainer = (props: Types.NoProps) => {
       message,
       tags,
     };
-    console.log(newLog);
+    // console.log(newLog);
 
-    // we only want to hold the most recent 60 logs, removing the oldest
+    /**
+     * we only want to hold the most recent 60 logs, removing the oldest as needed
+     * new log is added to the end of the array
+     * shift() removes from the front, which ends up being the olded messages
+     * ChatWindow component reverses to display the most recent logs first
+     *
+     */
     if (chatLogArray.length >= 60) {
       let tempchatLogArray = [...chatLogArray]; // clone chatLogArray into a temp array
       tempchatLogArray.shift(); // remove the first item (don't assign this, as it returns the removed element)
@@ -59,7 +65,7 @@ const GameContainer = (props: Types.NoProps) => {
 
         <div id="middle-column" className="col-lg-6 border border-dark border-2 rounded-3" style={{ height: "90vh" }}>
           <NavigationArea />
-          <ActivityArea newChatLog={handleNewChatLog} />
+          <ActivityArea newChatLog={handleNewChatLog} chatLogArray={chatLogArray} />
         </div>
 
         <div id="right-column" className="col-lg-3 border border-dark border-2 rounded-3" style={{ height: "90vh" }}>

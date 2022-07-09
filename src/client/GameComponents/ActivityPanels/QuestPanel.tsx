@@ -132,24 +132,11 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
   };
 
   const handleQuestChatMessage = (quest: Types.ICompositeQuestInfo) => {
-    console.log(`button clicked`);
-    //! this is not working
-
-    /**
-     * component seems to rerender when the button is clicked
-     */
-    // props.newChatLog(`Resuming ${quest.name}`, `Misc`);
-
+    // send a contextual message to the chat window
     if (quest.stepsComplete) {
-      console.log(`resume msg`);
-
       props.newChatLog(`Resuming ${quest.name}`, `Misc`);
-      console.log(`resume msg after`);
     } else {
-      console.log(`start msg`);
-
       props.newChatLog(`Starting ${quest.name}`, `Misc`);
-      console.log(`start msg after`);
     }
   };
 
