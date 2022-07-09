@@ -420,7 +420,8 @@ export type ChatLogTag =
   | `Welcome`
   | `Quest Completed`
   | `Equipment Swap`
-  | `Activity Swap`;
+  | `Activity Swap`
+  | `Misc`;
 
 export interface IArmorItem {
   name: string;

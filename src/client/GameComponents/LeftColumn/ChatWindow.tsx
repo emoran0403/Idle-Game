@@ -14,8 +14,8 @@ const ChatWindow = (props: Types.ChatWindowCompProps) => {
   const showChatJSX = () => {
     return (
       <div>
-        {displayedChatLogArray.map((chatLog) => (
-          <div className="d-flex flex-row justify-content-between" key={`ChatLog-at-${chatLog.timeStamp}`}>
+        {displayedChatLogArray.map((chatLog, i) => (
+          <div className="d-flex flex-row justify-content-between" key={`ChatLog-at-${chatLog.timeStamp}-${i}`}>
             <div className="badge rounded-pill bg-primary">{chatLog.timeStamp}</div>
             <div className="text-wrap">{chatLog.message}</div>
           </div>
@@ -54,6 +54,7 @@ const ChatWindow = (props: Types.ChatWindowCompProps) => {
       `Quest Completed`,
       `Equipment Swap`,
       `Activity Swap`,
+      `Misc`,
     ];
     setTagsToHide([...allFilters]);
   };
@@ -142,6 +143,15 @@ const ChatWindow = (props: Types.ChatWindowCompProps) => {
             className="btn btn-primary"
           >
             Activity Swap
+          </button>
+
+          <button
+            onClick={() => {
+              addOrRemoveFilters(`Misc`);
+            }}
+            className="btn btn-primary"
+          >
+            Misc.
           </button>
         </div>
         <div>

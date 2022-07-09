@@ -131,6 +131,28 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
     }
   };
 
+  const handleQuestChatMessage = (quest: Types.ICompositeQuestInfo) => {
+    console.log(`button clicked`);
+    //! this is not working
+
+    /**
+     * component seems to rerender when the button is clicked
+     */
+    // props.newChatLog(`Resuming ${quest.name}`, `Misc`);
+
+    if (quest.stepsComplete) {
+      console.log(`resume msg`);
+
+      props.newChatLog(`Resuming ${quest.name}`, `Misc`);
+      console.log(`resume msg after`);
+    } else {
+      console.log(`start msg`);
+
+      props.newChatLog(`Starting ${quest.name}`, `Misc`);
+      console.log(`start msg after`);
+    }
+  };
+
   const handleQuestButtonDisplay = (quest: Types.ICompositeQuestInfo) => {
     /**
      * based on the players level and quests complete, this function will style the background color
@@ -197,9 +219,12 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
     }
 
     if (meetsLevelRequirements.toString() === "true" && meetsQuestRequirements.toString() === "true") {
-      // has levels and has quests = green background
-
-      return <button className="btn btn-primary mx-2">{quest.stepsComplete ? `Resume quest` : `Begin quest`}</button>;
+      // has levels and has quests => show the button to start or resume the quest
+      return (
+        <button onClick={() => handleQuestChatMessage(quest)} className="btn btn-primary mx-2">
+          {quest.stepsComplete ? `Resume quest` : `Begin quest`}
+        </button>
+      );
     }
   };
 

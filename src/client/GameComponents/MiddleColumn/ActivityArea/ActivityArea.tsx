@@ -19,7 +19,7 @@ const ActivityArea = (props: Types.ActivityAreaCompProps) => {
     setDisplay(displayString);
   };
 
-  useEffect(() => {}, []);
+  // useEffect(() => {}, []);
 
   return (
     <div className="border border-dark border-2 rounded-3">

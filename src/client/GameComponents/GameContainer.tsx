@@ -32,9 +32,10 @@ const GameContainer = (props: Types.NoProps) => {
       message,
       tags,
     };
+    console.log(newLog);
 
-    // we only want to hold the most recent 50 logs, removing the oldest
-    if (chatLogArray.length >= 50) {
+    // we only want to hold the most recent 60 logs, removing the oldest
+    if (chatLogArray.length >= 60) {
       let tempchatLogArray = [...chatLogArray]; // clone chatLogArray into a temp array
       tempchatLogArray.shift(); // remove the first item (don't assign this, as it returns the removed element)
       tempchatLogArray.push(newLog); // adds the new log to the end of the array
@@ -44,7 +45,7 @@ const GameContainer = (props: Types.NoProps) => {
     }
   };
 
-  useEffect(() => {}, []);
+  // useEffect(() => {}, []);
 
   return (
     <div className="container">

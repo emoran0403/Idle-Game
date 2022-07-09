@@ -210,7 +210,7 @@ const WornEquipment = (props: Types.WornEquipmentCompProps) => {
     } else return false;
   };
 
-  useEffect(() => {}, []);
+  // useEffect(() => {}, []);
   return (
     <div className="border border-dark border-2 rounded-3">
       <h5 className="card-header text-center">WornEquipment</h5>
