@@ -133,10 +133,16 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
 
   const handleQuestChatMessage = (quest: Types.ICompositeQuestInfo) => {
     // send a contextual message to the chat window
-    if (quest.stepsComplete) {
-      props.newChatLog(`Resuming ${quest.name}`, `Misc`);
+
+    // if the last log contains the quest name, don't send it
+    if (quest.name === props.chatLogArray[props.chatLogArray.length - 1].message.substring(9)) {
+      return;
     } else {
-      props.newChatLog(`Starting ${quest.name}`, `Misc`);
+      if (quest.stepsComplete) {
+        props.newChatLog(`Resuming ${quest.name}`, `Misc`);
+      } else {
+        props.newChatLog(`Starting ${quest.name}`, `Misc`);
+      }
     }
   };
 
