@@ -7,6 +7,13 @@ const Inventory = (props: Types.NoProps) => {
   const Wallet = useSelector((state: Types.AllState) => state.Wallet) as Types.IWallet;
   const { Current } = useSelector((state: Types.AllState) => state.Inventory) as Types.I_Inventory;
 
+  const makeCompositeCurrent = () => {
+    let compositeCurrent = [...Current];
+    compositeCurrent.push(...Array(28 - Current.length).fill(`blank`));
+    console.log(`tempcurrent and new stuff is ${compositeCurrent}`);
+    return compositeCurrent;
+  };
+
   useEffect(() => {}, []);
 
   return (
@@ -14,24 +21,25 @@ const Inventory = (props: Types.NoProps) => {
       <div className="card">
         <h5 className="card-header text-center">
           Inventory
-          <div>
+          <div className="d-flex row">
             <h6 className="card-subtitle text-muted">Coins: {Wallet.coins}</h6>
           </div>
-          <div className="d-flex flex-wrap justify-content-center">
-            {/* {Current.map((item, i) => (
-              <div className="border border-2 m-1">
-                <span className={`${i % 2 && `invisible`}`}>{item}</span>
-              </div>
-            ))} */}
-          </div>
         </h5>
+
+        <div className="d-flex flex-wrap justify-content-between container">
+          {makeCompositeCurrent().map((item, i) => (
+            <div key={`Inventory-slot-${i + 1}`} className="border border-2 border-dark rounded flex-fill m-1">
+              <span>{item}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
 };
 
 export default Inventory;
-
+// className={`${i % 2 && `invisible`}`}
 {
   /* <div className="card">
   <div className="card-body">
