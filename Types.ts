@@ -10,6 +10,7 @@ export interface FiremakingCompProps {}
 
 export interface NavigationAreaCompProps {
   newChatLog: Function;
+  chatLogArray: IChatLog[];
 }
 export interface ResourcesCompProps {
   newChatLog: Function;
@@ -410,8 +411,9 @@ export interface ICompositeQuestInfo extends IQuestInfo {
 
 //@ extend this as needed to account for future locations
 export interface ICurrentLocation {
-  Current: `Lumbridge` | `Draynor`;
+  Current: ICurrentLocationOptions;
 }
+export type ICurrentLocationOptions = `Lumbridge` | `Draynor`;
 
 export interface IChatLog {
   timeStamp: string;
@@ -426,7 +428,7 @@ export type ChatLogTag =
   | `Rare Item`
   | `Level Up`
   | `Gained XP`
-  | `Welcome`
+  | `Nonfilterable`
   | `Quest Completed`
   | `Equipment Swap`
   | `Activity Swap`
