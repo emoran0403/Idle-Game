@@ -3,7 +3,7 @@ import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setResources } from "../../../Redux/Slices/Resources";
 
-const Resources = (props: Types.NoProps) => {
+const Resources = (props: Types.ResourcesCompProps) => {
   const state = useSelector((state: Types.AllState) => state.Resources) as Types.IResources;
   const dispatch = useDispatch();
   let resourcesToDisplay: string = "";
@@ -25,7 +25,8 @@ const Resources = (props: Types.NoProps) => {
         className="btn btn-primary"
         onClick={() => {
           dispatch(setResources());
-          console.log(`you toggled resources`);
+          props.newChatLog(`You are now ${resourcesForButton} Resources`, `Misc`);
+          // console.log(`you toggled resources`);
         }}
       >
         {resourcesForButton.substring(0, 4)} Resources

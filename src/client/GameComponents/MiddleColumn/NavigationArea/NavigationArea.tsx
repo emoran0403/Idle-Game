@@ -7,7 +7,7 @@ import CurrentSkill from "./CurrentSkill";
 import CurrentResource from "./CurrentResource";
 import CurrentActivity from "./CurrentActivity";
 
-const NavigationArea = (props: Types.NoProps) => {
+const NavigationArea = (props: Types.NavigationAreaCompProps) => {
   // useEffect(() => {}, []);
   return (
     <div className="d-flex border border-dark border-2 rounded-3">
@@ -17,13 +17,13 @@ const NavigationArea = (props: Types.NoProps) => {
         }}
         className="btn btn-primary flex-fill"
       >
-        World Map Button
+        World Map
       </button>
       <CurrentLocation />
       <CurrentActivity />
       <CurrentSkill />
       <CurrentResource />
-      <Resources />
+      <Resources newChatLog={props.newChatLog} />
     </div>
   );
 };

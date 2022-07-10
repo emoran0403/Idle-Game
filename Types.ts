@@ -8,6 +8,13 @@ export interface WoodcuttingCompProps {}
 export interface FletchingCompProps {}
 export interface FiremakingCompProps {}
 
+export interface NavigationAreaCompProps {
+  newChatLog: Function;
+}
+export interface ResourcesCompProps {
+  newChatLog: Function;
+}
+
 export interface QuestPanelCompProps {
   handleUpdateDisplay: Function;
   newChatLog: Function;

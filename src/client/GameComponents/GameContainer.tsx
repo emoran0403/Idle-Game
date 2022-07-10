@@ -64,7 +64,7 @@ const GameContainer = (props: Types.NoProps) => {
         </div>
 
         <div id="middle-column" className="col-lg-6 border border-dark border-2 rounded-3" style={{ height: "90vh" }}>
-          <NavigationArea />
+          <NavigationArea newChatLog={handleNewChatLog} />
           <ActivityArea newChatLog={handleNewChatLog} chatLogArray={chatLogArray} />
         </div>
 
