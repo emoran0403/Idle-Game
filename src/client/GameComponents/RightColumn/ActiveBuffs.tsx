@@ -6,7 +6,7 @@ const ActiveBuffs = (props: Types.NoProps) => {
   useEffect(() => {}, []);
   return (
     <div className="border border-dark border-2 rounded-3">
-      <div>This is ActiveBuffs</div>
+      <h5 className="card-header text-center">ActiveBuffs</h5>
       <div>ActiveBuffs is not part of the minimum viable product, but it needed a spot</div>
     </div>
   );
