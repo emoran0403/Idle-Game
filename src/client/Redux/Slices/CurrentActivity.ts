@@ -4,7 +4,7 @@ import * as Types from "../../../../Types";
 export const CurrentActivity = createSlice({
   name: "currentactivity",
   initialState: {
-    Current: `none`,
+    Current: `Idle`,
   },
   reducers: {
     // this is the only reducer needed as the player can only do 1 thing at a time

@@ -2,11 +2,17 @@ import * as Types from "../../../../Types";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { AllQuests } from "../../../../Constants/Quests";
 import { getLevel } from "../../../../Constants/XP Levels";
+import { setActivity } from "../../Redux/Slices/CurrentActivity";
+import { setResource } from "../../Redux/Slices/CurrentResource";
+import { setSkill } from "../../Redux/Slices/CurrentSkill";
 
 //! handleQuestStyle and handleQuestButtonDisplay have repeated logic that could be improved
 const QuestPanel = (props: Types.QuestPanelCompProps) => {
+  const dispatch = useDispatch();
+
   // This grabs the current location from state
   const { Current } = useSelector((state: Types.AllState) => state.CurrentLocation) as Types.ICurrentLocation;
 
@@ -214,7 +220,13 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
     if (meetsLevelRequirements.toString() === "true" && meetsQuestRequirements.toString() === "true") {
       // has levels and has quests => show the button to start or resume the quest
       return (
-        <button onClick={() => handleQuestChatMessage(quest)} className="btn btn-primary mx-2">
+        <button
+          onClick={(e) => {
+            handleQuestChatMessage(quest), dispatch(setActivity(`Questing`)), dispatch(setResource(`None`));
+            dispatch(setSkill(`None`));
+          }}
+          className="btn btn-primary mx-2"
+        >
           {quest.stepsComplete ? `Resume quest` : `Begin quest`}
         </button>
       );

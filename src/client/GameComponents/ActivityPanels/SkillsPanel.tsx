@@ -8,6 +8,7 @@ import { ListOfFish } from "../../../../Constants/Items/Fish";
 import { useDispatch } from "react-redux";
 import { setResource } from "../../Redux/Slices/CurrentResource";
 import { setSkill } from "../../Redux/Slices/CurrentSkill";
+import { setActivity } from "../../Redux/Slices/CurrentActivity";
 
 //@ this needs to pull from some single source of truth showing all the skills available, and their resources based on the current location from state
 //! how can i conditionall set the background color for each of the skilling options based on the player's current level?
@@ -56,6 +57,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
               onClick={(e) => {
                 dispatch(setResource(resource));
                 dispatch(setSkill(`Woodcutting`));
+                dispatch(setActivity(`Skilling`));
                 // send a contextual message to the chat window
                 // if the last log contains the resource, don't send it
                 if (resource === props.chatLogArray[props.chatLogArray.length - 1].message.substring(12)) {
@@ -93,6 +95,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
               onClick={(e) => {
                 dispatch(setResource(resource));
                 dispatch(setSkill(`Fishing`));
+                dispatch(setActivity(`Skilling`));
 
                 // send a contextual message to the chat window
                 // if the last log contains the resource, don't send it

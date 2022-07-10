@@ -5,9 +5,10 @@ import Resources from "./Resources";
 import CurrentLocation from "./CurrentLocation";
 import CurrentSkill from "./CurrentSkill";
 import CurrentResource from "./CurrentResource";
+import CurrentActivity from "./CurrentActivity";
 
 const NavigationArea = (props: Types.NoProps) => {
-  useEffect(() => {}, []);
+  // useEffect(() => {}, []);
   return (
     <div className="d-flex border border-dark border-2 rounded-3">
       <button
@@ -19,6 +20,7 @@ const NavigationArea = (props: Types.NoProps) => {
         World Map Button
       </button>
       <CurrentLocation />
+      <CurrentActivity />
       <CurrentSkill />
       <CurrentResource />
       <Resources />

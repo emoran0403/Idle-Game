@@ -228,14 +228,14 @@ export interface IStateQuest {
 }
 
 export interface ListOfSkills {
-  Current: `Woodcutting` | `Firemaking` | `Mining` | `Fishing`;
+  Current: `Woodcutting` | `Firemaking` | `Mining` | `Fishing` | `None`;
 }
 
 export type bigwow = `Woodcutting` | `Firemaking` | `Mining` | `Fishing`;
 
 export interface ICurrentResource {
   Current:
-    | `none`
+    | `None`
     | `raw_shrimp`
     | `raw_crayfish`
     | `raw_anchovies`
@@ -259,6 +259,7 @@ export interface AllState extends AllSlots {
   Bank_Logs: ILogBankSlice;
   Inventory: I_Inventory;
   CurrentLocation: ICurrentLocation;
+  CurrentActivity: ICurrentActivity;
   CurrentSkill: ListOfSkills;
   CurrentResource: ICurrentResource;
   Resources: IResources;
@@ -313,11 +314,9 @@ export interface I_Inventory {
 }
 
 export interface ICurrentActivity {
-  Banking: boolean;
-  Woodcutting: boolean;
-  Firemaking: boolean;
-  Combat: boolean;
+  Current: ICurrentActivityOptions;
 }
+export type ICurrentActivityOptions = `Banking` | `Skilling` | `Questing` | ` In combat` | `Idle`;
 
 export interface IResources {
   Banking: boolean;
