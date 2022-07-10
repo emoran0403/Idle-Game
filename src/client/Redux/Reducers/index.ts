@@ -8,6 +8,7 @@ import logsReducer from "../Slices/BankSlices/LogsSlice";
 import inventoryReducer from "../Slices/Inventory";
 import currentLocationReducer from "../Slices/CurrentLocation";
 import currentSkillReducer from "../Slices/CurrentSkill";
+import currentActivityReducer from "../Slices/CurrentActivity";
 import resourceReducer from "../Slices/CurrentResource";
 import resourcesReducer from "../Slices/Resources";
 import walletReducer from "../Slices/Wallet";
@@ -33,6 +34,7 @@ export default combineReducers({
   Inventory: inventoryReducer,
   CurrentLocation: currentLocationReducer,
   CurrentSkill: currentSkillReducer,
+  CurrentActivity: currentActivityReducer,
   CurrentResource: resourceReducer,
   Resources: resourcesReducer,
   Wallet: walletReducer,
