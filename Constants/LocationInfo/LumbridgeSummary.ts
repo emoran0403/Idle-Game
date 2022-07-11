@@ -7,6 +7,6 @@ export const LumbridgeSummary: Types.ILumbridgeLocationSummary = {
     Mining: [`clay`, `tin`, `copper`, `iron`, `coal`],
     Fishing: [`raw_crayfish`, `raw_shrimp`, `raw_sardine`, `raw_anchovies`, `raw_trout`, `raw_herring`, `raw_pike`, `raw_salmon`],
   },
-  Combat: [`man`, `woman`, `giant spider`, `goblin`, `chicken`, `cow`, `spider`, `giant rat`, `swamp frog`],
+  Combat: [`man`, `giant spider`, `goblin`, `chicken`, `cow`, `spider`, `giant rat`, `swamp frog`],
   Bosses: [],
 };

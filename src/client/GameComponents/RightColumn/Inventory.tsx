@@ -3,6 +3,8 @@ import * as React from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
+//! use custom CSS to force the interface to maintain its layout
+
 const Inventory = (props: Types.NoProps) => {
   const Wallet = useSelector((state: Types.AllState) => state.Wallet) as Types.IWallet;
   const { Current } = useSelector((state: Types.AllState) => state.Inventory) as Types.I_Inventory;
@@ -14,7 +16,7 @@ const Inventory = (props: Types.NoProps) => {
     return compositeCurrent;
   };
 
-  useEffect(() => {}, []);
+  // useEffect(() => {}, []);
 
   return (
     <div className="card border border-dark border-2 rounded-3">

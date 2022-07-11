@@ -9,17 +9,75 @@
 
 (() => {
   let ENEMYINFO = {
-    name: document.getElementById(`firstHeading`).textContent.toLowerCase(),
-    level: Number(document.getElementsByTagName(`tbody`)[0].children[12].children[0].textContent),
-    lifePoints: Number(document.getElementsByTagName(`tbody`)[0].children[12].children[1].textContent),
-    XPGivenCombatStyle: Math.round(Number(document.getElementsByTagName(`tbody`)[0].children[12].children[2].textContent)),
-    XPGivenConstitution: Math.round(Number(document.getElementsByTagName(`tbody`)[0].children[12].children[3].textContent)),
+    name: (() => {
+      try {
+        return document.getElementById(`firstHeading`).textContent.toLowerCase();
+      } catch (error) {
+        return `enterTHISmanually`;
+      }
+    })(),
+    level: (() => {
+      try {
+        return Number(document.getElementsByTagName(`tbody`)[0].children[12].children[0].textContent);
+      } catch (error) {
+        return `enterLEVELmanually`;
+      }
+    })(),
+
+    lifePoints: (() => {
+      try {
+        return Number(document.getElementsByTagName(`tbody`)[0].children[12].children[1].textContent);
+      } catch (error) {
+        return `enterlifepointsmanually`;
+      }
+    })(),
+    XPGivenCombatStyle: (() => {
+      try {
+        return Math.round(Number(document.getElementsByTagName(`tbody`)[0].children[12].children[2].textContent));
+      } catch (error) {
+        return `enterXPGivenCombatStylemanually`;
+      }
+    })(),
+    XPGivenConstitution: (() => {
+      try {
+        return Math.round(Number(document.getElementsByTagName(`tbody`)[0].children[12].children[3].textContent));
+      } catch (error) {
+        return `enterXPGivenConstitutionmanually`;
+      }
+    })(),
 
     affinities: { explicitWeakness: `enterManually`, weakStyle: `enterManually`, ownStyle: `enterManually`, strongStyle: `enterManually` },
 
-    armor: Number(document.getElementsByTagName(`tbody`)[0].children[31].children[0].textContent),
-    defence: Number(document.getElementsByTagName(`tbody`)[0].children[31].children[1].textContent),
-    accuracy: Number(document.getElementsByTagName(`tbody`)[0].children[28].children[0].textContent),
+    armor: (() => {
+      try {
+        if (isNaN(Number(document.getElementsByTagName(`tbody`)[0].children[31].children[0].textContent))) {
+          throw new error();
+        }
+        return Number(document.getElementsByTagName(`tbody`)[0].children[31].children[0].textContent);
+      } catch (error) {
+        return `enterArmorManually`;
+      }
+    })(),
+
+    defence: (() => {
+      try {
+        return Number(document.getElementsByTagName(`tbody`)[0].children[31].children[1].textContent);
+      } catch (error) {
+        return `enterDefenceManually`;
+      }
+    })(),
+
+    accuracy: (() => {
+      try {
+        return Math.max(
+          Number(document.getElementsByTagName(`tbody`)[0].children[28].children[0].textContent),
+          Number(document.getElementsByTagName(`tbody`)[0].children[28].children[1].textContent),
+          Number(document.getElementsByTagName(`tbody`)[0].children[28].children[2].textContent)
+        );
+      } catch (error) {
+        return `enterAccuracyManually`;
+      }
+    })(),
   };
 
   console.log(ENEMYINFO);
@@ -40,4 +98,29 @@ const exampleEnemyInfo = {
   armor: 130,
   defence: 3,
   accuracy: 130,
+};
+
+// (() => {
+//   try {
+//     return `statementhere`;
+//   } catch (error) {
+//     return `enterTHISmanually`;
+//   }
+// })();
+
+let wow = {
+  name: "giant spider",
+  level: 2,
+  lifePoints: 100,
+  XPGivenCombatStyle: 25,
+  XPGivenConstitution: 8,
+  affinities: {
+    explicitWeakness: "enterManually",
+    weakStyle: "enterManually",
+    ownStyle: "enterManually",
+    strongStyle: "enterManually",
+  },
+  armor: "enterArmorManually",
+  defence: "enterDefenceManually",
+  accuracy: "enterAccuracyManually",
 };
