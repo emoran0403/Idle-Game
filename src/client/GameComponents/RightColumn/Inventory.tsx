@@ -12,7 +12,7 @@ const Inventory = (props: Types.NoProps) => {
   const makeCompositeCurrent = () => {
     let compositeCurrent = [...Current];
     compositeCurrent.push(...Array(28 - Current.length).fill(`blank`));
-    console.log(`tempcurrent and new stuff is ${compositeCurrent}`);
+    // console.log(`tempcurrent and new stuff is ${compositeCurrent}`);
     return compositeCurrent;
   };
 

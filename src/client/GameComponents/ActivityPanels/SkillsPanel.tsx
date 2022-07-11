@@ -11,7 +11,6 @@ import { setSkill } from "../../Redux/Slices/CurrentSkill";
 import { setActivity } from "../../Redux/Slices/CurrentActivity";
 
 //@ this needs to pull from some single source of truth showing all the skills available, and their resources based on the current location from state
-//! how can i conditionall set the background color for each of the skilling options based on the player's current level?
 
 const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
   const dispatch = useDispatch();

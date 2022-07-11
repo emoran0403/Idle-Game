@@ -952,3 +952,5 @@ export interface ILumbridgeEnemies {
 export interface IAllEnemies {
   Lumbridge: ILumbridgeEnemies;
 }
+//@ extend this as more locations are added
+export type IEnemyLocations = ILumbridgeEnemies;
