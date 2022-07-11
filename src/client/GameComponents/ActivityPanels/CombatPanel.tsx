@@ -7,7 +7,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
   // This grabs the current location from state
   const { Current } = useSelector((state: Types.AllState) => state.CurrentLocation) as Types.ICurrentLocation;
 
-  useEffect(() => {}, []);
+  // useEffect(() => {}, []);
 
   const panelHeaderJSX = () => {
     // returns the JSX for the panel header
@@ -27,6 +27,8 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
       </div>
     );
   };
+
+  const combatOptionsJSX = () => {};
 
   return (
     <div className="container card border border-dark border-2 rounded-3">

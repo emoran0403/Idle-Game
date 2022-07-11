@@ -137,7 +137,7 @@ const swampfrog: Types.IEnemySummary = {
   accuracy: 223,
 };
 
-export const LumbridgeEnemies = {
+export const Lumbridge = {
   man,
   goblin,
   giantspider,

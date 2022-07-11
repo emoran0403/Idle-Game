@@ -936,6 +936,7 @@ export interface IEnemySummary {
   accuracy: number;
 }
 
+//@ recreate this for each location
 export interface ILumbridgeEnemies {
   man: IEnemySummary;
   goblin: IEnemySummary;
@@ -945,4 +946,9 @@ export interface ILumbridgeEnemies {
   spider: IEnemySummary;
   giantrat: IEnemySummary;
   swampfrog: IEnemySummary;
+}
+
+//@ extend this as more locations are added
+export interface IAllEnemies {
+  Lumbridge: ILumbridgeEnemies;
 }
