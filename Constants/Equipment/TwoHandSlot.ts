@@ -19,7 +19,7 @@ const listOfMeleeTwoHanders: Types.IListOfMeleeTwoHand = {
     styleBonusMelee: 0,
     styleBonusRanged: 0,
     styleBonusMagic: 0,
-    staffElement: `none`,
+    staffElement: `typeless`,
     value: 334,
   },
   iron2hsword: {
@@ -40,7 +40,7 @@ const listOfMeleeTwoHanders: Types.IListOfMeleeTwoHand = {
     styleBonusMelee: 0,
     styleBonusRanged: 0,
     styleBonusMagic: 0,
-    staffElement: `none`,
+    staffElement: `typeless`,
     value: 501,
   },
   steel2hsword: {
@@ -61,7 +61,7 @@ const listOfMeleeTwoHanders: Types.IListOfMeleeTwoHand = {
     styleBonusMelee: 0,
     styleBonusRanged: 0,
     styleBonusMagic: 0,
-    staffElement: `none`,
+    staffElement: `typeless`,
     value: 668,
   },
   mithril2hsword: {
@@ -82,7 +82,7 @@ const listOfMeleeTwoHanders: Types.IListOfMeleeTwoHand = {
     styleBonusMelee: 0,
     styleBonusRanged: 0,
     styleBonusMagic: 0,
-    staffElement: `none`,
+    staffElement: `typeless`,
     value: 1001,
   },
   adamant2hsword: {
@@ -103,7 +103,7 @@ const listOfMeleeTwoHanders: Types.IListOfMeleeTwoHand = {
     styleBonusMelee: 0,
     styleBonusRanged: 0,
     styleBonusMagic: 0,
-    staffElement: `none`,
+    staffElement: `typeless`,
     value: 1334,
   },
   rune2hsword: {
@@ -124,7 +124,7 @@ const listOfMeleeTwoHanders: Types.IListOfMeleeTwoHand = {
     styleBonusMelee: 0,
     styleBonusRanged: 0,
     styleBonusMagic: 0,
-    staffElement: `none`,
+    staffElement: `typeless`,
     value: 3334,
   },
 };
@@ -401,7 +401,7 @@ const listOfRangedTwoHanders: Types.IListOfRangedTwoHand = {
     styleBonusMelee: 0,
     styleBonusRanged: 0,
     styleBonusMagic: 0,
-    staffElement: "none",
+    staffElement: "typeless",
     value: 50,
   },
   oakshortbow: {
@@ -422,7 +422,7 @@ const listOfRangedTwoHanders: Types.IListOfRangedTwoHand = {
     styleBonusMelee: 0,
     styleBonusRanged: 0,
     styleBonusMagic: 0,
-    staffElement: "none",
+    staffElement: "typeless",
     value: 100,
   },
   willowshortbow: {
@@ -443,7 +443,7 @@ const listOfRangedTwoHanders: Types.IListOfRangedTwoHand = {
     styleBonusMelee: 0,
     styleBonusRanged: 0,
     styleBonusMagic: 0,
-    staffElement: "none",
+    staffElement: "typeless",
     value: 200,
   },
   mapleshortbow: {
@@ -464,7 +464,7 @@ const listOfRangedTwoHanders: Types.IListOfRangedTwoHand = {
     styleBonusMelee: 0,
     styleBonusRanged: 0,
     styleBonusMagic: 0,
-    staffElement: "none",
+    staffElement: "typeless",
     value: 400,
   },
   yewshortbow: {
@@ -485,7 +485,7 @@ const listOfRangedTwoHanders: Types.IListOfRangedTwoHand = {
     styleBonusMelee: 0,
     styleBonusRanged: 0,
     styleBonusMagic: 0,
-    staffElement: "none",
+    staffElement: "typeless",
     value: 800,
   },
   magicshortbow: {
@@ -506,7 +506,7 @@ const listOfRangedTwoHanders: Types.IListOfRangedTwoHand = {
     styleBonusMelee: 0,
     styleBonusRanged: 0,
     styleBonusMagic: 0,
-    staffElement: "none",
+    staffElement: "typeless",
     value: 1600,
   },
 };

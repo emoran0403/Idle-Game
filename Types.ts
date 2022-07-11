@@ -920,17 +920,29 @@ export interface ICurrentEquipment {
 
 export interface IEnemySummary {
   name: string;
+  displayName: string;
   level: number;
   lifePoints: number;
   XPGivenCombatStyle: number;
   XPGivenConstitution: number;
   affinities: {
-    explicitWeakness: SpellElement;
+    explicitWeakness: CombatStyle | SpellElement;
     weakStyle: CombatStyle;
-    ownStyle: CombatStyle;
+    neutralStyle: CombatStyle;
     strongStyle: CombatStyle;
   };
   armor: number;
   defence: number;
   accuracy: number;
+}
+
+export interface ILumbridgeEnemies {
+  man: IEnemySummary;
+  goblin: IEnemySummary;
+  giantspider: IEnemySummary;
+  chicken: IEnemySummary;
+  cow: IEnemySummary;
+  spider: IEnemySummary;
+  giantrat: IEnemySummary;
+  swampfrog: IEnemySummary;
 }

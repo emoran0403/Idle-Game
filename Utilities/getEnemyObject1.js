@@ -46,7 +46,12 @@
       }
     })(),
 
-    affinities: { explicitWeakness: `enterManually`, weakStyle: `enterManually`, ownStyle: `enterManually`, strongStyle: `enterManually` },
+    affinities: {
+      explicitWeakness: `enterManually`,
+      weakStyle: `enterManually`,
+      neutralStyle: `enterManually`,
+      strongStyle: `enterManually`,
+    },
 
     armor: (() => {
       try {
