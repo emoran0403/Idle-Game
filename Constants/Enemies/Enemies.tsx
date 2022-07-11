@@ -1,13 +1,13 @@
 import * as Types from "../../Types";
 
-const man = {
+const man: Types.IEnemySummary = {
   name: `man`,
   level: 4,
   lifePoints: 150,
   XPGivenCombatStyle: 25,
   XPGivenConstitution: 8,
   affinities: {
-    explicitWeakness: `fireSpells`,
+    explicitWeakness: `fire`,
     weakStyle: `magic`,
     ownStyle: `melee`,
     strongStyle: `ranged`,
@@ -17,14 +17,14 @@ const man = {
   accuracy: 130,
 };
 
-const goblin = {
+const goblin: Types.IEnemySummary = {
   name: `goblin`,
   level: 2,
   lifePoints: 100,
   XPGivenCombatStyle: 25,
   XPGivenConstitution: 8,
   affinities: {
-    explicitWeakness: `airSpells`,
+    explicitWeakness: `air`,
     weakStyle: `magic`,
     ownStyle: `melee`,
     strongStyle: `ranged`,

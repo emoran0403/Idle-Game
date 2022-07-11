@@ -453,15 +453,15 @@ export interface ICompositeArmorItem extends IArmorItem {
   playerOwnsThisItem: boolean;
 }
 
-export type SpellElement = `none` | `air` | `fire` | `water` | `earth`;
-export type WeaponStyle = `melee` | `magic` | `ranged`;
+export type SpellElement = `typeless` | `air` | `fire` | `water` | `earth`;
+export type CombatStyle = `melee` | `magic` | `ranged`;
 
 export interface ICompositeWeaponItem extends IWeaponItem {
   playerOwnsThisItem: boolean;
 }
 
 export interface IWeaponItem {
-  thisWeaponStyle: WeaponStyle;
+  thisWeaponStyle: CombatStyle;
   levelReqAttack: number;
   levelReqStrength: number;
   levelReqMagic: number;
@@ -901,6 +901,7 @@ export interface ITwoHandSlotSlice {
   playerOwnsyewshortbow: boolean;
   playerOwnsmagicshortbow: boolean;
 }
+/*********************************************************************************************************************** */
 
 export type IEquipmentSlotOptions = IArmorSlotBody | IArmorSlotHead | IArmorSlotLegs | IArmorSlotHands | IArmorSlotFeet | IArmorSlotTwoHand;
 
@@ -914,4 +915,22 @@ export interface ICurrentEquipment {
   NeckSlot: `none` | IListOfAllNecks;
   RingSlot: `none` | IListOfAllRings;
   TwoHandSlot: `none` | IListOfAllTwoHand;
+}
+/*********************************************************************************************************************** */
+
+export interface IEnemySummary {
+  name: string;
+  level: number;
+  lifePoints: number;
+  XPGivenCombatStyle: number;
+  XPGivenConstitution: number;
+  affinities: {
+    explicitWeakness: SpellElement;
+    weakStyle: CombatStyle;
+    ownStyle: CombatStyle;
+    strongStyle: CombatStyle;
+  };
+  armor: number;
+  defence: number;
+  accuracy: number;
 }
