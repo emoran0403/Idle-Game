@@ -54,8 +54,7 @@ const GameContainer = (props: Types.NoProps) => {
   // useEffect(() => {}, []);
 
   return (
-    <div className="container">
-      <div className="row justify-content-center">Title Here</div>
+    <div className="d-flex">
       <div id="gamecontainer" className="row justify-content-lg-center">
         <div id="left-column" className="col-lg-3 border border-dark border-2 rounded-3" style={{ height: "90vh", position: "relative" }}>
           <Levels />

@@ -5,7 +5,8 @@ import Grandparent from "./TestComponents/Grandparent";
 
 const App = (props: Types.AppProps) => {
   return (
-    <main className="container my-5">
+    <main className="container-fluid px-5 my-3">
+      <div className="text-center">Title Here</div>
       <GameContainer />
     </main>
   );
