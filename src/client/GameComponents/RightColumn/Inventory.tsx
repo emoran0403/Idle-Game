@@ -7,11 +7,11 @@ import { useSelector } from "react-redux";
 
 const Inventory = (props: Types.NoProps) => {
   const Wallet = useSelector((state: Types.AllState) => state.Wallet) as Types.IWallet;
-  const { Current } = useSelector((state: Types.AllState) => state.Inventory) as Types.I_Inventory;
+  const { CurrentInventory } = useSelector((state: Types.AllState) => state.Inventory) as Types.I_Inventory;
 
   const makeCompositeCurrent = () => {
-    let compositeCurrent = [...Current];
-    compositeCurrent.push(...Array(28 - Current.length).fill(`blank`));
+    let compositeCurrent = [...CurrentInventory];
+    compositeCurrent.push(...Array(28 - CurrentInventory.length).fill(`blank`));
     // console.log(`tempcurrent and new stuff is ${compositeCurrent}`);
     return compositeCurrent;
   };

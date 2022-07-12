@@ -46,6 +46,7 @@ export interface BossesPanelProps {
 export interface CombatPanelProps {
   handleUpdateDisplay: Function;
   newChatLog: Function;
+  chatLogArray: IChatLog[];
 }
 
 export interface BankPanelProps {
@@ -236,13 +237,13 @@ export interface IStateQuest {
 }
 
 export interface ListOfSkills {
-  Current: ListOfSkillOptions;
+  CurrentSkill: ListOfSkillOptions;
 }
 
 export type ListOfSkillOptions = `Woodcutting` | `Firemaking` | `Mining` | `Fishing` | `Attack` | `Strength` | `Defense` | `Ranged` | `Magic`;
 
 export interface ICurrentResource {
-  Current:
+  CurrentResource:
     | `None`
     | `raw_shrimp`
     | `raw_crayfish`
@@ -266,10 +267,10 @@ export interface AllState extends AllSlots {
   Bank_Fish: IFishBankSlice;
   Bank_Logs: ILogBankSlice;
   Inventory: I_Inventory;
-  CurrentLocation: ICurrentLocation;
-  CurrentActivity: ICurrentActivity;
-  CurrentSkill: ListOfSkills;
-  CurrentResource: ICurrentResource;
+  Location: ICurrentLocation;
+  Activity: ICurrentActivity;
+  Skill: ListOfSkills;
+  Resource: ICurrentResource;
   Resources: IResources;
   Wallet: IWallet;
   Quests_Lumbridge: LumbridgeQuestSliceCrap;
@@ -288,7 +289,16 @@ export interface AllSlots {
   TwoHandSlot: ITwoHandSlotSlice;
 }
 
-export type AllSliceKeys = IBackSlotSlice | IBodySlotSlice | IFeetSlotSlice | IHandSlotSlice | IHeadSlotSlice | ILegsSlotSlice | INeckSlotSlice | IRingSlotSlice | ITwoHandSlotSlice;
+export type AllSliceKeys =
+  | IBackSlotSlice
+  | IBodySlotSlice
+  | IFeetSlotSlice
+  | IHandSlotSlice
+  | IHeadSlotSlice
+  | ILegsSlotSlice
+  | INeckSlotSlice
+  | IRingSlotSlice
+  | ITwoHandSlotSlice;
 
 export interface AllStateQuestSlices {
   Quests_Lumbridge: LumbridgeQuestSliceCrap;
@@ -309,11 +319,11 @@ export interface DraynorQuestSliceCrap {
 }
 
 export interface I_Inventory {
-  Current: string[];
+  CurrentInventory: string[];
 }
 
 export interface ICurrentActivity {
-  Current: ICurrentActivityOptions;
+  CurrentActivity: ICurrentActivityOptions;
 }
 export type ICurrentActivityOptions = `Banking` | `Skilling` | `Questing` | `In combat` | `Idle`;
 
@@ -402,7 +412,7 @@ export interface ICompositeQuestInfo extends IQuestInfo {
 
 //@ extend this as needed to account for future locations
 export interface ICurrentLocation {
-  Current: ICurrentLocationOptions;
+  CurrentLocation: ICurrentLocationOptions;
 }
 export type ICurrentLocationOptions = `Lumbridge` | `Draynor`;
 
@@ -413,7 +423,17 @@ export interface IChatLog {
 }
 
 //@ chatLogs may only have 1 tag - if this is changed, then the filter logic needs to be updated
-export type ChatLogTag = `Gained Resource` | `Monster Drop` | `Rare Item` | `Level Up` | `Gained XP` | `Nonfilterable` | `Quest Completed` | `Equipment Swap` | `Activity Swap` | `Misc`;
+export type ChatLogTag =
+  | `Gained Resource`
+  | `Monster Drop`
+  | `Rare Item`
+  | `Level Up`
+  | `Gained XP`
+  | `Nonfilterable`
+  | `Quest Completed`
+  | `Equipment Swap`
+  | `Activity Swap`
+  | `Misc`;
 
 export interface IArmorItem {
   name: string;

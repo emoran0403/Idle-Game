@@ -14,7 +14,7 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
   const dispatch = useDispatch();
 
   // This grabs the current location from state
-  const { Current } = useSelector((state: Types.AllState) => state.CurrentLocation) as Types.ICurrentLocation;
+  const { CurrentLocation } = useSelector((state: Types.AllState) => state.Location) as Types.ICurrentLocation;
 
   // gets the player's experience
   const Experience = useSelector((state: Types.AllState) => state.Experience) as Types.ISkillList;
@@ -49,7 +49,7 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
             Back
           </button>
         </div>
-        <div className="col-lg-9 justify-content-lg-center">Quests in {Current}</div>
+        <div className="col-lg-9 justify-content-lg-center">Quests in {CurrentLocation}</div>
       </div>
     );
   };
@@ -107,10 +107,7 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
            * Or if we find that quest in state, and it is not complete,
            * then we fail the quest requirements and may break for effeciency
            */
-          if (
-            !AllQuestNamesFromState.includes(questName) ||
-            (AllQuestsFromStateFlat[i].name === questName && !AllQuestsFromStateFlat[i].complete)
-          ) {
+          if (!AllQuestNamesFromState.includes(questName) || (AllQuestsFromStateFlat[i].name === questName && !AllQuestsFromStateFlat[i].complete)) {
             // if we find a quest from state and the quest is not complete
             meetsQuestRequirements = false;
             break;
@@ -205,10 +202,7 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
            * Or if we find that quest in state, and it is not complete,
            * then we fail the quest requirements and may break for effeciency
            */
-          if (
-            !AllQuestNamesFromState.includes(questName) ||
-            (AllQuestsFromStateFlat[i].name === questName && !AllQuestsFromStateFlat[i].complete)
-          ) {
+          if (!AllQuestNamesFromState.includes(questName) || (AllQuestsFromStateFlat[i].name === questName && !AllQuestsFromStateFlat[i].complete)) {
             // if we find a quest from state and the quest is not complete
             meetsQuestRequirements = false;
             break;
@@ -265,7 +259,7 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
     <div className="container border border-dark border-2 rounded-3">
       {panelHeaderJSX()}
       {compositeQuestArray
-        ?.filter((quest) => quest.location === Current)
+        ?.filter((quest) => quest.location === CurrentLocation)
         .map((quest) => (
           <div key={`quest-list-${quest.name}`} className="card border border-dark border-1 rounded-3">
             <div className="card-body">
@@ -273,8 +267,7 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
               {quest.complete && <div>100%</div>}
               {!quest.complete && (
                 <div>
-                  {handleQuestButtonDisplay(quest)} {quest.stepsComplete ? `In Progress: ` : `Not Started`} : {quest.stepsComplete} /
-                  {` ${quest.stepsTotal}`}
+                  {handleQuestButtonDisplay(quest)} {quest.stepsComplete ? `In Progress: ` : `Not Started`} : {quest.stepsComplete} /{` ${quest.stepsTotal}`}
                 </div>
               )}
             </div>

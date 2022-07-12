@@ -15,10 +15,10 @@ import { setActivity } from "../../Redux/Slices/CurrentActivity";
 const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
   const dispatch = useDispatch();
   // This grabs the current location from state
-  const { Current } = useSelector((state: Types.AllState) => state.CurrentLocation) as Types.ICurrentLocation;
+  const { CurrentLocation } = useSelector((state: Types.AllState) => state.Location) as Types.ICurrentLocation;
 
   // This chooses the current location summary from AllLocations
-  const currentLocationSummary = AllLocations[Current] as Types.ILocationSummary;
+  const currentLocationSummary = AllLocations[CurrentLocation] as Types.ILocationSummary;
 
   // gets the player's experience
   const Experience = useSelector((state: Types.AllState) => state.Experience) as Types.ISkillList;
@@ -104,9 +104,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
                 props.newChatLog(`Now fishing ${resource}`, `Activity Swap`);
               }}
               key={`resource-list-${resource}`}
-              className={`btn border mb-3 ${
-                FishingLevel >= ListOfFish[resource as keyof Types.IListOfFish].levelReqFishing ? `bg-success` : `bg-danger`
-              }`}
+              className={`btn border mb-3 ${FishingLevel >= ListOfFish[resource as keyof Types.IListOfFish].levelReqFishing ? `bg-success` : `bg-danger`}`}
             >
               <div className="card-body text">
                 <h5 className="card-title">{resource}</h5>

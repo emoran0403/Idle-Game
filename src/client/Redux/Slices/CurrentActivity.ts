@@ -1,22 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 import * as Types from "../../../../Types";
 
-export const CurrentActivity = createSlice({
+export const Activity = createSlice({
   name: "currentactivity",
   initialState: {
-    Current: `Idle`,
+    CurrentActivity: `Idle`,
   },
   reducers: {
     // this is the only reducer needed as the player can only do 1 thing at a time
     setActivity: (state, action) => {
-      state.Current = action.payload;
+      state.CurrentActivity = action.payload;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setActivity } = CurrentActivity.actions;
+export const { setActivity } = Activity.actions;
 
-export default CurrentActivity.reducer;
+export default Activity.reducer;
 
 //! need to add a walking / traveling option / and a questing option

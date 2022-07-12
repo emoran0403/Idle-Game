@@ -10,7 +10,7 @@ let resourcesStatus = true;
 export const Inventory = createSlice({
   name: "inventory",
   initialState: {
-    Current: [`logs`],
+    CurrentInventory: [`logs`],
   },
   reducers: {
     /**
@@ -20,13 +20,13 @@ export const Inventory = createSlice({
 
     addItemToInventory: (state: Types.I_Inventory, action) => {
       const item: string = action.payload.item; // the item to push into the inventory
-      const inventorySpace: number = Number(state.Current.length); // the amount of occupied space in the inventory
+      const inventorySpace: number = Number(state.CurrentInventory.length); // the amount of occupied space in the inventory
 
       // check if the player is banking or dropping items
       if (resourcesStatus) {
         //Decide if the inventory has space
         if (inventorySpace < 28) {
-          state.Current.push(item); // add the item to state, then reassign
+          state.CurrentInventory.push(item); // add the item to state, then reassign
           if (inventorySpace + 1 === 28) {
             //@ this will need to trigger the player to move to the bank to deposit if the inventory is full
             // go to bank here
@@ -41,8 +41,8 @@ export const Inventory = createSlice({
     removeItemFromInventory: (state: Types.I_Inventory) => {
       //array.shift() for each item in the array will remove the first item every time (first item for UI/UX reasons)
 
-      for (let i = 0; i < state.Current.length; i++) {
-        const item = state.Current.shift(); // pop removes the item from the inventory array,
+      for (let i = 0; i < state.CurrentInventory.length; i++) {
+        const item = state.CurrentInventory.shift(); // pop removes the item from the inventory array,
 
         //search bank for the item, then increment the amount by 1
         //@ this will need to add to the player Bank if the player is depositing the inventory into the bank

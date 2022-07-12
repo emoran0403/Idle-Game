@@ -4,20 +4,20 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 import Resources from "./Resources";
-import CurrentLocation from "./CurrentLocation";
-import CurrentSkill from "./CurrentSkill";
-import CurrentResource from "./CurrentResource";
-import CurrentActivity from "./CurrentActivity";
+import CurrentLocationComp from "./CurrentLocationComp";
+import CurrentSkillComp from "./CurrentSkillComp";
+import CurrentResourceComp from "./CurrentResourceComp";
+import CurrentActivityComp from "./CurrentActivityComp";
 
 const NavigationArea = (props: Types.NavigationAreaCompProps) => {
-  const state = useSelector((state: Types.AllState) => state.CurrentLocation.Current as Types.ICurrentLocationOptions);
+  const { CurrentLocation } = useSelector((state: Types.AllState) => state.Location as Types.ICurrentLocation);
   // useEffect(() => {}, []);
   return (
     <div className="d-flex border border-dark border-2 rounded-3">
       <button
         onClick={() => {
           console.log("you clicked World Map Button");
-          console.log(state);
+          console.log(CurrentLocation);
           if (`More Locations coming soon(tm)!` === props.chatLogArray[props.chatLogArray.length - 1].message) {
             return;
           }
@@ -27,10 +27,10 @@ const NavigationArea = (props: Types.NavigationAreaCompProps) => {
       >
         World Map
       </button>
-      <CurrentLocation />
-      <CurrentActivity />
-      <CurrentSkill />
-      <CurrentResource />
+      <CurrentLocationComp />
+      <CurrentActivityComp />
+      <CurrentSkillComp />
+      <CurrentResourceComp />
       <Resources newChatLog={props.newChatLog} />
     </div>
   );

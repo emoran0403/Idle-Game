@@ -8,14 +8,18 @@ import { setResource } from "../../Redux/Slices/CurrentResource";
 import { setSkill } from "../../Redux/Slices/CurrentSkill";
 import { setActivity } from "../../Redux/Slices/CurrentActivity";
 
-//! need buttons to allow player to choose their combat style
-//! need to allow for elemental spells
-//! for simplicity, i'm not keeping track of ammunition / runes
+//@ for simplicity, i'm not keeping track of ammunition / runes
+
+//! need to add chatlog functionality to buttons swapping combat style
+//! need to add chatlog functionality to enemy buttons
+//! need a piece of state to hold which enemy is the current target
+//! need to conditionally display instead of the current resource based on combat or skilling
 
 const CombatPanel = (props: Types.CombatPanelProps) => {
   const dispatch = useDispatch();
   // This grabs the current location from state
-  const { Current } = useSelector((state: Types.AllState) => state.CurrentLocation) as Types.ICurrentLocation;
+  const { CurrentLocation } = useSelector((state: Types.AllState) => state.Location) as Types.ICurrentLocation;
+  const { CurrentSkill } = useSelector((state: Types.AllState) => state.Skill) as Types.ListOfSkills;
   // console.log(Current);
   // console.log(Enemies[Current as keyof Types.IAllEnemies]);
   //@ Enemies[Current as keyof Types.IAllEnemies] is the list of enemies at the current location
@@ -36,7 +40,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
             Back
           </button>
         </div>
-        <div className="col-lg-9 justify-content-lg-center">Combat in {Current}</div>
+        <div className="col-lg-9 justify-content-lg-center">Combat in {CurrentLocation}</div>
       </div>
     );
   };
@@ -50,7 +54,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
     //@ we don't need to disable enemies until a slayer level is implemented
     return (
       <div onClick={() => {}} className="card-title border border-dark border-1 rounded-3">
-        <h6 className="text-center">Enemies in {Current}</h6>
+        <h6 className="text-center">Enemies in {CurrentLocation}</h6>
         <div className="d-flex flex-row flex-wrap">
           {arrayOfEnemies.map((enemy) => (
             <button
@@ -91,6 +95,11 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
           onClick={() => {
             console.log(`i was clicked`);
             dispatch(setSkill(`Attack`));
+
+            if (CurrentSkill === props.chatLogArray[props.chatLogArray.length - 1].message.substring(13)) {
+              return;
+            }
+            props.newChatLog(`Now training Attack`, `Activity Swap`);
           }}
         >
           Attack
@@ -168,7 +177,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
       <div className="row justify-content-lg-center">
         <div className="card">
           {combatStyleButtonJSX()}
-          <div className="card-body">{combatOptionsJSX(Enemies[Current as keyof Types.IAllEnemies])}</div>
+          <div className="card-body">{combatOptionsJSX(Enemies[CurrentLocation as keyof Types.IAllEnemies])}</div>
         </div>
       </div>
     </div>
