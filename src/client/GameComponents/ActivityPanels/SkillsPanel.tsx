@@ -39,7 +39,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
             Back
           </button>
         </div>
-        <div className="col-lg-9 justify-content-lg-center">Skills</div>
+        <div className="col-lg-9 justify-content-lg-center">Skilling in {CurrentLocation}</div>
       </div>
     );
   };

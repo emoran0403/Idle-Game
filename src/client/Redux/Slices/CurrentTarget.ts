@@ -8,13 +8,13 @@ export const Target = createSlice({
   },
   reducers: {
     // this is the only reducer needed as the player can only do 1 thing at a time
-    setResource: (state, action) => {
+    setTarget: (state, action) => {
       state.CurrentTarget = action.payload;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setResource } = Target.actions;
+export const { setTarget } = Target.actions;
 
 export default Target.reducer;

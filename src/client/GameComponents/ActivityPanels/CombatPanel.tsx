@@ -7,8 +7,11 @@ import { Enemies } from "../../../../Constants/Enemies";
 import { setResource } from "../../Redux/Slices/CurrentResource";
 import { setSkill } from "../../Redux/Slices/CurrentSkill";
 import { setActivity } from "../../Redux/Slices/CurrentActivity";
+import { setTarget } from "../../Redux/Slices/CurrentTarget";
 
 //@ for simplicity, i'm not keeping track of ammunition / runes
+//! enemy buttons need to change the current skill to none if it was previously a skilling skill
+//? should i default to attack?
 
 //! need a piece of state to hold which enemy is the current target
 //! need to conditionally display instead of the current resource based on combat or skilling
@@ -56,11 +59,10 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
         <div className="d-flex flex-row flex-wrap">
           {arrayOfEnemies.map((enemy) => (
             <button
-              //! this button should send the message to chat when clicked
               onClick={(e) => {
                 console.log(`${enemy.displayName} was clicked`);
                 dispatch(setActivity(`In combat`));
-
+                dispatch(setTarget(enemy.displayName));
                 handleChatLogEnemy(`${enemy.displayName}`);
               }}
               key={`enemy-list-${enemy.displayName}`}
@@ -101,6 +103,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
         <button
           className="btn btn-primary"
           onClick={() => {
+            dispatch(setActivity(`In combat`));
             dispatch(setResource(`none`));
             dispatch(setSkill(`Attack`));
             handleChatLogSkill(`Attack`);
@@ -111,6 +114,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
         <button
           className="btn btn-primary"
           onClick={() => {
+            dispatch(setActivity(`In combat`));
             dispatch(setResource(`none`));
             dispatch(setSkill(`Strength`));
             handleChatLogSkill(`Strength`);
@@ -121,6 +125,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
         <button
           className="btn btn-primary"
           onClick={() => {
+            dispatch(setActivity(`In combat`));
             dispatch(setResource(`none`));
             dispatch(setSkill(`Defence`));
             handleChatLogSkill(`Defence`);
@@ -131,6 +136,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
         <button
           className="btn btn-primary"
           onClick={() => {
+            dispatch(setActivity(`In combat`));
             dispatch(setResource(`none`));
             dispatch(setSkill(`Ranged`));
             handleChatLogSkill(`Ranged`);
@@ -141,6 +147,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
         <button
           className="btn btn-primary"
           onClick={() => {
+            dispatch(setActivity(`In combat`));
             dispatch(setResource(`none`));
             dispatch(setSkill(`Magic`));
             handleChatLogSkill(`Magic`);
@@ -151,9 +158,9 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
         <button
           className="btn btn-primary"
           onClick={() => {
+            dispatch(setActivity(`In combat`));
             dispatch(setResource(`none`));
             dispatch(setSkill(`Magic`));
-
             handleChatLogSkill(`Magic`);
           }}
         >
@@ -162,6 +169,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
         <button
           className="btn btn-primary"
           onClick={() => {
+            dispatch(setActivity(`In combat`));
             dispatch(setResource(`none`));
             dispatch(setSkill(`Magic`));
             handleChatLogSkill(`Magic`);
@@ -172,6 +180,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
         <button
           className="btn btn-primary"
           onClick={() => {
+            dispatch(setActivity(`In combat`));
             dispatch(setResource(`none`));
             dispatch(setSkill(`Magic`));
             handleChatLogSkill(`Magic`);

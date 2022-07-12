@@ -216,8 +216,8 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
       return (
         <button
           onClick={(e) => {
-            handleQuestChatMessage(quest), dispatch(setActivity(`Questing`)), dispatch(setResource(`None`));
-            dispatch(setSkill(`None`));
+            handleQuestChatMessage(quest), dispatch(setActivity(`Questing`)), dispatch(setResource(`none`));
+            dispatch(setSkill(`none`));
           }}
           className="btn btn-primary mx-2"
         >

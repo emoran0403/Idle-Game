@@ -36,15 +36,6 @@ const ActivityButtons = (props: Types.ActivityButtonsCompProps) => {
       </button>
       <button
         onClick={() => {
-          props.handleUpdateDisplay(`bank`);
-          // console.log("you clicked Bank");
-        }}
-        className="btn btn-primary flex-fill"
-      >
-        Bank
-      </button>
-      <button
-        onClick={() => {
           props.handleUpdateDisplay(`combat`);
           // console.log("you clicked Combat");
         }}
@@ -52,6 +43,16 @@ const ActivityButtons = (props: Types.ActivityButtonsCompProps) => {
       >
         Combat
       </button>
+      <button
+        onClick={() => {
+          props.handleUpdateDisplay(`bank`);
+          // console.log("you clicked Bank");
+        }}
+        className="btn btn-primary flex-fill"
+      >
+        Bank
+      </button>
+
       <button
         disabled
         onClick={() => {
