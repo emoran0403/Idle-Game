@@ -8,22 +8,20 @@ import { setResource } from "../../Redux/Slices/CurrentResource";
 import { setSkill } from "../../Redux/Slices/CurrentSkill";
 import { setActivity } from "../../Redux/Slices/CurrentActivity";
 import { setTarget } from "../../Redux/Slices/CurrentTarget";
+import { getLevel } from "../../../../Constants/XP Levels";
 
 //@ for simplicity, i'm not keeping track of ammunition / runes
-
-//! need a piece of state to hold which enemy is the current target
-//! need to conditionally display instead of the current resource based on combat or skilling
 
 const CombatPanel = (props: Types.CombatPanelProps) => {
   const arrayOfCombatStyleSkills = [`Attack`, `Strength`, `Defence`, `Ranged`, `Magic`];
   const dispatch = useDispatch();
 
-  // This grabs the current location from state
+  // These grab info from state
   const { CurrentLocation } = useSelector((state: Types.AllState) => state.Location) as Types.ICurrentLocation;
   const { CurrentSkill } = useSelector((state: Types.AllState) => state.Skill) as Types.ListOfSkills;
   const { CurrentTarget } = useSelector((state: Types.AllState) => state.Target) as Types.ICurrentTarget;
-  // console.log(Current);
-  // console.log(Enemies[Current as keyof Types.IAllEnemies]);
+  const Experience = useSelector((state: Types.AllState) => state.Experience) as Types.ISkillList;
+
   //@ Enemies[Current as keyof Types.IAllEnemies] is the list of enemies at the current location
 
   // useEffect(() => {}, []);
@@ -47,21 +45,21 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
     );
   };
 
-  const combatOptionsJSX = (enemyObject: Types.IEnemyLocations) => {
+  const enemyButtonsJSX = (enemyObject: Types.IEnemyLocations) => {
     // spread out the enemies into an array, then sort them by their level in ascending order
     let arrayOfEnemies: Types.IEnemySummary[] = [...Object.values(enemyObject)].sort((a, b) => a.level - b.level);
 
-    console.log(arrayOfEnemies);
+    // console.log(arrayOfEnemies);
 
     //@ we don't need to disable enemies until a slayer level is implemented
     return (
       <div onClick={() => {}} className="card-title border border-dark border-1 rounded-3">
         <h6 className="text-center">Enemies in {CurrentLocation}</h6>
         <div className="d-flex flex-row flex-wrap">
-          {arrayOfEnemies.map((enemy) => (
+          {arrayOfEnemies.map((enemy: Types.IEnemySummary) => (
             <button
               onClick={(e) => {
-                console.log(`${enemy.displayName} was clicked`);
+                // console.log(`${enemy.displayName} was clicked`);
 
                 if (!arrayOfCombatStyleSkills.includes(CurrentSkill) || CurrentTarget === `none`) {
                   // if the player is currently not training a combat skill, set skill to none
@@ -79,7 +77,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
                 }
               }}
               key={`enemy-list-${enemy.displayName}`}
-              className={`btn border mb-3`}
+              className={`btn border mb-3 bg-${handleEnemyButtonsStyling(enemy.level)}`}
             >
               <div className="card-body text">
                 <h5 className="card-title">{enemy.displayName}</h5>
@@ -110,7 +108,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
     props.newChatLog(`Now fighting ${monster}`, `Activity Swap`);
   };
 
-  const combatStyleButtonJSX = () => {
+  const combatStyleButtonsJSX = () => {
     return (
       <div className="d-flex justify-content-evenly mt-2">
         <button
@@ -205,13 +203,44 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
     );
   };
 
+  const showCombatLevel = () => {
+    let att: number = getLevel(Experience.Attack);
+    let str: number = getLevel(Experience.Strength);
+    let mag: number = getLevel(Experience.Magic);
+    let rng: number = getLevel(Experience.Ranged);
+    let def: number = getLevel(Experience.Defence);
+    let con: number = getLevel(Experience.Consitution);
+    let pray: number = getLevel(Experience.Prayer);
+    let summ: number = getLevel(Experience.Summoning);
+
+    const combatLevel = Math.floor(((13 / 10) * Math.max(att + str, 2 * mag, 2 * rng) + def + con + Math.floor(0.5 * pray) + Math.floor(0.5 * summ)) / 4);
+    return combatLevel;
+  };
+
+  const handleEnemyButtonsStyling = (enemyLevel: number) => {
+    // conditionally return the appropriate background color for the enemy buttons based on the player and enemy combat levels
+    let lvlDifference: number = showCombatLevel() - enemyLevel; // player - enemy
+
+    if (lvlDifference > 5) {
+      return `cbGreen`;
+    } else if (lvlDifference > 0 && lvlDifference <= 5) {
+      return `cbYellow-Green`;
+    } else if (lvlDifference === 0) {
+      return `cbYellow`;
+    } else if (lvlDifference < 0 && lvlDifference >= -5) {
+      return `cbOrange`;
+    } else if (lvlDifference < -5) {
+      return `cbRed`;
+    }
+  };
+
   return (
     <div className="container card border border-dark border-2 rounded-3">
       {panelHeaderJSX()}
       <div className="row justify-content-lg-center">
         <div className="card">
-          {combatStyleButtonJSX()}
-          <div className="card-body">{combatOptionsJSX(Enemies[CurrentLocation as keyof Types.IAllEnemies])}</div>
+          {combatStyleButtonsJSX()}
+          <div className="card-body">{enemyButtonsJSX(Enemies[CurrentLocation as keyof Types.IAllEnemies])}</div>
         </div>
       </div>
     </div>
