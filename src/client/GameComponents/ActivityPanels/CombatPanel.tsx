@@ -83,90 +83,92 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
     );
   };
 
+  const combatStyleButtonJSX = () => {
+    return (
+      <div className="d-flex justify-content-evenly mt-2">
+        <button
+          className="btn btn-primary"
+          onClick={() => {
+            console.log(`i was clicked`);
+            dispatch(setSkill(`Attack`));
+          }}
+        >
+          Attack
+        </button>
+        <button
+          className="btn btn-primary"
+          onClick={() => {
+            console.log(`i was clicked`);
+            dispatch(setSkill(`Strength`));
+          }}
+        >
+          Strength
+        </button>
+        <button
+          className="btn btn-primary"
+          onClick={() => {
+            console.log(`i was clicked`);
+            dispatch(setSkill(`Defence`));
+          }}
+        >
+          Defence
+        </button>
+        <button
+          className="btn btn-primary"
+          onClick={() => {
+            console.log(`i was clicked`);
+            dispatch(setSkill(`Ranged`));
+          }}
+        >
+          Ranged
+        </button>
+        <button
+          className="btn btn-primary"
+          onClick={() => {
+            console.log(`i was clicked`);
+            dispatch(setSkill(`Magic`));
+          }}
+        >
+          Air Spells
+        </button>
+        <button
+          className="btn btn-primary"
+          onClick={() => {
+            console.log(`i was clicked`);
+            dispatch(setSkill(`Magic`));
+          }}
+        >
+          Water Spells
+        </button>
+        <button
+          className="btn btn-primary"
+          onClick={() => {
+            console.log(`i was clicked`);
+            dispatch(setSkill(`Magic`));
+          }}
+        >
+          Earth Spells
+        </button>
+        <button
+          className="btn btn-primary"
+          onClick={() => {
+            console.log(`i was clicked`);
+            dispatch(setSkill(`Magic`));
+          }}
+        >
+          Fire Spells
+        </button>
+      </div>
+    );
+  };
+
   return (
     <div className="container card border border-dark border-2 rounded-3">
       {panelHeaderJSX()}
       <div className="row justify-content-lg-center">
         <div className="card">
-          <div className="container">
-            <button
-              className="btn btn-primary"
-              onClick={() => {
-                console.log(`i was clicked`);
-                dispatch(setSkill(`Attack`));
-              }}
-            >
-              Attack
-            </button>
-            <button
-              className="btn btn-primary"
-              onClick={() => {
-                console.log(`i was clicked`);
-                dispatch(setSkill(`Strength`));
-              }}
-            >
-              Strength
-            </button>
-            <button
-              className="btn btn-primary"
-              onClick={() => {
-                console.log(`i was clicked`);
-                dispatch(setSkill(`Defence`));
-              }}
-            >
-              Defence
-            </button>
-            <button
-              className="btn btn-primary"
-              onClick={() => {
-                console.log(`i was clicked`);
-                dispatch(setSkill(`Ranged`));
-              }}
-            >
-              Ranged
-            </button>
-            <button
-              className="btn btn-primary"
-              onClick={() => {
-                console.log(`i was clicked`);
-                dispatch(setSkill(`Magic`));
-              }}
-            >
-              Air Spells
-            </button>
-            <button
-              className="btn btn-primary"
-              onClick={() => {
-                console.log(`i was clicked`);
-                dispatch(setSkill(`Magic`));
-              }}
-            >
-              Water Spells
-            </button>
-            <button
-              className="btn btn-primary"
-              onClick={() => {
-                console.log(`i was clicked`);
-                dispatch(setSkill(`Magic`));
-              }}
-            >
-              Earth Spells
-            </button>
-            <button
-              className="btn btn-primary"
-              onClick={() => {
-                console.log(`i was clicked`);
-                dispatch(setSkill(`Magic`));
-              }}
-            >
-              Fire Spells
-            </button>
-          </div>
-          <div className="card-body">
-            {/* panel specific content goes here */}
-            {combatOptionsJSX(Enemies[Current as keyof Types.IAllEnemies])}
-            {/* end of panel specific content */}
-          </div>
+          {combatStyleButtonJSX()}
+          <div className="card-body">{combatOptionsJSX(Enemies[Current as keyof Types.IAllEnemies])}</div>
         </div>
       </div>
     </div>
