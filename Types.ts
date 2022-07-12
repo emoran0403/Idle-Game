@@ -241,6 +241,7 @@ export interface ListOfSkills {
 }
 
 export type ListOfSkillOptions = `none` | `Woodcutting` | `Firemaking` | `Mining` | `Fishing` | `Attack` | `Strength` | `Defense` | `Ranged` | `Magic`;
+export type ListOfCombatStyleSkills = `Attack` | `Strength` | `Defense` | `Ranged` | `Magic`;
 
 export interface ICurrentResource {
   CurrentResource: ICurrentResourceOptions;

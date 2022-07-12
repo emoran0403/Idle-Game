@@ -6,12 +6,12 @@ import { useSelector } from "react-redux";
 const CurrentResourceComp = (props: Types.NoProps) => {
   const Resource = useSelector((state: Types.AllState) => state.Resource.CurrentResource as Types.ICurrentResourceOptions);
   const Target = useSelector((state: Types.AllState) => state.Target.CurrentTarget as Types.ICurrentTargetOptions);
+  const Activty = useSelector((state: Types.AllState) => state.Activity.CurrentActivity as Types.ICurrentActivityOptions);
   console.log(Target);
   useEffect(() => {}, []);
   return (
     <div className="text-center border border-dark border-2 rounded-3">
-      <div>Fighting {Target}</div>
-      <div>Collecting {Resource}</div>
+      {Activty === `In combat` ? <div>Fighting {Target}</div> : <div>Collecting {Resource}</div>}
     </div>
   );
 };
