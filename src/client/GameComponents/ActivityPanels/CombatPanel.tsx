@@ -37,7 +37,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
   const combatOptionsJSX = (enemyObject: Types.IEnemyLocations) => {
     // spread out the enemies into an array so we can display
     let arrayOfEnemies: Types.IEnemySummary[] = [...Object.values(enemyObject)];
-    // console.log(arrayOfEnemies);
+    console.log(arrayOfEnemies);
     return (
       <div onClick={() => {}} className="card-title border border-dark border-1 rounded-3">
         <h6 className="text-center">Enemies in {Current}</h6>
@@ -58,13 +58,14 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
                 // }
                 // props.newChatLog(`Now cutting ${enemy}`, `Activity Swap`);
               }}
-              key={`resource-list-${enemy}`}
+              key={`enemy-list-${enemy.displayName}`}
               className={`btn border mb-3`}
             >
               <div className="card-body text">
-                <h5 className="card-title">{enemy}</h5>
+                <h5 className="card-title">{enemy.displayName}</h5>
                 <div className="card-text">
-                  <div>{enemy}</div>
+                  <div>Lvl {enemy.level}</div>
+                  <div>LP {enemy.lifePoints}</div>
                   {/* <div>{ListOfLogs[enemy as keyof Types.IListOfLogs].XPGivenWoodcutting} XP</div> */}
                 </div>
               </div>
