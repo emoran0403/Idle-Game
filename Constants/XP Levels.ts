@@ -5,7 +5,6 @@ const levelUpTable: number[] = [
 
 // levelUpTable.filter((num) => num < experience).length; // will return level based on experience
 
-// import {getLevel} from this
 export const getLevel = (XP: number): number => {
   return levelUpTable.filter((num) => num < XP).length || 1; // if the xp is less than 83, return 1, since that is the lowest level
 };
@@ -15,8 +14,11 @@ export const percentToNextLevel = (XP: number): number => {
   let xpNeeded = levelUpTable[nextLevelIndex] - levelUpTable[nextLevelIndex - 1];
   let delta = levelUpTable[nextLevelIndex] - XP;
 
-  return Math.floor(((xpNeeded - delta) / xpNeeded) * 100) || 0;
+  // if the % is undefined due to being too low, or equals 100, return 0 instead
+  if (!Math.floor(((xpNeeded - delta) / xpNeeded) * 100) || Math.floor(((xpNeeded - delta) / xpNeeded) * 100) === 100) {
+    return 0;
+  } else {
+    // otherwise, return the %
+    return Math.floor(((xpNeeded - delta) / xpNeeded) * 100);
+  }
 };
-
-//! change this so that if the player never reaches 100% to the next level
-// if the player is right at the threshold, exactly at 100%, use the next level's xp to determine progress

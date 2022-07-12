@@ -52,7 +52,6 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
         <div className="d-flex flex-row flex-wrap">
           {resourceArray.map((resource) => (
             <button
-              //! this button should send the message to chat when clicked
               disabled={WoodcuttingLevel < ListOfLogs[resource as keyof Types.IListOfLogs].levelReqWoodcutting ? true : false}
               onClick={(e) => {
                 dispatch(setResource(resource));
