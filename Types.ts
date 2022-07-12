@@ -221,7 +221,7 @@ export interface ISkillList {
   Firemaking: number;
   Attack: number;
   Strength: number;
-  Defense: number;
+  Defence: number;
   Consitution: number;
   Prayer: number;
   Summoning: number;
@@ -240,8 +240,8 @@ export interface ListOfSkills {
   CurrentSkill: ListOfSkillOptions;
 }
 
-export type ListOfSkillOptions = `none` | `Woodcutting` | `Firemaking` | `Mining` | `Fishing` | `Attack` | `Strength` | `Defense` | `Ranged` | `Magic`;
-export type ListOfCombatStyleSkills = `Attack` | `Strength` | `Defense` | `Ranged` | `Magic`;
+export type ListOfSkillOptions = `none` | `Woodcutting` | `Firemaking` | `Mining` | `Fishing` | `Attack` | `Strength` | `Defence` | `Ranged` | `Magic`;
+export type ListOfCombatStyleSkills = `Attack` | `Strength` | `Defence` | `Ranged` | `Magic`;
 
 export interface ICurrentResource {
   CurrentResource: ICurrentResourceOptions;

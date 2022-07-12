@@ -3,8 +3,8 @@ import * as Types from "../../Types";
  * EXPERIENCE REWARDS
  * sometimes reward a prismatic lamp, allowing the player to choose the skill in which they gain xp
  * ANY: any skill
- * MAINCOMBAT: attack, strength, defense, constitution, magic, range
- * ANYCOMBAT: attack, strength, defense, constitution, magic, range, prayer, summoning
+ * MAINCOMBAT: attack, strength, defence, constitution, magic, range
+ * ANYCOMBAT: attack, strength, defence, constitution, magic, range, prayer, summoning
  */
 
 export const VarrockQuests: Types.IQuestInfo[] = [
@@ -18,7 +18,7 @@ export const VarrockQuests: Types.IQuestInfo[] = [
     levelRequirements: {},
     experienceRewards: {
       Strength: 18650,
-      Defense: 18650,
+      Defence: 18650,
     },
     itemRewards: {},
   },

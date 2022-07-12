@@ -3,8 +3,8 @@ import * as Types from "../../Types";
  * EXPERIENCE REWARDS
  * sometimes reward a prismatic lamp, allowing the player to choose the skill in which they gain xp
  * ANY: any skill
- * MAINCOMBAT: attack, strength, defense, constitution, magic, range
- * ANYCOMBAT: attack, strength, defense, constitution, magic, range, prayer, summoning
+ * MAINCOMBAT: attack, strength, defence, constitution, magic, range
+ * ANYCOMBAT: attack, strength, defence, constitution, magic, range, prayer, summoning
  */
 
 export const LumbridgeQuests: Types.IQuestInfo[] = [
@@ -76,7 +76,7 @@ export const LumbridgeQuests: Types.IQuestInfo[] = [
     experienceRewards: {
       Attack: 100,
       Strength: 100,
-      Defense: 100,
+      Defence: 100,
       Range: 100,
       Magic: 100,
     },

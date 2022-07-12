@@ -44,70 +44,70 @@ const WornEquipment = (props: Types.WornEquipmentCompProps) => {
     //! I can probably tidy this up a bit, but it works for now
     if (`levelReqDefence` in equipment) {
       // check if the player owns the armor, and has the appropriate defence level
-      if (equipment.playerOwnsThisItem && getLevel(Experience.Defense) >= equipment.levelReqDefence) {
+      if (equipment.playerOwnsThisItem && getLevel(Experience.Defence) >= equipment.levelReqDefence) {
         // has levels and owns item = green background
 
         return `bg-success`;
-      } else if (equipment.playerOwnsThisItem.valueOf() == false && getLevel(Experience.Defense) >= equipment.levelReqDefence) {
+      } else if (equipment.playerOwnsThisItem.valueOf() == false && getLevel(Experience.Defence) >= equipment.levelReqDefence) {
         // missing levels and owns item = yellow background
 
         return `bg-yellowlol`;
-      } else if (equipment.playerOwnsThisItem && getLevel(Experience.Defense) < equipment.levelReqDefence) {
+      } else if (equipment.playerOwnsThisItem && getLevel(Experience.Defence) < equipment.levelReqDefence) {
         // has levels and does not own item = orange background
 
         return `bg-orangelol`;
-      } else if (equipment.playerOwnsThisItem.valueOf() == false && getLevel(Experience.Defense) < equipment.levelReqDefence) {
+      } else if (equipment.playerOwnsThisItem.valueOf() == false && getLevel(Experience.Defence) < equipment.levelReqDefence) {
         // missing levels and does not own item = red background
         return `bg-danger`;
       }
     } else if (equipment.thisWeaponStyle === `melee`) {
-      if (equipment.playerOwnsThisItem && getLevel(Experience.Defense) >= equipment.levelReqAttack) {
+      if (equipment.playerOwnsThisItem && getLevel(Experience.Defence) >= equipment.levelReqAttack) {
         // has levels and owns item = green background
 
         return `bg-success`;
-      } else if (equipment.playerOwnsThisItem.valueOf() == false && getLevel(Experience.Defense) >= equipment.levelReqAttack) {
+      } else if (equipment.playerOwnsThisItem.valueOf() == false && getLevel(Experience.Defence) >= equipment.levelReqAttack) {
         // missing levels and owns item = yellow background
 
         return `bg-yellowlol`;
-      } else if (equipment.playerOwnsThisItem && getLevel(Experience.Defense) < equipment.levelReqAttack) {
+      } else if (equipment.playerOwnsThisItem && getLevel(Experience.Defence) < equipment.levelReqAttack) {
         // has levels and does not own item = orange background
 
         return `bg-orangelol`;
-      } else if (equipment.playerOwnsThisItem.valueOf() == false && getLevel(Experience.Defense) < equipment.levelReqAttack) {
+      } else if (equipment.playerOwnsThisItem.valueOf() == false && getLevel(Experience.Defence) < equipment.levelReqAttack) {
         // missing levels and does not own item = red background
         return `bg-danger`;
       }
     } else if (equipment.thisWeaponStyle === `magic`) {
-      if (equipment.playerOwnsThisItem && getLevel(Experience.Defense) >= equipment.levelReqMagic) {
+      if (equipment.playerOwnsThisItem && getLevel(Experience.Defence) >= equipment.levelReqMagic) {
         // has levels and owns item = green background
 
         return `bg-success`;
-      } else if (equipment.playerOwnsThisItem.valueOf() == false && getLevel(Experience.Defense) >= equipment.levelReqMagic) {
+      } else if (equipment.playerOwnsThisItem.valueOf() == false && getLevel(Experience.Defence) >= equipment.levelReqMagic) {
         // missing levels and owns item = yellow background
 
         return `bg-yellowlol`;
-      } else if (equipment.playerOwnsThisItem && getLevel(Experience.Defense) < equipment.levelReqMagic) {
+      } else if (equipment.playerOwnsThisItem && getLevel(Experience.Defence) < equipment.levelReqMagic) {
         // has levels and does not own item = orange background
 
         return `bg-orangelol`;
-      } else if (equipment.playerOwnsThisItem.valueOf() == false && getLevel(Experience.Defense) < equipment.levelReqMagic) {
+      } else if (equipment.playerOwnsThisItem.valueOf() == false && getLevel(Experience.Defence) < equipment.levelReqMagic) {
         // missing levels and does not own item = red background
         return `bg-danger`;
       }
     } else if (equipment.thisWeaponStyle === `ranged`) {
-      if (equipment.playerOwnsThisItem && getLevel(Experience.Defense) >= equipment.levelReqRanged) {
+      if (equipment.playerOwnsThisItem && getLevel(Experience.Defence) >= equipment.levelReqRanged) {
         // has levels and owns item = green background
 
         return `bg-success`;
-      } else if (equipment.playerOwnsThisItem.valueOf() == false && getLevel(Experience.Defense) >= equipment.levelReqRanged) {
+      } else if (equipment.playerOwnsThisItem.valueOf() == false && getLevel(Experience.Defence) >= equipment.levelReqRanged) {
         // missing levels and owns item = yellow background
 
         return `bg-yellowlol`;
-      } else if (equipment.playerOwnsThisItem && getLevel(Experience.Defense) < equipment.levelReqRanged) {
+      } else if (equipment.playerOwnsThisItem && getLevel(Experience.Defence) < equipment.levelReqRanged) {
         // has levels and does not own item = orange background
 
         return `bg-orangelol`;
-      } else if (equipment.playerOwnsThisItem.valueOf() == false && getLevel(Experience.Defense) < equipment.levelReqRanged) {
+      } else if (equipment.playerOwnsThisItem.valueOf() == false && getLevel(Experience.Defence) < equipment.levelReqRanged) {
         // missing levels and does not own item = red background
         return `bg-danger`;
       }
@@ -117,11 +117,7 @@ const WornEquipment = (props: Types.WornEquipmentCompProps) => {
   const displaySelectorTag = (itemsFromState: Types.AllSliceKeys, slotName: Types.IEquipmentSlotOptions, slotString: string) => {
     let compositeItems: Types.ICompositeArmorItem[] = [EmptyItem];
 
-    let itemsFromConstants: Types.IArmorItem[] = [
-      ...Object.values(slotName.melee),
-      ...Object.values(slotName.magic),
-      ...Object.values(slotName.ranged),
-    ];
+    let itemsFromConstants: Types.IArmorItem[] = [...Object.values(slotName.melee), ...Object.values(slotName.magic), ...Object.values(slotName.ranged)];
     // console.log(itemsFromState);
     // console.log();
 
@@ -172,12 +168,7 @@ const WornEquipment = (props: Types.WornEquipmentCompProps) => {
     return (
       <select onChange={(e) => itemHasBeenEquipped(e)} className="form-select" name={`${slotString}`}>
         {compositeItems.map((Item) => (
-          <option
-            value={Item.name}
-            disabled={applyDisabledAttribute(Item)}
-            key={`Slot-Item-${Item.name}`}
-            className={`${handleSelectorStyle(Item)}`}
-          >
+          <option value={Item.name} disabled={applyDisabledAttribute(Item)} key={`Slot-Item-${Item.name}`} className={`${handleSelectorStyle(Item)}`}>
             {Item.displayName}
           </option>
         ))}
@@ -195,7 +186,7 @@ const WornEquipment = (props: Types.WornEquipmentCompProps) => {
     // check this to type guard and infer Types.ICompositeArmorItem | Types.ICompositeWeaponItem
     if (`levelReqDefence` in item) {
       // if the item is armor
-      if (getLevel(Experience.Defense) < item.levelReqDefence) {
+      if (getLevel(Experience.Defence) < item.levelReqDefence) {
         // if the armor is a higher level than the player has, return true to disable the item
         return true;
       }

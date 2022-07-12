@@ -10,7 +10,7 @@ export const Experience = createSlice({
     Fishing: 0,
     Attack: 10000,
     Strength: 0,
-    Defense: 10000,
+    Defence: 10000,
     Consitution: 1358,
     Prayer: 0,
     Summoning: 0,

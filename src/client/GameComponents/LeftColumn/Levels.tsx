@@ -19,14 +19,12 @@ const Levels = (props: Types.NoProps) => {
     let str: number = getLevel(Experience.Strength);
     let mag: number = getLevel(Experience.Magic);
     let rng: number = getLevel(Experience.Ranged);
-    let def: number = getLevel(Experience.Defense);
+    let def: number = getLevel(Experience.Defence);
     let con: number = getLevel(Experience.Consitution);
     let pray: number = getLevel(Experience.Prayer);
     let summ: number = getLevel(Experience.Summoning);
 
-    const combatLevel = Math.floor(
-      ((13 / 10) * Math.max(att + str, 2 * mag, 2 * rng) + def + con + Math.floor(0.5 * pray) + Math.floor(0.5 * summ)) / 4
-    );
+    const combatLevel = Math.floor(((13 / 10) * Math.max(att + str, 2 * mag, 2 * rng) + def + con + Math.floor(0.5 * pray) + Math.floor(0.5 * summ)) / 4);
     return combatLevel;
   };
 

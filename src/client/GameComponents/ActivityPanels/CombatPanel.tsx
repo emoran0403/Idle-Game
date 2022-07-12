@@ -17,12 +17,13 @@ import { setTarget } from "../../Redux/Slices/CurrentTarget";
 //! need to conditionally display instead of the current resource based on combat or skilling
 
 const CombatPanel = (props: Types.CombatPanelProps) => {
-  const arrayOfCombatStyleSkills = [`Attack`, `Strength`, `Defense`, `Ranged`, `Magic`];
+  const arrayOfCombatStyleSkills = [`Attack`, `Strength`, `Defence`, `Ranged`, `Magic`];
   const dispatch = useDispatch();
 
   // This grabs the current location from state
   const { CurrentLocation } = useSelector((state: Types.AllState) => state.Location) as Types.ICurrentLocation;
   const { CurrentSkill } = useSelector((state: Types.AllState) => state.Skill) as Types.ListOfSkills;
+  const { CurrentTarget } = useSelector((state: Types.AllState) => state.Target) as Types.ICurrentTarget;
   // console.log(Current);
   // console.log(Enemies[Current as keyof Types.IAllEnemies]);
   //@ Enemies[Current as keyof Types.IAllEnemies] is the list of enemies at the current location
@@ -64,7 +65,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
               onClick={(e) => {
                 console.log(`${enemy.displayName} was clicked`);
 
-                if (!arrayOfCombatStyleSkills.includes(CurrentSkill)) {
+                if (!arrayOfCombatStyleSkills.includes(CurrentSkill) || CurrentTarget === `none`) {
                   // if the player is currently not training a combat skill, set skill to none
                   // - the player cannot train a noncombat skill while in combat
                   dispatch(setSkill(`none`));

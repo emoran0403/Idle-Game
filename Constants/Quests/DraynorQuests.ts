@@ -3,8 +3,8 @@ import * as Types from "../../Types";
  * EXPERIENCE REWARDS
  * sometimes reward a prismatic lamp, allowing the player to choose the skill in which they gain xp
  * ANY: any skill
- * MAINCOMBAT: attack, strength, defense, constitution, magic, range
- * ANYCOMBAT: attack, strength, defense, constitution, magic, range, prayer, summoning
+ * MAINCOMBAT: attack, strength, defence, constitution, magic, range
+ * ANYCOMBAT: attack, strength, defence, constitution, magic, range, prayer, summoning
  */
 
 export const DraynorQuests: Types.IQuestInfo[] = [
@@ -29,14 +29,7 @@ export const DraynorQuests: Types.IQuestInfo[] = [
     stepsTotal: 36,
     questPoints: 2,
     combatRequirements: 74,
-    questRequirements: [
-      "A Fairy Tale I - Growing Pains",
-      "Jungle Potion",
-      "Lost City",
-      "Nature Spirit",
-      "Priest in Peril",
-      "The Restless Ghost",
-    ],
+    questRequirements: ["A Fairy Tale I - Growing Pains", "Jungle Potion", "Lost City", "Nature Spirit", "Priest in Peril", "The Restless Ghost"],
     levelRequirements: {
       Thieving: 40,
       Farming: 49,
