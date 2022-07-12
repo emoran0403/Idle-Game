@@ -236,10 +236,10 @@ export interface IStateQuest {
 }
 
 export interface ListOfSkills {
-  Current: `Woodcutting` | `Firemaking` | `Mining` | `Fishing` | `None`;
+  Current: ListOfSkillOptions;
 }
 
-export type bigwow = `Woodcutting` | `Firemaking` | `Mining` | `Fishing`;
+export type ListOfSkillOptions = `Woodcutting` | `Firemaking` | `Mining` | `Fishing` | `Attack` | `Strength` | `Defense` | `Ranged` | `Magic`;
 
 export interface ICurrentResource {
   Current:
@@ -288,16 +288,7 @@ export interface AllSlots {
   TwoHandSlot: ITwoHandSlotSlice;
 }
 
-export type AllSliceKeys =
-  | IBackSlotSlice
-  | IBodySlotSlice
-  | IFeetSlotSlice
-  | IHandSlotSlice
-  | IHeadSlotSlice
-  | ILegsSlotSlice
-  | INeckSlotSlice
-  | IRingSlotSlice
-  | ITwoHandSlotSlice;
+export type AllSliceKeys = IBackSlotSlice | IBodySlotSlice | IFeetSlotSlice | IHandSlotSlice | IHeadSlotSlice | ILegsSlotSlice | INeckSlotSlice | IRingSlotSlice | ITwoHandSlotSlice;
 
 export interface AllStateQuestSlices {
   Quests_Lumbridge: LumbridgeQuestSliceCrap;
@@ -324,7 +315,7 @@ export interface I_Inventory {
 export interface ICurrentActivity {
   Current: ICurrentActivityOptions;
 }
-export type ICurrentActivityOptions = `Banking` | `Skilling` | `Questing` | ` In combat` | `Idle`;
+export type ICurrentActivityOptions = `Banking` | `Skilling` | `Questing` | `In combat` | `Idle`;
 
 export interface IResources {
   Banking: boolean;
@@ -422,17 +413,7 @@ export interface IChatLog {
 }
 
 //@ chatLogs may only have 1 tag - if this is changed, then the filter logic needs to be updated
-export type ChatLogTag =
-  | `Gained Resource`
-  | `Monster Drop`
-  | `Rare Item`
-  | `Level Up`
-  | `Gained XP`
-  | `Nonfilterable`
-  | `Quest Completed`
-  | `Equipment Swap`
-  | `Activity Swap`
-  | `Misc`;
+export type ChatLogTag = `Gained Resource` | `Monster Drop` | `Rare Item` | `Level Up` | `Gained XP` | `Nonfilterable` | `Quest Completed` | `Equipment Swap` | `Activity Swap` | `Misc`;
 
 export interface IArmorItem {
   name: string;
