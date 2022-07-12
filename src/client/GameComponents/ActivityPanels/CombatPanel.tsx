@@ -62,12 +62,8 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
               onClick={(e) => {
                 console.log(`${enemy.displayName} was clicked`);
                 dispatch(setActivity(`In combat`));
-                // send a contextual message to the chat window
-                // if the last log contains the resource, don't send it
-                // if (enemy === props.chatLogArray[props.chatLogArray.length - 1].message.substring(12)) {
-                //   return;
-                // }
-                // props.newChatLog(`Now cutting ${enemy}`, `Activity Swap`);
+
+                handleChatLogEnemy(`${enemy.displayName}`);
               }}
               key={`enemy-list-${enemy.displayName}`}
               className={`btn border mb-3`}
@@ -87,19 +83,28 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
     );
   };
 
+  const handleChatLogSkill = (skill: string) => {
+    if (skill === props.chatLogArray[props.chatLogArray.length - 1].message.substring(13)) {
+      return;
+    }
+    props.newChatLog(`Now training ${skill}`, `Activity Swap`);
+  };
+
+  const handleChatLogEnemy = (monster: string) => {
+    if (monster === props.chatLogArray[props.chatLogArray.length - 1].message.substring(13)) {
+      return;
+    }
+    props.newChatLog(`Now fighting ${monster}`, `Activity Swap`);
+  };
+
   const combatStyleButtonJSX = () => {
     return (
       <div className="d-flex justify-content-evenly mt-2">
         <button
           className="btn btn-primary"
           onClick={() => {
-            console.log(`i was clicked`);
             dispatch(setSkill(`Attack`));
-
-            if (CurrentSkill === props.chatLogArray[props.chatLogArray.length - 1].message.substring(13)) {
-              return;
-            }
-            props.newChatLog(`Now training Attack`, `Activity Swap`);
+            handleChatLogSkill(`Attack`);
           }}
         >
           Attack
@@ -107,8 +112,8 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
         <button
           className="btn btn-primary"
           onClick={() => {
-            console.log(`i was clicked`);
             dispatch(setSkill(`Strength`));
+            handleChatLogSkill(`Strength`);
           }}
         >
           Strength
@@ -116,8 +121,8 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
         <button
           className="btn btn-primary"
           onClick={() => {
-            console.log(`i was clicked`);
             dispatch(setSkill(`Defence`));
+            handleChatLogSkill(`Defence`);
           }}
         >
           Defence
@@ -125,8 +130,8 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
         <button
           className="btn btn-primary"
           onClick={() => {
-            console.log(`i was clicked`);
             dispatch(setSkill(`Ranged`));
+            handleChatLogSkill(`Ranged`);
           }}
         >
           Ranged
@@ -134,8 +139,8 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
         <button
           className="btn btn-primary"
           onClick={() => {
-            console.log(`i was clicked`);
             dispatch(setSkill(`Magic`));
+            handleChatLogSkill(`Magic`);
           }}
         >
           Air Spells
@@ -143,8 +148,9 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
         <button
           className="btn btn-primary"
           onClick={() => {
-            console.log(`i was clicked`);
             dispatch(setSkill(`Magic`));
+
+            handleChatLogSkill(`Magic`);
           }}
         >
           Water Spells
@@ -152,8 +158,8 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
         <button
           className="btn btn-primary"
           onClick={() => {
-            console.log(`i was clicked`);
             dispatch(setSkill(`Magic`));
+            handleChatLogSkill(`Magic`);
           }}
         >
           Earth Spells
@@ -161,8 +167,8 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
         <button
           className="btn btn-primary"
           onClick={() => {
-            console.log(`i was clicked`);
             dispatch(setSkill(`Magic`));
+            handleChatLogSkill(`Magic`);
           }}
         >
           Fire Spells
