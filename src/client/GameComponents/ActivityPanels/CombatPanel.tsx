@@ -10,8 +10,6 @@ import { setActivity } from "../../Redux/Slices/CurrentActivity";
 
 //@ for simplicity, i'm not keeping track of ammunition / runes
 
-//! need to add chatlog functionality to buttons swapping combat style
-//! need to add chatlog functionality to enemy buttons
 //! need a piece of state to hold which enemy is the current target
 //! need to conditionally display instead of the current resource based on combat or skilling
 
@@ -103,6 +101,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
         <button
           className="btn btn-primary"
           onClick={() => {
+            dispatch(setResource(`none`));
             dispatch(setSkill(`Attack`));
             handleChatLogSkill(`Attack`);
           }}
@@ -112,6 +111,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
         <button
           className="btn btn-primary"
           onClick={() => {
+            dispatch(setResource(`none`));
             dispatch(setSkill(`Strength`));
             handleChatLogSkill(`Strength`);
           }}
@@ -121,6 +121,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
         <button
           className="btn btn-primary"
           onClick={() => {
+            dispatch(setResource(`none`));
             dispatch(setSkill(`Defence`));
             handleChatLogSkill(`Defence`);
           }}
@@ -130,6 +131,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
         <button
           className="btn btn-primary"
           onClick={() => {
+            dispatch(setResource(`none`));
             dispatch(setSkill(`Ranged`));
             handleChatLogSkill(`Ranged`);
           }}
@@ -139,6 +141,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
         <button
           className="btn btn-primary"
           onClick={() => {
+            dispatch(setResource(`none`));
             dispatch(setSkill(`Magic`));
             handleChatLogSkill(`Magic`);
           }}
@@ -148,6 +151,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
         <button
           className="btn btn-primary"
           onClick={() => {
+            dispatch(setResource(`none`));
             dispatch(setSkill(`Magic`));
 
             handleChatLogSkill(`Magic`);
@@ -158,6 +162,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
         <button
           className="btn btn-primary"
           onClick={() => {
+            dispatch(setResource(`none`));
             dispatch(setSkill(`Magic`));
             handleChatLogSkill(`Magic`);
           }}
@@ -167,6 +172,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
         <button
           className="btn btn-primary"
           onClick={() => {
+            dispatch(setResource(`none`));
             dispatch(setSkill(`Magic`));
             handleChatLogSkill(`Magic`);
           }}

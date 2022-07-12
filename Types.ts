@@ -243,24 +243,25 @@ export interface ListOfSkills {
 export type ListOfSkillOptions = `Woodcutting` | `Firemaking` | `Mining` | `Fishing` | `Attack` | `Strength` | `Defense` | `Ranged` | `Magic`;
 
 export interface ICurrentResource {
-  CurrentResource:
-    | `None`
-    | `raw_shrimp`
-    | `raw_crayfish`
-    | `raw_anchovies`
-    | `raw_trout`
-    | `raw_salmon`
-    | `raw_pike`
-    | `raw_sardine`
-    | `raw_herring`
-    | `logs`
-    | `oak`
-    | `willow`
-    | `maple`
-    | `yew`
-    | `magic`
-    | `elder`;
+  CurrentResource: ICurrentResourceOptions;
 }
+export type ICurrentResourceOptions =
+  | `none`
+  | `raw_shrimp`
+  | `raw_crayfish`
+  | `raw_anchovies`
+  | `raw_trout`
+  | `raw_salmon`
+  | `raw_pike`
+  | `raw_sardine`
+  | `raw_herring`
+  | `logs`
+  | `oak`
+  | `willow`
+  | `maple`
+  | `yew`
+  | `magic`
+  | `elder`;
 
 export interface AllState extends AllSlots {
   Experience: ISkillList;
@@ -271,11 +272,17 @@ export interface AllState extends AllSlots {
   Activity: ICurrentActivity;
   Skill: ListOfSkills;
   Resource: ICurrentResource;
+  Target: ICurrentTarget;
   Resources: IResources;
   Wallet: IWallet;
   Quests_Lumbridge: LumbridgeQuestSliceCrap;
   Quests_Draynor: DraynorQuestSliceCrap;
 }
+
+export interface ICurrentTarget {
+  CurrentTarget: ICurrentTargetOptions;
+}
+export type ICurrentTargetOptions = `none` | `man` | `goblin` | `giantspider` | `chicken` | `cow` | `spider` | `giantrat` | `swampfrog`;
 
 export interface AllSlots {
   BackSlot: IBackSlotSlice;

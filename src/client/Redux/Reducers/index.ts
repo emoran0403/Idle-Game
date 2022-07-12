@@ -9,7 +9,8 @@ import inventoryReducer from "../Slices/Inventory";
 import currentLocationReducer from "../Slices/CurrentLocation";
 import currentSkillReducer from "../Slices/CurrentSkill";
 import currentActivityReducer from "../Slices/CurrentActivity";
-import resourceReducer from "../Slices/CurrentResource";
+import currentResourceReducer from "../Slices/CurrentResource";
+import currentTargetReducer from "../Slices/CurrentTarget";
 import resourcesReducer from "../Slices/Resources";
 import walletReducer from "../Slices/Wallet";
 import lumbridgequestReducer from "../Slices/QuestSlices/Lumbridge";
@@ -35,7 +36,8 @@ export default combineReducers({
   Location: currentLocationReducer,
   Skill: currentSkillReducer,
   Activity: currentActivityReducer,
-  Resource: resourceReducer,
+  Resource: currentResourceReducer,
+  Target: currentTargetReducer,
   Resources: resourcesReducer,
   Wallet: walletReducer,
   Quests_Lumbridge: lumbridgequestReducer,

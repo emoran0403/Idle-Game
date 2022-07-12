@@ -187,13 +187,7 @@ export const Lumbridge = {
  *
  */
 
-const hitchance = (
-  affinity: number,
-  armorRating: number,
-  accuracy: number,
-  additiveAccuracyBoosts: number = 0,
-  multiplicativeAccuracyBoosts: number = 1
-) => {
+const hitchance = (affinity: number, armorRating: number, accuracy: number, additiveAccuracyBoosts: number = 0, multiplicativeAccuracyBoosts: number = 1) => {
   // calculates the hitchance based on combat variables
   let hitChance: number = affinity * Math.round((accuracy * multiplicativeAccuracyBoosts + additiveAccuracyBoosts) / armorRating);
   return hitChance;

@@ -4,12 +4,14 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 const CurrentResourceComp = (props: Types.NoProps) => {
-  const state = useSelector((state: Types.AllState) => state.Resource.CurrentResource);
-  // console.log(state);
+  const Resource = useSelector((state: Types.AllState) => state.Resource.CurrentResource as Types.ICurrentResourceOptions);
+  const Target = useSelector((state: Types.AllState) => state.Target.CurrentTarget as Types.ICurrentTargetOptions);
+  console.log(Target);
   useEffect(() => {}, []);
   return (
     <div className="text-center border border-dark border-2 rounded-3">
-      <div>Collecting {state}</div>
+      <div>Fighting {Target}</div>
+      <div>Collecting {Resource}</div>
     </div>
   );
 };
