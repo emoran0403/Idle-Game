@@ -10,8 +10,6 @@ import { setActivity } from "../../Redux/Slices/CurrentActivity";
 import { setTarget } from "../../Redux/Slices/CurrentTarget";
 
 //@ for simplicity, i'm not keeping track of ammunition / runes
-//! enemy buttons need to change the current skill to none if it was previously a skilling skill
-//? should i default to attack?
 
 //! need a piece of state to hold which enemy is the current target
 //! need to conditionally display instead of the current resource based on combat or skilling
@@ -73,6 +71,12 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
                 dispatch(setActivity(`In combat`));
                 dispatch(setTarget(enemy.displayName));
                 handleChatLogEnemy(`${enemy.displayName}`);
+
+                if (CurrentSkill === `none`) {
+                  props.newChatLog(`Choose a combat style!`, `Nonfilterable`);
+                  // if player chooses to enter combat without selecting a combat style, send a chatlog
+                  // not choosing a combat style means combat will not continue, and the player should be notified
+                }
               }}
               key={`enemy-list-${enemy.displayName}`}
               className={`btn border mb-3`}
