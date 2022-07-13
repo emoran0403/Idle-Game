@@ -8,7 +8,7 @@ const CurrentActivityComp = (props: Types.NoProps) => {
 
   //   useEffect(() => {}, []);
   return (
-    <div className="text-center border border-dark border-2 rounded-3 flex-fill">
+    <div className="text-center border border-dark border-2 rounded-3" style={{ width: `80px` }}>
       <div>You are</div>
       <div>{CurrentActivity}</div>
     </div>

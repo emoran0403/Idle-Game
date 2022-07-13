@@ -19,7 +19,7 @@ const Resources = (props: Types.ResourcesCompProps) => {
   }
 
   return (
-    <div className="text-center border border-dark border-2 rounded-3 flex-fill">
+    <div className="text-center border border-dark border-2 rounded-3" style={{ width: `230px` }}>
       <div>Currently {resourcesToDisplay} Resources</div>
       <button
         className="btn btn-primary"

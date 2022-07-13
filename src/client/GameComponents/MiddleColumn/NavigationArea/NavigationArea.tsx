@@ -24,6 +24,7 @@ const NavigationArea = (props: Types.NavigationAreaCompProps) => {
           props.newChatLog(`More Locations coming soon(tm)!`, `Nonfilterable`);
         }}
         className="btn btn-primary flex-fill"
+        style={{ width: `130px` }}
       >
         World Map
       </button>

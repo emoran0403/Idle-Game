@@ -10,7 +10,7 @@ const CurrentResourceComp = (props: Types.NoProps) => {
   // console.log(Target);
   useEffect(() => {}, []);
   return (
-    <div className="text-center border border-dark border-2 rounded-3 flex-fill">
+    <div className="text-center border border-dark border-2 rounded-3" style={{ width: `130px` }}>
       {Activty === `In combat` ? (
         <div>
           <div>Fighting </div>
