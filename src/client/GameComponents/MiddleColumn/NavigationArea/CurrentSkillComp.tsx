@@ -4,16 +4,31 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 const CurrentSkillComp = (props: Types.NoProps) => {
-  const state = useSelector((state: Types.AllState) => state.Skill.CurrentSkill);
+  const Skill = useSelector((state: Types.AllState) => state.Skill.CurrentSkill);
   const Quest = useSelector((state: Types.AllState) => state.Quest.CurrentQuest);
   const Activity = useSelector((state: Types.AllState) => state.Activity.CurrentActivity);
-  console.log(Activity);
-  console.log(Quest);
+  const Target = useSelector((state: Types.AllState) => state.Target.CurrentTarget);
+
+  const arrayOfCombatStyleSkills = [`Attack`, `Strength`, `Defence`, `Ranged`, `Magic`];
+
+  // console.log(Activity);
+  // console.log(Quest);
+
+  const returnBackgroundColor = () => {
+    // if an enemy is chosen, but an attack style has not been chosen
+    if (Activity === `In combat` && !arrayOfCombatStyleSkills.includes(Skill)) {
+      return `bg-danger`;
+    } else if (Activity === `In combat` && Target === `none`) {
+      return `bg-danger`;
+    } else {
+      return ``;
+    }
+  };
 
   // useEffect(() => {}, []);
   return (
     <div className="text-center border border-dark border-2 rounded-3">
-      {Activity === `Questing` ? <div>Current Quest: {Quest}</div> : <div>Training {state}</div>}
+      {Activity === `Questing` ? <div>Current Quest: {Quest}</div> : <div className={returnBackgroundColor()}>Training {Skill}</div>}
     </div>
   );
 };

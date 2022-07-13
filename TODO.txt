@@ -11,3 +11,10 @@
   * onChange={(e) => itemHasBeenEquipped(e)}
   * className={`${handleSelectorStyle(Item)}`}
   * disabled={applyDisabledAttribute(Item)}
+
+ - click a quest
+ - choose an attack style
+ - choose an enemy
+  * same issue if a skill is set, then attack, then enemy
+
+  attack style is reset to none

@@ -62,9 +62,10 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
               onClick={(e) => {
                 // console.log(`${enemy.displayName} was clicked`);
 
-                if (!arrayOfCombatStyleSkills.includes(CurrentSkill) || CurrentTarget === `none`) {
+                if (!arrayOfCombatStyleSkills.includes(CurrentSkill) || CurrentSkill === `none`) {
                   // if the player is currently not training a combat skill, set skill to none
                   // - the player cannot train a noncombat skill while in combat
+                  console.log(CurrentSkill);
                   dispatch(setSkill(`none`));
                 }
                 dispatch(setTarget(enemy.displayName));
