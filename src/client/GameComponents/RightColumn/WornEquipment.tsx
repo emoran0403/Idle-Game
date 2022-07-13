@@ -14,19 +14,6 @@ import { EmptyItem } from "../../../../Constants/Equipment/EmptyItem";
 import { getLevel } from "../../../../Constants/XP Levels";
 
 const WornEquipment = (props: Types.WornEquipmentCompProps) => {
-  //@ currentEquipment is the collection of all the currently worn equipment - use this for combat purposes
-  const [currentEquipment, setCurrentEquipment] = useState<Types.ICurrentEquipment>({
-    BackSlot: `none`,
-    BodySlot: `none`,
-    FeetSlot: `none`,
-    HandsSlot: `none`,
-    HeadSlot: `none`,
-    LegsSlot: `none`,
-    NeckSlot: `none`,
-    RingSlot: `none`,
-    TwoHandSlot: `none`,
-  });
-
   // X - FromState is the state object containing the booleans signifying if the player owns X
   const headsFromState = useSelector((state: Types.AllState) => state.HeadSlot) as Types.IHeadSlotSlice;
   const bodiesFromState = useSelector((state: Types.AllState) => state.BodySlot) as Types.IBodySlotSlice;
@@ -144,25 +131,25 @@ const WornEquipment = (props: Types.WornEquipmentCompProps) => {
         }
 
         // if we match the .name to the old equipped item, set the display name
-        if (compositeItems[i].name === currentEquipment[e.target.name as keyof Types.ICurrentEquipment]) {
+        if (compositeItems[i].name === props.currentEquipment[e.target.name as keyof Types.ICurrentEquipment]) {
           oldEquippedItemDisplayName = compositeItems[i].displayName;
         }
       }
 
       // if slot is none, we are equipping an item
-      if (currentEquipment[e.target.name as keyof Types.ICurrentEquipment] === `none`) {
+      if (props.currentEquipment[e.target.name as keyof Types.ICurrentEquipment] === `none`) {
         props.newChatLog(`Equipped ${newlyEquippedItemDisplayName}`, `Equipment Swap`);
 
         // if slot is not none, and e.target.value is none, we are unequipping an item
-      } else if (currentEquipment[e.target.name as keyof Types.ICurrentEquipment] !== `none` && e.target.value === `none`) {
+      } else if (props.currentEquipment[e.target.name as keyof Types.ICurrentEquipment] !== `none` && e.target.value === `none`) {
         props.newChatLog(`Unequipped ${oldEquippedItemDisplayName}`, `Equipment Swap`);
 
         //if slot is not none, and e.target.value is not none, we are swapping to a new item
-      } else if (currentEquipment[e.target.name as keyof Types.ICurrentEquipment] !== `none` && e.target.value !== `none`) {
+      } else if (props.currentEquipment[e.target.name as keyof Types.ICurrentEquipment] !== `none` && e.target.value !== `none`) {
         props.newChatLog(`Swapped to ${newlyEquippedItemDisplayName}`, `Equipment Swap`);
       }
 
-      setCurrentEquipment({ ...currentEquipment, [e.target.name as keyof Types.ICurrentEquipment]: e.target.value });
+      props.setCurrentEquipment({ ...props.currentEquipment, [e.target.name as keyof Types.ICurrentEquipment]: e.target.value });
     };
 
     return (

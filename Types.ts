@@ -61,6 +61,8 @@ export interface CluesPanelProps {
 
 export interface WornEquipmentCompProps {
   newChatLog: Function;
+  setCurrentEquipment: Function;
+  currentEquipment: ICurrentEquipment;
 }
 
 export interface ActivityAreaCompProps {

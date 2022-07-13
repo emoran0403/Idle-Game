@@ -51,6 +51,19 @@ const GameContainer = (props: Types.NoProps) => {
     }
   };
 
+  //@ currentEquipment is the collection of all the currently worn equipment - use this for combat purposes
+  const [currentEquipment, setCurrentEquipment] = useState<Types.ICurrentEquipment>({
+    BackSlot: `none`,
+    BodySlot: `none`,
+    FeetSlot: `none`,
+    HandsSlot: `none`,
+    HeadSlot: `none`,
+    LegsSlot: `none`,
+    NeckSlot: `none`,
+    RingSlot: `none`,
+    TwoHandSlot: `none`,
+  });
+
   // useEffect(() => {}, []);
 
   return (
@@ -70,7 +83,7 @@ const GameContainer = (props: Types.NoProps) => {
         <div id="right-column" className="col-lg-3 border border-dark border-2 rounded-3" style={{ height: "90vh" }}>
           <Inventory />
           <ActiveBuffs />
-          <WornEquipment newChatLog={handleNewChatLog} />
+          <WornEquipment newChatLog={handleNewChatLog} setCurrentEquipment={setCurrentEquipment} currentEquipment={currentEquipment} />
         </div>
       </div>
     </div>
