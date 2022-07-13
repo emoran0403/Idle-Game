@@ -24,6 +24,7 @@ import BackSlotSliceReducer from "../Slices/EquipmentSlices/BackSlotSlice";
 import RingSlotSliceReducer from "../Slices/EquipmentSlices/RingSlotSlice";
 import NeckSlotSliceReducer from "../Slices/EquipmentSlices/NeckSlotSlice";
 import TwoHandSlotSliceReducer from "../Slices/EquipmentSlices/TwoHandSlotSlice";
+import HatchetsSliceReducer from "../Slices/SkillingEquipmentSlices/Hatchets";
 
 export default combineReducers({
   buttons1: buttons1Reducer,
@@ -51,4 +52,5 @@ export default combineReducers({
   RingSlot: RingSlotSliceReducer,
   NeckSlot: NeckSlotSliceReducer,
   TwoHandSlot: TwoHandSlotSliceReducer,
+  Hatchets: HatchetsSliceReducer,
 });

@@ -990,3 +990,12 @@ export interface IListOfHatchets {
   adamanthatchet: IHatchet;
   runehatchet: IHatchet;
 }
+
+export interface IHatchetsSlice {
+  playerOwnsbronzehatchet: boolean;
+  playerOwnsironhatchet: boolean;
+  playerOwnssteelhatchet: boolean;
+  playerOwnsmithrilhatchet: boolean;
+  playerOwnsadamanthatchet: boolean;
+  playerOwnsrunehatchet: boolean;
+}
