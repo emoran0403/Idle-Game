@@ -9,6 +9,7 @@ import { setSkill } from "../../Redux/Slices/CurrentSkill";
 import { setActivity } from "../../Redux/Slices/CurrentActivity";
 import { setTarget } from "../../Redux/Slices/CurrentTarget";
 import { getLevel } from "../../../../Constants/XP Levels";
+import { setQuest } from "../../Redux/Slices/CurrentQuest";
 
 //@ for simplicity, i'm not keeping track of ammunition / runes
 
@@ -66,8 +67,10 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
                   // - the player cannot train a noncombat skill while in combat
                   dispatch(setSkill(`none`));
                 }
-                dispatch(setActivity(`In combat`));
                 dispatch(setTarget(enemy.displayName));
+                dispatch(setActivity(`In combat`));
+                dispatch(setResource(`none`));
+                dispatch(setQuest(`none`));
                 handleChatLogEnemy(`${enemy.displayName}`);
 
                 if (CurrentSkill === `none`) {

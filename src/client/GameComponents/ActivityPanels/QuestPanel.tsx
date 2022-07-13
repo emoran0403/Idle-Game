@@ -9,6 +9,7 @@ import { setActivity } from "../../Redux/Slices/CurrentActivity";
 import { setResource } from "../../Redux/Slices/CurrentResource";
 import { setSkill } from "../../Redux/Slices/CurrentSkill";
 import { setQuest } from "../../Redux/Slices/CurrentQuest";
+import { setTarget } from "../../Redux/Slices/CurrentTarget";
 
 //! handleQuestStyle and handleQuestButtonDisplay have repeated logic that could be improved
 const QuestPanel = (props: Types.QuestPanelCompProps) => {
@@ -218,9 +219,10 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
         <button
           onClick={(e) => {
             handleQuestChatMessage(quest);
+            dispatch(setTarget(`none`));
             dispatch(setActivity(`Questing`));
-            dispatch(setQuest(quest.name));
             dispatch(setResource(`none`));
+            dispatch(setQuest(quest.name));
             dispatch(setSkill(`none`));
           }}
           className="btn btn-primary mx-2"

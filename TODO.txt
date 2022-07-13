@@ -6,3 +6,5 @@
  *  - handle a round of combat - based on currentTarget and currentSkill from state
  *
  */
+
+ skills panel needs to allow player to choose their hatchet - copy WornEquipment

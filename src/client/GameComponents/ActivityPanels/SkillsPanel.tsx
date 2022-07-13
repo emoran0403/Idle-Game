@@ -10,6 +10,7 @@ import { setResource } from "../../Redux/Slices/CurrentResource";
 import { setSkill } from "../../Redux/Slices/CurrentSkill";
 import { setActivity } from "../../Redux/Slices/CurrentActivity";
 import { setTarget } from "../../Redux/Slices/CurrentTarget";
+import { setQuest } from "../../Redux/Slices/CurrentQuest";
 
 //@ this needs to pull from some single source of truth showing all the skills available, and their resources based on the current location from state
 
@@ -54,10 +55,11 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
             <button
               disabled={WoodcuttingLevel < ListOfLogs[resource as keyof Types.IListOfLogs].levelReqWoodcutting ? true : false}
               onClick={(e) => {
-                dispatch(setResource(resource));
                 dispatch(setTarget(`none`));
-                dispatch(setSkill(`Woodcutting`));
                 dispatch(setActivity(`Skilling`));
+                dispatch(setResource(resource));
+                dispatch(setQuest(`none`));
+                dispatch(setSkill(`Woodcutting`));
                 // send a contextual message to the chat window
                 // if the last log contains the resource, don't send it
                 if (resource === props.chatLogArray[props.chatLogArray.length - 1].message.substring(12)) {
@@ -93,10 +95,11 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
             <button
               disabled={FishingLevel < ListOfFish[resource as keyof Types.IListOfFish].levelReqFishing ? true : false}
               onClick={(e) => {
-                dispatch(setResource(resource));
                 dispatch(setTarget(`none`));
-                dispatch(setSkill(`Fishing`));
                 dispatch(setActivity(`Skilling`));
+                dispatch(setResource(resource));
+                dispatch(setQuest(`none`));
+                dispatch(setSkill(`Fishing`));
 
                 // send a contextual message to the chat window
                 // if the last log contains the resource, don't send it
