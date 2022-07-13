@@ -10,8 +10,10 @@ import WornEquipment from "./RightColumn/WornEquipment";
 import ActivityArea from "./MiddleColumn/ActivityArea/ActivityArea";
 import ChatWindow from "./LeftColumn/ChatWindow";
 import { useEffect, useState } from "react";
-//! scale the columns to the viewport size
-//! scale the components to the parent column size
+import { useSelector } from "react-redux";
+
+//! work on functions to handle a combat exchange
+//! work on functions to handle a skilling exchange
 
 const GameContainer = (props: Types.NoProps) => {
   // initialize the chatLogArray with a default welcome message
@@ -64,6 +66,8 @@ const GameContainer = (props: Types.NoProps) => {
     TwoHandSlot: `none`,
   });
 
+  const Target = useSelector((state: Types.AllState) => state.Target.CurrentTarget as Types.ICurrentTargetOptions);
+  console.log({ Target });
   // useEffect(() => {}, []);
 
   return (

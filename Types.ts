@@ -965,3 +965,18 @@ export interface IAllEnemies {
 }
 //@ extend this as more locations are added
 export type IEnemyLocations = ILumbridgeEnemies;
+
+export interface IHatchet {
+  name: string;
+  displayName: string;
+  levelReqWoodcutting: number;
+}
+
+export interface IListOfHatchets {
+  bronzehatchet: IHatchet;
+  ironhatchet: IHatchet;
+  steelhatchet: IHatchet;
+  mithrilhatchet: IHatchet;
+  adamanthatchet: IHatchet;
+  runehatchet: IHatchet;
+}
