@@ -27,8 +27,18 @@ const CurrentSkillComp = (props: Types.NoProps) => {
 
   // useEffect(() => {}, []);
   return (
-    <div className="text-center border border-dark border-2 rounded-3">
-      {Activity === `Questing` ? <div>Current Quest: {Quest}</div> : <div className={returnBackgroundColor()}>Training {Skill}</div>}
+    <div className="text-center border border-dark border-2 rounded-3 flex-fill">
+      {Activity === `Questing` ? (
+        <div>
+          <div>Current Quest:</div>
+          <div>{Quest}</div>
+        </div>
+      ) : (
+        <div className={returnBackgroundColor()}>
+          <div>Training</div>
+          <div>{Skill}</div>
+        </div>
+      )}
     </div>
   );
 };

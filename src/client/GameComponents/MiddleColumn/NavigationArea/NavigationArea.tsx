@@ -13,7 +13,7 @@ const NavigationArea = (props: Types.NavigationAreaCompProps) => {
   // useEffect(() => {}, []);
 
   return (
-    <div className="d-flex border border-dark border-2 rounded-3">
+    <div className="d-flex justify-content-evenly border border-dark border-2 rounded-3" style={{ height: "75px" }}>
       <button
         onClick={() => {
           console.log("you clicked World Map Button");

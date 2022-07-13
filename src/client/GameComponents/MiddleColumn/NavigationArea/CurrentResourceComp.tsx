@@ -10,8 +10,18 @@ const CurrentResourceComp = (props: Types.NoProps) => {
   // console.log(Target);
   useEffect(() => {}, []);
   return (
-    <div className="text-center border border-dark border-2 rounded-3">
-      {Activty === `In combat` ? <div>Fighting {Target}</div> : <div>Collecting {Resource}</div>}
+    <div className="text-center border border-dark border-2 rounded-3 flex-fill">
+      {Activty === `In combat` ? (
+        <div>
+          <div>Fighting </div>
+          <div>{Target}</div>
+        </div>
+      ) : (
+        <div>
+          <div>Collecting</div>
+          <div>{Resource}</div>
+        </div>
+      )}
     </div>
   );
 };

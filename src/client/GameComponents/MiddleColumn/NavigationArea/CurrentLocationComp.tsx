@@ -9,8 +9,9 @@ const CurrentLocationComp = (props: Types.NoProps) => {
   useEffect(() => {}, []);
 
   return (
-    <div className="text-center border border-dark border-2 rounded-3">
-      <div>You are in {CurrentLocation}</div>
+    <div className="text-center border border-dark border-2 rounded-3 flex-fill">
+      <div>You are in </div>
+      <div>{CurrentLocation}</div>
     </div>
   );
 };
