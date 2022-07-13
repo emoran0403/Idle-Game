@@ -81,6 +81,16 @@ export interface ILog {
   levelReqFiremaking: number;
   XPGivenFiremaking: number;
   value: number;
+  low: logRoll;
+  high: logRoll;
+}
+export interface logRoll {
+  bronze: number;
+  iron: number;
+  steel: number;
+  mithril: number;
+  adamant: number;
+  rune: number;
 }
 
 export interface IListOfLogs {

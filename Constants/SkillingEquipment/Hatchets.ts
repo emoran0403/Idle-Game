@@ -14,21 +14,21 @@ export const listOfHatchets: Types.IListOfHatchets = {
   steelhatchet: {
     name: "steelhatchet",
     displayName: `Steel hatchet`,
-    levelReqWoodcutting: 0,
+    levelReqWoodcutting: 6,
   },
   mithrilhatchet: {
     name: "mithrilhatchet",
     displayName: `Mithril hatchet`,
-    levelReqWoodcutting: 0,
+    levelReqWoodcutting: 21,
   },
   adamanthatchet: {
     name: "adamanthatchet",
     displayName: `Adamant hatchet`,
-    levelReqWoodcutting: 0,
+    levelReqWoodcutting: 31,
   },
   runehatchet: {
     name: "runehatchet",
     displayName: `Rune hatchet`,
-    levelReqWoodcutting: 0,
+    levelReqWoodcutting: 41,
   },
 };
