@@ -64,6 +64,7 @@ const GameContainer = (props: Types.NoProps) => {
     NeckSlot: `none`,
     RingSlot: `none`,
     TwoHandSlot: `none`,
+    Hatchet: `none`,
   });
 
   const Target = useSelector((state: Types.AllState) => state.Target.CurrentTarget as Types.ICurrentTargetOptions);
@@ -81,7 +82,12 @@ const GameContainer = (props: Types.NoProps) => {
 
         <div id="middle-column" className="col-lg-6 border border-dark border-2 rounded-3" style={{ height: "90vh" }}>
           <NavigationArea newChatLog={handleNewChatLog} chatLogArray={chatLogArray} />
-          <ActivityArea newChatLog={handleNewChatLog} chatLogArray={chatLogArray} />
+          <ActivityArea
+            newChatLog={handleNewChatLog}
+            chatLogArray={chatLogArray}
+            setCurrentEquipment={setCurrentEquipment}
+            currentEquipment={currentEquipment}
+          />
         </div>
 
         <div id="right-column" className="col-lg-3 border border-dark border-2 rounded-3" style={{ height: "90vh" }}>

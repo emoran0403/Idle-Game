@@ -26,6 +26,8 @@ export interface SkillsPanelCompProps {
   handleUpdateDisplay: Function;
   newChatLog: Function;
   chatLogArray: IChatLog[];
+  setCurrentEquipment: Function;
+  currentEquipment: ICurrentEquipment;
 }
 
 export interface ActivityButtonsCompProps {
@@ -68,6 +70,8 @@ export interface WornEquipmentCompProps {
 export interface ActivityAreaCompProps {
   newChatLog: Function;
   chatLogArray: IChatLog[];
+  setCurrentEquipment: Function;
+  currentEquipment: ICurrentEquipment;
 }
 
 export interface ChatWindowCompProps {
@@ -958,6 +962,7 @@ export interface ICurrentEquipment {
   NeckSlot: `none` | IListOfAllNecks;
   RingSlot: `none` | IListOfAllRings;
   TwoHandSlot: `none` | IListOfAllTwoHand;
+  Hatchet: `none` | IListOfHatchets;
 }
 /*********************************************************************************************************************** */
 
