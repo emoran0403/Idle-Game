@@ -13,9 +13,6 @@ export const Inventory = createSlice({
     CurrentInventory: [`logs`],
   },
   reducers: {
-    /**
-     * This will need to respect the players resources setting - to bank or not to bank, that is the question
-     */
     // use this when we need to add an item to the inventory
 
     addItemToInventory: (state: Types.I_Inventory, action) => {

@@ -1,4 +1,9 @@
 import * as Types from "../../Types";
+import { getLevel } from "../XP Levels";
+
+//! list of hatchets is for testing purposes
+import { listOfHatchets } from "../SkillingEquipment/Hatchets";
+
 export const ListOfLogs: Types.IListOfLogs = {
   logs: {
     name: `logs`,
@@ -71,3 +76,33 @@ export const ListOfLogs: Types.IListOfLogs = {
     high: { bronze: 6, iron: 9, steel: 12, mithril: 15, adamant: 18, rune: 21 },
   },
 };
+
+// if the player is woodcutting, and the game interval has ticked, run this function
+//! do i need to move this somewhere?
+export const playerEarnsLog = (log: Types.ILog, WCEXP: number, hatchet: Types.IHatchet) => {
+  //? adjust function to account for buffs and boosts later
+  // calculate the player's Woodcutting level
+  let WCLevel = getLevel(WCEXP);
+
+  // calculate the rawRoll needed for the player to chop a log - formula obtained from wiki: https://runescape.wiki/w/Woodcutting#Mechanics
+  let playerRoll = Math.floor(
+    ((99 - WCLevel) * log.low[hatchet.name as keyof Types.logRoll] + (WCLevel - 1) * log.high[hatchet.name as keyof Types.logRoll]) / 98
+  );
+
+  // roll in the range 0-255 inclusive
+  let gameRoll = Math.floor(Math.random() * 256);
+
+  // if the player rolled higher than the game, return true
+  if (playerRoll >= gameRoll) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+if (playerEarnsLog(ListOfLogs.logs, 1000, listOfHatchets.bronzehatchet)) {
+  // if the player earns a log, we need to add the item to the inventory
+  // dispatch(addItemToInventory(ListOfLogs.logs));
+  // send a chatlog
+  // props.newChatLog(`Chopped some ${ListOfLogs.logs}`, `Gained Resource`);
+}
