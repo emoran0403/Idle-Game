@@ -286,6 +286,7 @@ export interface AllState extends AllSlots {
   Skill: ListOfSkills;
   Resource: ICurrentResource;
   Target: ICurrentTarget;
+  Quest: ICurrentQuest;
   Resources: IResources;
   Wallet: IWallet;
   Quests_Lumbridge: LumbridgeQuestSliceCrap;
@@ -296,6 +297,27 @@ export interface ICurrentTarget {
   CurrentTarget: ICurrentTargetOptions;
 }
 export type ICurrentTargetOptions = `none` | `man` | `goblin` | `giantspider` | `chicken` | `cow` | `spider` | `giantrat` | `swampfrog`;
+
+export interface ICurrentQuest {
+  CurrentQuest: ICurrentQuestOptions;
+}
+export type ICurrentQuestOptions =
+  | `none`
+  | `Cook's Assistant`
+  | `Myths of the White Lands`
+  | `The Restless Ghost`
+  | `The Lost Tribe`
+  | `The Blood Pact`
+  | `Buyers and Cellars`
+  | `A Fairy Tale I - Growing Pains`
+  | `A Fairy Tale II - Cure a Queen`
+  | `Vampyre Slayer`
+  | `Ernest the Chicken`
+  | `Animal Magnetism`
+  | `Love Story`
+  | `Swept Away`
+  | `Missing My Mummy`
+  | `Stolen Hearts`;
 
 export interface AllSlots {
   BackSlot: IBackSlotSlice;

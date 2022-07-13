@@ -11,6 +11,7 @@ import currentSkillReducer from "../Slices/CurrentSkill";
 import currentActivityReducer from "../Slices/CurrentActivity";
 import currentResourceReducer from "../Slices/CurrentResource";
 import currentTargetReducer from "../Slices/CurrentTarget";
+import currentQuestReducer from "../Slices/CurrentQuest";
 import resourcesReducer from "../Slices/Resources";
 import walletReducer from "../Slices/Wallet";
 import lumbridgequestReducer from "../Slices/QuestSlices/Lumbridge";
@@ -39,6 +40,7 @@ export default combineReducers({
   Activity: currentActivityReducer,
   Resource: currentResourceReducer,
   Target: currentTargetReducer,
+  Quest: currentQuestReducer,
   Resources: resourcesReducer,
   Wallet: walletReducer,
   Quests_Lumbridge: lumbridgequestReducer,
