@@ -5,11 +5,15 @@ import { useSelector } from "react-redux";
 
 const CurrentSkillComp = (props: Types.NoProps) => {
   const state = useSelector((state: Types.AllState) => state.Skill.CurrentSkill);
+  const Quest = useSelector((state: Types.AllState) => state.Quest.CurrentQuest);
+  const Activity = useSelector((state: Types.AllState) => state.Activity.CurrentActivity);
+  console.log(Activity);
+  console.log(Quest);
 
-  useEffect(() => {}, []);
+  // useEffect(() => {}, []);
   return (
     <div className="text-center border border-dark border-2 rounded-3">
-      <div>Training {state}</div>
+      {Activity === `Questing` ? <div>Current Quest: {Quest}</div> : <div>Training {state}</div>}
     </div>
   );
 };

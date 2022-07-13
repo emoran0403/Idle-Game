@@ -67,7 +67,7 @@ const GameContainer = (props: Types.NoProps) => {
   });
 
   const Target = useSelector((state: Types.AllState) => state.Target.CurrentTarget as Types.ICurrentTargetOptions);
-  console.log({ Target });
+  // console.log({ Target });
   // useEffect(() => {}, []);
 
   return (
