@@ -6,7 +6,7 @@ export const Hatchets = createSlice({
   initialState: {
     //list of hatchets, describing if the player owns the item or not
 
-    playerOwnsbronzehatchet: false,
+    playerOwnsbronzehatchet: true,
     playerOwnsironhatchet: false,
     playerOwnssteelhatchet: false,
     playerOwnsmithrilhatchet: false,

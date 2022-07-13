@@ -11,7 +11,7 @@ import { setSkill } from "../../Redux/Slices/CurrentSkill";
 import { setActivity } from "../../Redux/Slices/CurrentActivity";
 import { setTarget } from "../../Redux/Slices/CurrentTarget";
 import { setQuest } from "../../Redux/Slices/CurrentQuest";
-import { EmptyItem } from "../../../../Constants/Equipment/EmptyItem";
+import { listOfHatchets } from "../../../../Constants/SkillingEquipment/Hatchets";
 
 //@ this needs to pull from some single source of truth showing all the skills available, and their resources based on the current location from state
 
@@ -19,6 +19,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
   const dispatch = useDispatch();
   // This grabs the current location from state
   const { CurrentLocation } = useSelector((state: Types.AllState) => state.Location) as Types.ICurrentLocation;
+  const hatchetsFromState = useSelector((state: Types.AllState) => state.Hatchets) as Types.IHatchetsSlice;
 
   // This chooses the current location summary from AllLocations
   const currentLocationSummary = AllLocations[CurrentLocation] as Types.ILocationSummary;
@@ -126,74 +127,40 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
     );
   };
 
-  const displayToolSelectorTag = (itemsFromState: Types.AllSliceKeys, slotName: Types.IEquipmentSlotOptions, slotString: string) => {
-    let compositeItems: Types.ICompositeArmorItem[] = [EmptyItem];
+  const displayHatchetSelectorTag = () => {
+    // define an empty array where composite hatchets will be pushed to
+    let compositeHatchets: Types.ICompositeHatchet[] = [];
 
-    let itemsFromConstants: Types.IArmorItem[] = [...Object.values(slotName.melee), ...Object.values(slotName.magic), ...Object.values(slotName.ranged)];
-    // console.log(itemsFromState);
-    // console.log();
+    // create an array of hatchets from constants
+    let hatchetsFromConstants: Types.IHatchet[] = Object.values(listOfHatchets);
 
-    for (let i = 0; i < itemsFromConstants.length; i++) {
-      let playerOwnsThisItem: boolean = itemsFromState[`playerOwns${itemsFromConstants[i].name}` as keyof Types.AllSliceKeys];
-      let tempItem: Types.ICompositeArmorItem = { ...itemsFromConstants[i], playerOwnsThisItem };
-      compositeItems.push(tempItem);
+    for (let i = 0; i < hatchetsFromConstants.length; i++) {
+      // create an array of composite hatchets by adding the playerOwnsThisItem property to object from constants for each hatchet from constants
+
+      let playerOwnsThisItem: boolean = hatchetsFromState[`playerOwns${hatchetsFromConstants[i].name}` as keyof Types.IHatchetsSlice];
+      let tempHatchet: Types.ICompositeHatchet = { ...hatchetsFromConstants[i], playerOwnsThisItem };
+      compositeHatchets.push(tempHatchet);
     }
-
-    const itemHasBeenEquipped = (e: React.ChangeEvent<HTMLSelectElement>) => {
-      //! string type is `ok` since they can be keys of Types.ICurrentEquipment
-      /**
-       * this can be better described by stating the possible options of each slot in Types.ICurrentEquipment
-       *
-       */
-      let newlyEquippedItemDisplayName: string = ``;
-      let oldEquippedItemDisplayName: string = ``;
-
-      // go thru all the composite items so we can set the context of the old and new items
-      for (let i = 0; i < compositeItems.length; i++) {
-        // if we match the .name to the newly equipped item, set the display name
-        if (compositeItems[i].name === e.target.value) {
-          newlyEquippedItemDisplayName = compositeItems[i].displayName;
-        }
-
-        // if we match the .name to the old equipped item, set the display name
-        if (compositeItems[i].name === props.currentEquipment[e.target.name as keyof Types.ICurrentEquipment]) {
-          oldEquippedItemDisplayName = compositeItems[i].displayName;
-        }
-      }
-
-      // if slot is none, we are equipping an item
-      if (props.currentEquipment[e.target.name as keyof Types.ICurrentEquipment] === `none`) {
-        props.newChatLog(`Equipped ${newlyEquippedItemDisplayName}`, `Equipment Swap`);
-
-        // if slot is not none, and e.target.value is none, we are unequipping an item
-      } else if (props.currentEquipment[e.target.name as keyof Types.ICurrentEquipment] !== `none` && e.target.value === `none`) {
-        props.newChatLog(`Unequipped ${oldEquippedItemDisplayName}`, `Equipment Swap`);
-
-        //if slot is not none, and e.target.value is not none, we are swapping to a new item
-      } else if (props.currentEquipment[e.target.name as keyof Types.ICurrentEquipment] !== `none` && e.target.value !== `none`) {
-        props.newChatLog(`Swapped to ${newlyEquippedItemDisplayName}`, `Equipment Swap`);
-      }
-
-      props.setCurrentEquipment({ ...props.currentEquipment, [e.target.name as keyof Types.ICurrentEquipment]: e.target.value });
-    };
-
+    // compose items from constants and state
     return (
-      <select onChange={(e) => itemHasBeenEquipped(e)} className="form-select" name={`${slotString}`}>
-        {compositeItems.map((Item) => (
-          <option value={Item.name} disabled={applyDisabledAttribute(Item)} key={`Slot-Item-${Item.name}`} className={`${handleSelectorStyle(Item)}`}>
-            {Item.displayName}
+      <select className="form-select" name={`Hatchet`}>
+        {compositeHatchets.map((Hatchet) => (
+          <option value={Hatchet.name} key={`Slot-Item-${Hatchet.name}`}>
+            {Hatchet.displayName}
           </option>
         ))}
       </select>
     );
   };
-
+  //! onChange={(e) => itemHasBeenEquipped(e)}
+  //! className={`${handleSelectorStyle(Item)}`}
+  //! disabled={applyDisabledAttribute(Item)}
   return (
     <div className="container card border border-dark border-2 rounded-3">
       {panelHeaderJSX()}
       <div className="row justify-content-lg-center">
         <div className="card">
-          {displayToolSelectorTag()}
+          Hatchet: {displayHatchetSelectorTag()}
           <div className="card-body">
             {/* panel specific content goes here */}
             {WoodcuttingOptions(currentLocationSummary.Skills.Woodcutting)}

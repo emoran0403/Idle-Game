@@ -291,6 +291,7 @@ export interface AllState extends AllSlots {
   Resource: ICurrentResource;
   Target: ICurrentTarget;
   Quest: ICurrentQuest;
+  Hatchets: IHatchetsSlice;
   Resources: IResources;
   Wallet: IWallet;
   Quests_Lumbridge: LumbridgeQuestSliceCrap;
@@ -1025,4 +1026,8 @@ export interface IHatchetsSlice {
   playerOwnsmithrilhatchet: boolean;
   playerOwnsadamanthatchet: boolean;
   playerOwnsrunehatchet: boolean;
+}
+
+export interface ICompositeHatchet extends IHatchet {
+  playerOwnsThisItem: boolean;
 }

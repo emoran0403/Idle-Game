@@ -7,4 +7,7 @@
  *
  */
 
- skills panel needs to allow player to choose their hatchet - copy WornEquipment
+ skills panel hatchet selector needs:
+  * onChange={(e) => itemHasBeenEquipped(e)}
+  * className={`${handleSelectorStyle(Item)}`}
+  * disabled={applyDisabledAttribute(Item)}
