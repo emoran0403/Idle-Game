@@ -16,12 +16,18 @@ export const Experience = createSlice({
     Summoning: 0,
     Ranged: 0,
     Magic: 0,
+    Cooking: 0,
+    Mining: 0,
+    Thieving: 0,
+    Crafting: 0,
   },
   reducers: {
     // this is the only reducer needed, experience can only increase
     gainXP: (state: Types.IFlatObjectOfNums, action) => {
-      const skill: string = action.type; // decide which skill to gain the experience
-      const experienceGained: number = Number(action.payload); // this will be the amount of experience gained
+      console.log({ state });
+      console.log({ action });
+      const skill: string = action.payload.skill; // decide which skill to gain the experience
+      const experienceGained: number = Number(action.payload.xp); // this will be the amount of experience gained
 
       //object[key] is how we can access an object's value by passing in a key
       state[skill] += experienceGained;

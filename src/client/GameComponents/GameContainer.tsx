@@ -17,6 +17,7 @@ import { setActivity } from "../Redux/Slices/CurrentActivity";
 import { setQuest } from "../Redux/Slices/CurrentQuest";
 import { LumbridgeQuests } from "../../../Constants/Quests/LumbridgeQuests";
 import { addToWallet } from "../Redux/Slices/Wallet";
+import { gainXP } from "../Redux/Slices/Experience";
 
 const GameContainer = (props: Types.NoProps) => {
   const dispatch = useDispatch();
@@ -126,14 +127,22 @@ const GameContainer = (props: Types.NoProps) => {
         // unset current quest
         dispatch(setQuest(`none`));
 
-        //@ give quest xp
         // find the quest that was just completed
         let wowQuest: Types.IQuestInfo = LumbridgeQuests[LumbridgeQuests.findIndex((item) => item.name === CurrentQuest)];
 
+        //@ give item rewards
         // if Coins are rewarded, add them to the wallet
         if (wowQuest.itemRewards?.Coins) {
           dispatch(addToWallet(wowQuest.itemRewards.Coins));
         }
+
+        //@ give the expreience rewards
+        // Object.entries returns an empty array if there are no expreience rewards
+        Object.entries(wowQuest.experienceRewards).forEach(([skill, xp]) => {
+          dispatch(gainXP({ skill, xp }));
+        });
+        // if(){}
+
         break;
       }
     }
