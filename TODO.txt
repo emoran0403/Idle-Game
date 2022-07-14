@@ -16,3 +16,7 @@ if(player is in combat){
 //! work on functions to handle incrementing a quest step
     handle incrementing a quest step (maybe 10 game ticks for a quest step to increment)
 }
+
+
+
+* quest panel needs to rerender on every quest step incrementing

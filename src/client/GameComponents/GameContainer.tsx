@@ -13,6 +13,8 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { doQuestLogicLumbridge } from "../Redux/Slices/QuestSlices/Lumbridge";
 import { doQuestLogicDraynor } from "../Redux/Slices/QuestSlices/Draynor";
+import { setActivity } from "../Redux/Slices/CurrentActivity";
+import { setQuest } from "../Redux/Slices/CurrentQuest";
 
 const GameContainer = (props: Types.NoProps) => {
   const dispatch = useDispatch();
@@ -26,17 +28,6 @@ const GameContainer = (props: Types.NoProps) => {
   const DraynorQuestArray = useSelector((state: Types.AllState) => state.Quests_Draynor.DraynorQuestArray as Types.IStateQuest[]);
 
   const AllQuestsFromState: Types.IStateQuest[] = [...LumbridgeQuestArray, ...DraynorQuestArray];
-  // console.log(AllQuestsFromState);
-  // console.log(playerLocation);
-  // console.log(CurrentQuest);
-  //! works, but needs better typing
-  // const dynamicQuestArray = useSelector(
-  //   (state: Types.AllState) => state[`Quests_${playerLocation}` as keyof Types.AllState][`${playerLocation}QuestArray` as keyof Types.AllState]
-  // );
-
-  // console.log(dynamicQuestArray);
-  // console.log(Quest);
-  // console.log(playerLocation);
 
   //@ initialize the chatLogArray with a default welcome message
   //@ this will hold ALL chatLogs, a subset of which will be displayed based on the current filter settings
@@ -118,13 +109,23 @@ const GameContainer = (props: Types.NoProps) => {
         }
       }
     }
+
+    // if the player has completed the quest, do some things
+    // run through all quests...
+    for (let i = 0; i < AllQuestsFromState.length; i++) {
+      // if the quest in state is the same as the current AND it is completed...
+      if (AllQuestsFromState[i].name === CurrentQuest && AllQuestsFromState[i].complete) {
+        // send a chatlog
+        handleNewChatLog(`Congratulations, you completed ${CurrentQuest}`, `Quest Completed`);
+        // set player to idle
+        dispatch(setActivity(`Idle`));
+        // unset current quest
+        dispatch(setQuest(`none`));
+      }
+    }
   };
 
-  useEffect(() => {
-    // for (let i = 0; i < dynamicQuestArray.length; i++) {
-    //   console.log(dynamicQuestArray[i].name);
-    // }
-  }, []);
+  useEffect(() => {}, [AllQuestsFromState]);
 
   return (
     <div className="d-flex">
