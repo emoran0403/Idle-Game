@@ -57,7 +57,7 @@ const Levels = (props: Types.NoProps) => {
         {Object.entries(Experience).map(([skill, xp]) => (
           <div key={`${skill}-progress-bar-div`}>
             <div>{`${skill} Lv. ${getLevel(xp)}`}</div>
-            <ProgressBar>
+            <ProgressBar className="border border-dark border-2">
               <ProgressBar
                 striped
                 variant="success"

@@ -71,7 +71,7 @@ const QuestList = (props: Types.NoProps) => {
               <h6 className="card-subtitle text-muted">Completion</h6>
             </div>
 
-            <ProgressBar>
+            <ProgressBar className="border border-dark border-2">
               <ProgressBar
                 striped
                 variant="success"
@@ -91,7 +91,7 @@ const QuestList = (props: Types.NoProps) => {
               <h5 className="card-subtitle text-muted">{quest.name}</h5>
 
               <div key={`${quest.name}-progress-bar-div`}>
-                <ProgressBar>
+                <ProgressBar className="border border-dark border-2">
                   <ProgressBar
                     striped
                     variant="success"

@@ -16,8 +16,12 @@ const ChatWindow = (props: Types.ChatWindowCompProps) => {
       <div>
         {displayedChatLogArray.map((chatLog, i) => (
           <div className="d-flex flex-row justify-content-between" key={`ChatLog-at-${chatLog.timeStamp}-${i}`}>
-            <div className="badge rounded-pill bg-primary">{chatLog.timeStamp}</div>
-            <div className="text-wrap">{chatLog.message}</div>
+            <div className="">
+              <span className="badge rounded-pill bg-primary border border-2 border-dark">{chatLog.timeStamp}</span>
+            </div>
+            <div className="d-flex text-end justify-content-end">
+              <div>{chatLog.message}</div>
+            </div>
           </div>
         ))}
       </div>
