@@ -963,7 +963,7 @@ export interface ICurrentEquipment {
   NeckSlot: `none` | IListOfAllNecks;
   RingSlot: `none` | IListOfAllRings;
   TwoHandSlot: `none` | IListOfAllTwoHand;
-  Hatchet: `none` | IListOfHatchets;
+  Hatchet: `none` | IListOfHatchetOptions;
 }
 /*********************************************************************************************************************** */
 
@@ -1018,6 +1018,7 @@ export interface IListOfHatchets {
   adamanthatchet: IHatchet;
   runehatchet: IHatchet;
 }
+export type IListOfHatchetOptions = `bronzehatchet` | `ironhatchet` | `steelhatchet` | `mithrilhatchet` | `adamanthatchet` | `runehatchet`;
 
 export interface IHatchetsSlice {
   playerOwnsbronzehatchet: boolean;

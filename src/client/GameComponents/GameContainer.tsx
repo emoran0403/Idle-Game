@@ -64,7 +64,7 @@ const GameContainer = (props: Types.NoProps) => {
     NeckSlot: `none`,
     RingSlot: `none`,
     TwoHandSlot: `none`,
-    Hatchet: `none`,
+    Hatchet: `bronzehatchet`,
   });
 
   const Target = useSelector((state: Types.AllState) => state.Target.CurrentTarget as Types.ICurrentTargetOptions);

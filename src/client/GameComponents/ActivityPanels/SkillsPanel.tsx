@@ -139,11 +139,42 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
 
       let playerOwnsThisItem: boolean = hatchetsFromState[`playerOwns${hatchetsFromConstants[i].name}` as keyof Types.IHatchetsSlice];
       let tempHatchet: Types.ICompositeHatchet = { ...hatchetsFromConstants[i], playerOwnsThisItem };
+      // compose items from constants and state
       compositeHatchets.push(tempHatchet);
     }
-    // compose items from constants and state
+
+    const itemHasBeenEquipped = (e: React.ChangeEvent<HTMLSelectElement>) => {
+      //! string type is `ok` since they can be keys of Types.ICurrentEquipment
+      /**
+       * this can be better described by stating the possible options of each slot in Types.ICurrentEquipment
+       *
+       */
+      let newlyEquippedItemDisplayName: string = ``;
+      let oldEquippedItemDisplayName: string = ``;
+
+      // go thru all the composite items so we can set the context of the old and new items
+      for (let i = 0; i < compositeHatchets.length; i++) {
+        // if we match the .name to the newly equipped item, set the display name
+        if (compositeHatchets[i].name === e.target.value) {
+          newlyEquippedItemDisplayName = compositeHatchets[i].displayName;
+        }
+
+        // if we match the .name to the old equipped item, set the display name
+        if (compositeHatchets[i].name === props.currentEquipment[e.target.name as keyof Types.ICurrentEquipment]) {
+          oldEquippedItemDisplayName = compositeHatchets[i].displayName;
+        }
+      }
+
+      // a hatchet is always equipped, so we only need the swap message
+      if (props.currentEquipment[e.target.name as keyof Types.ICurrentEquipment] !== `none` && e.target.value !== `none`) {
+        props.newChatLog(`Swapped to ${newlyEquippedItemDisplayName}`, `Equipment Swap`);
+      }
+
+      props.setCurrentEquipment({ ...props.currentEquipment, [e.target.name as keyof Types.ICurrentEquipment]: e.target.value });
+    };
+
     return (
-      <select className="form-select" name={`Hatchet`}>
+      <select className="form-select" onChange={(e) => itemHasBeenEquipped(e)} name={`Hatchet`}>
         {compositeHatchets.map((Hatchet) => (
           <option value={Hatchet.name} key={`Slot-Item-${Hatchet.name}`}>
             {Hatchet.displayName}
@@ -152,7 +183,6 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
       </select>
     );
   };
-  //! onChange={(e) => itemHasBeenEquipped(e)}
   //! className={`${handleSelectorStyle(Item)}`}
   //! disabled={applyDisabledAttribute(Item)}
   return (
