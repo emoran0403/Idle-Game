@@ -296,8 +296,13 @@ export interface AllState extends AllSlots {
   Hatchets: IHatchetsSlice;
   Resources: IResources;
   Wallet: IWallet;
+  QuestPoints: IQuestPointsSlice;
   Quests_Lumbridge: LumbridgeQuestSliceCrap;
   Quests_Draynor: DraynorQuestSliceCrap;
+}
+
+export interface IQuestPointsSlice {
+  CurrentQuestPoints: number;
 }
 
 export interface ICurrentTarget {

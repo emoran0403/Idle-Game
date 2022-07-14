@@ -16,6 +16,7 @@ const QuestList = (props: Types.NoProps) => {
 
   // this represents all the Draynor quests coming from state
   const { DraynorQuestArray } = useSelector((state: Types.AllState) => state.Quests_Draynor);
+  const QuestPoints = useSelector((state: Types.AllState) => state.QuestPoints.CurrentQuestPoints);
 
   const AllQuestsFromStateFlat = [...LumbridgeQuestArray, ...DraynorQuestArray];
   //@spread out future quests into the AllQuestsFromStateFlat array
@@ -65,27 +66,23 @@ const QuestList = (props: Types.NoProps) => {
         <h5 className="card-header text-center">
           Quest List
           <div className="card-subtitle text-muted">
-            <h6>
-              Completion
-              <ProgressBar>
-                <ProgressBar
-                  striped
-                  variant="success"
-                  label={`${Math.round((completedQuestCounter / AllQuestsFromStateFlat.length) * 100)}%`}
-                  now={completedQuestCounter}
-                  key={`quest-completion-progress-bar`}
-                  min={0}
-                  max={AllQuestsFromStateFlat.length}
-                />
-                <ProgressBar
-                  variant="danger"
-                  now={AllQuestsFromStateFlat.length - completedQuestCounter}
-                  key={2}
-                  min={0}
-                  max={AllQuestsFromStateFlat.length}
-                />
-              </ProgressBar>
-            </h6>
+            <div className="d-flex row">
+              <h6 className="card-subtitle text-muted">QuestPoints: {QuestPoints}</h6>
+              <h6 className="card-subtitle text-muted">Completion</h6>
+            </div>
+
+            <ProgressBar>
+              <ProgressBar
+                striped
+                variant="success"
+                label={`${Math.round((completedQuestCounter / AllQuestsFromStateFlat.length) * 100)}%`}
+                now={completedQuestCounter}
+                key={`quest-completion-progress-bar`}
+                min={0}
+                max={AllQuestsFromStateFlat.length}
+              />
+              <ProgressBar variant="danger" now={AllQuestsFromStateFlat.length - completedQuestCounter} key={2} min={0} max={AllQuestsFromStateFlat.length} />
+            </ProgressBar>
           </div>
         </h5>
         {compositeQuestArray?.map((quest) => (

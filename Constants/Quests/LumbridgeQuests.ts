@@ -44,7 +44,7 @@ export const LumbridgeQuests: Types.IQuestInfo[] = [
     experienceRewards: {
       Prayer: 1125,
     },
-    itemRewards: {},
+    itemRewards: { Coins: 0 },
   },
   {
     name: "The Lost Tribe",
@@ -61,7 +61,7 @@ export const LumbridgeQuests: Types.IQuestInfo[] = [
     experienceRewards: {
       Mining: 3000,
     },
-    itemRewards: {},
+    itemRewards: { Coins: 0 },
   },
   //! blood pact does not have anyquest requirements, this was just for testing purposes
 
@@ -95,7 +95,7 @@ export const LumbridgeQuests: Types.IQuestInfo[] = [
     experienceRewards: {
       Thieving: 1025,
     },
-    itemRewards: {},
+    itemRewards: { Coins: 0 },
   },
   {
     name: "Lost City",
@@ -109,6 +109,6 @@ export const LumbridgeQuests: Types.IQuestInfo[] = [
       Woodcutting: 36,
     },
     experienceRewards: {},
-    itemRewards: {},
+    itemRewards: { Coins: 0 },
   },
 ];

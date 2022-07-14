@@ -14,6 +14,7 @@ import currentTargetReducer from "../Slices/CurrentTarget";
 import currentQuestReducer from "../Slices/CurrentQuest";
 import resourcesReducer from "../Slices/Resources";
 import walletReducer from "../Slices/Wallet";
+import questPointsReducer from "../Slices/QuestPoints";
 import lumbridgequestReducer from "../Slices/QuestSlices/Lumbridge";
 import draynorquestReducer from "../Slices/QuestSlices/Draynor";
 import bodySlotSliceReducer from "../Slices/EquipmentSlices/BodySlotSlice";
@@ -43,6 +44,7 @@ export default combineReducers({
   Quest: currentQuestReducer,
   Resources: resourcesReducer,
   Wallet: walletReducer,
+  QuestPoints: questPointsReducer,
   Quests_Lumbridge: lumbridgequestReducer,
   Quests_Draynor: draynorquestReducer,
   BodySlot: bodySlotSliceReducer,

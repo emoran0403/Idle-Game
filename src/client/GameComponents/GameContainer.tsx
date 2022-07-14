@@ -18,6 +18,7 @@ import { setQuest } from "../Redux/Slices/CurrentQuest";
 import { LumbridgeQuests } from "../../../Constants/Quests/LumbridgeQuests";
 import { addToWallet } from "../Redux/Slices/Wallet";
 import { gainXP } from "../Redux/Slices/Experience";
+import { addQuestPoints } from "../Redux/Slices/QuestPoints";
 
 const GameContainer = (props: Types.NoProps) => {
   const dispatch = useDispatch();
@@ -141,6 +142,9 @@ const GameContainer = (props: Types.NoProps) => {
         Object.entries(wowQuest.experienceRewards).forEach(([skill, xp]) => {
           dispatch(gainXP({ skill, xp }));
         });
+
+        //@ give the quest point rewards
+        dispatch(addQuestPoints(wowQuest.questPoints));
         // if(){}
 
         break;
