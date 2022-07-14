@@ -19,6 +19,9 @@ import { LumbridgeQuests } from "../../../Constants/Quests/LumbridgeQuests";
 import { addToWallet } from "../Redux/Slices/Wallet";
 import { gainXP } from "../Redux/Slices/Experience";
 import { addQuestPoints } from "../Redux/Slices/QuestPoints";
+import { ListOfLogs, playerEarnsLog } from "../../../Constants/Items/Logs";
+import { listOfHatchets } from "../../../Constants/SkillingEquipment/Hatchets";
+import { addItemToInventory } from "../Redux/Slices/Inventory";
 
 const GameContainer = (props: Types.NoProps) => {
   const dispatch = useDispatch();
@@ -30,6 +33,9 @@ const GameContainer = (props: Types.NoProps) => {
 
   const LumbridgeQuestArray = useSelector((state: Types.AllState) => state.Quests_Lumbridge.LumbridgeQuestArray as Types.IStateQuest[]);
   const DraynorQuestArray = useSelector((state: Types.AllState) => state.Quests_Draynor.DraynorQuestArray as Types.IStateQuest[]);
+  const CurrentResource = useSelector((state: Types.AllState) => state.Resource.CurrentResource);
+  const CurrentSkill = useSelector((state: Types.AllState) => state.Skill.CurrentSkill as Types.ListOfSkillOptions);
+  const Experience = useSelector((state: Types.AllState) => state.Experience);
 
   const AllQuestsFromState: Types.IStateQuest[] = [...LumbridgeQuestArray, ...DraynorQuestArray];
 
@@ -115,6 +121,35 @@ const GameContainer = (props: Types.NoProps) => {
     }
   };
 
+  const handleSkillingTick = () => {
+    // console.log(CurrentResource);
+    switch (CurrentSkill) {
+      case `Woodcutting`: {
+        if (
+          playerEarnsLog(
+            ListOfLogs[CurrentResource as keyof Types.IListOfLogs],
+            Experience.Woodcutting,
+            listOfHatchets[currentEquipment.Hatchet as keyof Types.IListOfHatchets]
+          )
+        ) {
+          // console.log(`handling skilling tick`);
+          // console.log(CurrentSkill);
+          // if the player earns a log, we need to add the item to the inventory
+          dispatch(addItemToInventory(CurrentResource));
+          // send a chatlog
+          handleNewChatLog(`Chopped some ${CurrentResource}`, `Gained Resource`);
+          console.log(ListOfLogs[CurrentResource as keyof Types.IListOfLogs].XPGivenWoodcutting);
+          dispatch(gainXP({ skill: `Woodcutting`, xp: ListOfLogs[CurrentResource as keyof Types.IListOfLogs].XPGivenWoodcutting }));
+        }
+        break;
+      }
+      case `Fishing`: {
+        //stuff here
+        break;
+      }
+    }
+  };
+
   //@ this useEffect is dedicated to executing the logic of what to do when the quest is complete
   useEffect(() => {
     //@ reset redux state and send the chat log
@@ -157,6 +192,11 @@ const GameContainer = (props: Types.NoProps) => {
       {/* Remove this button, its for testing quest steps */}
       <div>
         <button onClick={() => handleIncrementQuestStep()}>test quest</button>
+      </div>
+      {/* Remove this button, its for testing quest steps */}
+      {/* Remove this button, its for testing quest steps */}
+      <div>
+        <button onClick={() => handleSkillingTick()}>test skillTick</button>
       </div>
       {/* Remove this button, its for testing quest steps */}
 

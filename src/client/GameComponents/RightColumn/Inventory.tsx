@@ -31,7 +31,7 @@ const Inventory = (props: Types.NoProps) => {
         <div className="d-flex flex-wrap justify-content-between container">
           {makeCompositeCurrent().map((item, i) => (
             <div key={`Inventory-slot-${i + 1}`} className="border border-2 col-2 border-dark rounded flex-fill m-2">
-              <span>{item}</span>
+              <span className={item === `blank` ? `text-white` : `text-black`}>{item}</span>
             </div>
           ))}
         </div>

@@ -16,7 +16,7 @@ export const Inventory = createSlice({
     // use this when we need to add an item to the inventory
 
     addItemToInventory: (state: Types.I_Inventory, action) => {
-      const item: string = action.payload.item; // the item to push into the inventory
+      const item: string = action.payload; // the item to push into the inventory
       const inventorySpace: number = Number(state.CurrentInventory.length); // the amount of occupied space in the inventory
 
       // check if the player is banking or dropping items
