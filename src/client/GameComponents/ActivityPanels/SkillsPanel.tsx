@@ -176,15 +176,18 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
     return (
       <select className="form-select" onChange={(e) => itemHasBeenEquipped(e)} name={`Hatchet`}>
         {compositeHatchets.map((Hatchet) => (
-          <option value={Hatchet.name} key={`Slot-Item-${Hatchet.name}`} className={`${handleSelectorStyle(Hatchet)}`}>
+          <option
+            value={Hatchet.name}
+            key={`Slot-Item-${Hatchet.name}`}
+            className={`${handleSelectorStyle(Hatchet)}`}
+            disabled={applyDisabledAttribute(Hatchet)}
+          >
             {Hatchet.displayName}
           </option>
         ))}
       </select>
     );
   };
-  //! className={`${handleSelectorStyle(Item)}`}
-  //! disabled={applyDisabledAttribute(Item)}
 
   const handleSelectorStyle = (hatchet: Types.ICompositeHatchet) => {
     // if the equipment is a piece of armor, it will have a defence level
@@ -209,6 +212,16 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
     } else if (!playerOwnsItem && !canWear) {
       // missing levels and does not own item = red background
       return `bg-danger`;
+    }
+  };
+
+  const applyDisabledAttribute = (hatchet: Types.ICompositeHatchet) => {
+    const canWear = getLevel(Experience.Woodcutting) >= hatchet.levelReqWoodcutting;
+    if (!hatchet.playerOwnsThisItem || !canWear) {
+      // if the player does not own the item, or if the player does not meet the level req, return true to disable the item
+      return true;
+    } else {
+      return false;
     }
   };
 

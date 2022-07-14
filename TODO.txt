@@ -6,8 +6,3 @@
  *  - handle a round of combat - based on currentTarget and currentSkill from state
  *
  */
-
- skills panel hatchet selector needs:
-  * onChange={(e) => itemHasBeenEquipped(e)}
-  * className={`${handleSelectorStyle(Item)}`}
-  * disabled={applyDisabledAttribute(Item)}
