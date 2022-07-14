@@ -67,9 +67,10 @@ export const Quests_Draynor = createSlice({
   },
   reducers: {
     doQuestLogicDraynor: (state, action) => {
-      const questNameFromAction: string = action.payload; // decide which quest needs incrementing
+      // decide which quest needs incrementing
+      const questNameFromAction: string = action.payload;
       // go through all the quests...
-      for (let i = 1; i < state.DraynorQuestArray.length; i++) {
+      for (let i = 0; i < state.DraynorQuestArray.length; i++) {
         let questOfInterest = state.DraynorQuestArray[i]; // rename it for better context
         // ...until we find the quest name that matches the quest name from the action
         if (questOfInterest.name === questNameFromAction) {

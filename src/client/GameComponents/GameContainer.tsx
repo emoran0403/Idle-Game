@@ -94,8 +94,8 @@ const GameContainer = (props: Types.NoProps) => {
 
   //@ this will run every game tick (while questing) and holds the logic for progressing in quests
   const handleIncrementQuestStep = () => {
-    // every game tick increments a counter, when this counter hits a certain amount, increment the stepsComplete counter on the quest in state
-    // this must also check if the quest has been completed
+    // every game tick increments a counter, when this counter hits a certain amount, dispatch the appropriate quest reducer
+    // the quest reducer increments the stepsComplete counter, and can mark the quest complete
     // if the quest has been completed, it needs to update that in state
     // if the quest has been completed, it must also set the activity to idle, since the quest is complete
 
@@ -110,9 +110,7 @@ const GameContainer = (props: Types.NoProps) => {
       switch (playerLocation) {
         case `Lumbridge`: {
           //do quest logic
-          console.log(`about to do lumbridge quest logic`);
           dispatch(doQuestLogicLumbridge(CurrentQuest));
-          console.log(`done with lumbridge quest logic`);
           break;
         }
         case `Draynor`: {

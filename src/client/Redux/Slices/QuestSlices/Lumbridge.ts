@@ -55,9 +55,10 @@ export const Quests_Lumbridge = createSlice({
   },
   reducers: {
     doQuestLogicLumbridge: (state, action) => {
-      const questNameFromAction: string = action.payload; // decide which quest needs incrementing
+      // decide which quest needs incrementing
+      const questNameFromAction: string = action.payload;
       // go through all the quests...
-      for (let i = 1; i < state.LumbridgeQuestArray.length; i++) {
+      for (let i = 0; i < state.LumbridgeQuestArray.length; i++) {
         let questOfInterest = state.LumbridgeQuestArray[i]; // rename it for better context
         // ...until we find the quest name that matches the quest name from the action
         if (questOfInterest.name === questNameFromAction) {
