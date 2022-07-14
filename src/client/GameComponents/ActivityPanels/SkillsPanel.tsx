@@ -176,7 +176,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
     return (
       <select className="form-select" onChange={(e) => itemHasBeenEquipped(e)} name={`Hatchet`}>
         {compositeHatchets.map((Hatchet) => (
-          <option value={Hatchet.name} key={`Slot-Item-${Hatchet.name}`}>
+          <option value={Hatchet.name} key={`Slot-Item-${Hatchet.name}`} className={`${handleSelectorStyle(Hatchet)}`}>
             {Hatchet.displayName}
           </option>
         ))}
@@ -185,6 +185,33 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
   };
   //! className={`${handleSelectorStyle(Item)}`}
   //! disabled={applyDisabledAttribute(Item)}
+
+  const handleSelectorStyle = (hatchet: Types.ICompositeHatchet) => {
+    // if the equipment is a piece of armor, it will have a defence level
+    // based on the style, determine if the player has the appropriate offensive levels
+
+    const playerOwnsItem = hatchet.playerOwnsThisItem;
+
+    const canWear = getLevel(Experience.Woodcutting) >= hatchet.levelReqWoodcutting;
+    // check if the player owns the armor, and has the appropriate defence level
+    if (playerOwnsItem && canWear) {
+      // has levels and owns item = green background
+
+      return `bg-success`;
+    } else if (!playerOwnsItem && canWear) {
+      // missing levels and owns item = yellow background
+
+      return `bg-yellowlol`;
+    } else if (playerOwnsItem && !canWear) {
+      // has levels and does not own item = orange background
+
+      return `bg-orangelol`;
+    } else if (!playerOwnsItem && !canWear) {
+      // missing levels and does not own item = red background
+      return `bg-danger`;
+    }
+  };
+
   return (
     <div className="container card border border-dark border-2 rounded-3">
       {panelHeaderJSX()}
