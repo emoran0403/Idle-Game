@@ -20,6 +20,7 @@ export interface QuestPanelCompProps {
   handleUpdateDisplay: Function;
   newChatLog: Function;
   chatLogArray: IChatLog[];
+  questStepProgress: number;
 }
 
 export interface SkillsPanelCompProps {
@@ -72,6 +73,7 @@ export interface ActivityAreaCompProps {
   chatLogArray: IChatLog[];
   setCurrentEquipment: Function;
   currentEquipment: ICurrentEquipment;
+  questStepProgress: number;
 }
 
 export interface ChatWindowCompProps {

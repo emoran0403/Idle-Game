@@ -110,7 +110,7 @@ const GameContainer = (props: Types.NoProps) => {
       }
     }
 
-    // if the player has completed the quest, do some things
+    //@ if the player has completed the quest, do some things
     // run through all quests...
     for (let i = 0; i < AllQuestsFromState.length; i++) {
       // if the quest in state is the same as the current AND it is completed...
@@ -125,7 +125,7 @@ const GameContainer = (props: Types.NoProps) => {
     }
   };
 
-  useEffect(() => {}, [AllQuestsFromState]);
+  // useEffect(() => {}, []);
 
   return (
     <div className="d-flex">
@@ -149,6 +149,7 @@ const GameContainer = (props: Types.NoProps) => {
             chatLogArray={chatLogArray}
             setCurrentEquipment={setCurrentEquipment}
             currentEquipment={currentEquipment}
+            questStepProgress={questStepProgress}
           />
         </div>
 

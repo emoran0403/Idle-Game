@@ -20,3 +20,4 @@ if(player is in combat){
 
 
 * quest panel needs to rerender on every quest step incrementing
+* game container needs to respond quicker to completing a quest

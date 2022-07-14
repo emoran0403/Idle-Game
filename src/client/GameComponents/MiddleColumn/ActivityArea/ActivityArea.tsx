@@ -36,7 +36,14 @@ const ActivityArea = (props: Types.ActivityAreaCompProps) => {
               currentEquipment={props.currentEquipment}
             />
           ),
-          quests: <QuestPanel handleUpdateDisplay={handleUpdateDisplay} newChatLog={props.newChatLog} chatLogArray={props.chatLogArray} />,
+          quests: (
+            <QuestPanel
+              handleUpdateDisplay={handleUpdateDisplay}
+              newChatLog={props.newChatLog}
+              chatLogArray={props.chatLogArray}
+              questStepProgress={props.questStepProgress}
+            />
+          ),
           bank: <BankPanel handleUpdateDisplay={handleUpdateDisplay} newChatLog={props.newChatLog} />,
           combat: <CombatPanel handleUpdateDisplay={handleUpdateDisplay} newChatLog={props.newChatLog} chatLogArray={props.chatLogArray} />,
           bosses: <BossesPanel handleUpdateDisplay={handleUpdateDisplay} newChatLog={props.newChatLog} />,

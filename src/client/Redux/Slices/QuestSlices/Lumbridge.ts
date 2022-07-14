@@ -11,7 +11,7 @@ export const Quests_Lumbridge = createSlice({
     LumbridgeQuestArray: [
       {
         name: "Cook's Assistant",
-        stepsComplete: 10,
+        stepsComplete: 18,
         stepsTotal: 20,
         complete: false,
       },
