@@ -109,7 +109,9 @@ const GameContainer = (props: Types.NoProps) => {
         }
       }
     }
+  };
 
+  useEffect(() => {
     //@ if the player has completed the quest, do some things
     // run through all quests...
     for (let i = 0; i < AllQuestsFromState.length; i++) {
@@ -123,9 +125,7 @@ const GameContainer = (props: Types.NoProps) => {
         dispatch(setQuest(`none`));
       }
     }
-  };
-
-  // useEffect(() => {}, []);
+  }, [questStepProgress]);
 
   return (
     <div className="d-flex">

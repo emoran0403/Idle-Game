@@ -260,8 +260,8 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
     }
     //when the loops are done running, set tempCompArray to state in this component
     setCompositeQuestArray(tempCompArray);
-    //! putting compositeQuestArray in the dependecy array leads to an re-render loop :/
     // i want this component to rerender when a quest step is completed
+    // pass down the questStepProgress from gameContainer
   }, [props.questStepProgress]);
 
   return (
