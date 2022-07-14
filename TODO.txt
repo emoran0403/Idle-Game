@@ -2,7 +2,17 @@
  * what are the list of game events i need to have happen on each game tick?
  *  - gain a resource - based on currentResource and currentSkill from state
  *  - increment a quest step - based on currentActivty and currentQuest from state
- * !make a currentQuest slice?
  *  - handle a round of combat - based on currentTarget and currentSkill from state
  *
  */
+
+if(player is in combat){
+    handle a round of combat- if this kills an enemy, handle that as well
+//! work on functions to handle a combat exchange
+} else if (player is skilling){
+    roll to gain a resource and give xp - may need to trigger a bank run (need to define this lol)
+//! work on functions to handle a skilling exchange
+} else if (player is questing) {
+//! work on functions to handle incrementing a quest step
+    handle incrementing a quest step (maybe 10 game ticks for a quest step to increment)
+}

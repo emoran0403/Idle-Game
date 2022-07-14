@@ -10,14 +10,36 @@ import WornEquipment from "./RightColumn/WornEquipment";
 import ActivityArea from "./MiddleColumn/ActivityArea/ActivityArea";
 import ChatWindow from "./LeftColumn/ChatWindow";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-
-//! work on functions to handle a combat exchange
-//! work on functions to handle a skilling exchange
+import { useSelector, useDispatch } from "react-redux";
+import { doQuestLogicLumbridge } from "../Redux/Slices/QuestSlices/Lumbridge";
+import { doQuestLogicDraynor } from "../Redux/Slices/QuestSlices/Draynor";
 
 const GameContainer = (props: Types.NoProps) => {
-  // initialize the chatLogArray with a default welcome message
-  // this will hold ALL chatLogs, a subset of which will be displayed based on the current filter settings
+  const dispatch = useDispatch();
+  const Target = useSelector((state: Types.AllState) => state.Target.CurrentTarget as Types.ICurrentTargetOptions);
+
+  // CurrentQuest is the name of the quest the player has chosen
+  const CurrentQuest = useSelector((state: Types.AllState) => state.Quest.CurrentQuest as Types.ICurrentQuestOptions);
+  const playerLocation = useSelector((state: Types.AllState) => state.Location.CurrentLocation as Types.ICurrentLocationOptions);
+
+  const LumbridgeQuestArray = useSelector((state: Types.AllState) => state.Quests_Lumbridge.LumbridgeQuestArray as Types.IStateQuest[]);
+  const DraynorQuestArray = useSelector((state: Types.AllState) => state.Quests_Draynor.DraynorQuestArray as Types.IStateQuest[]);
+
+  const AllQuestsFromState: Types.IStateQuest[] = [...LumbridgeQuestArray, ...DraynorQuestArray];
+  // console.log(AllQuestsFromState);
+  // console.log(playerLocation);
+  // console.log(CurrentQuest);
+  //! works, but needs better typing
+  // const dynamicQuestArray = useSelector(
+  //   (state: Types.AllState) => state[`Quests_${playerLocation}` as keyof Types.AllState][`${playerLocation}QuestArray` as keyof Types.AllState]
+  // );
+
+  // console.log(dynamicQuestArray);
+  // console.log(Quest);
+  // console.log(playerLocation);
+
+  //@ initialize the chatLogArray with a default welcome message
+  //@ this will hold ALL chatLogs, a subset of which will be displayed based on the current filter settings
   const [chatLogArray, setChatLogArray] = useState<Types.IChatLog[]>([
     {
       timeStamp: Dayjs().format("HH:mm:ss"),
@@ -25,6 +47,23 @@ const GameContainer = (props: Types.NoProps) => {
       tags: `Nonfilterable`,
     },
   ]);
+
+  //@ currentEquipment is the collection of all the currently worn equipment - use this for combat purposes
+  const [currentEquipment, setCurrentEquipment] = useState<Types.ICurrentEquipment>({
+    BackSlot: `none`,
+    BodySlot: `none`,
+    FeetSlot: `none`,
+    HandsSlot: `none`,
+    HeadSlot: `none`,
+    LegsSlot: `none`,
+    NeckSlot: `none`,
+    RingSlot: `none`,
+    TwoHandSlot: `none`,
+    Hatchet: `bronzehatchet`,
+  });
+
+  //@ questStepProgress is holds the progress between completing quest steps
+  const [questStepProgress, setQuestStepProgress] = useState<number>(0);
 
   //@ use this to add to the chat log array
   const handleNewChatLog = (message: string, tags: Types.ChatLogTag) => {
@@ -53,26 +92,49 @@ const GameContainer = (props: Types.NoProps) => {
     }
   };
 
-  //@ currentEquipment is the collection of all the currently worn equipment - use this for combat purposes
-  const [currentEquipment, setCurrentEquipment] = useState<Types.ICurrentEquipment>({
-    BackSlot: `none`,
-    BodySlot: `none`,
-    FeetSlot: `none`,
-    HandsSlot: `none`,
-    HeadSlot: `none`,
-    LegsSlot: `none`,
-    NeckSlot: `none`,
-    RingSlot: `none`,
-    TwoHandSlot: `none`,
-    Hatchet: `bronzehatchet`,
-  });
+  //@ this will run every game tick (while questing) and holds the logic for progressing in quests
+  const handleIncrementQuestStep = () => {
+    // every game tick increments a counter, when this counter hits a certain amount, increment the stepsComplete counter on the quest in state
+    // this must also check if the quest has been completed
+    // if the quest has been completed, it needs to update that in state
+    // if the quest has been completed, it must also set the activity to idle, since the quest is complete
 
-  const Target = useSelector((state: Types.AllState) => state.Target.CurrentTarget as Types.ICurrentTargetOptions);
-  // console.log({ Target });
-  // useEffect(() => {}, []);
+    // increment the progress counter
+
+    console.log(`the questStepProgress is ${questStepProgress}`);
+    setQuestStepProgress(questStepProgress + 1);
+
+    // if the progress counter hits 20, reset it to 0, run the quest logic based on location
+    if (questStepProgress === 2) {
+      setQuestStepProgress(0);
+      switch (playerLocation) {
+        case `Lumbridge`: {
+          //do quest logic
+          console.log(`about to do lumbridge quest logic`);
+          dispatch(doQuestLogicLumbridge(CurrentQuest));
+          console.log(`done with lumbridge quest logic`);
+          break;
+        }
+        case `Draynor`: {
+          //do quest logic
+          dispatch(doQuestLogicDraynor(CurrentQuest));
+          break;
+        }
+      }
+    }
+  };
+
+  useEffect(() => {
+    // for (let i = 0; i < dynamicQuestArray.length; i++) {
+    //   console.log(dynamicQuestArray[i].name);
+    // }
+  }, []);
 
   return (
     <div className="d-flex">
+      <div>
+        <button onClick={() => handleIncrementQuestStep()}>test quest</button>
+      </div>
       <div id="gamecontainer" className="row justify-content-lg-center">
         <div id="left-column" className="col-lg-3 border border-dark border-2 rounded-3" style={{ height: "90vh", position: "relative" }}>
           <Levels />

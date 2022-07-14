@@ -66,19 +66,19 @@ export const Quests_Draynor = createSlice({
     ],
   },
   reducers: {
-    incrementQuestStepAndCheckIfCompleted: (state, action) => {
-      const questNameFromAction: string = action.type; // decide which quest needs incrementing
+    doQuestLogicDraynor: (state, action) => {
+      const questNameFromAction: string = action.payload; // decide which quest needs incrementing
       // go through all the quests...
       for (let i = 1; i < state.DraynorQuestArray.length; i++) {
-        let currentQuest = state.DraynorQuestArray[i]; // rename it for better context
+        let questOfInterest = state.DraynorQuestArray[i]; // rename it for better context
         // ...until we find the quest name that matches the quest name from the action
-        if (currentQuest.name === questNameFromAction) {
+        if (questOfInterest.name === questNameFromAction) {
           // increment the steps counter
-          currentQuest.stepsComplete += 1;
+          questOfInterest.stepsComplete += 1;
           // check if the newly incremented counter equals the total
-          if (currentQuest.stepsComplete === currentQuest.stepsTotal) {
+          if (questOfInterest.stepsComplete === questOfInterest.stepsTotal) {
             // if they equal, set the quest as complete
-            currentQuest.complete = true;
+            questOfInterest.complete = true;
           }
         }
       }
@@ -87,6 +87,6 @@ export const Quests_Draynor = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { incrementQuestStepAndCheckIfCompleted } = Quests_Draynor.actions;
+export const { doQuestLogicDraynor } = Quests_Draynor.actions;
 
 export default Quests_Draynor.reducer;

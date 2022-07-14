@@ -1,8 +1,7 @@
 import * as Types from "../../../../Types";
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { AllQuests } from "../../../../Constants/Quests";
 import { getLevel } from "../../../../Constants/XP Levels";
 import { setActivity } from "../../Redux/Slices/CurrentActivity";
@@ -12,6 +11,8 @@ import { setQuest } from "../../Redux/Slices/CurrentQuest";
 import { setTarget } from "../../Redux/Slices/CurrentTarget";
 
 //! handleQuestStyle and handleQuestButtonDisplay have repeated logic that could be improved
+//! composing the constant quest info and state info can be improved by relegating that to a function, which then returns jsx
+
 const QuestPanel = (props: Types.QuestPanelCompProps) => {
   const dispatch = useDispatch();
 

@@ -54,19 +54,19 @@ export const Quests_Lumbridge = createSlice({
     ],
   },
   reducers: {
-    incrementQuestStepAndCheckIfCompleted: (state, action) => {
-      const questNameFromAction: string = action.type; // decide which quest needs incrementing
+    doQuestLogicLumbridge: (state, action) => {
+      const questNameFromAction: string = action.payload; // decide which quest needs incrementing
       // go through all the quests...
       for (let i = 1; i < state.LumbridgeQuestArray.length; i++) {
-        let currentQuest = state.LumbridgeQuestArray[i]; // rename it for better context
+        let questOfInterest = state.LumbridgeQuestArray[i]; // rename it for better context
         // ...until we find the quest name that matches the quest name from the action
-        if (currentQuest.name === questNameFromAction) {
+        if (questOfInterest.name === questNameFromAction) {
           // increment the steps counter
-          currentQuest.stepsComplete += 1;
+          questOfInterest.stepsComplete += 1;
           // check if the newly incremented counter equals the total
-          if (currentQuest.stepsComplete === currentQuest.stepsTotal) {
+          if (questOfInterest.stepsComplete === questOfInterest.stepsTotal) {
             // if they equal, set the quest as complete
-            currentQuest.complete = true;
+            questOfInterest.complete = true;
           }
         }
       }
@@ -75,6 +75,6 @@ export const Quests_Lumbridge = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { incrementQuestStepAndCheckIfCompleted } = Quests_Lumbridge.actions;
+export const { doQuestLogicLumbridge } = Quests_Lumbridge.actions;
 
 export default Quests_Lumbridge.reducer;
