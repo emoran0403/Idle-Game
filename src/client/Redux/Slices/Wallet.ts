@@ -13,19 +13,19 @@ export const Wallet = createSlice({
     // use this when we need to add coins to the wallet
     addToWallet: (state: Types.IFlatObjectOfNums, action) => {
       const amount: number = Number(action.payload); // this will be the number of coins added to the wallet
-      state.Coins += amount; // add the coins to state, then reassign (ty immer)
+      state.coins += amount; // add the coins to state, then reassign (ty immer)
     },
 
     // use this when we need to remove an item from the bank
     removeFromWallet: (state: Types.IFlatObjectOfNums, action) => {
       const amount: number = Number(action.payload); // this will be the number of coins removed from the wallet
 
-      if (state.Coins - amount >= 0) {
+      if (state.coins - amount >= 0) {
         // prevent the removal of an amount that would result in a negative
-        state.Coins -= amount; // subtract the coins
+        state.coins -= amount; // subtract the coins
       } else {
         // remove all of the coins, setting state to 0
-        state.Coins = 0;
+        state.coins = 0;
       }
     },
   },

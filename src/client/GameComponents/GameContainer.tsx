@@ -15,6 +15,8 @@ import { doQuestLogicLumbridge } from "../Redux/Slices/QuestSlices/Lumbridge";
 import { doQuestLogicDraynor } from "../Redux/Slices/QuestSlices/Draynor";
 import { setActivity } from "../Redux/Slices/CurrentActivity";
 import { setQuest } from "../Redux/Slices/CurrentQuest";
+import { LumbridgeQuests } from "../../../Constants/Quests/LumbridgeQuests";
+import { addToWallet } from "../Redux/Slices/Wallet";
 
 const GameContainer = (props: Types.NoProps) => {
   const dispatch = useDispatch();
@@ -111,9 +113,9 @@ const GameContainer = (props: Types.NoProps) => {
     }
   };
 
+  //@ this useEffect is dedicated to executing the logic of what to do when the quest is complete
   useEffect(() => {
-    //@ if the player has completed the quest, do some things
-    // run through all quests...
+    //@ reset redux state and send the chat log
     for (let i = 0; i < AllQuestsFromState.length; i++) {
       // if the quest in state is the same as the current AND it is completed...
       if (AllQuestsFromState[i].name === CurrentQuest && AllQuestsFromState[i].complete) {
@@ -123,6 +125,16 @@ const GameContainer = (props: Types.NoProps) => {
         dispatch(setActivity(`Idle`));
         // unset current quest
         dispatch(setQuest(`none`));
+
+        //@ give quest xp
+        // find the quest that was just completed
+        let wowQuest: Types.IQuestInfo = LumbridgeQuests[LumbridgeQuests.findIndex((item) => item.name === CurrentQuest)];
+
+        // if Coins are rewarded, add them to the wallet
+        if (wowQuest.itemRewards?.Coins) {
+          dispatch(addToWallet(wowQuest.itemRewards.Coins));
+        }
+        break;
       }
     }
   }, [questStepProgress]);

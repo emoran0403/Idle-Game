@@ -390,7 +390,11 @@ export interface IQuestInfo {
   questRequirements: string[];
   levelRequirements: IFlatObjectOfNums;
   experienceRewards: IFlatObjectOfNums;
-  itemRewards: IFlatObjectOfNums;
+  itemRewards: IQuestItemReward;
+}
+
+export interface IQuestItemReward {
+  Coins?: number;
 }
 
 export interface IAllQuests {

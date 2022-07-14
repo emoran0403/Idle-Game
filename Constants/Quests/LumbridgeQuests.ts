@@ -19,7 +19,7 @@ export const LumbridgeQuests: Types.IQuestInfo[] = [
     experienceRewards: {
       Cooking: 300,
     },
-    itemRewards: { Coins: 500, Sardines: 20 },
+    itemRewards: { Coins: 500 },
   },
   //! myths does not have any quest requirements, this was just for testing purposes
   {
