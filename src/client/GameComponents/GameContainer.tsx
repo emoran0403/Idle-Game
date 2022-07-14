@@ -99,22 +99,20 @@ const GameContainer = (props: Types.NoProps) => {
     // if the quest has been completed, it needs to update that in state
     // if the quest has been completed, it must also set the activity to idle, since the quest is complete
 
-    // increment the progress counter
+    // console.log(`the questStepProgress is ${questStepProgress}`);
 
-    console.log(`the questStepProgress is ${questStepProgress}`);
+    // increment the progress counter
     setQuestStepProgress(questStepProgress + 1);
 
-    // if the progress counter hits 20, reset it to 0, run the quest logic based on location
+    // if the progress counter hits 20, reset it to 0, and then run the quest logic based on location
     if (questStepProgress === 2) {
       setQuestStepProgress(0);
       switch (playerLocation) {
         case `Lumbridge`: {
-          //do quest logic
           dispatch(doQuestLogicLumbridge(CurrentQuest));
           break;
         }
         case `Draynor`: {
-          //do quest logic
           dispatch(doQuestLogicDraynor(CurrentQuest));
           break;
         }
@@ -130,9 +128,12 @@ const GameContainer = (props: Types.NoProps) => {
 
   return (
     <div className="d-flex">
+      {/* Remove this button, its for testing quest steps */}
       <div>
         <button onClick={() => handleIncrementQuestStep()}>test quest</button>
       </div>
+      {/* Remove this button, its for testing quest steps */}
+
       <div id="gamecontainer" className="row justify-content-lg-center">
         <div id="left-column" className="col-lg-3 border border-dark border-2 rounded-3" style={{ height: "90vh", position: "relative" }}>
           <Levels />

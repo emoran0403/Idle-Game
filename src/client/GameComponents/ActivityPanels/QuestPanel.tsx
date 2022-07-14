@@ -260,7 +260,7 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
     }
     //when the loops are done running, set tempCompArray to state in this component
     setCompositeQuestArray(tempCompArray);
-  }, []);
+  }, [compositeQuestArray]);
 
   return (
     <div className="container border border-dark border-2 rounded-3">
