@@ -145,9 +145,9 @@ const GameContainer = (props: Types.NoProps) => {
       case `Fishing`: {
         if (playerEarnsFish(ListOfFish[CurrentResource as keyof Types.IListOfFish], Experience.Fishing)) {
           // if the player catches a fish, we need to add the item to the inventory
-          dispatch(addItemToInventory(CurrentResource));
+          dispatch(addItemToInventory(ListOfFish[CurrentResource as keyof Types.IListOfFish].displayName));
           // send a chatlog
-          handleNewChatLog(`Fished a ${CurrentResource}`, `Gained Resource`);
+          handleNewChatLog(`Fished a ${ListOfFish[CurrentResource as keyof Types.IListOfFish].displayName}`, `Gained Resource`);
           // console.log(ListOfFish[CurrentResource as keyof Types.IListOfFish].XPGivenFishing);
           // apply gained xp
           dispatch(gainXP({ skill: `Fishing`, xp: ListOfFish[CurrentResource as keyof Types.IListOfFish].XPGivenFishing }));

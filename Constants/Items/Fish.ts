@@ -6,6 +6,7 @@ import { getLevel } from "../XP Levels";
 export const ListOfFish: Types.IListOfFish = {
   raw_shrimp: {
     name: `shrimp`,
+    displayName: `Shrimp`,
     levelReqFishing: 1,
     XPGivenFishing: 10,
     levelReqCooking: 1,
@@ -17,6 +18,7 @@ export const ListOfFish: Types.IListOfFish = {
   },
   raw_crayfish: {
     name: `crayfish`,
+    displayName: `Crayfish`,
     levelReqFishing: 1,
     XPGivenFishing: 10,
     levelReqCooking: 1,
@@ -28,6 +30,7 @@ export const ListOfFish: Types.IListOfFish = {
   },
   raw_anchovies: {
     name: `anchovies`,
+    displayName: `Anchovies`,
     levelReqFishing: 15,
     XPGivenFishing: 40,
     levelReqCooking: 1,
@@ -39,6 +42,7 @@ export const ListOfFish: Types.IListOfFish = {
   },
   raw_trout: {
     name: `trout`,
+    displayName: `Trout`,
     levelReqFishing: 20,
     XPGivenFishing: 50,
     levelReqCooking: 15,
@@ -50,6 +54,7 @@ export const ListOfFish: Types.IListOfFish = {
   },
   raw_salmon: {
     name: `salmon`,
+    displayName: `Salmon`,
     levelReqFishing: 30,
     XPGivenFishing: 70,
     levelReqCooking: 25,
@@ -61,6 +66,7 @@ export const ListOfFish: Types.IListOfFish = {
   },
   raw_pike: {
     name: `pike`,
+    displayName: `Pike`,
     levelReqFishing: 25,
     XPGivenFishing: 60,
     levelReqCooking: 20,
@@ -72,6 +78,7 @@ export const ListOfFish: Types.IListOfFish = {
   },
   raw_sardine: {
     name: `sardine`,
+    displayName: `Sardine`,
     levelReqFishing: 5,
     XPGivenFishing: 20,
     levelReqCooking: 1,
@@ -83,6 +90,7 @@ export const ListOfFish: Types.IListOfFish = {
   },
   raw_herring: {
     name: `herring`,
+    displayName: `Herring`,
     levelReqFishing: 25,
     XPGivenFishing: 60,
     levelReqCooking: 20,

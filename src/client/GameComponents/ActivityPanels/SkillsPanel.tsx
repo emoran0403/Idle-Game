@@ -67,7 +67,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
                 if (resource === props.chatLogArray[props.chatLogArray.length - 1].message.substring(12)) {
                   return;
                 }
-                props.newChatLog(`Now cutting ${resource}`, `Activity Swap`);
+                props.newChatLog(`Now cutting ${ListOfLogs[resource as keyof Types.IListOfLogs].displayName}`, `Activity Swap`);
               }}
               key={`resource-list-${resource}`}
               className={`btn border mb-3 ${
@@ -108,13 +108,13 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
                 if (resource === props.chatLogArray[props.chatLogArray.length - 1].message.substring(12)) {
                   return;
                 }
-                props.newChatLog(`Now fishing ${resource}`, `Activity Swap`);
+                props.newChatLog(`Now fishing ${ListOfFish[resource as keyof Types.IListOfFish].displayName}`, `Activity Swap`);
               }}
               key={`resource-list-${resource}`}
               className={`btn border mb-3 ${FishingLevel >= ListOfFish[resource as keyof Types.IListOfFish].levelReqFishing ? `bg-success` : `bg-danger`}`}
             >
               <div className="card-body text">
-                <h5 className="card-title">{resource}</h5>
+                <h5 className="card-title">{ListOfFish[resource as keyof Types.IListOfFish].displayName}</h5>
                 <div className="card-text">
                   <div>Level {ListOfFish[resource as keyof Types.IListOfFish].levelReqFishing}</div>
                   <div>{ListOfFish[resource as keyof Types.IListOfFish].XPGivenFishing} XP</div>

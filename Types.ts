@@ -127,6 +127,7 @@ export interface ILogBankSlice {
 
 export interface IFish {
   name: string;
+  displayName: string;
   levelReqFishing: number;
   XPGivenFishing: number;
   levelReqCooking: number;
