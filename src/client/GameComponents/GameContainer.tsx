@@ -95,7 +95,7 @@ const GameContainer = (props: Types.NoProps) => {
   };
 
   //@ this will run every game tick (while questing) and holds the logic for progressing in quests
-  const handleIncrementQuestStep = () => {
+  const handleQuestingTick = () => {
     // every game tick increments a counter, when this counter hits a certain amount, dispatch the appropriate quest reducer
     // the quest reducer increments the stepsComplete counter, and can mark the quest complete
     // if the quest has been completed, it needs to update that in state
@@ -122,6 +122,7 @@ const GameContainer = (props: Types.NoProps) => {
     }
   };
 
+  //@ this will run every game tick (while skilling) and holds the logic for resolving a skilling action
   const handleSkillingTick = () => {
     switch (CurrentSkill) {
       case `Woodcutting`: {
@@ -200,7 +201,7 @@ const GameContainer = (props: Types.NoProps) => {
     <div className="d-flex">
       {/* Remove this button, its for testing quest steps */}
       <div>
-        <button onClick={() => handleIncrementQuestStep()}>test quest</button>
+        <button onClick={() => handleQuestingTick()}>test quest</button>
       </div>
       {/* Remove this button, its for testing quest steps */}
       {/* Remove this button, its for testing quest steps */}

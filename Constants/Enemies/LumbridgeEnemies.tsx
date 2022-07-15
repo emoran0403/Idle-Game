@@ -187,67 +187,80 @@ export const Lumbridge = {
  *
  */
 
-const hitchance = (affinity: number, armorRating: number, accuracy: number, additiveAccuracyBoosts: number = 0, multiplicativeAccuracyBoosts: number = 1) => {
-  // calculates the hitchance based on combat variables
-  let hitChance: number = affinity * Math.round((accuracy * multiplicativeAccuracyBoosts + additiveAccuracyBoosts) / armorRating);
+const calcAffinity = (enemy: Types.IEnemySummary) => {
+  enemy.affinities;
+};
+const calcAccuracy = () => {};
+const calcTargetArmorRating = () => {};
+
+const calcHitChance = (affinity: number, accuracy: number, targetArmorRating: number) => {
+  let hitChance = affinity * (accuracy / targetArmorRating);
   return hitChance;
 };
 
-const executeHit = () => {
-  // calculates the hitchance, determines if a hit happens, rolls for damage
-};
+/******************OLD STUFF BELOW ********************************/
+// const hitchance = (affinity: number, armorRating: number, accuracy: number, additiveAccuracyBoosts: number = 0, multiplicativeAccuracyBoosts: number = 1) => {
+//   //? boosts are incorporated into the function, but there are no ways to apply boosts
+//   // calculates the hitchance based on combat variables
+//   let hitChance: number = affinity * Math.round((accuracy * multiplicativeAccuracyBoosts + additiveAccuracyBoosts) / armorRating);
+//   return hitChance;
+// };
 
-let strengthLevel: number = 1;
+// const executeHit = () => {
+//   // calculates the hitchance, determines if a hit happens, rolls for damage
+// };
 
-const damageDealt = (
-  style: string,
-  mainHand: boolean,
-  damageMainHand: number,
-  offHand: boolean,
-  damageOffHand: number,
-  twoHanded: boolean,
-  damageTwoHanded: number,
-  boosts: number = 1
-) => {
-  // calculates the potential damageDealt based on combat variables
-  // abilities deal between 20% to 100% of their maximum damage - use this with the random number
-  // will need to pull levels from state
-  let damage: number = 0;
+// let strengthLevel: number = 1;
 
-  switch (style) {
-    case `melee`: {
-      if (mainHand) {
-        // if there is a mainhand weapon equipped, use the expression to add to the damage
-        damage += (2.5 * strengthLevel + damageMainHand) * boosts;
-      }
-      if (offHand) {
-        // if there is a offhand weapon equipped, use the expression to add to the damage
-        damage += (1.25 * strengthLevel + damageOffHand) * (0.5 * boosts);
-      }
-      if (twoHanded) {
-        // if there is a twohanded weapon equipped, use the expression to add to the damage
-        damage += (3.75 * strengthLevel + damageTwoHanded) * (1.5 * boosts);
-      }
-      if (!mainHand && !offHand && !twoHanded) {
-        // if there is no weapon equipped, use the expression to add to the damage
-        damage += 3.75 * strengthLevel * boosts;
-      }
-      break;
-    }
-    case `magic`: {
-      // magic
-      break;
-    }
-    case `ranged`: {
-      // ranged
-    }
-  }
-};
+// const damageDealt = (
+//   style: string,
+//   mainHand: boolean,
+//   damageMainHand: number,
+//   offHand: boolean,
+//   damageOffHand: number,
+//   twoHanded: boolean,
+//   damageTwoHanded: number,
+//   boosts: number = 1
+// ) => {
+//   // calculates the potential damageDealt based on combat variables
+//   // abilities deal between 20% to 100% of their maximum damage - use this with the random number
+//   // will need to pull levels from state
+//   let damage: number = 0;
 
-/**
- * calculate hitchance for both parties
- * calculate damage for both parties
- *
- * apply damage if random number passes the hitchance threshold
- * if damage is enough to kill, then reward drops
- */
+//   switch (style) {
+//     case `melee`: {
+//       if (mainHand) {
+//         // if there is a mainhand weapon equipped, use the expression to add to the damage
+//         damage += (2.5 * strengthLevel + damageMainHand) * boosts;
+//       }
+//       if (offHand) {
+//         // if there is a offhand weapon equipped, use the expression to add to the damage
+//         damage += (1.25 * strengthLevel + damageOffHand) * (0.5 * boosts);
+//       }
+//       if (twoHanded) {
+//         // if there is a twohanded weapon equipped, use the expression to add to the damage
+//         damage += (3.75 * strengthLevel + damageTwoHanded) * (1.5 * boosts);
+//       }
+//       if (!mainHand && !offHand && !twoHanded) {
+//         // if there is no weapon equipped, use the expression to add to the damage
+//         damage += 3.75 * strengthLevel * boosts;
+//       }
+//       break;
+//     }
+//     case `magic`: {
+//       // magic
+//       break;
+//     }
+//     case `ranged`: {
+//       // ranged
+//     }
+//   }
+// };
+
+// /**
+//  * calculate hitchance for both parties
+//  * calculate damage for both parties
+//  *
+//  * apply damage if random number passes the hitchance threshold
+//  * if damage is enough to kill, then reward drops
+//  */

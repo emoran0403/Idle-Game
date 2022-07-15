@@ -294,6 +294,7 @@ export interface AllState extends AllSlots {
   Location: ICurrentLocation;
   Activity: ICurrentActivity;
   Skill: ListOfSkills;
+  CombatStyle: IListOfCombatStyles;
   Resource: ICurrentResource;
   Target: ICurrentTarget;
   Quest: ICurrentQuest;
@@ -303,6 +304,12 @@ export interface AllState extends AllSlots {
   QuestPoints: IQuestPointsSlice;
   Quests_Lumbridge: LumbridgeQuestSliceCrap;
   Quests_Draynor: DraynorQuestSliceCrap;
+}
+
+export type ICurrentStyleOptions = `none ` | `melee` | `ranged` | `air` | `fire` | `water` | `earth`;
+
+export interface IListOfCombatStyles {
+  CurrentStyle: ICurrentStyleOptions;
 }
 
 export interface IQuestPointsSlice {
