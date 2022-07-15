@@ -22,6 +22,7 @@ import { addQuestPoints } from "../Redux/Slices/QuestPoints";
 import { ListOfLogs, playerEarnsLog } from "../../../Constants/Items/Logs";
 import { listOfHatchets } from "../../../Constants/SkillingEquipment/Hatchets";
 import { addItemToInventory } from "../Redux/Slices/Inventory";
+import { ListOfFish, playerEarnsFish } from "../../../Constants/Items/Fish";
 
 const GameContainer = (props: Types.NoProps) => {
   const dispatch = useDispatch();
@@ -132,16 +133,26 @@ const GameContainer = (props: Types.NoProps) => {
           )
         ) {
           // if the player earns a log, we need to add the item to the inventory
-          dispatch(addItemToInventory(CurrentResource));
+          dispatch(addItemToInventory(ListOfLogs[CurrentResource as keyof Types.IListOfLogs].displayName));
           // send a chatlog
-          handleNewChatLog(`Chopped some ${CurrentResource}`, `Gained Resource`);
-          console.log(ListOfLogs[CurrentResource as keyof Types.IListOfLogs].XPGivenWoodcutting);
+          handleNewChatLog(`Chopped some ${ListOfLogs[CurrentResource as keyof Types.IListOfLogs].displayName}`, `Gained Resource`);
+          // console.log(ListOfLogs[CurrentResource as keyof Types.IListOfLogs].XPGivenWoodcutting);
+          // apply gained xp
           dispatch(gainXP({ skill: `Woodcutting`, xp: ListOfLogs[CurrentResource as keyof Types.IListOfLogs].XPGivenWoodcutting }));
         }
         break;
       }
       case `Fishing`: {
-        //stuff here
+        if (playerEarnsFish(ListOfFish[CurrentResource as keyof Types.IListOfFish], Experience.Fishing)) {
+          // if the player catches a fish, we need to add the item to the inventory
+          dispatch(addItemToInventory(CurrentResource));
+          // send a chatlog
+          handleNewChatLog(`Fished a ${CurrentResource}`, `Gained Resource`);
+          // console.log(ListOfFish[CurrentResource as keyof Types.IListOfFish].XPGivenFishing);
+          // apply gained xp
+          dispatch(gainXP({ skill: `Fishing`, xp: ListOfFish[CurrentResource as keyof Types.IListOfFish].XPGivenFishing }));
+        }
+
         break;
       }
     }

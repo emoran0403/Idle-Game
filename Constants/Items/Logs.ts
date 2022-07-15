@@ -6,6 +6,7 @@ import { getLevel } from "../XP Levels";
 export const ListOfLogs: Types.IListOfLogs = {
   logs: {
     name: `logs`,
+    displayName: `Logs`,
     levelReqWoodcutting: 1,
     XPGivenWoodcutting: 25,
     levelReqFiremaking: 1,
@@ -16,6 +17,7 @@ export const ListOfLogs: Types.IListOfLogs = {
   },
   oak: {
     name: `oak`,
+    displayName: `Oak logs`,
     levelReqWoodcutting: 15,
     XPGivenWoodcutting: 37.5,
     levelReqFiremaking: 15,
@@ -26,6 +28,7 @@ export const ListOfLogs: Types.IListOfLogs = {
   },
   willow: {
     name: `willow`,
+    displayName: `Willow logs`,
     levelReqWoodcutting: 30,
     XPGivenWoodcutting: 67.5,
     levelReqFiremaking: 30,
@@ -36,6 +39,7 @@ export const ListOfLogs: Types.IListOfLogs = {
   },
   maple: {
     name: `maple`,
+    displayName: `Maple logs`,
     levelReqWoodcutting: 45,
     XPGivenWoodcutting: 100,
     levelReqFiremaking: 45,
@@ -46,6 +50,7 @@ export const ListOfLogs: Types.IListOfLogs = {
   },
   yew: {
     name: `yew`,
+    displayName: `Yew logs`,
     levelReqWoodcutting: 60,
     XPGivenWoodcutting: 175,
     levelReqFiremaking: 60,
@@ -56,6 +61,7 @@ export const ListOfLogs: Types.IListOfLogs = {
   },
   magic: {
     name: `magic`,
+    displayName: `Magic logs`,
     levelReqWoodcutting: 75,
     XPGivenWoodcutting: 250,
     levelReqFiremaking: 75,
@@ -66,6 +72,7 @@ export const ListOfLogs: Types.IListOfLogs = {
   },
   elder: {
     name: `elder`,
+    displayName: `Elder logs`,
     levelReqWoodcutting: 90,
     XPGivenWoodcutting: 325,
     levelReqFiremaking: 90,

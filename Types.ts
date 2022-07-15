@@ -82,6 +82,7 @@ export interface ChatWindowCompProps {
 
 export interface ILog {
   name: string;
+  displayName: string;
   levelReqWoodcutting: number;
   XPGivenWoodcutting: number;
   levelReqFiremaking: number;
