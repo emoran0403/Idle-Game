@@ -75,7 +75,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
               }`}
             >
               <div className="card-body text">
-                <h5 className="card-title">{resource}</h5>
+                <h5 className="card-title">{ListOfLogs[resource as keyof Types.IListOfLogs].displayName}</h5>
                 <div className="card-text">
                   <div>Level {ListOfLogs[resource as keyof Types.IListOfLogs].levelReqWoodcutting}</div>
                   <div>{ListOfLogs[resource as keyof Types.IListOfLogs].XPGivenWoodcutting} XP</div>
