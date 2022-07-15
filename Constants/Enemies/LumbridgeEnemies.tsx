@@ -187,8 +187,27 @@ export const Lumbridge = {
  *
  */
 
-const calcAffinity = (enemy: Types.IEnemySummary) => {
-  enemy.affinities;
+const calcAffinity = (enemy: Types.IEnemySummary, playerStyle: Types.ICurrentStyleOptions) => {
+  // if the player is using the monsters weakness
+  if (playerStyle === enemy.affinities.explicitWeakness) {
+    return 90;
+  }
+
+  // if the player is using a neutralStyle, or has not chosen a style
+  if (playerStyle === enemy.affinities.neutralStyle || playerStyle === `none`) {
+    return 55;
+  }
+
+  // if the player is using a spell the monster is not weak to
+  let spellTypes = [`air`, `fire`, `water`, `earth`];
+  let playerIsUsingMagic = spellTypes.includes(playerStyle);
+
+  if (playerStyle === enemy.affinities.weakStyle || (playerIsUsingMagic && enemy.affinities.weakStyle === `magic`)) {
+    return 65;
+  }
+
+  // if the player is using a style the monster is string against
+  return 45;
 };
 const calcAccuracy = () => {};
 const calcTargetArmorRating = () => {};

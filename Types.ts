@@ -306,7 +306,7 @@ export interface AllState extends AllSlots {
   Quests_Draynor: DraynorQuestSliceCrap;
 }
 
-export type ICurrentStyleOptions = `none ` | `melee` | `ranged` | `air` | `fire` | `water` | `earth`;
+export type ICurrentStyleOptions = `none` | `melee` | `ranged` | `air` | `fire` | `water` | `earth`;
 
 export interface IListOfCombatStyles {
   CurrentStyle: ICurrentStyleOptions;
