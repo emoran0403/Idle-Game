@@ -132,6 +132,8 @@ export interface IFish {
   XPGivenCooking: number;
   stopBurnLevel: number;
   value: number;
+  low: number;
+  high: number;
 }
 
 export interface IFishBankSlice {

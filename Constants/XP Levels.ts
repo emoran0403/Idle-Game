@@ -5,6 +5,7 @@ const levelUpTable: number[] = [
 
 // levelUpTable.filter((num) => num < experience).length; // will return level based on experience
 
+//! there is some rounding error here, if xp is just below a threshold, it counts it as if it passed the threshold
 export const getLevel = (XP: number): number => {
   return levelUpTable.filter((threshold) => threshold < XP).length || 1; // if the xp is less than 83, return 1, since that is the lowest level
 };

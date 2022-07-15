@@ -1,8 +1,7 @@
 import * as Types from "../../Types";
 import { getLevel } from "../XP Levels";
 
-//! list of hatchets is for testing purposes
-import { listOfHatchets } from "../SkillingEquipment/Hatchets";
+// low and high roll data from https://runescape.wiki/w/Module:Woodcutting_chance_calculator/data
 
 export const ListOfLogs: Types.IListOfLogs = {
   logs: {
@@ -78,7 +77,6 @@ export const ListOfLogs: Types.IListOfLogs = {
 };
 
 // if the player is woodcutting, and the game interval has ticked, run this function
-//! do i need to move this somewhere?
 export const playerEarnsLog = (log: Types.ILog, WCEXP: number, hatchet: Types.IHatchet) => {
   //? adjust function to account for buffs and boosts later
   // calculate the player's Woodcutting level

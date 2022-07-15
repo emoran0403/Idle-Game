@@ -13,9 +13,11 @@ if(player is in combat){
     roll to gain a resource and give xp - may need to trigger a bank run (need to define this lol)
 //! work on functions to handle a skilling exchange
 } else if (player is questing) {
-//! work on functions to handle incrementing a quest step
+done work on functions to handle incrementing a quest step
     handle incrementing a quest step (maybe 10 game ticks for a quest step to increment)
 }
+
+//! experience and levels is displaying too hig for some reason :/
 
 
 

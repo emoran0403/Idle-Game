@@ -122,7 +122,6 @@ const GameContainer = (props: Types.NoProps) => {
   };
 
   const handleSkillingTick = () => {
-    // console.log(CurrentResource);
     switch (CurrentSkill) {
       case `Woodcutting`: {
         if (
@@ -132,8 +131,6 @@ const GameContainer = (props: Types.NoProps) => {
             listOfHatchets[currentEquipment.Hatchet as keyof Types.IListOfHatchets]
           )
         ) {
-          // console.log(`handling skilling tick`);
-          // console.log(CurrentSkill);
           // if the player earns a log, we need to add the item to the inventory
           dispatch(addItemToInventory(CurrentResource));
           // send a chatlog
@@ -152,8 +149,8 @@ const GameContainer = (props: Types.NoProps) => {
 
   //@ this useEffect is dedicated to executing the logic of what to do when the quest is complete
   useEffect(() => {
-    //@ reset redux state and send the chat log
     for (let i = 0; i < AllQuestsFromState.length; i++) {
+      // iterate through all the quests until we find the one that was just completed
       // if the quest in state is the same as the current AND it is completed...
       if (AllQuestsFromState[i].name === CurrentQuest && AllQuestsFromState[i].complete) {
         // send a chatlog
@@ -182,6 +179,7 @@ const GameContainer = (props: Types.NoProps) => {
         dispatch(addQuestPoints(wowQuest.questPoints));
         // if(){}
 
+        // once we find our quest, terminate the loop
         break;
       }
     }
