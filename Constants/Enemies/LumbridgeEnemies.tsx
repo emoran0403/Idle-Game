@@ -1,4 +1,5 @@
 import * as Types from "../../Types";
+import { getLevel } from "../XP Levels";
 
 const man: Types.IEnemySummary = {
   name: `man`,
@@ -187,17 +188,16 @@ export const Lumbridge = {
  *
  */
 
+// calculate affinity
 const calcAffinity = (enemy: Types.IEnemySummary, playerStyle: Types.ICurrentStyleOptions) => {
   // if the player is using the monsters weakness
   if (playerStyle === enemy.affinities.explicitWeakness) {
     return 90;
   }
-
   // if the player is using a neutralStyle, or has not chosen a style
   if (playerStyle === enemy.affinities.neutralStyle || playerStyle === `none`) {
     return 55;
   }
-
   // if the player is using a spell the monster is not weak to
   let spellTypes = [`air`, `fire`, `water`, `earth`];
   let playerIsUsingMagic = spellTypes.includes(playerStyle);
@@ -205,17 +205,54 @@ const calcAffinity = (enemy: Types.IEnemySummary, playerStyle: Types.ICurrentSty
   if (playerStyle === enemy.affinities.weakStyle || (playerIsUsingMagic && enemy.affinities.weakStyle === `magic`)) {
     return 65;
   }
-
   // if the player is using a style the monster is string against
   return 45;
 };
-const calcAccuracy = () => {};
-const calcTargetArmorRating = () => {};
+// calculate accuracy
+const calcAccuracy = (level: number, weaponTier: number) => {
+  let levelBonus: number = Math.floor((1 / 1250) * Math.pow(level, 3) + 4 * level + 40);
+  let weaponTierBonus: number = Math.floor(2.5 * Math.floor((1 / 1250) * Math.pow(weaponTier, 3) + 4 * weaponTier + 40));
+  return levelBonus + weaponTierBonus;
+};
+// calculate enemy defence
+const calcTargetDefence = (enemy: Types.IEnemySummary) => {
+  return enemy.defence + enemy.armor;
+};
 
-const calcHitChance = (affinity: number, accuracy: number, targetArmorRating: number) => {
-  let hitChance = affinity * (accuracy / targetArmorRating);
+// calculate the hitchance based on affinity, accuracy, and targetDefence
+const calcHitChance = (affinity: number, accuracy: number, targetDefence: number) => {
+  let hitChance = affinity * (accuracy / targetDefence);
   return hitChance;
 };
+
+// determine if the player scored a hit
+const didPlayerHit = (hitchance: number) => {
+  // the player may have a hitchance greater than 100%, so return true if that occurs
+  // otherwise, roll 1-100, and if the player hitchance is greater, return true
+  if (hitchance >= 100 || Math.floor(Math.random() * 100) < hitchance) {
+  }
+  // if the game rolled higher than the hitchance, the player missed, so return false
+  return false;
+};
+
+// determine the damage
+const calcDamage = (playerStyle: Types.ICurrentStyleOptions, Experience: Types.ISkillList, boosts: number = 0) => {
+  //? boosts are available on capes and certain jewellery, default to 0 if no boosts present
+  // if the player is unarmed, use melee
+  switch (playerStyle) {
+    case `melee`:
+      return Math.floor(3.75 * getLevel(Experience.Strength) + 1.5 * boosts);
+    case `none`:
+      return Math.floor(3.75 * getLevel(Experience.Strength) + 1.5 * boosts);
+    case `ranged`:
+      return Math.floor(3.75 * getLevel(Experience.Ranged) + 1.5 * boosts);
+    default:
+      return Math.floor(3.75 * getLevel(Experience.Magic) + 1.5 * boosts);
+  }
+};
+
+//! need a way to store the player's hit points and the enemies hitpoints in state, maybe in the component?
+//! apply the damage to the enemy, if it is killed, award xp, if not, do another round of combat
 
 /******************OLD STUFF BELOW ********************************/
 // const hitchance = (affinity: number, armorRating: number, accuracy: number, additiveAccuracyBoosts: number = 0, multiplicativeAccuracyBoosts: number = 1) => {
