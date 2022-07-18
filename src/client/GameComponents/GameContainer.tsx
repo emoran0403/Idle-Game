@@ -66,6 +66,9 @@ const GameContainer = (props: Types.NoProps) => {
     Hatchet: `bronzehatchet`,
   });
 
+  // let bigwow = Object.entries(currentEquipment);
+  console.log(currentEquipment);
+
   //@ questStepProgress is holds the progress between completing quest steps
   const [questStepProgress, setQuestStepProgress] = useState<number>(0);
 
@@ -205,8 +208,10 @@ const GameContainer = (props: Types.NoProps) => {
 
   //@ this useEffect is dedicated to combat logic
   useEffect(() => {
-    //when a target is changed, set its lifepoints to state
-    setTargetLifePoints(Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].lifePoints);
+    // IF a target is changed, set its lifepoints to state
+    if (Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies]?.lifePoints) {
+      setTargetLifePoints(Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].lifePoints);
+    }
   }, [Target]);
 
   return (

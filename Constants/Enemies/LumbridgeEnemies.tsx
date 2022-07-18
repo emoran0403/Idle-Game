@@ -158,6 +158,7 @@ export const Lumbridge = {
  */
 
 //! ill eventually need a way to deal with drops
+//! need a way to calculate the stats from armor
 
 // calculate affinity
 const calcAffinity = (enemy: Types.IEnemySummary, playerStyle: Types.ICurrentStyleOptions) => {
@@ -242,3 +243,5 @@ const calcDamage = (playerStyle: Types.ICurrentStyleOptions, Experience: Types.I
 
 //! need a way to store the player's hit points and the enemies hitpoints in state, maybe in the component?
 //! apply the damage to the enemy, if it is killed, award xp, if not, do another round of combat
+
+const doCombat = (enemy: Types.IEnemySummary, playerStyle: Types.ICurrentStyleOptions, Experience: Types.ISkillList, Equipment: number) => {};

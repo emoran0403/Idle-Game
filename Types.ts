@@ -836,10 +836,12 @@ export interface IListOfTypelessCapes {
 export type IListOfAllCapes = IListOfMeleeCapes | IListOfMagicCapes | IListOfRangedCapes | IListOfTypelessCapes;
 
 export interface IArmorSlotBack {
-  melee: IListOfMeleeCapes;
-  magic: IListOfMagicCapes;
-  ranged: IListOfRangedCapes;
-  hybrid: IListOfTypelessCapes;
+  bladestormdrape: IArmorItem;
+  spellstormdrape: IArmorItem;
+  arrowstormdrape: IArmorItem;
+  pathfindercape: IArmorItem;
+  teamcape: IArmorItem;
+  obsidiancape: IArmorItem;
 }
 export interface IBackSlotSlice {
   playerOwnsbladestormdrape: boolean;
