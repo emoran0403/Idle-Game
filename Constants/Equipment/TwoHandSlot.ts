@@ -512,6 +512,20 @@ const listOfRangedTwoHanders: Types.IListOfRangedTwoHand = {
 };
 
 export const TwoHandSlot: Types.IArmorSlotTwoHand = {
+  none: {
+    name: "none",
+    displayName: `None`,
+    levelReqDefence: -1,
+    tier: 0,
+    armor: 0,
+    lifePointsExtra: 0,
+    prayerPointsExtra: 0,
+    damageReduction: 0,
+    styleBonusMelee: 0,
+    styleBonusRanged: 0,
+    styleBonusMagic: 0,
+    value: 0,
+  },
   bronze2hsword: {
     name: "bronze2hsword",
     displayName: `Bronze 2h sword`,

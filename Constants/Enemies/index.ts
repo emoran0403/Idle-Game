@@ -26,6 +26,12 @@ export const playerAttacksTarget = (
 ) => {
   // define the enemy
   let Enemy: Types.IEnemySummary = Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies];
+  // console.log(Enemies);
+  // console.log(playerLocation);
+  // console.log(Target);
+  // console.log(`filler lol`);
+  // console.log({ q: `current enemy:`, Enemy });
+  //! Enemy comes back undefined
 
   // #1 calculate affinity
   // set the default to 55 just in case
@@ -56,9 +62,9 @@ export const playerAttacksTarget = (
     case `melee`:
       levelBonus = Math.floor((1 / 1250) * Math.pow(getLevel(Experience.Attack), 3) + 4 * getLevel(Experience.Attack) + 40);
       break;
-    case `none`:
-      levelBonus = Math.floor((1 / 1250) * Math.pow(getLevel(Experience.Attack), 3) + 4 * getLevel(Experience.Attack) + 40);
-      break;
+    // case `none`:
+    //   levelBonus = Math.floor((1 / 1250) * Math.pow(getLevel(Experience.Attack), 3) + 4 * getLevel(Experience.Attack) + 40);
+    //   break;
     case `ranged`:
       levelBonus = Math.floor((1 / 1250) * Math.pow(getLevel(Experience.Ranged), 3) + 4 * getLevel(Experience.Ranged) + 40);
       break;
@@ -67,7 +73,16 @@ export const playerAttacksTarget = (
       break;
   }
   // assign the weapon tier from equipment, then calculate the bonus
-  let weaponTier: number = TwoHandSlot[Equipment.TwoHandSlot as keyof Types.IArmorSlotTwoHand].tier;
+  let weaponTier: number = 0;
+
+  //! i need to add up the stats for the equipment, this is a problem when we can mix and match armor
+  //! - some  numbers wont be defined, which means we cant add them
+
+  //! this happens here when checking for the tier of a non equipped item
+
+  if (TwoHandSlot[Equipment.TwoHandSlot as keyof Types.IArmorSlotTwoHand]) {
+    weaponTier = TwoHandSlot[Equipment.TwoHandSlot as keyof Types.IArmorSlotTwoHand].tier;
+  }
 
   let weaponTierBonus: number = Math.floor(2.5 * Math.floor((1 / 1250) * Math.pow(weaponTier, 3) + 4 * weaponTier + 40));
 
@@ -90,6 +105,17 @@ export const playerAttacksTarget = (
     //? boosts are available on capes and certain jewellery, default to 0 if no boosts present
     //? if the player is unarmed, use melee
     let boosts: number = 0;
+
+    // let oof = playerStyle.toLowerCase();
+    // console.log(oof);
+    // let concat = `styleBonus${oof}`;
+
+    // BackSlot[Equipment.BackSlot as keyof Types.IArmorSlotBack][concat as keyof Types.IArmorItem];
+    // console.log(`look here`);
+    // console.log(BackSlot[Equipment.BackSlot as keyof Types.IArmorSlotBack][concat as keyof Types.IArmorItem]);
+    //! need to modulate damage - this currently defines a max damage
+    let randomDamageScaler: number = Math.random();
+
     switch (playerStyle) {
       case `melee`:
         boosts =
@@ -102,19 +128,13 @@ export const playerAttacksTarget = (
           NeckSlot[Equipment.NeckSlot as keyof Types.IArmorSlotNeck].styleBonusMelee +
           RingSlot[Equipment.RingSlot as keyof Types.IArmorSlotRing].styleBonusMelee +
           TwoHandSlot[Equipment.TwoHandSlot as keyof Types.IArmorSlotTwoHand].styleBonusMelee;
-        return Math.floor(3.75 * getLevel(Experience.Strength) + 1.5 * boosts);
-      case `none`:
-        boosts =
-          BackSlot[Equipment.BackSlot as keyof Types.IArmorSlotBack].styleBonusMelee +
-          BodySlot[Equipment.BodySlot as keyof Types.IArmorSlotBody].styleBonusMelee +
-          FeetSlot[Equipment.FeetSlot as keyof Types.IArmorSlotFeet].styleBonusMelee +
-          HandsSlot[Equipment.HandsSlot as keyof Types.IArmorSlotHands].styleBonusMelee +
-          HeadSlot[Equipment.HeadSlot as keyof Types.IArmorSlotHead].styleBonusMelee +
-          LegsSlot[Equipment.LegsSlot as keyof Types.IArmorSlotLegs].styleBonusMelee +
-          NeckSlot[Equipment.NeckSlot as keyof Types.IArmorSlotNeck].styleBonusMelee +
-          RingSlot[Equipment.RingSlot as keyof Types.IArmorSlotRing].styleBonusMelee +
-          TwoHandSlot[Equipment.TwoHandSlot as keyof Types.IArmorSlotTwoHand].styleBonusMelee;
-        return Math.floor(3.75 * getLevel(Experience.Strength) + 1.5 * boosts);
+
+        if (Math.floor(randomDamageScaler * (3.75 * getLevel(Experience.Strength) + 1.5 * boosts))) {
+          return Math.floor(randomDamageScaler * (3.75 * getLevel(Experience.Strength) + 1.5 * boosts));
+        } else {
+          return 1;
+        }
+
       case `ranged`:
         boosts =
           BackSlot[Equipment.BackSlot as keyof Types.IArmorSlotBack].styleBonusRanged +
@@ -126,7 +146,12 @@ export const playerAttacksTarget = (
           NeckSlot[Equipment.NeckSlot as keyof Types.IArmorSlotNeck].styleBonusRanged +
           RingSlot[Equipment.RingSlot as keyof Types.IArmorSlotRing].styleBonusRanged +
           TwoHandSlot[Equipment.TwoHandSlot as keyof Types.IArmorSlotTwoHand].styleBonusRanged;
-        return Math.floor(3.75 * getLevel(Experience.Ranged) + 1.5 * boosts);
+
+        if (Math.floor(randomDamageScaler * (3.75 * getLevel(Experience.Ranged) + 1.5 * boosts))) {
+          return Math.floor(randomDamageScaler * (3.75 * getLevel(Experience.Ranged) + 1.5 * boosts));
+        } else {
+          return 1;
+        }
       default:
         boosts =
           BackSlot[Equipment.BackSlot as keyof Types.IArmorSlotBack].styleBonusMagic +
@@ -138,7 +163,12 @@ export const playerAttacksTarget = (
           NeckSlot[Equipment.NeckSlot as keyof Types.IArmorSlotNeck].styleBonusMagic +
           RingSlot[Equipment.RingSlot as keyof Types.IArmorSlotRing].styleBonusMagic +
           TwoHandSlot[Equipment.TwoHandSlot as keyof Types.IArmorSlotTwoHand].styleBonusMagic;
-        return Math.floor(3.75 * getLevel(Experience.Magic) + 1.5 * boosts);
+
+        if (Math.floor(randomDamageScaler * (3.75 * getLevel(Experience.Magic) + 1.5 * boosts))) {
+          return Math.floor(randomDamageScaler * (3.75 * getLevel(Experience.Magic) + 1.5 * boosts));
+        } else {
+          return 1;
+        }
     }
   }
   // if the game rolled higher than the hitchance, the player missed, so return 0 damage

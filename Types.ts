@@ -589,6 +589,7 @@ export interface IListOfRangedHeads {
 export type IListOfAllHeads = IListOfMeleeHeads | IListOfMagicHeads | IListOfRangedHeads;
 
 export interface IArmorSlotHead {
+  none: IArmorItem;
   bronzefullhelm: IArmorItem;
   ironfullhelm: IArmorItem;
   steelfullhelm: IArmorItem;
@@ -653,6 +654,7 @@ export interface IListOfRangedBodies {
 export type IListOfAllBodies = IListOfMeleeBodies | IListOfMagicBodies | IListOfRangedBodies;
 
 export interface IArmorSlotBody {
+  none: IArmorItem;
   bronzeplatebody: IArmorItem;
   ironplatebody: IArmorItem;
   steelplatebody: IArmorItem;
@@ -717,6 +719,7 @@ export interface IListOfRangedLegs {
 export type IListOfAllLegs = IListOfMeleeLegs | IListOfMagicLegs | IListOfRangedLegs;
 
 export interface IArmorSlotLegs {
+  none: IArmorItem;
   bronzeplatelegs: IArmorItem;
   ironplatelegs: IArmorItem;
   steelplatelegs: IArmorItem;
@@ -781,6 +784,7 @@ export interface IListOfRangedFeet {
 export type IListOfAllFeet = IListOfMeleeFeet | IListOfMagicFeet | IListOfRangedFeet;
 
 export interface IArmorSlotFeet {
+  none: IArmorItem;
   bronzearmouredboots: IArmorItem;
   ironarmouredboots: IArmorItem;
   steelarmouredboots: IArmorItem;
@@ -845,6 +849,7 @@ export interface IListOfRangedHands {
 export type IListOfAllHands = IListOfMeleeHands | IListOfMagicHands | IListOfRangedHands;
 
 export interface IArmorSlotHands {
+  none: IArmorItem;
   bronzegauntlets: IArmorItem;
   irongauntlets: IArmorItem;
   steelgauntlets: IArmorItem;
@@ -901,6 +906,7 @@ export interface IListOfTypelessCapes {
 export type IListOfAllCapes = IListOfMeleeCapes | IListOfMagicCapes | IListOfRangedCapes | IListOfTypelessCapes;
 
 export interface IArmorSlotBack {
+  none: IArmorItem;
   bladestormdrape: IArmorItem;
   spellstormdrape: IArmorItem;
   arrowstormdrape: IArmorItem;
@@ -934,6 +940,7 @@ export interface IListOfTypelessRings {
 export type IListOfAllRings = IListOfMeleeRings | IListOfMagicRings | IListOfRangedRings | IListOfTypelessRings;
 
 export interface IArmorSlotRing {
+  none: IArmorItem;
   warriorring: IArmorItem;
   seersring: IArmorItem;
   archerring: IArmorItem;
@@ -970,6 +977,7 @@ export interface IListOfTypelessNecks {
 export type IListOfAllNecks = IListOfMeleeNecks | IListOfMagicNecks | IListOfRangedNecks | IListOfTypelessNecks;
 
 export interface IArmorSlotNeck {
+  none: IArmorItem;
   amuletofstrength: IArmorItem;
   amuletofmagic: IArmorItem;
   amuletofaccuracy: IArmorItem;
@@ -1024,6 +1032,7 @@ export interface IListOfRangedTwoHand {
 export type IListOfAllTwoHand = IListOfMeleeTwoHand | IListOfMagicTwoHand | IListOfRangedTwoHand;
 
 export interface IArmorSlotTwoHand {
+  none: IArmorItem;
   bronze2hsword: IWeaponItem;
   iron2hsword: IWeaponItem;
   steel2hsword: IWeaponItem;

@@ -24,7 +24,8 @@ import { listOfHatchets } from "../../../Constants/SkillingEquipment/Hatchets";
 import { addItemToInventory } from "../Redux/Slices/Inventory";
 import { ListOfFish, playerEarnsFish } from "../../../Constants/Items/Fish";
 import { getLevel } from "../../../Constants/XP Levels";
-import { Enemies } from "../../../Constants/Enemies";
+import { Enemies, playerAttacksTarget } from "../../../Constants/Enemies";
+import { BackSlot } from "../../../Constants/Equipment/BackSlot";
 
 const GameContainer = (props: Types.NoProps) => {
   const dispatch = useDispatch();
@@ -39,6 +40,11 @@ const GameContainer = (props: Types.NoProps) => {
   const CurrentResource = useSelector((state: Types.AllState) => state.Resource.CurrentResource);
   const CurrentSkill = useSelector((state: Types.AllState) => state.Skill.CurrentSkill as Types.ListOfSkillOptions);
   const Experience = useSelector((state: Types.AllState) => state.Experience);
+  const CurrentStyle = useSelector((state: Types.AllState) => state.CombatStyle.CurrentStyle as Types.ICurrentStyleOptions);
+
+  // let wowwowo = CurrentStyle.toLowerCase();
+  // console.log(CurrentStyle);
+  // console.log(wowwowo);
 
   const AllQuestsFromState: Types.IStateQuest[] = [...LumbridgeQuestArray, ...DraynorQuestArray];
 
@@ -67,7 +73,16 @@ const GameContainer = (props: Types.NoProps) => {
   });
 
   // let bigwow = Object.entries(currentEquipment);
-  console.log(currentEquipment);
+  // console.log(currentEquipment);
+
+  // let oof = CurrentStyle.toLowerCase();
+  // console.log(`oof is next`);
+  // console.log(oof);
+  // let concat = `styleBonus${oof}`;
+
+  // console.log(`look here`);
+  // BackSlot[currentEquipment.BackSlot as keyof Types.IArmorSlotBack][concat as keyof Types.IArmorItem];
+  // console.log(BackSlot[currentEquipment.BackSlot as keyof Types.IArmorSlotBack][concat as keyof Types.IArmorItem]);
 
   //@ questStepProgress is holds the progress between completing quest steps
   const [questStepProgress, setQuestStepProgress] = useState<number>(0);
@@ -168,6 +183,24 @@ const GameContainer = (props: Types.NoProps) => {
     }
   };
 
+  //@ this will run every game tick (while in combat) and holds the logic for resolving combat turns
+  const handleCombatTick = () => {
+    // let bigwow1 = Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies];
+    // console.log(`here`);
+    // console.log(bigwow1);
+    // console.log(Enemies);
+    // console.log(playerLocation);
+    // console.log(Target);
+    // console.log(`filler lol`);
+    if (Target !== `none`) {
+      let wowow = playerAttacksTarget(Target, CurrentStyle, playerLocation, Experience, currentEquipment);
+      console.log(`damage should be next:`);
+      console.log(wowow);
+    } else {
+      console.log(`check your target and style`);
+    }
+  };
+
   //@ this useEffect is dedicated to executing the logic of what to do when the quest is complete
   useEffect(() => {
     for (let i = 0; i < AllQuestsFromState.length; i++) {
@@ -216,16 +249,21 @@ const GameContainer = (props: Types.NoProps) => {
 
   return (
     <div className="d-flex">
-      {/* Remove this button, its for testing quest steps */}
+      {/* Remove this button, its for testing*/}
       <div>
         <button onClick={() => handleQuestingTick()}>test quest</button>
       </div>
-      {/* Remove this button, its for testing quest steps */}
-      {/* Remove this button, its for testing quest steps */}
+      {/* Remove this button, its for testing*/}
+      {/* Remove this button, its for testing*/}
       <div>
         <button onClick={() => handleSkillingTick()}>test skillTick</button>
       </div>
-      {/* Remove this button, its for testing quest steps */}
+      {/* Remove this button, its for testing*/}
+      {/* Remove this button, its for testing*/}
+      <div>
+        <button onClick={() => handleCombatTick()}>test combatTick</button>
+      </div>
+      {/* Remove this button, its for testing*/}
 
       <div id="gamecontainer" className="row justify-content-lg-center">
         <div id="left-column" className="col-lg-3 border border-dark border-2 rounded-3" style={{ height: "90vh", position: "relative" }}>

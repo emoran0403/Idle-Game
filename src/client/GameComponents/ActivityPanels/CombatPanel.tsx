@@ -10,6 +10,7 @@ import { setActivity } from "../../Redux/Slices/CurrentActivity";
 import { setTarget } from "../../Redux/Slices/CurrentTarget";
 import { getLevel } from "../../../../Constants/XP Levels";
 import { setQuest } from "../../Redux/Slices/CurrentQuest";
+import { setStyle } from "../../Redux/Slices/CurrentCombatStyle";
 
 //@ for simplicity, i'm not keeping track of ammunition / runes
 
@@ -68,7 +69,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
                   console.log(CurrentSkill);
                   dispatch(setSkill(`none`));
                 }
-                dispatch(setTarget(enemy.displayName));
+                dispatch(setTarget(enemy.name));
                 dispatch(setActivity(`In combat`));
                 dispatch(setResource(`none`));
                 dispatch(setQuest(`none`));
@@ -121,6 +122,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
             dispatch(setActivity(`In combat`));
             dispatch(setResource(`none`));
             dispatch(setSkill(`Attack`));
+            dispatch(setStyle(`melee`));
             handleChatLogSkill(`Attack`);
           }}
         >
@@ -132,6 +134,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
             dispatch(setActivity(`In combat`));
             dispatch(setResource(`none`));
             dispatch(setSkill(`Strength`));
+            dispatch(setStyle(`melee`));
             handleChatLogSkill(`Strength`);
           }}
         >
@@ -143,6 +146,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
             dispatch(setActivity(`In combat`));
             dispatch(setResource(`none`));
             dispatch(setSkill(`Defence`));
+            dispatch(setStyle(`melee`));
             handleChatLogSkill(`Defence`);
           }}
         >
@@ -154,6 +158,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
             dispatch(setActivity(`In combat`));
             dispatch(setResource(`none`));
             dispatch(setSkill(`Ranged`));
+            dispatch(setStyle(`ranged`));
             handleChatLogSkill(`Ranged`);
           }}
         >
@@ -165,6 +170,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
             dispatch(setActivity(`In combat`));
             dispatch(setResource(`none`));
             dispatch(setSkill(`Magic`));
+            dispatch(setStyle(`air`));
             handleChatLogSkill(`Magic`);
           }}
         >
@@ -176,6 +182,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
             dispatch(setActivity(`In combat`));
             dispatch(setResource(`none`));
             dispatch(setSkill(`Magic`));
+            dispatch(setStyle(`water`));
             handleChatLogSkill(`Magic`);
           }}
         >
@@ -187,6 +194,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
             dispatch(setActivity(`In combat`));
             dispatch(setResource(`none`));
             dispatch(setSkill(`Magic`));
+            dispatch(setStyle(`earth`));
             handleChatLogSkill(`Magic`);
           }}
         >
@@ -198,6 +206,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
             dispatch(setActivity(`In combat`));
             dispatch(setResource(`none`));
             dispatch(setSkill(`Magic`));
+            dispatch(setStyle(`fire`));
             handleChatLogSkill(`Magic`);
           }}
         >

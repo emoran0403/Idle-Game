@@ -9,7 +9,7 @@ export const Experience = createSlice({
     Firemaking: 90,
     Fishing: 20000,
     Attack: 0,
-    Strength: 0,
+    Strength: 99990,
     Defence: 500,
     Consitution: 1358,
     Prayer: 0,

@@ -232,6 +232,20 @@ const listOfRangedFeet: Types.IListOfRangedFeet = {
 };
 
 export const FeetSlot: Types.IArmorSlotFeet = {
+  none: {
+    name: "none",
+    displayName: `None`,
+    levelReqDefence: -1,
+    tier: 0,
+    armor: 0,
+    lifePointsExtra: 0,
+    prayerPointsExtra: 0,
+    damageReduction: 0,
+    styleBonusMelee: 0,
+    styleBonusRanged: 0,
+    styleBonusMagic: 0,
+    value: 0,
+  },
   bronzearmouredboots: {
     name: "bronzearmouredboots",
     displayName: `Bronze armoured boots`,

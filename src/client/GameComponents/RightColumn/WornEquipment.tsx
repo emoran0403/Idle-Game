@@ -10,7 +10,7 @@ import { FeetSlot } from "../../../../Constants/Equipment/FeetSlot";
 import { TwoHandSlot } from "../../../../Constants/Equipment/TwoHandSlot";
 
 import { useSelector } from "react-redux";
-import { EmptyItem } from "../../../../Constants/Equipment/EmptyItem";
+import { EmptyArmorItemComposite, EmptyWeaponItemComposite } from "../../../../Constants/Equipment/EmptyItem";
 import { getLevel } from "../../../../Constants/XP Levels";
 
 const WornEquipment = (props: Types.WornEquipmentCompProps) => {
@@ -107,14 +107,18 @@ const WornEquipment = (props: Types.WornEquipmentCompProps) => {
     }
   };
 
-  const displaySelectorTag = (itemsFromState: Types.AllSliceKeys, slotName: Types.IEquipmentSlotOptions, slotString: string) => {
-    let compositeItems: Types.ICompositeArmorItem[] = [EmptyItem];
+  //! the default none item needs to have the playerOwnsThisItem: boolean set to true always
+  //! for the rest, it needs to be conditional
+  const displaySelectorTagArmor = (itemsFromState: Types.AllSliceKeys, slotName: Types.IEquipmentSlotOptions, slotString: string) => {
+    //# place an empty armor item into the array
+    let compositeItems: Types.ICompositeArmorItem[] = [EmptyArmorItemComposite];
 
     let itemsFromConstants: Types.IArmorItem[] = [...Object.values(slotName)];
     // console.log(itemsFromState);
     // console.log();
 
-    for (let i = 0; i < itemsFromConstants.length; i++) {
+    //# start the array at 1 to account for the none item added originally
+    for (let i = 1; i < itemsFromConstants.length; i++) {
       let playerOwnsThisItem: boolean = itemsFromState[`playerOwns${itemsFromConstants[i].name}` as keyof Types.AllSliceKeys];
       let tempItem: Types.ICompositeArmorItem = { ...itemsFromConstants[i], playerOwnsThisItem };
       compositeItems.push(tempItem);
@@ -161,7 +165,81 @@ const WornEquipment = (props: Types.WornEquipmentCompProps) => {
     return (
       <select onChange={(e) => itemHasBeenEquipped(e)} className="form-select" name={`${slotString}`}>
         {compositeItems.map((Item) => (
-          <option value={Item.name} disabled={applyDisabledAttribute(Item)} key={`Slot-Item-${Item.name}`} className={`${handleSelectorStyle(Item)}`}>
+          <option
+            value={Item.name}
+            disabled={applyDisabledAttribute(Item)}
+            key={`Slot-Item-${slotString}-${Item.name}`}
+            className={`${handleSelectorStyle(Item)}`}
+          >
+            {Item.displayName}
+          </option>
+        ))}
+      </select>
+    );
+  };
+
+  const displaySelectorTagWeapon = (itemsFromState: Types.AllSliceKeys, slotName: Types.IEquipmentSlotOptions, slotString: string) => {
+    //# place an empty armor item into the array
+    let compositeItems: Types.ICompositeWeaponItem[] = [EmptyWeaponItemComposite];
+
+    let itemsFromConstants: Types.IWeaponItem[] = [...Object.values(slotName)];
+    // console.log(itemsFromState);
+    // console.log();
+
+    //# start the array at 1 to account for the none item added originally
+    for (let i = 1; i < itemsFromConstants.length; i++) {
+      let playerOwnsThisItem: boolean = itemsFromState[`playerOwns${itemsFromConstants[i].name}` as keyof Types.AllSliceKeys];
+      let tempItem: Types.ICompositeWeaponItem = { ...itemsFromConstants[i], playerOwnsThisItem };
+      compositeItems.push(tempItem);
+    }
+
+    const itemHasBeenEquipped = (e: React.ChangeEvent<HTMLSelectElement>) => {
+      //! string type is `ok` since they can be keys of Types.ICurrentEquipment
+      /**
+       * this can be better described by stating the possible options of each slot in Types.ICurrentEquipment
+       *
+       */
+      let newlyEquippedItemDisplayName: string = ``;
+      let oldEquippedItemDisplayName: string = ``;
+
+      // go thru all the composite items so we can set the context of the old and new items
+      for (let i = 0; i < compositeItems.length; i++) {
+        // if we match the .name to the newly equipped item, set the display name
+        if (compositeItems[i].name === e.target.value) {
+          newlyEquippedItemDisplayName = compositeItems[i].displayName;
+        }
+
+        // if we match the .name to the old equipped item, set the display name
+        if (compositeItems[i].name === props.currentEquipment[e.target.name as keyof Types.ICurrentEquipment]) {
+          oldEquippedItemDisplayName = compositeItems[i].displayName;
+        }
+      }
+
+      // if slot is none, we are equipping an item
+      if (props.currentEquipment[e.target.name as keyof Types.ICurrentEquipment] === `none`) {
+        props.newChatLog(`Equipped ${newlyEquippedItemDisplayName}`, `Equipment Swap`);
+
+        // if slot is not none, and e.target.value is none, we are unequipping an item
+      } else if (props.currentEquipment[e.target.name as keyof Types.ICurrentEquipment] !== `none` && e.target.value === `none`) {
+        props.newChatLog(`Unequipped ${oldEquippedItemDisplayName}`, `Equipment Swap`);
+
+        //if slot is not none, and e.target.value is not none, we are swapping to a new item
+      } else if (props.currentEquipment[e.target.name as keyof Types.ICurrentEquipment] !== `none` && e.target.value !== `none`) {
+        props.newChatLog(`Swapped to ${newlyEquippedItemDisplayName}`, `Equipment Swap`);
+      }
+
+      props.setCurrentEquipment({ ...props.currentEquipment, [e.target.name as keyof Types.ICurrentEquipment]: e.target.value });
+    };
+
+    return (
+      <select onChange={(e) => itemHasBeenEquipped(e)} className="form-select" name={`${slotString}`}>
+        {compositeItems.map((Item) => (
+          <option
+            value={Item.name}
+            disabled={applyDisabledAttribute(Item)}
+            key={`Slot-Item-${slotString}-${Item.name}`}
+            className={`${handleSelectorStyle(Item)}`}
+          >
             {Item.displayName}
           </option>
         ))}
@@ -200,17 +278,17 @@ const WornEquipment = (props: Types.WornEquipmentCompProps) => {
       <h5 className="card-header text-center">WornEquipment</h5>
       <div className="d-flex flex-column">
         <div className="text-center">Head Slot:</div>
-        {displaySelectorTag(headsFromState, HeadSlot, `HeadSlot`)}
+        {displaySelectorTagArmor(headsFromState, HeadSlot, `HeadSlot`)}
         <div className="text-center">Body Slot:</div>
-        {displaySelectorTag(bodiesFromState, BodySlot, `BodySlot`)}
+        {displaySelectorTagArmor(bodiesFromState, BodySlot, `BodySlot`)}
         <div className="text-center">Legs Slot:</div>
-        {displaySelectorTag(legsFromState, LegsSlot, `LegsSlot`)}
+        {displaySelectorTagArmor(legsFromState, LegsSlot, `LegsSlot`)}
         <div className="text-center">Hands Slot:</div>
-        {displaySelectorTag(handsFromState, HandsSlot, `HandsSlot`)}
+        {displaySelectorTagArmor(handsFromState, HandsSlot, `HandsSlot`)}
         <div className="text-center">Feet Slot:</div>
-        {displaySelectorTag(feetFromState, FeetSlot, `FeetSlot`)}
+        {displaySelectorTagArmor(feetFromState, FeetSlot, `FeetSlot`)}
         <div className="text-center">TwoHand Slot:</div>
-        {displaySelectorTag(twoHandFromState, TwoHandSlot, `TwoHandSlot`)}
+        {displaySelectorTagWeapon(twoHandFromState, TwoHandSlot, `TwoHandSlot`)}
       </div>
     </div>
   );
