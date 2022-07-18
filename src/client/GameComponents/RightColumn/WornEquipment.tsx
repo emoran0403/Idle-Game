@@ -110,7 +110,7 @@ const WornEquipment = (props: Types.WornEquipmentCompProps) => {
   const displaySelectorTag = (itemsFromState: Types.AllSliceKeys, slotName: Types.IEquipmentSlotOptions, slotString: string) => {
     let compositeItems: Types.ICompositeArmorItem[] = [EmptyItem];
 
-    let itemsFromConstants: Types.IArmorItem[] = [...Object.values(slotName.melee), ...Object.values(slotName.magic), ...Object.values(slotName.ranged)];
+    let itemsFromConstants: Types.IArmorItem[] = [...Object.values(slotName)];
     // console.log(itemsFromState);
     // console.log();
 
