@@ -115,6 +115,7 @@ export const playerEarnsFish = (fish: Types.IFish, FishEXP: number) => {
   let gameRoll = Math.floor(Math.random() * 256);
 
   // if the player rolled higher than the game, return true
+  // playerRoll depends on level and fish stats, gameroll is a random number
   console.log({ playerRoll, gameRoll });
   if (playerRoll >= gameRoll) {
     return true;

@@ -157,36 +157,7 @@ export const Lumbridge = {
  * logs
  */
 
-//!
-/**
- * add a drop function to roll drops
- * define tables for drops based on ammunition, runes, fish...
- *
- *
- *
- * needs offensive stats
- * needs a combat style used
- *
- * needs defensive stats
- * will change based on player combat style choice
- *
- *hit chance = affinity * (accuracy / target armor rating)
- affinity =
-  90 for explicit weakness
-  65 for weakness style
-  55 for own style
-  45 for strong style 
- *
-
- * accuracy from level = 0.0008 * L^3 +4L +40
- * accuracy from weapon tier bonus = 0.0008 * T^3 +4T +40
- *
- *
- *
- *
- *
- *
- */
+//! ill eventually need a way to deal with drops
 
 // calculate affinity
 const calcAffinity = (enemy: Types.IEnemySummary, playerStyle: Types.ICurrentStyleOptions) => {
@@ -199,18 +170,35 @@ const calcAffinity = (enemy: Types.IEnemySummary, playerStyle: Types.ICurrentSty
     return 55;
   }
   // if the player is using a spell the monster is not weak to
+  // stab / crush / slash and bolt / arrow types are not implemented, which would go here
+  // Ex: the player is using fire spells, when the monster is weak to water spells, wont give the 90, but it is still the same style
   let spellTypes = [`air`, `fire`, `water`, `earth`];
   let playerIsUsingMagic = spellTypes.includes(playerStyle);
 
   if (playerStyle === enemy.affinities.weakStyle || (playerIsUsingMagic && enemy.affinities.weakStyle === `magic`)) {
     return 65;
   }
-  // if the player is using a style the monster is string against
+  // if the player is using a style the monster is strong against
   return 45;
 };
 // calculate accuracy
-const calcAccuracy = (level: number, weaponTier: number) => {
-  let levelBonus: number = Math.floor((1 / 1250) * Math.pow(level, 3) + 4 * level + 40);
+const calcAccuracy = (playerStyle: Types.ICurrentStyleOptions, level: number, weaponTier: number, Experience: Types.ISkillList) => {
+  let levelBonus: number = 0;
+  levelBonus = Math.floor((1 / 1250) * Math.pow(level, 3) + 4 * level + 40);
+  switch (playerStyle) {
+    case `melee`:
+      levelBonus = Math.floor((1 / 1250) * Math.pow(getLevel(Experience.Attack), 3) + 4 * getLevel(Experience.Attack) + 40);
+      break;
+    case `none`:
+      levelBonus = Math.floor((1 / 1250) * Math.pow(getLevel(Experience.Attack), 3) + 4 * getLevel(Experience.Attack) + 40);
+      break;
+    case `ranged`:
+      levelBonus = Math.floor((1 / 1250) * Math.pow(getLevel(Experience.Ranged), 3) + 4 * getLevel(Experience.Ranged) + 40);
+      break;
+    default:
+      levelBonus = Math.floor((1 / 1250) * Math.pow(getLevel(Experience.Magic), 3) + 4 * getLevel(Experience.Magic) + 40);
+      break;
+  }
   let weaponTierBonus: number = Math.floor(2.5 * Math.floor((1 / 1250) * Math.pow(weaponTier, 3) + 4 * weaponTier + 40));
   return levelBonus + weaponTierBonus;
 };
@@ -228,8 +216,9 @@ const calcHitChance = (affinity: number, accuracy: number, targetDefence: number
 // determine if the player scored a hit
 const didPlayerHit = (hitchance: number) => {
   // the player may have a hitchance greater than 100%, so return true if that occurs
-  // otherwise, roll 1-100, and if the player hitchance is greater, return true
+  // OR, roll 1-100, and if the player hitchance is greater, return true
   if (hitchance >= 100 || Math.floor(Math.random() * 100) < hitchance) {
+    return true;
   }
   // if the game rolled higher than the hitchance, the player missed, so return false
   return false;
@@ -253,70 +242,3 @@ const calcDamage = (playerStyle: Types.ICurrentStyleOptions, Experience: Types.I
 
 //! need a way to store the player's hit points and the enemies hitpoints in state, maybe in the component?
 //! apply the damage to the enemy, if it is killed, award xp, if not, do another round of combat
-
-/******************OLD STUFF BELOW ********************************/
-// const hitchance = (affinity: number, armorRating: number, accuracy: number, additiveAccuracyBoosts: number = 0, multiplicativeAccuracyBoosts: number = 1) => {
-//   //? boosts are incorporated into the function, but there are no ways to apply boosts
-//   // calculates the hitchance based on combat variables
-//   let hitChance: number = affinity * Math.round((accuracy * multiplicativeAccuracyBoosts + additiveAccuracyBoosts) / armorRating);
-//   return hitChance;
-// };
-
-// const executeHit = () => {
-//   // calculates the hitchance, determines if a hit happens, rolls for damage
-// };
-
-// let strengthLevel: number = 1;
-
-// const damageDealt = (
-//   style: string,
-//   mainHand: boolean,
-//   damageMainHand: number,
-//   offHand: boolean,
-//   damageOffHand: number,
-//   twoHanded: boolean,
-//   damageTwoHanded: number,
-//   boosts: number = 1
-// ) => {
-//   // calculates the potential damageDealt based on combat variables
-//   // abilities deal between 20% to 100% of their maximum damage - use this with the random number
-//   // will need to pull levels from state
-//   let damage: number = 0;
-
-//   switch (style) {
-//     case `melee`: {
-//       if (mainHand) {
-//         // if there is a mainhand weapon equipped, use the expression to add to the damage
-//         damage += (2.5 * strengthLevel + damageMainHand) * boosts;
-//       }
-//       if (offHand) {
-//         // if there is a offhand weapon equipped, use the expression to add to the damage
-//         damage += (1.25 * strengthLevel + damageOffHand) * (0.5 * boosts);
-//       }
-//       if (twoHanded) {
-//         // if there is a twohanded weapon equipped, use the expression to add to the damage
-//         damage += (3.75 * strengthLevel + damageTwoHanded) * (1.5 * boosts);
-//       }
-//       if (!mainHand && !offHand && !twoHanded) {
-//         // if there is no weapon equipped, use the expression to add to the damage
-//         damage += 3.75 * strengthLevel * boosts;
-//       }
-//       break;
-//     }
-//     case `magic`: {
-//       // magic
-//       break;
-//     }
-//     case `ranged`: {
-//       // ranged
-//     }
-//   }
-// };
-
-// /**
-//  * calculate hitchance for both parties
-//  * calculate damage for both parties
-//  *
-//  * apply damage if random number passes the hitchance threshold
-//  * if damage is enough to kill, then reward drops
-//  */

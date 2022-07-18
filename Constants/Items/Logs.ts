@@ -102,6 +102,8 @@ export const playerEarnsLog = (log: Types.ILog, WCEXP: number, hatchet: Types.IH
   let gameRoll = Math.floor(Math.random() * 256);
 
   // if the player rolled higher than the game, return true
+  // playerRoll depends on level, hatchet, and tree stats, gameroll is a random number
+
   console.log({ playerRoll, gameRoll });
   if (playerRoll >= gameRoll) {
     return true;
