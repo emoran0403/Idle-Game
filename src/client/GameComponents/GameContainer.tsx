@@ -23,6 +23,8 @@ import { ListOfLogs, playerEarnsLog } from "../../../Constants/Items/Logs";
 import { listOfHatchets } from "../../../Constants/SkillingEquipment/Hatchets";
 import { addItemToInventory } from "../Redux/Slices/Inventory";
 import { ListOfFish, playerEarnsFish } from "../../../Constants/Items/Fish";
+import { getLevel } from "../../../Constants/XP Levels";
+import { Enemies } from "../../../Constants/Enemies";
 
 const GameContainer = (props: Types.NoProps) => {
   const dispatch = useDispatch();
@@ -66,6 +68,10 @@ const GameContainer = (props: Types.NoProps) => {
 
   //@ questStepProgress is holds the progress between completing quest steps
   const [questStepProgress, setQuestStepProgress] = useState<number>(0);
+
+  //@ assign lifepoints to the player based on levels, and to the target in the usestate
+  const [playerLifePoints, setPlayerLifePoints] = useState<number>(getLevel(Experience.Consitution) * 100);
+  const [targetLifePoints, setTargetLifePoints] = useState<number>(0);
 
   //@ use this to add to the chat log array
   const handleNewChatLog = (message: string, tags: Types.ChatLogTag) => {
@@ -196,6 +202,12 @@ const GameContainer = (props: Types.NoProps) => {
       }
     }
   }, [questStepProgress]);
+
+  //@ this useEffect is dedicated to combat logic
+  useEffect(() => {
+    //when a target is changed, set its lifepoints to state
+    setTargetLifePoints(Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].lifePoints);
+  }, [Target]);
 
   return (
     <div className="d-flex">

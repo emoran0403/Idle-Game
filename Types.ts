@@ -321,6 +321,18 @@ export interface ICurrentTarget {
 }
 export type ICurrentTargetOptions = `none` | `man` | `goblin` | `giantspider` | `chicken` | `cow` | `spider` | `giantrat` | `swampfrog`;
 
+//@ extend this as more locations are added
+export interface ILumbridgeEnemies {
+  man: IEnemySummary;
+  goblin: IEnemySummary;
+  giantspider: IEnemySummary;
+  chicken: IEnemySummary;
+  cow: IEnemySummary;
+  spider: IEnemySummary;
+  giantrat: IEnemySummary;
+  swampfrog: IEnemySummary;
+}
+
 export interface ICurrentQuest {
   CurrentQuest: ICurrentQuestOptions;
 }
