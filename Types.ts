@@ -589,9 +589,22 @@ export interface IListOfRangedHeads {
 export type IListOfAllHeads = IListOfMeleeHeads | IListOfMagicHeads | IListOfRangedHeads;
 
 export interface IArmorSlotHead {
-  melee: IListOfMeleeHeads;
-  magic: IListOfMagicHeads;
-  ranged: IListOfRangedHeads;
+  bronzefullhelm: IArmorItem;
+  ironfullhelm: IArmorItem;
+  steelfullhelm: IArmorItem;
+  mithrilfullhelm: IArmorItem;
+  adamantfullhelm: IArmorItem;
+  runefullhelm: IArmorItem;
+  wizardhat: IArmorItem;
+  imphidehood: IArmorItem;
+  spidersilkhood: IArmorItem;
+  batwinghood: IArmorItem;
+  splitbarkhelm: IArmorItem;
+  leathercowl: IArmorItem;
+  hardleathercowl: IArmorItem;
+  studdedleathercoif: IArmorItem;
+  carapacehelm: IArmorItem;
+  greendragonhidecoif: IArmorItem;
 }
 export interface IHeadSlotSlice {
   playerOwnsbronzefullhelm: boolean;
@@ -640,9 +653,22 @@ export interface IListOfRangedBodies {
 export type IListOfAllBodies = IListOfMeleeBodies | IListOfMagicBodies | IListOfRangedBodies;
 
 export interface IArmorSlotBody {
-  melee: IListOfMeleeBodies;
-  magic: IListOfMagicBodies;
-  ranged: IListOfRangedBodies;
+  bronzeplatebody: IArmorItem;
+  ironplatebody: IArmorItem;
+  steelplatebody: IArmorItem;
+  mithrilplatebody: IArmorItem;
+  adamantplatebody: IArmorItem;
+  runeplatebody: IArmorItem;
+  wizardrobetop: IArmorItem;
+  imphiderobetop: IArmorItem;
+  spidersilkrobetop: IArmorItem;
+  batwingtorso: IArmorItem;
+  splitbarkbody: IArmorItem;
+  leatherbody: IArmorItem;
+  hardleatherbody: IArmorItem;
+  studdedbody: IArmorItem;
+  carapacetorso: IArmorItem;
+  greendragonhidebody: IArmorItem;
 }
 export interface IBodySlotSlice {
   playerOwnsbronzeplatebody: boolean;
@@ -691,9 +717,22 @@ export interface IListOfRangedLegs {
 export type IListOfAllLegs = IListOfMeleeLegs | IListOfMagicLegs | IListOfRangedLegs;
 
 export interface IArmorSlotLegs {
-  melee: IListOfMeleeLegs;
-  magic: IListOfMagicLegs;
-  ranged: IListOfRangedLegs;
+  bronzeplatelegs: IArmorItem;
+  ironplatelegs: IArmorItem;
+  steelplatelegs: IArmorItem;
+  mithrilplatelegs: IArmorItem;
+  adamantplatelegs: IArmorItem;
+  runeplatelegs: IArmorItem;
+  wizardrobeskirt: IArmorItem;
+  imphiderobebottom: IArmorItem;
+  spidersilkrobebottom: IArmorItem;
+  batwinglegs: IArmorItem;
+  splitbarklegs: IArmorItem;
+  leatherchaps: IArmorItem;
+  hardleatherchaps: IArmorItem;
+  studdedchaps: IArmorItem;
+  carapacelegs: IArmorItem;
+  greendragonhidechaps: IArmorItem;
 }
 export interface ILegsSlotSlice {
   playerOwnsbronzeplatelegs: boolean;
@@ -742,9 +781,22 @@ export interface IListOfRangedFeet {
 export type IListOfAllFeet = IListOfMeleeFeet | IListOfMagicFeet | IListOfRangedFeet;
 
 export interface IArmorSlotFeet {
-  melee: IListOfMeleeFeet;
-  magic: IListOfMagicFeet;
-  ranged: IListOfRangedFeet;
+  bronzearmouredboots: IArmorItem;
+  ironarmouredboots: IArmorItem;
+  steelarmouredboots: IArmorItem;
+  mithrilarmouredboots: IArmorItem;
+  adamantarmouredboots: IArmorItem;
+  runearmouredboots: IArmorItem;
+  wizardboots: IArmorItem;
+  imphideboots: IArmorItem;
+  spidersilkboots: IArmorItem;
+  batwingboots: IArmorItem;
+  splitbarkboots: IArmorItem;
+  leatherboots: IArmorItem;
+  hardleatherboots: IArmorItem;
+  studdedleatherboots: IArmorItem;
+  carapaceboots: IArmorItem;
+  greendragonhideboots: IArmorItem;
 }
 export interface IFeetSlotSlice {
   playerOwnsbronzearmouredboots: boolean;
@@ -793,9 +845,22 @@ export interface IListOfRangedHands {
 export type IListOfAllHands = IListOfMeleeHands | IListOfMagicHands | IListOfRangedHands;
 
 export interface IArmorSlotHands {
-  melee: IListOfMeleeHands;
-  magic: IListOfMagicHands;
-  ranged: IListOfRangedHands;
+  bronzegauntlets: IArmorItem;
+  irongauntlets: IArmorItem;
+  steelgauntlets: IArmorItem;
+  mithrilgauntlets: IArmorItem;
+  adamantgauntlets: IArmorItem;
+  runegauntlets: IArmorItem;
+  wizardgloves: IArmorItem;
+  imphidegloves: IArmorItem;
+  spidersilkgloves: IArmorItem;
+  batwinggloves: IArmorItem;
+  splitbarkgauntlets: IArmorItem;
+  leathervambraces: IArmorItem;
+  hardleathergloves: IArmorItem;
+  studdedleathergloves: IArmorItem;
+  carapacegloves: IArmorItem;
+  greendragonhidevambraces: IArmorItem;
 }
 export interface IHandSlotSlice {
   playerOwnsbronzegauntlets: boolean;
@@ -869,10 +934,12 @@ export interface IListOfTypelessRings {
 export type IListOfAllRings = IListOfMeleeRings | IListOfMagicRings | IListOfRangedRings | IListOfTypelessRings;
 
 export interface IArmorSlotRing {
-  melee: IListOfMeleeRings;
-  magic: IListOfMagicRings;
-  ranged: IListOfRangedRings;
-  hybrid: IListOfTypelessRings;
+  warriorring: IArmorItem;
+  seersring: IArmorItem;
+  archerring: IArmorItem;
+  ringofpotency: IArmorItem;
+  ringofwealth: IArmorItem;
+  berserkerring: IArmorItem;
 }
 export interface IRingSlotSlice {
   playerOwnswarriorring: boolean;
@@ -903,10 +970,14 @@ export interface IListOfTypelessNecks {
 export type IListOfAllNecks = IListOfMeleeNecks | IListOfMagicNecks | IListOfRangedNecks | IListOfTypelessNecks;
 
 export interface IArmorSlotNeck {
-  melee: IListOfMeleeNecks;
-  magic: IListOfMagicNecks;
-  ranged: IListOfRangedNecks;
-  hybrid: IListOfTypelessNecks;
+  amuletofstrength: IArmorItem;
+  amuletofmagic: IArmorItem;
+  amuletofaccuracy: IArmorItem;
+  holysymbol: IArmorItem;
+  amuletofdefence: IArmorItem;
+  amuletofpower: IArmorItem;
+  amuletofglory: IArmorItem;
+  amuletoffury: IArmorItem;
 }
 export interface INeckSlotSlice {
   playerOwnsamuletofstrength: boolean;
@@ -953,9 +1024,30 @@ export interface IListOfRangedTwoHand {
 export type IListOfAllTwoHand = IListOfMeleeTwoHand | IListOfMagicTwoHand | IListOfRangedTwoHand;
 
 export interface IArmorSlotTwoHand {
-  melee: IListOfMeleeTwoHand;
-  magic: IListOfMagicTwoHand;
-  ranged: IListOfRangedTwoHand;
+  bronze2hsword: IWeaponItem;
+  iron2hsword: IWeaponItem;
+  steel2hsword: IWeaponItem;
+  mithril2hsword: IWeaponItem;
+  adamant2hsword: IWeaponItem;
+  rune2hsword: IWeaponItem;
+  staffofair: IWeaponItem;
+  staffofwater: IWeaponItem;
+  staffofearth: IWeaponItem;
+  staffoffire: IWeaponItem;
+  airbattlestaff: IWeaponItem;
+  waterbattlestaff: IWeaponItem;
+  earthbattlestaff: IWeaponItem;
+  firebattlestaff: IWeaponItem;
+  mysticairstaff: IWeaponItem;
+  mysticwaterstaff: IWeaponItem;
+  mysticearthstaff: IWeaponItem;
+  mysticfirestaff: IWeaponItem;
+  shortbow: IWeaponItem;
+  oakshortbow: IWeaponItem;
+  willowshortbow: IWeaponItem;
+  mapleshortbow: IWeaponItem;
+  yewshortbow: IWeaponItem;
+  magicshortbow: IWeaponItem;
 }
 export interface ITwoHandSlotSlice {
   playerOwnsbronze2hsword: boolean;
