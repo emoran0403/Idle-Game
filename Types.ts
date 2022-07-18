@@ -1082,15 +1082,15 @@ export interface ITwoHandSlotSlice {
 export type IEquipmentSlotOptions = IArmorSlotBody | IArmorSlotHead | IArmorSlotLegs | IArmorSlotHands | IArmorSlotFeet | IArmorSlotTwoHand;
 
 export interface ICurrentEquipment {
-  BackSlot: `none` | IListOfAllCapes;
-  BodySlot: `none` | IListOfAllBodies;
-  FeetSlot: `none` | IListOfAllFeet;
-  HandsSlot: `none` | IListOfAllHands;
-  HeadSlot: `none` | IListOfAllHeads;
-  LegsSlot: `none` | IListOfAllLegs;
-  NeckSlot: `none` | IListOfAllNecks;
-  RingSlot: `none` | IListOfAllRings;
-  TwoHandSlot: `none` | IListOfAllTwoHand;
+  BackSlot: `none` | IArmorSlotBack;
+  BodySlot: `none` | IArmorSlotBody;
+  FeetSlot: `none` | IArmorSlotFeet;
+  HandsSlot: `none` | IArmorSlotHands;
+  HeadSlot: `none` | IArmorSlotHead;
+  LegsSlot: `none` | IArmorSlotLegs;
+  NeckSlot: `none` | IArmorSlotNeck;
+  RingSlot: `none` | IArmorSlotRing;
+  TwoHandSlot: `none` | IArmorSlotTwoHand;
   Hatchet: `none` | IListOfHatchetOptions;
 }
 /*********************************************************************************************************************** */

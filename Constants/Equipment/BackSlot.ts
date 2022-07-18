@@ -93,7 +93,7 @@ const listOfTypelessCapes: Types.IListOfTypelessCapes = {
   },
 };
 
-export const BackSLot: Types.IArmorSlotBack = {
+export const BackSlot: Types.IArmorSlotBack = {
   bladestormdrape: {
     name: "bladestormdrape",
     displayName: `Bladestorm drape`,

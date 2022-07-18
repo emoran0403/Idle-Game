@@ -1,7 +1,146 @@
 import * as Types from "../../Types";
 import { Lumbridge } from "./LumbridgeEnemies";
 
+import { BackSlot } from "../Equipment/BackSlot";
+import { BodySlot } from "../Equipment/BodySlot";
+import { FeetSlot } from "../Equipment/FeetSlot";
+import { HandsSlot } from "../Equipment/HandsSlot";
+import { HeadSlot } from "../Equipment/HeadSlot";
+import { LegsSlot } from "../Equipment/LegsSlot";
+import { NeckSlot } from "../Equipment/NeckSlot";
+import { RingSlot } from "../Equipment/RingSlot";
+import { TwoHandSlot } from "../Equipment/TwoHandSlot";
+import { getLevel } from "../XP Levels";
+
 // collecting all enemies within each location lets us access each location and their enemies via dynamic keys
 export const Enemies: Types.IAllEnemies = {
   Lumbridge,
+};
+
+export const playerAttacksTarget = (
+  Target: Types.ICurrentTargetOptions,
+  playerStyle: Types.ICurrentStyleOptions,
+  playerLocation: Types.ICurrentLocationOptions,
+  Experience: Types.ISkillList,
+  Equipment: Types.ICurrentEquipment
+) => {
+  // define the enemy
+  let Enemy: Types.IEnemySummary = Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies];
+
+  // #1 calculate affinity
+  // set the default to 55 just in case
+  let affinity: number = 55;
+
+  // if the player is using the monsters weakness
+  if (playerStyle === Enemy.affinities.explicitWeakness) {
+    affinity = 90;
+  }
+  // if the player is using a neutralStyle, or has not chosen a style
+  if (playerStyle === Enemy.affinities.neutralStyle || playerStyle === `none`) {
+    affinity = 55;
+  }
+  // if the player is using a spell the monster is not weak to
+  // stab / crush / slash and bolt / arrow types are not implemented, which would go here
+  // Ex: the player is using fire spells, when the monster is weak to water spells, wont give the 90, but it is still the same style
+  let spellTypes = [`air`, `fire`, `water`, `earth`];
+  let playerIsUsingMagic = spellTypes.includes(playerStyle);
+
+  if (playerStyle === Enemy.affinities.weakStyle || (playerIsUsingMagic && Enemy.affinities.weakStyle === `magic`)) {
+    affinity = 65;
+  }
+  /******************************************************************************************************* */
+  // #2 calculate accuracy
+  // set the levelBonus to 0 to start
+  let levelBonus: number = 0;
+  switch (playerStyle) {
+    case `melee`:
+      levelBonus = Math.floor((1 / 1250) * Math.pow(getLevel(Experience.Attack), 3) + 4 * getLevel(Experience.Attack) + 40);
+      break;
+    case `none`:
+      levelBonus = Math.floor((1 / 1250) * Math.pow(getLevel(Experience.Attack), 3) + 4 * getLevel(Experience.Attack) + 40);
+      break;
+    case `ranged`:
+      levelBonus = Math.floor((1 / 1250) * Math.pow(getLevel(Experience.Ranged), 3) + 4 * getLevel(Experience.Ranged) + 40);
+      break;
+    default:
+      levelBonus = Math.floor((1 / 1250) * Math.pow(getLevel(Experience.Magic), 3) + 4 * getLevel(Experience.Magic) + 40);
+      break;
+  }
+  // assign the weapon tier from equipment, then calculate the bonus
+  let weaponTier: number = TwoHandSlot[Equipment.TwoHandSlot as keyof Types.IArmorSlotTwoHand].tier;
+
+  let weaponTierBonus: number = Math.floor(2.5 * Math.floor((1 / 1250) * Math.pow(weaponTier, 3) + 4 * weaponTier + 40));
+
+  let accuracy: number = levelBonus + weaponTierBonus;
+  /******************************************************************************************************* */
+
+  // #3 calculate enemy defence
+  let enemyDefence: number = Enemy.defence + Enemy.armor;
+  /******************************************************************************************************* */
+
+  // #4 calculate hitChance
+  let hitChance: number = affinity * (accuracy / enemyDefence);
+  /******************************************************************************************************* */
+
+  // #5 determine if the player hits the enemy
+  // the player may have a hitchance greater than 100%, so return true if that occurs
+  // OR, roll 1-100, and if the player hitchance is greater, return true
+  if (hitChance >= 100 || Math.floor(Math.random() * 100) < hitChance) {
+    // #6 calculate the damage done to the target
+    //? boosts are available on capes and certain jewellery, default to 0 if no boosts present
+    //? if the player is unarmed, use melee
+    let boosts: number = 0;
+    switch (playerStyle) {
+      case `melee`:
+        boosts =
+          BackSlot[Equipment.BackSlot as keyof Types.IArmorSlotBack].styleBonusMelee +
+          BodySlot[Equipment.BodySlot as keyof Types.IArmorSlotBody].styleBonusMelee +
+          FeetSlot[Equipment.FeetSlot as keyof Types.IArmorSlotFeet].styleBonusMelee +
+          HandsSlot[Equipment.HandsSlot as keyof Types.IArmorSlotHands].styleBonusMelee +
+          HeadSlot[Equipment.HeadSlot as keyof Types.IArmorSlotHead].styleBonusMelee +
+          LegsSlot[Equipment.LegsSlot as keyof Types.IArmorSlotLegs].styleBonusMelee +
+          NeckSlot[Equipment.NeckSlot as keyof Types.IArmorSlotNeck].styleBonusMelee +
+          RingSlot[Equipment.RingSlot as keyof Types.IArmorSlotRing].styleBonusMelee +
+          TwoHandSlot[Equipment.TwoHandSlot as keyof Types.IArmorSlotTwoHand].styleBonusMelee;
+        return Math.floor(3.75 * getLevel(Experience.Strength) + 1.5 * boosts);
+      case `none`:
+        boosts =
+          BackSlot[Equipment.BackSlot as keyof Types.IArmorSlotBack].styleBonusMelee +
+          BodySlot[Equipment.BodySlot as keyof Types.IArmorSlotBody].styleBonusMelee +
+          FeetSlot[Equipment.FeetSlot as keyof Types.IArmorSlotFeet].styleBonusMelee +
+          HandsSlot[Equipment.HandsSlot as keyof Types.IArmorSlotHands].styleBonusMelee +
+          HeadSlot[Equipment.HeadSlot as keyof Types.IArmorSlotHead].styleBonusMelee +
+          LegsSlot[Equipment.LegsSlot as keyof Types.IArmorSlotLegs].styleBonusMelee +
+          NeckSlot[Equipment.NeckSlot as keyof Types.IArmorSlotNeck].styleBonusMelee +
+          RingSlot[Equipment.RingSlot as keyof Types.IArmorSlotRing].styleBonusMelee +
+          TwoHandSlot[Equipment.TwoHandSlot as keyof Types.IArmorSlotTwoHand].styleBonusMelee;
+        return Math.floor(3.75 * getLevel(Experience.Strength) + 1.5 * boosts);
+      case `ranged`:
+        boosts =
+          BackSlot[Equipment.BackSlot as keyof Types.IArmorSlotBack].styleBonusRanged +
+          BodySlot[Equipment.BodySlot as keyof Types.IArmorSlotBody].styleBonusRanged +
+          FeetSlot[Equipment.FeetSlot as keyof Types.IArmorSlotFeet].styleBonusRanged +
+          HandsSlot[Equipment.HandsSlot as keyof Types.IArmorSlotHands].styleBonusRanged +
+          HeadSlot[Equipment.HeadSlot as keyof Types.IArmorSlotHead].styleBonusRanged +
+          LegsSlot[Equipment.LegsSlot as keyof Types.IArmorSlotLegs].styleBonusRanged +
+          NeckSlot[Equipment.NeckSlot as keyof Types.IArmorSlotNeck].styleBonusRanged +
+          RingSlot[Equipment.RingSlot as keyof Types.IArmorSlotRing].styleBonusRanged +
+          TwoHandSlot[Equipment.TwoHandSlot as keyof Types.IArmorSlotTwoHand].styleBonusRanged;
+        return Math.floor(3.75 * getLevel(Experience.Ranged) + 1.5 * boosts);
+      default:
+        boosts =
+          BackSlot[Equipment.BackSlot as keyof Types.IArmorSlotBack].styleBonusMagic +
+          BodySlot[Equipment.BodySlot as keyof Types.IArmorSlotBody].styleBonusMagic +
+          FeetSlot[Equipment.FeetSlot as keyof Types.IArmorSlotFeet].styleBonusMagic +
+          HandsSlot[Equipment.HandsSlot as keyof Types.IArmorSlotHands].styleBonusMagic +
+          HeadSlot[Equipment.HeadSlot as keyof Types.IArmorSlotHead].styleBonusMagic +
+          LegsSlot[Equipment.LegsSlot as keyof Types.IArmorSlotLegs].styleBonusMagic +
+          NeckSlot[Equipment.NeckSlot as keyof Types.IArmorSlotNeck].styleBonusMagic +
+          RingSlot[Equipment.RingSlot as keyof Types.IArmorSlotRing].styleBonusMagic +
+          TwoHandSlot[Equipment.TwoHandSlot as keyof Types.IArmorSlotTwoHand].styleBonusMagic;
+        return Math.floor(3.75 * getLevel(Experience.Magic) + 1.5 * boosts);
+    }
+  }
+  // if the game rolled higher than the hitchance, the player missed, so return 0 damage
+  return 0;
 };
