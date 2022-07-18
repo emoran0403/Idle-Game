@@ -49,7 +49,7 @@ const WornEquipment = (props: Types.WornEquipmentCompProps) => {
         return `bg-danger`;
       }
     } else if (equipment.thisWeaponStyle === `melee`) {
-      const canWearAtk = getLevel(Experience.Defence) >= equipment.levelReqAttack;
+      const canWearAtk = getLevel(Experience.Attack) >= equipment.levelReqAttack;
 
       if (playerOwnsItem && canWearAtk) {
         // has levels and owns item = green background
@@ -68,7 +68,7 @@ const WornEquipment = (props: Types.WornEquipmentCompProps) => {
         return `bg-danger`;
       }
     } else if (equipment.thisWeaponStyle === `magic`) {
-      const canWearMagic = getLevel(Experience.Defence) >= equipment.levelReqMagic;
+      const canWearMagic = getLevel(Experience.Magic) >= equipment.levelReqMagic;
 
       if (playerOwnsItem && canWearMagic) {
         // has levels and owns item = green background
@@ -87,7 +87,7 @@ const WornEquipment = (props: Types.WornEquipmentCompProps) => {
         return `bg-danger`;
       }
     } else if (equipment.thisWeaponStyle === `ranged`) {
-      const canWearRange = getLevel(Experience.Defence) >= equipment.levelReqRanged;
+      const canWearRange = getLevel(Experience.Ranged) >= equipment.levelReqRanged;
       if (playerOwnsItem && canWearRange) {
         // has levels and owns item = green background
 
