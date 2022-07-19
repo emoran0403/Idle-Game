@@ -77,7 +77,7 @@ export const LumbridgeQuests: Types.IQuestInfo[] = [
       Attack: 100,
       Strength: 100,
       Defence: 100,
-      Range: 100,
+      Ranged: 100,
       Magic: 100,
     },
     itemRewards: { Coins: 2500 },

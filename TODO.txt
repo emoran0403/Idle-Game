@@ -23,7 +23,11 @@ done work on functions to handle incrementing a quest step
 //! need a banking state that is triggered upon filling the inventory
 //! this should not overwrite the skilling state, and instead maybe pause those actions?
 
+
+
 //! quest list component does not display progress bar updates when progressing through a quest
+
+//! target should highlight red when a combat style is chosen, but a target hasnt been selected yet
 
 
 

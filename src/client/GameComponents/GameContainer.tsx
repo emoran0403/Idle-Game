@@ -76,6 +76,7 @@ const GameContainer = (props: Types.NoProps) => {
   const [questStepProgress, setQuestStepProgress] = useState<number>(0);
 
   //@ assign lifepoints to the player based on levels, and to the target in the usestate
+  //? I might not use player Lifepoints lol
   const [playerLifePoints, setPlayerLifePoints] = useState<number>(getLevel(Experience.Consitution) * 100);
   const [targetLifePoints, setTargetLifePoints] = useState<number>(0);
 
@@ -173,12 +174,31 @@ const GameContainer = (props: Types.NoProps) => {
 
   //@ this will run every game tick (while in combat) and holds the logic for resolving combat turns
   const handleCombatTick = () => {
+    // IF a target is selected, then we can proceed
     if (Target !== `none`) {
       let damageDoneToTarget = playerAttacksTarget(Target, CurrentStyle, playerLocation, Experience, currentEquipment);
       console.log(`you hit: ${damageDoneToTarget}`);
-      console.log(`enemy lifepoints before hit: ${targetLifePoints}`);
-      setTargetLifePoints(targetLifePoints - damageDoneToTarget);
+
+      // IF the hit would kill the target
+      if (targetLifePoints - damageDoneToTarget <= 0) {
+        // then reset the lifepoints
+        setTargetLifePoints(Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].lifePoints);
+        // and award the xp
+        dispatch(
+          gainXP({ skill: CurrentSkill, xp: Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].XPGivenCombatStyle })
+        );
+        dispatch(
+          gainXP({ skill: `Constitution`, xp: Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].XPGivenConstitution })
+        );
+        console.log(`monster killed`);
+      } else {
+        // Otherwise, apply the damage
+        setTargetLifePoints(targetLifePoints - damageDoneToTarget);
+        console.log(`monster damaged`);
+      }
+
       console.log(`enemy lifepoints after hit: ${targetLifePoints}`);
+      //! this second console log does not show me the anticipated value, but dev tools do
     } else {
       console.log(`check your target and style`);
     }
@@ -227,7 +247,6 @@ const GameContainer = (props: Types.NoProps) => {
     // IF a target is changed, set its lifepoints to component state
     if (Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies]?.lifePoints) {
       setTargetLifePoints(Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].lifePoints);
-      // console.log(`target lifepoints: ${targetLifePoints}`);
     }
   }, [Target]);
 

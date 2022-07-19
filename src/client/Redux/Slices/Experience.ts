@@ -8,10 +8,10 @@ export const Experience = createSlice({
     Woodcutting: 9000,
     Firemaking: 90,
     Fishing: 20000,
-    Attack: 1358,
-    Strength: 1358,
-    Defence: 500,
-    Consitution: 1358,
+    Attack: 0,
+    Strength: 0,
+    Defence: 0,
+    Constitution: 1358,
     Prayer: 0,
     Summoning: 0,
     Ranged: 0,
@@ -24,12 +24,9 @@ export const Experience = createSlice({
   reducers: {
     // this is the only reducer needed, experience can only increase
     gainXP: (state: Types.IFlatObjectOfNums, action) => {
-      console.log({ state });
-      console.log({ action });
       const skill: string = action.payload.skill; // decide which skill to gain the experience
       const experienceGained: number = Number(action.payload.xp); // this will be the amount of experience gained
 
-      //object[key] is how we can access an object's value by passing in a key
       state[skill] += experienceGained;
     },
   },

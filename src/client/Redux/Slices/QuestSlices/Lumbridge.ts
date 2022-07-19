@@ -35,7 +35,7 @@ export const Quests_Lumbridge = createSlice({
       },
       {
         name: "The Blood Pact",
-        stepsComplete: 0,
+        stepsComplete: 16,
         stepsTotal: 17,
         complete: false,
       },
