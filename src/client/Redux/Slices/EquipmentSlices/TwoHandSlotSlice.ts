@@ -9,8 +9,8 @@ export const TwoHandSlotSlice = createSlice({
     playerOwnsbronze2hsword: true,
     playerOwnsiron2hsword: true,
     playerOwnssteel2hsword: true,
-    playerOwnsmithril2hsword: false,
-    playerOwnsadamant2hsword: false,
+    playerOwnsmithril2hsword: true,
+    playerOwnsadamant2hsword: true,
     playerOwnsrune2hsword: true,
 
     playerOwnsstaffofair: false,

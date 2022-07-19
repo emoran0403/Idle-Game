@@ -72,18 +72,6 @@ const GameContainer = (props: Types.NoProps) => {
     Hatchet: `bronzehatchet`,
   });
 
-  // let bigwow = Object.entries(currentEquipment);
-  // console.log(currentEquipment);
-
-  // let oof = CurrentStyle.toLowerCase();
-  // console.log(`oof is next`);
-  // console.log(oof);
-  // let concat = `styleBonus${oof}`;
-
-  // console.log(`look here`);
-  // BackSlot[currentEquipment.BackSlot as keyof Types.IArmorSlotBack][concat as keyof Types.IArmorItem];
-  // console.log(BackSlot[currentEquipment.BackSlot as keyof Types.IArmorSlotBack][concat as keyof Types.IArmorItem]);
-
   //@ questStepProgress is holds the progress between completing quest steps
   const [questStepProgress, setQuestStepProgress] = useState<number>(0);
 
@@ -185,17 +173,12 @@ const GameContainer = (props: Types.NoProps) => {
 
   //@ this will run every game tick (while in combat) and holds the logic for resolving combat turns
   const handleCombatTick = () => {
-    // let bigwow1 = Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies];
-    // console.log(`here`);
-    // console.log(bigwow1);
-    // console.log(Enemies);
-    // console.log(playerLocation);
-    // console.log(Target);
-    // console.log(`filler lol`);
     if (Target !== `none`) {
-      let wowow = playerAttacksTarget(Target, CurrentStyle, playerLocation, Experience, currentEquipment);
-      console.log(`damage should be next:`);
-      console.log(wowow);
+      let damageDoneToTarget = playerAttacksTarget(Target, CurrentStyle, playerLocation, Experience, currentEquipment);
+      console.log(`you hit: ${damageDoneToTarget}`);
+      console.log(`enemy lifepoints before hit: ${targetLifePoints}`);
+      setTargetLifePoints(targetLifePoints - damageDoneToTarget);
+      console.log(`enemy lifepoints after hit: ${targetLifePoints}`);
     } else {
       console.log(`check your target and style`);
     }
@@ -241,9 +224,10 @@ const GameContainer = (props: Types.NoProps) => {
 
   //@ this useEffect is dedicated to combat logic
   useEffect(() => {
-    // IF a target is changed, set its lifepoints to state
+    // IF a target is changed, set its lifepoints to component state
     if (Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies]?.lifePoints) {
       setTargetLifePoints(Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].lifePoints);
+      // console.log(`target lifepoints: ${targetLifePoints}`);
     }
   }, [Target]);
 

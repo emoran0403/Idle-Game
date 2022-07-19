@@ -4,12 +4,14 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { ListOfLogs } from "../../../../../Constants/Items/Logs";
 import { ListOfFish } from "../../../../../Constants/Items/Fish";
+import { Enemies } from "../../../../../Constants/Enemies";
 
 const CurrentResourceComp = (props: Types.NoProps) => {
   const Resource = useSelector((state: Types.AllState) => state.Resource.CurrentResource as Types.ICurrentResourceOptions);
   const Target = useSelector((state: Types.AllState) => state.Target.CurrentTarget as Types.ICurrentTargetOptions);
   const Activity = useSelector((state: Types.AllState) => state.Activity.CurrentActivity as Types.ICurrentActivityOptions);
   const Skill = useSelector((state: Types.AllState) => state.Skill.CurrentSkill);
+  const playerLocation = useSelector((state: Types.AllState) => state.Location.CurrentLocation as Types.ICurrentLocationOptions);
 
   // console.log(Target);
   // useEffect(() => {}, []);
@@ -36,7 +38,12 @@ const CurrentResourceComp = (props: Types.NoProps) => {
       {Activity === `In combat` ? (
         <div>
           <div>Fighting </div>
-          <div>{Target}</div>
+          {Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies] ? (
+            <div>{Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].displayName}</div>
+          ) : (
+            <div>none</div>
+          )}
+          {/* <div>{Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].displayName}</div> */}
         </div>
       ) : (
         <div>
