@@ -20,11 +20,11 @@ export const Inventory = createSlice({
       state.CurrentInventory.push(item);
     },
 
-    // use this when we need to remove an item from the inventory
+    // use this when we need to remove items from the inventory
     removeItemFromInventory: (state: Types.I_Inventory) => {
-      //array.shift() will remove the first item every time (first item for UI/UX reasons)
+      // removes all items from the inventory
       // logic of moving item to the bank or whatnot is handled elsewhere
-      state.CurrentInventory.shift();
+      state.CurrentInventory.splice(0, state.CurrentInventory.length);
     },
   },
 });

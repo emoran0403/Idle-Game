@@ -3,8 +3,6 @@ import * as React from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
-//! use custom CSS to force the interface to maintain its layout
-
 const Inventory = (props: Types.NoProps) => {
   const Wallet = useSelector((state: Types.AllState) => state.Wallet) as Types.IWallet;
   const { CurrentInventory } = useSelector((state: Types.AllState) => state.Inventory) as Types.I_Inventory;

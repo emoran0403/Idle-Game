@@ -150,11 +150,13 @@ const GameContainer = (props: Types.NoProps) => {
           ) {
             // if the player earns a log, we need to add the item to the inventory
             dispatch(addItemToInventory(ListOfLogs[CurrentResource as keyof Types.IListOfLogs].displayName));
+            console.log(playerInventory.length);
 
             // when the player's inventory is full (28 items) queue a bank run
             //@ this may fail because of the pinky-promise - might need to set to 27
             //! test this on woodcutting, if it works, add to fishing as well
-            if (playerInventory.length === 28) {
+            if (playerInventory.length === 27) {
+              console.log(`will need to bank next time`);
               // do bank stuff here
               setNeedsToBank(!needsToBank);
             }
@@ -187,6 +189,7 @@ const GameContainer = (props: Types.NoProps) => {
         // find the item, don't shift here as that is mutative
         let itemToAddToBank = playerInventory[i];
         // check each bank slice to see if it's the correct slice, if so, add it to the bank
+        //@ using bracket notation for a property that does not exist on an object returns undefined, which is considered falsy
         if (bank_logs[itemToAddToBank as keyof Types.ILogBankSlice]) {
           dispatch(addLogToBank({ item: itemToAddToBank, amount: 1 }));
         } else if (bank_fish[itemToAddToBank as keyof Types.IFishBankSlice]) {
@@ -198,6 +201,8 @@ const GameContainer = (props: Types.NoProps) => {
       for (let i = 0; i < playerInventory.length; i++) {
         dispatch(removeItemFromInventory());
       }
+      // after the banking is finished, the player no longer needs to bank
+      setNeedsToBank(!needsToBank);
     }
   };
 
