@@ -21,11 +21,13 @@ import { gainXP } from "../Redux/Slices/Experience";
 import { addQuestPoints } from "../Redux/Slices/QuestPoints";
 import { ListOfLogs, playerEarnsLog } from "../../../Constants/Items/Logs";
 import { listOfHatchets } from "../../../Constants/SkillingEquipment/Hatchets";
-import { addItemToInventory } from "../Redux/Slices/Inventory";
+import { addItemToInventory, removeItemFromInventory } from "../Redux/Slices/Inventory";
 import { ListOfFish, playerEarnsFish } from "../../../Constants/Items/Fish";
 import { getLevel } from "../../../Constants/XP Levels";
 import { Enemies, playerAttacksTarget } from "../../../Constants/Enemies";
 import { BackSlot } from "../../../Constants/Equipment/BackSlot";
+import { addLogToBank } from "../Redux/Slices/BankSlices/LogsSlice";
+import { addFishToBank } from "../Redux/Slices/BankSlices/FishSlice";
 
 const GameContainer = (props: Types.NoProps) => {
   const dispatch = useDispatch();
@@ -39,6 +41,9 @@ const GameContainer = (props: Types.NoProps) => {
   const Experience = useSelector((state: Types.AllState) => state.Experience);
   const CurrentStyle = useSelector((state: Types.AllState) => state.CombatStyle.CurrentStyle as Types.ICurrentStyleOptions);
   const playerInventory = useSelector((state: Types.AllState) => state.Inventory.CurrentInventory);
+  const bank_logs = useSelector((state: Types.AllState) => state.Bank_Logs) as Types.ILogBankSlice;
+  const bank_fish = useSelector((state: Types.AllState) => state.Bank_Fish) as Types.IFishBankSlice;
+
   // console.log(playerInventory);
   const AllQuestsFromState: Types.IStateQuest[] = [...LumbridgeQuestArray, ...DraynorQuestArray];
 
@@ -177,13 +182,22 @@ const GameContainer = (props: Types.NoProps) => {
       }
     } else {
       // Otherwise, the player needs to bank
-      // find the first item in the array, add that item to the bank
+      // iterate through the inventory array, adding items from the inventory to the bank
       for (let i = 0; i < playerInventory.length; i++) {
-        // find the first item, don't shift here as that is mutative
+        // find the item, don't shift here as that is mutative
         let itemToAddToBank = playerInventory[i];
+        // check each bank slice to see if it's the correct slice, if so, add it to the bank
+        if (bank_logs[itemToAddToBank as keyof Types.ILogBankSlice]) {
+          dispatch(addLogToBank({ item: itemToAddToBank, amount: 1 }));
+        } else if (bank_fish[itemToAddToBank as keyof Types.IFishBankSlice]) {
+          dispatch(addFishToBank({ item: itemToAddToBank, amount: 1 }));
+        }
       }
-      // call the inventory to remove the first item
-      // repeat this for the length of the inventory array
+      // iterate through the inventory array again, this time removing each item from the inventory array
+      //@ removing the item on each iteration would've changed the length of the inventory array, and the loop woul've probably terminated early
+      for (let i = 0; i < playerInventory.length; i++) {
+        dispatch(removeItemFromInventory());
+      }
     }
   };
 

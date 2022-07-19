@@ -43,7 +43,7 @@ export const bank_fish = createSlice({
   },
   reducers: {
     // use this when we need to add an item to the bank
-    addItemToBank: (state: Types.IFishBankSlice, action) => {
+    addFishToBank: (state: Types.IFishBankSlice, action) => {
       const item: string = action.payload.item; // decide which item to add
       const amount: number = Number(action.payload.amount); // this will be the number of items added to the bank
       state[item as keyof Types.IFishBankSlice].amount += amount; // add the item to state, then reassign (ty immer)
@@ -67,6 +67,6 @@ export const bank_fish = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { addItemToBank, removeItemFromBank } = bank_fish.actions;
+export const { addFishToBank, removeItemFromBank } = bank_fish.actions;
 
 export default bank_fish.reducer;

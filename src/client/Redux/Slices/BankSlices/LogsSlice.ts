@@ -38,7 +38,7 @@ export const bank_logs = createSlice({
   },
   reducers: {
     // use this when we need to add an item to the bank
-    addItemToBank: (state: Types.ILogBankSlice, action) => {
+    addLogToBank: (state: Types.ILogBankSlice, action) => {
       const item: string = action.payload.item; // decide which item to add
       const amount: number = Number(action.payload.amount); // this will be the number of items added to the bank
       state[item as keyof Types.ILogBankSlice].amount += amount; // add the item to state, then reassign (ty immer)
@@ -62,7 +62,7 @@ export const bank_logs = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { addItemToBank, removeItemFromBank } = bank_logs.actions;
+export const { addLogToBank, removeItemFromBank } = bank_logs.actions;
 
 export default bank_logs.reducer;
 
