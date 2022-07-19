@@ -11,11 +11,6 @@ const BankPanel = (props: Types.BankPanelProps) => {
 
   const arrayOfFish: Types.IBankItem[] = Object.values(bank_fish);
 
-  // const wow = Object.entries(bank_logs);
-  // console.log(wow);
-  // const wow2 = Object.keys(bank_logs);
-  // console.log(wow2);
-
   useEffect(() => {}, []);
 
   const panelHeaderJSX = () => {

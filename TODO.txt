@@ -17,18 +17,32 @@ done work on functions to handle incrementing a quest step
     handle incrementing a quest step (maybe 10 game ticks for a quest step to increment)
 }
 
-//! experience and levels is displaying too hig for some reason :/
+
+
+
+
+//# Fixes I need to do
 //! skilling tick does not respect the inventory max of 28
 //! need a way to check for inventory fullness and transition to a banking state
 //! need a banking state that is triggered upon filling the inventory
+
 //! this should not overwrite the skilling state, and instead maybe pause those actions?
 
-
-
+//# Fixes that can wait
+//! experience and levels is displaying too high for some reason :/
 //! quest list component does not display progress bar updates when progressing through a quest
-
 //! target should highlight red when a combat style is chosen, but a target hasnt been selected yet
+//! bankPanel should display the item display names - need to do some indexing from constants
 
 
-
+//# Future Updates
 //? maybe make the game choose the next available quest automatically
+
+
+
+
+
+
+
+
+

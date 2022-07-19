@@ -1,5 +1,3 @@
-import { Enemies } from ".";
-import WornEquipment from "../../src/client/GameComponents/RightColumn/WornEquipment";
 import * as Types from "../../Types";
 
 const man: Types.IEnemySummary = {

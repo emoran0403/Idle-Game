@@ -18,5 +18,3 @@ export const Activity = createSlice({
 export const { setActivity } = Activity.actions;
 
 export default Activity.reducer;
-
-//! need to add a walking / traveling option / and a questing option

@@ -30,22 +30,16 @@ import { BackSlot } from "../../../Constants/Equipment/BackSlot";
 const GameContainer = (props: Types.NoProps) => {
   const dispatch = useDispatch();
   const Target = useSelector((state: Types.AllState) => state.Target.CurrentTarget as Types.ICurrentTargetOptions);
-
-  // CurrentQuest is the name of the quest the player has chosen
   const CurrentQuest = useSelector((state: Types.AllState) => state.Quest.CurrentQuest as Types.ICurrentQuestOptions);
   const playerLocation = useSelector((state: Types.AllState) => state.Location.CurrentLocation as Types.ICurrentLocationOptions);
-
   const LumbridgeQuestArray = useSelector((state: Types.AllState) => state.Quests_Lumbridge.LumbridgeQuestArray as Types.IStateQuest[]);
   const DraynorQuestArray = useSelector((state: Types.AllState) => state.Quests_Draynor.DraynorQuestArray as Types.IStateQuest[]);
   const CurrentResource = useSelector((state: Types.AllState) => state.Resource.CurrentResource);
   const CurrentSkill = useSelector((state: Types.AllState) => state.Skill.CurrentSkill as Types.ListOfSkillOptions);
   const Experience = useSelector((state: Types.AllState) => state.Experience);
   const CurrentStyle = useSelector((state: Types.AllState) => state.CombatStyle.CurrentStyle as Types.ICurrentStyleOptions);
-
-  // let wowwowo = CurrentStyle.toLowerCase();
-  // console.log(CurrentStyle);
-  // console.log(wowwowo);
-
+  const PlayerInventory = useSelector((state: Types.AllState) => state.Inventory.CurrentInventory);
+  console.log(PlayerInventory);
   const AllQuestsFromState: Types.IStateQuest[] = [...LumbridgeQuestArray, ...DraynorQuestArray];
 
   //@ initialize the chatLogArray with a default welcome message
@@ -77,8 +71,9 @@ const GameContainer = (props: Types.NoProps) => {
 
   //@ assign lifepoints to the player based on levels, and to the target in the usestate
   //? I might not use player Lifepoints lol
-  const [playerLifePoints, setPlayerLifePoints] = useState<number>(getLevel(Experience.Consitution) * 100);
+  // const [playerLifePoints, setPlayerLifePoints] = useState<number>(getLevel(Experience.Consitution) * 100);
   const [targetLifePoints, setTargetLifePoints] = useState<number>(0);
+  const [needsToBank, setNeedsToBank] = useState<boolean>(false);
 
   //@ use this to add to the chat log array
   const handleNewChatLog = (message: string, tags: Types.ChatLogTag) => {
@@ -137,38 +132,55 @@ const GameContainer = (props: Types.NoProps) => {
 
   //@ this will run every game tick (while skilling) and holds the logic for resolving a skilling action
   const handleSkillingTick = () => {
-    switch (CurrentSkill) {
-      case `Woodcutting`: {
-        if (
-          playerEarnsLog(
-            ListOfLogs[CurrentResource as keyof Types.IListOfLogs],
-            Experience.Woodcutting,
-            listOfHatchets[currentEquipment.Hatchet as keyof Types.IListOfHatchets]
-          )
-        ) {
-          // if the player earns a log, we need to add the item to the inventory
-          dispatch(addItemToInventory(ListOfLogs[CurrentResource as keyof Types.IListOfLogs].displayName));
-          // send a chatlog
-          handleNewChatLog(`Chopped some ${ListOfLogs[CurrentResource as keyof Types.IListOfLogs].displayName}`, `Gained Resource`);
-          // console.log(ListOfLogs[CurrentResource as keyof Types.IListOfLogs].XPGivenWoodcutting);
-          // apply gained xp
-          dispatch(gainXP({ skill: `Woodcutting`, xp: ListOfLogs[CurrentResource as keyof Types.IListOfLogs].XPGivenWoodcutting }));
-        }
-        break;
-      }
-      case `Fishing`: {
-        if (playerEarnsFish(ListOfFish[CurrentResource as keyof Types.IListOfFish], Experience.Fishing)) {
-          // if the player catches a fish, we need to add the item to the inventory
-          dispatch(addItemToInventory(ListOfFish[CurrentResource as keyof Types.IListOfFish].displayName));
-          // send a chatlog
-          handleNewChatLog(`Fished a ${ListOfFish[CurrentResource as keyof Types.IListOfFish].displayName}`, `Gained Resource`);
-          // console.log(ListOfFish[CurrentResource as keyof Types.IListOfFish].XPGivenFishing);
-          // apply gained xp
-          dispatch(gainXP({ skill: `Fishing`, xp: ListOfFish[CurrentResource as keyof Types.IListOfFish].XPGivenFishing }));
-        }
+    // IF the player does not need to bank, continue with the skilling logic
+    if (!needsToBank) {
+      switch (CurrentSkill) {
+        case `Woodcutting`: {
+          if (
+            playerEarnsLog(
+              ListOfLogs[CurrentResource as keyof Types.IListOfLogs],
+              Experience.Woodcutting,
+              listOfHatchets[currentEquipment.Hatchet as keyof Types.IListOfHatchets]
+            )
+          ) {
+            // if the player earns a log, we need to add the item to the inventory
+            dispatch(addItemToInventory(ListOfLogs[CurrentResource as keyof Types.IListOfLogs].displayName));
 
-        break;
+            // when the player's inventory is full (28 items) queue a bank run
+            //@ this may fail because of the pinky-promise - might need to set to 27
+            //! test this on woodcutting, if it works, add to fishing as well
+            if (PlayerInventory.length === 28) {
+              // do bank stuff here
+              setNeedsToBank(!needsToBank);
+            }
+            // send a chatlog
+            handleNewChatLog(`Chopped some ${ListOfLogs[CurrentResource as keyof Types.IListOfLogs].displayName}`, `Gained Resource`);
+            // console.log(ListOfLogs[CurrentResource as keyof Types.IListOfLogs].XPGivenWoodcutting);
+            // apply gained xp
+            dispatch(gainXP({ skill: `Woodcutting`, xp: ListOfLogs[CurrentResource as keyof Types.IListOfLogs].XPGivenWoodcutting }));
+          }
+          break;
+        }
+        case `Fishing`: {
+          if (playerEarnsFish(ListOfFish[CurrentResource as keyof Types.IListOfFish], Experience.Fishing)) {
+            // if the player catches a fish, we need to add the item to the inventory
+            dispatch(addItemToInventory(ListOfFish[CurrentResource as keyof Types.IListOfFish].displayName));
+            // send a chatlog
+            handleNewChatLog(`Fished a ${ListOfFish[CurrentResource as keyof Types.IListOfFish].displayName}`, `Gained Resource`);
+            // console.log(ListOfFish[CurrentResource as keyof Types.IListOfFish].XPGivenFishing);
+            // apply gained xp
+            dispatch(gainXP({ skill: `Fishing`, xp: ListOfFish[CurrentResource as keyof Types.IListOfFish].XPGivenFishing }));
+          }
+
+          break;
+        }
       }
+    } else {
+      // Otherwise, the player needs to bank
+      // do bank stuff here
+      // find the first item in the array, add that item to the bank
+      // call the inventory to remove the first item
+      // repeat this for the length of the inventory array
     }
   };
 
@@ -199,7 +211,6 @@ const GameContainer = (props: Types.NoProps) => {
       }
 
       console.log(`enemy lifepoints after hit: ${targetLifePoints}`);
-      //! this second console log does not show me the anticipated value, but dev tools do
     } else {
       console.log(`check your target and style`);
     }
