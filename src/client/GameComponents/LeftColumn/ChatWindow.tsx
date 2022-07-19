@@ -52,6 +52,7 @@ const ChatWindow = (props: Types.ChatWindowCompProps) => {
     let allFilters: Types.ChatLogTag[] = [
       `Gained Resource`,
       `Monster Drop`,
+      `Monster Defeated`,
       `Rare Item`,
       `Level Up`,
       `Gained XP`,
@@ -131,6 +132,16 @@ const ChatWindow = (props: Types.ChatWindowCompProps) => {
           >
             Monster Drop
           </button>
+
+          <button
+            onClick={() => {
+              addOrRemoveFilters(`Monster Defeated`);
+            }}
+            className="btn btn-primary"
+          >
+            Monster Defeated
+          </button>
+
           <button
             onClick={() => {
               addOrRemoveFilters(`Equipment Swap`);

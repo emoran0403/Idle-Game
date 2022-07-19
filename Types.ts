@@ -507,6 +507,7 @@ export interface IChatLog {
 export type ChatLogTag =
   | `Gained Resource`
   | `Monster Drop`
+  | `Monster Defeated`
   | `Rare Item`
   | `Level Up`
   | `Gained XP`

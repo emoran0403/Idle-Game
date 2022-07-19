@@ -106,14 +106,8 @@ export const playerAttacksTarget = (
     //? if the player is unarmed, use melee
     let boosts: number = 0;
 
-    // let oof = playerStyle.toLowerCase();
-    // console.log(oof);
-    // let concat = `styleBonus${oof}`;
-
-    // BackSlot[Equipment.BackSlot as keyof Types.IArmorSlotBack][concat as keyof Types.IArmorItem];
-    // console.log(`look here`);
-    // console.log(BackSlot[Equipment.BackSlot as keyof Types.IArmorSlotBack][concat as keyof Types.IArmorItem]);
-    //! need to modulate damage - this currently defines a max damage
+    // this gives a random between 0 and 1, which is then used to reduce the max damage
+    // damage = randomDamageScaler * maxHit
     let randomDamageScaler: number = Math.random();
 
     switch (playerStyle) {
@@ -130,7 +124,7 @@ export const playerAttacksTarget = (
           TwoHandSlot[Equipment.TwoHandSlot as keyof Types.IArmorSlotTwoHand].styleBonusMelee;
 
         if (Math.floor(randomDamageScaler * (3.75 * getLevel(Experience.Strength) + 1.5 * boosts))) {
-          return Math.floor(randomDamageScaler * (3.75 * getLevel(Experience.Strength) + 1.5 * boosts));
+          return Math.floor(randomDamageScaler * ((3.75 * getLevel(Experience.Strength) + 1.5 * boosts) * 10));
         } else {
           return 1;
         }
@@ -148,7 +142,7 @@ export const playerAttacksTarget = (
           TwoHandSlot[Equipment.TwoHandSlot as keyof Types.IArmorSlotTwoHand].styleBonusRanged;
 
         if (Math.floor(randomDamageScaler * (3.75 * getLevel(Experience.Ranged) + 1.5 * boosts))) {
-          return Math.floor(randomDamageScaler * (3.75 * getLevel(Experience.Ranged) + 1.5 * boosts));
+          return Math.floor(randomDamageScaler * ((3.75 * getLevel(Experience.Ranged) + 1.5 * boosts) * 10));
         } else {
           return 1;
         }
@@ -165,7 +159,7 @@ export const playerAttacksTarget = (
           TwoHandSlot[Equipment.TwoHandSlot as keyof Types.IArmorSlotTwoHand].styleBonusMagic;
 
         if (Math.floor(randomDamageScaler * (3.75 * getLevel(Experience.Magic) + 1.5 * boosts))) {
-          return Math.floor(randomDamageScaler * (3.75 * getLevel(Experience.Magic) + 1.5 * boosts));
+          return Math.floor(randomDamageScaler * ((3.75 * getLevel(Experience.Magic) + 1.5 * boosts) * 10));
         } else {
           return 1;
         }

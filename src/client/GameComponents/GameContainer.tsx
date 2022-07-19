@@ -190,7 +190,8 @@ const GameContainer = (props: Types.NoProps) => {
         dispatch(
           gainXP({ skill: `Constitution`, xp: Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].XPGivenConstitution })
         );
-        console.log(`monster killed`);
+        // send a chatlog to the ChatWindow
+        handleNewChatLog(`Defeated a ${Target}`, `Monster Defeated`);
       } else {
         // Otherwise, apply the damage
         setTargetLifePoints(targetLifePoints - damageDoneToTarget);
@@ -245,6 +246,7 @@ const GameContainer = (props: Types.NoProps) => {
   //@ this useEffect is dedicated to combat logic
   useEffect(() => {
     // IF a target is changed, set its lifepoints to component state
+    // this ensures we have the correct lifepoints when the player changes targets, or starts combat for the first time
     if (Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies]?.lifePoints) {
       setTargetLifePoints(Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].lifePoints);
     }
