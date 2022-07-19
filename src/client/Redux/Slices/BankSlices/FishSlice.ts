@@ -44,15 +44,15 @@ export const bank_fish = createSlice({
   reducers: {
     // use this when we need to add an item to the bank
     addItemToBank: (state: Types.IFishBankSlice, action) => {
-      const item: string = action.type; // decide which item to add
-      const amount: number = Number(action.payload); // this will be the number of items added to the bank
+      const item: string = action.payload.item; // decide which item to add
+      const amount: number = Number(action.payload.amount); // this will be the number of items added to the bank
       state[item as keyof Types.IFishBankSlice].amount += amount; // add the item to state, then reassign (ty immer)
     },
 
     // use this when we need to remove an item from the bank
     removeItemFromBank: (state: Types.IFishBankSlice, action) => {
-      const item: string = action.type; // decide which item to remove
-      const amount: number = Number(action.payload); // this will be the number of items removed from the bank
+      const item: string = action.payload.item; // decide which item to remove
+      const amount: number = Number(action.payload.amount); // this will be the number of items removed from the bank
 
       //@ this will need to add to the player inventory
       if (state[item as keyof Types.IFishBankSlice].amount - amount >= 0) {

@@ -38,8 +38,8 @@ const GameContainer = (props: Types.NoProps) => {
   const CurrentSkill = useSelector((state: Types.AllState) => state.Skill.CurrentSkill as Types.ListOfSkillOptions);
   const Experience = useSelector((state: Types.AllState) => state.Experience);
   const CurrentStyle = useSelector((state: Types.AllState) => state.CombatStyle.CurrentStyle as Types.ICurrentStyleOptions);
-  const PlayerInventory = useSelector((state: Types.AllState) => state.Inventory.CurrentInventory);
-  console.log(PlayerInventory);
+  const playerInventory = useSelector((state: Types.AllState) => state.Inventory.CurrentInventory);
+  // console.log(playerInventory);
   const AllQuestsFromState: Types.IStateQuest[] = [...LumbridgeQuestArray, ...DraynorQuestArray];
 
   //@ initialize the chatLogArray with a default welcome message
@@ -149,7 +149,7 @@ const GameContainer = (props: Types.NoProps) => {
             // when the player's inventory is full (28 items) queue a bank run
             //@ this may fail because of the pinky-promise - might need to set to 27
             //! test this on woodcutting, if it works, add to fishing as well
-            if (PlayerInventory.length === 28) {
+            if (playerInventory.length === 28) {
               // do bank stuff here
               setNeedsToBank(!needsToBank);
             }
@@ -177,8 +177,11 @@ const GameContainer = (props: Types.NoProps) => {
       }
     } else {
       // Otherwise, the player needs to bank
-      // do bank stuff here
       // find the first item in the array, add that item to the bank
+      for (let i = 0; i < playerInventory.length; i++) {
+        // find the first item, don't shift here as that is mutative
+        let itemToAddToBank = playerInventory[i];
+      }
       // call the inventory to remove the first item
       // repeat this for the length of the inventory array
     }
