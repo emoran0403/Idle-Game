@@ -149,7 +149,7 @@ const GameContainer = (props: Types.NoProps) => {
             )
           ) {
             // if the player earns a log, we need to add the item to the inventory
-            dispatch(addItemToInventory(ListOfLogs[CurrentResource as keyof Types.IListOfLogs].displayName));
+            dispatch(addItemToInventory(ListOfLogs[CurrentResource as keyof Types.IListOfLogs].name));
             console.log(playerInventory.length);
 
             // when the player's inventory is full (28 items) queue a bank run
@@ -171,7 +171,7 @@ const GameContainer = (props: Types.NoProps) => {
         case `Fishing`: {
           if (playerEarnsFish(ListOfFish[CurrentResource as keyof Types.IListOfFish], Experience.Fishing)) {
             // if the player catches a fish, we need to add the item to the inventory
-            dispatch(addItemToInventory(ListOfFish[CurrentResource as keyof Types.IListOfFish].displayName));
+            dispatch(addItemToInventory(ListOfFish[CurrentResource as keyof Types.IListOfFish].name));
             // send a chatlog
             handleNewChatLog(`Fished a ${ListOfFish[CurrentResource as keyof Types.IListOfFish].displayName}`, `Gained Resource`);
             // console.log(ListOfFish[CurrentResource as keyof Types.IListOfFish].XPGivenFishing);
@@ -196,12 +196,11 @@ const GameContainer = (props: Types.NoProps) => {
           dispatch(addFishToBank({ item: itemToAddToBank, amount: 1 }));
         }
       }
-      // iterate through the inventory array again, this time removing each item from the inventory array
-      //@ removing the item on each iteration would've changed the length of the inventory array, and the loop woul've probably terminated early
-      for (let i = 0; i < playerInventory.length; i++) {
-        dispatch(removeItemFromInventory());
-      }
-      // after the banking is finished, the player no longer needs to bank
+      // remove all items from the inventory, since they're now in the bank
+      //! i am adding `logs` vs `Logs` to the inventory lol
+      dispatch(removeItemFromInventory());
+
+      // after the banking is finished, flip this state
       setNeedsToBank(!needsToBank);
     }
   };

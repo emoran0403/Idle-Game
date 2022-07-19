@@ -9,7 +9,7 @@ export const bank_logs = createSlice({
     //list of items in the bank, starting at 0
     logs: {
       name: `logs`,
-      amount: 69,
+      amount: 0,
     },
     oak: {
       name: `oak`,
