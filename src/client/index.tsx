@@ -11,5 +11,3 @@ render(
   </Provider>,
   document.getElementById("root")
 );
-
-//! does browser router wrap rtk provider, or vice-versa?
