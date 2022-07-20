@@ -111,7 +111,7 @@ const GameContainer = (props: Types.NoProps) => {
   //@ this will run every game tick (while questing) and holds the logic for progressing in quests
   const handleQuestingTick = () => {
     console.log(`Quest Ticked`);
-    console.log({ questStepProgress, playerLocation, CurrentQuest });
+    // console.log({ questStepProgress, playerLocation, CurrentQuest });
     // every game tick increments a counter, when this counter hits a certain amount, dispatch the appropriate quest reducer
     // the quest reducer increments the stepsComplete counter, and can mark the quest complete
     // if the quest has been completed, it needs to update that in state
@@ -142,7 +142,7 @@ const GameContainer = (props: Types.NoProps) => {
   //@ this will run every game tick (while skilling) and holds the logic for resolving a skilling action
   const handleSkillingTick = () => {
     console.log(`Skilling Ticked`);
-    console.log(CurrentSkill);
+    // console.log(CurrentSkill);
 
     // IF the player does not need to bank, continue with the skilling logic
     if (!needsToBank) {
@@ -220,7 +220,6 @@ const GameContainer = (props: Types.NoProps) => {
   //@ this will run every game tick (while in combat) and holds the logic for resolving combat turns
   const handleCombatTick = () => {
     console.log(`Combat Ticked`);
-
     // IF a target is selected, then we can proceed
     if (Target !== `none`) {
       let damageDoneToTarget = playerAttacksTarget(Target, CurrentStyle, playerLocation, Experience, currentEquipment);
@@ -301,9 +300,9 @@ const GameContainer = (props: Types.NoProps) => {
   //@ this useEffect is dedicated to the 'game tick' logic
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log("%cGame Ticked", "font-weight: bold;font-size: 20px");
+      console.log(`%cGame Ticked`, "font-weight: bold;font-size: 20px");
 
-      console.log({ CurrentActivity, Target, CurrentSkill });
+      // console.log({ CurrentActivity, Target, CurrentSkill, CurrentResource });
 
       if (CurrentActivity === `In combat` && Target !== `none`) {
         // combat tick function here
@@ -317,10 +316,22 @@ const GameContainer = (props: Types.NoProps) => {
       } else {
         console.log(`all ticks failed to tick`);
       }
-    }, 2000);
+    }, 500);
 
     return () => clearInterval(interval);
-  }, [CurrentActivity, CurrentResource, playerInventory]);
+  }, [
+    CurrentActivity,
+    CurrentResource,
+    chatLogArray,
+    playerInventory,
+    needsToBank,
+    Target,
+    CurrentSkill,
+    CurrentQuest,
+    targetLifePoints,
+    playerLocation,
+    questStepProgress,
+  ]);
 
   //! interval seems to use the default values from global state, instead of those set by the player or by the game
 
@@ -328,10 +339,14 @@ const GameContainer = (props: Types.NoProps) => {
   //* - log to log, log to fish, or fish to fish
   //# adding CurrentResource makes tick respect the current resource
 
-  //! also breaks the inventory - it does not respect needsToBank component state
-  //! adding playerInventory does not resolve issue
-
   //! chatlog is broken, does not seem to add repeated messages
+  //! also breaks the inventory - it does not respect needsToBank component state
+
+  //# adding chatLogArray seems to fix the chat issue, but i noticed it is banking 28 logs continuously
+  //# adding playerInventory fixes an issue where the game continuously banks 28 items
+
+  //! game does not continue gathering resources after banking - try adding needsToBank
+  //# adding needsToBank fixes an issue where the game continuously banks 28 items
 
   return (
     <div className="d-flex">
