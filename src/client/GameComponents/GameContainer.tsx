@@ -309,20 +309,26 @@ const GameContainer = (props: Types.NoProps) => {
       //! interval runs tick functions
       //! interval seems to use the default values from global state, instead of those set by the player
 
-      // if (CurrentActivity === `In combat` && Target !== `none`) {
-      //   // combat tick function here
-      //   handleCombatTick();
-      // } else if (CurrentActivity === `Skilling` && (CurrentSkill === `Woodcutting` || CurrentSkill === `Fishing`)) {
-      //   // skilling tick function here
-      //   handleSkillingTick();
-      // } else if (CurrentActivity === `Questing` && CurrentQuest !== `none`) {
-      //   // IF the player is questing, and has chosen a quest, then execute questing tick function
-      //   handleQuestingTick();
-      // }
-    }, 5000);
+      console.log({ CurrentActivity, Target, CurrentSkill });
+
+      if (CurrentActivity === `In combat` && Target !== `none`) {
+        // combat tick function here
+        handleCombatTick();
+      } else if (CurrentActivity === `Skilling` && (CurrentSkill === `Woodcutting` || CurrentSkill === `Fishing`)) {
+        // skilling tick function here
+        handleSkillingTick();
+      } else if (CurrentActivity === `Questing` && CurrentQuest !== `none`) {
+        // IF the player is questing, and has chosen a quest, then execute questing tick function
+        handleQuestingTick();
+      } else {
+        console.log(`all ticks failed to tick`);
+      }
+    }, 2000);
 
     return () => clearInterval(interval);
-  }, []);
+    //! adding CurrentActivity to the dependency array makes skilling work
+    //! inventory fills and crashes now lol
+  }, [CurrentActivity]);
 
   return (
     <div className="d-flex">
