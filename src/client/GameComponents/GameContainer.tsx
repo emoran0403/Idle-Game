@@ -305,7 +305,7 @@ const GameContainer = (props: Types.NoProps) => {
       console.log("%cGame Ticked", "font-weight: bold;font-size: 20px");
       // handleSkillingTick();
       // handleCombatTick();
-      handleQuestingTick();
+      // handleQuestingTick();
       //! interval runs tick functions
       //! interval seems to use the default values from global state, instead of those set by the player
 
