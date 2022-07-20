@@ -210,7 +210,6 @@ const GameContainer = (props: Types.NoProps) => {
         }
       }
       // remove all items from the inventory, since they're now in the bank
-      //! i am adding `logs` vs `Logs` to the inventory lol
       dispatch(removeItemFromInventory());
 
       // after the banking is finished, flip this state
@@ -303,11 +302,6 @@ const GameContainer = (props: Types.NoProps) => {
   useEffect(() => {
     const interval = setInterval(() => {
       console.log("%cGame Ticked", "font-weight: bold;font-size: 20px");
-      // handleSkillingTick();
-      // handleCombatTick();
-      // handleQuestingTick();
-      //! interval runs tick functions
-      //! interval seems to use the default values from global state, instead of those set by the player
 
       console.log({ CurrentActivity, Target, CurrentSkill });
 
@@ -326,9 +320,18 @@ const GameContainer = (props: Types.NoProps) => {
     }, 2000);
 
     return () => clearInterval(interval);
-    //! adding CurrentActivity to the dependency array makes skilling work
-    //! inventory fills and crashes now lol
-  }, [CurrentActivity]);
+  }, [CurrentActivity, CurrentResource, playerInventory]);
+
+  //! interval seems to use the default values from global state, instead of those set by the player or by the game
+
+  //* with CurrentActivity in the dependency array, skilling tick fires, but does not respect changing resources
+  //* - log to log, log to fish, or fish to fish
+  //# adding CurrentResource makes tick respect the current resource
+
+  //! also breaks the inventory - it does not respect needsToBank component state
+  //! adding playerInventory does not resolve issue
+
+  //! chatlog is broken, does not seem to add repeated messages
 
   return (
     <div className="d-flex">
