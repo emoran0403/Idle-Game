@@ -11,6 +11,7 @@ const Loginpage = () => {
   const [password_A, setPassword_A] = useState<string>("");
   const [password_B, setPassword_B] = useState<string>("");
   const [email, setEmail] = useState<string>("");
+  const [username, setUsername] = useState<string>("");
 
   //   const handleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
   //     e.preventDefault();
@@ -55,6 +56,15 @@ const Loginpage = () => {
             <h5 className="card-title text-center col-md-7">Please log in, or click the new player button</h5>
 
             <input
+              id="username"
+              placeholder="username"
+              type="text"
+              value={username}
+              className="form-control col-md-7 mt-1"
+              onChange={(e) => setUsername(e.target.value)}
+            />
+
+            <input
               id="email"
               placeholder="email"
               type="email"
@@ -64,7 +74,7 @@ const Loginpage = () => {
             />
 
             <input
-              id="password"
+              id="password_A"
               placeholder="password"
               type="password"
               value={password_A}
@@ -73,7 +83,7 @@ const Loginpage = () => {
             />
 
             <input
-              id="password"
+              id="password_B"
               placeholder="confirmpassword"
               type="password"
               value={password_B}
