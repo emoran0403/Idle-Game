@@ -150,13 +150,13 @@ const GameContainer = (props: Types.NoProps) => {
           ) {
             // if the player earns a log, we need to add the item to the inventory
             dispatch(addItemToInventory(ListOfLogs[CurrentResource as keyof Types.IListOfLogs].name));
-            console.log(playerInventory.length);
+            // console.log(playerInventory.length);
 
             // when the player's inventory is full (28 items) queue a bank run
             //@ this may fail because of the pinky-promise - might need to set to 27
             //! test this on woodcutting, if it works, add to fishing as well
             if (playerInventory.length === 27) {
-              console.log(`will need to bank next time`);
+              // console.log(`will need to bank next time`);
               // do bank stuff here
               setNeedsToBank(!needsToBank);
             }
@@ -210,7 +210,7 @@ const GameContainer = (props: Types.NoProps) => {
     // IF a target is selected, then we can proceed
     if (Target !== `none`) {
       let damageDoneToTarget = playerAttacksTarget(Target, CurrentStyle, playerLocation, Experience, currentEquipment);
-      console.log(`you hit: ${damageDoneToTarget}`);
+      // console.log(`you hit: ${damageDoneToTarget}`);
 
       // IF the hit would kill the target
       if (targetLifePoints - damageDoneToTarget <= 0) {
@@ -228,12 +228,12 @@ const GameContainer = (props: Types.NoProps) => {
       } else {
         // Otherwise, apply the damage
         setTargetLifePoints(targetLifePoints - damageDoneToTarget);
-        console.log(`monster damaged`);
+        // console.log(`monster damaged`);
       }
 
-      console.log(`enemy lifepoints after hit: ${targetLifePoints}`);
+      // console.log(`enemy lifepoints after hit: ${targetLifePoints}`);
     } else {
-      console.log(`check your target and style`);
+      // console.log(`check your target and style`);
     }
   };
 
@@ -283,6 +283,15 @@ const GameContainer = (props: Types.NoProps) => {
       setTargetLifePoints(Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].lifePoints);
     }
   }, [Target]);
+
+  //@ this useEffect is dedicated to the 'game tick' logic
+  useEffect(() => {
+    const interval = setInterval(() => {
+      console.log("%cGame Ticked", "font-weight: bold;font-size: 20px");
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="d-flex">

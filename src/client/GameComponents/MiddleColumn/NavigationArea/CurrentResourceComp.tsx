@@ -18,7 +18,7 @@ const CurrentResourceComp = (props: Types.NoProps) => {
 
   const displayResource = () => {
     // this function shows the display name of the current resource
-    console.log(Skill);
+    // console.log(Skill);
     if (Skill) {
       switch (Skill) {
         case `Woodcutting`: {
