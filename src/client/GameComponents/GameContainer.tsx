@@ -41,6 +41,7 @@ const GameContainer = (props: Types.NoProps) => {
   const Experience = useSelector((state: Types.AllState) => state.Experience);
   const CurrentStyle = useSelector((state: Types.AllState) => state.CombatStyle.CurrentStyle as Types.ICurrentStyleOptions);
   const playerInventory = useSelector((state: Types.AllState) => state.Inventory.CurrentInventory);
+  const { CurrentActivity } = useSelector((state: Types.AllState) => state.Activity);
   const bank_logs = useSelector((state: Types.AllState) => state.Bank_Logs) as Types.ILogBankSlice;
   const bank_fish = useSelector((state: Types.AllState) => state.Bank_Fish) as Types.IFishBankSlice;
 
@@ -109,6 +110,8 @@ const GameContainer = (props: Types.NoProps) => {
 
   //@ this will run every game tick (while questing) and holds the logic for progressing in quests
   const handleQuestingTick = () => {
+    console.log(`Quest Ticked`);
+    console.log({ questStepProgress, playerLocation, CurrentQuest });
     // every game tick increments a counter, when this counter hits a certain amount, dispatch the appropriate quest reducer
     // the quest reducer increments the stepsComplete counter, and can mark the quest complete
     // if the quest has been completed, it needs to update that in state
@@ -120,6 +123,7 @@ const GameContainer = (props: Types.NoProps) => {
     setQuestStepProgress(questStepProgress + 1);
 
     // if the progress counter hits 20, reset it to 0, and then run the quest logic based on location
+    //! change this to 20 for production
     if (questStepProgress === 2) {
       setQuestStepProgress(0);
       switch (playerLocation) {
@@ -137,6 +141,9 @@ const GameContainer = (props: Types.NoProps) => {
 
   //@ this will run every game tick (while skilling) and holds the logic for resolving a skilling action
   const handleSkillingTick = () => {
+    console.log(`Skilling Ticked`);
+    console.log(CurrentSkill);
+
     // IF the player does not need to bank, continue with the skilling logic
     if (!needsToBank) {
       switch (CurrentSkill) {
@@ -213,6 +220,8 @@ const GameContainer = (props: Types.NoProps) => {
 
   //@ this will run every game tick (while in combat) and holds the logic for resolving combat turns
   const handleCombatTick = () => {
+    console.log(`Combat Ticked`);
+
     // IF a target is selected, then we can proceed
     if (Target !== `none`) {
       let damageDoneToTarget = playerAttacksTarget(Target, CurrentStyle, playerLocation, Experience, currentEquipment);
@@ -294,7 +303,23 @@ const GameContainer = (props: Types.NoProps) => {
   useEffect(() => {
     const interval = setInterval(() => {
       console.log("%cGame Ticked", "font-weight: bold;font-size: 20px");
-    }, 1000);
+      // handleSkillingTick();
+      // handleCombatTick();
+      handleQuestingTick();
+      //! interval runs tick functions
+      //! interval seems to use the default values from global state, instead of those set by the player
+
+      // if (CurrentActivity === `In combat` && Target !== `none`) {
+      //   // combat tick function here
+      //   handleCombatTick();
+      // } else if (CurrentActivity === `Skilling` && (CurrentSkill === `Woodcutting` || CurrentSkill === `Fishing`)) {
+      //   // skilling tick function here
+      //   handleSkillingTick();
+      // } else if (CurrentActivity === `Questing` && CurrentQuest !== `none`) {
+      //   // IF the player is questing, and has chosen a quest, then execute questing tick function
+      //   handleQuestingTick();
+      // }
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);
