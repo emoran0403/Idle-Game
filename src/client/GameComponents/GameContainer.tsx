@@ -152,9 +152,7 @@ const GameContainer = (props: Types.NoProps) => {
             dispatch(addItemToInventory(ListOfLogs[CurrentResource as keyof Types.IListOfLogs].name));
             // console.log(playerInventory.length);
 
-            // when the player's inventory is full (28 items) queue a bank run
-            //@ this may fail because of the pinky-promise - might need to set to 27
-            //! test this on woodcutting, if it works, add to fishing as well
+            // when the player's inventory will be full with the next item added, queue a bank run
             if (playerInventory.length === 27) {
               // console.log(`will need to bank next time`);
               // do bank stuff here
@@ -172,6 +170,14 @@ const GameContainer = (props: Types.NoProps) => {
           if (playerEarnsFish(ListOfFish[CurrentResource as keyof Types.IListOfFish], Experience.Fishing)) {
             // if the player catches a fish, we need to add the item to the inventory
             dispatch(addItemToInventory(ListOfFish[CurrentResource as keyof Types.IListOfFish].name));
+
+            // when the player's inventory will be full with the next item added, queue a bank run
+            if (playerInventory.length === 27) {
+              // console.log(`will need to bank next time`);
+              // do bank stuff here
+              setNeedsToBank(!needsToBank);
+            }
+
             // send a chatlog
             handleNewChatLog(`Fished a ${ListOfFish[CurrentResource as keyof Types.IListOfFish].displayName}`, `Gained Resource`);
             // console.log(ListOfFish[CurrentResource as keyof Types.IListOfFish].XPGivenFishing);
