@@ -44,6 +44,7 @@ const GameContainer = (props: Types.NoProps) => {
   const { CurrentActivity } = useSelector((state: Types.AllState) => state.Activity);
   const bank_logs = useSelector((state: Types.AllState) => state.Bank_Logs) as Types.ILogBankSlice;
   const bank_fish = useSelector((state: Types.AllState) => state.Bank_Fish) as Types.IFishBankSlice;
+  const playerIsBanking = useSelector((state: Types.AllState) => state.Resources.Banking);
 
   // console.log(playerInventory);
   const AllQuestsFromState: Types.IStateQuest[] = [...LumbridgeQuestArray, ...DraynorQuestArray];
@@ -155,16 +156,19 @@ const GameContainer = (props: Types.NoProps) => {
               listOfHatchets[currentEquipment.Hatchet as keyof Types.IListOfHatchets]
             )
           ) {
-            // if the player earns a log, we need to add the item to the inventory
-            dispatch(addItemToInventory(ListOfLogs[CurrentResource as keyof Types.IListOfLogs].name));
-            // console.log(playerInventory.length);
+            if (playerIsBanking) {
+              // if the player earns a log, AND the player is banking the items, we need to add the item to the inventory
+              dispatch(addItemToInventory(ListOfLogs[CurrentResource as keyof Types.IListOfLogs].name));
+              // console.log(playerInventory.length);
 
-            // when the player's inventory will be full with the next item added, queue a bank run
-            if (playerInventory.length === 27) {
-              // console.log(`will need to bank next time`);
-              // do bank stuff here
-              setNeedsToBank(!needsToBank);
+              // when the player's inventory will be full with the next item added, queue a bank run
+              if (playerInventory.length === 27) {
+                // console.log(`will need to bank next time`);
+                // do bank stuff here
+                setNeedsToBank(!needsToBank);
+              }
             }
+
             // send a chatlog
             handleNewChatLog(`Chopped some ${ListOfLogs[CurrentResource as keyof Types.IListOfLogs].displayName}`, `Gained Resource`);
             // console.log(ListOfLogs[CurrentResource as keyof Types.IListOfLogs].XPGivenWoodcutting);
@@ -175,14 +179,17 @@ const GameContainer = (props: Types.NoProps) => {
         }
         case `Fishing`: {
           if (playerEarnsFish(ListOfFish[CurrentResource as keyof Types.IListOfFish], Experience.Fishing)) {
-            // if the player catches a fish, we need to add the item to the inventory
-            dispatch(addItemToInventory(ListOfFish[CurrentResource as keyof Types.IListOfFish].name));
+            // if the player catches a fish, AND the player is banking the items, we need to add the item to the inventory
 
-            // when the player's inventory will be full with the next item added, queue a bank run
-            if (playerInventory.length === 27) {
-              // console.log(`will need to bank next time`);
-              // do bank stuff here
-              setNeedsToBank(!needsToBank);
+            if (playerIsBanking) {
+              dispatch(addItemToInventory(ListOfFish[CurrentResource as keyof Types.IListOfFish].name));
+
+              // when the player's inventory will be full with the next item added, queue a bank run
+              if (playerInventory.length === 27) {
+                // console.log(`will need to bank next time`);
+                // do bank stuff here
+                setNeedsToBank(!needsToBank);
+              }
             }
 
             // send a chatlog
@@ -319,6 +326,7 @@ const GameContainer = (props: Types.NoProps) => {
     }, 500);
 
     return () => clearInterval(interval);
+    // any variable the useEffect DEPENDS on need to be in the dependency array
   }, [
     CurrentActivity,
     CurrentResource,
@@ -331,22 +339,8 @@ const GameContainer = (props: Types.NoProps) => {
     targetLifePoints,
     playerLocation,
     questStepProgress,
+    playerIsBanking,
   ]);
-
-  //! interval seems to use the default values from global state, instead of those set by the player or by the game
-
-  //* with CurrentActivity in the dependency array, skilling tick fires, but does not respect changing resources
-  //* - log to log, log to fish, or fish to fish
-  //# adding CurrentResource makes tick respect the current resource
-
-  //! chatlog is broken, does not seem to add repeated messages
-  //! also breaks the inventory - it does not respect needsToBank component state
-
-  //# adding chatLogArray seems to fix the chat issue, but i noticed it is banking 28 logs continuously
-  //# adding playerInventory fixes an issue where the game continuously banks 28 items
-
-  //! game does not continue gathering resources after banking - try adding needsToBank
-  //# adding needsToBank fixes an issue where the game continuously banks 28 items
 
   return (
     <div className="d-flex">
