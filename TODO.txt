@@ -7,6 +7,7 @@
 //! server - connect to db to save data
 //! server - make a way for players to login and retrieve data
 //! server - connect to db to read data upon logging in
+//! DB - need a way to add player auth info the player object in global storage
 
 //# Fixes that can wait
 //! Logic - experience and levels is displaying too high for some reason :/
