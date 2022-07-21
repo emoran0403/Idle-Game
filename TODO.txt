@@ -1,7 +1,3 @@
-* create a login page
-* set up react router dom - which version?
-//# does browser router wrap rtk provider, or vice-versa? - does not matter
-* - login page, game page
 * mongo - how to store and retrieve data?
 * auth - will need to tweak auth since data is coming back differently than from sql
 
@@ -9,7 +5,7 @@
 //# Fixes I need to do
 //! game - set up a way to save progress to local storage
 //! server - connect to db to save data
-//! server - make a way for players to login
+//! server - make a way for players to login and retrieve data
 //! server - connect to db to read data upon logging in
 
 //# Fixes that can wait

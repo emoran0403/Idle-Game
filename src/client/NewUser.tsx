@@ -51,6 +51,7 @@ const NewUser = (props: Types.NoProps) => {
     // check if email or usernames are duplicates here
 
     // Fetcher.POST("/auth/login", { email, password_A })
+    //! this will need to set data from db into global redux state
     //   .then((data) => {
     //     // console.log({ data });
     //     if (data.token) {

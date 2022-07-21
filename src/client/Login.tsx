@@ -23,6 +23,8 @@ const Loginpage = () => {
 
     //! i want this to accept username instead of an email
     // Fetcher.POST("/auth/login", { username, password })
+    //! this will need to set data from db into global redux state
+
     //   .then((data) => {
     //     // console.log({ data });
     //     if (data.token) {
