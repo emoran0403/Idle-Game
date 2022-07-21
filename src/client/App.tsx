@@ -4,11 +4,26 @@ import GameContainer from "./GameComponents/GameContainer";
 import LoginPage from "./Login";
 import NewUser from "./NewUser";
 import { Routes, Route } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const App = (props: Types.AppProps) => {
+  const nav = useNavigate();
+
+  const handeLogOut = () => {
+    console.log(`logging out`);
+    nav(`/`);
+  };
+
   return (
-    <main className="container-fluid px-5 my-3">
+    <main className="container-fluid px-5 mt-3">
       <div className="text-center">Title Here</div>
+
+      <div className="d-flex justify-content-end mb-1">
+        <button onClick={() => handeLogOut()} className="btn btn-primary">
+          Log Out
+        </button>
+      </div>
+
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/game" element={<GameContainer />} />

@@ -12,13 +12,22 @@ const Loginpage = () => {
   const handleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
+    //@ check if the user has entered their username and password
+    if (!password || !username) {
+      alert(`Please enter your username and password`);
+      return;
+    }
+
+    //! this is for testing purposes
+    nav(`/game`);
+
     //! i want this to accept username instead of an email
     // Fetcher.POST("/auth/login", { username, password })
     //   .then((data) => {
     //     // console.log({ data });
     //     if (data.token) {
     //       localStorage.setItem(TOKEN_KEY, data.token);
-    //       nav(`/blogs`);
+    //       nav(`/game`);
     //     } else {
     //       alert(data.message);
     //     }

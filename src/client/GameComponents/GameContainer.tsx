@@ -345,19 +345,19 @@ const GameContainer = (props: Types.NoProps) => {
   return (
     <div className="d-flex">
       {/* Remove this button, its for testing*/}
-      <div>
+      {/* <div>
         <button onClick={() => handleQuestingTick()}>test quest</button>
-      </div>
+      </div> */}
       {/* Remove this button, its for testing*/}
       {/* Remove this button, its for testing*/}
-      <div>
+      {/* <div>
         <button onClick={() => handleSkillingTick()}>test skillTick</button>
-      </div>
+      </div> */}
       {/* Remove this button, its for testing*/}
       {/* Remove this button, its for testing*/}
-      <div>
+      {/* <div>
         <button onClick={() => handleCombatTick()}>test combatTick</button>
-      </div>
+      </div> */}
       {/* Remove this button, its for testing*/}
 
       <div id="gamecontainer" className="row justify-content-lg-center">

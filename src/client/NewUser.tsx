@@ -44,7 +44,11 @@ const NewUser = (props: Types.NoProps) => {
         return;
       });
 
+    //! this is for testing purposes
+    nav(`/game`);
+
     //! need to check if email or usernames are duplicates
+    // check if email or usernames are duplicates here
 
     // Fetcher.POST("/auth/login", { email, password_A })
     //   .then((data) => {
