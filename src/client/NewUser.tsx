@@ -26,11 +26,21 @@ const NewUser = (props: Types.NoProps) => {
 
     //@ check if the user entered valid email
     Validation.isValidEmail(email)
-      .then(() => console.log(`Validation Complete.`))
+      .then(() => console.log(`Email validated.`))
       .catch((error) => {
         console.log(`Bad Email Check Error...\n`);
         console.error(error);
         alert("Please enter a valid email");
+        return;
+      });
+
+    //@ check if the user entered an acceptable username
+    Validation.isValidusername(username)
+      .then(() => console.log(`Username validated.`))
+      .catch((error) => {
+        console.log(`Bad Username Check Error...\n`);
+        console.log(error);
+        alert("Please enter a username containing only letters, numbers, and spaces");
         return;
       });
 
@@ -41,7 +51,7 @@ const NewUser = (props: Types.NoProps) => {
     //     // console.log({ data });
     //     if (data.token) {
     //       localStorage.setItem(TOKEN_KEY, data.token);
-    //       nav(`/blogs`);
+    //       nav(`/game`);
     //     } else {
     //       alert(data.message);
     //     }
