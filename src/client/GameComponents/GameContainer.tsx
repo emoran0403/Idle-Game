@@ -82,6 +82,9 @@ const GameContainer = (props: Types.NoProps) => {
   const [targetLifePoints, setTargetLifePoints] = useState<number>(0);
   const [needsToBank, setNeedsToBank] = useState<boolean>(false);
 
+  //@ this keeps track of time, used to 'save' progress in localStorage, and to update DB
+  const [checkPointTimer, setcheckPointTimer] = useState<number>(0);
+
   //@ use this to add to the chat log array
   const handleNewChatLog = (message: string, tags: Types.ChatLogTag) => {
     // create a newLog object by generating a timestamp, and the given message and tags array
@@ -323,6 +326,17 @@ const GameContainer = (props: Types.NoProps) => {
       } else {
         console.log(`all ticks failed to tick`);
       }
+      setcheckPointTimer(checkPointTimer + 1);
+      if (checkPointTimer % 15 === 0) {
+        //@every 30 seconds, update localStorage
+        //! need to stringify store?
+      }
+      if (checkPointTimer % 150 === 0) {
+        //@every 5 mins, update database
+        //! make a put req to db
+      }
+      console.log(checkPointTimer);
+      //! set this to 2000ms in production, 500ms for testing
     }, 500);
 
     return () => clearInterval(interval);
@@ -340,6 +354,7 @@ const GameContainer = (props: Types.NoProps) => {
     playerLocation,
     questStepProgress,
     playerIsBanking,
+    checkPointTimer,
   ]);
 
   return (

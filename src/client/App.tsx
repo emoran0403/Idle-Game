@@ -10,6 +10,7 @@ const App = (props: Types.AppProps) => {
   const nav = useNavigate();
 
   const handeLogOut = () => {
+    //! this needs to handle a PUT req to the db to update player data
     console.log(`logging out`);
     nav(`/`);
   };
