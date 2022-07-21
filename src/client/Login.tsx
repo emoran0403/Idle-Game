@@ -1,52 +1,34 @@
 import React, { useState } from "react";
 import * as Types from "../../Types";
-// import { useNavigate } from "react-router-dom";
-// import { Button } from "@mui/material";
-import Validation from "./ClientUtils/DataValidation";
-// import Fetcher, { TOKEN_KEY } from "../client/Client_Utils/Fetch_Service";
+import { useNavigate } from "react-router-dom";
+import Fetcher, { TOKEN_KEY } from "../client/ClientUtils/Fetcher";
 
 const Loginpage = () => {
-  //   const nav = useNavigate();
+  const nav = useNavigate();
 
-  const [password_A, setPassword_A] = useState<string>("");
-  const [password_B, setPassword_B] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const [username, setUsername] = useState<string>("");
 
-  //   const handleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
-  //     e.preventDefault();
+  const handleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
 
-  // if (password_A !== password_B) {
-  //   alert("Passwords do not match");
-  //   setPassword_A("");
-  //   setPassword_B("");
-  // }
-
-  //     Validation.isValidEmail(email)
-  //       .then(() => console.log(`Validation Complete.`))
-  //       .catch((error) => {
-  //         console.log(`Bad Email Check Error...\n`);
-  //         console.error(error);
-  //         alert("Please check your credentials");
-  //         return;
-  //       });
-
-  //     Fetcher.POST("/auth/login", { email, password })
-  //       .then((data) => {
-  //         // console.log({ data });
-  //         if (data.token) {
-  //           localStorage.setItem(TOKEN_KEY, data.token);
-  //           nav(`/blogs`);
-  //         } else {
-  //           alert(data.message);
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         console.log(`Login Error...\n`);
-  //         console.error(error);
-  //         alert(`Something went wrong, please try again`);
-  //       });
-  //   };
+    //! i want this to accept username instead of an email
+    // Fetcher.POST("/auth/login", { username, password })
+    //   .then((data) => {
+    //     // console.log({ data });
+    //     if (data.token) {
+    //       localStorage.setItem(TOKEN_KEY, data.token);
+    //       nav(`/blogs`);
+    //     } else {
+    //       alert(data.message);
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.log(`Login Error...\n`);
+    //     console.error(error);
+    //     alert(`Something went wrong, please try again`);
+    //   });
+  };
 
   return (
     <>
@@ -65,39 +47,21 @@ const Loginpage = () => {
             />
 
             <input
-              id="email"
-              placeholder="email"
-              type="email"
-              value={email}
-              className="form-control col-md-7 mt-1"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-
-            <input
-              id="password_A"
+              id="password"
               placeholder="password"
               type="password"
-              value={password_A}
+              value={password}
               className="form-control col-md-7 mb-1"
-              onChange={(e) => setPassword_A(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
             />
 
-            <input
-              id="password_B"
-              placeholder="confirmpassword"
-              type="password"
-              value={password_B}
-              className="form-control col-md-7 mb-1"
-              onChange={(e) => setPassword_B(e.target.value)}
-            />
-
-            {/* <button className="btn btn-primary my-2 ms-2 col-md-6" type="button" onClick={(e) => handleLogin(e)}>
+            <button className="btn btn-primary my-2 ms-2 col-md-6" type="button" onClick={(e) => handleLogin(e)}>
               Login
-            </button> */}
-            {/* need a new player view */}
-            {/* <button className="btn btn-primary my-2 ms-2 col-md-6" type="button" onClick={() => nav("/newplayer")}>
+            </button>
+
+            <button className="btn btn-primary my-2 ms-2 col-md-6" type="button" onClick={() => nav(`/register`)}>
               New Player
-            </button> */}
+            </button>
           </div>
         </div>
       </div>

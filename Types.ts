@@ -1170,3 +1170,16 @@ export interface IHatchetsSlice {
 export interface ICompositeHatchet extends IHatchet {
   playerOwnsThisItem: boolean;
 }
+
+export interface FetchData {
+  [key: string]: string | number | boolean;
+}
+
+export interface IFetchOptions {
+  headers: IHeaderObject;
+  body?: string;
+}
+
+export interface IHeaderObject {
+  [key: string]: string;
+}
