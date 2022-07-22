@@ -11,6 +11,9 @@ const Loginpage = () => {
 
   const handleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    //! this will need to grab data from localStorage and the database
+    //! choose the one with the larger timestamp
+    //! then set that to redux state
 
     //@ check if the user has entered their username and password
     if (!password || !username) {
@@ -22,8 +25,8 @@ const Loginpage = () => {
     nav(`/game`);
 
     //! i want this to accept username instead of an email
+
     // Fetcher.POST("/auth/login", { username, password })
-    //! this will need to set data from db into global redux state
 
     //   .then((data) => {
     //     // console.log({ data });

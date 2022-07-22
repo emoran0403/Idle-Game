@@ -264,23 +264,31 @@ const GameContainer = (props: Types.NoProps) => {
 
   //@ this will handle saving the game state to localstorage and the database
   const handleSavePoint = () => {
+    /**
+     * every 30 seconds, stringify state with a timestamp and set to localstorage as a checkpoint
+     * this checkpoint helps if the player closes the tab without hitting logout, (logout button will make the db call to save data)
+     * every 5 mins, create a checkpoint, and send data to the database
+     */
+
     // increment the checkPointTimer so we can keep track of the time between saves
     setcheckPointTimer(checkPointTimer + 1);
 
     if (checkPointTimer % 15 === 0) {
       //@every 30 seconds, stringify state and update localStorage
       console.log(`updating localStorage`);
-      let timestamp = Date.now();
+      let timestamp: number = Date.now();
       let checkPointData: Types.IcheckPointData = { ...ALLSTATE, timestamp };
       let checkPointDataStringified = JSON.stringify(checkPointData);
       localStorage.setItem("checkPointData", checkPointDataStringified);
     }
     if (checkPointTimer % 150 === 0) {
       //@every 5 mins, update database
-      //! make a put req to db
       console.log(`update database`);
-      let stateString = JSON.stringify(ALLSTATE);
-      localStorage.setItem("checkPointData", stateString);
+      let timestamp: number = Date.now();
+      let checkPointData: Types.IcheckPointData = { ...ALLSTATE, timestamp };
+      let checkPointDataStringified = JSON.stringify(checkPointData);
+      localStorage.setItem("checkPointData", checkPointDataStringified);
+      //! make a put req to db
     }
     console.log(checkPointTimer);
   };
@@ -354,7 +362,7 @@ const GameContainer = (props: Types.NoProps) => {
 
       handleSavePoint();
 
-      //! set this to 2000ms in production, 500ms for testing
+      //! set this to 2000ms in production
     }, 1000);
 
     return () => clearInterval(interval);
