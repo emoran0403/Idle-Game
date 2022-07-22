@@ -8,6 +8,8 @@
   - if there is local data, and db data, which one do i use?
    - timestamp the object - and use the data with the most recent timestamp
 
+* im going to have jwt in localstorage as well as the checkpoint data
+
 
 //# Fixes I need to do
 //! game - set up a way to save progress to local storage

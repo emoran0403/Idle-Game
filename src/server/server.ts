@@ -1,6 +1,8 @@
 import * as express from "express";
 import apiRouter from "./routes";
 
+import "./mongodb";
+
 const app = express();
 
 app.use(express.static("public"));
