@@ -2,6 +2,13 @@
 * auth - will need to tweak auth since data is coming back differently than from sql
 
 
+* how to i reconcile the checkpoint data in local and the saved data in the database?
+* why do i need / want local data?
+ - if the player closes the tab without hitting logout, they could lose ~5 mins worth of progress
+  - if there is local data, and db data, which one do i use?
+   - timestamp the object - and use the data with the most recent timestamp
+
+
 //# Fixes I need to do
 //! game - set up a way to save progress to local storage
 //! server - connect to db to save data
@@ -27,3 +34,4 @@
 //? maybe make the game choose the next available quest automatically
 //? offline progress
 //? show location of quest in questlist component
+

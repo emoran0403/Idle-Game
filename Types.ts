@@ -279,6 +279,18 @@ export type ICurrentResourceOptions =
   | `magic`
   | `elder`;
 
+export interface AllSlots {
+  BackSlot: IBackSlotSlice;
+  BodySlot: IBodySlotSlice;
+  FeetSlot: IFeetSlotSlice;
+  HandSlot: IHandSlotSlice;
+  HeadSlot: IHeadSlotSlice;
+  LegsSlot: ILegsSlotSlice;
+  NeckSlot: INeckSlotSlice;
+  RingSlot: IRingSlotSlice;
+  TwoHandSlot: ITwoHandSlotSlice;
+}
+
 export interface AllState extends AllSlots {
   Experience: ISkillList;
   Bank_Fish: IFishBankSlice;
@@ -297,6 +309,10 @@ export interface AllState extends AllSlots {
   QuestPoints: IQuestPointsSlice;
   Quests_Lumbridge: LumbridgeQuestSliceCrap;
   Quests_Draynor: DraynorQuestSliceCrap;
+}
+
+export interface IcheckPointData extends AllState {
+  timestamp: number;
 }
 
 export type ICurrentStyleOptions = `none` | `melee` | `ranged` | `air` | `fire` | `water` | `earth`;
@@ -346,18 +362,6 @@ export type ICurrentQuestOptions =
   | `Swept Away`
   | `Missing My Mummy`
   | `Stolen Hearts`;
-
-export interface AllSlots {
-  BackSlot: IBackSlotSlice;
-  BodySlot: IBodySlotSlice;
-  FeetSlot: IFeetSlotSlice;
-  HandSlot: IHandSlotSlice;
-  HeadSlot: IHeadSlotSlice;
-  LegsSlot: ILegsSlotSlice;
-  NeckSlot: INeckSlotSlice;
-  RingSlot: IRingSlotSlice;
-  TwoHandSlot: ITwoHandSlotSlice;
-}
 
 export type AllSliceKeys =
   | IBackSlotSlice

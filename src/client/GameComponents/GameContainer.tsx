@@ -45,8 +45,8 @@ const GameContainer = (props: Types.NoProps) => {
   const bank_logs = useSelector((state: Types.AllState) => state.Bank_Logs) as Types.ILogBankSlice;
   const bank_fish = useSelector((state: Types.AllState) => state.Bank_Fish) as Types.IFishBankSlice;
   const playerIsBanking = useSelector((state: Types.AllState) => state.Resources.Banking);
-  const everything = useSelector((state: Types.AllState) => state);
-  console.log(everything);
+  const ALLSTATE = useSelector((state: Types.AllState) => state);
+  // console.log(ALLSTATE);
 
   // console.log(playerInventory);
   const AllQuestsFromState: Types.IStateQuest[] = [...LumbridgeQuestArray, ...DraynorQuestArray];
@@ -262,6 +262,29 @@ const GameContainer = (props: Types.NoProps) => {
     }
   };
 
+  //@ this will handle saving the game state to localstorage and the database
+  const handleSavePoint = () => {
+    // increment the checkPointTimer so we can keep track of the time between saves
+    setcheckPointTimer(checkPointTimer + 1);
+
+    if (checkPointTimer % 15 === 0) {
+      //@every 30 seconds, stringify state and update localStorage
+      console.log(`updating localStorage`);
+      let timestamp = Date.now();
+      let checkPointData: Types.IcheckPointData = { ...ALLSTATE, timestamp };
+      let checkPointDataStringified = JSON.stringify(checkPointData);
+      localStorage.setItem("checkPointData", checkPointDataStringified);
+    }
+    if (checkPointTimer % 150 === 0) {
+      //@every 5 mins, update database
+      //! make a put req to db
+      console.log(`update database`);
+      let stateString = JSON.stringify(ALLSTATE);
+      localStorage.setItem("checkPointData", stateString);
+    }
+    console.log(checkPointTimer);
+  };
+
   //@ this useEffect is dedicated to executing the logic of what to do when the quest is complete
   useEffect(() => {
     for (let i = 0; i < AllQuestsFromState.length; i++) {
@@ -328,18 +351,9 @@ const GameContainer = (props: Types.NoProps) => {
       } else {
         console.log(`all ticks failed to tick`);
       }
-      setcheckPointTimer(checkPointTimer + 1);
-      if (checkPointTimer % 15 === 0) {
-        //@every 30 seconds, update localStorage
-        //! need to stringify store?
-        console.log(`update localStorage`);
-      }
-      if (checkPointTimer % 150 === 0) {
-        //@every 5 mins, update database
-        //! make a put req to db
-        console.log(`update database`);
-      }
-      console.log(checkPointTimer);
+
+      handleSavePoint();
+
       //! set this to 2000ms in production, 500ms for testing
     }, 1000);
 
