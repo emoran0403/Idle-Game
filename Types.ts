@@ -222,13 +222,6 @@ export type RootState = ReturnType<typeof store.getState>;
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch;
 
-//! this can probably be improved
-export interface ButtonSlice {
-  buttons1?: { value: number };
-  buttons2?: { value: number };
-  buttons3?: { value: number };
-}
-
 export interface IFlatObjectOfNums {
   [key: string]: number;
 }

@@ -45,6 +45,8 @@ const GameContainer = (props: Types.NoProps) => {
   const bank_logs = useSelector((state: Types.AllState) => state.Bank_Logs) as Types.ILogBankSlice;
   const bank_fish = useSelector((state: Types.AllState) => state.Bank_Fish) as Types.IFishBankSlice;
   const playerIsBanking = useSelector((state: Types.AllState) => state.Resources.Banking);
+  const everything = useSelector((state: Types.AllState) => state);
+  console.log(everything);
 
   // console.log(playerInventory);
   const AllQuestsFromState: Types.IStateQuest[] = [...LumbridgeQuestArray, ...DraynorQuestArray];
@@ -310,7 +312,7 @@ const GameContainer = (props: Types.NoProps) => {
   //@ this useEffect is dedicated to the 'game tick' logic
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log(`%cGame Ticked`, "font-weight: bold;font-size: 20px");
+      console.count(`Game Ticked`);
 
       // console.log({ CurrentActivity, Target, CurrentSkill, CurrentResource });
 
@@ -330,14 +332,16 @@ const GameContainer = (props: Types.NoProps) => {
       if (checkPointTimer % 15 === 0) {
         //@every 30 seconds, update localStorage
         //! need to stringify store?
+        console.log(`update localStorage`);
       }
       if (checkPointTimer % 150 === 0) {
         //@every 5 mins, update database
         //! make a put req to db
+        console.log(`update database`);
       }
       console.log(checkPointTimer);
       //! set this to 2000ms in production, 500ms for testing
-    }, 500);
+    }, 1000);
 
     return () => clearInterval(interval);
     // any variable the useEffect DEPENDS on need to be in the dependency array

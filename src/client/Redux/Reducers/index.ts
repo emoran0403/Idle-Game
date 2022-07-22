@@ -1,7 +1,4 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import buttons1Reducer from "../Slices/TestSlices/Button1";
-import buttons2Reducer from "../Slices/TestSlices/Button2";
-import buttons3Reducer from "../Slices/TestSlices/Button3";
 import experienceReducer from "../Slices/Experience";
 import fishReducer from "../Slices/BankSlices/FishSlice";
 import logsReducer from "../Slices/BankSlices/LogsSlice";
@@ -30,9 +27,6 @@ import TwoHandSlotSliceReducer from "../Slices/EquipmentSlices/TwoHandSlotSlice"
 import HatchetsSliceReducer from "../Slices/SkillingEquipmentSlices/Hatchets";
 
 export default combineReducers({
-  buttons1: buttons1Reducer,
-  buttons2: buttons2Reducer,
-  buttons3: buttons3Reducer,
   Experience: experienceReducer,
   Bank_Fish: fishReducer,
   Bank_Logs: logsReducer,
