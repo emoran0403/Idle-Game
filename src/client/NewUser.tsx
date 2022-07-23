@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Validation from "./ClientUtils/DataValidation";
 import Fetcher, { TOKEN_KEY } from "../client/ClientUtils/Fetcher";
 
-const NewUser = (props: Types.NoProps) => {
+const NewUser = (props: Types.NewUserCompProps) => {
   const [password_A, setPassword_A] = useState<string>("");
   const [password_B, setPassword_B] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -46,6 +46,9 @@ const NewUser = (props: Types.NoProps) => {
 
     //! this is for testing purposes
     nav(`/game`);
+
+    //@ toggle the logged in boolean to properly display the logout button
+    props.setLoggedIn(!props.loggedIn);
 
     //! need to check if email or usernames are duplicates
     // check if email or usernames are duplicates here

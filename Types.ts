@@ -2,12 +2,14 @@ import store from "./src/client/Redux/store";
 
 export interface AppProps {}
 export interface NoProps {}
-export interface CounterProps {}
-export interface InventoryProps {}
-export interface WoodcuttingCompProps {}
-export interface FletchingCompProps {}
-export interface FiremakingCompProps {}
-
+export interface LoginCompProps {
+  setLoggedIn: Function;
+  loggedIn: boolean;
+}
+export interface NewUserCompProps {
+  setLoggedIn: Function;
+  loggedIn: boolean;
+}
 export interface NavigationAreaCompProps {
   newChatLog: Function;
   chatLogArray: IChatLog[];

@@ -3,7 +3,7 @@ import * as Types from "../../Types";
 import { useNavigate } from "react-router-dom";
 import Fetcher, { TOKEN_KEY } from "../client/ClientUtils/Fetcher";
 
-const Loginpage = () => {
+const Loginpage = (props: Types.LoginCompProps) => {
   const nav = useNavigate();
 
   const [password, setPassword] = useState<string>("");
@@ -23,6 +23,9 @@ const Loginpage = () => {
 
     //! this is for testing purposes
     nav(`/game`);
+
+    //@ toggle the logged in boolean to properly display the logout button
+    props.setLoggedIn(!props.loggedIn);
 
     //! i want this to accept username instead of an email
 
