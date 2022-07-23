@@ -35,13 +35,13 @@ export const TwoHandSlotSlice = createSlice({
   },
   reducers: {
     // this is the only reducer needed as the player will only be able to acquire armor, not sell them
-    playerNowOwnsItem: (state: Types.ITwoHandSlotSlice, action) => {
+    playerNowOwnsTwoHandItem: (state: Types.ITwoHandSlotSlice, action) => {
       state[action.payload as keyof Types.ITwoHandSlotSlice] = true;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { playerNowOwnsItem } = TwoHandSlotSlice.actions;
+export const { playerNowOwnsTwoHandItem } = TwoHandSlotSlice.actions;
 
 export default TwoHandSlotSlice.reducer;
