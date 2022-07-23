@@ -16,7 +16,7 @@ async function main() {
   const Player = mongoose.model("Player", playerInfoSchema);
 
   const Eric = new Player();
-  console.log(Eric);
+  // console.log(Eric);
 
   await Eric.save();
 }

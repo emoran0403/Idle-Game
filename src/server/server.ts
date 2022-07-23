@@ -1,7 +1,8 @@
 import * as express from "express";
 import apiRouter from "./routes";
 
-import "./mongodb";
+//! for testing purposes
+// import "./mongodb";
 
 const app = express();
 

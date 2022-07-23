@@ -398,7 +398,7 @@ export const HeadSlot: Types.IArmorSlotHead = {
     styleBonusMelee: 0,
     styleBonusRanged: 0,
     styleBonusMagic: 0,
-    value: 10000,
+    value: 1000,
   },
   leathercowl: {
     name: "leathercowl",
