@@ -49,7 +49,7 @@ const Levels = (props: Types.NoProps) => {
           Levels
           <div className="d-flex row">
             <h6 className="card-subtitle text-muted">Combat Level: {showCombatLevel()}</h6>
-            <h6 className="card-subtitle text-muted">Total Levels: {totalLevel}</h6>
+            <h6 className="card-subtitle text-muted">Total Levels: {totalLevel.toLocaleString("en-US")}</h6>
             <h6 className="card-subtitle text-muted">Total Experience: {totalExperience.toLocaleString("en-US")}</h6>
           </div>
         </h5>

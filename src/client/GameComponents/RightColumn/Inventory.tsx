@@ -22,7 +22,7 @@ const Inventory = (props: Types.NoProps) => {
         <h5 className="card-header text-center">
           Inventory
           <div className="d-flex row">
-            <h6 className="card-subtitle text-muted">Coins: {Wallet.coins}</h6>
+            <h6 className="card-subtitle text-muted">Coins: {Wallet.coins.toLocaleString("en-US")}</h6>
           </div>
         </h5>
 

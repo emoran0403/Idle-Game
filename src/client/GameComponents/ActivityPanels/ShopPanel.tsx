@@ -116,7 +116,7 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
                 <div className="card-text">
                   {item.playerOwnsThisItem && <div>Owned</div>}
                   {!item.playerOwnsThisItem && (
-                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 10).toLocaleString()}</button>
+                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 10).toLocaleString("en-US")}</button>
                   )}
                 </div>
               </div>
@@ -183,7 +183,7 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
                 <div className="card-text">
                   {item.playerOwnsThisItem && <div>Owned</div>}
                   {!item.playerOwnsThisItem && (
-                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 10).toLocaleString()}</button>
+                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 10).toLocaleString("en-US")}</button>
                   )}
                 </div>
               </div>
@@ -250,7 +250,7 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
                 <div className="card-text">
                   {item.playerOwnsThisItem && <div>Owned</div>}
                   {!item.playerOwnsThisItem && (
-                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 10).toLocaleString()}</button>
+                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 10).toLocaleString("en-US")}</button>
                   )}
                 </div>
               </div>
@@ -317,7 +317,7 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
                 <div className="card-text">
                   {item.playerOwnsThisItem && <div>Owned</div>}
                   {!item.playerOwnsThisItem && (
-                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 10).toLocaleString()}</button>
+                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 10).toLocaleString("en-US")}</button>
                   )}
                 </div>
               </div>
@@ -384,7 +384,7 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
                 <div className="card-text">
                   {item.playerOwnsThisItem && <div>Owned</div>}
                   {!item.playerOwnsThisItem && (
-                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 10).toLocaleString()}</button>
+                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 10).toLocaleString("en-US")}</button>
                   )}
                 </div>
               </div>
@@ -451,7 +451,7 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
                 <div className="card-text">
                   {item.playerOwnsThisItem && <div>Owned</div>}
                   {!item.playerOwnsThisItem && (
-                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 10).toLocaleString()}</button>
+                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 10).toLocaleString("en-US")}</button>
                   )}
                 </div>
               </div>
