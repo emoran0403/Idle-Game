@@ -256,7 +256,9 @@ const GameContainer = (props: Types.NoProps) => {
         Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].displayName;
 
         handleNewChatLog(
-          `Defeated a ${Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].displayName} and earned ${coinDrop} coins`,
+          `Defeated a ${
+            Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].displayName
+          } and earned ${coinDrop.toLocaleString("en-US")} coins`,
           `Monster Defeated`
         );
       } else {

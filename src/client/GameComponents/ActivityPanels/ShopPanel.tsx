@@ -4,12 +4,16 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromWallet } from "../../Redux/Slices/Wallet";
 
+import { playerNowOwnsHatchetItem } from "../../Redux/Slices/SkillingEquipmentSlices/Hatchets";
+
 import { playerNowOwnsHeadItem } from "../../Redux/Slices/EquipmentSlices/HeadSlotSlice";
 import { playerNowOwnsBodyItem } from "../../Redux/Slices/EquipmentSlices/BodySlotSlice";
 import { playerNowOwnsLegItem } from "../../Redux/Slices/EquipmentSlices/LegsSlotSlice";
 import { playerNowOwnsHandItem } from "../../Redux/Slices/EquipmentSlices/HandsSlotSlice";
 import { playerNowOwnsFeetItem } from "../../Redux/Slices/EquipmentSlices/FeetSlotSlice";
 import { playerNowOwnsTwoHandItem } from "../../Redux/Slices/EquipmentSlices/TwoHandSlotSlice";
+
+import { listOfHatchets } from "../../../../Constants/SkillingEquipment/Hatchets";
 
 import { HeadSlot } from "../../../../Constants/Equipment/HeadSlot";
 import { BodySlot } from "../../../../Constants/Equipment/BodySlot";
@@ -22,6 +26,9 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
   const dispatch = useDispatch();
 
   const Wallet = useSelector((state: Types.AllState) => state.Wallet) as Types.IWallet;
+
+  const hatchetsFromState = useSelector((state: Types.AllState) => state.Hatchets) as Types.IHatchetsSlice;
+
   const headsFromState = useSelector((state: Types.AllState) => state.HeadSlot) as Types.IHeadSlotSlice;
   const bodiesFromState = useSelector((state: Types.AllState) => state.BodySlot) as Types.IBodySlotSlice;
   const legsFromState = useSelector((state: Types.AllState) => state.LegsSlot) as Types.ILegsSlotSlice;
@@ -50,14 +57,92 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
     );
   };
 
-  const handleButtonStyle = (item: Types.ICompositeArmorItem) => {
-    if (Wallet.coins >= item.value * 10 && !item.playerOwnsThisItem) {
-      // item is buyable
-      return `bg-success`;
+  const handleButtonStyle = (item: Types.ICompositeArmorItem | Types.ICompositeHatchet) => {
+    // hatchets are more expensive, so we need to check for that - use the `in` operator to type guard
+    if (`armor` in item) {
+      if (Wallet.coins >= item.value * 10 && !item.playerOwnsThisItem) {
+        // item is buyable
+        return `bg-success`;
+      } else {
+        // item is not buyable
+        return `bg-danger`;
+      }
     } else {
-      // item is not buyable
-      return `bg-danger`;
+      if (Wallet.coins >= item.value * 25 && !item.playerOwnsThisItem) {
+        // item is buyable
+        return `bg-success`;
+      } else {
+        // item is not buyable
+        return `bg-danger`;
+      }
     }
+  };
+
+  const displayHatchetItems = () => {
+    // create an array of hatchet items from those in constants
+    let hatchetsFromConstants: Types.IHatchet[] = Object.values(listOfHatchets);
+
+    // remove the first item, which is the bronze hatchet that is owned by default
+    hatchetsFromConstants.shift();
+
+    // create an empty array to store the composite hatchet items
+    let compositeItems: Types.ICompositeHatchet[] = [];
+
+    for (let i = 0; i < hatchetsFromConstants.length; i++) {
+      let playerOwnsThisItem: boolean = hatchetsFromState[`playerOwns${hatchetsFromConstants[i].name}` as keyof Types.IHatchetsSlice];
+      let tempItem: Types.ICompositeHatchet = { ...hatchetsFromConstants[i], playerOwnsThisItem };
+      compositeItems.push(tempItem);
+    }
+
+    const handleBuyingItem = (item: Types.ICompositeHatchet) => {
+      // define vowels for grammar in chatlog
+      let vowels: string[] = [`a`, `e`, `i`, `o`, `u`];
+
+      // match the bought item to its counterpart in state
+      let itemForState = `playerOwns${item.name}`;
+
+      // remove the coins from the wallet
+      dispatch(removeFromWallet(item.value * 25));
+
+      // add the item to state
+      dispatch(playerNowOwnsHatchetItem(itemForState));
+
+      // send a gramatically correct message to the chat window
+      if (vowels.includes(item.displayName[0].toLocaleLowerCase())) {
+        props.newChatLog(`Bought an ${item.displayName}`, `Nonfilterable`);
+      } else {
+        props.newChatLog(`Bought a ${item.displayName}`, `Nonfilterable`);
+      }
+    };
+
+    // disable the item if the player already owns it
+    return (
+      <div className="card-title border border-dark border-1 rounded-3">
+        <h6 className="text-center">Hatchets</h6>
+        <div className="d-flex flex-row flex-wrap">
+          {compositeItems.map((item) => (
+            <button
+              key={`resource-list-${item.name}`}
+              className={`card border mb-3`}
+              disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 25}
+              onClick={() => {
+                handleBuyingItem(item);
+              }}
+            >
+              <div className="card-body text">
+                <h5 className="card-title">{item.displayName}</h5>
+                <div className="card-text">
+                  {item.playerOwnsThisItem && <div>Owned</div>}
+                  {!item.playerOwnsThisItem && (
+                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 25).toLocaleString("en-US")}</button>
+                  )}
+                </div>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+    );
   };
 
   const displayHeadSlotItems = () => {
@@ -106,7 +191,7 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
             <button
               key={`resource-list-${item.name}`}
               className={`card border mb-3`}
-              disabled={item.playerOwnsThisItem}
+              disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 10}
               onClick={() => {
                 handleBuyingItem(item);
               }}
@@ -173,7 +258,7 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
             <button
               key={`resource-list-${item.name}`}
               className={`card border mb-3`}
-              disabled={item.playerOwnsThisItem}
+              disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 10}
               onClick={() => {
                 handleBuyingItem(item);
               }}
@@ -240,7 +325,7 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
             <button
               key={`resource-list-${item.name}`}
               className={`card border mb-3`}
-              disabled={item.playerOwnsThisItem}
+              disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 10}
               onClick={() => {
                 handleBuyingItem(item);
               }}
@@ -307,7 +392,7 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
             <button
               key={`resource-list-${item.name}`}
               className={`card border mb-3`}
-              disabled={item.playerOwnsThisItem}
+              disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 10}
               onClick={() => {
                 handleBuyingItem(item);
               }}
@@ -374,7 +459,7 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
             <button
               key={`resource-list-${item.name}`}
               className={`card border mb-3`}
-              disabled={item.playerOwnsThisItem}
+              disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 10}
               onClick={() => {
                 handleBuyingItem(item);
               }}
@@ -441,7 +526,7 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
             <button
               key={`resource-list-${item.name}`}
               className={`card border mb-3`}
-              disabled={item.playerOwnsThisItem}
+              disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 10}
               onClick={() => {
                 handleBuyingItem(item);
               }}
@@ -469,6 +554,7 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
         <div className="card">
           <div className="card-body">
             {/* panel specific content goes here */}
+            {displayHatchetItems()}
             {displayHeadSlotItems()}
             {displayBodySlotItems()}
             {displayLegsSlotItems()}

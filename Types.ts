@@ -1151,6 +1151,7 @@ export interface IHatchet {
   name: string;
   displayName: string;
   levelReqWoodcutting: number;
+  value: number;
 }
 
 export interface IListOfHatchets {

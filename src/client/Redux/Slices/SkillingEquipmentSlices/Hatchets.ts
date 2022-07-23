@@ -15,13 +15,13 @@ export const Hatchets = createSlice({
   },
   reducers: {
     // this is the only reducer needed as the player will only be able to acquire armor, not sell them
-    playerNowOwnsItem: (state: Types.IHatchetsSlice, action) => {
+    playerNowOwnsHatchetItem: (state: Types.IHatchetsSlice, action) => {
       state[action.payload as keyof Types.IHatchetsSlice] = true;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { playerNowOwnsItem } = Hatchets.actions;
+export const { playerNowOwnsHatchetItem } = Hatchets.actions;
 
 export default Hatchets.reducer;
