@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { HeadSlot } from "../../../../Constants/Equipment/HeadSlot";
 
 const ShopPanel = (props: Types.ShopPanelProps) => {
+  const Wallet = useSelector((state: Types.AllState) => state.Wallet) as Types.IWallet;
   const headsFromState = useSelector((state: Types.AllState) => state.HeadSlot) as Types.IHeadSlotSlice;
   //   console.log(headsFromState);
   //   useEffect(() => {}, []);
@@ -25,6 +26,16 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
         <div className="col-lg-9 justify-content-lg-center">Shop</div>
       </div>
     );
+  };
+
+  const handleButtonStyle = (item: Types.ICompositeArmorItem) => {
+    if (Wallet.coins >= item.value * 10 && !item.playerOwnsThisItem) {
+      // item is buyable
+      return `bg-success`;
+    } else {
+      // item is not buyable
+      return `bg-danger`;
+    }
   };
 
   const displayHeadSlotItems = () => {
@@ -54,7 +65,10 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
               <div className="card-body text">
                 <h5 className="card-title">{item.displayName}</h5>
                 <div className="card-text">
-                  <div>Cost: {(item.value * 10).toLocaleString()}</div>
+                  {item.playerOwnsThisItem && <div>Owned</div>}
+                  {!item.playerOwnsThisItem && (
+                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 10).toLocaleString()}</button>
+                  )}
                 </div>
               </div>
             </button>
