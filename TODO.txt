@@ -28,7 +28,6 @@
 
 
 //# Future Updates
-//? shop to buy equipment
 //? implement player lifepoints
 //? more locations
 //? bosses

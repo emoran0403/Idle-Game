@@ -253,7 +253,12 @@ const GameContainer = (props: Types.NoProps) => {
         );
         dispatch(addToWallet(coinDrop));
         // send a chatlog to the ChatWindow
-        handleNewChatLog(`Defeated a ${Target} and earned ${coinDrop} coins`, `Monster Defeated`);
+        Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].displayName;
+
+        handleNewChatLog(
+          `Defeated a ${Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].displayName} and earned ${coinDrop} coins`,
+          `Monster Defeated`
+        );
       } else {
         // Otherwise, apply the damage
         setTargetLifePoints(targetLifePoints - damageDoneToTarget);
