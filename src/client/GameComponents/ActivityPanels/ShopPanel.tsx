@@ -5,7 +5,9 @@ import { useSelector } from "react-redux";
 import { HeadSlot } from "../../../../Constants/Equipment/HeadSlot";
 
 const ShopPanel = (props: Types.ShopPanelProps) => {
-  useEffect(() => {}, []);
+  const headsFromState = useSelector((state: Types.AllState) => state.HeadSlot) as Types.IHeadSlotSlice;
+  //   console.log(headsFromState);
+  //   useEffect(() => {}, []);
 
   const panelHeaderJSX = () => {
     return (
@@ -25,23 +27,37 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
     );
   };
 
-  const headSlotItems = () => {
-    let headSlotArray: Types.IArmorItem[] = Object.values(HeadSlot);
-    headSlotArray.shift(); // remove the first item, which is the `none` item
-    console.log(headSlotArray);
+  const displayHeadSlotItems = () => {
+    // create an array of head slot items from those in constants
+    let headsFromConstants: Types.IArmorItem[] = Object.values(HeadSlot);
+
+    // remove the first item, which is the `none` item
+    headsFromConstants.shift();
+
+    // create an empty array to store the composite head items
+    let compositeItems: Types.ICompositeArmorItem[] = [];
+
+    for (let i = 0; i < headsFromConstants.length; i++) {
+      let playerOwnsThisItem: boolean = headsFromState[`playerOwns${headsFromConstants[i].name}` as keyof Types.AllSliceKeys];
+      let tempItem: Types.ICompositeArmorItem = { ...headsFromConstants[i], playerOwnsThisItem };
+      compositeItems.push(tempItem);
+    }
+
+    // console.log(headsFromConstants);
+    // disable the item if the player already owns it
     return (
       <div className="card-title border border-dark border-1 rounded-3">
         <h6 className="text-center">Head Slot Items</h6>
         <div className="d-flex flex-row flex-wrap">
-          {headSlotArray.map((item) => (
-            <div key={`resource-list-${item.name}`} className={`card border mb-3`}>
+          {compositeItems.map((item) => (
+            <button key={`resource-list-${item.name}`} className={`card border mb-3`} disabled={item.playerOwnsThisItem}>
               <div className="card-body text">
                 <h5 className="card-title">{item.displayName}</h5>
                 <div className="card-text">
                   <div>Cost: {(item.value * 10).toLocaleString()}</div>
                 </div>
               </div>
-            </div>
+            </button>
           ))}
         </div>
       </div>
@@ -55,7 +71,7 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
         <div className="card">
           <div className="card-body">
             {/* panel specific content goes here */}
-            {headSlotItems()}
+            {displayHeadSlotItems()}
             {/* end of panel specific content */}
           </div>
         </div>

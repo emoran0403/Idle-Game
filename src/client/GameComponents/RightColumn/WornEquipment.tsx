@@ -110,7 +110,7 @@ const WornEquipment = (props: Types.WornEquipmentCompProps) => {
   //! the default none item needs to have the playerOwnsThisItem: boolean set to true always
   //! for the rest, it needs to be conditional
   const displaySelectorTagArmor = (itemsFromState: Types.AllSliceKeys, slotName: Types.IEquipmentSlotOptions, slotString: string) => {
-    //# place an empty armor item into the array
+    //# place an empty armor item into the array, so that `none` will be displayed first in the selector
     let compositeItems: Types.ICompositeArmorItem[] = [EmptyArmorItemComposite];
 
     let itemsFromConstants: Types.IArmorItem[] = [...Object.values(slotName)];
