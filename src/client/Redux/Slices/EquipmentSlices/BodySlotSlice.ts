@@ -27,13 +27,13 @@ export const BodySlotSlice = createSlice({
   },
   reducers: {
     // this is the only reducer needed as the player will only be able to acquire armor, not sell them
-    playerNowOwnsItem: (state: Types.IBodySlotSlice, action) => {
+    playerNowOwnsBodyItem: (state: Types.IBodySlotSlice, action) => {
       state[action.payload as keyof Types.IBodySlotSlice] = true;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { playerNowOwnsItem } = BodySlotSlice.actions;
+export const { playerNowOwnsBodyItem } = BodySlotSlice.actions;
 
 export default BodySlotSlice.reducer;
