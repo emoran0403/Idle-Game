@@ -248,8 +248,12 @@ const GameContainer = (props: Types.NoProps) => {
         dispatch(
           gainXP({ skill: `Constitution`, xp: Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].XPGivenConstitution })
         );
+        let coinDrop: number = Math.floor(
+          Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].lifePoints * Math.random() * 2
+        );
+        dispatch(addToWallet(coinDrop));
         // send a chatlog to the ChatWindow
-        handleNewChatLog(`Defeated a ${Target}`, `Monster Defeated`);
+        handleNewChatLog(`Defeated a ${Target} and earned ${coinDrop} coins`, `Monster Defeated`);
       } else {
         // Otherwise, apply the damage
         setTargetLifePoints(targetLifePoints - damageDoneToTarget);
