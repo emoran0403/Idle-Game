@@ -79,7 +79,7 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
   };
 
   return (
-    <div className="container card border border-dark border-2 rounded-3">
+    <div className="container card border border-dark border-2 rounded-3" style={{ overflowY: "auto", position: "relative", height: "81%" }}>
       {panelHeaderJSX()}
       <div className="row justify-content-lg-center">
         <div className="card">
