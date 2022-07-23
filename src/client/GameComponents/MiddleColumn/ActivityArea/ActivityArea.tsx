@@ -47,7 +47,7 @@ const ActivityArea = (props: Types.ActivityAreaCompProps) => {
           ),
           combat: <CombatPanel handleUpdateDisplay={handleUpdateDisplay} newChatLog={props.newChatLog} chatLogArray={props.chatLogArray} />,
           bank: <BankPanel handleUpdateDisplay={handleUpdateDisplay} newChatLog={props.newChatLog} />,
-          shop: <ShopPanel handleUpdateDisplay={handleUpdateDisplay} newChatLog={props.newChatLog} />,
+          shop: <ShopPanel handleUpdateDisplay={handleUpdateDisplay} newChatLog={props.newChatLog} chatLogArray={props.chatLogArray} />,
           bosses: <BossesPanel handleUpdateDisplay={handleUpdateDisplay} newChatLog={props.newChatLog} />,
           minigames: <MinigamePanel handleUpdateDisplay={handleUpdateDisplay} newChatLog={props.newChatLog} />,
           clues: <CluesPanel handleUpdateDisplay={handleUpdateDisplay} newChatLog={props.newChatLog} />,

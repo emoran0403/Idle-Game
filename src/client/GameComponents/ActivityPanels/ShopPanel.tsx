@@ -43,9 +43,24 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
   };
 
   const handleBuyingItem = (item: Types.ICompositeArmorItem) => {
+    // define vowels for grammar in chatlog
+    let vowels: string[] = [`a`, `e`, `i`, `o`, `u`];
+
+    // match the bought item to its counterpart in state
     let itemForState = `playerOwns${item.name}`;
+
+    // remove the coins from the wallet
     dispatch(removeFromWallet(item.value * 10));
+
+    // add the item to state
     dispatch(playerNowOwnsHeadItem(itemForState));
+
+    // send a gramatically correct message to the chat window
+    if (vowels.includes(item.displayName[0].toLocaleLowerCase())) {
+      props.newChatLog(`Bought an ${item.displayName}`, `Nonfilterable`);
+    } else {
+      props.newChatLog(`Bought a ${item.displayName}`, `Nonfilterable`);
+    }
   };
 
   const displayHeadSlotItems = () => {
