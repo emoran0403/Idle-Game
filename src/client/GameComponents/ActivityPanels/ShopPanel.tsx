@@ -1,10 +1,14 @@
 import * as Types from "../../../../Types";
 import * as React from "react";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { HeadSlot } from "../../../../Constants/Equipment/HeadSlot";
+import { playerNowOwnsHeadItem } from "../../Redux/Slices/EquipmentSlices/HeadSlotSlice";
+import { removeFromWallet } from "../../Redux/Slices/Wallet";
 
 const ShopPanel = (props: Types.ShopPanelProps) => {
+  const dispatch = useDispatch();
+
   const Wallet = useSelector((state: Types.AllState) => state.Wallet) as Types.IWallet;
   const headsFromState = useSelector((state: Types.AllState) => state.HeadSlot) as Types.IHeadSlotSlice;
   //   console.log(headsFromState);
@@ -38,6 +42,12 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
     }
   };
 
+  const handleBuyingItem = (item: Types.ICompositeArmorItem) => {
+    let itemForState = `playerOwns${item.name}`;
+    dispatch(removeFromWallet(item.value * 10));
+    dispatch(playerNowOwnsHeadItem(itemForState));
+  };
+
   const displayHeadSlotItems = () => {
     // create an array of head slot items from those in constants
     let headsFromConstants: Types.IArmorItem[] = Object.values(HeadSlot);
@@ -61,7 +71,14 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
         <h6 className="text-center">Head Slot Items</h6>
         <div className="d-flex flex-row flex-wrap">
           {compositeItems.map((item) => (
-            <button key={`resource-list-${item.name}`} className={`card border mb-3`} disabled={item.playerOwnsThisItem}>
+            <button
+              key={`resource-list-${item.name}`}
+              className={`card border mb-3`}
+              disabled={item.playerOwnsThisItem}
+              onClick={() => {
+                handleBuyingItem(item);
+              }}
+            >
               <div className="card-body text">
                 <h5 className="card-title">{item.displayName}</h5>
                 <div className="card-text">
