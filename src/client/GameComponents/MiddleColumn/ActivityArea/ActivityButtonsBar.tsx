@@ -54,6 +54,16 @@ const ActivityButtons = (props: Types.ActivityButtonsCompProps) => {
       </button>
 
       <button
+        onClick={() => {
+          props.handleUpdateDisplay(`shop`);
+          // console.log("you clicked Bank");
+        }}
+        className="btn btn-primary flex-fill"
+      >
+        Shop
+      </button>
+
+      <button
         disabled
         onClick={() => {
           props.handleUpdateDisplay(`bosses`);

@@ -59,6 +59,11 @@ export interface BankPanelProps {
   newChatLog: Function;
 }
 
+export interface ShopPanelProps {
+  handleUpdateDisplay: Function;
+  newChatLog: Function;
+}
+
 export interface CluesPanelProps {
   handleUpdateDisplay: Function;
   newChatLog: Function;

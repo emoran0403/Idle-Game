@@ -10,8 +10,9 @@ import BossesPanel from "../../ActivityPanels/BossesPanel";
 import MinigamePanel from "../../ActivityPanels/MinigamePanel";
 import CluesPanel from "../../ActivityPanels/CluesPanel";
 import BankPanel from "../../ActivityPanels/BankPanel";
-//@ This is a component to hold the activity buttons and the activity display components to manage state for rendering purposes
+import ShopPanel from "../../ActivityPanels/ShopPanel";
 
+//@ This is a component to hold the activity buttons and the activity display components to manage state for rendering purposes
 const ActivityArea = (props: Types.ActivityAreaCompProps) => {
   const [display, setDisplay] = useState<string>("activityDisplay"); // set the default to render the activityDisplay component
 
@@ -44,8 +45,9 @@ const ActivityArea = (props: Types.ActivityAreaCompProps) => {
               questStepProgress={props.questStepProgress}
             />
           ),
-          bank: <BankPanel handleUpdateDisplay={handleUpdateDisplay} newChatLog={props.newChatLog} />,
           combat: <CombatPanel handleUpdateDisplay={handleUpdateDisplay} newChatLog={props.newChatLog} chatLogArray={props.chatLogArray} />,
+          bank: <BankPanel handleUpdateDisplay={handleUpdateDisplay} newChatLog={props.newChatLog} />,
+          shop: <ShopPanel handleUpdateDisplay={handleUpdateDisplay} newChatLog={props.newChatLog} />,
           bosses: <BossesPanel handleUpdateDisplay={handleUpdateDisplay} newChatLog={props.newChatLog} />,
           minigames: <MinigamePanel handleUpdateDisplay={handleUpdateDisplay} newChatLog={props.newChatLog} />,
           clues: <CluesPanel handleUpdateDisplay={handleUpdateDisplay} newChatLog={props.newChatLog} />,
