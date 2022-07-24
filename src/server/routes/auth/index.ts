@@ -1,9 +1,9 @@
 // this can hold the auth routes, there aren't too many
 import * as express from "express";
-import * as Types from "../../../types";
-import * as DB from "../../database";
+import * as Types from "../../../../Types";
+import * as DB from "../../mongodb/index";
 import * as passport from "passport";
-import { generateHash, generateToken } from "../../server_utils/Passwords";
+import { generateHash, generateToken } from "../../ServerUtils/Passwords";
 
 //current route is /auth
 const authRouter = express.Router();
@@ -14,6 +14,7 @@ authRouter.get(`/verify`, passport.authenticate("jwt"), (req, res) => {
 });
 
 //login existing user
+//! refactor to work with MongoDB
 authRouter.post(`/login`, passport.authenticate("local"), (req: Types.ReqUser, res) => {
   try {
     const token = generateToken(req.user.id, req.user.email, req.user.name);
@@ -25,6 +26,7 @@ authRouter.post(`/login`, passport.authenticate("local"), (req: Types.ReqUser, r
 });
 
 //register new user
+//! refactor to work with MongoDB
 authRouter.post(`/register`, async (req, res) => {
   const newUser = req.body;
   try {

@@ -3,7 +3,7 @@
 import * as express from "express";
 import baseRouter from "./Routes/index";
 
-import { configurePassport } from "./server_utils/JWTStrategies";
+import { configurePassport } from "../server/ServerUtils/JWTStrategies";
 
 const app = express();
 
