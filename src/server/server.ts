@@ -5,6 +5,9 @@ import baseRouter from "./Routes/index";
 
 import { configurePassport } from "../server/ServerUtils/JWTStrategies";
 
+//! use this to test MongoDB
+import "../server/mongodb/index";
+
 const app = express();
 
 configurePassport(app);

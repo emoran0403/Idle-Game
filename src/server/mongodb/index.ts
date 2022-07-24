@@ -1,4 +1,4 @@
-import { MongoClient, ServerApiVersion } from "mongodb";
+import { MongoClient, ServerApiVersion, WithId } from "mongodb";
 import * as Types from "../../../Types";
 
 import { DB_CONFIG } from "../config";
@@ -11,11 +11,11 @@ const uri = `mongodb+srv://${Mongo_Name}:${Mongo_Pass}@cluster0.2twg6.mongodb.ne
 const client: MongoClient = new MongoClient(uri, { serverApi: ServerApiVersion.v1 });
 
 //@ this function queries the MongoDB cluster for a player matching the specific username
-const getPlayerInfo = async (playerName: string) => {
+const getPlayerInfo = async (email: string) => {
   try {
     // Connect to the MongoDB cluster
     await client.connect();
-    const result = await client.db("EricDB").collection("PlayerInfo").findOne({ username: playerName });
+    const result = await client.db("EricDB").collection("PlayerInfo").findOne({ email });
 
     if (result) {
       // if there is a result, return it
@@ -81,6 +81,19 @@ export const MongoQuery = {
   registerNewPlayer,
   updatePlayerInfo,
 };
+
+//! use these to test
+getPlayerInfo(`testnamelol2@gmail.com`).then((res) => {
+  if (res) {
+    //! probably a better way to do this
+    // this lets us assert that playerInfo is of the correct type.
+    let playerInfo = JSON.parse(JSON.stringify(res)) as Types.IPlayerData;
+    playerInfo.password;
+    console.log(`the password is ${res.password}`);
+
+    console.log(`the password is ${playerInfo.password}`);
+  }
+});
 
 let testPlayerData: Types.IPlayerData = {
   username: `testnamelol2`,

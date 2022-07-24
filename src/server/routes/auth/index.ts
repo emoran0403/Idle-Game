@@ -10,14 +10,15 @@ const authRouter = express.Router();
 
 //verify token
 authRouter.get(`/verify`, passport.authenticate("jwt"), (req, res) => {
-  res.status(200).json({ message: "valid token" }); // make sure i check for this exact message on navbar!
+  // when verifying, check for this exact message
+  res.status(200).json({ message: "valid token" });
 });
 
 //login existing user
 //! refactor to work with MongoDB
-authRouter.post(`/login`, passport.authenticate("local"), (req: Types.ReqUser, res) => {
+authRouter.post(`/login`, passport.authenticate("local"), (req, res) => {
   try {
-    const token = generateToken(req.user.id, req.user.email, req.user.name);
+    const token = generateToken(req.user.username);
     res.json(token);
   } catch (error) {
     console.log(`login error...\n`);
@@ -33,7 +34,7 @@ authRouter.post(`/register`, async (req, res) => {
     newUser.password = generateHash(newUser.password);
     const results = await DB.Users.insertNewUser(newUser);
     if (results.affectedRows) {
-      const token = generateToken(results.insertId, newUser.email, newUser.name);
+      const token = generateToken(newUser.username);
       res.json(token);
     } else {
       res.status(400).json({ message: "duplicate email" });

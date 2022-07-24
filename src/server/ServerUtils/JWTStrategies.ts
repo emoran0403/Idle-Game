@@ -8,13 +8,15 @@ import * as CONFIG from "../config";
 import { Application } from "express";
 import { compareHash } from "./Passwords";
 
+//! need help with this lol
+
 export function configurePassport(app: Application) {
-  passport.serializeUser((user, done) => {
+  passport.serializeUser((user: Types.IPlayerData, done) => {
     if (user.password) delete user.password;
     done(null, user);
   });
 
-  passport.deserializeUser((user, done) => {
+  passport.deserializeUser((user: Types.IPlayerData, done) => {
     done(null, user);
   });
 
@@ -27,13 +29,23 @@ export function configurePassport(app: Application) {
       },
       async (email, password, done) => {
         try {
-          const [userFound, metaData] = await DB.Users.getSingleUserAUTH(email);
-          if (userFound.length && compareHash(password, userFound[0].password)) {
-            delete userFound[0].password;
-            done(null, userFound);
-          } else {
-            done(null, false);
-          }
+          // query the DB for a player with the given email
+          MongoQuery.getPlayerInfo(email).then((res) => {
+            // if a response is returned, the player's email exists
+            if (res) {
+              //! probably a better way to do this
+              // this lets us assert that playerInfo is of the correct type.
+              let playerInfo = JSON.parse(JSON.stringify(res)) as Types.IPlayerData;
+              // check if the provided password matches the hashedPassword from the DB
+              if (compareHash(password, playerInfo.password!)) {
+                // if so, remove it from the playerInfo, and call done, passing forward the playerInfo
+                delete playerInfo.password;
+                done(null, playerInfo);
+              } else {
+                done(null, false);
+              }
+            }
+          });
         } catch (error) {
           done(error);
         }

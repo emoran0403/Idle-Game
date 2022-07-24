@@ -1,4 +1,5 @@
 import store from "./src/client/Redux/store";
+import { Request } from "express";
 
 export interface AppProps {}
 export interface NoProps {}
@@ -1209,4 +1210,15 @@ export interface IFetchOptions {
 
 export interface IHeaderObject {
   [key: string]: string;
+}
+
+export interface Payload {
+  id: number;
+  email: string;
+  role: string;
+  name: string;
+}
+
+export interface ReqUser extends Request {
+  user?: IPlayerData | Payload;
 }

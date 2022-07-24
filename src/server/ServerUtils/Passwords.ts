@@ -16,11 +16,9 @@ export function compareHash(plaintextPassword: string, hashedPassword: string) {
 }
 
 // Returns a signed JWT - needed to use the Non-null assertion operator `!`
-export function generateToken(username: string, email: string) {
-  const token = jwt.sign({ username, email }, config.JWT_CONFIG.jwtSecretKey!, {
+export function generateToken(username: String) {
+  const token = jwt.sign({ username }, config.JWT_CONFIG.jwtSecretKey!, {
     expiresIn: config.JWT_CONFIG.jwtExpireTime,
   });
   return token;
 }
-
-//! i left off on this - rework the generatetoken function in the other files
