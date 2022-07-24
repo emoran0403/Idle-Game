@@ -11,6 +11,7 @@ const uri = `mongodb+srv://${Mongo_Name}:${Mongo_Pass}@cluster0.2twg6.mongodb.ne
 const client: MongoClient = new MongoClient(uri, { serverApi: ServerApiVersion.v1 });
 
 //@ this function connects to the MongoDB server, and runs qeuries
+//! I can probably wrap this up just like fetcher lol
 async function mainMongoFunction() {
   try {
     // Connect to the MongoDB cluster
@@ -19,7 +20,8 @@ async function mainMongoFunction() {
 
     // Make the appropriate DB calls
     // await findOnePlayerTest(client, `testnamelol`);
-    await registerNewPlayer(client, testPlayerData);
+    // await registerNewPlayer(client, testPlayerData);
+    await updatePlayerStats(client, `testnamelol2`, testPlayerData);
   } catch (e) {
     // log the error if any occur
     console.error(e);
@@ -47,28 +49,36 @@ async function registerNewPlayer(client: MongoClient, newPlayerInfo: Types.IPlay
   console.log(`New player registered with the following id: ${result.insertedId}`);
 }
 
-// mainMongoFunction().catch(console.error);
+//@ this function will update a player's information in the PlayerInfo collection
+async function updatePlayerStats(client: MongoClient, playerName: string, playerInfo: Types.IPlayerData) {
+  const result = await client.db("EricDB").collection("PlayerInfo").updateOne({ username: playerName }, { $set: playerInfo });
+
+  console.log(`${result.matchedCount} document(s) matched the query criteria.`);
+  console.log(`${result.modifiedCount} document(s) was/were updated.`);
+}
+
+mainMongoFunction().catch(console.error);
 
 let testPlayerData: Types.IPlayerData = {
   username: `testnamelol2`,
   email: `testnamelol2@gmail.com`,
   password: `hunter2lolftw2`,
   Experience: {
-    Woodcutting: 9000000,
-    Firemaking: 90,
-    Fishing: 20000000,
-    Attack: 13000000,
-    Strength: 13000000,
-    Defence: 0,
+    Woodcutting: 420,
+    Firemaking: 420,
+    Fishing: 420,
+    Attack: 420,
+    Strength: 420,
+    Defence: 420,
     Constitution: 1358,
-    Prayer: 0,
-    Summoning: 0,
-    Ranged: 0,
-    Magic: 0,
-    Cooking: 0,
-    Mining: 0,
-    Thieving: 0,
-    Crafting: 0,
+    Prayer: 420,
+    Summoning: 420,
+    Ranged: 420,
+    Magic: 420,
+    Cooking: 420,
+    Mining: 420,
+    Thieving: 420,
+    Crafting: 420,
   },
   Bank_Fish: {
     raw_shrimp: { name: "raw_shrimp", amount: 69 },

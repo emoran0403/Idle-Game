@@ -35,4 +35,5 @@
 //? maybe make the game choose the next available quest automatically
 //? offline progress
 //? show location of quest in questlist component
+//? high scores list - read multiple MongoDB call
 
