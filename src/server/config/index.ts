@@ -1,7 +1,7 @@
 import * as dotenv from "dotenv";
 dotenv.config();
 
-export const JWT_CONFIG = { jwtSecretKey: process.env.JWT_SECRET_KEY };
+export const JWT_CONFIG = { jwtSecretKey: process.env.JWT_SECRET_KEY, jwtExpireTime: process.env.JWT_EXPIRE_TIME };
 
 export const DB_CONFIG = {
   name: process.env.MONGO_NAME,
