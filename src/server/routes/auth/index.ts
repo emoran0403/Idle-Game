@@ -1,7 +1,7 @@
 // this can hold the auth routes, there aren't too many
 import * as express from "express";
 import * as Types from "../../../../Types";
-import * as DB from "../../mongodb/index";
+import { MongoQuery } from "../../mongodb/index";
 import * as passport from "passport";
 import { generateHash, generateToken } from "../../ServerUtils/Passwords";
 
@@ -29,16 +29,19 @@ authRouter.post(`/login`, passport.authenticate("local"), (req, res) => {
 //register new user
 //! refactor to work with MongoDB
 authRouter.post(`/register`, async (req, res) => {
-  const newUser = req.body;
+  const newPlayer = req.body;
   try {
-    newUser.password = generateHash(newUser.password);
-    const results = await DB.Users.insertNewUser(newUser);
-    if (results.affectedRows) {
-      const token = generateToken(newUser.username);
-      res.json(token);
-    } else {
-      res.status(400).json({ message: "duplicate email" });
-    }
+    newPlayer.password = generateHash(newPlayer.password);
+
+    MongoQuery.registerNewPlayer(newPlayer).then((MongoRes) => {
+      // if there was a positive response
+      if (MongoRes?.acknowledged) {
+        const token = generateToken(newPlayer.username);
+        res.json(token);
+      } else {
+        res.status(400).json({ message: "duplicate email" });
+      }
+    });
   } catch (error) {
     console.log(`register error...\n`);
     console.error(error);
