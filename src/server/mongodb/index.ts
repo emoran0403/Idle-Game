@@ -10,54 +10,77 @@ const uri = `mongodb+srv://${Mongo_Name}:${Mongo_Pass}@cluster0.2twg6.mongodb.ne
 
 const client: MongoClient = new MongoClient(uri, { serverApi: ServerApiVersion.v1 });
 
-//@ this function connects to the MongoDB server, and runs qeuries
-//! I can probably wrap this up just like fetcher lol
-async function mainMongoFunction() {
+//@ this function queries the MongoDB cluster for a player matching the specific username
+const getPlayerInfo = async (playerName: string) => {
   try {
     // Connect to the MongoDB cluster
-    console.log(`im trying to connect`);
     await client.connect();
+    const result = await client.db("EricDB").collection("PlayerInfo").findOne({ username: playerName });
 
-    // Make the appropriate DB calls
-    // await findOnePlayerTest(client, `testnamelol`);
-    // await registerNewPlayer(client, testPlayerData);
-    await updatePlayerStats(client, `testnamelol2`, testPlayerData);
+    if (result) {
+      // if there is a result, return it
+      return result;
+    } else {
+      console.log(`No results`);
+    }
   } catch (e) {
     // log the error if any occur
     console.error(e);
   } finally {
-    // the finally block always executes, regardless of if there was an error
-    console.log(`now i am closing the connection`);
+    // the finally block always executes, regardless of the presence of an error, and before any control-flow statements
     await client.close();
   }
-}
-
-//@ this function queries the MongoDB cluster for a player matching the specific username
-async function findOnePlayerTest(client: MongoClient, playerName: string) {
-  const result = await client.db("EricDB").collection("PlayerInfo").findOne({ username: playerName });
-
-  if (result) {
-    console.log(result);
-  } else {
-    console.log(`No results`);
-  }
-}
+};
 
 //@ this function creates a new player document in the PlayerInfo collection
-async function registerNewPlayer(client: MongoClient, newPlayerInfo: Types.IPlayerData) {
-  const result = await client.db("EricDB").collection("PlayerInfo").insertOne(newPlayerInfo);
-  console.log(`New player registered with the following id: ${result.insertedId}`);
-}
+const registerNewPlayer = async (client: MongoClient, newPlayerInfo: Types.IPlayerData) => {
+  try {
+    // Connect to the MongoDB cluster
+    await client.connect();
+    const result = await client.db("EricDB").collection("PlayerInfo").insertOne(newPlayerInfo);
+
+    if (result) {
+      // if there is a result, return it
+      return result;
+    } else {
+      console.log(`No results`);
+    }
+  } catch (e) {
+    // log the error if any occur
+    console.error(e);
+  } finally {
+    // the finally block always executes, regardless of the presence of an error, and before any control-flow statements
+    await client.close();
+  }
+};
 
 //@ this function will update a player's information in the PlayerInfo collection
-async function updatePlayerStats(client: MongoClient, playerName: string, playerInfo: Types.IPlayerData) {
-  const result = await client.db("EricDB").collection("PlayerInfo").updateOne({ username: playerName }, { $set: playerInfo });
+const updatePlayerInfo = async (client: MongoClient, playerName: string, playerInfo: Types.IPlayerData) => {
+  try {
+    // Connect to the MongoDB cluster
+    await client.connect();
+    const result = await client.db("EricDB").collection("PlayerInfo").updateOne({ username: playerName }, { $set: playerInfo });
 
-  console.log(`${result.matchedCount} document(s) matched the query criteria.`);
-  console.log(`${result.modifiedCount} document(s) was/were updated.`);
-}
+    if (result) {
+      // if there is a result, return it
+      return result;
+    } else {
+      console.log(`No results`);
+    }
+  } catch (e) {
+    // log the error if any occur
+    console.error(e);
+  } finally {
+    // the finally block always executes, regardless of the presence of an error, and before any control-flow statements
+    await client.close();
+  }
+};
 
-mainMongoFunction().catch(console.error);
+export const MongoQuery = {
+  getPlayerInfo,
+  registerNewPlayer,
+  updatePlayerInfo,
+};
 
 let testPlayerData: Types.IPlayerData = {
   username: `testnamelol2`,
