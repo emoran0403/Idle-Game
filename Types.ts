@@ -239,9 +239,6 @@ export interface IFlatObjectOfBooleans {
 }
 
 export interface ISkillList {
-  Woodcutting: number;
-  Firemaking: number;
-  Fishing: number;
   Attack: number;
   Strength: number;
   Defence: number;
@@ -250,10 +247,26 @@ export interface ISkillList {
   Summoning: number;
   Ranged: number;
   Magic: number;
-  Cooking: number;
-  Mining: number;
-  Thieving: number;
   Crafting: number;
+  Mining: number;
+  Smithing: number;
+  Fishing: number;
+  Cooking: number;
+  Firemaking: number;
+  Woodcutting: number;
+  Runecrafting: number;
+  Dungeoneering: number;
+  Fletching: number;
+  Agility: number;
+  Herblore: number;
+  Thieving: number;
+  Slayer: number;
+  Farming: number;
+  Construction: number;
+  Hunter: number;
+  Divination: number;
+  Invention: number;
+  Archaeology: number;
 }
 
 export interface IStateQuest {
