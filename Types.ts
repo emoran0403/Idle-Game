@@ -239,17 +239,21 @@ export interface IFlatObjectOfBooleans {
 }
 
 export interface ISkillList {
-  Fishing: number;
   Woodcutting: number;
   Firemaking: number;
+  Fishing: number;
   Attack: number;
   Strength: number;
   Defence: number;
-  Consitution: number;
+  Constitution: number;
   Prayer: number;
   Summoning: number;
   Ranged: number;
   Magic: number;
+  Cooking: number;
+  Mining: number;
+  Thieving: number;
+  Crafting: number;
 }
 
 export interface IStateQuest {
@@ -319,8 +323,12 @@ export interface AllState extends AllSlots {
   Quests_Draynor: DraynorQuestSliceCrap;
 }
 
-export interface IcheckPointData extends AllState {
+//@ this is the entirety of the player data structure, identifying player info is optional for auth purposes
+export interface IPlayerData extends AllState {
   timestamp: number;
+  username?: string;
+  email?: string;
+  password?: string;
 }
 
 export type ICurrentStyleOptions = `none` | `melee` | `ranged` | `air` | `fire` | `water` | `earth`;

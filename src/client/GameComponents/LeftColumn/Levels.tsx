@@ -20,7 +20,7 @@ const Levels = (props: Types.NoProps) => {
     let mag: number = getLevel(Experience.Magic);
     let rng: number = getLevel(Experience.Ranged);
     let def: number = getLevel(Experience.Defence);
-    let con: number = getLevel(Experience.Consitution);
+    let con: number = getLevel(Experience.Constitution);
     let pray: number = getLevel(Experience.Prayer);
     let summ: number = getLevel(Experience.Summoning);
 

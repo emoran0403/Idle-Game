@@ -288,7 +288,7 @@ const GameContainer = (props: Types.NoProps) => {
       //@every 30 seconds, stringify state and update localStorage
       console.log(`updating localStorage`);
       let timestamp: number = Date.now();
-      let checkPointData: Types.IcheckPointData = { ...ALLSTATE, timestamp };
+      let checkPointData: Types.IPlayerData = { ...ALLSTATE, timestamp };
       let checkPointDataStringified = JSON.stringify(checkPointData);
       localStorage.setItem("checkPointData", checkPointDataStringified);
     }
@@ -296,7 +296,7 @@ const GameContainer = (props: Types.NoProps) => {
       //@every 5 mins, update database
       console.log(`update database`);
       let timestamp: number = Date.now();
-      let checkPointData: Types.IcheckPointData = { ...ALLSTATE, timestamp };
+      let checkPointData: Types.IPlayerData = { ...ALLSTATE, timestamp };
       let checkPointDataStringified = JSON.stringify(checkPointData);
       localStorage.setItem("checkPointData", checkPointDataStringified);
       //! make a put req to db
