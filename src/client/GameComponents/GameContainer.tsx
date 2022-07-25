@@ -277,7 +277,6 @@ const GameContainer = (props: Types.NoProps) => {
     }
   };
 
-  //! issue with chatlog here
   //@ this will run every game tick (while in combat) and holds the logic for resolving combat turns
   const handleCombatTick = () => {
     // console.log(`Combat Ticked`);
@@ -383,7 +382,6 @@ const GameContainer = (props: Types.NoProps) => {
     // console.log(checkPointTimer);
   };
 
-  //! chatlog issue here
   //@ this useEffect is dedicated to executing the logic of what to do when the quest is complete
   useEffect(() => {
     for (let i = 0; i < AllQuestsFromState.length; i++) {
@@ -429,7 +427,7 @@ const GameContainer = (props: Types.NoProps) => {
         break;
       }
     }
-  }, [questStepProgress]);
+  }, [questStepProgress, LumbridgeQuestArray, DraynorQuestArray]);
 
   //@ this useEffect is dedicated to combat logic
   useEffect(() => {
