@@ -116,7 +116,7 @@ const GameContainer = (props: Types.NoProps) => {
 
   //@ this will run every game tick (while questing) and holds the logic for progressing in quests
   const handleQuestingTick = () => {
-    console.log(`Quest Ticked`);
+    // console.log(`Quest Ticked`);
     // console.log({ questStepProgress, playerLocation, CurrentQuest });
     // every game tick increments a counter, when this counter hits a certain amount, dispatch the appropriate quest reducer
     // the quest reducer increments the stepsComplete counter, and can mark the quest complete
@@ -147,7 +147,7 @@ const GameContainer = (props: Types.NoProps) => {
 
   //@ this will run every game tick (while skilling) and holds the logic for resolving a skilling action
   const handleSkillingTick = () => {
-    console.log(`Skilling Ticked`);
+    // console.log(`Skilling Ticked`);
     // console.log(CurrentSkill);
 
     // IF the player does not need to bank, continue with the skilling logic
@@ -241,9 +241,10 @@ const GameContainer = (props: Types.NoProps) => {
     }
   };
 
+  //! issue with chatlog here
   //@ this will run every game tick (while in combat) and holds the logic for resolving combat turns
   const handleCombatTick = () => {
-    console.log(`Combat Ticked`);
+    // console.log(`Combat Ticked`);
     // IF a target is selected, then we can proceed
     if (Target !== `none`) {
       let damageDoneToTarget = playerAttacksTarget(Target, CurrentStyle, playerLocation, Experience, currentEquipment);
@@ -257,9 +258,35 @@ const GameContainer = (props: Types.NoProps) => {
         dispatch(
           gainXP({ skill: CurrentSkill, xp: Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].XPGivenCombatStyle })
         );
+
+        // check if the player gained a level in their combat style
+        if (
+          didPlayerLevelUp(
+            Experience[CurrentSkill as keyof Types.ISkillList],
+            Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].XPGivenCombatStyle
+          )
+        ) {
+          // if so, send a chatlog
+          // console.log(`player should have levelled up in ${CurrentSkill}`);
+          //! not sending this chatlog, but the enemy defeated one is sent
+          handleNewChatLog(`${CurrentSkill} Level up!`, `Level Up`);
+        }
+
         dispatch(
           gainXP({ skill: `Constitution`, xp: Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].XPGivenConstitution })
         );
+
+        // check if the player gained a level in constitution
+        if (
+          didPlayerLevelUp(
+            Experience[CurrentSkill as keyof Types.ISkillList],
+            Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].XPGivenConstitution
+          )
+        ) {
+          // if so, send a chatlog
+          handleNewChatLog(`Constitution Level up!`, `Level Up`);
+        }
+
         let coinDrop: number = Math.floor(
           Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].lifePoints * Math.random() * 2
         );
@@ -316,6 +343,7 @@ const GameContainer = (props: Types.NoProps) => {
     // console.log(checkPointTimer);
   };
 
+  //! chatlog issue here
   //@ this useEffect is dedicated to executing the logic of what to do when the quest is complete
   useEffect(() => {
     for (let i = 0; i < AllQuestsFromState.length; i++) {
@@ -342,6 +370,13 @@ const GameContainer = (props: Types.NoProps) => {
         // Object.entries returns an empty array if there are no expreience rewards
         Object.entries(wowQuest.experienceRewards).forEach(([skill, xp]) => {
           dispatch(gainXP({ skill, xp }));
+
+          // check if the player gained a level
+          if (didPlayerLevelUp(Experience[skill as keyof Types.ISkillList], xp)) {
+            // if so, send a chatlog
+            //! seems like the chatlog will not send multiple messages at once
+            handleNewChatLog(`${skill} Level up!`, `Level Up`);
+          }
         });
 
         //@ give the quest point rewards
