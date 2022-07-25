@@ -25,38 +25,38 @@ const Loginpage = (props: Types.LoginCompProps) => {
     props.setLoggedIn(!props.loggedIn);
 
     //@ check if the user is a valid user, and if so, set the proper data to state, and move them to the game
-    Fetcher.POST("/auth/login", { username, password })
-      .then((data) => {
-        // console.log({ data });
+    // Fetcher.POST("/auth/login", { username, password })
+    //   .then((data) => {
+    //     // console.log({ data });
 
-        // if the player can log in
-        if (data.token) {
-          // put the JWT into local storage
-          localStorage.setItem(TOKEN_KEY, data.token);
+    //     // if the player can log in
+    //     if (data.token) {
+    //       // put the JWT into local storage
+    //       localStorage.setItem(TOKEN_KEY, data.token);
 
-          // grab the previous checkPointData from localStorage
-          const checkPointData = localStorage.getItem(`checkPointData`);
+    //       // grab the previous checkPointData from localStorage
+    //       const checkPointData = localStorage.getItem(`checkPointData`);
 
-          // if there is checkPointData, compare the timestamp to the DB timestamp
-          if (checkPointData) {
-            //! compare timestamps here
-            //! set the data with the larger timestamp to state
-          } else {
-            //! if there is no checkPointData, set data from DB to state
-          }
+    //       // if there is checkPointData, compare the timestamp to the DB timestamp
+    //       if (checkPointData) {
+    //         //! compare timestamps here
+    //         //! set the data with the larger timestamp to state
+    //       } else {
+    //         //! if there is no checkPointData, set data from DB to state
+    //       }
 
-          // finally navigate the player to the game
-          nav(`/game`);
-        } else {
-          // otherwise, the player cannot login, so alert the user to the problem
-          alert(data.message);
-        }
-      })
-      .catch((error) => {
-        console.log(`Login Error...\n`);
-        console.error(error);
-        alert(`Something went wrong, please try again`);
-      });
+    //       // finally navigate the player to the game
+    //       nav(`/game`);
+    //     } else {
+    //       // otherwise, the player cannot login, so alert the user to the problem
+    //       alert(data.message);
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.log(`Login Error...\n`);
+    //     console.error(error);
+    //     alert(`Something went wrong, please try again`);
+    //   });
   };
 
   return (

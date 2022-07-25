@@ -84,18 +84,18 @@ export const MongoQuery = {
 
 //! use these to test
 
-registerNewPlayer(defaultPlayerData).then((res) => {
-  if (res) {
-    console.log(res);
-    //! probably a better way to do this
-    // this lets us assert that playerInfo is of the correct type.
-    // let playerInfo = JSON.parse(JSON.stringify(res)) as Types.IPlayerData;
-    // playerInfo.password;
-    // console.log(`the password is ${res.password}`);
+// registerNewPlayer(defaultPlayerData).then((res) => {
+//   if (res) {
+//     console.log(res);
+//     //! probably a better way to do this
+//     // this lets us assert that playerInfo is of the correct type.
+//     // let playerInfo = JSON.parse(JSON.stringify(res)) as Types.IPlayerData;
+//     // playerInfo.password;
+//     // console.log(`the password is ${res.password}`);
 
-    // console.log(`the password is ${playerInfo.password}`);
-  }
-});
+//     // console.log(`the password is ${playerInfo.password}`);
+//   }
+// });
 
 // getPlayerInfo(`tesail.com`).then((res) => {
 //   if (res) {

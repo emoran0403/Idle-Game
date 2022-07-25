@@ -262,7 +262,7 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
     setCompositeQuestArray(tempCompArray);
     // i want this component to rerender when a quest step is completed
     // pass down the questStepProgress from gameContainer
-  }, [props.questStepProgress]);
+  }, [props.questStepProgress, LumbridgeQuestArray, DraynorQuestArray]);
 
   return (
     <div className="container border border-dark border-2 rounded-3">

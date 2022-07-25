@@ -23,7 +23,7 @@ import { ListOfLogs, playerEarnsLog } from "../../../Constants/Items/Logs";
 import { listOfHatchets } from "../../../Constants/SkillingEquipment/Hatchets";
 import { addItemToInventory, removeItemFromInventory } from "../Redux/Slices/Inventory";
 import { ListOfFish, playerEarnsFish } from "../../../Constants/Items/Fish";
-import { getLevel } from "../../../Constants/XP Levels";
+import { didPlayerLevelUp, getLevel } from "../../../Constants/XP Levels";
 import { Enemies, playerAttacksTarget } from "../../../Constants/Enemies";
 import { BackSlot } from "../../../Constants/Equipment/BackSlot";
 import { addLogToBank } from "../Redux/Slices/BankSlices/LogsSlice";
@@ -179,6 +179,12 @@ const GameContainer = (props: Types.NoProps) => {
             // console.log(ListOfLogs[CurrentResource as keyof Types.IListOfLogs].XPGivenWoodcutting);
             // apply gained xp
             dispatch(gainXP({ skill: `Woodcutting`, xp: ListOfLogs[CurrentResource as keyof Types.IListOfLogs].XPGivenWoodcutting }));
+
+            // check if the player gained a level
+            if (didPlayerLevelUp(Experience.Woodcutting, ListOfLogs[CurrentResource as keyof Types.IListOfLogs].XPGivenWoodcutting)) {
+              // if so, send a chatlog
+              handleNewChatLog(`Woodcutting Level up!`, `Level Up`);
+            }
           }
           break;
         }
@@ -202,6 +208,12 @@ const GameContainer = (props: Types.NoProps) => {
             // console.log(ListOfFish[CurrentResource as keyof Types.IListOfFish].XPGivenFishing);
             // apply gained xp
             dispatch(gainXP({ skill: `Fishing`, xp: ListOfFish[CurrentResource as keyof Types.IListOfFish].XPGivenFishing }));
+
+            // check if the player gained a level
+            if (didPlayerLevelUp(Experience.Fishing, ListOfFish[CurrentResource as keyof Types.IListOfFish].XPGivenFishing)) {
+              // if so, send a chatlog
+              handleNewChatLog(`Fishing Level up!`, `Level Up`);
+            }
           }
 
           break;
@@ -301,7 +313,7 @@ const GameContainer = (props: Types.NoProps) => {
       localStorage.setItem("checkPointData", checkPointDataStringified);
       //! make a put req to db
     }
-    console.log(checkPointTimer);
+    // console.log(checkPointTimer);
   };
 
   //@ this useEffect is dedicated to executing the logic of what to do when the quest is complete

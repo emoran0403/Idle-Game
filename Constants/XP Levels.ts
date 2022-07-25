@@ -1,3 +1,5 @@
+import { current } from "@reduxjs/toolkit";
+
 const levelUpTable: number[] = [
   0, 83, 174, 276, 388, 512, 650, 801, 969, 1154, 1358, 1584, 1833, 2107, 2411, 2746, 3115, 3523, 3973, 4470, 5018, 5624, 6291, 7028, 7842, 8740, 9730, 10824,
   12031, 13363, 14833, 16456, 18247, 20244, 22406, 24815, 27473, 30408, 33648, 37224, 41171, 45529, 50339, 55649, 61512, 67983, 75127, 83014, 91721, 101333,
@@ -13,6 +15,7 @@ export const getLevel = (XP: number): number => {
   return levelUpTable.filter((threshold) => threshold < XP).length || 1; // if the xp is less than 83, return 1, since that is the lowest level
 };
 
+//@ returns the percentage to the next level
 export const percentToNextLevel = (XP: number): number => {
   let nextLevelIndex = levelUpTable.filter((num) => num < XP).length || 1;
   let xpNeeded = levelUpTable[nextLevelIndex] - levelUpTable[nextLevelIndex - 1];
@@ -24,5 +27,32 @@ export const percentToNextLevel = (XP: number): number => {
   } else {
     // otherwise, return the %
     return Math.floor(((xpNeeded - delta) / xpNeeded) * 100);
+  }
+};
+
+//@ returns a boolean describing whether the player levelled up
+export const didPlayerLevelUp = (XP: number, XPGain: number) => {
+  // establish the player's current level
+  let currentLevel = 1;
+  if (levelUpTable.filter((threshold) => threshold < XP).length > 0) {
+    currentLevel = levelUpTable.filter((threshold) => threshold < XP).length;
+  }
+  console.log(`currentLevel is ${currentLevel}`);
+  // calculate the xp the player will be at when the xp is gained
+  let newXP = XP + XPGain;
+
+  // establish the player's new level
+  let newLevel = 1;
+  if (levelUpTable.filter((threshold) => threshold < newXP).length > 0) {
+    newLevel = levelUpTable.filter((threshold) => threshold < newXP).length;
+  }
+  console.log(`newLevel is ${newLevel}`);
+
+  // if the currentLevel equals the newLevel, then the player did not level up, so return false
+  if (currentLevel === newLevel) {
+    return false;
+    // otherwise, return true
+  } else {
+    return true;
   }
 };

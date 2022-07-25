@@ -58,7 +58,7 @@ const QuestList = (props: Types.NoProps) => {
     setCompositeQuestArray(tempCompArray);
     // console.log(questCompleteCounter);
     // console.log(AllQuestsFromStateFlat.length);
-  }, []);
+  }, [LumbridgeQuestArray, DraynorQuestArray]);
 
   return (
     <div className="card border border-dark border-2 rounded-3 }" style={{ overflowY: "auto", position: "relative", height: "33%" }}>
