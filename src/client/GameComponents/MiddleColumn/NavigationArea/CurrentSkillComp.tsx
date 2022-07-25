@@ -14,13 +14,16 @@ const CurrentSkillComp = (props: Types.NoProps) => {
   // console.log(Activity);
   // console.log(Quest);
 
+  //@ this sets the background color if a target has been selected, but a combat style has not been selected
   const returnBackgroundColor = () => {
     // if an enemy is chosen, but an attack style has not been chosen
     if (Activity === `In combat` && !arrayOfCombatStyleSkills.includes(Skill)) {
       return `bg-danger`;
-    } else if (Activity === `In combat` && Target === `none`) {
-      return `bg-danger`;
-    } else {
+    }
+    // else if (Activity === `In combat` && Target === `none`) {
+    //   return `bg-danger`;
+    // }
+    else {
       return ``;
     }
   };

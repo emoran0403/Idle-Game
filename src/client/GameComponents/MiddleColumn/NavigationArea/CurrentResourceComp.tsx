@@ -13,8 +13,16 @@ const CurrentResourceComp = (props: Types.NoProps) => {
   const Skill = useSelector((state: Types.AllState) => state.Skill.CurrentSkill);
   const playerLocation = useSelector((state: Types.AllState) => state.Location.CurrentLocation as Types.ICurrentLocationOptions);
 
-  // console.log(Target);
   // useEffect(() => {}, []);
+
+  //@ this sets the background color if a combat style has been selected, but a target has not been selected
+  const returnBackgroundColor = () => {
+    if (Activity === `In combat` && Target === `none`) {
+      return `bg-danger`;
+    } else {
+      return ``;
+    }
+  };
 
   const displayResource = () => {
     // this function shows the display name of the current resource
@@ -36,7 +44,7 @@ const CurrentResourceComp = (props: Types.NoProps) => {
   return (
     <div className="text-center border border-dark border-2 rounded-3" style={{ width: `130px` }}>
       {Activity === `In combat` ? (
-        <div>
+        <div className={returnBackgroundColor()}>
           <div>Fighting </div>
           {Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies] ? (
             <div>{Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].displayName}</div>
