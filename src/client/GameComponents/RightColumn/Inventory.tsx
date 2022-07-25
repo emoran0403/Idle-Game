@@ -2,11 +2,14 @@ import * as Types from "../../../../Types";
 import * as React from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { ListOfFish } from "../../../../Constants/Items/Fish";
+import { ListOfLogs } from "../../../../Constants/Items/Logs";
 
 const Inventory = (props: Types.NoProps) => {
   const Wallet = useSelector((state: Types.AllState) => state.Wallet) as Types.IWallet;
   const { CurrentInventory } = useSelector((state: Types.AllState) => state.Inventory) as Types.I_Inventory;
 
+  //@ this pulls the current inventory, and adds filler items to a length of 28
   const makeCompositeCurrent = () => {
     let compositeCurrent = [...CurrentInventory];
     compositeCurrent.push(...Array(28 - CurrentInventory.length).fill(`blank`));
@@ -15,6 +18,16 @@ const Inventory = (props: Types.NoProps) => {
   };
 
   // useEffect(() => {}, []);
+  //@ given an item, this returns the item display name
+  const getItemDisplayName = (item: string) => {
+    if (ListOfFish[item as keyof Types.IListOfFish]) {
+      return ListOfFish[item as keyof Types.IListOfFish].displayName;
+    } else if (ListOfLogs[item as keyof Types.IListOfLogs]) {
+      return ListOfLogs[item as keyof Types.IListOfLogs].displayName;
+    } else {
+      return item;
+    }
+  };
 
   return (
     <div className="card border border-dark border-2 rounded-3">
@@ -29,7 +42,7 @@ const Inventory = (props: Types.NoProps) => {
         <div className="d-flex flex-wrap justify-content-between container">
           {makeCompositeCurrent().map((item, i) => (
             <div key={`Inventory-slot-${i + 1}`} className="border border-2 col-2 border-dark rounded flex-fill m-2">
-              <span className={item === `blank` ? `text-white` : `text-black`}>{item}</span>
+              <span className={item === `blank` ? `text-white` : `text-black`}>{getItemDisplayName(item)}</span>
             </div>
           ))}
         </div>
