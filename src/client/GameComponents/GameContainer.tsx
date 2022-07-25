@@ -390,13 +390,10 @@ const GameContainer = (props: Types.NoProps) => {
       // iterate through all the quests until we find the one that was just completed
       // if the quest in state is the same as the current AND it is completed...
       if (AllQuestsFromState[i].name === CurrentQuest && AllQuestsFromState[i].complete) {
-        // send a chatlog
-        handleNewChatLog(`Congratulations, you completed ${CurrentQuest}`, `Quest Completed`);
         // set player to idle
         dispatch(setActivity(`Idle`));
         // unset current quest
         dispatch(setQuest(`none`));
-
         // find the quest that was just completed
         let wowQuest: Types.IQuestInfo = LumbridgeQuests[LumbridgeQuests.findIndex((item) => item.name === CurrentQuest)];
 
@@ -406,6 +403,13 @@ const GameContainer = (props: Types.NoProps) => {
           dispatch(addToWallet(wowQuest.itemRewards.Coins));
         }
 
+        //@ give the quest point rewards
+        dispatch(addQuestPoints(wowQuest.questPoints));
+
+        // prepare chatlogs for completing a quest, and possibly for levelling up
+        let questMessages: string[] = [`Congratulations, you completed ${CurrentQuest}`];
+        let questMessagesTags: Types.ChatLogTag[] = [`Quest Completed`];
+
         //@ give the expreience rewards
         // Object.entries returns an empty array if there are no expreience rewards
         Object.entries(wowQuest.experienceRewards).forEach(([skill, xp]) => {
@@ -413,17 +417,15 @@ const GameContainer = (props: Types.NoProps) => {
 
           // check if the player gained a level
           if (didPlayerLevelUp(Experience[skill as keyof Types.ISkillList], xp)) {
-            // if so, send a chatlog
-            //! seems like the chatlog will not send multiple messages at once
-            handleNewChatLog(`${skill} Level up!`, `Level Up`);
+            // if so queue a chatlog
+            questMessages = [...questMessages, `${skill} Level up!`];
+            questMessagesTags = [...questMessagesTags, `Level Up`];
           }
         });
 
-        //@ give the quest point rewards
-        dispatch(addQuestPoints(wowQuest.questPoints));
-        // if(){}
+        // send those queued up chatlogs
+        handleMultipleChatLogs(questMessages, questMessagesTags);
 
-        // once we find our quest, terminate the loop
         break;
       }
     }
