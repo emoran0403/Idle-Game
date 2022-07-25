@@ -14,13 +14,14 @@ function isValidEmail(email: string) {
 
 function isValidusername(username: string) {
   const usernameRegex: RegExp = /^[a-zA-Z0-9\s]*$/;
-  const isGoodUsername: boolean = usernameRegex.test(username);
+  const charCheck: boolean = usernameRegex.test(username); // returning false means that the username is acceptable
+  const lengthCheck: boolean = username.length >= 4 && username.length <= 16; // evaluating to true means that the username is acceptable
 
   return new Promise((resolve, reject) => {
-    if (!isGoodUsername) {
-      reject(`Bad data - not an acceptable username`);
-    } else {
+    if (!charCheck && lengthCheck) {
       resolve("Good data - is an acceptable username");
+    } else {
+      reject(`Bad data - not an acceptable username`);
     }
   });
 }

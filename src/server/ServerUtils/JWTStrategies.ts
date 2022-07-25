@@ -24,14 +24,15 @@ export function configurePassport(app: Application) {
   passport.use(
     new PassportLocal.Strategy(
       {
+        //! do i swap email here to username since i want to login with a username + password combo?
         usernameField: "email",
         session: false,
       },
-      async (email, password, done) => {
+      async (username, password, done) => {
         try {
-          // query the DB for a player with the given email
-          MongoQuery.getPlayerInfo(email).then((res) => {
-            // if a response is returned, the player's email exists
+          // query the DB for a player with the given username
+          MongoQuery.getPlayerInfo(username).then((res) => {
+            // if a response is returned, the player's username exists
             if (res) {
               //! probably a better way to do this
               // this lets us assert that playerInfo is of the correct type.

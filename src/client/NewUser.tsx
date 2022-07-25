@@ -40,7 +40,7 @@ const NewUser = (props: Types.NewUserCompProps) => {
       .catch((error) => {
         console.log(`Bad Username Check Error...\n`);
         console.log(error);
-        alert("Please enter a username containing only letters, numbers, and spaces");
+        alert("Please enter a username of 4-16 characters and containing only letters, numbers, and spaces");
         return;
       });
 

@@ -11,9 +11,6 @@ const Loginpage = (props: Types.LoginCompProps) => {
 
   const handleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    //! this will need to grab data from localStorage and the database
-    //! choose the one with the larger timestamp
-    //! then set that to redux state
 
     //@ check if the user has entered their username and password
     if (!password || !username) {
@@ -27,24 +24,39 @@ const Loginpage = (props: Types.LoginCompProps) => {
     //@ toggle the logged in boolean to properly display the logout button
     props.setLoggedIn(!props.loggedIn);
 
-    //! i want this to accept username instead of an email
+    //@ check if the user is a valid user, and if so, set the proper data to state, and move them to the game
+    Fetcher.POST("/auth/login", { username, password })
+      .then((data) => {
+        // console.log({ data });
 
-    // Fetcher.POST("/auth/login", { username, password })
+        // if the player can log in
+        if (data.token) {
+          // put the JWT into local storage
+          localStorage.setItem(TOKEN_KEY, data.token);
 
-    //   .then((data) => {
-    //     // console.log({ data });
-    //     if (data.token) {
-    //       localStorage.setItem(TOKEN_KEY, data.token);
-    //       nav(`/game`);
-    //     } else {
-    //       alert(data.message);
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log(`Login Error...\n`);
-    //     console.error(error);
-    //     alert(`Something went wrong, please try again`);
-    //   });
+          // grab the previous checkPointData from localStorage
+          const checkPointData = localStorage.getItem(`checkPointData`);
+
+          // if there is checkPointData, compare the timestamp to the DB timestamp
+          if (checkPointData) {
+            //! compare timestamps here
+            //! set the data with the larger timestamp to state
+          } else {
+            //! if there is no checkPointData, set data from DB to state
+          }
+
+          // finally navigate the player to the game
+          nav(`/game`);
+        } else {
+          // otherwise, the player cannot login, so alert the user to the problem
+          alert(data.message);
+        }
+      })
+      .catch((error) => {
+        console.log(`Login Error...\n`);
+        console.error(error);
+        alert(`Something went wrong, please try again`);
+      });
   };
 
   return (
