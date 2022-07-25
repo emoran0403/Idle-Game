@@ -338,8 +338,11 @@ export interface AllState extends AllSlots {
 }
 
 //@ this is the entirety of the player data structure, identifying player info is optional for auth purposes
-export interface IPlayerData extends AllState {
+export interface IPlayerData extends AllState, IPlayerPayload {
   timestamp: number;
+}
+
+export interface IPlayerPayload {
   username?: string;
   email?: string;
   password?: string;
@@ -1212,13 +1215,6 @@ export interface IHeaderObject {
   [key: string]: string;
 }
 
-export interface Payload {
-  id: number;
-  email: string;
-  role: string;
-  name: string;
-}
-
 export interface ReqUser extends Request {
-  user?: IPlayerData | Payload;
+  user?: { username?: string; email?: string; password?: string };
 }

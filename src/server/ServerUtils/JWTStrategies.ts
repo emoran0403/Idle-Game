@@ -8,10 +8,8 @@ import * as CONFIG from "../config";
 import { Application } from "express";
 import { compareHash } from "./Passwords";
 
-//! need help with this lol
-
 export function configurePassport(app: Application) {
-  passport.serializeUser((user: Types.IPlayerData, done) => {
+  passport.serializeUser((user: Types.IPlayerPayload, done) => {
     if (user.password) delete user.password;
     done(null, user);
   });
@@ -24,8 +22,7 @@ export function configurePassport(app: Application) {
   passport.use(
     new PassportLocal.Strategy(
       {
-        //! do i swap email here to username since i want to login with a username + password combo?
-        usernameField: "email",
+        usernameField: "username",
         session: false,
       },
       async (username, password, done) => {
@@ -34,9 +31,7 @@ export function configurePassport(app: Application) {
           MongoQuery.getPlayerInfo(username).then((res) => {
             // if a response is returned, the player's username exists
             if (res) {
-              //! probably a better way to do this
-              // this lets us assert that playerInfo is of the correct type.
-              let playerInfo = JSON.parse(JSON.stringify(res)) as Types.IPlayerData;
+              let playerInfo = res;
               // check if the provided password matches the hashedPassword from the DB
               if (compareHash(password, playerInfo.password!)) {
                 // if so, remove it from the playerInfo, and call done, passing forward the playerInfo
@@ -61,10 +56,12 @@ export function configurePassport(app: Application) {
         jwtFromRequest: PassportJWT.ExtractJwt.fromAuthHeaderAsBearerToken(),
         secretOrKey: CONFIG.JWT_CONFIG.jwtSecretKey,
       },
-      (payload: Types.Payload, done) => {
+      (payload: Types.IPlayerPayload, done) => {
         try {
           done(null, payload);
-        } catch (error) {}
+        } catch (error) {
+          done(error, false);
+        }
       }
     )
   );

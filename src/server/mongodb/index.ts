@@ -15,9 +15,9 @@ const getPlayerInfo = async (email: string) => {
   try {
     // Connect to the MongoDB cluster
     await client.connect();
-    const result = await client.db("EricDB").collection("PlayerInfo").findOne({ email });
+    const result = await client.db("EricDB").collection("PlayerInfo").findOne<Types.IPlayerData>({ email });
 
-    if (result) {
+    if (result !== null) {
       // if there is a result, return it
       return result;
     } else {
@@ -37,17 +37,28 @@ const registerNewPlayer = async (newPlayerInfo: Types.IPlayerData) => {
   try {
     // Connect to the MongoDB cluster
     await client.connect();
-    const result = await client.db("EricDB").collection("PlayerInfo").insertOne(newPlayerInfo);
+    //! how do i set up 2 unique constraints?
 
-    if (result) {
-      // if there is a result, return it
-      return result;
+    const usernameTest = await client.db("EricDB").collection("PlayerInfo").findOne<Types.IPlayerData>({ username: newPlayerInfo.username });
+
+    if (usernameTest !== null) {
+      // if there is a result this means the username is taken
+      //! do something here
+      throw new Error(`username taken`);
     } else {
-      console.log(`No results`);
+      const result = await client.db("EricDB").collection("PlayerInfo").insertOne(newPlayerInfo);
+      if (result.acknowledged) {
+        // if there is a result, return it
+        return result;
+      } else {
+        console.log(`No results`);
+        throw new Error(`duplicate email`);
+      }
     }
   } catch (e) {
     // log the error if any occur
     console.error(e);
+    throw new Error(e.message);
   } finally {
     // the finally block always executes, regardless of the presence of an error, and before any control-flow statements
     await client.close();
