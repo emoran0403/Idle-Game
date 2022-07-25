@@ -2,6 +2,8 @@ import * as Types from "../../../../Types";
 import * as React from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { ListOfFish } from "../../../../Constants/Items/Fish";
+import { ListOfLogs } from "../../../../Constants/Items/Logs";
 
 const BankPanel = (props: Types.BankPanelProps) => {
   const bank_logs = useSelector((state: Types.AllState) => state.Bank_Logs) as Types.ILogBankSlice;
@@ -39,7 +41,7 @@ const BankPanel = (props: Types.BankPanelProps) => {
           {arrayOfLogs.map((item) => (
             <div key={`resource-list-${item.name}`} className={`card border mb-3`}>
               <div className="card-body text">
-                <h5 className="card-title">{item.name}</h5>
+                <h5 className="card-title">{ListOfLogs[item.name as keyof Types.IListOfLogs].displayName}</h5>
                 <div className="card-text">
                   <div>{item.amount}</div>
                 </div>
@@ -59,7 +61,7 @@ const BankPanel = (props: Types.BankPanelProps) => {
           {arrayOfFish.map((item) => (
             <div key={`resource-list-${item.name}`} className={`card border mb-3`}>
               <div className="card-body text">
-                <h5 className="card-title">{item.name}</h5>
+                <h5 className="card-title">Raw {ListOfFish[item.name as keyof Types.IListOfFish].displayName}</h5>
                 <div className="card-text">
                   <div>{item.amount}</div>
                 </div>

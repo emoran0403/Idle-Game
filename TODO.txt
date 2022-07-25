@@ -21,8 +21,6 @@
 //# Fixes that can wait
 //! Logic - experience and levels is displaying too high for some reason :/
 //! Visual - target should highlight red when a combat style is chosen, but a target hasnt been selected yet
-//! Visual - inventory component should display the item display names
-//! Visual - bankPanel component should display the item display names - need to do some indexing from constants
 //! Visual - skilling levels send a message, quests and combat do not - issue with sending more than 1 message at a time i think
 
 
