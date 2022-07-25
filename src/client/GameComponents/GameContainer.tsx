@@ -100,7 +100,7 @@ const GameContainer = (props: Types.NoProps) => {
     /**
      * we only want to hold the most recent 60 logs, removing the oldest as needed
      * new log is added to the end of the array
-     * shift() removes from the front, which ends up being the olded messages
+     * shift() removes from the front, which ends up being the oldest messages
      * ChatWindow component reverses to display the most recent logs first
      *
      */
@@ -111,6 +111,38 @@ const GameContainer = (props: Types.NoProps) => {
       setChatLogArray(tempchatLogArray); // updates the chatLogArray with the new log
     } else {
       setChatLogArray([...chatLogArray, newLog]);
+    }
+  };
+
+  //@ use this to add multiple messages to the chat log array
+  const handleMultipleChatLogs = (messages: string[], tags: Types.ChatLogTag[]) => {
+    // create an array of chatlogs from the messages and tags, along with a timestamp
+    let newMessagesToAdd: Types.IChatLog[] = [];
+
+    for (let i = 0; i < messages.length; i++) {
+      let newLog: Types.IChatLog = {
+        timeStamp: Dayjs().format("HH:mm:ss"),
+        message: messages[i],
+        tags: tags[i],
+      };
+      newMessagesToAdd.push(newLog);
+    }
+
+    // if there will be more than 60 messages, we need to remove enough so that we end with 60
+    if (chatLogArray.length + newMessagesToAdd.length >= 60) {
+      // clone chatLogArray and the new chat log array into a temp array
+      let tempchatLogArray = [...chatLogArray, ...newMessagesToAdd];
+
+      for (let j = 60; j < chatLogArray.length; j++) {
+        // start at 60, continue until we reach the length of the chat log array,
+        // this will result in the number of old messages that need removing
+        // remove the first (oldest) message from the array
+        tempchatLogArray.shift();
+      }
+      setChatLogArray(tempchatLogArray);
+    } else {
+      // otherwise, we can just add the new chatlogs
+      setChatLogArray([...chatLogArray, ...newMessagesToAdd]);
     }
   };
 
@@ -173,17 +205,19 @@ const GameContainer = (props: Types.NoProps) => {
                 setNeedsToBank(!needsToBank);
               }
             }
-
-            // send a chatlog
-            handleNewChatLog(`Chopped some ${ListOfLogs[CurrentResource as keyof Types.IListOfLogs].displayName}`, `Gained Resource`);
-            // console.log(ListOfLogs[CurrentResource as keyof Types.IListOfLogs].XPGivenWoodcutting);
             // apply gained xp
             dispatch(gainXP({ skill: `Woodcutting`, xp: ListOfLogs[CurrentResource as keyof Types.IListOfLogs].XPGivenWoodcutting }));
 
             // check if the player gained a level
             if (didPlayerLevelUp(Experience.Woodcutting, ListOfLogs[CurrentResource as keyof Types.IListOfLogs].XPGivenWoodcutting)) {
-              // if so, send a chatlog
-              handleNewChatLog(`Woodcutting Level up!`, `Level Up`);
+              // if so, send chatlogs for the item collected and for the level up
+              handleMultipleChatLogs(
+                [`Woodcutting Level up!`, `Chopped some ${ListOfLogs[CurrentResource as keyof Types.IListOfLogs].displayName}`],
+                [`Level Up`, `Gained Resource`]
+              );
+            } else {
+              // otherwise, send a chatlog for the item collected
+              handleNewChatLog(`Chopped some ${ListOfLogs[CurrentResource as keyof Types.IListOfLogs].displayName}`, `Gained Resource`);
             }
           }
           break;
@@ -202,17 +236,19 @@ const GameContainer = (props: Types.NoProps) => {
                 setNeedsToBank(!needsToBank);
               }
             }
-
-            // send a chatlog
-            handleNewChatLog(`Fished a ${ListOfFish[CurrentResource as keyof Types.IListOfFish].displayName}`, `Gained Resource`);
-            // console.log(ListOfFish[CurrentResource as keyof Types.IListOfFish].XPGivenFishing);
             // apply gained xp
             dispatch(gainXP({ skill: `Fishing`, xp: ListOfFish[CurrentResource as keyof Types.IListOfFish].XPGivenFishing }));
 
             // check if the player gained a level
             if (didPlayerLevelUp(Experience.Fishing, ListOfFish[CurrentResource as keyof Types.IListOfFish].XPGivenFishing)) {
-              // if so, send a chatlog
-              handleNewChatLog(`Fishing Level up!`, `Level Up`);
+              // if so, send chatlogs for the item collected and for the level up
+              handleMultipleChatLogs(
+                [`Fishing Level up!`, `Fished a ${ListOfFish[CurrentResource as keyof Types.IListOfFish].displayName}`],
+                [`Level Up`, `Gained Resource`]
+              );
+            } else {
+              // otherwise, send a chatlog for the item collected
+              handleNewChatLog(`Fished a ${ListOfFish[CurrentResource as keyof Types.IListOfFish].displayName}`, `Gained Resource`);
             }
           }
 
@@ -270,6 +306,8 @@ const GameContainer = (props: Types.NoProps) => {
           // console.log(`player should have levelled up in ${CurrentSkill}`);
           //! not sending this chatlog, but the enemy defeated one is sent
           handleNewChatLog(`${CurrentSkill} Level up!`, `Level Up`);
+        } else {
+          console.log(`player did not level up`);
         }
 
         dispatch(
@@ -285,10 +323,12 @@ const GameContainer = (props: Types.NoProps) => {
         ) {
           // if so, send a chatlog
           handleNewChatLog(`Constitution Level up!`, `Level Up`);
+        } else {
+          console.log(`player did not level up`);
         }
 
         let coinDrop: number = Math.floor(
-          Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].lifePoints * Math.random() * 2
+          Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].lifePoints * Math.random()
         );
         dispatch(addToWallet(coinDrop));
         // send a chatlog to the ChatWindow
