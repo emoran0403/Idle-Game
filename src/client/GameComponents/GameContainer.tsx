@@ -290,10 +290,29 @@ const GameContainer = (props: Types.NoProps) => {
       if (targetLifePoints - damageDoneToTarget <= 0) {
         // then reset the lifepoints
         setTargetLifePoints(Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].lifePoints);
-        // and award the xp
+        // and award the combat style xp
         dispatch(
           gainXP({ skill: CurrentSkill, xp: Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].XPGivenCombatStyle })
         );
+
+        // and award the constitution xp
+        dispatch(
+          gainXP({ skill: `Constitution`, xp: Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].XPGivenConstitution })
+        );
+
+        // award the coins
+        let coinDrop: number = Math.floor(
+          Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].lifePoints * Math.random()
+        );
+        dispatch(addToWallet(coinDrop));
+
+        // prepare chatlogs for defeating an enemy, and possibly for levelling up
+        let combatMessages: string[] = [
+          `Defeated a ${
+            Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].displayName
+          } and earned ${coinDrop.toLocaleString("en-US")} coins`,
+        ];
+        let combatMessagesTags: Types.ChatLogTag[] = [`Monster Defeated`];
 
         // check if the player gained a level in their combat style
         if (
@@ -302,17 +321,10 @@ const GameContainer = (props: Types.NoProps) => {
             Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].XPGivenCombatStyle
           )
         ) {
-          // if so, send a chatlog
-          // console.log(`player should have levelled up in ${CurrentSkill}`);
-          //! not sending this chatlog, but the enemy defeated one is sent
-          handleNewChatLog(`${CurrentSkill} Level up!`, `Level Up`);
-        } else {
-          console.log(`player did not level up`);
+          // if so, queue up a chatlog
+          combatMessages = [...combatMessages, `${CurrentSkill} Level up!`];
+          combatMessagesTags = [...combatMessagesTags, `Level Up`];
         }
-
-        dispatch(
-          gainXP({ skill: `Constitution`, xp: Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].XPGivenConstitution })
-        );
 
         // check if the player gained a level in constitution
         if (
@@ -321,25 +333,13 @@ const GameContainer = (props: Types.NoProps) => {
             Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].XPGivenConstitution
           )
         ) {
-          // if so, send a chatlog
-          handleNewChatLog(`Constitution Level up!`, `Level Up`);
-        } else {
-          console.log(`player did not level up`);
+          // if so, queue up a chatlog
+          combatMessages = [...combatMessages, `Constitution Level up!`];
+          combatMessagesTags = [...combatMessagesTags, `Level Up`];
         }
 
-        let coinDrop: number = Math.floor(
-          Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].lifePoints * Math.random()
-        );
-        dispatch(addToWallet(coinDrop));
-        // send a chatlog to the ChatWindow
-        Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].displayName;
-
-        handleNewChatLog(
-          `Defeated a ${
-            Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].displayName
-          } and earned ${coinDrop.toLocaleString("en-US")} coins`,
-          `Monster Defeated`
-        );
+        // send those queued up chatlogs
+        handleMultipleChatLogs(combatMessages, combatMessagesTags);
       } else {
         // Otherwise, apply the damage
         setTargetLifePoints(targetLifePoints - damageDoneToTarget);
