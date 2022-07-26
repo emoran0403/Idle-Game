@@ -38,10 +38,10 @@ apiRouter.put("/updateplayerinfo", async (req, res) => {
   try {
     // query the db with the username, and attempt to set the player data
     // this query will throw an error if there was an issue
-    await MongoQuery.updatePlayerInfo(username, playerdata);
+    const mongoRes = await MongoQuery.updatePlayerInfo(username, playerdata);
 
     // if no error was thrown, the player exists and their data was successfully set
-    res.status(200);
+    res.status(200).json(mongoRes);
   } catch (error) {
     // if an error was thrown, log it
     console.error(error);
