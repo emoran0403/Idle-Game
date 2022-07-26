@@ -21,11 +21,14 @@ const getPlayerInfo = async (email: string) => {
       // if there is a result, return it
       return result;
     } else {
-      console.log(`No results`);
+      // otherwise throw an error - the user was not found
+      throw new Error(`Player with email ${email} not found`);
     }
   } catch (e) {
-    // log the error if any occur
-    console.error(e);
+    // log the error message if any occur
+    console.error(e.message);
+    // throwing this to the route allows the route to have context of the error message
+    throw new Error(e.message);
   } finally {
     // the finally block always executes, regardless of the presence of an error, and before any control-flow statements
     await client.close();
@@ -63,10 +66,13 @@ const updatePlayerInfo = async (playerName: string, playerInfo: Types.IPlayerDat
       return result;
     } else {
       console.log(`No results`);
+      throw new Error();
     }
   } catch (e) {
-    // log the error if any occur
-    console.error(e);
+    // log the error message if any occur
+    console.error(e.message);
+    // throwing this to the route allows the route to have context of the error message
+    throw new Error(e.message);
   } finally {
     // the finally block always executes, regardless of the presence of an error, and before any control-flow statements
     await client.close();
