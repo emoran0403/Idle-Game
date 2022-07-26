@@ -29,17 +29,21 @@ authRouter.post(`/login`, passport.authenticate("local"), (req: Types.ReqUser, r
 });
 
 //register new user
-//! refactor to work with MongoDB
 authRouter.post(`/register`, async (req, res) => {
+  // grab the player information from the req body
   const playerRegisterInfo = req.body as Types.IPlayerPayload;
   try {
+    // hash the password, and overwrite it to the player information
     let hashedPass = generateHash(playerRegisterInfo.password!);
     playerRegisterInfo.password = hashedPass;
 
+    // combine the player information with the default player data - experience, quests, etc
     let newPlayerData = { ...defaultPlayerData, ...playerRegisterInfo };
 
+    // attempt to register the player - errors will be thrown if there is duplicate data
     const MongoRes = await MongoQuery.registerNewPlayer(newPlayerData);
-    // if there was a positive response
+
+    // if there was a positive response, log it and send a token to the client
     console.log(MongoRes);
 
     const token = generateToken(playerRegisterInfo.username!, playerRegisterInfo.email!);
