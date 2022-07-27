@@ -362,22 +362,21 @@ const GameContainer = (props: Types.NoProps) => {
     // increment the checkPointTimer so we can keep track of the time between saves
     setcheckPointTimer(checkPointTimer + 1);
 
-    if (checkPointTimer % 15 === 0) {
-      //@every 30 seconds, stringify state and update localStorage
-      console.log(`updating localStorage`);
-      let timestamp: number = Date.now();
-      let checkPointData: Types.IPlayerData = { ...ALLSTATE, timestamp };
-      let checkPointDataStringified = JSON.stringify(checkPointData);
-      localStorage.setItem("checkPointData", checkPointDataStringified);
-    }
+    // if (checkPointTimer % 15 === 0) {
+    //   //@every 30 seconds, stringify state and update localStorage
+    //   console.log(`updating localStorage`);
+    //   let timestamp: number = Date.now();
+    //   let checkPointData: Types.IPlayerData = { ...ALLSTATE, timestamp };
+    //   let checkPointDataStringified = JSON.stringify(checkPointData);
+    //   localStorage.setItem("checkPointData", checkPointDataStringified);
+    // }
     if (checkPointTimer % 150 === 0) {
       //@every 5 mins, update database
       console.log(`update database`);
       let timestamp: number = Date.now();
       let checkPointData: Types.IPlayerData = { ...ALLSTATE, timestamp };
-      let checkPointDataStringified = JSON.stringify(checkPointData);
-      localStorage.setItem("checkPointData", checkPointDataStringified);
       //! make a put req to db
+      // read the username from the jwt, then make the update mongo call with that username and this checkPointData
     }
     // console.log(checkPointTimer);
   };
@@ -463,6 +462,7 @@ const GameContainer = (props: Types.NoProps) => {
       //! set this to 2000ms in production
     }, 1000);
 
+    // console.log({ interval });
     return () => clearInterval(interval);
     // any variable the useEffect DEPENDS on need to be in the dependency array
   }, [

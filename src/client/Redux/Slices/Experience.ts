@@ -1,9 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 import * as Types from "../../../../Types";
 
+const hydratedState = {};
+hydratedState.rawData = localStorage.getItem("persist:root");
+if (hydratedState.rawData) {
+  // debugger;
+  // hydratedState.rawData;
+  hydratedState.Experience = JSON.parse(hydratedState.rawData).Experience;
+  if (hydratedState.Experience) {
+    hydratedState.Experience = JSON.parse(hydratedState.Experience);
+  }
+}
+
 export const Experience = createSlice({
   name: "experience",
-  initialState: {
+  initialState: hydratedState.Experience || {
     //list of skills, starting at 0 experience
     Attack: 0,
     Strength: 0,

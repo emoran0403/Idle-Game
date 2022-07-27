@@ -19,44 +19,48 @@ const Loginpage = (props: Types.LoginCompProps) => {
     }
 
     //! this is for testing purposes
-    nav(`/game`);
-
-    //@ toggle the logged in boolean to properly display the logout button
-    props.setLoggedIn(!props.loggedIn);
+    // nav(`/game`);
+    // props.setLoggedIn(!props.loggedIn);
 
     //@ check if the user is a valid user, and if so, set the proper data to state, and move them to the game
-    // Fetcher.POST("/auth/login", { username, password })
-    //   .then((data) => {
-    //     // console.log({ data });
+    Fetcher.POST("/auth/login", { username, password })
+      .then((data) => {
+        // console.log({ data });
+        console.log(`trying to login!`);
 
-    //     // if the player can log in
-    //     if (data.token) {
-    //       // put the JWT into local storage
-    //       localStorage.setItem(TOKEN_KEY, data.token);
+        // if the player can log in
+        if (data.token) {
+          //@ toggle the logged in boolean to properly display the logout button
+          props.setLoggedIn(!props.loggedIn);
 
-    //       // grab the previous checkPointData from localStorage
-    //       const checkPointData = localStorage.getItem(`checkPointData`);
+          // put the JWT into local storage
+          localStorage.setItem(TOKEN_KEY, data.token);
 
-    //       // if there is checkPointData, compare the timestamp to the DB timestamp
-    //       if (checkPointData) {
-    //         //! compare timestamps here
-    //         //! set the data with the larger timestamp to state
-    //       } else {
-    //         //! if there is no checkPointData, set data from DB to state
-    //       }
+          //@ setup the player's saved game data here
+          // grab the previous checkPointData from localStorage
+          const previousCheckPointDataRaw = localStorage.getItem("persist:root")!;
 
-    //       // finally navigate the player to the game
-    //       nav(`/game`);
-    //     } else {
-    //       // otherwise, the player cannot login, so alert the user to the problem
-    //       alert(data.message);
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log(`Login Error...\n`);
-    //     console.error(error);
-    //     alert(`Something went wrong, please try again`);
-    //   });
+          // if there is checkPointData,
+          if (!previousCheckPointDataRaw) {
+            //! if there is no checkPointData, set data from DB to state
+            // rename the player's data from the db for convenience
+            const playerInfoFromDBRaw: Types.IPlayerDataFromMongo = data.playerData;
+            const playerInfoFromDB = JSON.stringify(playerInfoFromDBRaw);
+            localStorage.setItem("persist:root", playerInfoFromDB);
+          }
+
+          // finally navigate the player to the game
+          nav(`/game`);
+        } else {
+          // otherwise, the player cannot login, so alert the user to the problem
+          alert(data.message);
+        }
+      })
+      .catch((error) => {
+        console.log(`Login Error...\n`);
+        console.error(error);
+        alert(`Something went wrong, please try again`);
+      });
   };
 
   return (

@@ -342,6 +342,10 @@ export interface IPlayerData extends AllState, IPlayerPayload {
   timestamp: number;
 }
 
+export interface IPlayerDataFromMongo extends IPlayerData {
+  _id: string;
+}
+
 export interface IPlayerPayload {
   username?: string;
   email?: string;

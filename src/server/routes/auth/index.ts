@@ -11,16 +11,16 @@ const authRouter = express.Router();
 
 //verify token
 //@ can fetch this on an interval to check if the token is valid
-authRouter.get(`/verify`, passport.authenticate("jwt"), (req, res) => {
+authRouter.get(`/verify`, passport.authenticate("jwt", { session: false }), (req, res) => {
   // when verifying, check for this exact message
   res.status(200).json({ message: "valid token" });
 });
 
 //login existing user
-authRouter.post(`/login`, passport.authenticate("local"), (req: Types.ReqUser, res) => {
+authRouter.post(`/login`, passport.authenticate("local", { session: false }), (req: Types.ReqUser, res) => {
   try {
-    const token = generateToken(req.user!.username!, req.user!.email!);
-    res.json(token);
+    const token = generateToken(req.user!.username!);
+    res.json({ token, playerData: req.user });
   } catch (error) {
     console.log(`login error...\n`);
     console.error(error);
@@ -46,7 +46,7 @@ authRouter.post(`/register`, async (req, res) => {
     // if there was a positive response, log it and send a token to the client
     console.log(MongoRes);
 
-    const token = generateToken(playerRegisterInfo.username!, playerRegisterInfo.email!);
+    const token = generateToken(playerRegisterInfo.username!);
 
     res.json(token);
   } catch (error) {

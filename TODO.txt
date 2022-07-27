@@ -10,6 +10,9 @@
 
 * im going to have jwt in localstorage as well as the checkpoint data
 
+when loading data from local storage or from mongo, how do i set that to state?
+ - normalize the data?
+
 
 //# Fixes I need to do
 //! game - set up a way to save progress to local storage

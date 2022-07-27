@@ -11,18 +11,18 @@ const uri = `mongodb+srv://${Mongo_Name}:${Mongo_Pass}@cluster0.2twg6.mongodb.ne
 const client: MongoClient = new MongoClient(uri, { serverApi: ServerApiVersion.v1 });
 
 //@ this function queries the MongoDB cluster for a player matching the specific username
-const getPlayerInfo = async (email: string) => {
+const getPlayerInfo = async (username: string) => {
   try {
     // Connect to the MongoDB cluster
     await client.connect();
-    const result = await client.db("EricDB").collection("PlayerInfo").findOne<Types.IPlayerData>({ email });
+    const result = await client.db("EricDB").collection("PlayerInfo").findOne<Types.IPlayerData>({ username });
 
     if (result !== null) {
       // if there is a result, return it
       return result;
     } else {
       // otherwise throw an error - the user was not found
-      throw new Error(`Player with email ${email} not found`);
+      throw new Error(`Player with email ${username} not found`);
     }
   } catch (e) {
     // log the error message if any occur
@@ -84,30 +84,3 @@ export const MongoQuery = {
   registerNewPlayer,
   updatePlayerInfo,
 };
-
-//! use these to test
-
-// registerNewPlayer(defaultPlayerData).then((res) => {
-//   if (res) {
-//     console.log(res);
-//     //! probably a better way to do this
-//     // this lets us assert that playerInfo is of the correct type.
-//     // let playerInfo = JSON.parse(JSON.stringify(res)) as Types.IPlayerData;
-//     // playerInfo.password;
-//     // console.log(`the password is ${res.password}`);
-
-//     // console.log(`the password is ${playerInfo.password}`);
-//   }
-// });
-
-// getPlayerInfo(`tesail.com`).then((res) => {
-//   if (res) {
-//     //! probably a better way to do this
-//     // this lets us assert that playerInfo is of the correct type.
-//     let playerInfo = JSON.parse(JSON.stringify(res)) as Types.IPlayerData;
-//     playerInfo.password;
-//     console.log(`the password is ${res.password}`);
-
-//     console.log(`the password is ${playerInfo.password}`);
-//   }
-// });
