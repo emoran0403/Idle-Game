@@ -45,7 +45,7 @@ const NewUser = (props: Types.NewUserCompProps) => {
       });
 
     //! this is for testing purposes
-    nav(`/game`);
+    nav(`/lobby`);
 
     //@ toggle the logged in boolean to properly display the logout button
     props.setLoggedIn(!props.loggedIn);
@@ -59,7 +59,7 @@ const NewUser = (props: Types.NewUserCompProps) => {
     //     // console.log({ data });
     //     if (data.token) {
     //       localStorage.setItem(TOKEN_KEY, data.token);
-    //       nav(`/game`);
+    //       nav(`/lobby`);
     //     } else {
     //       alert(data.message);
     //     }
