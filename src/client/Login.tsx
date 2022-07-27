@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import * as Types from "../../Types";
 import { useNavigate } from "react-router-dom";
 import Fetcher, { TOKEN_KEY } from "../client/ClientUtils/Fetcher";
+import { error } from "jquery";
 
 const Loginpage = (props: Types.LoginCompProps) => {
   const nav = useNavigate();
@@ -9,8 +10,8 @@ const Loginpage = (props: Types.LoginCompProps) => {
   const [password, setPassword] = useState<string>("");
   const [username, setUsername] = useState<string>("");
 
-  const handleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  const handleLogin = (e?: React.MouseEvent<HTMLButtonElement>) => {
+    e?.preventDefault();
 
     //@ check if the user has entered their username and password
     if (!password || !username) {
@@ -19,55 +20,45 @@ const Loginpage = (props: Types.LoginCompProps) => {
     }
 
     //! this is for testing purposes
-    nav(`/lobby`); // navigate user to the lobby component
-    props.setLoggedIn(!props.loggedIn); // toggle the login state to allow the logout button to be displayed
+    // nav(`/lobby`); // navigate user to the lobby component
+    // props.setLoggedIn(!props.loggedIn); // toggle the login state to allow the logout button to be displayed
 
     //@ check if the user is a valid user, and if so, set the proper data to state, and move them to the lobby
-    // Fetcher.POST("/auth/login", { username, password })
-    //   .then((data) => {
-    //     // console.log({ data });
-    //     console.log(`trying to login!`);
+    Fetcher.POST("/auth/login", { username, password })
+      .then((data) => {
+        // console.log({ data });
+        console.log(`trying to login!`);
 
-    //     // if the player can log in
-    //     if (data.token) {
-    //       //@ toggle the logged in boolean to properly display the logout button
-    //       props.setLoggedIn(!props.loggedIn);
+        // if the player can log in
+        if (data.token) {
+          //@ toggle the logged in boolean to properly display the logout button
+          props.setLoggedIn(!props.loggedIn);
 
-    //       // put the JWT into local storage
-    //       localStorage.setItem(TOKEN_KEY, data.token);
+          // put the JWT into local storage
+          localStorage.setItem(TOKEN_KEY, data.token);
 
-    //       //@ setup the player's saved game data here
-    //       // grab the previous checkPointData from localStorage
-    //       const previousCheckPointDataRaw = localStorage.getItem("persist:root")!;
+          // finally navigate the player to the lobby
+          nav(`/lobby`);
+        }
+      })
+      .catch((error) => {
+        console.log(`Login Error...\n`);
+        console.error(error);
+        alert(error.message);
+      });
+  };
 
-    //       // if there is checkPointData,
-    //       if (!previousCheckPointDataRaw) {
-    //         //! if there is no checkPointData, set data from DB to state
-    //         // rename the player's data from the db for convenience
-    //         const playerInfoFromDBRaw: Types.IPlayerDataFromMongo = data.playerData;
-    //         const playerInfoFromDB = JSON.stringify(playerInfoFromDBRaw);
-    //         localStorage.setItem("persist:root", playerInfoFromDB);
-    //       }
-
-    //       // finally navigate the player to the game
-    //       nav(`/lobby`);
-    //     } else {
-    //       // otherwise, the player cannot login, so alert the user to the problem
-    //       alert(data.message);
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log(`Login Error...\n`);
-    //     console.error(error);
-    //     alert(`Something went wrong, please try again`);
-    //   });
+  const handleEnterLogin = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleLogin();
+    }
   };
 
   return (
     <>
       <div className="d-flex justify-content-center mt-5">
         <div className="card bg-light shadow col-md-4">
-          <div className="card-body d-flex flex-wrap justify-content-center">
+          <form className="card-body d-flex flex-wrap justify-content-center">
             <h5 className="card-title text-center col-md-7">Please log in, or click the new player button</h5>
 
             <input
@@ -86,6 +77,7 @@ const Loginpage = (props: Types.LoginCompProps) => {
               value={password}
               className="form-control col-md-7 mb-1"
               onChange={(e) => setPassword(e.target.value)}
+              onKeyDown={(e) => handleEnterLogin(e)}
             />
 
             <button className="btn btn-primary my-2 ms-2 col-md-6" type="button" onClick={(e) => handleLogin(e)}>
@@ -95,7 +87,7 @@ const Loginpage = (props: Types.LoginCompProps) => {
             <button className="btn btn-primary my-2 ms-2 col-md-6" type="button" onClick={() => nav(`/register`)}>
               New Player
             </button>
-          </div>
+          </form>
         </div>
       </div>
     </>

@@ -2,8 +2,9 @@
 import * as Types from "../../../Types";
 
 export const TOKEN_KEY = `token`;
+export const PLAYER_DATA_KEY = `playerGameData`;
 
-const Fetcher = async (url: string, method: string, data?: Types.FetchData) => {
+const Fetcher = async (url: string, method: string, data?: any) => {
   // token is any JWT token in localStorage
   const token = localStorage.getItem(`token`);
 
@@ -40,7 +41,7 @@ const Fetcher = async (url: string, method: string, data?: Types.FetchData) => {
       // if there is a bad response, return the data, and log
     } else {
       console.log(`res was bad here`);
-      return data;
+      throw new Error(`Something went wrong`);
     }
   } catch (error) {
     // if an error occurs, log the error
@@ -48,14 +49,14 @@ const Fetcher = async (url: string, method: string, data?: Types.FetchData) => {
     console.error(error);
 
     // This throw will not be caught in this catch block, thus, ALL Fetcher calls need to end with a .catch
-    throw new Error(`Bad Fetcher Call`);
+    throw new Error(`Something went wrong`);
   }
 };
 
 // Abstract Fetcher for get, post, put, delete methods
 export const GET = (url: string) => Fetcher(url, "GET");
-export const POST = (url: string, data: Types.FetchData) => Fetcher(url, "POST", data);
-export const PUT = (url: string, data: Types.FetchData) => Fetcher(url, "PUT", data);
+export const POST = (url: string, data: any) => Fetcher(url, "POST", data);
+export const PUT = (url: string, data: any) => Fetcher(url, "PUT", data);
 export const DELETE = (url: string) => Fetcher(url, "DELETE");
 
 export default {

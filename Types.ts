@@ -1,4 +1,3 @@
-import store from "./src/client/Redux/store";
 import { Request } from "express";
 
 export interface AppProps {}
@@ -232,10 +231,10 @@ export interface IListOfArrows {
   runeArrow: IArrow;
 }
 
-// Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof store.getState>;
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-export type AppDispatch = typeof store.dispatch;
+// // Infer the `RootState` and `AppDispatch` types from the store itself
+// export type RootState = ReturnType<typeof store.getState>;
+// // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
+// export type AppDispatch = typeof store.dispatch;
 
 export interface IFlatObjectOfNums {
   [key: string]: number;
@@ -1210,10 +1209,6 @@ export interface IHatchetsSlice {
 
 export interface ICompositeHatchet extends IHatchet {
   playerOwnsThisItem: boolean;
-}
-
-export interface FetchData {
-  [key: string]: string | number | boolean;
 }
 
 export interface IFetchOptions {

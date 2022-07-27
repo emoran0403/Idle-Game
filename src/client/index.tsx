@@ -2,18 +2,27 @@ import * as React from "react";
 import { render } from "react-dom";
 import App from "./App";
 import "./scss/app";
-import store, { persistedStore } from "./Redux/store";
+import { configureStoreAsync } from "./Redux/store";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import { PersistGate } from "redux-persist/integration/react";
+import { AnyAction, Store } from "@reduxjs/toolkit";
+import { PLAYER_DATA_KEY } from "./ClientUtils/Fetcher";
 
-render(
-  <Provider store={store}>
-    <PersistGate loading={null} persistor={persistedStore}>
+configureStoreAsync().then((store) => {
+  // sub to the store on all changes and pass them into our utility
+  //@ts-ignore
+  store.subscribe(async () => {
+    //@ts-ignore
+    localStorage.setItem(PLAYER_DATA_KEY, JSON.stringify(store.getState()));
+  });
+
+  render(
+    //@ts-ignore
+    <Provider store={store}>
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </PersistGate>
-  </Provider>,
-  document.getElementById("root")
-);
+    </Provider>,
+    document.getElementById("root")
+  );
+});

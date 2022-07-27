@@ -28,6 +28,7 @@ import { Enemies, playerAttacksTarget } from "../../../Constants/Enemies";
 import { BackSlot } from "../../../Constants/Equipment/BackSlot";
 import { addLogToBank } from "../Redux/Slices/BankSlices/LogsSlice";
 import { addFishToBank } from "../Redux/Slices/BankSlices/FishSlice";
+import { saveState } from "../Redux/store";
 
 const GameContainer = (props: Types.GameContainerProps) => {
   const dispatch = useDispatch();
@@ -85,7 +86,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
   const [needsToBank, setNeedsToBank] = useState<boolean>(false);
 
   //@ this keeps track of time, used to 'save' progress in localStorage, and to update DB
-  const [checkPointTimer, setcheckPointTimer] = useState<number>(0);
+  const [checkPointTimer, setcheckPointTimer] = useState<number>(1);
 
   //@ use this to add to the chat log array
   const handleNewChatLog = (message: string, tags: Types.ChatLogTag) => {
@@ -353,32 +354,17 @@ const GameContainer = (props: Types.GameContainerProps) => {
 
   //@ this will handle saving the game state to localstorage and the database
   const handleSavePoint = () => {
-    /**
-     * every 30 seconds, stringify state with a timestamp and set to localstorage as a checkpoint
-     * this checkpoint helps if the player closes the tab without hitting logout, (logout button will make the db call to save data)
-     * every 5 mins, create a checkpoint, and send data to the database
-     */
-
     // increment the checkPointTimer so we can keep track of the time between saves
     setcheckPointTimer(checkPointTimer + 1);
-
-    // if (checkPointTimer % 15 === 0) {
-    //   //@every 30 seconds, stringify state and update localStorage
-    //   console.log(`updating localStorage`);
-    //   let timestamp: number = Date.now();
-    //   let checkPointData: Types.IPlayerData = { ...ALLSTATE, timestamp };
-    //   let checkPointDataStringified = JSON.stringify(checkPointData);
-    //   localStorage.setItem("checkPointData", checkPointDataStringified);
-    // }
     if (checkPointTimer % 150 === 0) {
       //@every 5 mins, update database
       console.log(`update database`);
       let timestamp: number = Date.now();
       let checkPointData: Types.IPlayerData = { ...ALLSTATE, timestamp };
-      //! make a put req to db
-      // read the username from the jwt, then make the update mongo call with that username and this checkPointData
+      // save the data to the database
+      console.log(checkPointData);
+      saveState(checkPointData);
     }
-    // console.log(checkPointTimer);
   };
 
   //@ this useEffect is dedicated to executing the logic of what to do when the quest is complete
