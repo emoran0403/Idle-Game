@@ -19,8 +19,8 @@ const Loginpage = (props: Types.LoginCompProps) => {
     }
 
     //! this is for testing purposes
-    nav(`/lobby`);
-    props.setLoggedIn(!props.loggedIn);
+    nav(`/lobby`); // navigate user to the lobby component
+    props.setLoggedIn(!props.loggedIn); // toggle the login state to allow the logout button to be displayed
 
     //@ check if the user is a valid user, and if so, set the proper data to state, and move them to the lobby
     // Fetcher.POST("/auth/login", { username, password })

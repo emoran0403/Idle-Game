@@ -29,7 +29,7 @@ import { BackSlot } from "../../../Constants/Equipment/BackSlot";
 import { addLogToBank } from "../Redux/Slices/BankSlices/LogsSlice";
 import { addFishToBank } from "../Redux/Slices/BankSlices/FishSlice";
 
-const GameContainer = (props: Types.NoProps) => {
+const GameContainer = (props: Types.GameContainerProps) => {
   const dispatch = useDispatch();
   const Target = useSelector((state: Types.AllState) => state.Target.CurrentTarget as Types.ICurrentTargetOptions);
   const CurrentQuest = useSelector((state: Types.AllState) => state.Quest.CurrentQuest as Types.ICurrentQuestOptions);

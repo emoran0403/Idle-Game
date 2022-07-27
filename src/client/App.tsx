@@ -12,12 +12,21 @@ const App = (props: Types.AppProps) => {
   const nav = useNavigate();
 
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
+  const [showLobbyButton, setShowLobbyButton] = useState<boolean>(false);
 
   const handeLogOut = () => {
     //! this needs to handle a PUT req to the db to update player data
     console.log(`logging out`);
     setLoggedIn(!loggedIn);
+    setShowLobbyButton(false);
     nav(`/`);
+  };
+
+  const handleMoveToLobby = () => {
+    // move the player to the game
+    nav(`/lobby`);
+    // toggle state for the lobby button
+    setShowLobbyButton(false);
   };
 
   return (
@@ -26,9 +35,12 @@ const App = (props: Types.AppProps) => {
 
       {loggedIn && (
         <div className="d-flex justify-content-end mb-1">
-          <button onClick={() => nav(`/lobby`)} className="btn btn-primary">
-            Lobby
-          </button>
+          {showLobbyButton && (
+            <button onClick={() => handleMoveToLobby()} className="btn btn-primary">
+              Lobby
+            </button>
+          )}
+
           <button onClick={() => handeLogOut()} className="btn btn-primary">
             Log Out
           </button>
@@ -37,8 +49,8 @@ const App = (props: Types.AppProps) => {
 
       <Routes>
         <Route path="/" element={<LoginPage setLoggedIn={setLoggedIn} loggedIn={loggedIn} />} />
-        <Route path="/lobby" element={<Lobby />} />
-        <Route path="/game" element={<GameContainer />} />
+        <Route path="/lobby" element={<Lobby setShowLobbyButton={setShowLobbyButton} />} />
+        <Route path="/game" element={<GameContainer setShowLobbyButton={setShowLobbyButton} />} />
         <Route path="/register" element={<NewUser setLoggedIn={setLoggedIn} loggedIn={loggedIn} />} />
       </Routes>
     </main>

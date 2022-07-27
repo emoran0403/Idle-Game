@@ -3,6 +3,12 @@ import { Request } from "express";
 
 export interface AppProps {}
 export interface NoProps {}
+export interface LobbyProps {
+  setShowLobbyButton: Function;
+}
+export interface GameContainerProps {
+  setShowLobbyButton: Function;
+}
 export interface LoginCompProps {
   setLoggedIn: Function;
   loggedIn: boolean;
