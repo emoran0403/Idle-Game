@@ -20,9 +20,12 @@ when loading data from local storage or from mongo, how do i set that to state?
 //! server - make a way for players to login and retrieve data
 //! server - connect to db to read data upon logging in
 //! DB - need a way to add player auth info the player object in global storage
+//! clean up the lobby into panels or some other layout
 
 //# Fixes that can wait
 //! Logic - experience and levels is displaying too high for some reason :/
+//! display which quests and levels are missing for quests in quest panel
+//! get a changelog from github for the lobby
 
 
 //# Future Updates
