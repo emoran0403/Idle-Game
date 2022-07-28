@@ -21,7 +21,7 @@ export const bank_logs = createSlice({
     },
     maple: {
       name: `maple`,
-      amount: 420,
+      amount: 0,
     },
     yew: {
       name: `yew`,

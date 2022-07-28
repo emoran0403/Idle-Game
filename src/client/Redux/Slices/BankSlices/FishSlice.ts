@@ -10,7 +10,7 @@ export const bank_fish = createSlice({
 
     raw_shrimp: {
       name: `raw_shrimp`,
-      amount: 69,
+      amount: 0,
     },
     raw_crayfish: {
       name: `raw_crayfish`,
@@ -26,7 +26,7 @@ export const bank_fish = createSlice({
     },
     raw_salmon: {
       name: `raw_salmon`,
-      amount: 420,
+      amount: 0,
     },
     raw_pike: {
       name: `raw_pike`,
