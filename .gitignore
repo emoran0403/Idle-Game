@@ -7,3 +7,5 @@ public/js/app.js
 
 # don't commit secret passwords
 .env
+
+TODO.txt
