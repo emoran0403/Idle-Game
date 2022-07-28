@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import * as Types from "../../Types";
 import { useNavigate } from "react-router-dom";
 import Fetcher, { TOKEN_KEY } from "../client/ClientUtils/Fetcher";
-import { error } from "jquery";
 
 const Loginpage = (props: Types.LoginCompProps) => {
   const nav = useNavigate();
