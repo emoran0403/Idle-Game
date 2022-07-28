@@ -14,12 +14,12 @@ export const HeadSlotSlice = createSlice({
     playerOwnsrunefullhelm: false,
 
     playerOwnswizardhat: false,
-    playerOwnsimphidehood: true,
-    playerOwnsspidersilkhood: true,
-    playerOwnsbatwinghood: true,
-    playerOwnssplitbarkhelm: true,
+    playerOwnsimphidehood: false,
+    playerOwnsspidersilkhood: false,
+    playerOwnsbatwinghood: false,
+    playerOwnssplitbarkhelm: false,
 
-    playerOwnsleathercowl: true,
+    playerOwnsleathercowl: false,
     playerOwnshardleathercowl: false,
     playerOwnsstuddedleathercoif: false,
     playerOwnscarapacehelm: false,

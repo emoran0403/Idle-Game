@@ -1,8 +1,9 @@
 
 //# Fixes I need to do
-//! clean up the lobby into panels or some other layout
 
 //# Fixes that can wait
+//! chatwindow greets the player by username
+//! clean up the lobby into panels or some other layout
 //! Logic - experience and levels is displaying too high for some reason :/
 //! get a changelog from github for the lobby
 //! display the stupid images lol
