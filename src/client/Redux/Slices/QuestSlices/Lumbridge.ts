@@ -11,7 +11,7 @@ export const Quests_Lumbridge = createSlice({
     LumbridgeQuestArray: [
       {
         name: "Cook's Assistant",
-        stepsComplete: 18,
+        stepsComplete: 0,
         stepsTotal: 20,
         complete: false,
       },
@@ -23,7 +23,7 @@ export const Quests_Lumbridge = createSlice({
       },
       {
         name: "The Restless Ghost",
-        stepsComplete: 14,
+        stepsComplete: 0,
         stepsTotal: 14,
         complete: true,
       },
@@ -35,7 +35,7 @@ export const Quests_Lumbridge = createSlice({
       },
       {
         name: "The Blood Pact",
-        stepsComplete: 16,
+        stepsComplete: 0,
         stepsTotal: 17,
         complete: false,
       },
