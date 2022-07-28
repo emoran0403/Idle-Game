@@ -40,10 +40,13 @@ export function configurePassport(app: Application) {
               } else {
                 done(null, false);
               }
+            } else {
+              done(null, false);
             }
           });
         } catch (error) {
-          done(error);
+          // done(error);
+          done(null, false);
         }
       }
     )

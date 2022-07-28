@@ -19,13 +19,12 @@ const App = (props: Types.AppProps) => {
   const [showLobbyButton, setShowLobbyButton] = useState<boolean>(false);
 
   const handleLogOut = async () => {
-    //! this needs to handle a PUT req to the db to update player data
     let timestamp: number = Date.now();
-
     let checkPointData: Types.IPlayerData = { ...ALLSTATE, timestamp };
 
     console.log({ checkPointData });
     try {
+      //@ saveState calls a PUT req to the db to update player data
       await saveState(checkPointData);
       console.log(`successfully saved`);
     } catch (error) {

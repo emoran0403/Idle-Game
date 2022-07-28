@@ -14,7 +14,7 @@ apiRouter.get("/getplayerinfo", passport.authenticate("jwt", { session: false })
   const playerusername = req.user!.username!;
 
   try {
-    // contact the db with the player email
+    // contact the db with the username
     // this query will throw an error if the player was not found
 
     const playerDataDB = await MongoQuery.getPlayerInfo(playerusername);

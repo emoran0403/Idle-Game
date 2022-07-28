@@ -22,7 +22,7 @@ const getPlayerInfo = async (username: string) => {
       return result;
     } else {
       // otherwise throw an error - the user was not found
-      throw new Error(`Player with email ${username} not found`);
+      throw new Error(`Player with username ${username} not found`);
     }
   } catch (e) {
     // log the error message if any occur

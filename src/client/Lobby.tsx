@@ -27,15 +27,47 @@ const Lobby = (props: Types.LobbyProps) => {
         </p>
         <p>
           The game currently features skills, quests, and combat found in Lumbridge, the starting area of Runescape. This game will 'tick' every 2 seconds,
-          resolving the action chosen by the player. If the player has chosen a quest, progress will accumulate until the quest is complete, and any rewards
-          will be given out. Players who choose combat will make progress in defeating enemies via a chosen combat style, and will be rewarded when the enemy is
-          defeated. Skilling is where the player gathers or creates certain items.
+          resolving the action chosen by the player. Every game tick will update the state of the game, which will subsequently save the player data to
+          localstorage. Every 5 minutes, player data is saved to the database. Upon loading the app, player data will be loaded from localStorage, or the
+          database if localStorage is empty.
         </p>
+        <div className="d-flex flex-row justify-content-center">
+          <div className="card">
+            <div>
+              <img src="/Assets/ActivityButtons.PNG" className="card-img-top " width="326" height="149" />
+            </div>
+          </div>
+        </div>
         <div className="d-flex flex-row">
           <div className="card col-4">
-            <img src="/Assets/QuestButton.PNG" className="card-img-top" />
+            <div className="card-body">
+              <h5 className="card-title text-center">Skilling</h5>
+              <p className="card-text">Skilling is where the player gathers or creates certain items.</p>
+
+              <p className="card-text">
+                To begin skilling, click the skills activity button. Options in green are accesssible, and those in red require a higher level in the respective
+                skill.
+              </p>
+
+              <ul>
+                <li className="card-text">
+                  Training Woodcutting requires a hatchet (more powerful hatchets can be bought in the store - store activity button). Select the hatchet you
+                  wish to use, then click on the type of logs you wish to cut.
+                </li>
+                <li className="card-text">Training Fishing does not require any type of special equipment, simply click on the fish you wish to catch</li>
+              </ul>
+              <p className="card-text">
+                As you accumulate resources your inventory will fill up (the box at the top right of the screen). Items will automatically be deposited into the
+                bank when your inventory is full. You can view your bank by clicking the bank activity button.
+              </p>
+            </div>
+          </div>
+          <div className="card col-4">
             <div className="card-body">
               <h5 className="card-title text-center">Quests</h5>
+              <p className="card-text">
+                If the player has chosen a quest, progress will accumulate until the quest is complete, and any rewards will be given out.
+              </p>
               <p className="card-text">
                 To start a quest, click the quests activity button. Clicking the begin or resume quest button will start you on your quest. Progress will
                 accumulate until the quest is complete. Quests typically reward the player with Coins and Experience. After you complete a quest, you will need
@@ -57,31 +89,13 @@ const Lobby = (props: Types.LobbyProps) => {
               </ul>
             </div>
           </div>
+
           <div className="card col-4">
-            {/* <img src="..." className="card-img-top" alt="..." /> */}
-            <div className="card-body">
-              <h5 className="card-title text-center">Skilling</h5>
-              <p className="card-text">
-                To begin skilling, click the skills activity button. Options in green are accesssible, and those in red require a higher level in the respective
-                skill.
-              </p>
-              <ul>
-                <li className="card-text">
-                  Training Woodcutting requires a hatchet (more powerful hatchets can be bought in the store - store activity button). Select the hatchet you
-                  wish to use, then click on the type of logs you wish to cut.
-                </li>
-                <li className="card-text">Training Fishing does not require any type of special equipment, simply click on the fish you wish to catch</li>
-              </ul>
-              <p className="card-text">
-                As you accumulate resources your inventory will fill up (the box at the top right of the screen). Items will automatically be deposited into the
-                bank when your inventory is full. You can view your bank by clicking the bank activity button.
-              </p>
-            </div>
-          </div>
-          <div className="card col-4">
-            {/* <img src="..." className="card-img-top" alt="..." /> */}
             <div className="card-body">
               <h5 className="card-title text-center">Combat</h5>
+              <p className="card-text">
+                Players who choose combat will make progress in defeating enemies via a chosen combat style, and will be rewarded when the enemy is defeated.{" "}
+              </p>
               <p className="card-text">
                 To start Combat, click the combat activity button. You will need to select an enemy, and a combat style. Combat style determines which combat
                 skill is trained, and some enemies are weaker to certain styles. Enemies with a green background are at a lower combat level than you, while
@@ -96,10 +110,10 @@ const Lobby = (props: Types.LobbyProps) => {
                   Equipment you own but cannot wield will have a <span className="bg-yellowlol">yellow background</span>.
                 </li>
                 <li>
-                  Equipment you do not own but can wield will have a<span className="bg-orangelol">orange background</span>.
+                  Equipment you do not own but can wield will have an <span className="bg-orangelol">orange background</span>.
                 </li>
                 <li>
-                  Equipment you do not own and cannot wield will have a<span className="bg-danger">red background</span>.
+                  Equipment you do not own and cannot wield will have a <span className="bg-danger">red background</span>.
                 </li>
               </ul>
             </div>
