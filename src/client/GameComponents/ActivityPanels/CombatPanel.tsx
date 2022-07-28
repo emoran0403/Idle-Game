@@ -109,6 +109,8 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
   };
 
   const handleChatLogEnemy = (enemy: string) => {
+    //@ prevent spamming the chat window
+    // if the enemy mayches that of the most recent chat log, dont send a new message to the chat window
     if (enemy === props.chatLogArray[props.chatLogArray.length - 1].message.substring(13)) {
       return;
     }
@@ -118,9 +120,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
   const combatStyleButtonsJSX = () => {
     // reference the current weapon
     // TwoHandSlot[props.currentEquipment.TwoHandSlot as keyof Types.IArmorSlotTwoHand].thisWeaponStyle;
-    if (TwoHandSlot[props.currentEquipment.TwoHandSlot as keyof Types.IArmorSlotTwoHand].thisWeaponStyle !== `melee`) {
-    }
-
+    //@ conditionally disable the buttons if they do not match the style of the currently equipped weapon
     return (
       <div className="d-flex justify-content-evenly mt-2">
         <button

@@ -197,14 +197,9 @@ const WornEquipment = (props: Types.WornEquipmentCompProps) => {
     }
 
     const itemHasBeenEquipped = (e: React.ChangeEvent<HTMLSelectElement>) => {
-      // when a weapon is swapped, reset the current skill to none, forcing the player to switch styles
+      //@ when a weapon is swapped, reset the current skill to none, forcing the player to switch styles
       dispatch(setSkill("none"));
 
-      //@ string type is `ok` since they can be keys of Types.ICurrentEquipment
-      /**
-       * this can be better described by stating the possible options of each slot in Types.ICurrentEquipment
-       *
-       */
       let newlyEquippedItemDisplayName: string = ``;
       let oldEquippedItemDisplayName: string = ``;
 
@@ -280,7 +275,7 @@ const WornEquipment = (props: Types.WornEquipmentCompProps) => {
 
   // useEffect(() => {}, []);
   return (
-    <div className="border border-dark border-2 rounded-3" style={{ overflowY: "auto", position: "relative", height: "46%" }}>
+    <div className="border border-dark border-2 rounded-3" style={{ overflowY: "auto", position: "relative", height: "44%" }}>
       <h5 className="card-header text-center">WornEquipment</h5>
       <div className="d-flex flex-column">
         <div className="text-center">Head Slot:</div>

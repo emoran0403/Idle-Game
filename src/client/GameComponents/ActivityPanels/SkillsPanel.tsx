@@ -61,8 +61,10 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
                 dispatch(setQuest(`none`));
                 dispatch(setSkill(`Woodcutting`));
                 // send a contextual message to the chat window
-                // if the last log contains the resource, don't send it
-                if (resource === props.chatLogArray[props.chatLogArray.length - 1].message.substring(12)) {
+                // if the last log contains the same message, don't send it
+                if (
+                  `Now cutting ${ListOfLogs[resource as keyof Types.IListOfLogs].displayName}` === props.chatLogArray[props.chatLogArray.length - 1].message
+                ) {
                   return;
                 }
                 props.newChatLog(`Now cutting ${ListOfLogs[resource as keyof Types.IListOfLogs].displayName}`, `Activity Swap`);
@@ -102,8 +104,10 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
                 dispatch(setSkill(`Fishing`));
 
                 // send a contextual message to the chat window
-                // if the last log contains the resource, don't send it
-                if (resource === props.chatLogArray[props.chatLogArray.length - 1].message.substring(12)) {
+                // if the last log contains the same message, don't send it
+                if (
+                  `Now fishing ${ListOfFish[resource as keyof Types.IListOfFish].displayName}` === props.chatLogArray[props.chatLogArray.length - 1].message
+                ) {
                   return;
                 }
                 props.newChatLog(`Now fishing ${ListOfFish[resource as keyof Types.IListOfFish].displayName}`, `Activity Swap`);
