@@ -60,7 +60,6 @@ const App = (props: Types.AppProps) => {
           </button>
         </div>
       )}
-      //! swapped game and lobby for testing
       <Routes>
         <Route path="/game" element={<LoginPage setLoggedIn={setLoggedIn} loggedIn={loggedIn} />} />
         <Route path="/lobby" element={<Lobby setShowLobbyButton={setShowLobbyButton} />} />
@@ -71,4 +70,5 @@ const App = (props: Types.AppProps) => {
   );
 };
 
+//! swapped game and lobby for testing
 export default App;

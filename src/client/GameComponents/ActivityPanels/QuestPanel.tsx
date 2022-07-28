@@ -9,6 +9,7 @@ import { setResource } from "../../Redux/Slices/CurrentResource";
 import { setSkill } from "../../Redux/Slices/CurrentSkill";
 import { setQuest } from "../../Redux/Slices/CurrentQuest";
 import { setTarget } from "../../Redux/Slices/CurrentTarget";
+import { info } from "sass";
 
 //! handleQuestStyle and handleQuestButtonDisplay have repeated logic that could be improved
 //! composing the constant quest info and state info can be improved by relegating that to a function, which then returns jsx
@@ -32,8 +33,9 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
   const { DraynorQuestArray } = useSelector((state: Types.AllState) => state.Quests_Draynor);
 
   // spread out all the quests from state into a flat array
-  const AllQuestsFromStateFlat = [...LumbridgeQuestArray, ...DraynorQuestArray];
   //@spread out future quests into the AllQuestsFromStateFlat array
+  const AllQuestsFromStateFlat = [...LumbridgeQuestArray, ...DraynorQuestArray];
+  // console.log({ allquests: AllQuestsFromStateFlat });
 
   // we establish an array of composite quests, pulling in the progress from state, and the static info from the summary
   const [compositeQuestArray, setCompositeQuestArray] = useState<Types.ICompositeQuestInfo[]>([]);
@@ -240,33 +242,38 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
   const displayQuestReqJSX = (quest: Types.ICompositeQuestInfo) => {
     // define an empty array where the quest requirements will be placed
     let questReqArray: string[] = [];
-    // if there are quest requirements check if the player has completed them, and if not, add them to the list
-    if (quest.questRequirements.length) {
-      console.log({ thisQuest: quest, req: quest.questRequirements });
-      // iterate through the quest requirements, and for each quest requirement
-      quest.questRequirements.forEach((questRequirement) => {
-        // then iterate through the array of composite quests
-        for (let i = 0; i < compositeQuestArray.length; i++) {
-          // to find the matching quest, then check if that quest is complete
-          if (compositeQuestArray[i].name === questRequirement) {
-            if (!compositeQuestArray[i].complete) {
-              // if the quest is not complete, add it to the list of quest requirements
-              questReqArray.push(compositeQuestArray[i].name);
-            }
-          }
+
+    // if there are quest requirements, check if the player has completed them, and if not, add them to the list
+    quest.questRequirements.forEach((req) => {
+      // console.log({ req });
+      AllQuestsFromStateFlat.forEach((questFromState) => {
+        // console.log({ questFromState });
+        // debugger;
+        console.log({ req, name: questFromState.name, complete: questFromState.complete });
+        if (questFromState.name == req && !questFromState.complete) {
+          questReqArray.push(req);
         }
       });
+    });
+
+    if (questReqArray.length) {
+      return (
+        <div>
+          <p>Quest Requirements:</p>
+          <ul>
+            {questReqArray.map((questReq) => (
+              <li>{questReq}</li>
+            ))}
+          </ul>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <p>All required quests complete</p>
+        </div>
+      );
     }
-    return (
-      <div>
-        <p>Quest Requirements:</p>
-        <ul>
-          {questReqArray.map((questReq) => (
-            <li>{questReq}</li>
-          ))}
-        </ul>
-      </div>
-    );
   };
 
   useEffect(() => {
@@ -274,6 +281,7 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
      * this useEffect shuffles the quest array coming from constants and the quest array coming from state together
      * adding in the stateful keys to the constant quest info
      */
+
     let tempCompArray: Types.ICompositeQuestInfo[] = [];
     for (let i = 0; i < AllQuestsFlat.length; i++) {
       // run through all quests from constants

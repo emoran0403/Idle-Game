@@ -13,8 +13,6 @@ import { setTarget } from "../../Redux/Slices/CurrentTarget";
 import { setQuest } from "../../Redux/Slices/CurrentQuest";
 import { listOfHatchets } from "../../../../Constants/SkillingEquipment/Hatchets";
 
-//@ this needs to pull from some single source of truth showing all the skills available, and their resources based on the current location from state
-
 const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
   const dispatch = useDispatch();
   // This grabs the current location from state
