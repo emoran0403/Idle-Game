@@ -163,7 +163,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
 
     // if the progress counter hits 20, reset it to 0, and then run the quest logic based on location
     //! change this to 20 for production
-    if (questStepProgress === 2) {
+    if (questStepProgress === 20) {
       setQuestStepProgress(0);
       switch (playerLocation) {
         case `Lumbridge`: {
@@ -447,7 +447,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
       handleSavePoint();
 
       //! set this to 2000ms in production
-    }, 1000);
+    }, 2000);
 
     // console.log({ interval });
     return () => clearInterval(interval);
