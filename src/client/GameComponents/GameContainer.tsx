@@ -379,16 +379,16 @@ const GameContainer = (props: Types.GameContainerProps) => {
         // unset current quest
         dispatch(setQuest(`none`));
         // find the quest that was just completed
-        let wowQuest: Types.IQuestInfo = LumbridgeQuests[LumbridgeQuests.findIndex((item) => item.name === CurrentQuest)];
+        let questRewards: Types.IQuestInfo = LumbridgeQuests[LumbridgeQuests.findIndex((item) => item.name === CurrentQuest)];
 
         //@ give item rewards
         // if Coins are rewarded, add them to the wallet
-        if (wowQuest.itemRewards?.Coins) {
-          dispatch(addToWallet(wowQuest.itemRewards.Coins));
+        if (questRewards.itemRewards?.Coins) {
+          dispatch(addToWallet(questRewards.itemRewards.Coins));
         }
 
         //@ give the quest point rewards
-        dispatch(addQuestPoints(wowQuest.questPoints));
+        dispatch(addQuestPoints(questRewards.questPoints));
 
         // prepare chatlogs for completing a quest, and possibly for levelling up
         let questMessages: string[] = [`Congratulations, you completed ${CurrentQuest}`];
@@ -396,7 +396,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
 
         //@ give the expreience rewards
         // Object.entries returns an empty array if there are no expreience rewards
-        Object.entries(wowQuest.experienceRewards).forEach(([skill, xp]) => {
+        Object.entries(questRewards.experienceRewards).forEach(([skill, xp]) => {
           dispatch(gainXP({ skill, xp }));
 
           // check if the player gained a level

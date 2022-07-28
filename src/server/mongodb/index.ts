@@ -1,5 +1,4 @@
 import { MongoClient, ServerApiVersion, WithId } from "mongodb";
-import { defaultPlayerData } from "../../../Constants/DefaultPlayerData";
 import * as Types from "../../../Types";
 import { DB_CONFIG } from "../config";
 

@@ -61,9 +61,9 @@ const App = (props: Types.AppProps) => {
         </div>
       )}
       <Routes>
-        <Route path="/game" element={<LoginPage setLoggedIn={setLoggedIn} loggedIn={loggedIn} />} />
+        <Route path="/" element={<LoginPage setLoggedIn={setLoggedIn} loggedIn={loggedIn} />} />
         <Route path="/lobby" element={<Lobby setShowLobbyButton={setShowLobbyButton} />} />
-        <Route path="/" element={<GameContainer setShowLobbyButton={setShowLobbyButton} />} />
+        <Route path="/game" element={<GameContainer setShowLobbyButton={setShowLobbyButton} />} />
         <Route path="/register" element={<NewUser setLoggedIn={setLoggedIn} loggedIn={loggedIn} />} />
       </Routes>
     </main>

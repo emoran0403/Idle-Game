@@ -4,7 +4,8 @@ import * as Types from "../../../../Types";
 import { MongoQuery } from "../../mongodb/index";
 import * as passport from "passport";
 import { generateHash, generateToken } from "../../ServerUtils/Passwords";
-import { defaultPlayerData } from "../../../../Constants/DefaultPlayerData";
+import { defaultPlayerData } from "../../Constants/DefaultPlayerData";
+import Validation from "../../ServerUtils/DataValidation";
 
 //current route is /auth
 const authRouter = express.Router();
@@ -32,7 +33,18 @@ authRouter.post(`/login`, passport.authenticate("local", { session: false }), (r
 authRouter.post(`/register`, async (req, res) => {
   // grab the player information from the req body
   const playerRegisterInfo = req.body as Types.IPlayerPayload;
+
   try {
+    //@ check if the user entered valid email
+    await Validation.isValidEmail(playerRegisterInfo.email!);
+
+    //@ then check if the user entered an acceptable username
+    await Validation.isValidusername(playerRegisterInfo.username!);
+
+    if (playerRegisterInfo.password?.length! < 8) {
+      throw new Error(`Password not long enough`);
+    }
+
     // hash the password, and overwrite it to the player information
     let hashedPass = generateHash(playerRegisterInfo.password!);
     playerRegisterInfo.password = hashedPass;

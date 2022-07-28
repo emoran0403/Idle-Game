@@ -1,4 +1,4 @@
-import * as Types from "../Types";
+import * as Types from "../../../Types";
 
 export const defaultPlayerData: Types.IPlayerData = {
   Experience: {

@@ -6,76 +6,56 @@ import Validation from "./ClientUtils/DataValidation";
 import Fetcher, { TOKEN_KEY } from "../client/ClientUtils/Fetcher";
 
 const NewUser = (props: Types.NewUserCompProps) => {
-  const [password_A, setPassword_A] = useState<string>("");
-  const [password_B, setPassword_B] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [username, setUsername] = useState<string>("");
+  const [password_A, setPassword_A] = useState<string>("hunter2222");
+  const [password_B, setPassword_B] = useState<string>("hunter2222");
+  const [email, setEmail] = useState<string>(`${Date.now()}@test.com`);
+  const [username, setUsername] = useState<string>(`${Date.now()}`);
 
   const nav = useNavigate();
 
   const handleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    //@ check if the user entered the password they meant to enter
-    if (password_A !== password_B) {
-      alert("Passwords do not match");
-      setPassword_A("");
-      setPassword_B("");
-      return;
-    }
-
-    //@ check for password length
-    if (password_A.length < 8) {
-      alert("Password must be 8 or more characters");
-      setPassword_A("");
-      setPassword_B("");
-      return;
-    }
-
     //@ check if the user entered valid email
     Validation.isValidEmail(email)
-      .then(() => console.log(`Email validated.`))
-      .catch((error) => {
-        console.log(`Bad Email Check Error...\n`);
-        console.error(error);
-        alert("Please enter a valid email");
-        return;
-      });
+      .then(() => {
+        //@ then check if the user entered an acceptable username
+        return Validation.isValidusername(username);
+      })
+      .then(() => {
+        //@ then check if the user entered the password they meant to enter
+        if (password_A !== password_B) {
+          setPassword_A("");
+          setPassword_B("");
+          throw new Error(`passwords do not match`);
+        }
 
-    //@ check if the user entered an acceptable username
-    Validation.isValidusername(username)
-      .then(() => console.log(`Username validated.`))
+        //@ then check for password length
+        if (password_A.length < 8) {
+          setPassword_A("");
+          setPassword_B("");
+          throw new Error(`passwords must be more than 8 characters long`);
+        }
+      })
+      .then(() => {
+        Fetcher.POST("/auth/register", { username, email, password: password_A })
+          .then((res) => {
+            // console.log({ data });
+            props.setLoggedIn(true);
+            localStorage.setItem(TOKEN_KEY, res);
+            nav(`/lobby`);
+          })
+          .catch((error) => {
+            console.log(`Login Error...\n`);
+            console.error(error);
+            alert(`Something went wrong, please try again: ${error.message}`);
+          });
+      })
       .catch((error) => {
-        console.log(`Bad Username Check Error...\n`);
         console.log(error);
-        alert("Please enter a username of 4-16 characters and containing only letters, numbers, and spaces");
+        alert("Please check your inputs");
         return;
       });
-
-    //! this is for testing purposes
-    nav(`/lobby`);
-    //@ toggle the logged in boolean to properly display the logout button
-    props.setLoggedIn(!props.loggedIn);
-
-    //! need to check if email or usernames are duplicates
-    // check if email or usernames are duplicates here
-
-    // Fetcher.POST("/auth/login", { email, password_A })
-    //   // ! this will need to set data from db into global redux state
-    //   .then((data) => {
-    //     // console.log({ data });
-    //     if (data.token) {
-    //       localStorage.setItem(TOKEN_KEY, data.token);
-    //       nav(`/lobby`);
-    //     } else {
-    //       alert(data.message);
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log(`Login Error...\n`);
-    //     console.error(error);
-    //     alert(`Something went wrong, please try again`);
-    //   });
   };
 
   //   useEffect(() => {}, []);

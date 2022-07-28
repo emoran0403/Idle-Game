@@ -12,13 +12,9 @@
 
     stepsComplete: 0,
 
-    stepsTotal: [...document.getElementsByClassName("lighttable checklist")]
-      .map((div) => div.firstElementChild.children.length)
-      .reduce((a, b) => a + b, 0),
+    stepsTotal: [...document.getElementsByClassName("lighttable checklist")].map((div) => div.firstElementChild.children.length).reduce((a, b) => a + b, 0),
 
-    questPoints: Number(
-      [...document.getElementsByTagName("a")].filter((item) => item.title === "Quest points")[0].parentElement.textContent.split(" ")[0]
-    ),
+    questPoints: Number([...document.getElementsByTagName("a")].filter((item) => item.title === "Quest points")[0].parentElement.textContent.split(" ")[0]),
 
     complete: false,
 
@@ -33,9 +29,7 @@
 
       if (requirementsExist) {
         let requirements = [
-          ...document
-            .getElementsByClassName("questreq ")[0]
-            .children[0].children[1].firstChild.children[0].children[0].getElementsByTagName("li"),
+          ...document.getElementsByClassName("questreq ")[0].children[0].children[1].firstChild.children[0].children[0].getElementsByTagName("li"),
         ].map((li) => li.children[0].innerText.trimEnd());
         return requirements;
       } else {
@@ -57,24 +51,19 @@
     experienceRewards: (() => {
       const temp = {};
 
-      const images = [
-        ...document.getElementById("Rewards").parentElement.nextElementSibling.nextElementSibling.getElementsByTagName("img"),
-      ];
+      const images = [...document.getElementById("Rewards").parentElement.nextElementSibling.nextElementSibling.getElementsByTagName("img")];
       images
         .filter((img) => img.parentElement.parentElement.innerText.toLowerCase().includes("experience"))
         .map((img) => img.parentElement.parentElement.innerText.replace(" experience", "") + img.alt)
-        .forEach((pizza) => {
-          const [xp, skill] = pizza.split(" ");
+        .forEach((img) => {
+          const [xp, skill] = img.split(" ");
           temp[skill] = Number(xp.replace(",", ""));
         });
       return temp;
     })(),
 
     itemRewards: {
-      ...[
-        ...document.getElementById("Rewards").parentElement.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling
-          .children,
-      ]
+      ...[...document.getElementById("Rewards").parentElement.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.children]
         .map((child) => child.innerText)
         .filter((string) => string.toLowerCase().includes("lamp")),
     },

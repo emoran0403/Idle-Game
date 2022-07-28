@@ -89,13 +89,13 @@ export const playerEarnsLog = (log: Types.ILog, WCEXP: number, hatchet: Types.IH
   // calculate the player's Woodcutting level
   let WCLevel = getLevel(WCEXP);
 
-  const wow = hatchet.name.replace(`hatchet`, ``);
+  const hatchetName = hatchet.name.replace(`hatchet`, ``);
 
-  // console.log({ low: log.low[wow], high: log.high[wow] });
+  // console.log({ low: log.low[hatchetName], high: log.high[hatchetName] });
 
   // calculate the rawRoll needed for the player to chop a log - formula obtained from wiki: https://runescape.wiki/w/Woodcutting#Mechanics
   let playerRoll = Math.floor(
-    ((99 - WCLevel) * Number(log.low[wow as keyof Types.logRoll]) + (WCLevel - 1) * Number(log.high[wow as keyof Types.logRoll])) / 98
+    ((99 - WCLevel) * Number(log.low[hatchetName as keyof Types.logRoll]) + (WCLevel - 1) * Number(log.high[hatchetName as keyof Types.logRoll])) / 98
   );
 
   // roll in the range 0-255 inclusive

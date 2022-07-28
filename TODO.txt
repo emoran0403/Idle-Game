@@ -1,8 +1,5 @@
 
 //# Fixes I need to do
-//! logging in with a username/pass which cannot be found in db crashes lol
-//! double check registering a new player in class
-//! display which quests and levels are missing for quests in quest panel - not working for some reason
 //! clean up the lobby into panels or some other layout
 
 //# Fixes that can wait

@@ -7,6 +7,7 @@ import * as Types from "../../../Types";
 import * as CONFIG from "../config";
 import { Application } from "express";
 import { compareHash } from "./Passwords";
+import { error } from "jquery";
 
 export function configurePassport(app: Application) {
   passport.serializeUser((user: Types.IPlayerPayload, done) => {
@@ -28,22 +29,18 @@ export function configurePassport(app: Application) {
       async (username, password, done) => {
         try {
           // query the DB for a player with the given username
-          MongoQuery.getPlayerInfo(username).then((res) => {
-            // if a response is returned, the player's username exists
-            if (res) {
-              let playerInfo = res;
-              // check if the provided password matches the hashedPassword from the DB
-              if (compareHash(password, playerInfo.password!)) {
-                // if so, remove it from the playerInfo, and call done, passing forward the playerInfo
-                delete playerInfo.password;
-                done(null, playerInfo);
-              } else {
-                done(null, false);
-              }
-            } else {
-              done(null, false);
-            }
-          });
+          let res = await MongoQuery.getPlayerInfo(username);
+          // if a response is returned, the player's username exists
+          // console.log({ res });
+          let playerInfo = res;
+          // check if the provided password matches the hashedPassword from the DB
+          if (res && compareHash(password, playerInfo.password!)) {
+            // if so, remove it from the playerInfo, and call done, passing forward the playerInfo
+            delete playerInfo.password;
+            done(null, playerInfo);
+          } else {
+            done(null, false);
+          }
         } catch (error) {
           // done(error);
           done(null, false);

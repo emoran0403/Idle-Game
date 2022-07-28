@@ -113,7 +113,7 @@ const exampleEnemyInfo = {
 //   }
 // })();
 
-let wow = {
+let exampleEnemyInfo2 = {
   name: "giant spider",
   level: 2,
   lifePoints: 100,

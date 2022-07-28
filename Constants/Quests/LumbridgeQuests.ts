@@ -21,14 +21,13 @@ export const LumbridgeQuests: Types.IQuestInfo[] = [
     },
     itemRewards: { Coins: 500 },
   },
-  //! myths does not have any quest requirements, this was just for testing purposes
   {
     name: "Myths of the White Lands",
     location: "Lumbridge",
-    stepsTotal: 113,
+    stepsTotal: 35,
     questPoints: 2,
     combatRequirements: 0,
-    questRequirements: ["Cook's Assistant"],
+    questRequirements: [],
     levelRequirements: {},
     experienceRewards: { ANY: 500 },
     itemRewards: { Coins: 5000 },
@@ -46,13 +45,14 @@ export const LumbridgeQuests: Types.IQuestInfo[] = [
     },
     itemRewards: { Coins: 0 },
   },
+  //! add "Goblin Diplomacy"  to The Lost Tribe
   {
     name: "The Lost Tribe",
     location: "Lumbridge",
     stepsTotal: 33,
     questPoints: 1,
     combatRequirements: 0,
-    questRequirements: ["Goblin Diplomacy"],
+    questRequirements: [],
     levelRequirements: {
       Agility: 13,
       Mining: 17,
@@ -63,15 +63,13 @@ export const LumbridgeQuests: Types.IQuestInfo[] = [
     },
     itemRewards: { Coins: 0 },
   },
-  //! blood pact does not have anyquest requirements, this was just for testing purposes
-
   {
     name: "The Blood Pact",
     location: "Lumbridge",
     stepsTotal: 17,
     questPoints: 1,
     combatRequirements: 1,
-    questRequirements: ["The Restless Ghost"],
+    questRequirements: [],
     levelRequirements: {},
     experienceRewards: {
       Attack: 100,

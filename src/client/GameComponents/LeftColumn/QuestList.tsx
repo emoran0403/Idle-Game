@@ -120,4 +120,4 @@ export default QuestList;
 //   ee: [{ e: 1 }, { e: 2 }, { e: 3 }, { e: 4 }, { e: 5 }],
 // };
 
-// const wow = [...Object.values(example)].flat();
+// const test = [...Object.values(example)].flat();
