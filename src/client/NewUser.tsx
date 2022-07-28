@@ -6,10 +6,10 @@ import Validation from "./ClientUtils/DataValidation";
 import Fetcher, { TOKEN_KEY } from "../client/ClientUtils/Fetcher";
 
 const NewUser = (props: Types.NewUserCompProps) => {
-  const [password_A, setPassword_A] = useState<string>("hunter2222");
-  const [password_B, setPassword_B] = useState<string>("hunter2222");
-  const [email, setEmail] = useState<string>(`${Date.now()}@test.com`);
-  const [username, setUsername] = useState<string>(`${Date.now()}`);
+  const [password_A, setPassword_A] = useState<string>("");
+  const [password_B, setPassword_B] = useState<string>("");
+  const [email, setEmail] = useState<string>(``);
+  const [username, setUsername] = useState<string>(``);
 
   const nav = useNavigate();
 
