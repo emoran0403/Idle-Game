@@ -5,8 +5,6 @@ import { getLevel, percentToNextLevel } from "../../../../Constants/XP Levels";
 import { useEffect, useState } from "react";
 import { ProgressBar } from "react-bootstrap";
 
-//! use a useeffect to 'animate' the progress bars
-
 const Levels = (props: Types.NoProps) => {
   const [totalExperience, setTotalExperience] = useState<number>(0);
   const [totalLevel, setTotalLevel] = useState<number>(0);

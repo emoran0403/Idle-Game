@@ -45,7 +45,7 @@ export const bank_logs = createSlice({
     },
 
     // use this when we need to remove an item from the bank
-    removeItemFromBank: (state: Types.ILogBankSlice, action) => {
+    removeLogFromBank: (state: Types.ILogBankSlice, action) => {
       const item: string = action.payload.item; // decide which item to remove
       const amount: number = Number(action.payload.amount); // this will be the number of items removed from the bank
 
@@ -62,8 +62,6 @@ export const bank_logs = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { addLogToBank, removeItemFromBank } = bank_logs.actions;
+export const { addLogToBank, removeLogFromBank } = bank_logs.actions;
 
 export default bank_logs.reducer;
-
-//! fix the reducers! lol

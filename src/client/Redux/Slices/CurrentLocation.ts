@@ -22,5 +22,3 @@ export const Location = createSlice({
 export const { setLocation } = Location.actions;
 
 export default Location.reducer;
-
-//! I think i want to change this to just be {Location: 'location string here'}

@@ -5,8 +5,6 @@ import { AllQuests } from "../../../../Constants/Quests/";
 import { useSelector } from "react-redux";
 import { ProgressBar } from "react-bootstrap";
 
-//! use a useeffect to 'animate' the progress bars
-
 const QuestList = (props: Types.NoProps) => {
   // This represents all the quests as a flat array
   const AllQuestsFlat: Types.IQuestInfo[] = [...Object.values(AllQuests)].flat();
@@ -113,7 +111,6 @@ const QuestList = (props: Types.NoProps) => {
 };
 
 export default QuestList;
-//! before deploying - reset all quest state and experience to zero, aside from Constitution, that default is lvl 10
 
 // let example = {
 //   aa: [{ a: 1 }, { a: 2 }, { a: 3 }, { a: 4 }, { a: 5 }],

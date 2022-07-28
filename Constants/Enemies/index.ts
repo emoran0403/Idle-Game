@@ -31,7 +31,6 @@ export const playerAttacksTarget = (
   // console.log(Target);
   // console.log(`filler lol`);
   // console.log({ q: `current enemy:`, Enemy });
-  //! Enemy comes back undefined
 
   // #1 calculate affinity
   // set the default to 55 just in case

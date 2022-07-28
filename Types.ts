@@ -425,7 +425,7 @@ export interface IWallet {
   coins: number;
 }
 
-//! will need to make more of these for each location's quests
+//@ will need to make more of these for each location's quests
 export interface LumbridgeQuestSliceCrap {
   LumbridgeQuestArray: IStateQuest[];
 }
@@ -478,7 +478,7 @@ export interface ILocationSummary {
   Bosses: string[];
 }
 
-//! do i really need this?
+//@ do i really need this?
 export interface ILumbridgeLocationSummary {
   Quests: string[];
   Skills: {
@@ -490,7 +490,7 @@ export interface ILumbridgeLocationSummary {
   Bosses: string[];
 }
 
-//! do i really need this?
+//@ do i really need this?
 export interface IDraynorLocationSummary {
   Quests: string[];
   Skills: {

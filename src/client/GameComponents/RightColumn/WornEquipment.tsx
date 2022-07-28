@@ -107,8 +107,8 @@ const WornEquipment = (props: Types.WornEquipmentCompProps) => {
     }
   };
 
-  //! the default none item needs to have the playerOwnsThisItem: boolean set to true always
-  //! for the rest, it needs to be conditional
+  //@ the default none item needs to have the playerOwnsThisItem: boolean set to true always
+  //@ for the rest, it needs to be conditional
   const displaySelectorTagArmor = (itemsFromState: Types.AllSliceKeys, slotName: Types.IEquipmentSlotOptions, slotString: string) => {
     //# place an empty armor item into the array, so that `none` will be displayed first in the selector
     let compositeItems: Types.ICompositeArmorItem[] = [EmptyArmorItemComposite];
@@ -179,7 +179,7 @@ const WornEquipment = (props: Types.WornEquipmentCompProps) => {
   };
 
   const displaySelectorTagWeapon = (itemsFromState: Types.AllSliceKeys, slotName: Types.IEquipmentSlotOptions, slotString: string) => {
-    //# place an empty armor item into the array
+    //# place an empty weapon item into the array
     let compositeItems: Types.ICompositeWeaponItem[] = [EmptyWeaponItemComposite];
 
     let itemsFromConstants: Types.IWeaponItem[] = [...Object.values(slotName)];
@@ -194,7 +194,7 @@ const WornEquipment = (props: Types.WornEquipmentCompProps) => {
     }
 
     const itemHasBeenEquipped = (e: React.ChangeEvent<HTMLSelectElement>) => {
-      //! string type is `ok` since they can be keys of Types.ICurrentEquipment
+      //@ string type is `ok` since they can be keys of Types.ICurrentEquipment
       /**
        * this can be better described by stating the possible options of each slot in Types.ICurrentEquipment
        *

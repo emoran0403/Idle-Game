@@ -1,5 +1,8 @@
 import * as Types from "../../Types";
 
+//@ empty armor, empty weapon item, and their composites
+// use these for the 'none' options
+
 export const EmptyArmorItemComposite: Types.ICompositeArmorItem = {
   name: "none",
   displayName: `None`,
@@ -75,5 +78,3 @@ export const EmptyWeaponItemComposite: Types.ICompositeWeaponItem = {
   styleBonusMagic: 0,
   value: 0,
 };
-
-//! i need an empty armor, and empty weapon item, and their composites

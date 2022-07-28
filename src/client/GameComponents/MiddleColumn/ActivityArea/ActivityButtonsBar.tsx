@@ -1,11 +1,9 @@
 import * as Types from "../../../../../Types";
 import * as React from "react";
 
-//! all but clues should read from a constant file - how to structure that file for each location?
-//! clues should check the bank state for a clue scroll
-//! based on these conditions, apply the disabled attribute to those activities that are not present in the current location
+//@ once implemented, clues should check the bank state for a clue scroll
 
-// these buttons will need to hide the activity area, and display the corresponding panel in place of the activity are
+// these buttons will need to hide the activity area, and display the corresponding panel in place of the activity area
 // when the back button is clicked, return to the activity area
 // skills, quests, combat, and bosses read from a constant file - under location info
 // bank is always enabled
