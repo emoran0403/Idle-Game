@@ -8,12 +8,15 @@ import { LegsSlot } from "../../../../Constants/Equipment/LegsSlot";
 import { HandsSlot } from "../../../../Constants/Equipment/HandsSlot";
 import { FeetSlot } from "../../../../Constants/Equipment/FeetSlot";
 import { TwoHandSlot } from "../../../../Constants/Equipment/TwoHandSlot";
+import { useSelector, useDispatch } from "react-redux";
 
-import { useSelector } from "react-redux";
 import { EmptyArmorItemComposite, EmptyWeaponItemComposite } from "../../../../Constants/Equipment/EmptyItem";
 import { getLevel } from "../../../../Constants/XP Levels";
+import { setSkill } from "../../Redux/Slices/CurrentSkill";
 
 const WornEquipment = (props: Types.WornEquipmentCompProps) => {
+  const dispatch = useDispatch();
+
   // X - FromState is the state object containing the booleans signifying if the player owns X
   const headsFromState = useSelector((state: Types.AllState) => state.HeadSlot) as Types.IHeadSlotSlice;
   const bodiesFromState = useSelector((state: Types.AllState) => state.BodySlot) as Types.IBodySlotSlice;
@@ -194,6 +197,9 @@ const WornEquipment = (props: Types.WornEquipmentCompProps) => {
     }
 
     const itemHasBeenEquipped = (e: React.ChangeEvent<HTMLSelectElement>) => {
+      // when a weapon is swapped, reset the current skill to none, forcing the player to switch styles
+      dispatch(setSkill("none"));
+
       //@ string type is `ok` since they can be keys of Types.ICurrentEquipment
       /**
        * this can be better described by stating the possible options of each slot in Types.ICurrentEquipment

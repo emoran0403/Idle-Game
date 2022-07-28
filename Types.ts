@@ -58,6 +58,7 @@ export interface CombatPanelProps {
   handleUpdateDisplay: Function;
   newChatLog: Function;
   chatLogArray: IChatLog[];
+  currentEquipment: ICurrentEquipment;
 }
 
 export interface BankPanelProps {
@@ -1072,7 +1073,7 @@ export interface IListOfRangedTwoHand {
 export type IListOfAllTwoHand = IListOfMeleeTwoHand | IListOfMagicTwoHand | IListOfRangedTwoHand;
 
 export interface IArmorSlotTwoHand {
-  none: IArmorItem;
+  none: IWeaponItem;
   bronze2hsword: IWeaponItem;
   iron2hsword: IWeaponItem;
   steel2hsword: IWeaponItem;

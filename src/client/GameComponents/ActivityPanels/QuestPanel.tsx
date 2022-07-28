@@ -9,7 +9,6 @@ import { setResource } from "../../Redux/Slices/CurrentResource";
 import { setSkill } from "../../Redux/Slices/CurrentSkill";
 import { setQuest } from "../../Redux/Slices/CurrentQuest";
 import { setTarget } from "../../Redux/Slices/CurrentTarget";
-import { info } from "sass";
 
 //! handleQuestStyle and handleQuestButtonDisplay have repeated logic that could be improved
 //! composing the constant quest info and state info can be improved by relegating that to a function, which then returns jsx
@@ -242,7 +241,7 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
   const displayQuestReqJSX = (quest: Types.ICompositeQuestInfo) => {
     // define an empty array where the quest requirements will be placed
     let questReqArray: string[] = [];
-
+    //! why is this not working?
     // if there are quest requirements, check if the player has completed them, and if not, add them to the list
     quest.questRequirements.forEach((req) => {
       // console.log({ req });
@@ -303,7 +302,7 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
     }
     //when the loops are done running, set tempCompArray to state in this component
     setCompositeQuestArray(tempCompArray);
-    // i want this component to rerender when a quest step is completed
+    // to make this component rerender when a quest step is completed,
     // pass down the questStepProgress from gameContainer
   }, [props.questStepProgress, LumbridgeQuestArray, DraynorQuestArray]);
 

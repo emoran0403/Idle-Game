@@ -11,6 +11,7 @@ import { setTarget } from "../../Redux/Slices/CurrentTarget";
 import { getLevel } from "../../../../Constants/XP Levels";
 import { setQuest } from "../../Redux/Slices/CurrentQuest";
 import { setStyle } from "../../Redux/Slices/CurrentCombatStyle";
+import { TwoHandSlot } from "../../../../Constants/Equipment/TwoHandSlot";
 
 //@ for simplicity, i'm not keeping track of ammunition / runes
 
@@ -26,7 +27,8 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
 
   //@ Enemies[Current as keyof Types.IAllEnemies] is the list of enemies at the current location
 
-  // useEffect(() => {}, []);
+  //@ rerender when the player equips a new weapon
+  useEffect(() => {}, [props.currentEquipment.TwoHandSlot]);
 
   const panelHeaderJSX = () => {
     // returns the JSX for the panel header
@@ -106,17 +108,23 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
     props.newChatLog(`Now training ${skill}`, `Activity Swap`);
   };
 
-  const handleChatLogEnemy = (monster: string) => {
-    if (monster === props.chatLogArray[props.chatLogArray.length - 1].message.substring(13)) {
+  const handleChatLogEnemy = (enemy: string) => {
+    if (enemy === props.chatLogArray[props.chatLogArray.length - 1].message.substring(13)) {
       return;
     }
-    props.newChatLog(`Now fighting ${monster}`, `Activity Swap`);
+    props.newChatLog(`Now fighting ${enemy}`, `Activity Swap`);
   };
 
   const combatStyleButtonsJSX = () => {
+    // reference the current weapon
+    // TwoHandSlot[props.currentEquipment.TwoHandSlot as keyof Types.IArmorSlotTwoHand].thisWeaponStyle;
+    if (TwoHandSlot[props.currentEquipment.TwoHandSlot as keyof Types.IArmorSlotTwoHand].thisWeaponStyle !== `melee`) {
+    }
+
     return (
       <div className="d-flex justify-content-evenly mt-2">
         <button
+          disabled={TwoHandSlot[props.currentEquipment.TwoHandSlot as keyof Types.IArmorSlotTwoHand].thisWeaponStyle !== `melee` ? true : false}
           className="btn btn-primary"
           onClick={() => {
             dispatch(setActivity(`In combat`));
@@ -129,6 +137,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
           Attack
         </button>
         <button
+          disabled={TwoHandSlot[props.currentEquipment.TwoHandSlot as keyof Types.IArmorSlotTwoHand].thisWeaponStyle !== `melee` ? true : false}
           className="btn btn-primary"
           onClick={() => {
             dispatch(setActivity(`In combat`));
@@ -141,6 +150,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
           Strength
         </button>
         <button
+          disabled={TwoHandSlot[props.currentEquipment.TwoHandSlot as keyof Types.IArmorSlotTwoHand].thisWeaponStyle !== `melee` ? true : false}
           className="btn btn-primary"
           onClick={() => {
             dispatch(setActivity(`In combat`));
@@ -153,6 +163,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
           Defence
         </button>
         <button
+          disabled={TwoHandSlot[props.currentEquipment.TwoHandSlot as keyof Types.IArmorSlotTwoHand].thisWeaponStyle !== `ranged` ? true : false}
           className="btn btn-primary"
           onClick={() => {
             dispatch(setActivity(`In combat`));
@@ -165,6 +176,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
           Ranged
         </button>
         <button
+          disabled={TwoHandSlot[props.currentEquipment.TwoHandSlot as keyof Types.IArmorSlotTwoHand].thisWeaponStyle !== `magic` ? true : false}
           className="btn btn-primary"
           onClick={() => {
             dispatch(setActivity(`In combat`));
@@ -177,6 +189,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
           Air Spells
         </button>
         <button
+          disabled={TwoHandSlot[props.currentEquipment.TwoHandSlot as keyof Types.IArmorSlotTwoHand].thisWeaponStyle !== `magic` ? true : false}
           className="btn btn-primary"
           onClick={() => {
             dispatch(setActivity(`In combat`));
@@ -189,6 +202,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
           Water Spells
         </button>
         <button
+          disabled={TwoHandSlot[props.currentEquipment.TwoHandSlot as keyof Types.IArmorSlotTwoHand].thisWeaponStyle !== `magic` ? true : false}
           className="btn btn-primary"
           onClick={() => {
             dispatch(setActivity(`In combat`));
@@ -201,6 +215,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
           Earth Spells
         </button>
         <button
+          disabled={TwoHandSlot[props.currentEquipment.TwoHandSlot as keyof Types.IArmorSlotTwoHand].thisWeaponStyle !== `magic` ? true : false}
           className="btn btn-primary"
           onClick={() => {
             dispatch(setActivity(`In combat`));
