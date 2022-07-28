@@ -24,7 +24,7 @@ authRouter.post(`/login`, passport.authenticate("local", { session: false }), (r
     res.json({ token, playerData: req.user });
   } catch (error) {
     console.log(`login error...\n`);
-    console.error(error);
+    console.log(error);
     res.status(500).json({ message: "issue logging in" });
   }
 });
@@ -63,7 +63,7 @@ authRouter.post(`/register`, async (req, res) => {
     res.json(token);
   } catch (error) {
     console.log(`register error...\n`);
-    console.error(error);
+    console.log(error);
     res.status(400).json({ message: `${error.message}` });
   }
 });

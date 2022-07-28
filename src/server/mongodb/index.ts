@@ -25,7 +25,7 @@ const getPlayerInfo = async (username: string) => {
     }
   } catch (e) {
     // log the error message if any occur
-    console.error(e.message);
+    console.log(e.message);
     // throwing this to the route allows the route to have context of the error message
     throw new Error(e.message);
   } finally {
@@ -44,7 +44,7 @@ const registerNewPlayer = async (newPlayerInfo: Types.IPlayerData) => {
     await client.db("EricDB").collection("PlayerInfo").insertOne(newPlayerInfo);
   } catch (e) {
     // log the error message if any occur
-    console.error(e.message);
+    console.log(e.message);
     // throwing this to the route allows the route to have context of the error message
     throw new Error(e.message);
   } finally {
@@ -69,7 +69,7 @@ const updatePlayerInfo = async (playerName: string, playerInfo: Types.IPlayerDat
     }
   } catch (e) {
     // log the error message if any occur
-    console.error(e.message);
+    console.log(e.message);
     // throwing this to the route allows the route to have context of the error message
     throw new Error(e.message);
   } finally {

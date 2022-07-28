@@ -24,7 +24,7 @@ apiRouter.get("/getplayerinfo", passport.authenticate("jwt", { session: false })
     res.status(200).json(playerDataDB);
   } catch (error) {
     // if an error was thrown, log it
-    console.error(error);
+    console.log(error);
     // and respond with the error message
     res.status(400).json({ message: `${error.message}` });
   }
@@ -47,7 +47,7 @@ apiRouter.put("/updateplayerinfo", passport.authenticate("jwt", { session: false
     res.status(200).json(mongoRes);
   } catch (error) {
     // if an error was thrown, log it
-    console.error(error);
+    console.log(error);
     // and respond with the error message
     res.status(400).json({ message: `${error.message}` });
   }
