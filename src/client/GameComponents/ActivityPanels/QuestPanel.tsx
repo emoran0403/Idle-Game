@@ -153,6 +153,8 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
   };
 
   const handleQuestButtonDisplay = (quest: Types.ICompositeQuestInfo) => {
+    // console.log({ compositeQuestArray });
+
     /**
      * based on the players level and quests complete, this function will style the background color
      * of each quest card to indicate met or missing requirements
@@ -234,6 +236,39 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
     }
   };
 
+  //@ displays the missing quest requirements for the given quest
+  const displayQuestReqJSX = (quest: Types.ICompositeQuestInfo) => {
+    // define an empty array where the quest requirements will be placed
+    let questReqArray: string[] = [];
+    // if there are quest requirements check if the player has completed them, and if not, add them to the list
+    if (quest.questRequirements.length) {
+      console.log({ thisQuest: quest, req: quest.questRequirements });
+      // iterate through the quest requirements, and for each quest requirement
+      quest.questRequirements.forEach((questRequirement) => {
+        // then iterate through the array of composite quests
+        for (let i = 0; i < compositeQuestArray.length; i++) {
+          // to find the matching quest, then check if that quest is complete
+          if (compositeQuestArray[i].name === questRequirement) {
+            if (!compositeQuestArray[i].complete) {
+              // if the quest is not complete, add it to the list of quest requirements
+              questReqArray.push(compositeQuestArray[i].name);
+            }
+          }
+        }
+      });
+    }
+    return (
+      <div>
+        <p>Quest Requirements:</p>
+        <ul>
+          {questReqArray.map((questReq) => (
+            <li>{questReq}</li>
+          ))}
+        </ul>
+      </div>
+    );
+  };
+
   useEffect(() => {
     /**
      * this useEffect shuffles the quest array coming from constants and the quest array coming from state together
@@ -265,7 +300,7 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
   }, [props.questStepProgress, LumbridgeQuestArray, DraynorQuestArray]);
 
   return (
-    <div className="container border border-dark border-2 rounded-3">
+    <div className="container border border-dark border-2 rounded-3" style={{ overflowY: "auto", position: "relative", height: "81%" }}>
       {panelHeaderJSX()}
       {compositeQuestArray
         ?.filter((quest) => quest.location === CurrentLocation)
@@ -279,6 +314,7 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
                   {handleQuestButtonDisplay(quest)} {quest.stepsComplete ? `In Progress: ` : `Not Started`} : {quest.stepsComplete} /{` ${quest.stepsTotal}`}
                 </div>
               )}
+              {displayQuestReqJSX(quest)}
             </div>
           </div>
         ))}

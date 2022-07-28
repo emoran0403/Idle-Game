@@ -47,7 +47,6 @@ const App = (props: Types.AppProps) => {
   return (
     <main className="container-fluid px-5 mt-3">
       <div className="text-center">IdleScape</div>
-
       {loggedIn && (
         <div className="d-flex justify-content-end mb-1">
           {showLobbyButton && (
@@ -61,11 +60,11 @@ const App = (props: Types.AppProps) => {
           </button>
         </div>
       )}
-
+      //! swapped game and lobby for testing
       <Routes>
-        <Route path="/" element={<LoginPage setLoggedIn={setLoggedIn} loggedIn={loggedIn} />} />
+        <Route path="/game" element={<LoginPage setLoggedIn={setLoggedIn} loggedIn={loggedIn} />} />
         <Route path="/lobby" element={<Lobby setShowLobbyButton={setShowLobbyButton} />} />
-        <Route path="/game" element={<GameContainer setShowLobbyButton={setShowLobbyButton} />} />
+        <Route path="/" element={<GameContainer setShowLobbyButton={setShowLobbyButton} />} />
         <Route path="/register" element={<NewUser setLoggedIn={setLoggedIn} loggedIn={loggedIn} />} />
       </Routes>
     </main>

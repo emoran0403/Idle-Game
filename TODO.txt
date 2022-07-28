@@ -1,6 +1,7 @@
 
 //# Fixes I need to do
 //! logging in with a username/pass not in db crashes lol
+//! double check registering a new player in class
 //! clean up the lobby into panels or some other layout
 
 //# Fixes that can wait

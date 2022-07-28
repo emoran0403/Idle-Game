@@ -274,7 +274,7 @@ const WornEquipment = (props: Types.WornEquipmentCompProps) => {
 
   // useEffect(() => {}, []);
   return (
-    <div className="border border-dark border-2 rounded-3" style={{ overflowY: "auto", position: "relative", height: "45%" }}>
+    <div className="border border-dark border-2 rounded-3" style={{ overflowY: "auto", position: "relative", height: "46%" }}>
       <h5 className="card-header text-center">WornEquipment</h5>
       <div className="d-flex flex-column">
         <div className="text-center">Head Slot:</div>

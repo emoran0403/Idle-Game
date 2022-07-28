@@ -5,7 +5,7 @@ import { useEffect } from "react";
 const CluesPanel = (props: Types.CluesPanelProps) => {
   useEffect(() => {}, []);
   return (
-    <div className="card border border-dark border-2 rounded-3">
+    <div className="card border border-dark border-2 rounded-3" style={{ overflowY: "auto", position: "relative", height: "81%" }}>
       <div>This is CluesPanel</div>
       <div>CluesPanel is not part of the minimum viable product, but it needed a spot</div>
       <button
