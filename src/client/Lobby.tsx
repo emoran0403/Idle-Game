@@ -17,7 +17,7 @@ const Lobby = (props: Types.LobbyProps) => {
   };
 
   return (
-    <div className="border border-dark border-2 rounded-3">
+    <div className="border border-dark shadow border-2 rounded-3">
       <div>
         <p className="text-center">Welcome to the game!</p>
         <p>

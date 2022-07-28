@@ -46,7 +46,7 @@ const App = (props: Types.AppProps) => {
 
   return (
     <main className="container-fluid px-5 mt-3">
-      <div className="text-center">Title Here</div>
+      <div className="text-center">IdleScape</div>
 
       {loggedIn && (
         <div className="d-flex justify-content-end mb-1">

@@ -468,7 +468,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
   ]);
 
   return (
-    <div className="d-flex">
+    <div className="d-flex shadow">
       {/* Remove this button, its for testing*/}
       {/* <div>
         <button onClick={() => handleQuestingTick()}>test quest</button>

@@ -24,6 +24,14 @@ const NewUser = (props: Types.NewUserCompProps) => {
       return;
     }
 
+    //@ check for password length
+    if (password_A.length < 8) {
+      alert("Password must be 8 or more characters");
+      setPassword_A("");
+      setPassword_B("");
+      return;
+    }
+
     //@ check if the user entered valid email
     Validation.isValidEmail(email)
       .then(() => console.log(`Email validated.`))
