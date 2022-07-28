@@ -1,7 +1,7 @@
 // this is the start of the server routes - initialize the server here
 
 import * as express from "express";
-import baseRouter from "./Routes/index";
+import baseRouter from "./routes/index";
 import * as path from "path";
 
 import { configurePassport } from "../server/ServerUtils/JWTStrategies";

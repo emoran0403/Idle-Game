@@ -7,7 +7,6 @@ import * as Types from "../../../Types";
 import * as CONFIG from "../config";
 import { Application } from "express";
 import { compareHash } from "./Passwords";
-import { error } from "jquery";
 
 export function configurePassport(app: Application) {
   passport.serializeUser((user: Types.IPlayerPayload, done) => {
