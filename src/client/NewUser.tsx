@@ -46,7 +46,6 @@ const NewUser = (props: Types.NewUserCompProps) => {
 
     //! this is for testing purposes
     nav(`/lobby`);
-
     //@ toggle the logged in boolean to properly display the logout button
     props.setLoggedIn(!props.loggedIn);
 
@@ -54,7 +53,7 @@ const NewUser = (props: Types.NewUserCompProps) => {
     // check if email or usernames are duplicates here
 
     // Fetcher.POST("/auth/login", { email, password_A })
-    //! this will need to set data from db into global redux state
+    //   // ! this will need to set data from db into global redux state
     //   .then((data) => {
     //     // console.log({ data });
     //     if (data.token) {

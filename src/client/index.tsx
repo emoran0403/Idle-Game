@@ -5,7 +5,6 @@ import "./scss/app";
 import { configureStoreAsync } from "./Redux/store";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import { AnyAction, Store } from "@reduxjs/toolkit";
 import { PLAYER_DATA_KEY } from "./ClientUtils/Fetcher";
 
 configureStoreAsync().then((store) => {

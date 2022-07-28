@@ -30,15 +30,17 @@ export const configureStoreAsync = () => {
         delete preloadedState.timestamp;
         delete preloadedState.username;
         delete preloadedState.email;
-        console.log({ stateIS: preloadedState });
+        // console.log({ stateIS: preloadedState });
         // if there is a token in local storage, load with the player's saved data
         let store = configureStore({
           reducer: rootReducer,
           preloadedState,
         });
+        console.log(`get player info worked and resolving with the store`);
         resolve(store);
       })
       .catch((error) => {
+        console.log(`Could not get the player info error here:`);
         console.log(error);
         // if there is a no token in local storage, load with the default data
         let store = configureStore({
