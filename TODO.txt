@@ -1,7 +1,7 @@
 //# Quality of life
 * Skill images
 * DONE - Levels component displays the level and experience
-* chatwindow greets the player by username
+* DONE - chatwindow greets the player by username
 * clean up the lobby into panels or some other layout
 * get a changelog from github for the lobby
 * show location of quest in questlist component

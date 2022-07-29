@@ -29,6 +29,7 @@ import { BackSlot } from "../../../Constants/Equipment/BackSlot";
 import { addLogToBank } from "../Redux/Slices/BankSlices/LogsSlice";
 import { addFishToBank } from "../Redux/Slices/BankSlices/FishSlice";
 import { saveState } from "../Redux/store";
+import { TOKEN_KEY } from "../ClientUtils/Fetcher";
 
 const GameContainer = (props: Types.GameContainerProps) => {
   const dispatch = useDispatch();
@@ -57,10 +58,21 @@ const GameContainer = (props: Types.GameContainerProps) => {
   const [chatLogArray, setChatLogArray] = useState<Types.IChatLog[]>([
     {
       timeStamp: Dayjs().format("HH:mm:ss"),
-      message: `Welcome to the game!`,
+      message: `${welcomeMessage()}`,
       tags: `Nonfilterable`,
     },
   ]);
+
+  //@ populate the first chatlog with a welcome message to the player, using the player's username from the token in localStorage
+  function welcomeMessage() {
+    const token = localStorage.getItem(TOKEN_KEY)!;
+    if (!token) {
+      return `Welcome to the game!`;
+    }
+    const base64Url = token.split(".")[1];
+    const base64 = base64Url.replace("-", "+").replace("_", "/");
+    return `Welcome to the game, ${JSON.parse(window.atob(base64)).username}!`;
+  }
 
   //@ currentEquipment is the collection of all the currently worn equipment - use this for combat purposes
   const [currentEquipment, setCurrentEquipment] = useState<Types.ICurrentEquipment>({
