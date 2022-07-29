@@ -10,7 +10,7 @@ let resourcesStatus = true;
 export const Inventory = createSlice({
   name: "inventory",
   initialState: {
-    CurrentInventory: [`logs`],
+    CurrentInventory: [],
   },
   reducers: {
     // use this when we need to add an item to the inventory
