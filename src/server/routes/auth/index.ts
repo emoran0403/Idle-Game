@@ -35,15 +35,15 @@ authRouter.post(`/register`, async (req, res) => {
   const playerRegisterInfo = req.body as Types.IPlayerPayload;
 
   try {
-    // //@ check if the user entered valid email
-    // await Validation.isValidEmail(playerRegisterInfo.email!);
+    //@ check if the user entered valid email
+    await Validation.isValidEmail(playerRegisterInfo.email!);
 
-    // //@ then check if the user entered an acceptable username
-    // await Validation.isValidusername(playerRegisterInfo.username!);
+    //@ then check if the user entered an acceptable username
+    await Validation.isValidusername(playerRegisterInfo.username!);
 
-    // if (playerRegisterInfo.password?.length! < 8) {
-    //   throw new Error(`Password not long enough`);
-    // }
+    if (playerRegisterInfo.password?.length! < 8) {
+      throw new Error(`Password not long enough`);
+    }
 
     // hash the password, and overwrite it to the player information
     let hashedPass = generateHash(playerRegisterInfo.password!);

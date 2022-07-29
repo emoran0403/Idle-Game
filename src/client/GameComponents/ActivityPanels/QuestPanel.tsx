@@ -241,7 +241,6 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
   const displayQuestReqJSX = (quest: Types.ICompositeQuestInfo) => {
     // define an empty array where the quest requirements will be placed
     let questReqArray: string[] = [];
-    //! why is this not working?
     // if there are quest requirements, check if the player has completed them, and if not, add them to the list
     quest.questRequirements.forEach((req) => {
       // console.log({ req });
