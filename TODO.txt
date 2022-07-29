@@ -5,7 +5,7 @@
 * clean up the lobby into panels or some other layout
 * get a changelog from github for the lobby
 * DONE - show location of quest in questlist component
-* quest panel to show missing level requirements
+* DONE - quest panel to show missing level requirements
 * maybe make the game choose the next available quest automatically
 * offline progress
 
@@ -17,6 +17,7 @@
 * clue scrolls
 * enemy item drops
 * high scores list - read multiple MongoDB call
+* add mroe skills
 
 //# Misc / Bug Fixes
 * implement player lifepoints
