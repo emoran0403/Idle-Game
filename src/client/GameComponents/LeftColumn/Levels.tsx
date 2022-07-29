@@ -54,7 +54,10 @@ const Levels = (props: Types.NoProps) => {
 
         {Object.entries(Experience).map(([skill, xp]) => (
           <div key={`${skill}-progress-bar-div`}>
-            <div>{`${skill} Lv. ${getLevel(xp)}`}</div>
+            <div>
+              <span className="badge rounded-pill bg-primary border border-2 border-dark">{`${skill} Lv. ${getLevel(xp)}`}</span>
+              <span>{` XP: ${Experience[skill as keyof Types.ISkillList].toLocaleString("en-US")}`}</span>
+            </div>
             <ProgressBar className="border border-dark border-2">
               <ProgressBar
                 striped

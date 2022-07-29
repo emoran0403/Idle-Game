@@ -1,22 +1,26 @@
+//# Quality of life
+* Skill images
+* DONE - Levels component displays the level and experience
+* DONE - chatwindow greets the player by username
+* clean up the lobby into panels or some other layout
+* get a changelog from github for the lobby
+* DONE - show location of quest in questlist component
+* DONE - quest panel to show missing level requirements
+* maybe make the game choose the next available quest automatically
+* offline progress
 
-//# Fixes I need to do
+//# Content
+* Draynor Village
+* Varrock
+* Al-Kharid
+* bosses
+* clue scrolls
+* enemy item drops
+* high scores list - read multiple MongoDB call
+* add mroe skills
 
-//# Fixes that can wait
-//! chatwindow greets the player by username
-//! clean up the lobby into panels or some other layout
-//! Logic - experience and levels is displaying too high for some reason :/
-//! get a changelog from github for the lobby
-//! display the stupid images lol
-//! get github api key for commit history - changelog
-//! remove boilerplate commits
-
-//# Future Updates
-//? implement player lifepoints
-//? more locations
-//? bosses
-//? clue scrolls
-//? maybe make the game choose the next available quest automatically
-//? offline progress
-//? show location of quest in questlist component
-//? high scores list - read multiple MongoDB call
+//# Misc / Bug Fixes
+* implement player lifepoints
+* Logic - experience and levels is displaying too high for some reason :/
+* remove boilerplate commits
 

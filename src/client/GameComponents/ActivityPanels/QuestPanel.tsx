@@ -241,7 +241,6 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
   const displayQuestReqJSX = (quest: Types.ICompositeQuestInfo) => {
     // define an empty array where the quest requirements will be placed
     let questReqArray: string[] = [];
-    //! why is this not working?
     // if there are quest requirements, check if the player has completed them, and if not, add them to the list
     quest.questRequirements.forEach((req) => {
       // console.log({ req });
@@ -270,6 +269,44 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
       return (
         <div>
           <p>All required quests complete</p>
+        </div>
+      );
+    }
+  };
+
+  //@ displays the missing level requirements for the given quest
+  const displayLevelReqJSX = (quest: Types.ICompositeQuestInfo) => {
+    // define an empty array where the level requirements will be placed
+    let levelReqArray: string[] = [];
+    // retrieve the level requirements for the quest and place them into an array
+    let levelReqTupleArray = Object.entries(quest.levelRequirements);
+    // 0: ['Agility', 13]
+    // 1: ['Mining', 17]
+    // 2: ['Thieving', 13]
+    levelReqTupleArray.forEach((tuple) => {
+      const playerLevel = getLevel(Experience[tuple[0] as keyof Types.ISkillList]);
+      const reqLevel = tuple[1];
+      if (playerLevel < reqLevel) {
+        const reqMsg = `You need ${tuple[1]} ${tuple[0]}`;
+        levelReqArray.push(reqMsg);
+      }
+    });
+
+    if (levelReqArray.length) {
+      return (
+        <div>
+          <p>Level Requirements:</p>
+          <ul>
+            {levelReqArray.map((levelReq) => (
+              <li>{levelReq}</li>
+            ))}
+          </ul>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <p>Attained all required levels</p>
         </div>
       );
     }
@@ -317,11 +354,16 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
               <h5 className={`card-subtitle text-black`}>{quest.name}</h5>
               {quest.complete && <div className="fw-bold">100%</div>}
               {!quest.complete && (
-                <div className="fw-bold">
-                  {handleQuestButtonDisplay(quest)} {quest.stepsComplete ? `In Progress: ` : `Not Started`} : {quest.stepsComplete} /{` ${quest.stepsTotal}`}
+                <div>
+                  <div className="fw-bold">
+                    {handleQuestButtonDisplay(quest)} {quest.stepsComplete ? `In Progress: ` : `Not Started`} : {quest.stepsComplete} /{` ${quest.stepsTotal}`}
+                  </div>
+                  <div>
+                    {displayQuestReqJSX(quest)}
+                    {displayLevelReqJSX(quest)}
+                  </div>
                 </div>
               )}
-              {displayQuestReqJSX(quest)}
             </div>
           </div>
         ))}

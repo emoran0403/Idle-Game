@@ -87,6 +87,7 @@ const QuestList = (props: Types.NoProps) => {
           <div key={`quest-list-${quest.name}`} className="card">
             <div className="card-body">
               <h5 className="card-subtitle text-muted">{quest.name}</h5>
+              <h6 className="card-subtitle text-muted">{quest.location}</h6>
 
               <div key={`${quest.name}-progress-bar-div`}>
                 <ProgressBar className="border border-dark border-2">
