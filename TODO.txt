@@ -4,7 +4,8 @@
 * DONE - chatwindow greets the player by username
 * clean up the lobby into panels or some other layout
 * get a changelog from github for the lobby
-* show location of quest in questlist component
+* DONE - show location of quest in questlist component
+* quest panel to show missing level requirements
 * maybe make the game choose the next available quest automatically
 * offline progress
 
