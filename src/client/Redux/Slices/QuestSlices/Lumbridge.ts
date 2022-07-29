@@ -25,7 +25,7 @@ export const Quests_Lumbridge = createSlice({
         name: "The Restless Ghost",
         stepsComplete: 0,
         stepsTotal: 14,
-        complete: true,
+        complete: false,
       },
       {
         name: "The Lost Tribe",
