@@ -38,7 +38,8 @@ const Levels = (props: Types.NoProps) => {
     }
     setTotalExperience(localTotalExperience);
     setTotalLevel(localTotalLevel);
-  }, []);
+    // as the player gains experience, rerender the component
+  }, [Experience]);
 
   return (
     <div className="card border border-dark border-2 rounded-3" style={{ overflowY: "auto", position: "relative", height: "33%" }}>
