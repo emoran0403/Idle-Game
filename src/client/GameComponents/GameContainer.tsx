@@ -47,6 +47,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
   const bank_logs = useSelector((state: Types.AllState) => state.Bank_Logs) as Types.ILogBankSlice;
   const bank_fish = useSelector((state: Types.AllState) => state.Bank_Fish) as Types.IFishBankSlice;
   const playerIsBanking = useSelector((state: Types.AllState) => state.Resources.Banking);
+
   const ALLSTATE = useSelector((state: Types.AllState) => state);
   // console.log(ALLSTATE);
 
@@ -206,39 +207,53 @@ const GameContainer = (props: Types.GameContainerProps) => {
               listOfHatchets[currentEquipment.Hatchet as keyof Types.IListOfHatchets]
             )
           ) {
+            // IF the player earned a log - apply gained xp
+            dispatch(gainXP({ skill: `Woodcutting`, xp: ListOfLogs[CurrentResource as keyof Types.IListOfLogs].XPGivenWoodcutting }));
+            // decide if the player gained a level
+            const playerLevelled = didPlayerLevelUp(Experience.Woodcutting, ListOfLogs[CurrentResource as keyof Types.IListOfLogs].XPGivenWoodcutting);
             if (playerIsBanking) {
-              // if the player earns a log, AND the player is banking the items, we need to add the item to the inventory
+              // IF the player earns a log, AND the player is banking the items, we need to add the item to the inventory
               dispatch(addItemToInventory(ListOfLogs[CurrentResource as keyof Types.IListOfLogs].name));
               // console.log(playerInventory.length);
-
               // when the player's inventory will be full with the next item added, queue a bank run
               if (playerInventory.length === 27) {
                 // console.log(`will need to bank next time`);
-                // do bank stuff here
                 setNeedsToBank(!needsToBank);
               }
-            }
-            // apply gained xp
-            dispatch(gainXP({ skill: `Woodcutting`, xp: ListOfLogs[CurrentResource as keyof Types.IListOfLogs].XPGivenWoodcutting }));
-
-            // check if the player gained a level
-            if (didPlayerLevelUp(Experience.Woodcutting, ListOfLogs[CurrentResource as keyof Types.IListOfLogs].XPGivenWoodcutting)) {
-              // if so, send chatlogs for the item collected and for the level up
-              handleMultipleChatLogs(
-                [`Woodcutting Level up!`, `Chopped some ${ListOfLogs[CurrentResource as keyof Types.IListOfLogs].displayName}`],
-                [`Level Up`, `Gained Resource`]
-              );
+              if (playerLevelled) {
+                // yes level and yes banking
+                handleMultipleChatLogs(
+                  [`Woodcutting Level up!`, `Chopped some ${ListOfLogs[CurrentResource as keyof Types.IListOfLogs].displayName}`],
+                  [`Level Up`, `Gained Resource`]
+                );
+              } else {
+                // no level and yes banking
+                handleNewChatLog(`Chopped some ${ListOfLogs[CurrentResource as keyof Types.IListOfLogs].displayName}`, `Gained Resource`);
+              }
             } else {
-              // otherwise, send a chatlog for the item collected
-              handleNewChatLog(`Chopped some ${ListOfLogs[CurrentResource as keyof Types.IListOfLogs].displayName}`, `Gained Resource`);
+              // the player is not banking in this block
+              if (playerLevelled) {
+                // yes level and no banking
+                handleMultipleChatLogs(
+                  [`Woodcutting Level up!`, `Chopped and dropped some ${ListOfLogs[CurrentResource as keyof Types.IListOfLogs].displayName}`],
+                  [`Level Up`, `Gained Resource`]
+                );
+              } else {
+                // no level and no banking
+                handleNewChatLog(`Chopped and dropped some ${ListOfLogs[CurrentResource as keyof Types.IListOfLogs].displayName}`, `Gained Resource`);
+              }
             }
           }
           break;
         }
         case `Fishing`: {
+          // decide if the player caught a fish
           if (playerEarnsFish(ListOfFish[CurrentResource as keyof Types.IListOfFish], Experience.Fishing)) {
-            // if the player catches a fish, AND the player is banking the items, we need to add the item to the inventory
+            // apply gained xp
+            dispatch(gainXP({ skill: `Fishing`, xp: ListOfFish[CurrentResource as keyof Types.IListOfFish].XPGivenFishing }));
+            const playerLevelled = didPlayerLevelUp(Experience.Fishing, ListOfFish[CurrentResource as keyof Types.IListOfFish].XPGivenFishing);
 
+            // if the player catches a fish, AND the player is banking the items, we need to add the item to the inventory
             if (playerIsBanking) {
               dispatch(addItemToInventory(ListOfFish[CurrentResource as keyof Types.IListOfFish].name));
 
@@ -248,23 +263,29 @@ const GameContainer = (props: Types.GameContainerProps) => {
                 // do bank stuff here
                 setNeedsToBank(!needsToBank);
               }
-            }
-            // apply gained xp
-            dispatch(gainXP({ skill: `Fishing`, xp: ListOfFish[CurrentResource as keyof Types.IListOfFish].XPGivenFishing }));
-
-            // check if the player gained a level
-            if (didPlayerLevelUp(Experience.Fishing, ListOfFish[CurrentResource as keyof Types.IListOfFish].XPGivenFishing)) {
-              // if so, send chatlogs for the item collected and for the level up
-              handleMultipleChatLogs(
-                [`Fishing Level up!`, `Fished a ${ListOfFish[CurrentResource as keyof Types.IListOfFish].displayName}`],
-                [`Level Up`, `Gained Resource`]
-              );
+              if (playerLevelled) {
+                // yes level and yes banking
+                handleMultipleChatLogs(
+                  [`Fishing Level up!`, `Fished a ${ListOfFish[CurrentResource as keyof Types.IListOfFish].displayName}`],
+                  [`Level Up`, `Gained Resource`]
+                );
+              } else {
+                // no level and yes banking
+                handleNewChatLog(`Fished a ${ListOfFish[CurrentResource as keyof Types.IListOfFish].displayName}`, `Gained Resource`);
+              }
             } else {
-              // otherwise, send a chatlog for the item collected
-              handleNewChatLog(`Fished a ${ListOfFish[CurrentResource as keyof Types.IListOfFish].displayName}`, `Gained Resource`);
+              // yes level and no banking
+              if (playerLevelled) {
+                handleMultipleChatLogs(
+                  [`Fishing Level up!`, `Fished and dropped a ${ListOfFish[CurrentResource as keyof Types.IListOfFish].displayName}`],
+                  [`Level Up`, `Gained Resource`]
+                );
+              } else {
+                // no level and no banking
+                handleNewChatLog(`Fished and dropped a ${ListOfFish[CurrentResource as keyof Types.IListOfFish].displayName}`, `Gained Resource`);
+              }
             }
           }
-
           break;
         }
       }
