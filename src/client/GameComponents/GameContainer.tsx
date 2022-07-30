@@ -174,8 +174,8 @@ const GameContainer = (props: Types.GameContainerProps) => {
     setQuestStepProgress(questStepProgress + 1);
 
     // if the progress counter hits 20, reset it to 0, and then run the quest logic based on location
-    //! change this to 20 for production
-    if (questStepProgress === 2) {
+    //! change this to 30 for production
+    if (questStepProgress === 30) {
       setQuestStepProgress(0);
       switch (playerLocation) {
         case `Lumbridge`: {
