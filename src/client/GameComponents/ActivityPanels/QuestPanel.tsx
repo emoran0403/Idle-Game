@@ -312,6 +312,43 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
     }
   };
 
+  //@ displays the experience rewards for the given quest
+  const displayXPRewardsJSX = (quest: Types.ICompositeQuestInfo) => {
+    // define an empty array where the xp rewards will be placed
+    let xprewardArray: string[] = [];
+    // retrieve the xp rewards for the quest and place them into an array
+    let xprewardTupleArray = Object.entries(quest.experienceRewards);
+    // 0: ['Agility', 13]
+    // 1: ['Mining', 17]
+    // 2: ['Thieving', 13]
+    xprewardTupleArray.forEach((tuple) => {
+      // for now, if the quest offers an ANY xp reward, skip it
+      if (tuple[0] !== `ANY`) {
+        const reqMsg = `You will receive ${tuple[1]} xp in ${tuple[0]}`;
+        xprewardArray.push(reqMsg);
+      }
+    });
+
+    if (xprewardArray.length) {
+      return (
+        <div>
+          <p>Experience Rewards:</p>
+          <ul>
+            {xprewardArray.map((reward) => (
+              <li>{reward}</li>
+            ))}
+          </ul>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <p>This quest does not reward Experience</p>
+        </div>
+      );
+    }
+  };
+
   useEffect(() => {
     /**
      * this useEffect shuffles the quest array coming from constants and the quest array coming from state together
@@ -361,6 +398,7 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
                   <div>
                     {displayQuestReqJSX(quest)}
                     {displayLevelReqJSX(quest)}
+                    {displayXPRewardsJSX(quest)}
                   </div>
                 </div>
               )}
