@@ -1,13 +1,16 @@
 //# Quality of life
 * Skill images
+* clean up the lobby into panels or some other layout
+* level requirements for equipment
+* more info on quests
+*@ maybe make the game choose the next available quest automatically
+*@ get a changelog from github for the lobby
+*@ offline progress
+* DONE - levels component does not update xp live - use effect
 * DONE - Levels component displays the level and experience
 * DONE - chatwindow greets the player by username
-* clean up the lobby into panels or some other layout
-* get a changelog from github for the lobby
 * DONE - show location of quest in questlist component
 * DONE - quest panel to show missing level requirements
-* maybe make the game choose the next available quest automatically
-* offline progress
 
 //# Content
 * Draynor Village
