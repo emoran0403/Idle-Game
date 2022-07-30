@@ -34,7 +34,7 @@ const Lobby = (props: Types.LobbyProps) => {
         <div className="d-flex flex-row justify-content-center">
           <div className="card">
             <div>
-              <img src="/Assets/ActivityButtons.PNG" className="card-img-top " width="326" height="149" />
+              <img src="/Assets/Favicons/ActivityButtons.PNG" className="card-img-top " width="326" height="149" />
             </div>
           </div>
         </div>

@@ -1,3 +1,6 @@
+//! Fixes
+* need to work on hydrating logic - clearing token and logging in resets the player back to defaults
+
 //# Quality of life
 * Skill images
 * clean up the lobby into panels or some other layout
@@ -20,7 +23,7 @@
 * clue scrolls
 * enemy item drops
 * high scores list - read multiple MongoDB call
-* add mroe skills
+* add more skills
 
 //# Misc / Bug Fixes
 * implement player lifepoints
