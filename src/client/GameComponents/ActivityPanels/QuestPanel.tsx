@@ -256,18 +256,18 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
 
     if (questReqArray.length) {
       return (
-        <div>
+        <div className="text-center">
           <p>Quest Requirements:</p>
           <ul>
             {questReqArray.map((questReq) => (
-              <li>{questReq}</li>
+              <li className="text-start">{questReq}</li>
             ))}
           </ul>
         </div>
       );
     } else {
       return (
-        <div>
+        <div className="text-center">
           <p>All required quests complete</p>
         </div>
       );
@@ -294,18 +294,18 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
 
     if (levelReqArray.length) {
       return (
-        <div>
+        <div className="text-center">
           <p>Level Requirements:</p>
           <ul>
             {levelReqArray.map((levelReq) => (
-              <li>{levelReq}</li>
+              <li className="text-start">{levelReq}</li>
             ))}
           </ul>
         </div>
       );
     } else {
       return (
-        <div>
+        <div className="text-center">
           <p>Attained all required levels</p>
         </div>
       );
@@ -331,18 +331,18 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
 
     if (xprewardArray.length) {
       return (
-        <div>
+        <div className="text-center">
           <p>Experience Rewards:</p>
           <ul>
             {xprewardArray.map((reward) => (
-              <li>{reward}</li>
+              <li className="text-start">{reward}</li>
             ))}
           </ul>
         </div>
       );
     } else {
       return (
-        <div>
+        <div className="text-center">
           <p>This quest does not reward Experience</p>
         </div>
       );
@@ -388,17 +388,17 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
         .map((quest) => (
           <div key={`quest-list-${quest.name}`} className={`card border border-dark border-1 rounded-3 ${handleQuestStyle(quest)}`}>
             <div className="card-body">
-              <h5 className={`card-subtitle text-black`}>{quest.name}</h5>
+              <h5 className={`card-subtitle text-black text-center`}>{quest.name}</h5>
               {quest.complete && <div className="fw-bold">100%</div>}
               {!quest.complete && (
                 <div>
                   <div className="fw-bold">
                     {handleQuestButtonDisplay(quest)} {quest.stepsComplete ? `In Progress: ` : `Not Started`} : {quest.stepsComplete} /{` ${quest.stepsTotal}`}
                   </div>
-                  <div>
-                    {displayQuestReqJSX(quest)}
-                    {displayLevelReqJSX(quest)}
-                    {displayXPRewardsJSX(quest)}
+                  <div className="d-flex">
+                    <div className="col-4 border border-dark border-1 rounded-3">{displayQuestReqJSX(quest)}</div>
+                    <div className="col-4 border border-dark border-1 rounded-3">{displayLevelReqJSX(quest)}</div>
+                    <div className="col-4 border border-dark border-1 rounded-3">{displayXPRewardsJSX(quest)}</div>
                   </div>
                 </div>
               )}
