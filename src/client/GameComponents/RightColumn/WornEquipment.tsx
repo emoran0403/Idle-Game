@@ -165,6 +165,15 @@ const WornEquipment = (props: Types.WornEquipmentCompProps) => {
       props.setCurrentEquipment({ ...props.currentEquipment, [e.target.name as keyof Types.ICurrentEquipment]: e.target.value });
     };
 
+    // returns a string representing the item display name and the level required to wield the item
+    const displayOption = (Item: Types.ICompositeArmorItem) => {
+      if (Item.levelReqDefence >= 0) {
+        return `${Item.displayName} (Defence Lv: ${Item.levelReqDefence})`;
+      } else {
+        return `${Item.displayName} (Defence Lv: 0)`;
+      }
+    };
+
     return (
       <select onChange={(e) => itemHasBeenEquipped(e)} className="form-select" name={`${slotString}`}>
         {compositeItems.map((Item) => (
@@ -174,7 +183,7 @@ const WornEquipment = (props: Types.WornEquipmentCompProps) => {
             key={`Slot-Item-${slotString}-${Item.name}`}
             className={`${handleSelectorStyle(Item)}`}
           >
-            {Item.displayName}
+            {displayOption(Item)}
           </option>
         ))}
       </select>
@@ -232,6 +241,31 @@ const WornEquipment = (props: Types.WornEquipmentCompProps) => {
       props.setCurrentEquipment({ ...props.currentEquipment, [e.target.name as keyof Types.ICurrentEquipment]: e.target.value });
     };
 
+    // returns a string representing the item display name and the level required to wield the item
+    const displayOption = (Item: Types.ICompositeWeaponItem) => {
+      switch (Item.thisWeaponStyle) {
+        case `melee`:
+          if (Item.levelReqAttack >= 0) {
+            return `${Item.displayName} (Attack Lv: ${Item.levelReqAttack})`;
+          } else {
+            return `${Item.displayName} (Attack Lv: 0)`;
+          }
+        case `magic`:
+          if (Item.levelReqMagic >= 0) {
+            return `${Item.displayName} (Magic Lv: ${Item.levelReqMagic})`;
+          } else {
+            return `${Item.displayName} (Magic Lv: 0)`;
+          }
+
+        case `ranged`:
+          if (Item.levelReqRanged >= 0) {
+            return `${Item.displayName} (Ranged Lv: ${Item.levelReqRanged})`;
+          } else {
+            return `${Item.displayName} (Ranged Lv: 0)`;
+          }
+      }
+    };
+
     return (
       <select onChange={(e) => itemHasBeenEquipped(e)} className="form-select" name={`${slotString}`}>
         {compositeItems.map((Item) => (
@@ -241,7 +275,7 @@ const WornEquipment = (props: Types.WornEquipmentCompProps) => {
             key={`Slot-Item-${slotString}-${Item.name}`}
             className={`${handleSelectorStyle(Item)}`}
           >
-            {Item.displayName}
+            {displayOption(Item)}
           </option>
         ))}
       </select>
