@@ -22,9 +22,8 @@ export const configureStoreAsync = () => {
       });
       resolve(store);
     }
-    console.log(`here lol`);
+    // console.log(`here lol`);
 
-    //! if there is no player data (and no token) get the data from the database (but this requires a token)
     // otherwise, get it from the database
     Fetcher.GET("/api/getplayerinfo")
       .then((preloadedState) => {

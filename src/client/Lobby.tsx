@@ -11,8 +11,9 @@ const Lobby = (props: Types.LobbyProps) => {
   const nav = useNavigate();
   const dispatch = useDispatch();
 
+  //@ this useEffect hydrates the data from Mongo in case there is no token in localStorage
   useEffect(() => {
-    console.log(`mongo is hydrating!!!`);
+    // console.log(`mongo is hydrating!!!`);
 
     Fetcher.GET("/api/getplayerinfo")
       .then((preloadedState) => {
@@ -25,7 +26,7 @@ const Lobby = (props: Types.LobbyProps) => {
         // if there is a token in local storage, load with the player's saved data
       })
       .catch((error) => {
-        console.log(`Could not get the player info from mongo error here:`);
+        // console.log(`Could not get the player info from mongo error here:`);
         console.log(error);
       });
   }, []);

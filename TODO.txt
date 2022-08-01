@@ -1,5 +1,3 @@
-//! Fixes
-* Catch-22 with loading the data from the db - need a token to get data, but the whole idea is to get the data from the db without a token
 * DONE - ANY somehow got into the experience - check where quest xp is given out
 
 //# NEXT

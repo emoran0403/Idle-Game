@@ -55,7 +55,7 @@ const AppReducer = combineReducers({
   Hatchets: HatchetsSliceReducer,
 });
 
-// wrapping root reducer
+// wrapping app reducer in another reducer so that we can hydrate with data from the database
 const RootReducer = (state, action) => {
   if (action.type === `mongoHydrate`) {
     return AppReducer(action.payload, action);
