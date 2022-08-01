@@ -393,8 +393,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
     if (checkPointTimer % 150 === 0) {
       //@every 5 mins, update database
       console.log(`update database`);
-      let timestamp: number = Date.now();
-      let checkPointData: Types.IPlayerData = { ...ALLSTATE, timestamp };
+      let checkPointData: Types.AllState = { ...ALLSTATE };
       // save the data to the database
       console.log(checkPointData);
       saveState(checkPointData);

@@ -34,7 +34,7 @@ apiRouter.get("/getplayerinfo", passport.authenticate("jwt", { session: false })
 apiRouter.put("/updateplayerinfo", passport.authenticate("jwt", { session: false }), async (req: Types.ReqUser, res) => {
   // grab the player's username and data from the req body
   const username = req.user!.username!;
-  const playerdata = req.body as Types.IPlayerData;
+  const playerdata = req.body as Types.IPlayerDataToMongo;
   console.log({ wow: playerdata.Inventory.CurrentInventory });
 
   try {

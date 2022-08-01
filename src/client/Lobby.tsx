@@ -2,13 +2,34 @@ import * as Types from "../../Types";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import Fetcher from "./ClientUtils/Fetcher";
 
 //@ This component is displayed after the player logs in.
 //@ Tutorial info and updates to the game will be shown while the server hydrates the player information.
 const Lobby = (props: Types.LobbyProps) => {
   const nav = useNavigate();
+  const dispatch = useDispatch();
 
-  // useEffect(() => {}, []);
+  useEffect(() => {
+    console.log(`mongo is hydrating!!!`);
+
+    Fetcher.GET("/api/getplayerinfo")
+      .then((preloadedState) => {
+        delete preloadedState._id;
+        delete preloadedState.timestamp;
+        delete preloadedState.username;
+        delete preloadedState.email;
+        dispatch({ type: `mongoHydrate`, payload: preloadedState });
+        // console.log({ stateIS: preloadedState });
+        // if there is a token in local storage, load with the player's saved data
+      })
+      .catch((error) => {
+        console.log(`Could not get the player info from mongo error here:`);
+        console.log(error);
+      });
+  }, []);
+
   const handleMoveToGame = () => {
     // move the player to the game
     nav(`/game`);

@@ -26,7 +26,7 @@ import NeckSlotSliceReducer from "../Slices/EquipmentSlices/NeckSlotSlice";
 import TwoHandSlotSliceReducer from "../Slices/EquipmentSlices/TwoHandSlotSlice";
 import HatchetsSliceReducer from "../Slices/SkillingEquipmentSlices/Hatchets";
 
-export default combineReducers({
+const AppReducer = combineReducers({
   Experience: experienceReducer,
   Bank_Fish: fishReducer,
   Bank_Logs: logsReducer,
@@ -54,3 +54,14 @@ export default combineReducers({
   TwoHandSlot: TwoHandSlotSliceReducer,
   Hatchets: HatchetsSliceReducer,
 });
+
+// wrapping root reducer
+const RootReducer = (state, action) => {
+  if (action.type === `mongoHydrate`) {
+    return AppReducer(action.payload, action);
+  }
+  return AppReducer(state, action);
+};
+
+export default RootReducer;
+export type RootState = ReturnType<typeof AppReducer>;

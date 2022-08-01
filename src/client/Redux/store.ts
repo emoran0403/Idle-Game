@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import Fetcher, { PLAYER_DATA_KEY } from "../ClientUtils/Fetcher";
-import rootReducer from "./Reducers";
+import rootReducer, { RootState } from "./Reducers";
 import * as Types from "../../../Types";
 
 // we make our own Promise function that will configure the store after an api call
@@ -15,14 +15,16 @@ export const configureStoreAsync = () => {
 
     // if it exists, use it
     if (playerDataFromLocalStorage) {
-      let goodData = JSON.parse(playerDataFromLocalStorage) as Types.IPlayerData;
+      let goodData = JSON.parse(playerDataFromLocalStorage);
       let store = configureStore({
         reducer: rootReducer,
         preloadedState: goodData,
       });
       resolve(store);
     }
+    console.log(`here lol`);
 
+    //! if there is no player data (and no token) get the data from the database (but this requires a token)
     // otherwise, get it from the database
     Fetcher.GET("/api/getplayerinfo")
       .then((preloadedState) => {

@@ -1,6 +1,6 @@
 import * as Types from "../../../Types";
 
-export const defaultPlayerData: Types.IPlayerData = {
+export const defaultPlayerData: Types.AllState = {
   Experience: {
     Attack: 0,
     Strength: 0,
@@ -235,5 +235,4 @@ export const defaultPlayerData: Types.IPlayerData = {
     playerOwnsadamanthatchet: false,
     playerOwnsrunehatchet: false,
   },
-  timestamp: 0,
 };

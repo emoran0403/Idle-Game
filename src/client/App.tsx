@@ -19,8 +19,7 @@ const App = (props: Types.AppProps) => {
   const [showLobbyButton, setShowLobbyButton] = useState<boolean>(false);
 
   const handleLogOut = async () => {
-    let timestamp: number = Date.now();
-    let checkPointData: Types.IPlayerData = { ...ALLSTATE, timestamp };
+    let checkPointData: Types.AllState = { ...ALLSTATE };
 
     console.log({ checkPointData });
     try {

@@ -14,10 +14,11 @@ const getPlayerInfo = async (username: string) => {
   try {
     // Connect to the MongoDB cluster
     await client.connect();
-    const result = await client.db("EricDB").collection("PlayerInfo").findOne<Types.IPlayerData>({ username });
+    const result = await client.db("EricDB").collection("PlayerInfo").findOne<Types.IPlayerDataFromMongo>({ username });
 
     if (result !== null) {
       // if there is a result, return it
+
       return result;
     } else {
       // otherwise throw an error - the user was not found
@@ -35,7 +36,7 @@ const getPlayerInfo = async (username: string) => {
 };
 
 //@ this function creates a new player document in the PlayerInfo collection
-const registerNewPlayer = async (newPlayerInfo: Types.IPlayerData) => {
+const registerNewPlayer = async (newPlayerInfo: Types.IPlayerPayload) => {
   try {
     // Connect to the MongoDB cluster
     await client.connect();
@@ -54,7 +55,7 @@ const registerNewPlayer = async (newPlayerInfo: Types.IPlayerData) => {
 };
 
 //@ this function will update a player's information in the PlayerInfo collection
-const updatePlayerInfo = async (playerName: string, playerInfo: Types.IPlayerData) => {
+const updatePlayerInfo = async (playerName: string, playerInfo: Types.IPlayerPayload) => {
   try {
     // Connect to the MongoDB cluster
     await client.connect();
