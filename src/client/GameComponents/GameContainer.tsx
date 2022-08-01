@@ -177,7 +177,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
     // if the progress counter hits 20, reset it to 0, and then run the quest logic based on location
 
     //! change this to 30 for production
-    if (questStepProgress === 30) {
+    if (questStepProgress === 2) {
       setQuestStepProgress(0);
       switch (playerLocation) {
         case `Lumbridge`: {
@@ -394,8 +394,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
     if (checkPointTimer % 150 === 0) {
       //@every 5 mins, update database
       console.log(`update database`);
-      let timestamp: number = Date.now();
-      let checkPointData: Types.IPlayerData = { ...ALLSTATE, timestamp };
+      let checkPointData: Types.AllState = { ...ALLSTATE };
       // save the data to the database
       console.log(checkPointData);
       saveState(checkPointData);

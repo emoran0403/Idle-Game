@@ -14,7 +14,7 @@ export function configurePassport(app: Application) {
     done(null, user);
   });
 
-  passport.deserializeUser((user: Types.IPlayerData, done) => {
+  passport.deserializeUser((user: any, done) => {
     done(null, user);
   });
 

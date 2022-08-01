@@ -1,14 +1,17 @@
-//! Fixes
-* need to work on hydrating logic - clearing token and logging in resets the player back to defaults
-* ANY somehow got into the experience - check where quest xp is given out
+* DONE - ANY somehow got into the experience - check where quest xp is given out
+
+//# NEXT
+* Make a world map component - use map and area tags to create clickable areas
+* => find out how to have those area tags set location state
 
 //# Quality of life
-* clean up the lobby into panels or some other layout
-* more info on quests
-* need a way to reward those quest which give ANY xp
+* globe picture for the world map icon
+* hatchet options in skill panel display their woodcutting
+*@ need a way to reward those quest which give ANY xp
 *@ maybe make the game choose the next available quest automatically
 *@ get a changelog from github for the lobby
 *@ offline progress
+* DONE - more info on quests
 * DONE - level requirements for equipment
 * DONE - Skill images
 * DONE - levels component does not update xp live - use effect
@@ -26,6 +29,7 @@
 * enemy item drops
 * high scores list - read multiple MongoDB call
 * add more skills
+* DONE - implement combat into quests
 
 //# Misc / Bug Fixes
 * implement player lifepoints

@@ -344,13 +344,15 @@ export interface AllState extends AllSlots {
 }
 
 //@ this is the entirety of the player data structure, identifying player info is optional for auth purposes
-export interface IPlayerData extends AllState, IPlayerPayload {
-  timestamp: number;
-}
+// export interface IPlayerData extends AllState, IPlayerPayload {
+//   timestamp?: number;
+// }
 
-export interface IPlayerDataFromMongo extends IPlayerData {
+export interface IPlayerDataFromMongo extends AllState, IPlayerPayload {
   _id: string;
 }
+
+export interface IPlayerDataToMongo extends IPlayerPayload, AllState {}
 
 export interface IPlayerPayload {
   username?: string;

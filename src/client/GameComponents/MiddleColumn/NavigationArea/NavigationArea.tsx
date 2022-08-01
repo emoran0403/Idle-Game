@@ -27,6 +27,7 @@ const NavigationArea = (props: Types.NavigationAreaCompProps) => {
         style={{ width: `130px` }}
       >
         World Map
+        <img src="/Assets/World_map_icon.png" />
       </button>
       <CurrentLocationComp />
       <CurrentActivityComp />
