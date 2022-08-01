@@ -479,7 +479,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
       handleSavePoint();
 
       //! set this to 2000ms in production
-    }, 2000);
+    }, 500);
 
     // console.log({ interval });
     return () => clearInterval(interval);
