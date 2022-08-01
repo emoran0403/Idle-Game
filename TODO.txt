@@ -1,6 +1,7 @@
 //! Fixes
 * need to work on hydrating logic - clearing token and logging in resets the player back to defaults
-* ANY somehow got into the experience - check where quest xp is given out
+* fetching db if there is no token isnt working properly
+* DONE - ANY somehow got into the experience - check where quest xp is given out
 
 //# Quality of life
 * clean up the lobby into panels or some other layout
@@ -18,6 +19,7 @@
 * DONE - quest panel to show missing level requirements
 
 //# Content
+* implement combat into quests
 * Draynor Village
 * Varrock
 * Al-Kharid

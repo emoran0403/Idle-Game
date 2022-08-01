@@ -58,6 +58,7 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
     );
   };
 
+  //@ conditionally styles the quest's background color
   const handleQuestStyle = (quest: Types.ICompositeQuestInfo) => {
     /**
      * based on the players level and quests complete, this function will style the background color
@@ -66,31 +67,42 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
     let meetsLevelRequirements = true; // this gets set to false if the player does not meet the level requirements
     let meetsQuestRequirements = true; // this gets set to false if the player does not meet the requirements
 
+    //@ check if the player has a reasonable combat level
+    let combatLevel = showCombatLevel();
+    // if the player's combat level is more than 10 levels below the combat requirements of the quest, set to false
+    if (combatLevel <= quest.combatRequirements - 10) {
+      meetsLevelRequirements = false;
+    }
     const arrayOfSkillNamesFromQuestReqs = Object.keys(quest.levelRequirements);
     /**
      * we initialize arrayOfSkillNamesFromQuestReqs to get an array of skill names.
      * we use this to index the Experience from state, and the quest level requirements
      * if a quest has no level requirements, it will be an empty array
      */
+
     //@ check if the player meets the level requirements
-    try {
-      if (arrayOfSkillNamesFromQuestReqs.length) {
-        // run through each level requirement
-        arrayOfSkillNamesFromQuestReqs.forEach((levelReq) => {
-          // find the player's level in that skill
-          const mylevel = getLevel(Experience[levelReq as keyof Types.ISkillList]);
+    // if the player fails combat requirements, skip the skill requirements
+    if (meetsLevelRequirements) {
+      try {
+        if (arrayOfSkillNamesFromQuestReqs.length) {
+          // run through each level requirement
+          arrayOfSkillNamesFromQuestReqs.forEach((levelReq) => {
+            // find the player's level in that skill
+            const mylevel = getLevel(Experience[levelReq as keyof Types.ISkillList]);
 
-          // find the level requirement from that quest
-          const reqlevel = quest.levelRequirements[levelReq];
+            // find the level requirement from that quest
+            const reqlevel = quest.levelRequirements[levelReq];
 
-          if (mylevel <= reqlevel) {
-            meetsLevelRequirements = false;
-            // throwing an error allows us to 'break' out of this forEach, since we cannot 'continue' across the function boundary
-            throw new Error(`Player does not meet a level requirement`);
-          }
-        });
-      }
-    } catch (error) {}
+            if (mylevel <= reqlevel) {
+              // if just 1 level requirement is not met, set to false and break out of the loop
+              meetsLevelRequirements = false;
+              // throwing an error allows us to 'break' out of this forEach, since we cannot 'continue' across the function boundary
+              throw new Error(`Player does not meet a level requirement`);
+            }
+          });
+        }
+      } catch (error) {}
+    }
 
     //@ check if the player meets the quest requirements
     if (quest.questRequirements) {
@@ -138,6 +150,7 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
     }
   };
 
+  //@ sends a message to the chat window when beginnign or resuming a quest
   const handleQuestChatMessage = (quest: Types.ICompositeQuestInfo) => {
     // send a contextual message to the chat window
 
@@ -153,7 +166,8 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
     }
   };
 
-  const handleQuestButtonDisplay = (quest: Types.ICompositeQuestInfo) => {
+  //@ displays the `begin` and `resume` buttons as appropriate
+  const handleQuestButtonJSX = (quest: Types.ICompositeQuestInfo) => {
     // console.log({ compositeQuestArray });
 
     /**
@@ -283,6 +297,8 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
     // 0: ['Agility', 13]
     // 1: ['Mining', 17]
     // 2: ['Thieving', 13]
+
+    // iterate over the level requirements, adding text which will be displayed
     levelReqTupleArray.forEach((tuple) => {
       const playerLevel = getLevel(Experience[tuple[0] as keyof Types.ISkillList]);
       const reqLevel = tuple[1];
@@ -291,6 +307,11 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
         levelReqArray.push(reqMsg);
       }
     });
+
+    // if there are combat requirements for the quest, add them to the level requirements
+    if (quest.combatRequirements > 14) {
+      levelReqArray.unshift(`Combat level ${quest.combatRequirements - 10}+`);
+    }
 
     if (levelReqArray.length) {
       return (
@@ -349,6 +370,21 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
     }
   };
 
+  //@ returns the player's combat level
+  const showCombatLevel = () => {
+    let att: number = getLevel(Experience.Attack);
+    let str: number = getLevel(Experience.Strength);
+    let mag: number = getLevel(Experience.Magic);
+    let rng: number = getLevel(Experience.Ranged);
+    let def: number = getLevel(Experience.Defence);
+    let con: number = getLevel(Experience.Constitution);
+    let pray: number = getLevel(Experience.Prayer);
+    let summ: number = getLevel(Experience.Summoning);
+
+    const combatLevel = Math.floor(((13 / 10) * Math.max(att + str, 2 * mag, 2 * rng) + def + con + Math.floor(0.5 * pray) + Math.floor(0.5 * summ)) / 4);
+    return combatLevel;
+  };
+
   useEffect(() => {
     /**
      * this useEffect shuffles the quest array coming from constants and the quest array coming from state together
@@ -393,7 +429,7 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
               {!quest.complete && (
                 <div>
                   <div className="fw-bold">
-                    {handleQuestButtonDisplay(quest)} {quest.stepsComplete ? `In Progress: ` : `Not Started`} : {quest.stepsComplete} /{` ${quest.stepsTotal}`}
+                    {handleQuestButtonJSX(quest)} {quest.stepsComplete ? `In Progress: ` : `Not Started`} : {quest.stepsComplete} /{` ${quest.stepsTotal}`}
                   </div>
                   <div className="d-flex">
                     <div className="col-4 border border-dark border-1 rounded-3">{displayQuestReqJSX(quest)}</div>

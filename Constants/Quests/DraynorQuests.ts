@@ -41,6 +41,7 @@ export const DraynorQuests: Types.IQuestInfo[] = [
     },
     itemRewards: {},
   },
+  //! Vampyre Slayer  - MAINCOMBAT: 4825,
   {
     name: "Vampyre Slayer",
     location: "Draynor",
@@ -49,9 +50,7 @@ export const DraynorQuests: Types.IQuestInfo[] = [
     combatRequirements: 28,
     questRequirements: [],
     levelRequirements: {},
-    experienceRewards: {
-      MAINCOMBAT: 4825,
-    },
+    experienceRewards: {},
     itemRewards: {},
   },
   {
