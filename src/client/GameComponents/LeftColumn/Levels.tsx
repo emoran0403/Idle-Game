@@ -47,17 +47,21 @@ const Levels = (props: Types.NoProps) => {
         <h5 className="card-header text-center">
           Levels
           <div className="d-flex row">
-            <h6 className="card-subtitle text-muted">Combat Level: {showCombatLevel()}</h6>
-            <h6 className="card-subtitle text-muted">Total Levels: {totalLevel.toLocaleString("en-US")}</h6>
-            <h6 className="card-subtitle text-muted">Total Experience: {totalExperience.toLocaleString("en-US")}</h6>
+            <h6 className="card-subtitle text-muted col-4">Combat Level: {showCombatLevel()}</h6>
+            <h6 className="card-subtitle text-muted col-4">Total Levels: {totalLevel.toLocaleString("en-US")}</h6>
+            <h6 className="card-subtitle text-muted col-4">Total Experience: {totalExperience.toLocaleString("en-US")}</h6>
           </div>
         </h5>
 
         {Object.entries(Experience).map(([skill, xp]) => (
           <div key={`${skill}-progress-bar-div`}>
-            <div>
-              <span className="badge rounded-pill bg-primary border border-2 border-dark">{`${skill} Lv. ${getLevel(xp)}`}</span>
-              <span>{` XP: ${Experience[skill as keyof Types.ISkillList].toLocaleString("en-US")}`}</span>
+            <div className="d-flex">
+              <img src={`/Assets/SkillIcons/${skill}.png`} width="25" height="25" />
+
+              <div>
+                <span className="badge rounded-pill bg-primary border border-2 border-dark">{`${skill} Lv. ${getLevel(xp)}`}</span>
+                <span>{` XP: ${Experience[skill as keyof Types.ISkillList].toLocaleString("en-US")}`}</span>
+              </div>
             </div>
             <ProgressBar className="border border-dark border-2">
               <ProgressBar

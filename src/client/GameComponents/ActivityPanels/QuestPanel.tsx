@@ -256,18 +256,18 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
 
     if (questReqArray.length) {
       return (
-        <div>
+        <div className="text-center">
           <p>Quest Requirements:</p>
           <ul>
             {questReqArray.map((questReq) => (
-              <li>{questReq}</li>
+              <li className="text-start">{questReq}</li>
             ))}
           </ul>
         </div>
       );
     } else {
       return (
-        <div>
+        <div className="text-center">
           <p>All required quests complete</p>
         </div>
       );
@@ -294,19 +294,56 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
 
     if (levelReqArray.length) {
       return (
-        <div>
+        <div className="text-center">
           <p>Level Requirements:</p>
           <ul>
             {levelReqArray.map((levelReq) => (
-              <li>{levelReq}</li>
+              <li className="text-start">{levelReq}</li>
             ))}
           </ul>
         </div>
       );
     } else {
       return (
-        <div>
+        <div className="text-center">
           <p>Attained all required levels</p>
+        </div>
+      );
+    }
+  };
+
+  //@ displays the experience rewards for the given quest
+  const displayXPRewardsJSX = (quest: Types.ICompositeQuestInfo) => {
+    // define an empty array where the xp rewards will be placed
+    let xprewardArray: string[] = [];
+    // retrieve the xp rewards for the quest and place them into an array
+    let xprewardTupleArray = Object.entries(quest.experienceRewards);
+    // 0: ['Agility', 13]
+    // 1: ['Mining', 17]
+    // 2: ['Thieving', 13]
+    xprewardTupleArray.forEach((tuple) => {
+      // for now, if the quest offers an ANY xp reward, skip it
+      if (tuple[0] !== `ANY`) {
+        const reqMsg = `You will receive ${tuple[1]} xp in ${tuple[0]}`;
+        xprewardArray.push(reqMsg);
+      }
+    });
+
+    if (xprewardArray.length) {
+      return (
+        <div className="text-center">
+          <p>Experience Rewards:</p>
+          <ul>
+            {xprewardArray.map((reward) => (
+              <li className="text-start">{reward}</li>
+            ))}
+          </ul>
+        </div>
+      );
+    } else {
+      return (
+        <div className="text-center">
+          <p>This quest does not reward Experience</p>
         </div>
       );
     }
@@ -351,16 +388,17 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
         .map((quest) => (
           <div key={`quest-list-${quest.name}`} className={`card border border-dark border-1 rounded-3 ${handleQuestStyle(quest)}`}>
             <div className="card-body">
-              <h5 className={`card-subtitle text-black`}>{quest.name}</h5>
+              <h5 className={`card-subtitle text-black text-center`}>{quest.name}</h5>
               {quest.complete && <div className="fw-bold">100%</div>}
               {!quest.complete && (
                 <div>
                   <div className="fw-bold">
                     {handleQuestButtonDisplay(quest)} {quest.stepsComplete ? `In Progress: ` : `Not Started`} : {quest.stepsComplete} /{` ${quest.stepsTotal}`}
                   </div>
-                  <div>
-                    {displayQuestReqJSX(quest)}
-                    {displayLevelReqJSX(quest)}
+                  <div className="d-flex">
+                    <div className="col-4 border border-dark border-1 rounded-3">{displayQuestReqJSX(quest)}</div>
+                    <div className="col-4 border border-dark border-1 rounded-3">{displayLevelReqJSX(quest)}</div>
+                    <div className="col-4 border border-dark border-1 rounded-3">{displayXPRewardsJSX(quest)}</div>
                   </div>
                 </div>
               )}

@@ -1,11 +1,16 @@
+//! Fixes
+* need to work on hydrating logic - clearing token and logging in resets the player back to defaults
+* ANY somehow got into the experience - check where quest xp is given out
+
 //# Quality of life
-* Skill images
 * clean up the lobby into panels or some other layout
-* level requirements for equipment
 * more info on quests
+* need a way to reward those quest which give ANY xp
 *@ maybe make the game choose the next available quest automatically
 *@ get a changelog from github for the lobby
 *@ offline progress
+* DONE - level requirements for equipment
+* DONE - Skill images
 * DONE - levels component does not update xp live - use effect
 * DONE - Levels component displays the level and experience
 * DONE - chatwindow greets the player by username
@@ -20,7 +25,7 @@
 * clue scrolls
 * enemy item drops
 * high scores list - read multiple MongoDB call
-* add mroe skills
+* add more skills
 
 //# Misc / Bug Fixes
 * implement player lifepoints

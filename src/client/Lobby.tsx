@@ -69,9 +69,9 @@ const Lobby = (props: Types.LobbyProps) => {
                 If the player has chosen a quest, progress will accumulate until the quest is complete, and any rewards will be given out.
               </p>
               <p className="card-text">
-                To start a quest, click the quests activity button. Clicking the begin or resume quest button will start you on your quest. Progress will
-                accumulate until the quest is complete. Quests typically reward the player with Coins and Experience. After you complete a quest, you will need
-                to begin another activity.
+                To start a quest, click the quests activity button. Clicking the begin or resume quest button will start you on your quest. Each Progress step
+                takes a minute, and will increment until the quest is complete. Quests typically reward the player with Coins and Experience. After you complete
+                a quest, you will need to manually select another activity.
               </p>
               <ul>
                 <li>
@@ -166,7 +166,7 @@ export default Lobby;
     <p className="card-text">
       To start Combat, click the combat activity button. You will need to select an enemy, and a combat style. Combat style determines which combat skill is
       trained, and some enemies are weaker to certain styles. Enemies with a green background are at a lower combat level than you, while those in orange and
-      red are higher, and therefore will take longer to defeat. Defeating an ememy wil earn you experience in the chosen skill, and Coins.
+      red are higher, and therefore will take longer to defeat. Defeating an ememy will earn you experience in the chosen skill, and Coins.
     </p>
   </div>
 </div>;

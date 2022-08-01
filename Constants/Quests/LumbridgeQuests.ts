@@ -21,6 +21,7 @@ export const LumbridgeQuests: Types.IQuestInfo[] = [
     },
     itemRewards: { Coins: 500 },
   },
+  //!  Myths of the White Lands has an ANY xp reward of 500 - need to implement a way for the player to choose their xp
   {
     name: "Myths of the White Lands",
     location: "Lumbridge",
@@ -29,7 +30,7 @@ export const LumbridgeQuests: Types.IQuestInfo[] = [
     combatRequirements: 0,
     questRequirements: [],
     levelRequirements: {},
-    experienceRewards: { ANY: 500 },
+    experienceRewards: {},
     itemRewards: { Coins: 5000 },
   },
   {
