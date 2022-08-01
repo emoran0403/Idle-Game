@@ -20,8 +20,9 @@ const ActivityArea = (props: Types.ActivityAreaCompProps) => {
     setDisplay(displayString);
   };
 
-  // useEffect(() => {}, []);
-
+  // the structure below is an object containing references to components.
+  // We can conditionally render the components contained in the object via bracket notation
+  // state is set on buttons in another component, which changes the display state, thus selecting the component to render
   return (
     <div className="border border-dark border-2 rounded-3">
       <ActivityButtons handleUpdateDisplay={handleUpdateDisplay} />
