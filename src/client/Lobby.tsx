@@ -54,7 +54,7 @@ const Lobby = (props: Types.LobbyProps) => {
                   Training Woodcutting requires a hatchet (more powerful hatchets can be bought in the store - store activity button). Select the hatchet you
                   wish to use, then click on the type of logs you wish to cut.
                 </li>
-                <li className="card-text">Training Fishing does not require any type of special equipment, simply click on the fish you wish to catch</li>
+                <li className="card-text">Training Fishing does not require any type of special equipment, simply click on the fish you wish to catch.</li>
               </ul>
               <p className="card-text">
                 As you accumulate resources your inventory will fill up (the box at the top right of the screen). Items will automatically be deposited into the
@@ -89,7 +89,6 @@ const Lobby = (props: Types.LobbyProps) => {
               </ul>
             </div>
           </div>
-
           <div className="card col-4">
             <div className="card-body">
               <h5 className="card-title text-center">Combat</h5>
@@ -130,43 +129,3 @@ const Lobby = (props: Types.LobbyProps) => {
 };
 
 export default Lobby;
-<div className="card">
-  <img src="..." className="card-img-top" alt="..." />
-  <div className="card-body">
-    <h5 className="card-title">Card title</h5>
-    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  </div>
-</div>;
-
-<div className="card">
-  <img src="" className="card-img-top" alt="..." />
-  <div className="card-body">
-    <h5 className="card-title">Skilling</h5>
-    <p className="card-text">
-      To begin skilling, click the skills activity button. Options in green are accesssible, and those in red require a higher level in the respective skill.
-    </p>
-    <ul>
-      <li className="card-text">
-        Training Woodcutting requires a hatchet (more powerful hatchets can be bought in the store - store activity button). Select the hatchet you wish to use,
-        then click on the type of logs you wish to cut.
-      </li>
-      <li className="card-text">Training Fishing does not require any type of special equipment, simply click on the fish you wish to catch</li>
-    </ul>
-    <p className="card-text">
-      As you accumulate resources your inventory will fill up (the box at the top right of the screen). Items will automatically be deposited into the bank when
-      your inventory is full. You can view your bank by clicking the bank activity button.
-    </p>
-  </div>
-</div>;
-
-<div className="card">
-  <img src="..." className="card-img-top" alt="..." />
-  <div className="card-body">
-    <h5 className="card-title">Combat</h5>
-    <p className="card-text">
-      To start Combat, click the combat activity button. You will need to select an enemy, and a combat style. Combat style determines which combat skill is
-      trained, and some enemies are weaker to certain styles. Enemies with a green background are at a lower combat level than you, while those in orange and
-      red are higher, and therefore will take longer to defeat. Defeating an ememy will earn you experience in the chosen skill, and Coins.
-    </p>
-  </div>
-</div>;

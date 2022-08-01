@@ -4,12 +4,12 @@
 * DONE - ANY somehow got into the experience - check where quest xp is given out
 
 //# Quality of life
-* clean up the lobby into panels or some other layout
-* more info on quests
-* need a way to reward those quest which give ANY xp
+* globe picture for the world map icon
+*@ need a way to reward those quest which give ANY xp
 *@ maybe make the game choose the next available quest automatically
 *@ get a changelog from github for the lobby
 *@ offline progress
+* DONE - more info on quests
 * DONE - level requirements for equipment
 * DONE - Skill images
 * DONE - levels component does not update xp live - use effect
