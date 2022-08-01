@@ -1,5 +1,6 @@
 //! Fixes
 * need to work on hydrating logic - clearing token and logging in resets the player back to defaults
+* ANY somehow got into the experience - check where quest xp is given out
 
 //# Quality of life
 * clean up the lobby into panels or some other layout

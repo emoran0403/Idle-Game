@@ -87,6 +87,7 @@ export const DraynorQuests: Types.IQuestInfo[] = [
     },
     itemRewards: {},
   },
+  //! Love Story has ANY: 10000,
   {
     name: "Love Story",
     location: "Draynor",
@@ -130,10 +131,10 @@ export const DraynorQuests: Types.IQuestInfo[] = [
       Magic: 50000,
       Smithing: 40000,
       Crafting: 40000,
-      ANY: 10000,
     },
     itemRewards: { Coins: 35000 },
   },
+  //! Swept away has ANY: 5000
   {
     name: "Swept Away",
     location: "Draynor",
@@ -142,7 +143,7 @@ export const DraynorQuests: Types.IQuestInfo[] = [
     combatRequirements: 0,
     questRequirements: [],
     levelRequirements: {},
-    experienceRewards: { ANY: 5000 },
+    experienceRewards: {},
     itemRewards: {},
   },
   {
