@@ -183,6 +183,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
             key={`Slot-Item-${Hatchet.name}`}
             className={`${handleSelectorStyle(Hatchet)}`}
             disabled={applyDisabledAttribute(Hatchet)}
+            selected={Hatchet.name === props.currentEquipment.Hatchet ? true : false}
           >
             {Hatchet.displayName}
           </option>

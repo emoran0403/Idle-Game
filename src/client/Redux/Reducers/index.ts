@@ -56,6 +56,7 @@ const AppReducer = combineReducers({
 });
 
 // wrapping app reducer in another reducer so that we can hydrate with data from the database
+// @ts-ignore
 const RootReducer = (state, action) => {
   if (action.type === `mongoHydrate`) {
     return AppReducer(action.payload, action);
