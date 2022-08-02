@@ -6,19 +6,30 @@
 
 
 //# NEXT
-* Make a world map component - use map and area tags to create clickable areas
-* => find out how to have those area tags set location state
+* add mining options to location summaries
+* add mining resources to bank
+* add mining to skills panel
+* add mining to game GameContainer
+* add mining calculations to Ores file under constants
 
 //# Fixes
 
+//# world map
+* grab an image for the world map, place these divs over it, setting the pixels as needed
+<div
+                onClick={(e) => doClick(e)}
+                style={{ border: "2px solid red", position: "absolute", top: "20px", left: "20px", width: "30px", height: "30px", zIndex: "5" }}
+              ></div>
 
 //# Quality of life
-* globe picture for the world map icon
+** timer showing the progress until the next tick, red bar if the player is idle
+* Bank shows items in ascending level order
 * hatchet options in skill panel display their woodcutting
 *** need a way to reward those quest which give ANY xp
 *** maybe make the game choose the next available quest automatically
 *** get a changelog from github for the lobby
 *** offline progress
+* DONE -  globe picture for the world map icon
 * DONE -  double check the buttons on quest panel - allowing player to begin a quest without the combat requirements
 * DONE - more info on quests
 * DONE - level requirements for equipment
