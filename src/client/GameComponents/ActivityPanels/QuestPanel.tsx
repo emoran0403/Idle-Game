@@ -261,7 +261,7 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
       AllQuestsFromStateFlat.forEach((questFromState) => {
         // console.log({ questFromState });
         // debugger;
-        console.log({ req, name: questFromState.name, complete: questFromState.complete });
+        // console.log({ req, name: questFromState.name, complete: questFromState.complete });
         if (questFromState.name === req && !questFromState.complete) {
           questReqArray.push(req);
         }

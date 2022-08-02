@@ -1,8 +1,12 @@
 import * as Types from "../../../../Types";
 import * as React from "react";
 import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setLocation } from "../../Redux/Slices/CurrentLocation";
 
 const MapPanel = (props: Types.MapPanelProps) => {
+  const dispatch = useDispatch();
+
   //   useEffect(() => {}, []);
 
   const panelHeaderJSX = () => {
@@ -30,7 +34,27 @@ const MapPanel = (props: Types.MapPanelProps) => {
         <div className="card">
           <div className="card-body">
             {/* panel specific content goes here */}
-            <p>map panel stuff here</p>
+            <button
+              className="btn btn-primary"
+              onClick={() => {
+                console.log(`travelling to Lumbridge`);
+                dispatch(setLocation(`Lumbridge`));
+              }}
+            >
+              Lumbridge
+            </button>
+            <button
+              className="btn btn-primary"
+              onClick={() => {
+                console.log(`travelling to Draynor Village`);
+                dispatch(setLocation(`Draynor`));
+              }}
+            >
+              Draynor Village
+            </button>
+            {/* <button className="btn btn-primary" onClick={() => {}}></button>
+            <button className="btn btn-primary" onClick={() => {}}></button>
+            <button className="btn btn-primary" onClick={() => {}}></button> */}
             {/* end of panel specific content */}
           </div>
         </div>

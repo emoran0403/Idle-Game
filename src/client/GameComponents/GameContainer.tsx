@@ -1,6 +1,11 @@
+// module imports
 import * as Types from "../../../Types";
 import * as React from "react";
 import Dayjs from "dayjs";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+// component imports
 import Levels from "./LeftColumn/Levels";
 import QuestList from "./LeftColumn/QuestList";
 import NavigationArea from "./MiddleColumn/NavigationArea/NavigationArea";
@@ -9,25 +14,30 @@ import ActiveBuffs from "./RightColumn/ActiveBuffs";
 import WornEquipment from "./RightColumn/WornEquipment";
 import ActivityArea from "./MiddleColumn/ActivityArea/ActivityArea";
 import ChatWindow from "./LeftColumn/ChatWindow";
-import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+
+// slice imports
 import { doQuestLogicLumbridge } from "../Redux/Slices/QuestSlices/Lumbridge";
 import { doQuestLogicDraynor } from "../Redux/Slices/QuestSlices/Draynor";
 import { setActivity } from "../Redux/Slices/CurrentActivity";
 import { setQuest } from "../Redux/Slices/CurrentQuest";
-import { LumbridgeQuests } from "../../../Constants/Quests/LumbridgeQuests";
 import { addToWallet } from "../Redux/Slices/Wallet";
 import { gainXP } from "../Redux/Slices/Experience";
 import { addQuestPoints } from "../Redux/Slices/QuestPoints";
-import { ListOfLogs, playerEarnsLog } from "../../../Constants/Items/Logs";
-import { listOfHatchets } from "../../../Constants/SkillingEquipment/Hatchets";
 import { addItemToInventory, removeItemFromInventory } from "../Redux/Slices/Inventory";
-import { ListOfFish, playerEarnsFish } from "../../../Constants/Items/Fish";
-import { didPlayerLevelUp, getLevel } from "../../../Constants/XP Levels";
-import { Enemies, playerAttacksTarget } from "../../../Constants/Enemies";
-import { BackSlot } from "../../../Constants/Equipment/BackSlot";
 import { addLogToBank } from "../Redux/Slices/BankSlices/LogsSlice";
 import { addFishToBank } from "../Redux/Slices/BankSlices/FishSlice";
+
+// constants imports
+import { LumbridgeQuests } from "../../../Constants/Quests/LumbridgeQuests";
+import { DraynorQuests } from "../../../Constants/Quests/DraynorQuests";
+import { EmptyQuestRewards } from "../../../Constants/Quests";
+import { ListOfLogs, playerEarnsLog } from "../../../Constants/Items/Logs";
+import { ListOfFish, playerEarnsFish } from "../../../Constants/Items/Fish";
+import { listOfHatchets } from "../../../Constants/SkillingEquipment/Hatchets";
+import { didPlayerLevelUp, getLevel } from "../../../Constants/XP Levels";
+import { Enemies, playerAttacksTarget } from "../../../Constants/Enemies";
+
+// misc imports
 import { saveState } from "../Redux/store";
 import { TOKEN_KEY } from "../ClientUtils/Fetcher";
 
@@ -411,7 +421,19 @@ const GameContainer = (props: Types.GameContainerProps) => {
         // unset current quest
         dispatch(setQuest(`none`));
         // find the quest that was just completed
-        let questRewards: Types.IQuestInfo = LumbridgeQuests[LumbridgeQuests.findIndex((item) => item.name === CurrentQuest)];
+
+        // define questRewards as the placeholder temporarily
+        let questRewards = EmptyQuestRewards;
+        //@ as more locations are implemented, add them here
+        // based on the player's location, reassign questRewards as the actual rewards for the quest
+        switch (playerLocation) {
+          case `Lumbridge`:
+            questRewards = LumbridgeQuests[LumbridgeQuests.findIndex((item) => item.name === CurrentQuest)];
+            break;
+          case `Draynor`:
+            questRewards = DraynorQuests[DraynorQuests.findIndex((item) => item.name === CurrentQuest)];
+            break;
+        }
 
         //@ give item rewards
         // if Coins are rewarded, add them to the wallet

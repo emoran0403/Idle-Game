@@ -17,6 +17,6 @@ export const DraynorSummary: Types.IDraynorLocationSummary = {
     Mining: [`clay`],
     Fishing: [`raw_shrimp`, `raw_sardine`, `raw_anchovies`, `raw_herring`],
   },
-  Combat: [],
+  Combat: [`man`, `farmer`],
   Bosses: [],
 };

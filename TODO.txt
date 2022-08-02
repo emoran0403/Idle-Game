@@ -4,13 +4,15 @@
 * Make a world map component - use map and area tags to create clickable areas
 * => find out how to have those area tags set location state
 
+//# Fixes
+* double check the buttons on quest panel - allowing player to begin a quest without the combat requirements
 //# Quality of life
 * globe picture for the world map icon
 * hatchet options in skill panel display their woodcutting
-*@ need a way to reward those quest which give ANY xp
-*@ maybe make the game choose the next available quest automatically
-*@ get a changelog from github for the lobby
-*@ offline progress
+*** need a way to reward those quest which give ANY xp
+*** maybe make the game choose the next available quest automatically
+*** get a changelog from github for the lobby
+*** offline progress
 * DONE - more info on quests
 * DONE - level requirements for equipment
 * DONE - Skill images
@@ -36,3 +38,4 @@
 * Logic - experience and levels is displaying too high for some reason :/
 * remove boilerplate commits
 
+Adding new Locations - add cases to switch statement in GameContainer

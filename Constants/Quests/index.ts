@@ -10,6 +10,17 @@ export const AllQuests: Types.IAllQuests = {
   Varrock: VarrockQuests,
 };
 
+export const EmptyQuestRewards: Types.IQuestInfo = {
+  name: `Empty Quest - I should never be completed lol`,
+  location: `empty`,
+  stepsTotal: 0,
+  questPoints: 0,
+  combatRequirements: 0,
+  questRequirements: [],
+  levelRequirements: {},
+  experienceRewards: {},
+  itemRewards: { Coins: 0 },
+};
 /**
  *
  * import * as Types from "../../Types";

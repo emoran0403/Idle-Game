@@ -136,6 +136,23 @@ const swampfrog: Types.IEnemySummary = {
   defence: 12,
   accuracy: 223,
 };
+const farmer: Types.IEnemySummary = {
+  name: "farmer",
+  displayName: "Farmer",
+  level: 7,
+  lifePoints: 250,
+  XPGivenCombatStyle: 27,
+  XPGivenConstitution: 9,
+  affinities: {
+    explicitWeakness: "fire",
+    weakStyle: "magic",
+    neutralStyle: "melee",
+    strongStyle: "ranged",
+  },
+  armor: 150,
+  defence: 5,
+  accuracy: 150,
+};
 
 export const Lumbridge = {
   man,
@@ -146,6 +163,11 @@ export const Lumbridge = {
   spider,
   giantrat,
   swampfrog,
+};
+
+export const Draynor = {
+  man,
+  farmer,
 };
 
 /**
