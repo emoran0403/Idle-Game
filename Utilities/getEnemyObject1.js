@@ -16,6 +16,14 @@
         return `enterTHISmanually`;
       }
     })(),
+
+    displayName: (() => {
+      try {
+        return document.title.split(` `)[0];
+      } catch (error) {
+        return `enterLEVELmanually`;
+      }
+    })(),
     level: (() => {
       try {
         return Number(document.getElementsByTagName(`tbody`)[0].children[12].children[0].textContent);

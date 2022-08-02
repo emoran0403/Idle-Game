@@ -1,4 +1,7 @@
-* DONE - ANY somehow got into the experience - check where quest xp is given out
+@ Adding new Locations - add cases to switch statements (questing tick func and quest rewards useEffect) in GameContainer
+
+
+
 
 //# NEXT
 * Make a world map component - use map and area tags to create clickable areas
@@ -37,5 +40,3 @@
 * implement player lifepoints
 * Logic - experience and levels is displaying too high for some reason :/
 * remove boilerplate commits
-
-Adding new Locations - add cases to switch statement in GameContainer

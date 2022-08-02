@@ -495,7 +495,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
         // IF the player is questing, and has chosen a quest, then execute questing tick function
         handleQuestingTick();
       } else {
-        console.log(`all ticks failed to tick`);
+        // console.log(`all ticks failed to tick`);
       }
 
       handleSavePoint();
