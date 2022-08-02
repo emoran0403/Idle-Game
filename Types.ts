@@ -1183,8 +1183,15 @@ export interface ILumbridgeEnemies {
 }
 
 export interface IDraynorEnemies {
+  rat: IEnemySummary;
   man: IEnemySummary;
   farmer: IEnemySummary;
+  zombie12: IEnemySummary;
+  skeleton15: IEnemySummary;
+  zombie29: IEnemySummary;
+  skeleton32: IEnemySummary;
+  ghost25: IEnemySummary;
+  blackknight: IEnemySummary;
 }
 
 //@ extend this as more locations are added

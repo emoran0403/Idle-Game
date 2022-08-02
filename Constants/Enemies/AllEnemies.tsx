@@ -1,5 +1,6 @@
 import * as Types from "../../Types";
 
+//@ enemies with a number in their name indicates that their combat level varies, as well as their stats
 export const man: Types.IEnemySummary = {
   name: `man`,
   displayName: `Man`,
@@ -169,4 +170,106 @@ export const rat: Types.IEnemySummary = {
   armor: 110,
   defence: 1,
   accuracy: 110,
+};
+export const skeleton15: Types.IEnemySummary = {
+  name: "skeleton15",
+  displayName: "Skeleton",
+  level: 15,
+  lifePoints: 550,
+  XPGivenCombatStyle: 34,
+  XPGivenConstitution: 11,
+  affinities: {
+    explicitWeakness: "earth",
+    weakStyle: "magic",
+    neutralStyle: "melee",
+    strongStyle: "ranged",
+  },
+  armor: 213,
+  defence: 11,
+  accuracy: 213,
+};
+export const skeleton32: Types.IEnemySummary = {
+  name: "skeleton32",
+  displayName: "Skeleton",
+  level: 32,
+  lifePoints: 1150,
+  XPGivenCombatStyle: 50,
+  XPGivenConstitution: 17,
+  affinities: {
+    explicitWeakness: "earth",
+    weakStyle: "magic",
+    neutralStyle: "melee",
+    strongStyle: "ranged",
+  },
+  armor: 354,
+  defence: 23,
+  accuracy: 354,
+};
+export const zombie12: Types.IEnemySummary = {
+  name: "zombie12",
+  displayName: "Zombie",
+  level: 12,
+  lifePoints: 900,
+  XPGivenCombatStyle: 31,
+  XPGivenConstitution: 10,
+  affinities: {
+    explicitWeakness: "fire",
+    weakStyle: "magic",
+    neutralStyle: "melee",
+    strongStyle: "ranged",
+  },
+  armor: 191,
+  defence: 9,
+  accuracy: 191,
+};
+export const zombie29: Types.IEnemySummary = {
+  name: "zombie29",
+  displayName: "Zombie",
+  level: 29,
+  lifePoints: 1050,
+  XPGivenCombatStyle: 47,
+  XPGivenConstitution: 15,
+  affinities: {
+    explicitWeakness: "fire",
+    weakStyle: "magic",
+    neutralStyle: "melee",
+    strongStyle: "ranged",
+  },
+  armor: 329,
+  defence: 21,
+  accuracy: 329,
+};
+export const ghost25: Types.IEnemySummary = {
+  name: "ghost25",
+  displayName: "Ghost",
+  level: 25,
+  lifePoints: 90,
+  XPGivenCombatStyle: 41,
+  XPGivenConstitution: 13,
+  affinities: {
+    explicitWeakness: "ranged",
+    weakStyle: "ranged",
+    neutralStyle: "melee",
+    strongStyle: "magic",
+  },
+  armor: 292,
+  defence: 18,
+  accuracy: 292,
+};
+export const blackknight: Types.IEnemySummary = {
+  name: "blackknight",
+  displayName: "Black Knight",
+  level: 30,
+  lifePoints: 1100,
+  XPGivenCombatStyle: 49,
+  XPGivenConstitution: 16,
+  affinities: {
+    explicitWeakness: "water",
+    weakStyle: "magic",
+    neutralStyle: "melee",
+    strongStyle: "ranged",
+  },
+  armor: 341,
+  defence: 22,
+  accuracy: 341,
 };
