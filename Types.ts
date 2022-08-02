@@ -44,6 +44,11 @@ export interface ActivityButtonsCompProps {
   newChatLog?: Function;
 }
 
+export interface MapPanelProps {
+  handleUpdateDisplay: Function;
+  newChatLog?: Function;
+}
+
 export interface MinigamePanelCompProps {
   handleUpdateDisplay: Function;
   newChatLog: Function;
