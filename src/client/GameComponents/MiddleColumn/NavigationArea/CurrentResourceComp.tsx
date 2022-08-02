@@ -46,8 +46,8 @@ const CurrentResourceComp = (props: Types.NoProps) => {
       {Activity === `In combat` ? (
         <div className={returnBackgroundColor()}>
           <div>Fighting </div>
-          {Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies] ? (
-            <div>{Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].displayName}</div>
+          {Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations] ? (
+            <div>{Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].displayName}</div>
           ) : (
             <div>none</div>
           )}

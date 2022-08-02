@@ -334,27 +334,25 @@ const GameContainer = (props: Types.GameContainerProps) => {
       // IF the hit would kill the target
       if (targetLifePoints - damageDoneToTarget <= 0) {
         // then reset the lifepoints
-        setTargetLifePoints(Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].lifePoints);
+        setTargetLifePoints(Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].lifePoints);
         // and award the combat style xp
         dispatch(
-          gainXP({ skill: CurrentSkill, xp: Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].XPGivenCombatStyle })
+          gainXP({ skill: CurrentSkill, xp: Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].XPGivenCombatStyle })
         );
 
         // and award the constitution xp
         dispatch(
-          gainXP({ skill: `Constitution`, xp: Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].XPGivenConstitution })
+          gainXP({ skill: `Constitution`, xp: Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].XPGivenConstitution })
         );
 
         // award the coins
-        let coinDrop: number = Math.floor(
-          Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].lifePoints * Math.random()
-        );
+        let coinDrop: number = Math.floor(Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].lifePoints * Math.random());
         dispatch(addToWallet(coinDrop));
 
         // prepare chatlogs for defeating an enemy, and possibly for levelling up
         let combatMessages: string[] = [
           `Defeated a ${
-            Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].displayName
+            Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].displayName
           } and earned ${coinDrop.toLocaleString("en-US")} coins`,
         ];
         let combatMessagesTags: Types.ChatLogTag[] = [`Monster Defeated`];
@@ -363,7 +361,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
         if (
           didPlayerLevelUp(
             Experience[CurrentSkill as keyof Types.ISkillList],
-            Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].XPGivenCombatStyle
+            Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].XPGivenCombatStyle
           )
         ) {
           // if so, queue up a chatlog
@@ -375,7 +373,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
         if (
           didPlayerLevelUp(
             Experience[CurrentSkill as keyof Types.ISkillList],
-            Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].XPGivenConstitution
+            Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].XPGivenConstitution
           )
         ) {
           // if so, queue up a chatlog
@@ -474,8 +472,8 @@ const GameContainer = (props: Types.GameContainerProps) => {
   useEffect(() => {
     // IF a target is changed, set its lifepoints to component state
     // this ensures we have the correct lifepoints when the player changes targets, or starts combat for the first time
-    if (Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies]?.lifePoints) {
-      setTargetLifePoints(Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].lifePoints);
+    if (Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations]?.lifePoints) {
+      setTargetLifePoints(Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].lifePoints);
     }
   }, [Target]);
 

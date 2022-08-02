@@ -1181,6 +1181,7 @@ export interface ILumbridgeEnemies {
   giantrat: IEnemySummary;
   swampfrog: IEnemySummary;
 }
+
 export interface IDraynorEnemies {
   man: IEnemySummary;
   farmer: IEnemySummary;
@@ -1192,7 +1193,7 @@ export interface IAllEnemies {
   Draynor: IDraynorEnemies;
 }
 //@ extend this as more locations are added
-export type IEnemyLocations = ILumbridgeEnemies;
+export type IEnemyLocations = ILumbridgeEnemies | IDraynorEnemies;
 
 export interface IHatchet {
   name: string;

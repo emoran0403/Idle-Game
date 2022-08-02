@@ -40,7 +40,7 @@ export const playerAttacksTarget = (
   Equipment: Types.ICurrentEquipment
 ) => {
   // define the enemy
-  let Enemy: Types.IEnemySummary = Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies];
+  let Enemy: Types.IEnemySummary = Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations];
   // console.log(Enemies);
   // console.log(playerLocation);
   // console.log(Target);

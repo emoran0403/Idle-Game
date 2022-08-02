@@ -1,4 +1,6 @@
-@ Adding new Locations - add cases to switch statements (questing tick func and quest rewards useEffect) in GameContainer
+@ Adding new Locations -
+* - add cases to switch statements (questing tick func and quest rewards useEffect) in GameContainer
+* - add typings for enemies search => //@ recreate this for each location
 
 
 
