@@ -12,12 +12,15 @@ import { setActivity } from "../../Redux/Slices/CurrentActivity";
 import { setTarget } from "../../Redux/Slices/CurrentTarget";
 import { setQuest } from "../../Redux/Slices/CurrentQuest";
 import { listOfHatchets } from "../../../../Constants/SkillingEquipment/Hatchets";
+import { listOfPickaxes } from "../../../../Constants/SkillingEquipment/Pickaxes";
+import { info } from "sass";
 
 const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
   const dispatch = useDispatch();
   // This grabs the current location from state
   const { CurrentLocation } = useSelector((state: Types.AllState) => state.Location) as Types.ICurrentLocation;
   const hatchetsFromState = useSelector((state: Types.AllState) => state.Hatchets) as Types.IHatchetsSlice;
+  const pickaxesFromState = useSelector((state: Types.AllState) => state.Pickaxes) as Types.IPickaxesSlice;
 
   // This chooses the current location summary from AllLocations
   const currentLocationSummary = AllLocations[CurrentLocation] as Types.ILocationSummary;
@@ -192,14 +195,83 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
     );
   };
 
-  const handleSelectorStyle = (hatchet: Types.ICompositeHatchet) => {
-    // if the equipment is a piece of armor, it will have a defence level
-    // based on the style, determine if the player has the appropriate offensive levels
+  const displayPickaxeSelectorTag = () => {
+    // define an empty array where composite pickaxes will be pushed to
+    let compositePickaxes: Types.ICompositePickaxe[] = [];
 
-    const playerOwnsItem = hatchet.playerOwnsThisItem;
+    // create an array of Pickaxes from constants
+    let pickaxesFromConstants: Types.IPickaxe[] = Object.values(listOfPickaxes);
 
-    const canWear = getLevel(Experience.Woodcutting) >= hatchet.levelReqWoodcutting;
-    // check if the player owns the armor, and has the appropriate defence level
+    for (let i = 0; i < pickaxesFromConstants.length; i++) {
+      // create an array of composite Pickaxes by adding the playerOwnsThisItem property to object from constants for each Pickaxe from constants
+
+      let playerOwnsThisItem: boolean = pickaxesFromState[`playerOwns${pickaxesFromConstants[i].name}` as keyof Types.IPickaxesSlice];
+      let tempPickaxe: Types.ICompositePickaxe = { ...pickaxesFromConstants[i], playerOwnsThisItem };
+      // compose items from constants and state
+      compositePickaxes.push(tempPickaxe);
+    }
+
+    const itemHasBeenEquipped = (e: React.ChangeEvent<HTMLSelectElement>) => {
+      //! string type is `ok` since they can be keys of Types.ICurrentEquipment
+      /**
+       * this can be better described by stating the possible options of each slot in Types.ICurrentEquipment
+       *
+       */
+      let newlyEquippedItemDisplayName: string = ``;
+      let oldEquippedItemDisplayName: string = ``;
+
+      // go thru all the composite items so we can set the context of the old and new items
+      for (let i = 0; i < compositePickaxes.length; i++) {
+        // if we match the .name to the newly equipped item, set the display name
+        if (compositePickaxes[i].name === e.target.value) {
+          newlyEquippedItemDisplayName = compositePickaxes[i].displayName;
+        }
+
+        // if we match the .name to the old equipped item, set the display name
+        if (compositePickaxes[i].name === props.currentEquipment[e.target.name as keyof Types.ICurrentEquipment]) {
+          oldEquippedItemDisplayName = compositePickaxes[i].displayName;
+        }
+      }
+
+      // a hatchet is always equipped, so we only need the swap message
+      if (props.currentEquipment[e.target.name as keyof Types.ICurrentEquipment] !== `none` && e.target.value !== `none`) {
+        props.newChatLog(`Swapped to ${newlyEquippedItemDisplayName}`, `Equipment Swap`);
+      }
+
+      props.setCurrentEquipment({ ...props.currentEquipment, [e.target.name as keyof Types.ICurrentEquipment]: e.target.value });
+    };
+
+    return (
+      <select className="form-select" onChange={(e) => itemHasBeenEquipped(e)} name={`Pickaxe`}>
+        {compositePickaxes.map((Pickaxe) => (
+          <option
+            value={Pickaxe.name}
+            key={`Slot-Item-${Pickaxe.name}`}
+            className={`${handleSelectorStyle(Pickaxe)}`}
+            disabled={applyDisabledAttribute(Pickaxe)}
+            selected={Pickaxe.name === props.currentEquipment.Pickaxe ? true : false}
+          >
+            {Pickaxe.displayName}
+          </option>
+        ))}
+      </select>
+    );
+  };
+
+  const handleSelectorStyle = (item: Types.ICompositeHatchet | Types.ICompositePickaxe) => {
+    // use type guarding to decide which item is being styled
+
+    const playerOwnsItem = item.playerOwnsThisItem;
+
+    let canWear = false;
+
+    if (`levelReqWoodcutting` in item) {
+      canWear = getLevel(Experience.Woodcutting) >= item.levelReqWoodcutting;
+    } else if (`levelReqMining` in item) {
+      canWear = getLevel(Experience.Mining) >= item.levelReqMining;
+    }
+
+    // check if the player owns the item, and has the appropriate level
     if (playerOwnsItem && canWear) {
       // has levels and owns item = green background
 
@@ -218,9 +290,17 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
     }
   };
 
-  const applyDisabledAttribute = (hatchet: Types.ICompositeHatchet) => {
-    const canWear = getLevel(Experience.Woodcutting) >= hatchet.levelReqWoodcutting;
-    if (!hatchet.playerOwnsThisItem || !canWear) {
+  const applyDisabledAttribute = (item: Types.ICompositeHatchet | Types.ICompositePickaxe) => {
+    // set canWear to false,
+    let canWear = false;
+    // type guard to ensure we are checking the correct attribute
+    if (`levelReqWoodcutting` in item) {
+      canWear = getLevel(Experience.Woodcutting) >= item.levelReqWoodcutting;
+    } else if (`levelReqMining` in item) {
+      canWear = getLevel(Experience.Mining) >= item.levelReqMining;
+    }
+
+    if (!item.playerOwnsThisItem || !canWear) {
       // if the player does not own the item, or if the player does not meet the level req, return true to disable the item
       return true;
     } else {
@@ -234,6 +314,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
       <div className="row justify-content-lg-center">
         <div className="card">
           Hatchet: {displayHatchetSelectorTag()}
+          Pickaxe: {displayPickaxeSelectorTag()}
           <div className="card-body">
             {/* panel specific content goes here */}
             {WoodcuttingOptions(currentLocationSummary.Skills.Woodcutting)}

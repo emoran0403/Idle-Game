@@ -21,6 +21,8 @@ import { LegsSlot } from "../../../../Constants/Equipment/LegsSlot";
 import { HandsSlot } from "../../../../Constants/Equipment/HandsSlot";
 import { FeetSlot } from "../../../../Constants/Equipment/FeetSlot";
 import { TwoHandSlot } from "../../../../Constants/Equipment/TwoHandSlot";
+import { listOfPickaxes } from "../../../../Constants/SkillingEquipment/Pickaxes";
+import { playerNowOwnsPickaxeItem } from "../../Redux/Slices/SkillingEquipmentSlices/Pickaxes";
 
 const ShopPanel = (props: Types.ShopPanelProps) => {
   const dispatch = useDispatch();
@@ -28,6 +30,7 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
   const Wallet = useSelector((state: Types.AllState) => state.Wallet) as Types.IWallet;
 
   const hatchetsFromState = useSelector((state: Types.AllState) => state.Hatchets) as Types.IHatchetsSlice;
+  const pickaxesFromState = useSelector((state: Types.AllState) => state.Pickaxes) as Types.IPickaxesSlice;
 
   const headsFromState = useSelector((state: Types.AllState) => state.HeadSlot) as Types.IHeadSlotSlice;
   const bodiesFromState = useSelector((state: Types.AllState) => state.BodySlot) as Types.IBodySlotSlice;
@@ -57,7 +60,7 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
     );
   };
 
-  const handleButtonStyle = (item: Types.ICompositeArmorItem | Types.ICompositeHatchet) => {
+  const handleButtonStyle = (item: Types.ICompositeArmorItem | Types.ICompositeHatchet | Types.ICompositePickaxe) => {
     // hatchets are more expensive, so we need to check for that - use the `in` operator to type guard
     if (`armor` in item) {
       if (Wallet.coins >= item.value * 10 && !item.playerOwnsThisItem) {
@@ -119,6 +122,73 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
     return (
       <div className="card-title border border-dark border-1 rounded-3">
         <h6 className="text-center">Hatchets</h6>
+        <div className="d-flex flex-row flex-wrap">
+          {compositeItems.map((item) => (
+            <button
+              key={`resource-list-${item.name}`}
+              className={`card border mb-3`}
+              disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 25}
+              onClick={() => {
+                handleBuyingItem(item);
+              }}
+            >
+              <div className="card-body text">
+                <h5 className="card-title">{item.displayName}</h5>
+                <div className="card-text">
+                  {item.playerOwnsThisItem && <div>Owned</div>}
+                  {!item.playerOwnsThisItem && (
+                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 25).toLocaleString("en-US")}</button>
+                  )}
+                </div>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
+  const displayPickaxeItems = () => {
+    // create an array of pickaxe items from those in constants
+    let pickaxesFromConstants: Types.IPickaxe[] = Object.values(listOfPickaxes);
+
+    // remove the first item, which is the bronze pickaxe that is owned by default
+    pickaxesFromConstants.shift();
+
+    // create an empty array to store the composite pickaxe items
+    let compositeItems: Types.ICompositePickaxe[] = [];
+
+    for (let i = 0; i < pickaxesFromConstants.length; i++) {
+      let playerOwnsThisItem: boolean = pickaxesFromState[`playerOwns${pickaxesFromConstants[i].name}` as keyof Types.IPickaxesSlice];
+      let tempItem: Types.ICompositePickaxe = { ...pickaxesFromConstants[i], playerOwnsThisItem };
+      compositeItems.push(tempItem);
+    }
+
+    const handleBuyingItem = (item: Types.ICompositePickaxe) => {
+      // define vowels for grammar in chatlog
+      let vowels: string[] = [`a`, `e`, `i`, `o`, `u`];
+
+      // match the bought item to its counterpart in state
+      let itemForState = `playerOwns${item.name}`;
+
+      // remove the coins from the wallet
+      dispatch(removeFromWallet(item.value * 25));
+
+      // add the item to state
+      dispatch(playerNowOwnsPickaxeItem(itemForState));
+
+      // send a gramatically correct message to the chat window
+      if (vowels.includes(item.displayName[0].toLocaleLowerCase())) {
+        props.newChatLog(`Bought an ${item.displayName}`, `Nonfilterable`);
+      } else {
+        props.newChatLog(`Bought a ${item.displayName}`, `Nonfilterable`);
+      }
+    };
+
+    // disable the item if the player already owns it
+    return (
+      <div className="card-title border border-dark border-1 rounded-3">
+        <h6 className="text-center">Pickaxes</h6>
         <div className="d-flex flex-row flex-wrap">
           {compositeItems.map((item) => (
             <button
@@ -555,6 +625,7 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
           <div className="card-body">
             {/* panel specific content goes here */}
             {displayHatchetItems()}
+            {displayPickaxeItems()}
             {displayHeadSlotItems()}
             {displayBodySlotItems()}
             {displayLegsSlotItems()}

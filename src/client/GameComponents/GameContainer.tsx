@@ -97,6 +97,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
     RingSlot: `none`,
     TwoHandSlot: `none`,
     Hatchet: `bronzehatchet`,
+    Pickaxe: `bronzepickaxe`,
   });
 
   //@ questStepProgress is holds the progress between completing quest steps

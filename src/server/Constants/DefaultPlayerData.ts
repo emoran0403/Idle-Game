@@ -235,4 +235,12 @@ export const defaultPlayerData: Types.AllState = {
     playerOwnsadamanthatchet: false,
     playerOwnsrunehatchet: false,
   },
+  Pickaxes: {
+    playerOwnsbronzepickaxe: true,
+    playerOwnsironpickaxe: false,
+    playerOwnssteelpickaxe: false,
+    playerOwnsmithrilpickaxe: false,
+    playerOwnsadamantpickaxe: false,
+    playerOwnsrunepickaxe: false,
+  },
 };

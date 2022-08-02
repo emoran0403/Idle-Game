@@ -341,6 +341,7 @@ export interface AllState extends AllSlots {
   Target: ICurrentTarget;
   Quest: ICurrentQuest;
   Hatchets: IHatchetsSlice;
+  Pickaxes: IPickaxesSlice;
   Resources: IResources;
   Wallet: IWallet;
   QuestPoints: IQuestPointsSlice;
@@ -1149,6 +1150,7 @@ export interface ICurrentEquipment {
   RingSlot: `none` | IArmorSlotRing;
   TwoHandSlot: `none` | IArmorSlotTwoHand;
   Hatchet: `none` | IListOfHatchetOptions;
+  Pickaxe: `none` | IListOfPickaxeOptions;
 }
 /*********************************************************************************************************************** */
 
@@ -1209,6 +1211,13 @@ export interface IHatchet {
   value: number;
 }
 
+export interface IPickaxe {
+  name: string;
+  displayName: string;
+  levelReqMining: number;
+  value: number;
+}
+
 export interface IListOfHatchets {
   bronzehatchet: IHatchet;
   ironhatchet: IHatchet;
@@ -1217,7 +1226,18 @@ export interface IListOfHatchets {
   adamanthatchet: IHatchet;
   runehatchet: IHatchet;
 }
+
+export interface IListOfPickaxes {
+  bronzepickaxe: IPickaxe;
+  ironpickaxe: IPickaxe;
+  steelpickaxe: IPickaxe;
+  mithrilpickaxe: IPickaxe;
+  adamantpickaxe: IPickaxe;
+  runepickaxe: IPickaxe;
+}
+
 export type IListOfHatchetOptions = `bronzehatchet` | `ironhatchet` | `steelhatchet` | `mithrilhatchet` | `adamanthatchet` | `runehatchet`;
+export type IListOfPickaxeOptions = `bronzepickaxe` | `ironpickaxe` | `steelpickaxe` | `mithrilpickaxe` | `adamantpickaxe` | `runepickaxe`;
 
 export interface IHatchetsSlice {
   playerOwnsbronzehatchet: boolean;
@@ -1228,7 +1248,20 @@ export interface IHatchetsSlice {
   playerOwnsrunehatchet: boolean;
 }
 
+export interface IPickaxesSlice {
+  playerOwnsbronzepickaxe: boolean;
+  playerOwnsironpickaxe: boolean;
+  playerOwnssteelpickaxe: boolean;
+  playerOwnsmithrilpickaxe: boolean;
+  playerOwnsadamantpickaxe: boolean;
+  playerOwnsrunepickaxe: boolean;
+}
+
 export interface ICompositeHatchet extends IHatchet {
+  playerOwnsThisItem: boolean;
+}
+
+export interface ICompositePickaxe extends IPickaxe {
   playerOwnsThisItem: boolean;
 }
 
