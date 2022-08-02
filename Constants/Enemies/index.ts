@@ -1,5 +1,4 @@
 import * as Types from "../../Types";
-import { Lumbridge } from "./LumbridgeEnemies";
 
 import { BackSlot } from "../Equipment/BackSlot";
 import { BodySlot } from "../Equipment/BodySlot";
@@ -11,10 +10,26 @@ import { NeckSlot } from "../Equipment/NeckSlot";
 import { RingSlot } from "../Equipment/RingSlot";
 import { TwoHandSlot } from "../Equipment/TwoHandSlot";
 import { getLevel } from "../XP Levels";
+import { chicken, cow, farmer, giantrat, giantspider, goblin, man, spider, swampfrog } from "./AllEnemies";
 
 // collecting all enemies within each location lets us access each location and their enemies via dynamic keys
+export const Draynor = {
+  man,
+  farmer,
+};
+export const Lumbridge = {
+  man,
+  goblin,
+  giantspider,
+  chicken,
+  cow,
+  spider,
+  giantrat,
+  swampfrog,
+};
 export const Enemies: Types.IAllEnemies = {
   Lumbridge,
+  Draynor,
 };
 
 export const playerAttacksTarget = (

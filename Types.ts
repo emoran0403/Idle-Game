@@ -1181,10 +1181,15 @@ export interface ILumbridgeEnemies {
   giantrat: IEnemySummary;
   swampfrog: IEnemySummary;
 }
+export interface IDraynorEnemies {
+  man: IEnemySummary;
+  farmer: IEnemySummary;
+}
 
 //@ extend this as more locations are added
 export interface IAllEnemies {
   Lumbridge: ILumbridgeEnemies;
+  Draynor: IDraynorEnemies;
 }
 //@ extend this as more locations are added
 export type IEnemyLocations = ILumbridgeEnemies;

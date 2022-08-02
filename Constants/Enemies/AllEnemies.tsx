@@ -1,6 +1,6 @@
 import * as Types from "../../Types";
 
-const man: Types.IEnemySummary = {
+export const man: Types.IEnemySummary = {
   name: `man`,
   displayName: `Man`,
   level: 4,
@@ -17,7 +17,7 @@ const man: Types.IEnemySummary = {
   defence: 3,
   accuracy: 130,
 };
-const goblin: Types.IEnemySummary = {
+export const goblin: Types.IEnemySummary = {
   name: `goblin`,
   displayName: `Goblin`,
   level: 2,
@@ -34,7 +34,7 @@ const goblin: Types.IEnemySummary = {
   defence: 2,
   accuracy: 120,
 };
-const giantspider: Types.IEnemySummary = {
+export const giantspider: Types.IEnemySummary = {
   name: "giantspider",
   displayName: "Giant spider",
   level: 2,
@@ -51,7 +51,7 @@ const giantspider: Types.IEnemySummary = {
   defence: 2,
   accuracy: 120,
 };
-const chicken: Types.IEnemySummary = {
+export const chicken: Types.IEnemySummary = {
   name: "chicken",
   displayName: "Chicken",
   level: 1,
@@ -68,7 +68,7 @@ const chicken: Types.IEnemySummary = {
   defence: 1,
   accuracy: 110,
 };
-const cow: Types.IEnemySummary = {
+export const cow: Types.IEnemySummary = {
   name: "cow",
   displayName: "Cow",
   level: 4,
@@ -85,7 +85,7 @@ const cow: Types.IEnemySummary = {
   defence: 3,
   accuracy: 130,
 };
-const spider: Types.IEnemySummary = {
+export const spider: Types.IEnemySummary = {
   name: "spider",
   displayName: "Spider",
   level: 1,
@@ -102,7 +102,7 @@ const spider: Types.IEnemySummary = {
   defence: 1,
   accuracy: 10,
 };
-const giantrat: Types.IEnemySummary = {
+export const giantrat: Types.IEnemySummary = {
   name: "giantrat",
   displayName: "Giant rat",
   level: 7,
@@ -119,7 +119,7 @@ const giantrat: Types.IEnemySummary = {
   defence: 5,
   accuracy: 150,
 };
-const swampfrog: Types.IEnemySummary = {
+export const swampfrog: Types.IEnemySummary = {
   name: "swampfrog",
   displayName: "Swamp frog",
   level: 16,
@@ -136,7 +136,7 @@ const swampfrog: Types.IEnemySummary = {
   defence: 12,
   accuracy: 223,
 };
-const farmer: Types.IEnemySummary = {
+export const farmer: Types.IEnemySummary = {
   name: "farmer",
   displayName: "Farmer",
   level: 7,
@@ -153,29 +153,3 @@ const farmer: Types.IEnemySummary = {
   defence: 5,
   accuracy: 150,
 };
-
-export const Lumbridge = {
-  man,
-  goblin,
-  giantspider,
-  chicken,
-  cow,
-  spider,
-  giantrat,
-  swampfrog,
-};
-
-export const Draynor = {
-  man,
-  farmer,
-};
-
-/**
- * coins
- * ammunition
- * runes
- * fish
- * logs
- */
-
-//! ill eventually need a way to deal with drops
