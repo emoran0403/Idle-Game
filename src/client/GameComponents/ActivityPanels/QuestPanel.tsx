@@ -177,6 +177,13 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
     let meetsLevelRequirements = true; // this gets set to false if the player does not meet the level requirements
     let meetsQuestRequirements = true; // this gets set to false if the player does not meet the requirements
 
+    //@ check if the player has a reasonable combat level
+    let combatLevel = showCombatLevel();
+    // if the player's combat level is more than 10 levels below the combat requirements of the quest, set to false
+    if (combatLevel <= quest.combatRequirements - 10) {
+      meetsLevelRequirements = false;
+    }
+
     const arrayOfSkillNamesFromQuestReqs = Object.keys(quest.levelRequirements);
     /**
      * we initialize arrayOfSkillNamesFromQuestReqs to get an array of skill names.
@@ -184,24 +191,26 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
      * if a quest has no level requirements, it will be an empty array
      */
     //@ check if the player meets the level requirements
-    try {
-      if (arrayOfSkillNamesFromQuestReqs.length) {
-        // run through each level requirement
-        arrayOfSkillNamesFromQuestReqs.forEach((levelReq) => {
-          // find the player's level in that skill
-          const mylevel = getLevel(Experience[levelReq as keyof Types.ISkillList]);
+    if (meetsLevelRequirements) {
+      try {
+        if (arrayOfSkillNamesFromQuestReqs.length) {
+          // run through each level requirement
+          arrayOfSkillNamesFromQuestReqs.forEach((levelReq) => {
+            // find the player's level in that skill
+            const mylevel = getLevel(Experience[levelReq as keyof Types.ISkillList]);
 
-          // find the level requirement from that quest
-          const reqlevel = quest.levelRequirements[levelReq];
+            // find the level requirement from that quest
+            const reqlevel = quest.levelRequirements[levelReq];
 
-          if (mylevel <= reqlevel) {
-            meetsLevelRequirements = false;
-            // throwing an error allows us to 'break' out of this forEach, since we cannot 'continue' across the function boundary
-            throw new Error(`Player does not meet a level requirement`);
-          }
-        });
-      }
-    } catch (error) {}
+            if (mylevel <= reqlevel) {
+              meetsLevelRequirements = false;
+              // throwing an error allows us to 'break' out of this forEach, since we cannot 'continue' across the function boundary
+              throw new Error(`Player does not meet a level requirement`);
+            }
+          });
+        }
+      } catch (error) {}
+    }
 
     //@ check if the player meets the quest requirements
     if (quest.questRequirements) {
