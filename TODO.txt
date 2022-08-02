@@ -10,7 +10,8 @@
 * => find out how to have those area tags set location state
 
 //# Fixes
-* double check the buttons on quest panel - allowing player to begin a quest without the combat requirements
+
+
 //# Quality of life
 * globe picture for the world map icon
 * hatchet options in skill panel display their woodcutting
@@ -18,6 +19,7 @@
 *** maybe make the game choose the next available quest automatically
 *** get a changelog from github for the lobby
 *** offline progress
+* DONE -  double check the buttons on quest panel - allowing player to begin a quest without the combat requirements
 * DONE - more info on quests
 * DONE - level requirements for equipment
 * DONE - Skill images
@@ -28,7 +30,7 @@
 * DONE - quest panel to show missing level requirements
 
 //# Content
-* Draynor Village
+* Draynor Village + enemies
 * Varrock
 * Al-Kharid
 * bosses

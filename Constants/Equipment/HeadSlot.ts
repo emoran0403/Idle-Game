@@ -155,7 +155,7 @@ const listOfMagicHeads: Types.IListOfMagicHeads = {
     styleBonusMelee: 0,
     styleBonusRanged: 0,
     styleBonusMagic: 0,
-    value: 10000,
+    value: 1000,
   },
 };
 const listOfRangedHeads: Types.IListOfRangedHeads = {

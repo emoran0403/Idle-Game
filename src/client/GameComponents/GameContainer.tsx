@@ -345,8 +345,10 @@ const GameContainer = (props: Types.GameContainerProps) => {
           gainXP({ skill: `Constitution`, xp: Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].XPGivenConstitution })
         );
 
-        // award the coins
-        let coinDrop: number = Math.floor(Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].lifePoints * Math.random());
+        // award the coins 0-half of lifepoints
+        let coinDrop: number = Math.floor(
+          Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].lifePoints * (Math.random() * 0.5)
+        );
         dispatch(addToWallet(coinDrop));
 
         // prepare chatlogs for defeating an enemy, and possibly for levelling up

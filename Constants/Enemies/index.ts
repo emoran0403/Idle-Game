@@ -10,12 +10,13 @@ import { NeckSlot } from "../Equipment/NeckSlot";
 import { RingSlot } from "../Equipment/RingSlot";
 import { TwoHandSlot } from "../Equipment/TwoHandSlot";
 import { getLevel } from "../XP Levels";
-import { chicken, cow, farmer, giantrat, giantspider, goblin, man, spider, swampfrog } from "./AllEnemies";
+import { chicken, cow, farmer, giantrat, giantspider, goblin, man, rat, spider, swampfrog } from "./AllEnemies";
 
 // collecting all enemies within each location lets us access each location and their enemies via dynamic keys
 export const Draynor = {
   man,
   farmer,
+  rat,
 };
 export const Lumbridge = {
   man,

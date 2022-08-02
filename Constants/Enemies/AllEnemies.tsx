@@ -153,3 +153,20 @@ export const farmer: Types.IEnemySummary = {
   defence: 5,
   accuracy: 150,
 };
+export const rat: Types.IEnemySummary = {
+  name: "rat",
+  displayName: "Rat",
+  level: 1,
+  lifePoints: 50,
+  XPGivenCombatStyle: 25,
+  XPGivenConstitution: 8,
+  affinities: {
+    explicitWeakness: "earth",
+    weakStyle: "magic",
+    neutralStyle: "melee",
+    strongStyle: "ranged",
+  },
+  armor: 110,
+  defence: 1,
+  accuracy: 110,
+};
