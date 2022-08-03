@@ -6,6 +6,10 @@
 
 
 //# NEXT
+* add dragon info to the logs
+* add that into types
+* update IListOfHatchetOptions for dragon
+* update IListOfPickaxeOptions for all picks
 * add mining options to location summaries
 * add mining resources to bank
 * add mining to skills panel
@@ -13,6 +17,7 @@
 * add mining calculations to Ores file under constants
 
 //# Fixes
+* grammar when fishing anchovies
 
 //# world map
 * grab an image for the world map, place these divs over it, setting the pixels as needed
@@ -22,9 +27,10 @@
               ></div>
 
 //# Quality of life
-** timer showing the progress until the next tick, red bar if the player is idle
+* quest is colored yellow when i have the combat level req
 * Bank shows items in ascending level order
 * hatchet options in skill panel display their woodcutting
+** timer showing the progress until the next tick, red bar if the player is idle
 *** need a way to reward those quest which give ANY xp
 *** maybe make the game choose the next available quest automatically
 *** get a changelog from github for the lobby
@@ -55,3 +61,6 @@
 * implement player lifepoints
 * Logic - experience and levels is displaying too high for some reason :/
 * remove boilerplate commits
+
+//# mining
+https://runescape.wiki/w/Module:Sandbox/User:Doktor/Mining

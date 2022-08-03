@@ -182,19 +182,33 @@ export interface IListOfFish {
 
 export interface IOre {
   name: string;
+  displayName: string;
   levelReqMining: number;
-  XPGivenMining: number;
-  levelReqSmithing: number;
-  XPGivenSmithing: number;
+  durability: number;
+  hardness: number;
+  xpMultiplier: number;
   value: number;
 }
 
 export interface IListOfOres {
+  runeEssence: IOre;
+  pureEssence: IOre;
   tin: IOre;
   copper: IOre;
   iron: IOre;
   coal: IOre;
   mithril: IOre;
+  gold: IOre;
+  adamantite: IOre;
+  luminite: IOre;
+  runite: IOre;
+  orichalcite: IOre;
+  drakolith: IOre;
+  necrite: IOre;
+  phasmatite: IOre;
+  banite: IOre;
+  lightAnimica: IOre;
+  darkAnimica: IOre;
 }
 
 export interface IRune {
@@ -1215,6 +1229,9 @@ export interface IPickaxe {
   name: string;
   displayName: string;
   levelReqMining: number;
+  penetration: number;
+  damageMin: number;
+  damageMax: number;
   value: number;
 }
 
@@ -1234,6 +1251,12 @@ export interface IListOfPickaxes {
   mithrilpickaxe: IPickaxe;
   adamantpickaxe: IPickaxe;
   runepickaxe: IPickaxe;
+  orikalkumpickaxe: IPickaxe;
+  dragonpickaxe: IPickaxe;
+  necroniumpickaxe: IPickaxe;
+  crystalpickaxe: IPickaxe;
+  banepickaxe: IPickaxe;
+  elderpickaxe: IPickaxe;
 }
 
 export type IListOfHatchetOptions = `bronzehatchet` | `ironhatchet` | `steelhatchet` | `mithrilhatchet` | `adamanthatchet` | `runehatchet`;
