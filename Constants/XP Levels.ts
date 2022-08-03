@@ -28,7 +28,12 @@ export const percentToNextLevel = (XP: number): number => {
   }
 };
 
-//@ returns a boolean describing whether the player levelled up
+/**
+ *
+ * @param XP - The xp in the current skill as number
+ * @param XPGain - The xp gained as number
+ * @returns - Boolean indicating whether the player levelled up
+ */
 export const didPlayerLevelUp = (XP: number, XPGain: number) => {
   // establish the player's current level
   let currentLevel = 1;

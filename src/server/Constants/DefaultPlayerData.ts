@@ -51,6 +51,10 @@ export const defaultPlayerData: Types.AllState = {
     elder: { name: "elder", amount: 0 },
   },
   Bank_Ores: {
+    clay: {
+      name: `clay`,
+      amount: 0,
+    },
     runeEssence: {
       name: `runeEssence`,
       amount: 0,

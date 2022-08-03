@@ -6,20 +6,29 @@
 
 
 //# NEXT
-*! conditionally check for crystal hatchets and pickaxes in shop and skilling panel, as these are special items
-* add mining resources to bank
 * add mining to skills panel
 * add mining to game GameContainer
+* DONE -  add case to currentresourcecomp for mining
+* DONE -  conditionally check for crystal hatchets and pickaxes in shop and skilling panel, as these are special items
+* DONE - add mining resources to bank
 * DONE - add mining calculations to Ores file under constants
 * DONE - add ores to resource options type
 * DONE - add mining options to location summaries
 * DONE - update IListOfPickaxeOptions for all picks
 
 //# Fixes
+* check buttons on shop panel - they cannot be nested
+* check keys in quest panel
+* can clean up chat logs in game component under woodcutting and fishing
+* add chat logs for gaining xp in combat skills
+* add chat logs for gaining xp in gathering skills
+* content layout shift in levels component when xp is 10+ digits
+* changing location resets all state to none or idle
 * clean up the functions in shoppanel - handle buying item can be a standalone function i think
 * worn equipment component spills out of the container
 * grammar when fishing anchovies
 * equipping a weapon while skilling stops the skilling
+* DONE - inventory needs to display ore display names
 
 //# world map
 * grab an image for the world map, place these divs over it, setting the pixels as needed

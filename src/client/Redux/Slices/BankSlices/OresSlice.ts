@@ -7,6 +7,10 @@ export const bank_ores = createSlice({
   name: "bank_ores",
   initialState: {
     //list of items in the bank, starting at 0
+    clay: {
+      name: `clay`,
+      amount: 0,
+    },
     runeEssence: {
       name: `runeEssence`,
       amount: 0,

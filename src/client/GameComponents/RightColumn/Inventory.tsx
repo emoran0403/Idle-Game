@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { ListOfFish } from "../../../../Constants/Items/Fish";
 import { ListOfLogs } from "../../../../Constants/Items/Logs";
+import { ListOfOres } from "../../../../Constants/Items/Ores";
 
 const Inventory = (props: Types.NoProps) => {
   const Wallet = useSelector((state: Types.AllState) => state.Wallet) as Types.IWallet;
@@ -24,6 +25,8 @@ const Inventory = (props: Types.NoProps) => {
       return ListOfFish[item as keyof Types.IListOfFish].displayName;
     } else if (ListOfLogs[item as keyof Types.IListOfLogs]) {
       return ListOfLogs[item as keyof Types.IListOfLogs].displayName;
+    } else if (ListOfOres[item as keyof Types.IListOfOres]) {
+      return ListOfOres[item as keyof Types.IListOfOres].displayName;
     } else {
       return item;
     }

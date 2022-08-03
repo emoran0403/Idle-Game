@@ -2,6 +2,15 @@ import * as Types from "../../Types";
 import { getLevel } from "../XP Levels";
 
 export const ListOfOres: Types.IListOfOres = {
+  clay: {
+    name: "clay",
+    displayName: "Clay",
+    levelReqMining: 1,
+    durability: 50,
+    hardness: 0,
+    xpMultiplier: 0.66,
+    value: 1,
+  },
   runeEssence: {
     name: "runeEssence",
     displayName: "Rune essence",
@@ -175,6 +184,8 @@ export const ListOfOres: Types.IListOfOres = {
  *
  * @param ore - The ore the player is mining as Types.IOre
  * @param pickaxe - The pickaxe the player is using as Types.IPickaxe
+ * @param miningXP - The player's current mining experience
+ * @param strengthXP - The player's current strength experience
  */
 export const resolveMining = (ore: Types.IOre, pickaxe: Types.IPickaxe, miningXP: number, strengthXP: number) => {
   let resultObj = {

@@ -185,6 +185,7 @@ export interface IOre {
   value: number;
 }
 export interface IListOfOres {
+  clay: IOre;
   runeEssence: IOre;
   pureEssence: IOre;
   tinore: IOre;
@@ -205,6 +206,7 @@ export interface IListOfOres {
   darkAnimicaore: IOre;
 }
 export interface IOreBankSlice {
+  clay: IBankItem;
   runeEssence: IBankItem;
   pureEssence: IBankItem;
   tinore: IBankItem;
@@ -421,7 +423,36 @@ export interface LocationSkills {
   Agility: string[];
   Thieving: string[];
 }
-export type ListOfSkillOptions = `none` | `Woodcutting` | `Firemaking` | `Mining` | `Fishing` | `Attack` | `Strength` | `Defence` | `Ranged` | `Magic`;
+export type ListOfSkillOptions =
+  | `none`
+  | `Attack`
+  | `Strength`
+  | `Defence`
+  | `Constitution`
+  | `Prayer`
+  | `Summoning`
+  | `Ranged`
+  | `Magic`
+  | `Crafting`
+  | `Mining`
+  | `Smithing`
+  | `Fishing`
+  | `Cooking`
+  | `Firemaking`
+  | `Woodcutting`
+  | `Runecrafting`
+  | `Dungeoneering`
+  | `Fletching`
+  | `Agility`
+  | `Herblore`
+  | `Thieving`
+  | `Slayer`
+  | `Farming`
+  | `Construction`
+  | `Hunter`
+  | `Divination`
+  | `Invention`
+  | `Archaeology`;
 
 //@ ******************************* QUESTS *******************************
 
@@ -586,24 +617,25 @@ export type ICurrentResourceOptions =
   | `yew`
   | `magic`
   | `elder`
+  | `clay`
   | `runeEssence`
   | `pureEssence`
-  | `tin`
-  | `copper`
-  | `iron`
-  | `coal`
-  | `mithril`
-  | `gold`
-  | `adamantite`
-  | `luminite`
-  | `runite`
-  | `orichalcite`
-  | `drakolith`
-  | `necrite`
-  | `phasmatite`
-  | `banite`
-  | `lightAnimica`
-  | `darkAnimica`;
+  | `tinore`
+  | `copperore`
+  | `ironore`
+  | `coalore`
+  | `mithrilore`
+  | `goldore`
+  | `adamantiteore`
+  | `luminiteore`
+  | `runiteore`
+  | `orichalciteore`
+  | `drakolithore`
+  | `necriteore`
+  | `phasmatiteore`
+  | `baniteore`
+  | `lightAnimicaore`
+  | `darkAnimicaore`;
 
 //@ ******************************* STATE *******************************
 

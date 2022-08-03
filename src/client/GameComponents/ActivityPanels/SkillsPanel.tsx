@@ -1,19 +1,23 @@
 import * as Types from "../../../../Types";
 import * as React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
 import { AllLocations } from "../../../../Constants/LocationInfo";
-import { ListOfLogs } from "../../../../Constants/Items/Logs";
 import { getLevel } from "../../../../Constants/XP Levels";
+
 import { ListOfFish } from "../../../../Constants/Items/Fish";
-import { useDispatch } from "react-redux";
+
+import { ListOfLogs } from "../../../../Constants/Items/Logs";
+import { listOfHatchets } from "../../../../Constants/SkillingEquipment/Hatchets";
+
+import { ListOfOres } from "../../../../Constants/Items/Ores";
+import { listOfPickaxes } from "../../../../Constants/SkillingEquipment/Pickaxes";
+
 import { setResource } from "../../Redux/Slices/CurrentResource";
 import { setSkill } from "../../Redux/Slices/CurrentSkill";
 import { setActivity } from "../../Redux/Slices/CurrentActivity";
 import { setTarget } from "../../Redux/Slices/CurrentTarget";
 import { setQuest } from "../../Redux/Slices/CurrentQuest";
-import { listOfHatchets } from "../../../../Constants/SkillingEquipment/Hatchets";
-import { listOfPickaxes } from "../../../../Constants/SkillingEquipment/Pickaxes";
-import { info } from "sass";
 
 const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
   const dispatch = useDispatch();
@@ -29,6 +33,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
   const Experience = useSelector((state: Types.AllState) => state.Experience) as Types.ISkillList;
   let WoodcuttingLevel: number = getLevel(Experience.Woodcutting);
   let FishingLevel: number = getLevel(Experience.Fishing);
+  let MiningLevel: number = getLevel(Experience.Mining);
 
   const panelHeaderJSX = () => {
     // returns the JSX for the panel header
@@ -123,6 +128,43 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
                 <div className="card-text">
                   <div>Level {ListOfFish[resource as keyof Types.IListOfFish].levelReqFishing}</div>
                   <div>{ListOfFish[resource as keyof Types.IListOfFish].XPGivenFishing} XP</div>
+                </div>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
+  const MiningOptions = (resourceArray: string[]) => {
+    return (
+      <div className="card-title border border-dark border-1 rounded-3">
+        <h6 className="text-center">Mining Level {MiningLevel}</h6>
+        <div className="d-flex flex-row flex-wrap">
+          {resourceArray.map((resource) => (
+            <button
+              disabled={MiningLevel < ListOfOres[resource as keyof Types.IListOfOres].levelReqMining ? true : false}
+              onClick={(e) => {
+                dispatch(setTarget(`none`));
+                dispatch(setActivity(`Skilling`));
+                dispatch(setResource(resource));
+                dispatch(setQuest(`none`));
+                dispatch(setSkill(`Mining`));
+                // send a contextual message to the chat window
+                // if the last log contains the same message, don't send it
+                if (`Now mining ${ListOfOres[resource as keyof Types.IListOfOres].displayName}` === props.chatLogArray[props.chatLogArray.length - 1].message) {
+                  return;
+                }
+                props.newChatLog(`Now mining ${ListOfOres[resource as keyof Types.IListOfOres].displayName}`, `Activity Swap`);
+              }}
+              key={`resource-list-${resource}`}
+              className={`btn border mb-3 ${MiningLevel >= ListOfOres[resource as keyof Types.IListOfOres].levelReqMining ? `bg-success` : `bg-danger`}`}
+            >
+              <div className="card-body text">
+                <h5 className="card-title">{ListOfOres[resource as keyof Types.IListOfOres].displayName}</h5>
+                <div className="card-text">
+                  <div>Level {ListOfOres[resource as keyof Types.IListOfOres].levelReqMining}</div>
                 </div>
               </div>
             </button>
@@ -325,6 +367,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
             {/* panel specific content goes here */}
             {WoodcuttingOptions(currentLocationSummary.Skills.Woodcutting)}
             {FishingOptions(currentLocationSummary.Skills.Fishing)}
+            {MiningOptions(currentLocationSummary.Skills.Mining)}
             {/* end of panel specific content */}
           </div>
         </div>

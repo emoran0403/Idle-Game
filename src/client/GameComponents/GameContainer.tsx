@@ -24,16 +24,23 @@ import { addToWallet } from "../Redux/Slices/Wallet";
 import { gainXP } from "../Redux/Slices/Experience";
 import { addQuestPoints } from "../Redux/Slices/QuestPoints";
 import { addItemToInventory, removeItemFromInventory } from "../Redux/Slices/Inventory";
-import { addLogToBank } from "../Redux/Slices/BankSlices/LogsSlice";
-import { addFishToBank } from "../Redux/Slices/BankSlices/FishSlice";
 
 // constants imports
 import { LumbridgeQuests } from "../../../Constants/Quests/LumbridgeQuests";
 import { DraynorQuests } from "../../../Constants/Quests/DraynorQuests";
 import { EmptyQuestRewards } from "../../../Constants/Quests";
+
+import { addLogToBank } from "../Redux/Slices/BankSlices/LogsSlice";
 import { ListOfLogs, playerEarnsLog } from "../../../Constants/Items/Logs";
-import { ListOfFish, playerEarnsFish } from "../../../Constants/Items/Fish";
 import { listOfHatchets } from "../../../Constants/SkillingEquipment/Hatchets";
+
+import { addOreToBank } from "../Redux/Slices/BankSlices/OresSlice";
+import { ListOfOres, resolveMining } from "../../../Constants/Items/Ores";
+import { listOfPickaxes } from "../../../Constants/SkillingEquipment/Pickaxes";
+
+import { addFishToBank } from "../Redux/Slices/BankSlices/FishSlice";
+import { ListOfFish, playerEarnsFish } from "../../../Constants/Items/Fish";
+
 import { didPlayerLevelUp, getLevel } from "../../../Constants/XP Levels";
 import { Enemies, playerAttacksTarget } from "../../../Constants/Enemies";
 
@@ -54,8 +61,8 @@ const GameContainer = (props: Types.GameContainerProps) => {
   const CurrentStyle = useSelector((state: Types.AllState) => state.CombatStyle.CurrentStyle as Types.ICurrentStyleOptions);
   const playerInventory = useSelector((state: Types.AllState) => state.Inventory.CurrentInventory);
   const { CurrentActivity } = useSelector((state: Types.AllState) => state.Activity);
-  const bank_logs = useSelector((state: Types.AllState) => state.Bank_Logs) as Types.ILogBankSlice;
-  const bank_fish = useSelector((state: Types.AllState) => state.Bank_Fish) as Types.IFishBankSlice;
+  // const bank_logs = useSelector((state: Types.AllState) => state.Bank_Logs) as Types.ILogBankSlice;
+  // const bank_fish = useSelector((state: Types.AllState) => state.Bank_Fish) as Types.IFishBankSlice;
   const playerIsBanking = useSelector((state: Types.AllState) => state.Resources.Banking);
 
   const ALLSTATE = useSelector((state: Types.AllState) => state);
@@ -107,7 +114,12 @@ const GameContainer = (props: Types.GameContainerProps) => {
   //? I might not use player Lifepoints lol
   // const [playerLifePoints, setPlayerLifePoints] = useState<number>(getLevel(Experience.Consitution) * 100);
   const [targetLifePoints, setTargetLifePoints] = useState<number>(0);
+
+  //@ this is set when the player gains an item which will fill their inventory
   const [needsToBank, setNeedsToBank] = useState<boolean>(false);
+
+  //@ assign the ore rock's durability to state to track progress towards receiving an ore
+  const [oreRockDurability, setOreRockDurability] = useState<number>(0);
 
   //@ this keeps track of time, used to 'save' progress in localStorage, and to update DB
   const [checkPointTimer, setcheckPointTimer] = useState<number>(1);
@@ -139,7 +151,12 @@ const GameContainer = (props: Types.GameContainerProps) => {
     }
   };
 
-  //@ use this to add multiple messages to the chat log array
+  /**
+   * handleMultipleChatLogs queues up multiple chat logs to send to the chat window component.
+   *
+   * @param messages - An array of chatlogs to send as string[]
+   * @param tags - An array of chatlogtags to send as Types.ChatLogTag[]
+   */
   const handleMultipleChatLogs = (messages: string[], tags: Types.ChatLogTag[]) => {
     // create an array of chatlogs from the messages and tags, along with a timestamp
     let newMessagesToAdd: Types.IChatLog[] = [];
@@ -299,6 +316,62 @@ const GameContainer = (props: Types.GameContainerProps) => {
           }
           break;
         }
+        case `Mining`: {
+          /**
+           * The logic to handle mining is slightly different from woodcutting and fishing.  The player always gets xp, albeit a variable amount.
+           * The player does damage to the ore rock, and receives an ore when the rock takes enough damage, making it similar to combat
+           */
+
+          //* call resolveMining, and store the return value.  this holds the experience and damage dealt to the rock
+          let MiningResult = resolveMining(
+            ListOfOres[CurrentResource as keyof Types.IListOfOres],
+            listOfPickaxes[currentEquipment.Pickaxe as keyof Types.IListOfPickaxes],
+            Experience.Mining,
+            Experience.Strength
+          );
+
+          //* initialize chatlogs with the experience message
+          let miningMessages: string[] = [`Gained ${MiningResult.experience} xp in Mining`];
+          let miningMessagesTags: Types.ChatLogTag[] = [`Gained XP`];
+
+          //* mining always yields experience, so dispatch it
+          dispatch(gainXP({ skill: `Mining`, xp: MiningResult.experience }));
+
+          //* decide if the player gained a level, and send a chatlog if so
+          const playerLevelled = didPlayerLevelUp(Experience.Mining, MiningResult.experience);
+          if (playerLevelled) {
+            miningMessages = [...miningMessages, `Mining Level up!`];
+            miningMessagesTags = [...miningMessagesTags, `Level Up`];
+          }
+
+          //* apply the damage to the ore rock
+          // IF the damage would deplete the rock (or cause the durability to go negative), reset the durability and give an ore to the player
+          if (oreRockDurability - MiningResult.damage <= 0) {
+            // reset the durability
+            setOreRockDurability(ListOfOres[CurrentResource as keyof Types.IListOfOres].durability);
+
+            // add a message for gaining an ore
+            miningMessages = [...miningMessages, `Mined some ${ListOfOres[CurrentResource as keyof Types.IListOfOres].displayName}`];
+            miningMessagesTags = [...miningMessagesTags, `Gained Resource`];
+
+            // IF the player earns an ore, AND the player is banking the items, we need to add the item to the inventory
+            // IF the player is not banking, we can skip this step
+            if (playerIsBanking) {
+              dispatch(addItemToInventory(ListOfOres[CurrentResource as keyof Types.IListOfOres].name));
+              // when the player's inventory will be full with the next item added, queue a bank run
+              if (playerInventory.length === 27) {
+                // console.log(`will need to bank next time`);
+                setNeedsToBank(!needsToBank);
+              }
+            }
+          } else {
+            // Otherwise, just apply the damage
+            setOreRockDurability(oreRockDurability - MiningResult.damage);
+          }
+
+          handleMultipleChatLogs(miningMessages, miningMessagesTags);
+          break;
+        }
       }
     } else {
       // Otherwise, the player needs to bank
@@ -308,10 +381,12 @@ const GameContainer = (props: Types.GameContainerProps) => {
         let itemToAddToBank = playerInventory[i];
         // check each bank slice to see if it's the correct slice, if so, add it to the bank
         //@ using bracket notation for a property that does not exist on an object returns undefined, which is considered falsy
-        if (bank_logs[itemToAddToBank as keyof Types.ILogBankSlice]) {
+        if (ListOfLogs[itemToAddToBank as keyof Types.IListOfLogs]) {
           dispatch(addLogToBank({ item: itemToAddToBank, amount: 1 }));
-        } else if (bank_fish[itemToAddToBank as keyof Types.IFishBankSlice]) {
+        } else if (ListOfFish[itemToAddToBank as keyof Types.IListOfFish]) {
           dispatch(addFishToBank({ item: itemToAddToBank, amount: 1 }));
+        } else if (ListOfOres[itemToAddToBank as keyof Types.IListOfOres]) {
+          dispatch(addOreToBank({ item: itemToAddToBank, amount: 1 }));
         }
       }
       // remove all items from the inventory, since they're now in the bank
@@ -411,7 +486,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
     }
   };
 
-  //@ this useEffect is dedicated to executing the logic of what to do when the quest is complete
+  //@ this useEffect executes the logic of what to do when the quest is complete
   useEffect(() => {
     for (let i = 0; i < AllQuestsFromState.length; i++) {
       // iterate through all the quests until we find the one that was just completed
@@ -470,7 +545,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
     }
   }, [questStepProgress, LumbridgeQuestArray, DraynorQuestArray]);
 
-  //@ this useEffect is dedicated to combat logic
+  //@ this useEffect sets new enemy lifepoints to state if the player chooses to do combat
   useEffect(() => {
     // IF a target is changed, set its lifepoints to component state
     // this ensures we have the correct lifepoints when the player changes targets, or starts combat for the first time
@@ -479,7 +554,16 @@ const GameContainer = (props: Types.GameContainerProps) => {
     }
   }, [Target]);
 
-  //@ this useEffect is dedicated to the 'game tick' logic
+  //@ this useEffect sets ore rock's durability to state if the player chooses to mine
+  useEffect(() => {
+    // IF the current resource is a property in List of Ores, set its durability to component state
+    // this ensures we have the correct durability when the player changes ores, or starts mining for the first time
+    if (ListOfOres[CurrentResource as keyof Types.IListOfOres]?.durability) {
+      setOreRockDurability(ListOfOres[CurrentResource as keyof Types.IListOfOres].durability);
+    }
+  }, [CurrentResource]);
+
+  //@ this useEffect runs the 'game tick' logic
   useEffect(() => {
     const interval = setInterval(() => {
       console.count(`Game Ticked`);
@@ -487,21 +571,16 @@ const GameContainer = (props: Types.GameContainerProps) => {
       // console.log({ CurrentActivity, Target, CurrentSkill, CurrentResource });
 
       if (CurrentActivity === `In combat` && Target !== `none`) {
-        // combat tick function here
         handleCombatTick();
-      } else if (CurrentActivity === `Skilling` && (CurrentSkill === `Woodcutting` || CurrentSkill === `Fishing`)) {
-        // skilling tick function here
+      } else if (CurrentActivity === `Skilling` && (CurrentSkill === `Woodcutting` || CurrentSkill === `Fishing` || CurrentSkill === `Mining`)) {
         handleSkillingTick();
       } else if (CurrentActivity === `Questing` && CurrentQuest !== `none`) {
-        // IF the player is questing, and has chosen a quest, then execute questing tick function
         handleQuestingTick();
-      } else {
-        // console.log(`all ticks failed to tick`);
       }
 
       handleSavePoint();
 
-      //! set this to 2000ms in production
+      //! set this to 2500ms in production
     }, 500);
 
     // console.log({ interval });
