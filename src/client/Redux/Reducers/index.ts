@@ -2,6 +2,7 @@ import { combineReducers } from "@reduxjs/toolkit";
 import experienceReducer from "../Slices/Experience";
 import fishReducer from "../Slices/BankSlices/FishSlice";
 import logsReducer from "../Slices/BankSlices/LogsSlice";
+import oresReducer from "../Slices/BankSlices/OresSlice";
 import inventoryReducer from "../Slices/Inventory";
 import currentLocationReducer from "../Slices/CurrentLocation";
 import currentSkillReducer from "../Slices/CurrentSkill";
@@ -31,6 +32,7 @@ const AppReducer = combineReducers({
   Experience: experienceReducer,
   Bank_Fish: fishReducer,
   Bank_Logs: logsReducer,
+  Bank_Ores: oresReducer,
   Inventory: inventoryReducer,
   Location: currentLocationReducer,
   Skill: currentSkillReducer,

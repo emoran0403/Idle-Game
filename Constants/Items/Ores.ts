@@ -19,8 +19,8 @@ export const ListOfOres: Types.IListOfOres = {
     xpMultiplier: 0.66,
     value: 17,
   },
-  tin: {
-    name: "tin",
+  tinore: {
+    name: "tinore",
     displayName: "Tin ore",
     levelReqMining: 1,
     durability: 40,
@@ -28,8 +28,8 @@ export const ListOfOres: Types.IListOfOres = {
     xpMultiplier: 0.66,
     value: 17,
   },
-  copper: {
-    name: "copper",
+  copperore: {
+    name: "copperore",
     displayName: "Copper ore",
     levelReqMining: 1,
     durability: 40,
@@ -37,8 +37,8 @@ export const ListOfOres: Types.IListOfOres = {
     xpMultiplier: 0.66,
     value: 17,
   },
-  iron: {
-    name: "iron",
+  ironore: {
+    name: "ironore",
     displayName: "Iron ore",
     levelReqMining: 10,
     durability: 120,
@@ -46,8 +46,8 @@ export const ListOfOres: Types.IListOfOres = {
     xpMultiplier: 0.68,
     value: 25,
   },
-  coal: {
-    name: "coal",
+  coalore: {
+    name: "coalore",
     displayName: "Coal ore",
     levelReqMining: 20,
     durability: 140,
@@ -55,8 +55,8 @@ export const ListOfOres: Types.IListOfOres = {
     xpMultiplier: 0.7,
     value: 42,
   },
-  mithril: {
-    name: "mithril",
+  mithrilore: {
+    name: "mithrilore",
     displayName: "Mithril ore",
     levelReqMining: 30,
     durability: 240,
@@ -64,8 +64,8 @@ export const ListOfOres: Types.IListOfOres = {
     xpMultiplier: 0.72,
     value: 59,
   },
-  gold: {
-    name: "gold",
+  goldore: {
+    name: "goldore",
     displayName: "Gold ore",
     levelReqMining: 40,
     durability: 200,
@@ -73,8 +73,8 @@ export const ListOfOres: Types.IListOfOres = {
     xpMultiplier: 0.74,
     value: 150,
   },
-  adamantite: {
-    name: "adamantite",
+  adamantiteore: {
+    name: "adamantiteore",
     displayName: "Adamantite ore",
     levelReqMining: 40,
     durability: 380,
@@ -82,8 +82,8 @@ export const ListOfOres: Types.IListOfOres = {
     xpMultiplier: 0.74,
     value: 84,
   },
-  luminite: {
-    name: "luminite",
+  luminiteore: {
+    name: "luminiteore",
     displayName: "Luminite ore",
     levelReqMining: 40,
     durability: 380,
@@ -91,8 +91,8 @@ export const ListOfOres: Types.IListOfOres = {
     xpMultiplier: 0.74,
     value: 84,
   },
-  runite: {
-    name: "runite",
+  runiteore: {
+    name: "runiteore",
     displayName: "Runite ore",
     levelReqMining: 50,
     durability: 600,
@@ -100,8 +100,8 @@ export const ListOfOres: Types.IListOfOres = {
     xpMultiplier: 0.76,
     value: 209,
   },
-  orichalcite: {
-    name: "orichalcite",
+  orichalciteore: {
+    name: "orichalciteore",
     displayName: "Orichalcite ore",
     levelReqMining: 60,
     durability: 1400,
@@ -109,8 +109,8 @@ export const ListOfOres: Types.IListOfOres = {
     xpMultiplier: 0.78,
     value: 417,
   },
-  drakolith: {
-    name: "drakolith",
+  drakolithore: {
+    name: "drakolithore",
     displayName: "Drakolith ore",
     levelReqMining: 60,
     durability: 1400,
@@ -118,8 +118,8 @@ export const ListOfOres: Types.IListOfOres = {
     xpMultiplier: 0.78,
     value: 417,
   },
-  necrite: {
-    name: "necrite",
+  necriteore: {
+    name: "necriteore",
     displayName: "Necrite ore",
     levelReqMining: 70,
     durability: 1300,
@@ -127,8 +127,8 @@ export const ListOfOres: Types.IListOfOres = {
     xpMultiplier: 0.8,
     value: 834,
   },
-  phasmatite: {
-    name: "phasmatite",
+  phasmatiteore: {
+    name: "phasmatiteore",
     displayName: "Phasmatite ore",
     levelReqMining: 70,
     durability: 1300,
@@ -136,8 +136,8 @@ export const ListOfOres: Types.IListOfOres = {
     xpMultiplier: 0.8,
     value: 834,
   },
-  banite: {
-    name: "banite",
+  baniteore: {
+    name: "baniteore",
     displayName: "Banite ore",
     levelReqMining: 80,
     durability: 1700,
@@ -145,8 +145,8 @@ export const ListOfOres: Types.IListOfOres = {
     xpMultiplier: 0.82,
     value: 1067,
   },
-  lightAnimica: {
-    name: "lightAnimica",
+  lightAnimicaore: {
+    name: "lightAnimicaore",
     displayName: "Light animica ore",
     levelReqMining: 90,
     durability: 2000,
@@ -154,8 +154,8 @@ export const ListOfOres: Types.IListOfOres = {
     xpMultiplier: 0.84,
     value: 1734,
   },
-  darkAnimica: {
-    name: "darkAnimica",
+  darkAnimicaore: {
+    name: "darkAnimicaore",
     displayName: "Dark animica ore",
     levelReqMining: 90,
     durability: 2000,

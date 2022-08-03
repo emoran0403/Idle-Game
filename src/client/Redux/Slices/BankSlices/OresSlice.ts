@@ -15,68 +15,68 @@ export const bank_ores = createSlice({
       name: `pureEssence`,
       amount: 0,
     },
-    tin: {
-      name: `tin`,
+    tinore: {
+      name: `tinore`,
       amount: 0,
     },
-    copper: {
-      name: `copper`,
+    copperore: {
+      name: `copperore`,
       amount: 0,
     },
-    iron: {
-      name: `iron`,
+    ironore: {
+      name: `ironore`,
       amount: 0,
     },
-    coal: {
-      name: `coal`,
+    coalore: {
+      name: `coalore`,
       amount: 0,
     },
-    mithril: {
-      name: `mithril`,
+    mithrilore: {
+      name: `mithrilore`,
       amount: 0,
     },
-    gold: {
-      name: `gold`,
+    goldore: {
+      name: `goldore`,
       amount: 0,
     },
-    adamantite: {
-      name: `adamantite`,
+    adamantiteore: {
+      name: `adamantiteore`,
       amount: 0,
     },
-    luminite: {
-      name: `luminite`,
+    luminiteore: {
+      name: `luminiteore`,
       amount: 0,
     },
-    runite: {
-      name: `runite`,
+    runiteore: {
+      name: `runiteore`,
       amount: 0,
     },
-    orichalcite: {
-      name: `orichalcite`,
+    orichalciteore: {
+      name: `orichalciteore`,
       amount: 0,
     },
-    drakolith: {
-      name: `drakolith`,
+    drakolithore: {
+      name: `drakolithore`,
       amount: 0,
     },
-    necrite: {
-      name: `necrite`,
+    necriteore: {
+      name: `necriteore`,
       amount: 0,
     },
-    phasmatite: {
-      name: `phasmatite`,
+    phasmatiteore: {
+      name: `phasmatiteore`,
       amount: 0,
     },
-    banite: {
-      name: `banite`,
+    baniteore: {
+      name: `baniteore`,
       amount: 0,
     },
-    lightAnimica: {
-      name: `lightAnimica`,
+    lightAnimicaore: {
+      name: `lightAnimicaore`,
       amount: 0,
     },
-    darkAnimica: {
-      name: `darkAnimica`,
+    darkAnimicaore: {
+      name: `darkAnimicaore`,
       amount: 0,
     },
   },

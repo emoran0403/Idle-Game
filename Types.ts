@@ -187,42 +187,42 @@ export interface IOre {
 export interface IListOfOres {
   runeEssence: IOre;
   pureEssence: IOre;
-  tin: IOre;
-  copper: IOre;
-  iron: IOre;
-  coal: IOre;
-  mithril: IOre;
-  gold: IOre;
-  adamantite: IOre;
-  luminite: IOre;
-  runite: IOre;
-  orichalcite: IOre;
-  drakolith: IOre;
-  necrite: IOre;
-  phasmatite: IOre;
-  banite: IOre;
-  lightAnimica: IOre;
-  darkAnimica: IOre;
+  tinore: IOre;
+  copperore: IOre;
+  ironore: IOre;
+  coalore: IOre;
+  mithrilore: IOre;
+  goldore: IOre;
+  adamantiteore: IOre;
+  luminiteore: IOre;
+  runiteore: IOre;
+  orichalciteore: IOre;
+  drakolithore: IOre;
+  necriteore: IOre;
+  phasmatiteore: IOre;
+  baniteore: IOre;
+  lightAnimicaore: IOre;
+  darkAnimicaore: IOre;
 }
 export interface IOreBankSlice {
   runeEssence: IBankItem;
   pureEssence: IBankItem;
-  tin: IBankItem;
-  copper: IBankItem;
-  iron: IBankItem;
-  coal: IBankItem;
-  mithril: IBankItem;
-  gold: IBankItem;
-  adamantite: IBankItem;
-  luminite: IBankItem;
-  runite: IBankItem;
-  orichalcite: IBankItem;
-  drakolith: IBankItem;
-  necrite: IBankItem;
-  phasmatite: IBankItem;
-  banite: IBankItem;
-  lightAnimica: IBankItem;
-  darkAnimica: IBankItem;
+  tinore: IBankItem;
+  copperore: IBankItem;
+  ironore: IBankItem;
+  coalore: IBankItem;
+  mithrilore: IBankItem;
+  goldore: IBankItem;
+  adamantiteore: IBankItem;
+  luminiteore: IBankItem;
+  runiteore: IBankItem;
+  orichalciteore: IBankItem;
+  drakolithore: IBankItem;
+  necriteore: IBankItem;
+  phasmatiteore: IBankItem;
+  baniteore: IBankItem;
+  lightAnimicaore: IBankItem;
+  darkAnimicaore: IBankItem;
 }
 
 //@ ******************************* PICKAXES *******************************
