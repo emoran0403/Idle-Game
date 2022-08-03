@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { ListOfLogs } from "../../../../../Constants/Items/Logs";
 import { ListOfFish } from "../../../../../Constants/Items/Fish";
 import { Enemies } from "../../../../../Constants/Enemies";
+import { ListOfOres } from "../../../../../Constants/Items/Ores";
 
 const CurrentResourceComp = (props: Types.NoProps) => {
   const Resource = useSelector((state: Types.AllState) => state.Resource.CurrentResource as Types.ICurrentResourceOptions);
@@ -35,6 +36,9 @@ const CurrentResourceComp = (props: Types.NoProps) => {
         case `Fishing`: {
           return <div>{ListOfFish[Resource as keyof Types.IListOfFish].displayName}</div>;
         }
+        case `Mining`: {
+          return <div>{ListOfOres[Resource as keyof Types.IListOfOres].displayName}</div>;
+        }
         default:
           return <div>none</div>;
       }
@@ -46,12 +50,11 @@ const CurrentResourceComp = (props: Types.NoProps) => {
       {Activity === `In combat` ? (
         <div className={returnBackgroundColor()}>
           <div>Fighting </div>
-          {Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies] ? (
-            <div>{Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].displayName}</div>
+          {Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations] ? (
+            <div>{Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].displayName}</div>
           ) : (
             <div>none</div>
           )}
-          {/* <div>{Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].displayName}</div> */}
         </div>
       ) : (
         <div>

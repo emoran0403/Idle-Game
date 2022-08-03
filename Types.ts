@@ -1,5 +1,7 @@
 import { Request } from "express";
 
+//@ ******************************* COMPONENT PROPS *******************************
+
 export interface AppProps {}
 export interface NoProps {}
 export interface LobbyProps {
@@ -23,14 +25,12 @@ export interface NavigationAreaCompProps {
 export interface ResourcesCompProps {
   newChatLog: Function;
 }
-
 export interface QuestPanelCompProps {
   handleUpdateDisplay: Function;
   newChatLog: Function;
   chatLogArray: IChatLog[];
   questStepProgress: number;
 }
-
 export interface SkillsPanelCompProps {
   handleUpdateDisplay: Function;
   newChatLog: Function;
@@ -38,51 +38,46 @@ export interface SkillsPanelCompProps {
   setCurrentEquipment: Function;
   currentEquipment: ICurrentEquipment;
 }
-
 export interface ActivityButtonsCompProps {
   handleUpdateDisplay: Function;
   newChatLog?: Function;
 }
-
+export interface MapPanelProps {
+  handleUpdateDisplay: Function;
+  newChatLog?: Function;
+}
 export interface MinigamePanelCompProps {
   handleUpdateDisplay: Function;
   newChatLog: Function;
 }
-
 export interface BossesPanelProps {
   handleUpdateDisplay: Function;
   newChatLog: Function;
 }
-
 export interface CombatPanelProps {
   handleUpdateDisplay: Function;
   newChatLog: Function;
   chatLogArray: IChatLog[];
   currentEquipment: ICurrentEquipment;
 }
-
 export interface BankPanelProps {
   handleUpdateDisplay: Function;
   newChatLog: Function;
 }
-
 export interface ShopPanelProps {
   handleUpdateDisplay: Function;
   newChatLog: Function;
   chatLogArray: IChatLog[];
 }
-
 export interface CluesPanelProps {
   handleUpdateDisplay: Function;
   newChatLog: Function;
 }
-
 export interface WornEquipmentCompProps {
   newChatLog: Function;
   setCurrentEquipment: Function;
   currentEquipment: ICurrentEquipment;
 }
-
 export interface ActivityAreaCompProps {
   newChatLog: Function;
   chatLogArray: IChatLog[];
@@ -90,10 +85,11 @@ export interface ActivityAreaCompProps {
   currentEquipment: ICurrentEquipment;
   questStepProgress: number;
 }
-
 export interface ChatWindowCompProps {
   chatLogArray: IChatLog[];
 }
+
+//@ ******************************* LOGS *******************************
 
 export interface ILog {
   name: string;
@@ -113,8 +109,9 @@ export interface logRoll {
   mithril: number;
   adamant: number;
   rune: number;
+  dragon: number;
+  crystal: number;
 }
-
 export interface IListOfLogs {
   logs: ILog;
   oak: ILog;
@@ -124,12 +121,6 @@ export interface IListOfLogs {
   magic: ILog;
   elder: ILog;
 }
-
-export interface IBankItem {
-  name: string;
-  amount: number;
-}
-
 export interface ILogBankSlice {
   logs: IBankItem;
   oak: IBankItem;
@@ -139,6 +130,160 @@ export interface ILogBankSlice {
   magic: IBankItem;
   elder: IBankItem;
 }
+
+//@ ******************************* HATCHETS *******************************
+
+export interface IHatchet {
+  name: string;
+  displayName: string;
+  levelReqWoodcutting: number;
+  value: number;
+}
+export interface IListOfHatchets {
+  bronzehatchet: IHatchet;
+  ironhatchet: IHatchet;
+  steelhatchet: IHatchet;
+  mithrilhatchet: IHatchet;
+  adamanthatchet: IHatchet;
+  runehatchet: IHatchet;
+  dragonhatchet: IHatchet;
+  crystalhatchet: IHatchet;
+}
+export interface IHatchetsSlice {
+  playerOwnsbronzehatchet: boolean;
+  playerOwnsironhatchet: boolean;
+  playerOwnssteelhatchet: boolean;
+  playerOwnsmithrilhatchet: boolean;
+  playerOwnsadamanthatchet: boolean;
+  playerOwnsrunehatchet: boolean;
+  playerOwnsdragonhatchet: boolean;
+  playerOwnscrystalhatchet: boolean;
+}
+export interface ICompositeHatchet extends IHatchet {
+  playerOwnsThisItem: boolean;
+}
+
+export type IListOfHatchetOptions =
+  | `bronzehatchet`
+  | `ironhatchet`
+  | `steelhatchet`
+  | `mithrilhatchet`
+  | `adamanthatchet`
+  | `runehatchet`
+  | `dragonhatchet`
+  | `crystalhatchet`;
+
+//@ ******************************* ORE *******************************
+
+export interface IOre {
+  name: string;
+  displayName: string;
+  levelReqMining: number;
+  durability: number;
+  hardness: number;
+  xpMultiplier: number;
+  value: number;
+}
+export interface IListOfOres {
+  clay: IOre;
+  runeEssence: IOre;
+  pureEssence: IOre;
+  tinore: IOre;
+  copperore: IOre;
+  ironore: IOre;
+  coalore: IOre;
+  mithrilore: IOre;
+  goldore: IOre;
+  adamantiteore: IOre;
+  luminiteore: IOre;
+  runiteore: IOre;
+  orichalciteore: IOre;
+  drakolithore: IOre;
+  necriteore: IOre;
+  phasmatiteore: IOre;
+  baniteore: IOre;
+  lightAnimicaore: IOre;
+  darkAnimicaore: IOre;
+}
+export interface IOreBankSlice {
+  clay: IBankItem;
+  runeEssence: IBankItem;
+  pureEssence: IBankItem;
+  tinore: IBankItem;
+  copperore: IBankItem;
+  ironore: IBankItem;
+  coalore: IBankItem;
+  mithrilore: IBankItem;
+  goldore: IBankItem;
+  adamantiteore: IBankItem;
+  luminiteore: IBankItem;
+  runiteore: IBankItem;
+  orichalciteore: IBankItem;
+  drakolithore: IBankItem;
+  necriteore: IBankItem;
+  phasmatiteore: IBankItem;
+  baniteore: IBankItem;
+  lightAnimicaore: IBankItem;
+  darkAnimicaore: IBankItem;
+}
+
+//@ ******************************* PICKAXES *******************************
+
+export interface IPickaxe {
+  name: string;
+  displayName: string;
+  levelReqMining: number;
+  penetration: number;
+  damageMin: number;
+  damageMax: number;
+  value: number;
+}
+export interface IListOfPickaxes {
+  bronzepickaxe: IPickaxe;
+  ironpickaxe: IPickaxe;
+  steelpickaxe: IPickaxe;
+  mithrilpickaxe: IPickaxe;
+  adamantpickaxe: IPickaxe;
+  runepickaxe: IPickaxe;
+  orikalkumpickaxe: IPickaxe;
+  dragonpickaxe: IPickaxe;
+  necroniumpickaxe: IPickaxe;
+  crystalpickaxe: IPickaxe;
+  banepickaxe: IPickaxe;
+  elderrunepickaxe: IPickaxe;
+}
+export interface IPickaxesSlice {
+  playerOwnsbronzepickaxe: boolean;
+  playerOwnsironpickaxe: boolean;
+  playerOwnssteelpickaxe: boolean;
+  playerOwnsmithrilpickaxe: boolean;
+  playerOwnsadamantpickaxe: boolean;
+  playerOwnsrunepickaxe: boolean;
+  playerOwnsorikalkumpickaxe: boolean;
+  playerOwnsdragonpickaxe: boolean;
+  playerOwnsnecroniumpickaxe: boolean;
+  playerOwnscrystalpickaxe: boolean;
+  playerOwnsbanepickaxe: boolean;
+  playerOwnselderrunepickaxe: boolean;
+}
+export interface ICompositePickaxe extends IPickaxe {
+  playerOwnsThisItem: boolean;
+}
+export type IListOfPickaxeOptions =
+  | `bronzepickaxe`
+  | `ironpickaxe`
+  | `steelpickaxe`
+  | `mithrilpickaxe`
+  | `adamantpickaxe`
+  | `runepickaxe`
+  | `orikalkumpickaxe`
+  | `dragonpickaxe`
+  | `necroniumpickaxe`
+  | `crystalpickaxe`
+  | `banepickaxe`
+  | `elderrunepickaxe`;
+
+//@ ******************************* FISH *******************************
 
 export interface IFish {
   name: string;
@@ -152,7 +297,6 @@ export interface IFish {
   low: number;
   high: number;
 }
-
 export interface IFishBankSlice {
   raw_shrimp: IBankItem;
   raw_crayfish: IBankItem;
@@ -163,7 +307,6 @@ export interface IFishBankSlice {
   raw_sardine: IBankItem;
   raw_herring: IBankItem;
 }
-
 export interface IListOfFish {
   raw_shrimp: IFish;
   raw_crayfish: IFish;
@@ -175,22 +318,20 @@ export interface IListOfFish {
   raw_herring: IFish;
 }
 
-export interface IOre {
+//@ ******************************* MISC *******************************
+
+export interface IBankItem {
   name: string;
-  levelReqMining: number;
-  XPGivenMining: number;
-  levelReqSmithing: number;
-  XPGivenSmithing: number;
-  value: number;
+  amount: number;
+}
+export interface IFlatObjectOfNums {
+  [key: string]: number;
+}
+export interface IFlatObjectOfBooleans {
+  [key: string]: boolean;
 }
 
-export interface IListOfOres {
-  tin: IOre;
-  copper: IOre;
-  iron: IOre;
-  coal: IOre;
-  mithril: IOre;
-}
+//@ ******************************* RUNES *******************************
 
 export interface IRune {
   name: string;
@@ -198,7 +339,6 @@ export interface IRune {
   XPGivenRunecrafting: number;
   value: number;
 }
-
 export interface IListOfRunes {
   air: IRune;
   mind: IRune;
@@ -216,13 +356,14 @@ export interface IListOfRunes {
   soul: IRune;
 }
 
+//@ ******************************* ARROWS *******************************
+
 export interface IArrow {
   name: string;
   levelReqRanged: number;
   damage: number;
   value: number;
 }
-
 export interface IListOfArrows {
   bronzeArrow: IArrow;
   ironArrow: IArrow;
@@ -232,18 +373,7 @@ export interface IListOfArrows {
   runeArrow: IArrow;
 }
 
-// // Infer the `RootState` and `AppDispatch` types from the store itself
-// export type RootState = ReturnType<typeof store.getState>;
-// // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-// export type AppDispatch = typeof store.dispatch;
-
-export interface IFlatObjectOfNums {
-  [key: string]: number;
-}
-
-export interface IFlatObjectOfBooleans {
-  [key: string]: boolean;
-}
+//@ ******************************* SKILLS *******************************
 
 export interface ISkillList {
   Attack: number;
@@ -275,6 +405,56 @@ export interface ISkillList {
   Invention: number;
   Archaeology: number;
 }
+export interface ListOfSkills {
+  CurrentSkill: ListOfSkillOptions;
+}
+export interface LocationSkills {
+  Mining: string[];
+  Fishing: string[];
+  Woodcutting: string[];
+  Farming: string[];
+  Firemaking: string[];
+  Hunter: string[];
+  Divination: string[];
+  Archaeology: string[];
+  Runecrafting: string[];
+  Construction: string[];
+  Summoning: string[];
+  Agility: string[];
+  Thieving: string[];
+}
+export type ListOfSkillOptions =
+  | `none`
+  | `Attack`
+  | `Strength`
+  | `Defence`
+  | `Constitution`
+  | `Prayer`
+  | `Summoning`
+  | `Ranged`
+  | `Magic`
+  | `Crafting`
+  | `Mining`
+  | `Smithing`
+  | `Fishing`
+  | `Cooking`
+  | `Firemaking`
+  | `Woodcutting`
+  | `Runecrafting`
+  | `Dungeoneering`
+  | `Fletching`
+  | `Agility`
+  | `Herblore`
+  | `Thieving`
+  | `Slayer`
+  | `Farming`
+  | `Construction`
+  | `Hunter`
+  | `Divination`
+  | `Invention`
+  | `Archaeology`;
+
+//@ ******************************* QUESTS *******************************
 
 export interface IStateQuest {
   name: string;
@@ -282,13 +462,140 @@ export interface IStateQuest {
   stepsTotal: number;
   complete: boolean;
 }
-
-export interface ListOfSkills {
-  CurrentSkill: ListOfSkillOptions;
+export interface IQuestPointsSlice {
+  CurrentQuestPoints: number;
 }
+export interface ICurrentQuest {
+  CurrentQuest: ICurrentQuestOptions;
+}
+//* will need to make more of these for each location's quests
+export interface LumbridgeQuestSlice {
+  LumbridgeQuestArray: IStateQuest[];
+}
+export interface DraynorQuestSlice {
+  DraynorQuestArray: IStateQuest[];
+}
+export interface IQuestInfo {
+  name: string;
+  location: string;
+  stepsTotal: number;
+  questPoints: number;
+  combatRequirements: number;
+  questRequirements: string[];
+  levelRequirements: IFlatObjectOfNums;
+  experienceRewards: IFlatObjectOfNums;
+  itemRewards: IQuestItemReward;
+}
+export interface IQuestItemReward {
+  Coins?: number;
+}
+export interface IAllQuests {
+  Lumbridge: IQuestInfo[];
+  Draynor: IQuestInfo[];
+  Varrock: IQuestInfo[];
+}
+export interface ICompositeQuestInfo extends IQuestInfo {
+  stepsComplete: number;
+  complete: boolean;
+}
+export type ICurrentQuestOptions =
+  | `none`
+  | `Cook's Assistant`
+  | `Myths of the White Lands`
+  | `The Restless Ghost`
+  | `The Lost Tribe`
+  | `The Blood Pact`
+  | `Buyers and Cellars`
+  | `A Fairy Tale I - Growing Pains`
+  | `A Fairy Tale II - Cure a Queen`
+  | `Vampyre Slayer`
+  | `Ernest the Chicken`
+  | `Animal Magnetism`
+  | `Love Story`
+  | `Swept Away`
+  | `Missing My Mummy`
+  | `Stolen Hearts`;
+//@ ******************************* COMBAT *******************************
 
-export type ListOfSkillOptions = `none` | `Woodcutting` | `Firemaking` | `Mining` | `Fishing` | `Attack` | `Strength` | `Defence` | `Ranged` | `Magic`;
+export interface IListOfCombatStyles {
+  CurrentStyle: ICurrentStyleOptions;
+}
+export interface ICurrentTarget {
+  CurrentTarget: ICurrentTargetOptions;
+}
+export interface IEnemySummary {
+  name: string;
+  displayName: string;
+  level: number;
+  lifePoints: number;
+  XPGivenCombatStyle: number;
+  XPGivenConstitution: number;
+  affinities: {
+    explicitWeakness: CombatStyle | SpellElement;
+    weakStyle: CombatStyle;
+    neutralStyle: CombatStyle;
+    strongStyle: CombatStyle;
+  };
+  armor: number;
+  defence: number;
+  accuracy: number;
+}
+//* copy this as more locations are added
+export interface ILumbridgeEnemies {
+  man: IEnemySummary;
+  goblin: IEnemySummary;
+  giantspider: IEnemySummary;
+  chicken: IEnemySummary;
+  cow: IEnemySummary;
+  spider: IEnemySummary;
+  giantrat: IEnemySummary;
+  swampfrog: IEnemySummary;
+}
+export interface IDraynorEnemies {
+  rat: IEnemySummary;
+  man: IEnemySummary;
+  farmer: IEnemySummary;
+  zombie12: IEnemySummary;
+  skeleton15: IEnemySummary;
+  zombie29: IEnemySummary;
+  skeleton32: IEnemySummary;
+  ghost25: IEnemySummary;
+  blackknight: IEnemySummary;
+}
+//* extend this as more locations are added
+export interface IAllEnemies {
+  Lumbridge: ILumbridgeEnemies;
+  Draynor: IDraynorEnemies;
+}
 export type ListOfCombatStyleSkills = `Attack` | `Strength` | `Defence` | `Ranged` | `Magic`;
+export type ICurrentStyleOptions = `none` | `melee` | `ranged` | `air` | `fire` | `water` | `earth`;
+export type CombatStyle = `melee` | `magic` | `ranged`;
+export type SpellElement = `typeless` | `air` | `fire` | `water` | `earth`;
+
+//* extend this as more locations are added
+export type IEnemyLocations = ILumbridgeEnemies | IDraynorEnemies;
+
+//* add to this as more enemies are added
+export type ICurrentTargetOptions =
+  | `none`
+  | `man`
+  | `goblin`
+  | `giantspider`
+  | `chicken`
+  | `cow`
+  | `spider`
+  | `giantrat`
+  | `swampfrog`
+  | `rat`
+  | `farmer`
+  | `zombie12`
+  | `skeleton15`
+  | `zombie29`
+  | `skeleton32`
+  | `ghost25`
+  | `blackknight`;
+
+//@ ******************************* RESOURCES *******************************
 
 export interface ICurrentResource {
   CurrentResource: ICurrentResourceOptions;
@@ -309,7 +616,28 @@ export type ICurrentResourceOptions =
   | `maple`
   | `yew`
   | `magic`
-  | `elder`;
+  | `elder`
+  | `clay`
+  | `runeEssence`
+  | `pureEssence`
+  | `tinore`
+  | `copperore`
+  | `ironore`
+  | `coalore`
+  | `mithrilore`
+  | `goldore`
+  | `adamantiteore`
+  | `luminiteore`
+  | `runiteore`
+  | `orichalciteore`
+  | `drakolithore`
+  | `necriteore`
+  | `phasmatiteore`
+  | `baniteore`
+  | `lightAnimicaore`
+  | `darkAnimicaore`;
+
+//@ ******************************* STATE *******************************
 
 export interface AllSlots {
   BackSlot: IBackSlotSlice;
@@ -322,11 +650,11 @@ export interface AllSlots {
   RingSlot: IRingSlotSlice;
   TwoHandSlot: ITwoHandSlotSlice;
 }
-
 export interface AllState extends AllSlots {
   Experience: ISkillList;
   Bank_Fish: IFishBankSlice;
   Bank_Logs: ILogBankSlice;
+  Bank_Ores: IOreBankSlice;
   Inventory: I_Inventory;
   Location: ICurrentLocation;
   Activity: ICurrentActivity;
@@ -336,78 +664,34 @@ export interface AllState extends AllSlots {
   Target: ICurrentTarget;
   Quest: ICurrentQuest;
   Hatchets: IHatchetsSlice;
+  Pickaxes: IPickaxesSlice;
   Resources: IResources;
   Wallet: IWallet;
   QuestPoints: IQuestPointsSlice;
-  Quests_Lumbridge: LumbridgeQuestSliceCrap;
-  Quests_Draynor: DraynorQuestSliceCrap;
+  Quests_Lumbridge: LumbridgeQuestSlice;
+  Quests_Draynor: DraynorQuestSlice;
 }
-
-//@ this is the entirety of the player data structure, identifying player info is optional for auth purposes
-// export interface IPlayerData extends AllState, IPlayerPayload {
-//   timestamp?: number;
-// }
-
 export interface IPlayerDataFromMongo extends AllState, IPlayerPayload {
   _id: string;
 }
-
-export interface IPlayerDataToMongo extends IPlayerPayload, AllState {}
-
-export interface IPlayerPayload {
-  username?: string;
-  email?: string;
-  password?: string;
+export interface AllStateQuestSlices {
+  Quests_Lumbridge: LumbridgeQuestSlice;
+  Quests_Draynor: DraynorQuestSlice;
 }
-
-export type ICurrentStyleOptions = `none` | `melee` | `ranged` | `air` | `fire` | `water` | `earth`;
-
-export interface IListOfCombatStyles {
-  CurrentStyle: ICurrentStyleOptions;
+export interface IWallet {
+  coins: number;
 }
-
-export interface IQuestPointsSlice {
-  CurrentQuestPoints: number;
+export interface I_Inventory {
+  CurrentInventory: string[];
 }
-
-export interface ICurrentTarget {
-  CurrentTarget: ICurrentTargetOptions;
+export interface ICurrentActivity {
+  CurrentActivity: ICurrentActivityOptions;
 }
-export type ICurrentTargetOptions = `none` | `man` | `goblin` | `giantspider` | `chicken` | `cow` | `spider` | `giantrat` | `swampfrog`;
-
-//@ extend this as more locations are added
-export interface ILumbridgeEnemies {
-  man: IEnemySummary;
-  goblin: IEnemySummary;
-  giantspider: IEnemySummary;
-  chicken: IEnemySummary;
-  cow: IEnemySummary;
-  spider: IEnemySummary;
-  giantrat: IEnemySummary;
-  swampfrog: IEnemySummary;
+export interface IResources {
+  Banking: boolean;
+  Dropping: boolean;
 }
-
-export interface ICurrentQuest {
-  CurrentQuest: ICurrentQuestOptions;
-}
-export type ICurrentQuestOptions =
-  | `none`
-  | `Cook's Assistant`
-  | `Myths of the White Lands`
-  | `The Restless Ghost`
-  | `The Lost Tribe`
-  | `The Blood Pact`
-  | `Buyers and Cellars`
-  | `A Fairy Tale I - Growing Pains`
-  | `A Fairy Tale II - Cure a Queen`
-  | `Vampyre Slayer`
-  | `Ernest the Chicken`
-  | `Animal Magnetism`
-  | `Love Story`
-  | `Swept Away`
-  | `Missing My Mummy`
-  | `Stolen Hearts`;
-
+export type ICurrentActivityOptions = `Banking` | `Skilling` | `Questing` | `In combat` | `Idle`;
 export type AllSliceKeys =
   | IBackSlotSlice
   | IBodySlotSlice
@@ -419,58 +703,13 @@ export type AllSliceKeys =
   | IRingSlotSlice
   | ITwoHandSlotSlice;
 
-export interface AllStateQuestSlices {
-  Quests_Lumbridge: LumbridgeQuestSliceCrap;
-  Quests_Draynor: DraynorQuestSliceCrap;
-}
+//@ ******************************* MONGO *******************************
 
-export interface IWallet {
-  coins: number;
-}
-
-//@ will need to make more of these for each location's quests
-export interface LumbridgeQuestSliceCrap {
-  LumbridgeQuestArray: IStateQuest[];
-}
-
-export interface DraynorQuestSliceCrap {
-  DraynorQuestArray: IStateQuest[];
-}
-
-export interface I_Inventory {
-  CurrentInventory: string[];
-}
-
-export interface ICurrentActivity {
-  CurrentActivity: ICurrentActivityOptions;
-}
-export type ICurrentActivityOptions = `Banking` | `Skilling` | `Questing` | `In combat` | `Idle`;
-
-export interface IResources {
-  Banking: boolean;
-  Dropping: boolean;
-}
-
-export interface IQuestInfo {
-  name: string;
-  location: string;
-  stepsTotal: number;
-  questPoints: number;
-  combatRequirements: number;
-  questRequirements: string[];
-  levelRequirements: IFlatObjectOfNums;
-  experienceRewards: IFlatObjectOfNums;
-  itemRewards: IQuestItemReward;
-}
-
-export interface IQuestItemReward {
-  Coins?: number;
-}
-
-export interface IAllQuests {
-  Lumbridge: IQuestInfo[];
-  Draynor: IQuestInfo[];
-  Varrock: IQuestInfo[];
+export interface IPlayerDataToMongo extends IPlayerPayload, AllState {}
+export interface IPlayerPayload {
+  username?: string;
+  email?: string;
+  password?: string;
 }
 
 //@ copy this and trim it down to match the location summary
@@ -481,7 +720,8 @@ export interface ILocationSummary {
   Bosses: string[];
 }
 
-//@ do i really need this?
+//@ ******************************* LOCATIONS *******************************
+
 export interface ILumbridgeLocationSummary {
   Quests: string[];
   Skills: {
@@ -492,8 +732,6 @@ export interface ILumbridgeLocationSummary {
   Combat: string[];
   Bosses: string[];
 }
-
-//@ do i really need this?
 export interface IDraynorLocationSummary {
   Quests: string[];
   Skills: {
@@ -504,48 +742,25 @@ export interface IDraynorLocationSummary {
   Combat: string[];
   Bosses: string[];
 }
-
-export interface LocationSkills {
-  Mining: string[];
-  Fishing: string[];
-  Woodcutting: string[];
-  Farming: string[];
-  Firemaking: string[];
-  Hunter: string[];
-  Divination: string[];
-  Archaeology: string[];
-  Runecrafting: string[];
-  Construction: string[];
-  Summoning: string[];
-  Agility: string[];
-  Thieving: string[];
-}
-
 export interface IAllLocations {
   Lumbridge: ILumbridgeLocationSummary;
   Draynor: IDraynorLocationSummary;
   // Varrock: ILocationSummary;
 }
-
-//This will be the type used for quests displayed in the Quest List component and the Quests in Area panel
-export interface ICompositeQuestInfo extends IQuestInfo {
-  stepsComplete: number;
-  complete: boolean;
-}
-
-//@ extend this as needed to account for future locations
+//* extend this as needed to account for future locations
 export interface ICurrentLocation {
   CurrentLocation: ICurrentLocationOptions;
 }
 export type ICurrentLocationOptions = `Lumbridge` | `Draynor`;
+
+//@ ******************************* CHAT *******************************
 
 export interface IChatLog {
   timeStamp: string;
   message: string;
   tags: ChatLogTag;
 }
-
-//@ chatLogs may only have 1 tag - if this is changed, then the filter logic needs to be updated
+//* chatLogs may only have 1 tag - if this is changed, then the filter logic needs to be updated
 export type ChatLogTag =
   | `Gained Resource`
   | `Monster Drop`
@@ -559,6 +774,7 @@ export type ChatLogTag =
   | `Activity Swap`
   | `Misc`;
 
+//@ ******************************* WEAPONS + ARMOR *******************************
 export interface IArmorItem {
   name: string;
   displayName: string;
@@ -573,18 +789,12 @@ export interface IArmorItem {
   styleBonusMagic: number;
   value: number;
 }
-
 export interface ICompositeArmorItem extends IArmorItem {
   playerOwnsThisItem: boolean;
 }
-
-export type SpellElement = `typeless` | `air` | `fire` | `water` | `earth`;
-export type CombatStyle = `melee` | `magic` | `ranged`;
-
 export interface ICompositeWeaponItem extends IWeaponItem {
   playerOwnsThisItem: boolean;
 }
-
 export interface IWeaponItem {
   thisWeaponStyle: CombatStyle;
   levelReqAttack: number;
@@ -606,7 +816,23 @@ export interface IWeaponItem {
   styleBonusMagic: number;
   value: number;
 }
-/*********************************************************************************************************************** */
+export interface ICurrentEquipment {
+  BackSlot: `none` | IArmorSlotBack;
+  BodySlot: `none` | IArmorSlotBody;
+  FeetSlot: `none` | IArmorSlotFeet;
+  HandsSlot: `none` | IArmorSlotHands;
+  HeadSlot: `none` | IArmorSlotHead;
+  LegsSlot: `none` | IArmorSlotLegs;
+  NeckSlot: `none` | IArmorSlotNeck;
+  RingSlot: `none` | IArmorSlotRing;
+  TwoHandSlot: `none` | IArmorSlotTwoHand;
+  Hatchet: `none` | IListOfHatchetOptions;
+  Pickaxe: `none` | IListOfPickaxeOptions;
+}
+export type IEquipmentSlotOptions = IArmorSlotBody | IArmorSlotHead | IArmorSlotLegs | IArmorSlotHands | IArmorSlotFeet | IArmorSlotTwoHand;
+
+//@ ******************************* HEAD SLOT *******************************
+
 export interface IListOfMeleeHeads {
   bronzefullhelm: IArmorItem;
   ironfullhelm: IArmorItem;
@@ -629,8 +855,6 @@ export interface IListOfRangedHeads {
   carapacehelm: IArmorItem;
   greendragonhidecoif: IArmorItem;
 }
-export type IListOfAllHeads = IListOfMeleeHeads | IListOfMagicHeads | IListOfRangedHeads;
-
 export interface IArmorSlotHead {
   none: IArmorItem;
   bronzefullhelm: IArmorItem;
@@ -670,7 +894,9 @@ export interface IHeadSlotSlice {
   playerOwnscarapacehelm: boolean;
   playerOwnsgreendragonhidecoif: boolean;
 }
-/*********************************************************************************************************************** */
+export type IListOfAllHeads = IListOfMeleeHeads | IListOfMagicHeads | IListOfRangedHeads;
+
+//@ ******************************* BODY SLOT *******************************
 
 export interface IListOfMeleeBodies {
   bronzeplatebody: IArmorItem;
@@ -694,8 +920,6 @@ export interface IListOfRangedBodies {
   carapacetorso: IArmorItem;
   greendragonhidebody: IArmorItem;
 }
-export type IListOfAllBodies = IListOfMeleeBodies | IListOfMagicBodies | IListOfRangedBodies;
-
 export interface IArmorSlotBody {
   none: IArmorItem;
   bronzeplatebody: IArmorItem;
@@ -735,7 +959,9 @@ export interface IBodySlotSlice {
   playerOwnscarapacetorso: boolean;
   playerOwnsgreendragonhidebody: boolean;
 }
-/*********************************************************************************************************************** */
+export type IListOfAllBodies = IListOfMeleeBodies | IListOfMagicBodies | IListOfRangedBodies;
+
+//@ ******************************* LEGS SLOT *******************************
 
 export interface IListOfMeleeLegs {
   bronzeplatelegs: IArmorItem;
@@ -759,8 +985,6 @@ export interface IListOfRangedLegs {
   carapacelegs: IArmorItem;
   greendragonhidechaps: IArmorItem;
 }
-export type IListOfAllLegs = IListOfMeleeLegs | IListOfMagicLegs | IListOfRangedLegs;
-
 export interface IArmorSlotLegs {
   none: IArmorItem;
   bronzeplatelegs: IArmorItem;
@@ -800,7 +1024,9 @@ export interface ILegsSlotSlice {
   playerOwnscarapacelegs: boolean;
   playerOwnsgreendragonhidechaps: boolean;
 }
-/*********************************************************************************************************************** */
+export type IListOfAllLegs = IListOfMeleeLegs | IListOfMagicLegs | IListOfRangedLegs;
+
+//@ ******************************* FEET SLOT *******************************
 
 export interface IListOfMeleeFeet {
   bronzearmouredboots: IArmorItem;
@@ -824,8 +1050,6 @@ export interface IListOfRangedFeet {
   carapaceboots: IArmorItem;
   greendragonhideboots: IArmorItem;
 }
-export type IListOfAllFeet = IListOfMeleeFeet | IListOfMagicFeet | IListOfRangedFeet;
-
 export interface IArmorSlotFeet {
   none: IArmorItem;
   bronzearmouredboots: IArmorItem;
@@ -865,7 +1089,9 @@ export interface IFeetSlotSlice {
   playerOwnscarapaceboots: boolean;
   playerOwnsgreendragonhideboots: boolean;
 }
-/*********************************************************************************************************************** */
+export type IListOfAllFeet = IListOfMeleeFeet | IListOfMagicFeet | IListOfRangedFeet;
+
+//@ ******************************* HANDS SLOT *******************************
 
 export interface IListOfMeleeHands {
   bronzegauntlets: IArmorItem;
@@ -889,8 +1115,6 @@ export interface IListOfRangedHands {
   carapacegloves: IArmorItem;
   greendragonhidevambraces: IArmorItem;
 }
-export type IListOfAllHands = IListOfMeleeHands | IListOfMagicHands | IListOfRangedHands;
-
 export interface IArmorSlotHands {
   none: IArmorItem;
   bronzegauntlets: IArmorItem;
@@ -930,7 +1154,9 @@ export interface IHandSlotSlice {
   playerOwnscarapacegloves: boolean;
   playerOwnsgreendragonhidevambraces: boolean;
 }
-/*********************************************************************************************************************** */
+export type IListOfAllHands = IListOfMeleeHands | IListOfMagicHands | IListOfRangedHands;
+
+//@ ******************************* CAPE SLOT *******************************
 
 export interface IListOfMeleeCapes {
   bladestormdrape: IArmorItem;
@@ -946,8 +1172,6 @@ export interface IListOfTypelessCapes {
   teamcape: IArmorItem;
   obsidiancape: IArmorItem;
 }
-export type IListOfAllCapes = IListOfMeleeCapes | IListOfMagicCapes | IListOfRangedCapes | IListOfTypelessCapes;
-
 export interface IArmorSlotBack {
   none: IArmorItem;
   bladestormdrape: IArmorItem;
@@ -965,7 +1189,10 @@ export interface IBackSlotSlice {
   playerOwnsteamcape: boolean;
   playerOwnsobsidiancape: boolean;
 }
-/*********************************************************************************************************************** */
+export type IListOfAllCapes = IListOfMeleeCapes | IListOfMagicCapes | IListOfRangedCapes | IListOfTypelessCapes;
+
+//@ ******************************* RING SLOT *******************************
+
 export interface IListOfMeleeRings {
   warriorring: IArmorItem;
 }
@@ -980,8 +1207,6 @@ export interface IListOfTypelessRings {
   ringofwealth: IArmorItem;
   berserkerring: IArmorItem;
 }
-export type IListOfAllRings = IListOfMeleeRings | IListOfMagicRings | IListOfRangedRings | IListOfTypelessRings;
-
 export interface IArmorSlotRing {
   none: IArmorItem;
   warriorring: IArmorItem;
@@ -999,8 +1224,10 @@ export interface IRingSlotSlice {
   playerOwnsringofwealth: boolean;
   playerOwnsberserkerring: boolean;
 }
+export type IListOfAllRings = IListOfMeleeRings | IListOfMagicRings | IListOfRangedRings | IListOfTypelessRings;
 
-/*********************************************************************************************************************** */
+//@ ******************************* NECK SLOT *******************************
+
 export interface IListOfMeleeNecks {
   amuletofstrength: IArmorItem;
 }
@@ -1017,8 +1244,6 @@ export interface IListOfTypelessNecks {
   amuletofglory: IArmorItem;
   amuletoffury: IArmorItem;
 }
-export type IListOfAllNecks = IListOfMeleeNecks | IListOfMagicNecks | IListOfRangedNecks | IListOfTypelessNecks;
-
 export interface IArmorSlotNeck {
   none: IArmorItem;
   amuletofstrength: IArmorItem;
@@ -1040,7 +1265,9 @@ export interface INeckSlotSlice {
   playerOwnsamuletofglory: boolean;
   playerOwnsamuletoffury: boolean;
 }
-/*********************************************************************************************************************** */
+export type IListOfAllNecks = IListOfMeleeNecks | IListOfMagicNecks | IListOfRangedNecks | IListOfTypelessNecks;
+
+//@ ******************************* TWOHAND SLOT *******************************
 
 export interface IListOfMeleeTwoHand {
   bronze2hsword: IWeaponItem;
@@ -1072,8 +1299,6 @@ export interface IListOfRangedTwoHand {
   yewshortbow: IWeaponItem;
   magicshortbow: IWeaponItem;
 }
-export type IListOfAllTwoHand = IListOfMeleeTwoHand | IListOfMagicTwoHand | IListOfRangedTwoHand;
-
 export interface IArmorSlotTwoHand {
   none: IWeaponItem;
   bronze2hsword: IWeaponItem;
@@ -1129,90 +1354,7 @@ export interface ITwoHandSlotSlice {
   playerOwnsyewshortbow: boolean;
   playerOwnsmagicshortbow: boolean;
 }
-/*********************************************************************************************************************** */
-
-export type IEquipmentSlotOptions = IArmorSlotBody | IArmorSlotHead | IArmorSlotLegs | IArmorSlotHands | IArmorSlotFeet | IArmorSlotTwoHand;
-
-export interface ICurrentEquipment {
-  BackSlot: `none` | IArmorSlotBack;
-  BodySlot: `none` | IArmorSlotBody;
-  FeetSlot: `none` | IArmorSlotFeet;
-  HandsSlot: `none` | IArmorSlotHands;
-  HeadSlot: `none` | IArmorSlotHead;
-  LegsSlot: `none` | IArmorSlotLegs;
-  NeckSlot: `none` | IArmorSlotNeck;
-  RingSlot: `none` | IArmorSlotRing;
-  TwoHandSlot: `none` | IArmorSlotTwoHand;
-  Hatchet: `none` | IListOfHatchetOptions;
-}
-/*********************************************************************************************************************** */
-
-export interface IEnemySummary {
-  name: string;
-  displayName: string;
-  level: number;
-  lifePoints: number;
-  XPGivenCombatStyle: number;
-  XPGivenConstitution: number;
-  affinities: {
-    explicitWeakness: CombatStyle | SpellElement;
-    weakStyle: CombatStyle;
-    neutralStyle: CombatStyle;
-    strongStyle: CombatStyle;
-  };
-  armor: number;
-  defence: number;
-  accuracy: number;
-}
-
-//@ recreate this for each location
-export interface ILumbridgeEnemies {
-  man: IEnemySummary;
-  goblin: IEnemySummary;
-  giantspider: IEnemySummary;
-  chicken: IEnemySummary;
-  cow: IEnemySummary;
-  spider: IEnemySummary;
-  giantrat: IEnemySummary;
-  swampfrog: IEnemySummary;
-}
-
-//@ extend this as more locations are added
-export interface IAllEnemies {
-  Lumbridge: ILumbridgeEnemies;
-}
-//@ extend this as more locations are added
-export type IEnemyLocations = ILumbridgeEnemies;
-
-export interface IHatchet {
-  name: string;
-  displayName: string;
-  levelReqWoodcutting: number;
-  value: number;
-}
-
-export interface IListOfHatchets {
-  bronzehatchet: IHatchet;
-  ironhatchet: IHatchet;
-  steelhatchet: IHatchet;
-  mithrilhatchet: IHatchet;
-  adamanthatchet: IHatchet;
-  runehatchet: IHatchet;
-}
-export type IListOfHatchetOptions = `bronzehatchet` | `ironhatchet` | `steelhatchet` | `mithrilhatchet` | `adamanthatchet` | `runehatchet`;
-
-export interface IHatchetsSlice {
-  playerOwnsbronzehatchet: boolean;
-  playerOwnsironhatchet: boolean;
-  playerOwnssteelhatchet: boolean;
-  playerOwnsmithrilhatchet: boolean;
-  playerOwnsadamanthatchet: boolean;
-  playerOwnsrunehatchet: boolean;
-}
-
-export interface ICompositeHatchet extends IHatchet {
-  playerOwnsThisItem: boolean;
-}
+export type IListOfAllTwoHand = IListOfMeleeTwoHand | IListOfMagicTwoHand | IListOfRangedTwoHand;
 
 export interface IFetchOptions {
   headers: IHeaderObject;

@@ -155,7 +155,7 @@ const listOfMagicBodies: Types.IListOfMagicBodies = {
     styleBonusMelee: 0,
     styleBonusRanged: 0,
     styleBonusMagic: 0,
-    value: 45000,
+    value: 5000,
   },
 };
 const listOfRangedBodies: Types.IListOfRangedBodies = {
@@ -328,7 +328,7 @@ export const BodySlot: Types.IArmorSlotBody = {
     styleBonusMelee: 0,
     styleBonusRanged: 0,
     styleBonusMagic: 0,
-    value: 4168,
+    value: 7168,
   },
   wizardrobetop: {
     name: "wizardrobetop",
@@ -398,7 +398,7 @@ export const BodySlot: Types.IArmorSlotBody = {
     styleBonusMelee: 0,
     styleBonusRanged: 0,
     styleBonusMagic: 0,
-    value: 45000,
+    value: 5500,
   },
   leatherbody: {
     name: "leatherbody",

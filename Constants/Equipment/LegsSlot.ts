@@ -155,7 +155,7 @@ const listOfMagicLegs: Types.IListOfMagicLegs = {
     styleBonusMelee: 0,
     styleBonusRanged: 0,
     styleBonusMagic: 0,
-    value: 40000,
+    value: 4000,
   },
 };
 const listOfRangedLegs: Types.IListOfRangedLegs = {
@@ -398,7 +398,7 @@ export const LegsSlot: Types.IArmorSlotLegs = {
     styleBonusMelee: 0,
     styleBonusRanged: 0,
     styleBonusMagic: 0,
-    value: 40000,
+    value: 4000,
   },
   leatherchaps: {
     name: "leatherchaps",

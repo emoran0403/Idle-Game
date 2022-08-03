@@ -1,9 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import * as Types from "../../../../Types";
-import { useSelector } from "react-redux";
-
-// const resourcesStatus = useSelector((state: Types.AllState) => state.Resources) as Types.IResources;
-let resourcesStatus = true;
 
 //object[key] is how we can access an object's value by passing in a key
 

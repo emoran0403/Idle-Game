@@ -37,6 +37,10 @@ const Lobby = (props: Types.LobbyProps) => {
     // toggle state for the lobby button
     props.setShowLobbyButton(true);
   };
+  const doClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.preventDefault();
+    console.log(`hi`);
+  };
 
   return (
     <div className="border border-dark shadow border-2 rounded-3">
@@ -56,7 +60,7 @@ const Lobby = (props: Types.LobbyProps) => {
         <div className="d-flex flex-row justify-content-center">
           <div className="card">
             <div>
-              <img src="/Assets/ActivityButtons.PNG" className="card-img-top " width="326" height="149" />
+              <img src="/Assets/ActivityButtons.PNG" className="card-img-top" width="326" height="149" />
             </div>
           </div>
         </div>

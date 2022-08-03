@@ -16,6 +16,14 @@
         return `enterTHISmanually`;
       }
     })(),
+
+    displayName: (() => {
+      try {
+        return document.title.split(` `)[0];
+      } catch (error) {
+        return `enterLEVELmanually`;
+      }
+    })(),
     level: (() => {
       try {
         return Number(document.getElementsByTagName(`tbody`)[0].children[12].children[0].textContent);
@@ -60,7 +68,7 @@
         }
         return Number(document.getElementsByTagName(`tbody`)[0].children[31].children[0].textContent);
       } catch (error) {
-        return `enterArmorManually`;
+        return `enterManually`;
       }
     })(),
 
@@ -68,7 +76,7 @@
       try {
         return Number(document.getElementsByTagName(`tbody`)[0].children[31].children[1].textContent);
       } catch (error) {
-        return `enterDefenceManually`;
+        return `enterManually`;
       }
     })(),
 
@@ -80,7 +88,7 @@
           Number(document.getElementsByTagName(`tbody`)[0].children[28].children[2].textContent)
         );
       } catch (error) {
-        return `enterAccuracyManually`;
+        return `enterManually`;
       }
     })(),
   };

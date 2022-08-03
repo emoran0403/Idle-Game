@@ -12,9 +12,11 @@ export const Hatchets = createSlice({
     playerOwnsmithrilhatchet: false,
     playerOwnsadamanthatchet: false,
     playerOwnsrunehatchet: false,
+    playerOwnsdragonhatchet: false,
+    playerOwnscrystalhatchet: false,
   },
   reducers: {
-    // this is the only reducer needed as the player will only be able to acquire armor, not sell them
+    // this is the only reducer needed as the player will only be able to acquire hatchets, not sell them
     playerNowOwnsHatchetItem: (state: Types.IHatchetsSlice, action) => {
       state[action.payload as keyof Types.IHatchetsSlice] = true;
     },

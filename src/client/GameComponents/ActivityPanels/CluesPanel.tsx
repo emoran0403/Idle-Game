@@ -3,7 +3,7 @@ import * as React from "react";
 import { useEffect } from "react";
 
 const CluesPanel = (props: Types.CluesPanelProps) => {
-  useEffect(() => {}, []);
+  // useEffect(() => {}, []);
   return (
     <div className="card border border-dark border-2 rounded-3" style={{ overflowY: "auto", position: "relative", height: "81%" }}>
       <div>This is CluesPanel</div>

@@ -6,7 +6,6 @@ import * as Types from "../../../../../Types";
 export const bank_logs = createSlice({
   name: "bank_logs",
   initialState: {
-    //list of items in the bank, starting at 0
     logs: {
       name: `logs`,
       amount: 0,

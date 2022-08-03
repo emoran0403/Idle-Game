@@ -1,6 +1,11 @@
+// module imports
 import * as Types from "../../../Types";
 import * as React from "react";
 import Dayjs from "dayjs";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+// component imports
 import Levels from "./LeftColumn/Levels";
 import QuestList from "./LeftColumn/QuestList";
 import NavigationArea from "./MiddleColumn/NavigationArea/NavigationArea";
@@ -9,25 +14,37 @@ import ActiveBuffs from "./RightColumn/ActiveBuffs";
 import WornEquipment from "./RightColumn/WornEquipment";
 import ActivityArea from "./MiddleColumn/ActivityArea/ActivityArea";
 import ChatWindow from "./LeftColumn/ChatWindow";
-import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+
+// slice imports
 import { doQuestLogicLumbridge } from "../Redux/Slices/QuestSlices/Lumbridge";
 import { doQuestLogicDraynor } from "../Redux/Slices/QuestSlices/Draynor";
 import { setActivity } from "../Redux/Slices/CurrentActivity";
 import { setQuest } from "../Redux/Slices/CurrentQuest";
-import { LumbridgeQuests } from "../../../Constants/Quests/LumbridgeQuests";
 import { addToWallet } from "../Redux/Slices/Wallet";
 import { gainXP } from "../Redux/Slices/Experience";
 import { addQuestPoints } from "../Redux/Slices/QuestPoints";
+import { addItemToInventory, removeItemFromInventory } from "../Redux/Slices/Inventory";
+
+// constants imports
+import { LumbridgeQuests } from "../../../Constants/Quests/LumbridgeQuests";
+import { DraynorQuests } from "../../../Constants/Quests/DraynorQuests";
+import { EmptyQuestRewards } from "../../../Constants/Quests";
+
+import { addLogToBank } from "../Redux/Slices/BankSlices/LogsSlice";
 import { ListOfLogs, playerEarnsLog } from "../../../Constants/Items/Logs";
 import { listOfHatchets } from "../../../Constants/SkillingEquipment/Hatchets";
-import { addItemToInventory, removeItemFromInventory } from "../Redux/Slices/Inventory";
+
+import { addOreToBank } from "../Redux/Slices/BankSlices/OresSlice";
+import { ListOfOres, resolveMining } from "../../../Constants/Items/Ores";
+import { listOfPickaxes } from "../../../Constants/SkillingEquipment/Pickaxes";
+
+import { addFishToBank } from "../Redux/Slices/BankSlices/FishSlice";
 import { ListOfFish, playerEarnsFish } from "../../../Constants/Items/Fish";
+
 import { didPlayerLevelUp, getLevel } from "../../../Constants/XP Levels";
 import { Enemies, playerAttacksTarget } from "../../../Constants/Enemies";
-import { BackSlot } from "../../../Constants/Equipment/BackSlot";
-import { addLogToBank } from "../Redux/Slices/BankSlices/LogsSlice";
-import { addFishToBank } from "../Redux/Slices/BankSlices/FishSlice";
+
+// misc imports
 import { saveState } from "../Redux/store";
 import { TOKEN_KEY } from "../ClientUtils/Fetcher";
 
@@ -46,6 +63,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
   const { CurrentActivity } = useSelector((state: Types.AllState) => state.Activity);
   const bank_logs = useSelector((state: Types.AllState) => state.Bank_Logs) as Types.ILogBankSlice;
   const bank_fish = useSelector((state: Types.AllState) => state.Bank_Fish) as Types.IFishBankSlice;
+  const bank_ores = useSelector((state: Types.AllState) => state.Bank_Ores) as Types.IOreBankSlice;
   const playerIsBanking = useSelector((state: Types.AllState) => state.Resources.Banking);
 
   const ALLSTATE = useSelector((state: Types.AllState) => state);
@@ -87,6 +105,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
     RingSlot: `none`,
     TwoHandSlot: `none`,
     Hatchet: `bronzehatchet`,
+    Pickaxe: `bronzepickaxe`,
   });
 
   //@ questStepProgress is holds the progress between completing quest steps
@@ -96,7 +115,12 @@ const GameContainer = (props: Types.GameContainerProps) => {
   //? I might not use player Lifepoints lol
   // const [playerLifePoints, setPlayerLifePoints] = useState<number>(getLevel(Experience.Consitution) * 100);
   const [targetLifePoints, setTargetLifePoints] = useState<number>(0);
+
+  //@ this is set when the player gains an item which will fill their inventory
   const [needsToBank, setNeedsToBank] = useState<boolean>(false);
+
+  //@ assign the ore rock's durability to state to track progress towards receiving an ore
+  const [oreRockDurability, setOreRockDurability] = useState<number>(0);
 
   //@ this keeps track of time, used to 'save' progress in localStorage, and to update DB
   const [checkPointTimer, setcheckPointTimer] = useState<number>(1);
@@ -128,7 +152,12 @@ const GameContainer = (props: Types.GameContainerProps) => {
     }
   };
 
-  //@ use this to add multiple messages to the chat log array
+  /**
+   * handleMultipleChatLogs queues up multiple chat logs to send to the chat window component.
+   *
+   * @param messages - An array of chatlogs to send as string[]
+   * @param tags - An array of chatlogtags to send as Types.ChatLogTag[]
+   */
   const handleMultipleChatLogs = (messages: string[], tags: Types.ChatLogTag[]) => {
     // create an array of chatlogs from the messages and tags, along with a timestamp
     let newMessagesToAdd: Types.IChatLog[] = [];
@@ -174,10 +203,10 @@ const GameContainer = (props: Types.GameContainerProps) => {
     // increment the progress counter
     setQuestStepProgress(questStepProgress + 1);
 
-    // if the progress counter hits 20, reset it to 0, and then run the quest logic based on location
+    // if the progress counter hits 30, reset it to 0, and then run the quest logic based on location
 
     //! change this to 30 for production
-    if (questStepProgress === 2) {
+    if (questStepProgress === 30) {
       setQuestStepProgress(0);
       switch (playerLocation) {
         case `Lumbridge`: {
@@ -289,19 +318,78 @@ const GameContainer = (props: Types.GameContainerProps) => {
           }
           break;
         }
+        case `Mining`: {
+          /**
+           * The logic to handle mining is slightly different from woodcutting and fishing.  The player always gets xp, albeit a variable amount.
+           * The player does damage to the ore rock, and receives an ore when the rock takes enough damage, making it similar to combat
+           */
+
+          //* call resolveMining, and store the return value.  this holds the experience and damage dealt to the rock
+          let MiningResult = resolveMining(
+            ListOfOres[CurrentResource as keyof Types.IListOfOres],
+            listOfPickaxes[currentEquipment.Pickaxe as keyof Types.IListOfPickaxes],
+            Experience.Mining,
+            Experience.Strength
+          );
+
+          //* initialize chatlogs with the experience message
+          let miningMessages: string[] = [`Gained ${MiningResult.experience} xp in Mining`];
+          let miningMessagesTags: Types.ChatLogTag[] = [`Gained XP`];
+
+          //* mining always yields experience, so dispatch it
+          dispatch(gainXP({ skill: `Mining`, xp: MiningResult.experience }));
+
+          //* decide if the player gained a level, and send a chatlog if so
+          const playerLevelled = didPlayerLevelUp(Experience.Mining, MiningResult.experience);
+          if (playerLevelled) {
+            miningMessages = [...miningMessages, `Mining Level up!`];
+            miningMessagesTags = [...miningMessagesTags, `Level Up`];
+          }
+
+          //* apply the damage to the ore rock
+          // IF the damage would deplete the rock (or cause the durability to go negative), reset the durability and give an ore to the player
+          if (oreRockDurability - MiningResult.damage <= 0) {
+            // reset the durability
+            setOreRockDurability(ListOfOres[CurrentResource as keyof Types.IListOfOres].durability);
+
+            // add a message for gaining an ore
+            miningMessages = [...miningMessages, `Mined some ${ListOfOres[CurrentResource as keyof Types.IListOfOres].displayName}`];
+            miningMessagesTags = [...miningMessagesTags, `Gained Resource`];
+
+            // IF the player earns an ore, AND the player is banking the items, we need to add the item to the inventory
+            // IF the player is not banking, we can skip this step
+            if (playerIsBanking) {
+              dispatch(addItemToInventory(ListOfOres[CurrentResource as keyof Types.IListOfOres].name));
+              // when the player's inventory will be full with the next item added, queue a bank run
+              if (playerInventory.length === 27) {
+                // console.log(`will need to bank next time`);
+                setNeedsToBank(!needsToBank);
+              }
+            }
+          } else {
+            // Otherwise, just apply the damage
+            setOreRockDurability(oreRockDurability - MiningResult.damage);
+          }
+
+          handleMultipleChatLogs(miningMessages, miningMessagesTags);
+          break;
+        }
       }
     } else {
       // Otherwise, the player needs to bank
       // iterate through the inventory array, adding items from the inventory to the bank
       for (let i = 0; i < playerInventory.length; i++) {
         // find the item, don't shift here as that is mutative
-        let itemToAddToBank = playerInventory[i];
+        let item = playerInventory[i];
+        let amount = 1;
         // check each bank slice to see if it's the correct slice, if so, add it to the bank
         //@ using bracket notation for a property that does not exist on an object returns undefined, which is considered falsy
-        if (bank_logs[itemToAddToBank as keyof Types.ILogBankSlice]) {
-          dispatch(addLogToBank({ item: itemToAddToBank, amount: 1 }));
-        } else if (bank_fish[itemToAddToBank as keyof Types.IFishBankSlice]) {
-          dispatch(addFishToBank({ item: itemToAddToBank, amount: 1 }));
+        if (bank_logs[item as keyof Types.IListOfLogs]) {
+          dispatch(addLogToBank({ item, amount }));
+        } else if (bank_fish[item as keyof Types.IListOfFish]) {
+          dispatch(addFishToBank({ item, amount }));
+        } else if (bank_ores[item as keyof Types.IListOfOres]) {
+          dispatch(addOreToBank({ item, amount }));
         }
       }
       // remove all items from the inventory, since they're now in the bank
@@ -324,27 +412,27 @@ const GameContainer = (props: Types.GameContainerProps) => {
       // IF the hit would kill the target
       if (targetLifePoints - damageDoneToTarget <= 0) {
         // then reset the lifepoints
-        setTargetLifePoints(Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].lifePoints);
+        setTargetLifePoints(Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].lifePoints);
         // and award the combat style xp
         dispatch(
-          gainXP({ skill: CurrentSkill, xp: Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].XPGivenCombatStyle })
+          gainXP({ skill: CurrentSkill, xp: Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].XPGivenCombatStyle })
         );
 
         // and award the constitution xp
         dispatch(
-          gainXP({ skill: `Constitution`, xp: Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].XPGivenConstitution })
+          gainXP({ skill: `Constitution`, xp: Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].XPGivenConstitution })
         );
 
-        // award the coins
+        // award the coins 0-half of lifepoints
         let coinDrop: number = Math.floor(
-          Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].lifePoints * Math.random()
+          Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].lifePoints * (Math.random() * 0.5)
         );
         dispatch(addToWallet(coinDrop));
 
         // prepare chatlogs for defeating an enemy, and possibly for levelling up
         let combatMessages: string[] = [
           `Defeated a ${
-            Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].displayName
+            Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].displayName
           } and earned ${coinDrop.toLocaleString("en-US")} coins`,
         ];
         let combatMessagesTags: Types.ChatLogTag[] = [`Monster Defeated`];
@@ -353,7 +441,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
         if (
           didPlayerLevelUp(
             Experience[CurrentSkill as keyof Types.ISkillList],
-            Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].XPGivenCombatStyle
+            Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].XPGivenCombatStyle
           )
         ) {
           // if so, queue up a chatlog
@@ -365,7 +453,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
         if (
           didPlayerLevelUp(
             Experience[CurrentSkill as keyof Types.ISkillList],
-            Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].XPGivenConstitution
+            Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].XPGivenConstitution
           )
         ) {
           // if so, queue up a chatlog
@@ -401,7 +489,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
     }
   };
 
-  //@ this useEffect is dedicated to executing the logic of what to do when the quest is complete
+  //@ this useEffect executes the logic of what to do when the quest is complete
   useEffect(() => {
     for (let i = 0; i < AllQuestsFromState.length; i++) {
       // iterate through all the quests until we find the one that was just completed
@@ -412,7 +500,19 @@ const GameContainer = (props: Types.GameContainerProps) => {
         // unset current quest
         dispatch(setQuest(`none`));
         // find the quest that was just completed
-        let questRewards: Types.IQuestInfo = LumbridgeQuests[LumbridgeQuests.findIndex((item) => item.name === CurrentQuest)];
+
+        // define questRewards as the placeholder temporarily
+        let questRewards = EmptyQuestRewards;
+        //@ as more locations are implemented, add them here
+        // based on the player's location, reassign questRewards as the actual rewards for the quest
+        switch (playerLocation) {
+          case `Lumbridge`:
+            questRewards = LumbridgeQuests[LumbridgeQuests.findIndex((item) => item.name === CurrentQuest)];
+            break;
+          case `Draynor`:
+            questRewards = DraynorQuests[DraynorQuests.findIndex((item) => item.name === CurrentQuest)];
+            break;
+        }
 
         //@ give item rewards
         // if Coins are rewarded, add them to the wallet
@@ -448,16 +548,25 @@ const GameContainer = (props: Types.GameContainerProps) => {
     }
   }, [questStepProgress, LumbridgeQuestArray, DraynorQuestArray]);
 
-  //@ this useEffect is dedicated to combat logic
+  //@ this useEffect sets new enemy lifepoints to state if the player chooses to do combat
   useEffect(() => {
     // IF a target is changed, set its lifepoints to component state
     // this ensures we have the correct lifepoints when the player changes targets, or starts combat for the first time
-    if (Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies]?.lifePoints) {
-      setTargetLifePoints(Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].lifePoints);
+    if (Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations]?.lifePoints) {
+      setTargetLifePoints(Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].lifePoints);
     }
   }, [Target]);
 
-  //@ this useEffect is dedicated to the 'game tick' logic
+  //@ this useEffect sets ore rock's durability to state if the player chooses to mine
+  useEffect(() => {
+    // IF the current resource is a property in List of Ores, set its durability to component state
+    // this ensures we have the correct durability when the player changes ores, or starts mining for the first time
+    if (ListOfOres[CurrentResource as keyof Types.IListOfOres]?.durability) {
+      setOreRockDurability(ListOfOres[CurrentResource as keyof Types.IListOfOres].durability);
+    }
+  }, [CurrentResource]);
+
+  //@ this useEffect runs the 'game tick' logic
   useEffect(() => {
     const interval = setInterval(() => {
       console.count(`Game Ticked`);
@@ -465,22 +574,17 @@ const GameContainer = (props: Types.GameContainerProps) => {
       // console.log({ CurrentActivity, Target, CurrentSkill, CurrentResource });
 
       if (CurrentActivity === `In combat` && Target !== `none`) {
-        // combat tick function here
         handleCombatTick();
-      } else if (CurrentActivity === `Skilling` && (CurrentSkill === `Woodcutting` || CurrentSkill === `Fishing`)) {
-        // skilling tick function here
+      } else if (CurrentActivity === `Skilling` && (CurrentSkill === `Woodcutting` || CurrentSkill === `Fishing` || CurrentSkill === `Mining`)) {
         handleSkillingTick();
       } else if (CurrentActivity === `Questing` && CurrentQuest !== `none`) {
-        // IF the player is questing, and has chosen a quest, then execute questing tick function
         handleQuestingTick();
-      } else {
-        console.log(`all ticks failed to tick`);
       }
 
       handleSavePoint();
 
-      //! set this to 2000ms in production
-    }, 2000);
+      //! set this to 2500ms in production
+    }, 2500);
 
     // console.log({ interval });
     return () => clearInterval(interval);

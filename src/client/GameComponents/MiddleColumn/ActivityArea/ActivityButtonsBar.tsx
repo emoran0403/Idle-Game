@@ -62,6 +62,23 @@ const ActivityButtons = (props: Types.ActivityButtonsCompProps) => {
       </button>
 
       <button
+        onClick={() => {
+          console.log("you clicked World Map Button");
+          props.handleUpdateDisplay(`map`);
+
+          // console.log(CurrentLocation);
+          // if (`More Locations coming soon(tm)!` === props.chatLogArray[props.chatLogArray.length - 1].message) {
+          //   return;
+          // }
+          // props.newChatLog(`More Locations coming soon(tm)!`, `Nonfilterable`);
+        }}
+        className="btn btn-primary flex-fill"
+      >
+        World Map
+        <img src="/Assets/World_map_icon.png" />
+      </button>
+
+      <button
         disabled
         onClick={() => {
           props.handleUpdateDisplay(`bosses`);

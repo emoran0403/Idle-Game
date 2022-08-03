@@ -2,6 +2,7 @@ import { combineReducers } from "@reduxjs/toolkit";
 import experienceReducer from "../Slices/Experience";
 import fishReducer from "../Slices/BankSlices/FishSlice";
 import logsReducer from "../Slices/BankSlices/LogsSlice";
+import oresReducer from "../Slices/BankSlices/OresSlice";
 import inventoryReducer from "../Slices/Inventory";
 import currentLocationReducer from "../Slices/CurrentLocation";
 import currentSkillReducer from "../Slices/CurrentSkill";
@@ -25,11 +26,13 @@ import RingSlotSliceReducer from "../Slices/EquipmentSlices/RingSlotSlice";
 import NeckSlotSliceReducer from "../Slices/EquipmentSlices/NeckSlotSlice";
 import TwoHandSlotSliceReducer from "../Slices/EquipmentSlices/TwoHandSlotSlice";
 import HatchetsSliceReducer from "../Slices/SkillingEquipmentSlices/Hatchets";
+import PickaxesSliceReducer from "../Slices/SkillingEquipmentSlices/Pickaxes";
 
 const AppReducer = combineReducers({
   Experience: experienceReducer,
   Bank_Fish: fishReducer,
   Bank_Logs: logsReducer,
+  Bank_Ores: oresReducer,
   Inventory: inventoryReducer,
   Location: currentLocationReducer,
   Skill: currentSkillReducer,
@@ -53,6 +56,7 @@ const AppReducer = combineReducers({
   NeckSlot: NeckSlotSliceReducer,
   TwoHandSlot: TwoHandSlotSliceReducer,
   Hatchets: HatchetsSliceReducer,
+  Pickaxes: PickaxesSliceReducer,
 });
 
 // wrapping app reducer in another reducer so that we can hydrate with data from the database

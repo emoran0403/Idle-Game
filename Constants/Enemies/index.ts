@@ -1,5 +1,4 @@
 import * as Types from "../../Types";
-import { Lumbridge } from "./LumbridgeEnemies";
 
 import { BackSlot } from "../Equipment/BackSlot";
 import { BodySlot } from "../Equipment/BodySlot";
@@ -11,10 +10,51 @@ import { NeckSlot } from "../Equipment/NeckSlot";
 import { RingSlot } from "../Equipment/RingSlot";
 import { TwoHandSlot } from "../Equipment/TwoHandSlot";
 import { getLevel } from "../XP Levels";
+import {
+  chicken,
+  cow,
+  farmer,
+  ghost25,
+  giantrat,
+  giantspider,
+  goblin,
+  man,
+  rat,
+  skeleton15,
+  skeleton32,
+  spider,
+  swampfrog,
+  zombie12,
+  zombie29,
+  blackknight,
+} from "./AllEnemies";
 
 // collecting all enemies within each location lets us access each location and their enemies via dynamic keys
+//@ when adding new locations, also add to types under I<Location> Enemies => (ILumbridgeEnemies)
+export const Draynor = {
+  man,
+  farmer,
+  rat,
+  skeleton15,
+  skeleton32,
+  zombie12,
+  zombie29,
+  ghost25,
+  blackknight,
+};
+export const Lumbridge = {
+  man,
+  goblin,
+  giantspider,
+  chicken,
+  cow,
+  spider,
+  giantrat,
+  swampfrog,
+};
 export const Enemies: Types.IAllEnemies = {
   Lumbridge,
+  Draynor,
 };
 
 export const playerAttacksTarget = (
@@ -25,7 +65,7 @@ export const playerAttacksTarget = (
   Equipment: Types.ICurrentEquipment
 ) => {
   // define the enemy
-  let Enemy: Types.IEnemySummary = Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies];
+  let Enemy: Types.IEnemySummary = Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations];
   // console.log(Enemies);
   // console.log(playerLocation);
   // console.log(Target);

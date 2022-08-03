@@ -679,7 +679,7 @@ export const TwoHandSlot: Types.IArmorSlotTwoHand = {
     styleBonusRanged: 0,
     styleBonusMagic: 0,
     staffElement: `air`,
-    value: 1500,
+    value: 500,
   },
   staffofwater: {
     name: "staffofwater",
@@ -700,7 +700,7 @@ export const TwoHandSlot: Types.IArmorSlotTwoHand = {
     styleBonusRanged: 0,
     styleBonusMagic: 0,
     staffElement: `water`,
-    value: 1500,
+    value: 500,
   },
   staffofearth: {
     name: "staffofearth",
@@ -721,7 +721,7 @@ export const TwoHandSlot: Types.IArmorSlotTwoHand = {
     styleBonusRanged: 0,
     styleBonusMagic: 0,
     staffElement: `earth`,
-    value: 1500,
+    value: 500,
   },
   staffoffire: {
     name: "staffoffire",
@@ -742,7 +742,7 @@ export const TwoHandSlot: Types.IArmorSlotTwoHand = {
     styleBonusRanged: 0,
     styleBonusMagic: 0,
     staffElement: `fire`,
-    value: 1500,
+    value: 500,
   },
   airbattlestaff: {
     name: "airbattlestaff",
@@ -763,7 +763,7 @@ export const TwoHandSlot: Types.IArmorSlotTwoHand = {
     styleBonusRanged: 0,
     styleBonusMagic: 0,
     staffElement: "air",
-    value: 15500,
+    value: 1500,
   },
   waterbattlestaff: {
     name: "waterbattlestaff",
@@ -784,7 +784,7 @@ export const TwoHandSlot: Types.IArmorSlotTwoHand = {
     styleBonusRanged: 0,
     styleBonusMagic: 0,
     staffElement: "water",
-    value: 15500,
+    value: 1500,
   },
   earthbattlestaff: {
     name: "earthbattlestaff",
@@ -805,7 +805,7 @@ export const TwoHandSlot: Types.IArmorSlotTwoHand = {
     styleBonusRanged: 0,
     styleBonusMagic: 0,
     staffElement: "earth",
-    value: 15500,
+    value: 1500,
   },
   firebattlestaff: {
     name: "firebattlestaff",
@@ -826,7 +826,7 @@ export const TwoHandSlot: Types.IArmorSlotTwoHand = {
     styleBonusRanged: 0,
     styleBonusMagic: 0,
     staffElement: "fire",
-    value: 15500,
+    value: 1500,
   },
   mysticairstaff: {
     name: "mysticairstaff",
@@ -847,7 +847,7 @@ export const TwoHandSlot: Types.IArmorSlotTwoHand = {
     styleBonusRanged: 0,
     styleBonusMagic: 0,
     staffElement: "air",
-    value: 42500,
+    value: 4200,
   },
   mysticwaterstaff: {
     name: "mysticwaterstaff",
@@ -868,7 +868,7 @@ export const TwoHandSlot: Types.IArmorSlotTwoHand = {
     styleBonusRanged: 0,
     styleBonusMagic: 0,
     staffElement: "water",
-    value: 42500,
+    value: 4200,
   },
   mysticearthstaff: {
     name: "mysticearthstaff",
@@ -889,7 +889,7 @@ export const TwoHandSlot: Types.IArmorSlotTwoHand = {
     styleBonusRanged: 0,
     styleBonusMagic: 0,
     staffElement: "earth",
-    value: 42500,
+    value: 4200,
   },
   mysticfirestaff: {
     name: "mysticfirestaff",
@@ -910,7 +910,7 @@ export const TwoHandSlot: Types.IArmorSlotTwoHand = {
     styleBonusRanged: 0,
     styleBonusMagic: 0,
     staffElement: "fire",
-    value: 42500,
+    value: 4200,
   },
   shortbow: {
     name: "shortbow",

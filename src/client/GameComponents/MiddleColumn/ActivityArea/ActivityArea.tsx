@@ -11,6 +11,7 @@ import MinigamePanel from "../../ActivityPanels/MinigamePanel";
 import CluesPanel from "../../ActivityPanels/CluesPanel";
 import BankPanel from "../../ActivityPanels/BankPanel";
 import ShopPanel from "../../ActivityPanels/ShopPanel";
+import MapPanel from "../../ActivityPanels/MapPanel";
 
 //@ This is a component to hold the activity buttons and the activity display components to manage state for rendering purposes
 const ActivityArea = (props: Types.ActivityAreaCompProps) => {
@@ -59,6 +60,7 @@ const ActivityArea = (props: Types.ActivityAreaCompProps) => {
           bosses: <BossesPanel handleUpdateDisplay={handleUpdateDisplay} newChatLog={props.newChatLog} />,
           minigames: <MinigamePanel handleUpdateDisplay={handleUpdateDisplay} newChatLog={props.newChatLog} />,
           clues: <CluesPanel handleUpdateDisplay={handleUpdateDisplay} newChatLog={props.newChatLog} />,
+          map: <MapPanel handleUpdateDisplay={handleUpdateDisplay} newChatLog={props.newChatLog} />,
         }[display]
       }
     </div>
