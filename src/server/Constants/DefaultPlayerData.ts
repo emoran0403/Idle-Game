@@ -50,6 +50,80 @@ export const defaultPlayerData: Types.AllState = {
     magic: { name: "magic", amount: 0 },
     elder: { name: "elder", amount: 0 },
   },
+  Bank_Ores: {
+    runeEssence: {
+      name: `runeEssence`,
+      amount: 0,
+    },
+    pureEssence: {
+      name: `pureEssence`,
+      amount: 0,
+    },
+    tinore: {
+      name: `tinore`,
+      amount: 0,
+    },
+    copperore: {
+      name: `copperore`,
+      amount: 0,
+    },
+    ironore: {
+      name: `ironore`,
+      amount: 0,
+    },
+    coalore: {
+      name: `coalore`,
+      amount: 0,
+    },
+    mithrilore: {
+      name: `mithrilore`,
+      amount: 0,
+    },
+    goldore: {
+      name: `goldore`,
+      amount: 0,
+    },
+    adamantiteore: {
+      name: `adamantiteore`,
+      amount: 0,
+    },
+    luminiteore: {
+      name: `luminiteore`,
+      amount: 0,
+    },
+    runiteore: {
+      name: `runiteore`,
+      amount: 0,
+    },
+    orichalciteore: {
+      name: `orichalciteore`,
+      amount: 0,
+    },
+    drakolithore: {
+      name: `drakolithore`,
+      amount: 0,
+    },
+    necriteore: {
+      name: `necriteore`,
+      amount: 0,
+    },
+    phasmatiteore: {
+      name: `phasmatiteore`,
+      amount: 0,
+    },
+    baniteore: {
+      name: `baniteore`,
+      amount: 0,
+    },
+    lightAnimicaore: {
+      name: `lightAnimicaore`,
+      amount: 0,
+    },
+    darkAnimicaore: {
+      name: `darkAnimicaore`,
+      amount: 0,
+    },
+  },
   Inventory: { CurrentInventory: [] },
   Location: { CurrentLocation: "Lumbridge" },
   Skill: { CurrentSkill: "none" },
@@ -234,6 +308,8 @@ export const defaultPlayerData: Types.AllState = {
     playerOwnsmithrilhatchet: false,
     playerOwnsadamanthatchet: false,
     playerOwnsrunehatchet: false,
+    playerOwnsdragonhatchet: false,
+    playerOwnscrystalhatchet: false,
   },
   Pickaxes: {
     playerOwnsbronzepickaxe: true,
@@ -242,5 +318,11 @@ export const defaultPlayerData: Types.AllState = {
     playerOwnsmithrilpickaxe: false,
     playerOwnsadamantpickaxe: false,
     playerOwnsrunepickaxe: false,
+    playerOwnsorikalkumpickaxe: false,
+    playerOwnsdragonpickaxe: false,
+    playerOwnsnecroniumpickaxe: false,
+    playerOwnscrystalpickaxe: false,
+    playerOwnsbanepickaxe: false,
+    playerOwnselderrunepickaxe: false,
   },
 };
