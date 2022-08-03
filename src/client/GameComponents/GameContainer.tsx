@@ -61,8 +61,9 @@ const GameContainer = (props: Types.GameContainerProps) => {
   const CurrentStyle = useSelector((state: Types.AllState) => state.CombatStyle.CurrentStyle as Types.ICurrentStyleOptions);
   const playerInventory = useSelector((state: Types.AllState) => state.Inventory.CurrentInventory);
   const { CurrentActivity } = useSelector((state: Types.AllState) => state.Activity);
-  // const bank_logs = useSelector((state: Types.AllState) => state.Bank_Logs) as Types.ILogBankSlice;
-  // const bank_fish = useSelector((state: Types.AllState) => state.Bank_Fish) as Types.IFishBankSlice;
+  const bank_logs = useSelector((state: Types.AllState) => state.Bank_Logs) as Types.ILogBankSlice;
+  const bank_fish = useSelector((state: Types.AllState) => state.Bank_Fish) as Types.IFishBankSlice;
+  const bank_ores = useSelector((state: Types.AllState) => state.Bank_Ores) as Types.IOreBankSlice;
   const playerIsBanking = useSelector((state: Types.AllState) => state.Resources.Banking);
 
   const ALLSTATE = useSelector((state: Types.AllState) => state);
@@ -378,15 +379,16 @@ const GameContainer = (props: Types.GameContainerProps) => {
       // iterate through the inventory array, adding items from the inventory to the bank
       for (let i = 0; i < playerInventory.length; i++) {
         // find the item, don't shift here as that is mutative
-        let itemToAddToBank = playerInventory[i];
+        let item = playerInventory[i];
+        let amount = 1;
         // check each bank slice to see if it's the correct slice, if so, add it to the bank
         //@ using bracket notation for a property that does not exist on an object returns undefined, which is considered falsy
-        if (ListOfLogs[itemToAddToBank as keyof Types.IListOfLogs]) {
-          dispatch(addLogToBank({ item: itemToAddToBank, amount: 1 }));
-        } else if (ListOfFish[itemToAddToBank as keyof Types.IListOfFish]) {
-          dispatch(addFishToBank({ item: itemToAddToBank, amount: 1 }));
-        } else if (ListOfOres[itemToAddToBank as keyof Types.IListOfOres]) {
-          dispatch(addOreToBank({ item: itemToAddToBank, amount: 1 }));
+        if (bank_logs[item as keyof Types.IListOfLogs]) {
+          dispatch(addLogToBank({ item, amount }));
+        } else if (bank_fish[item as keyof Types.IListOfFish]) {
+          dispatch(addFishToBank({ item, amount }));
+        } else if (bank_ores[item as keyof Types.IListOfOres]) {
+          dispatch(addOreToBank({ item, amount }));
         }
       }
       // remove all items from the inventory, since they're now in the bank

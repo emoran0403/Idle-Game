@@ -40,7 +40,7 @@ export const didPlayerLevelUp = (XP: number, XPGain: number) => {
   if (levelUpTable.filter((threshold) => threshold < XP).length > 0) {
     currentLevel = levelUpTable.filter((threshold) => threshold < XP).length;
   }
-  console.log(`currentLevel is ${currentLevel}`);
+  // console.log(`currentLevel is ${currentLevel}`);
   // calculate the xp the player will be at when the xp is gained
   let newXP = XP + XPGain;
 
@@ -49,7 +49,7 @@ export const didPlayerLevelUp = (XP: number, XPGain: number) => {
   if (levelUpTable.filter((threshold) => threshold < newXP).length > 0) {
     newLevel = levelUpTable.filter((threshold) => threshold < newXP).length;
   }
-  console.log(`newLevel is ${newLevel}`);
+  // console.log(`newLevel is ${newLevel}`);
 
   // if the currentLevel equals the newLevel, then the player did not level up, so return false
   if (currentLevel === newLevel) {

@@ -7,6 +7,7 @@ import { ListOfLogs } from "../../../../Constants/Items/Logs";
 import { ListOfOres } from "../../../../Constants/Items/Ores";
 
 const BankPanel = (props: Types.BankPanelProps) => {
+  // grab the bank slices from state
   const bank_logs = useSelector((state: Types.AllState) => state.Bank_Logs) as Types.ILogBankSlice;
   const bank_fish = useSelector((state: Types.AllState) => state.Bank_Fish) as Types.IFishBankSlice;
   const bank_ores = useSelector((state: Types.AllState) => state.Bank_Ores) as Types.IOreBankSlice;

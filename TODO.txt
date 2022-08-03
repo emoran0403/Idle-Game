@@ -17,6 +17,7 @@
 * DONE - update IListOfPickaxeOptions for all picks
 
 //# Fixes
+* I cant get clay to show up in the bank lol - it is not being saved for some reason
 * check buttons on shop panel - they cannot be nested
 * check keys in quest panel
 * can clean up chat logs in game component under woodcutting and fishing
