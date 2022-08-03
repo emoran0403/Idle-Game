@@ -1,6 +1,6 @@
 import * as Types from "../../Types";
 
-export const listOfPickaxes = {
+export const listOfPickaxes: Types.IListOfPickaxes = {
   bronzepickaxe: {
     name: "bronzepickaxe",
     displayName: "Bronze pickaxe",
@@ -101,9 +101,9 @@ export const listOfPickaxes = {
     damageMax: 120,
     value: 13334,
   },
-  elderpickaxe: {
-    name: "elderpickaxe",
-    displayName: "Elder pickaxe",
+  elderrunepickaxe: {
+    name: "elderrunepickaxe",
+    displayName: "Elder rune pickaxe",
     levelReqMining: 90,
     penetration: 235,
     damageMin: 45,

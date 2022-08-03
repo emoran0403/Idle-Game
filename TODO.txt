@@ -6,18 +6,18 @@
 
 
 //# NEXT
-* add dragon info to the logs
-* add that into types
-* update IListOfHatchetOptions for dragon
-* update IListOfPickaxeOptions for all picks
-* add mining options to location summaries
+*! conditionally check for crystal hatchets and pickaxes in shop and skilling panel, as these are special items
 * add mining resources to bank
 * add mining to skills panel
 * add mining to game GameContainer
 * add mining calculations to Ores file under constants
+* DONE  -add ores to resource options type
+* DONE - add mining options to location summaries
+* DONE - update IListOfPickaxeOptions for all picks
 
 //# Fixes
 * grammar when fishing anchovies
+* equipping a weapon while skilling stops the skilling
 
 //# world map
 * grab an image for the world map, place these divs over it, setting the pixels as needed

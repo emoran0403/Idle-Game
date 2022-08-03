@@ -37,4 +37,19 @@ export const listOfHatchets: Types.IListOfHatchets = {
     levelReqWoodcutting: 41,
     value: 834,
   },
+
+  dragonhatchet: {
+    name: "dragonhatchet",
+    displayName: `Dragon hatchet`,
+    levelReqWoodcutting: 61,
+    value: 55000,
+  },
+  //@ this is a special purchase
+
+  crystalhatchet: {
+    name: "crystalhatchet",
+    displayName: `Crystal hatchet`,
+    levelReqWoodcutting: 71,
+    value: 4000,
+  },
 };

@@ -12,6 +12,12 @@ export const Pickaxes = createSlice({
     playerOwnsmithrilpickaxe: false,
     playerOwnsadamantpickaxe: false,
     playerOwnsrunepickaxe: false,
+    playerOwnsorikalkumpickaxe: false,
+    playerOwnsdragonpickaxe: false,
+    playerOwnsnecroniumpickaxe: false,
+    playerOwnscrystalpickaxe: false,
+    playerOwnsbanepickaxe: false,
+    playerOwnselderrunepickaxe: false,
   },
   reducers: {
     // this is the only reducer needed as the player will only be able to acquire pickaxes, not sell them
