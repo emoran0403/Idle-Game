@@ -148,6 +148,9 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
       compositeHatchets.push(tempHatchet);
     }
 
+    //@ remove crystal hatchet until implemented
+    let compositeHatchetsNoCrystal = compositeHatchets.filter((hatchet) => hatchet.name !== "crystalhatchet");
+
     const itemHasBeenEquipped = (e: React.ChangeEvent<HTMLSelectElement>) => {
       //! string type is `ok` since they can be keys of Types.ICurrentEquipment
       /**
@@ -158,15 +161,15 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
       let oldEquippedItemDisplayName: string = ``;
 
       // go thru all the composite items so we can set the context of the old and new items
-      for (let i = 0; i < compositeHatchets.length; i++) {
+      for (let i = 0; i < compositeHatchetsNoCrystal.length; i++) {
         // if we match the .name to the newly equipped item, set the display name
-        if (compositeHatchets[i].name === e.target.value) {
-          newlyEquippedItemDisplayName = compositeHatchets[i].displayName;
+        if (compositeHatchetsNoCrystal[i].name === e.target.value) {
+          newlyEquippedItemDisplayName = compositeHatchetsNoCrystal[i].displayName;
         }
 
         // if we match the .name to the old equipped item, set the display name
-        if (compositeHatchets[i].name === props.currentEquipment[e.target.name as keyof Types.ICurrentEquipment]) {
-          oldEquippedItemDisplayName = compositeHatchets[i].displayName;
+        if (compositeHatchetsNoCrystal[i].name === props.currentEquipment[e.target.name as keyof Types.ICurrentEquipment]) {
+          oldEquippedItemDisplayName = compositeHatchetsNoCrystal[i].displayName;
         }
       }
 
@@ -180,7 +183,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
 
     return (
       <select className="form-select" onChange={(e) => itemHasBeenEquipped(e)} name={`Hatchet`}>
-        {compositeHatchets.map((Hatchet) => (
+        {compositeHatchetsNoCrystal.map((Hatchet) => (
           <option
             value={Hatchet.name}
             key={`Slot-Item-${Hatchet.name}`}
@@ -211,6 +214,9 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
       compositePickaxes.push(tempPickaxe);
     }
 
+    //@ remove crystal pickaxe until implemented
+    let compositePickaxesNoCrystal = compositePickaxes.filter((hatchet) => hatchet.name !== "crystalpickaxe");
+
     const itemHasBeenEquipped = (e: React.ChangeEvent<HTMLSelectElement>) => {
       //! string type is `ok` since they can be keys of Types.ICurrentEquipment
       /**
@@ -221,15 +227,15 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
       let oldEquippedItemDisplayName: string = ``;
 
       // go thru all the composite items so we can set the context of the old and new items
-      for (let i = 0; i < compositePickaxes.length; i++) {
+      for (let i = 0; i < compositePickaxesNoCrystal.length; i++) {
         // if we match the .name to the newly equipped item, set the display name
-        if (compositePickaxes[i].name === e.target.value) {
-          newlyEquippedItemDisplayName = compositePickaxes[i].displayName;
+        if (compositePickaxesNoCrystal[i].name === e.target.value) {
+          newlyEquippedItemDisplayName = compositePickaxesNoCrystal[i].displayName;
         }
 
         // if we match the .name to the old equipped item, set the display name
-        if (compositePickaxes[i].name === props.currentEquipment[e.target.name as keyof Types.ICurrentEquipment]) {
-          oldEquippedItemDisplayName = compositePickaxes[i].displayName;
+        if (compositePickaxesNoCrystal[i].name === props.currentEquipment[e.target.name as keyof Types.ICurrentEquipment]) {
+          oldEquippedItemDisplayName = compositePickaxesNoCrystal[i].displayName;
         }
       }
 
@@ -243,7 +249,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
 
     return (
       <select className="form-select" onChange={(e) => itemHasBeenEquipped(e)} name={`Pickaxe`}>
-        {compositePickaxes.map((Pickaxe) => (
+        {compositePickaxesNoCrystal.map((Pickaxe) => (
           <option
             value={Pickaxe.name}
             key={`Slot-Item-${Pickaxe.name}`}
