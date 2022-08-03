@@ -55,7 +55,6 @@ const CurrentResourceComp = (props: Types.NoProps) => {
           ) : (
             <div>none</div>
           )}
-          {/* <div>{Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.ILumbridgeEnemies].displayName}</div> */}
         </div>
       ) : (
         <div>
