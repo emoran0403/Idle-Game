@@ -131,6 +131,48 @@ export interface ILogBankSlice {
   elder: IBankItem;
 }
 
+//@ ******************************* HATCHETS *******************************
+
+export interface IHatchet {
+  name: string;
+  displayName: string;
+  levelReqWoodcutting: number;
+  value: number;
+}
+export interface IListOfHatchets {
+  bronzehatchet: IHatchet;
+  ironhatchet: IHatchet;
+  steelhatchet: IHatchet;
+  mithrilhatchet: IHatchet;
+  adamanthatchet: IHatchet;
+  runehatchet: IHatchet;
+  dragonhatchet: IHatchet;
+  crystalhatchet: IHatchet;
+}
+export interface IHatchetsSlice {
+  playerOwnsbronzehatchet: boolean;
+  playerOwnsironhatchet: boolean;
+  playerOwnssteelhatchet: boolean;
+  playerOwnsmithrilhatchet: boolean;
+  playerOwnsadamanthatchet: boolean;
+  playerOwnsrunehatchet: boolean;
+  playerOwnsdragonhatchet: boolean;
+  playerOwnscrystalhatchet: boolean;
+}
+export interface ICompositeHatchet extends IHatchet {
+  playerOwnsThisItem: boolean;
+}
+
+export type IListOfHatchetOptions =
+  | `bronzehatchet`
+  | `ironhatchet`
+  | `steelhatchet`
+  | `mithrilhatchet`
+  | `adamanthatchet`
+  | `runehatchet`
+  | `dragonhatchet`
+  | `crystalhatchet`;
+
 //@ ******************************* ORE *******************************
 
 export interface IOre {
@@ -182,6 +224,62 @@ export interface IOreBankSlice {
   lightAnimica: IBankItem;
   darkAnimica: IBankItem;
 }
+
+//@ ******************************* PICKAXES *******************************
+
+export interface IPickaxe {
+  name: string;
+  displayName: string;
+  levelReqMining: number;
+  penetration: number;
+  damageMin: number;
+  damageMax: number;
+  value: number;
+}
+export interface IListOfPickaxes {
+  bronzepickaxe: IPickaxe;
+  ironpickaxe: IPickaxe;
+  steelpickaxe: IPickaxe;
+  mithrilpickaxe: IPickaxe;
+  adamantpickaxe: IPickaxe;
+  runepickaxe: IPickaxe;
+  orikalkumpickaxe: IPickaxe;
+  dragonpickaxe: IPickaxe;
+  necroniumpickaxe: IPickaxe;
+  crystalpickaxe: IPickaxe;
+  banepickaxe: IPickaxe;
+  elderrunepickaxe: IPickaxe;
+}
+export interface IPickaxesSlice {
+  playerOwnsbronzepickaxe: boolean;
+  playerOwnsironpickaxe: boolean;
+  playerOwnssteelpickaxe: boolean;
+  playerOwnsmithrilpickaxe: boolean;
+  playerOwnsadamantpickaxe: boolean;
+  playerOwnsrunepickaxe: boolean;
+  playerOwnsorikalkumpickaxe: boolean;
+  playerOwnsdragonpickaxe: boolean;
+  playerOwnsnecroniumpickaxe: boolean;
+  playerOwnscrystalpickaxe: boolean;
+  playerOwnsbanepickaxe: boolean;
+  playerOwnselderrunepickaxe: boolean;
+}
+export interface ICompositePickaxe extends IPickaxe {
+  playerOwnsThisItem: boolean;
+}
+export type IListOfPickaxeOptions =
+  | `bronzepickaxe`
+  | `ironpickaxe`
+  | `steelpickaxe`
+  | `mithrilpickaxe`
+  | `adamantpickaxe`
+  | `runepickaxe`
+  | `orikalkumpickaxe`
+  | `dragonpickaxe`
+  | `necroniumpickaxe`
+  | `crystalpickaxe`
+  | `banepickaxe`
+  | `elderrunepickaxe`;
 
 //@ ******************************* FISH *******************************
 
@@ -394,23 +492,6 @@ export interface IListOfCombatStyles {
 export interface ICurrentTarget {
   CurrentTarget: ICurrentTargetOptions;
 }
-//* copy this as more locations are added
-export interface ILumbridgeEnemies {
-  man: IEnemySummary;
-  goblin: IEnemySummary;
-  giantspider: IEnemySummary;
-  chicken: IEnemySummary;
-  cow: IEnemySummary;
-  spider: IEnemySummary;
-  giantrat: IEnemySummary;
-  swampfrog: IEnemySummary;
-}
-//* add to this as more enemies are added
-export type ICurrentTargetOptions = `none` | `man` | `goblin` | `giantspider` | `chicken` | `cow` | `spider` | `giantrat` | `swampfrog`;
-export type ListOfCombatStyleSkills = `Attack` | `Strength` | `Defence` | `Ranged` | `Magic`;
-export type ICurrentStyleOptions = `none` | `melee` | `ranged` | `air` | `fire` | `water` | `earth`;
-export type CombatStyle = `melee` | `magic` | `ranged`;
-export type SpellElement = `typeless` | `air` | `fire` | `water` | `earth`;
 export interface IEnemySummary {
   name: string;
   displayName: string;
@@ -428,8 +509,7 @@ export interface IEnemySummary {
   defence: number;
   accuracy: number;
 }
-
-//@ recreate this for each location
+//* copy this as more locations are added
 export interface ILumbridgeEnemies {
   man: IEnemySummary;
   goblin: IEnemySummary;
@@ -440,7 +520,6 @@ export interface ILumbridgeEnemies {
   giantrat: IEnemySummary;
   swampfrog: IEnemySummary;
 }
-
 export interface IDraynorEnemies {
   rat: IEnemySummary;
   man: IEnemySummary;
@@ -452,6 +531,39 @@ export interface IDraynorEnemies {
   ghost25: IEnemySummary;
   blackknight: IEnemySummary;
 }
+//* extend this as more locations are added
+export interface IAllEnemies {
+  Lumbridge: ILumbridgeEnemies;
+  Draynor: IDraynorEnemies;
+}
+export type ListOfCombatStyleSkills = `Attack` | `Strength` | `Defence` | `Ranged` | `Magic`;
+export type ICurrentStyleOptions = `none` | `melee` | `ranged` | `air` | `fire` | `water` | `earth`;
+export type CombatStyle = `melee` | `magic` | `ranged`;
+export type SpellElement = `typeless` | `air` | `fire` | `water` | `earth`;
+
+//* extend this as more locations are added
+export type IEnemyLocations = ILumbridgeEnemies | IDraynorEnemies;
+
+//* add to this as more enemies are added
+export type ICurrentTargetOptions =
+  | `none`
+  | `man`
+  | `goblin`
+  | `giantspider`
+  | `chicken`
+  | `cow`
+  | `spider`
+  | `giantrat`
+  | `swampfrog`
+  | `rat`
+  | `farmer`
+  | `zombie12`
+  | `skeleton15`
+  | `zombie29`
+  | `skeleton32`
+  | `ghost25`
+  | `blackknight`;
+
 //@ ******************************* RESOURCES *******************************
 
 export interface ICurrentResource {
@@ -1211,115 +1323,6 @@ export interface ITwoHandSlotSlice {
   playerOwnsmagicshortbow: boolean;
 }
 export type IListOfAllTwoHand = IListOfMeleeTwoHand | IListOfMagicTwoHand | IListOfRangedTwoHand;
-
-//@ extend this as more locations are added
-export interface IAllEnemies {
-  Lumbridge: ILumbridgeEnemies;
-  Draynor: IDraynorEnemies;
-}
-//@ extend this as more locations are added
-export type IEnemyLocations = ILumbridgeEnemies | IDraynorEnemies;
-
-export interface IHatchet {
-  name: string;
-  displayName: string;
-  levelReqWoodcutting: number;
-  value: number;
-}
-
-export interface IPickaxe {
-  name: string;
-  displayName: string;
-  levelReqMining: number;
-  penetration: number;
-  damageMin: number;
-  damageMax: number;
-  value: number;
-}
-
-export interface IListOfHatchets {
-  bronzehatchet: IHatchet;
-  ironhatchet: IHatchet;
-  steelhatchet: IHatchet;
-  mithrilhatchet: IHatchet;
-  adamanthatchet: IHatchet;
-  runehatchet: IHatchet;
-  dragonhatchet: IHatchet;
-  crystalhatchet: IHatchet;
-}
-
-export interface IListOfPickaxes {
-  bronzepickaxe: IPickaxe;
-  ironpickaxe: IPickaxe;
-  steelpickaxe: IPickaxe;
-  mithrilpickaxe: IPickaxe;
-  adamantpickaxe: IPickaxe;
-  runepickaxe: IPickaxe;
-  orikalkumpickaxe: IPickaxe;
-  dragonpickaxe: IPickaxe;
-  necroniumpickaxe: IPickaxe;
-  crystalpickaxe: IPickaxe;
-  banepickaxe: IPickaxe;
-  elderrunepickaxe: IPickaxe;
-}
-
-export type IListOfHatchetOptions =
-  | `bronzehatchet`
-  | `ironhatchet`
-  | `steelhatchet`
-  | `mithrilhatchet`
-  | `adamanthatchet`
-  | `runehatchet`
-  | `dragonhatchet`
-  | `crystalhatchet`;
-
-export type IListOfPickaxeOptions =
-  | `bronzepickaxe`
-  | `ironpickaxe`
-  | `steelpickaxe`
-  | `mithrilpickaxe`
-  | `adamantpickaxe`
-  | `runepickaxe`
-  | `orikalkumpickaxe`
-  | `dragonpickaxe`
-  | `necroniumpickaxe`
-  | `crystalpickaxe`
-  | `banepickaxe`
-  | `elderrunepickaxe`;
-
-export interface IHatchetsSlice {
-  playerOwnsbronzehatchet: boolean;
-  playerOwnsironhatchet: boolean;
-  playerOwnssteelhatchet: boolean;
-  playerOwnsmithrilhatchet: boolean;
-  playerOwnsadamanthatchet: boolean;
-  playerOwnsrunehatchet: boolean;
-  playerOwnsdragonhatchet: boolean;
-  playerOwnscrystalhatchet: boolean;
-}
-
-export interface IPickaxesSlice {
-  playerOwnsbronzepickaxe: boolean;
-  playerOwnsironpickaxe: boolean;
-  playerOwnssteelpickaxe: boolean;
-  playerOwnsmithrilpickaxe: boolean;
-  playerOwnsadamantpickaxe: boolean;
-  playerOwnsrunepickaxe: boolean;
-  playerOwnsorikalkumpickaxe: boolean;
-  playerOwnsdragonpickaxe: boolean;
-  playerOwnsnecroniumpickaxe: boolean;
-  playerOwnscrystalpickaxe: boolean;
-  playerOwnsbanepickaxe: boolean;
-  playerOwnselderrunepickaxe: boolean;
-}
-
-export interface ICompositeHatchet extends IHatchet {
-  playerOwnsThisItem: boolean;
-}
-
-export interface ICompositePickaxe extends IPickaxe {
-  playerOwnsThisItem: boolean;
-}
 
 export interface IFetchOptions {
   headers: IHeaderObject;
