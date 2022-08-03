@@ -322,7 +322,6 @@ const GameContainer = (props: Types.GameContainerProps) => {
     }
   };
 
-  //! need to work on this to allow for targets from more than 1 location
   //@ this will run every game tick (while in combat) and holds the logic for resolving combat turns
   const handleCombatTick = () => {
     let arrayOfCombatStyleSkills = ["Attack", "Strength", "Defence", "Ranged", "Magic"];

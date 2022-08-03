@@ -1,4 +1,5 @@
 import * as Types from "../../Types";
+import { getLevel } from "../XP Levels";
 
 export const ListOfOres: Types.IListOfOres = {
   runeEssence: {
@@ -163,4 +164,46 @@ export const ListOfOres: Types.IListOfOres = {
     xpMultiplier: 0.84,
     value: 1734,
   },
+};
+
+// if the player is mining, and the game interval has ticked, run this function
+/**
+ * Calculates the damage the player does to an ore rock, and the experience gained as a result.
+ *
+ * Returns an object:
+ *  { damage: number, experience: number}
+ *
+ * @param ore - The ore the player is mining as Types.IOre
+ * @param pickaxe - The pickaxe the player is using as Types.IPickaxe
+ */
+export const resolveMining = (ore: Types.IOre, pickaxe: Types.IPickaxe, miningXP: number, strengthXP: number) => {
+  let resultObj = {
+    damage: 0,
+    experience: 0,
+  };
+
+  // calculate the player's mining and strength levels
+  const miningLevel = getLevel(miningXP);
+  const strengthLevel = getLevel(strengthXP);
+
+  // calcualte the random amount of damage above the minimum damage, then add the minimum
+  const damageRoll = Math.floor(Math.random() * (pickaxe.damageMax - pickaxe.damageMin)) + pickaxe.damageMin;
+
+  // calculate the net hardness - a penalty IF the player is using a lower level pickaxe on a higher tier ore
+  const netHardness = pickaxe.penetration - ore.hardness >= 0 ? 0 : pickaxe.penetration - ore.hardness;
+
+  // calculate the the damage the player will do to the rock
+  const damage = miningLevel + Math.floor(strengthLevel / 10) + damageRoll + netHardness;
+
+  // update the damage value of the resultObj
+  resultObj.damage = damage;
+
+  // calculate the the experience the player gains on each hit
+  const experience = Math.floor(damage * ore.xpMultiplier * 0.4);
+
+  // update the experience value of the resultObj
+  resultObj.experience = experience;
+
+  // finally, return the resultObj
+  return resultObj;
 };

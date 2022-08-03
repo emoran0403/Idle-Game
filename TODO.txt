@@ -10,12 +10,13 @@
 * add mining resources to bank
 * add mining to skills panel
 * add mining to game GameContainer
-* add mining calculations to Ores file under constants
-* DONE  -add ores to resource options type
+* DONE - add mining calculations to Ores file under constants
+* DONE - add ores to resource options type
 * DONE - add mining options to location summaries
 * DONE - update IListOfPickaxeOptions for all picks
 
 //# Fixes
+* worn equipment component spills out of the container
 * grammar when fishing anchovies
 * equipping a weapon while skilling stops the skilling
 
