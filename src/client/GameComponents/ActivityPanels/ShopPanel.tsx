@@ -97,6 +97,9 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
       compositeItems.push(tempItem);
     }
 
+    //@ remove crystal hatchet until implemented
+    let compositeItemsNoCrystal = compositeItems.filter((hatchet) => hatchet.name !== "crystalhatchet");
+
     const handleBuyingItem = (item: Types.ICompositeHatchet) => {
       // define vowels for grammar in chatlog
       let vowels: string[] = [`a`, `e`, `i`, `o`, `u`];
@@ -123,7 +126,7 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
       <div className="card-title border border-dark border-1 rounded-3">
         <h6 className="text-center">Hatchets</h6>
         <div className="d-flex flex-row flex-wrap">
-          {compositeItems.map((item) => (
+          {compositeItemsNoCrystal.map((item) => (
             <button
               key={`resource-list-${item.name}`}
               className={`card border mb-3`}
@@ -137,7 +140,7 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
                 <div className="card-text">
                   {item.playerOwnsThisItem && <div>Owned</div>}
                   {!item.playerOwnsThisItem && (
-                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 25).toLocaleString("en-US")}</button>
+                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 25).toLocaleString("en-US")}gp</button>
                   )}
                 </div>
               </div>
@@ -163,6 +166,9 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
       let tempItem: Types.ICompositePickaxe = { ...pickaxesFromConstants[i], playerOwnsThisItem };
       compositeItems.push(tempItem);
     }
+
+    //@ remove crystal pickaxe until implemented
+    let compositeItemsNoCrystal = compositeItems.filter((pickaxe) => pickaxe.name !== "crystalpickaxe");
 
     const handleBuyingItem = (item: Types.ICompositePickaxe) => {
       // define vowels for grammar in chatlog
@@ -190,7 +196,7 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
       <div className="card-title border border-dark border-1 rounded-3">
         <h6 className="text-center">Pickaxes</h6>
         <div className="d-flex flex-row flex-wrap">
-          {compositeItems.map((item) => (
+          {compositeItemsNoCrystal.map((item) => (
             <button
               key={`resource-list-${item.name}`}
               className={`card border mb-3`}
@@ -204,7 +210,7 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
                 <div className="card-text">
                   {item.playerOwnsThisItem && <div>Owned</div>}
                   {!item.playerOwnsThisItem && (
-                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 25).toLocaleString("en-US")}</button>
+                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 25).toLocaleString("en-US")}gp</button>
                   )}
                 </div>
               </div>
@@ -271,7 +277,7 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
                 <div className="card-text">
                   {item.playerOwnsThisItem && <div>Owned</div>}
                   {!item.playerOwnsThisItem && (
-                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 10).toLocaleString("en-US")}</button>
+                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 10).toLocaleString("en-US")}gp</button>
                   )}
                 </div>
               </div>
@@ -338,7 +344,7 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
                 <div className="card-text">
                   {item.playerOwnsThisItem && <div>Owned</div>}
                   {!item.playerOwnsThisItem && (
-                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 10).toLocaleString("en-US")}</button>
+                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 10).toLocaleString("en-US")}gp</button>
                   )}
                 </div>
               </div>
@@ -405,7 +411,7 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
                 <div className="card-text">
                   {item.playerOwnsThisItem && <div>Owned</div>}
                   {!item.playerOwnsThisItem && (
-                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 10).toLocaleString("en-US")}</button>
+                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 10).toLocaleString("en-US")}gp</button>
                   )}
                 </div>
               </div>
@@ -472,7 +478,7 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
                 <div className="card-text">
                   {item.playerOwnsThisItem && <div>Owned</div>}
                   {!item.playerOwnsThisItem && (
-                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 10).toLocaleString("en-US")}</button>
+                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 10).toLocaleString("en-US")}gp</button>
                   )}
                 </div>
               </div>
@@ -539,7 +545,7 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
                 <div className="card-text">
                   {item.playerOwnsThisItem && <div>Owned</div>}
                   {!item.playerOwnsThisItem && (
-                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 10).toLocaleString("en-US")}</button>
+                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 10).toLocaleString("en-US")}gp</button>
                   )}
                 </div>
               </div>
@@ -606,7 +612,7 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
                 <div className="card-text">
                   {item.playerOwnsThisItem && <div>Owned</div>}
                   {!item.playerOwnsThisItem && (
-                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 10).toLocaleString("en-US")}</button>
+                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 10).toLocaleString("en-US")}gp</button>
                   )}
                 </div>
               </div>

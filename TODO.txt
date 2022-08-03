@@ -16,6 +16,7 @@
 * DONE - update IListOfPickaxeOptions for all picks
 
 //# Fixes
+* clean up the functions in shoppanel - handle buying item can be a standalone function i think
 * worn equipment component spills out of the container
 * grammar when fishing anchovies
 * equipping a weapon while skilling stops the skilling
