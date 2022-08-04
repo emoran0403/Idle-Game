@@ -99,7 +99,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
 
   const WoodcuttingOptions = (resourceArray: string[]) => {
     return (
-      <div onClick={() => handleToggleSkillPanel(`Woodcutting`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
+      <div role="button" onClick={() => handleToggleSkillPanel(`Woodcutting`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
         <h1 className="text-center">Woodcutting Level {WoodcuttingLevel}</h1>
         <div className={`d-flex flex-row flex-wrap ${skillPanelsOpened.Woodcutting ? `` : `d-none`}`}>
           {resourceArray.map((resource) => (
@@ -141,7 +141,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
 
   const FishingOptions = (resourceArray: string[]) => {
     return (
-      <div onClick={() => handleToggleSkillPanel(`Fishing`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
+      <div role="button" onClick={() => handleToggleSkillPanel(`Fishing`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
         <h1 className="text-center">Fishing Level {FishingLevel}</h1>
         <div className={`d-flex flex-row flex-wrap ${skillPanelsOpened.Fishing ? `` : `d-none`}`}>
           {resourceArray.map((resource) => (
@@ -182,7 +182,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
 
   const MiningOptions = (resourceArray: string[]) => {
     return (
-      <div onClick={() => handleToggleSkillPanel(`Mining`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
+      <div role="button" onClick={() => handleToggleSkillPanel(`Mining`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
         <h1 className="text-center">Mining Level {MiningLevel}</h1>
         <div className={`d-flex flex-row flex-wrap ${skillPanelsOpened.Mining ? `` : `d-none`}`}>
           {resourceArray.map((resource) => (

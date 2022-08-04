@@ -58,8 +58,7 @@
               ></div>
 
 //# Quality of life
-* make skills in skills panel into collapsible panels
-* make resources in bank panel into collapsible panels
+* make resources in bank panel into collapsible panels - copy skillspanel
 * add dropping messages to ores if the player is dropping resources
 * quest is colored yellow when i have the combat level req
 * Bank shows items in ascending level order
@@ -68,6 +67,7 @@
 *** maybe make the game choose the next available quest automatically
 *** get a changelog from github for the lobby
 *** offline progress
+* DONE -  make skills in skills panel into collapsible panels
 * DONE -  hatchet options in skill panel display their woodcutting
 * DONE -  globe picture for the world map icon
 * DONE -  double check the buttons on quest panel - allowing player to begin a quest without the combat requirements
