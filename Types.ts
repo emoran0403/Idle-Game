@@ -283,6 +283,35 @@ export type IListOfPickaxeOptions =
   | `banepickaxe`
   | `elderrunepickaxe`;
 
+//@ ******************************* THIEVING *******************************
+
+export interface IMainLoot {
+  Coins: Number;
+  Items: string[];
+}
+export interface IMultiLoot {
+  levelReqThieving: number;
+  levelReqAgility: number;
+}
+export interface IPickpocketNPC {
+  name: string;
+  displayName: string;
+  levelReqThieving: number;
+  XPGivenThieving: number;
+  doubleloot: IMultiLoot;
+  tripleloot: IMultiLoot;
+  quadloot: IMultiLoot;
+  loot: IMainLoot;
+}
+export interface IPickpocketStall {
+  name: string;
+  displayName: string;
+  levelreqThieving: number;
+  respawntime: number;
+  XPGivenThieving: number;
+  loot: IMainLoot;
+}
+
 //@ ******************************* FISH *******************************
 
 export interface IFish {
