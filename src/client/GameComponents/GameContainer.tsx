@@ -429,7 +429,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
 
         // award the coins 0-half of lifepoints
         let coinDrop: number = Math.floor(
-          Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].lifePoints * (Math.random() * 0.5)
+          Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].level * (Math.random() * 0.5)
         );
         dispatch(addToWallet(coinDrop));
 

@@ -3,12 +3,8 @@
 * - add typings for enemies search => //@ recreate this for each location
 
 
-//# PRAYER
-* DONE - update combat tick to dispatch prayer xp for the XPGivenPrayer amount
-* DONE - update enemy object utility to account for bones being dropped
-* DONE - add an XPGivenPrayer property to all enemies, defaulting to 0
-* DONE - update typings for enemies
-
+//! do soon
+scale coin drops to the enemy level, not lifepoints
 
 //# THIEVING
 * update location summaries to include thieving opportunities
@@ -17,17 +13,6 @@
 * update GameContainer to handle thieving skill
 * update currentresourcecomp to handle thieving skill
 
-
-//# MINING DONE**************************************
-* DONE - add mining to skills panel
-* DONE - add mining to game GameContainer
-* DONE - add case to currentresourcecomp for mining
-* DONE - conditionally check for crystal hatchets and pickaxes in shop and skilling panel, as these are special items
-* DONE - add mining resources to bank
-* DONE - add mining calculations to Ores file under constants
-* DONE - add ores to resource options type
-* DONE - add mining options to location summaries
-* DONE - update IListOfPickaxeOptions for all picks
 
 //# Fixes
 * can clean up chat logs in game component under woodcutting and fishing
@@ -71,14 +56,12 @@
 * DONE - quest panel to show missing level requirements
 
 //# Content
-* Draynor Village + enemies
 * Varrock
 * Al-Kharid
 * bosses
 * clue scrolls
 * enemy item drops
 * high scores list - read multiple MongoDB call
-* add more skills
 * DONE - implement combat into quests
 
 //# Misc / Bug Fixes
@@ -86,5 +69,20 @@
 * Logic - experience and levels is displaying too high for some reason :/
 * remove boilerplate commits
 
-//# mining
-https://runescape.wiki/w/Module:Sandbox/User:Doktor/Mining
+
+//# PRAYER DONE**********************************
+* DONE - update combat tick to dispatch prayer xp for the XPGivenPrayer amount
+* DONE - update enemy object utility to account for bones being dropped
+* DONE - add an XPGivenPrayer property to all enemies, defaulting to 0
+* DONE - update typings for enemies
+
+//# MINING DONE**************************************
+* DONE - add mining to skills panel
+* DONE - add mining to game GameContainer
+* DONE - add case to currentresourcecomp for mining
+* DONE - conditionally check for crystal hatchets and pickaxes in shop and skilling panel, as these are special items
+* DONE - add mining resources to bank
+* DONE - add mining calculations to Ores file under constants
+* DONE - add ores to resource options type
+* DONE - add mining options to location summaries
+* DONE - update IListOfPickaxeOptions for all picks
