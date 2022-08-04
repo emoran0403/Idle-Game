@@ -32,7 +32,6 @@
 * DONE - update IListOfPickaxeOptions for all picks
 
 //# Fixes
-* check keys in quest panel
 * can clean up chat logs in game component under woodcutting and fishing
 * add chat logs for gaining xp in combat skills
 * add chat logs for gaining xp in gathering skills
@@ -42,6 +41,7 @@
 * inventory pushes down worn equipment component when it has items with long names
 * grammar when fishing anchovies
 * equipping a weapon while skilling stops the skilling
+* DONE - check keys in quest panel = the requirements and reward Li's did not have keys
 * DONE - check buttons on shop panel - they cannot be nested
 * DONE - inventory needs to display ore display names
 

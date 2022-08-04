@@ -283,7 +283,9 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
           <p>Quest Requirements:</p>
           <ul>
             {questReqArray.map((questReq) => (
-              <li className="text-start">{questReq}</li>
+              <li key={`quest-panel-quest-req-${questReq}`} className="text-start">
+                {questReq}
+              </li>
             ))}
           </ul>
         </div>
@@ -328,7 +330,9 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
           <p>Level Requirements:</p>
           <ul>
             {levelReqArray.map((levelReq) => (
-              <li className="text-start">{levelReq}</li>
+              <li key={`quest-panel-level-req-${levelReq}`} className="text-start">
+                {levelReq}
+              </li>
             ))}
           </ul>
         </div>
@@ -365,7 +369,9 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
           <p>Experience Rewards:</p>
           <ul>
             {xprewardArray.map((reward) => (
-              <li className="text-start">{reward}</li>
+              <li key={`quest-panel-reward-${reward}`} className="text-start">
+                {reward}
+              </li>
             ))}
           </ul>
         </div>
