@@ -20,9 +20,7 @@
 * update currentresourcecomp to handle thieving skill
 
 
-//# MINING
-* I cant get clay to show up in the bank lol - it is not being saved for some reason
-* make clay work lol
+//# MINING DONE**************************************
 * DONE - add mining to skills panel
 * DONE - add mining to game GameContainer
 * DONE - add case to currentresourcecomp for mining
@@ -34,7 +32,6 @@
 * DONE - update IListOfPickaxeOptions for all picks
 
 //# Fixes
-* check buttons on shop panel - they cannot be nested
 * check keys in quest panel
 * can clean up chat logs in game component under woodcutting and fishing
 * add chat logs for gaining xp in combat skills
@@ -45,6 +42,7 @@
 * inventory pushes down worn equipment component when it has items with long names
 * grammar when fishing anchovies
 * equipping a weapon while skilling stops the skilling
+* DONE - check buttons on shop panel - they cannot be nested
 * DONE - inventory needs to display ore display names
 
 //# world map

@@ -127,24 +127,25 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
         <h6 className="text-center">Hatchets</h6>
         <div className="d-flex flex-row flex-wrap">
           {compositeItemsNoCrystal.map((item) => (
-            <button
-              key={`resource-list-${item.name}`}
-              className={`card border mb-3`}
-              disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 25}
-              onClick={() => {
-                handleBuyingItem(item);
-              }}
-            >
+            <div className={`card border mb-3`} key={`resource-list-${item.name}`}>
               <div className="card-body text">
                 <h5 className="card-title">{item.displayName}</h5>
-                <div className="card-text">
-                  {item.playerOwnsThisItem && <div>Owned</div>}
+                <div className="card-text justify-content-center">
+                  {item.playerOwnsThisItem && <div className="text-center">Owned</div>}
                   {!item.playerOwnsThisItem && (
-                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 25).toLocaleString("en-US")}gp</button>
+                    <button
+                      disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 25}
+                      onClick={() => {
+                        handleBuyingItem(item);
+                      }}
+                      className={`btn border mb-3 ${handleButtonStyle(item)}`}
+                    >
+                      Cost: {(item.value * 25).toLocaleString("en-US")}gp
+                    </button>
                   )}
                 </div>
               </div>
-            </button>
+            </div>
           ))}
         </div>
       </div>
@@ -197,24 +198,25 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
         <h6 className="text-center">Pickaxes</h6>
         <div className="d-flex flex-row flex-wrap">
           {compositeItemsNoCrystal.map((item) => (
-            <button
-              key={`resource-list-${item.name}`}
-              className={`card border mb-3`}
-              disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 25}
-              onClick={() => {
-                handleBuyingItem(item);
-              }}
-            >
+            <div className={`card border mb-3`} key={`resource-list-${item.name}`}>
               <div className="card-body text">
                 <h5 className="card-title">{item.displayName}</h5>
-                <div className="card-text">
-                  {item.playerOwnsThisItem && <div>Owned</div>}
+                <div className="card-text justify-content-center">
+                  {item.playerOwnsThisItem && <div className="text-center">Owned</div>}
                   {!item.playerOwnsThisItem && (
-                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 25).toLocaleString("en-US")}gp</button>
+                    <button
+                      disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 25}
+                      onClick={() => {
+                        handleBuyingItem(item);
+                      }}
+                      className={`btn border mb-3 ${handleButtonStyle(item)}`}
+                    >
+                      Cost: {(item.value * 25).toLocaleString("en-US")}gp
+                    </button>
                   )}
                 </div>
               </div>
-            </button>
+            </div>
           ))}
         </div>
       </div>
@@ -264,24 +266,25 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
         <h6 className="text-center">Head Slot Items</h6>
         <div className="d-flex flex-row flex-wrap">
           {compositeItems.map((item) => (
-            <button
-              key={`resource-list-${item.name}`}
-              className={`card border mb-3`}
-              disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 10}
-              onClick={() => {
-                handleBuyingItem(item);
-              }}
-            >
+            <div className={`card border mb-3`} key={`resource-list-${item.name}`}>
               <div className="card-body text">
                 <h5 className="card-title">{item.displayName}</h5>
-                <div className="card-text">
-                  {item.playerOwnsThisItem && <div>Owned</div>}
+                <div className="card-text justify-content-center">
+                  {item.playerOwnsThisItem && <div className="text-center">Owned</div>}
                   {!item.playerOwnsThisItem && (
-                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 10).toLocaleString("en-US")}gp</button>
+                    <button
+                      disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 10}
+                      onClick={() => {
+                        handleBuyingItem(item);
+                      }}
+                      className={`btn border mb-3 ${handleButtonStyle(item)}`}
+                    >
+                      Cost: {(item.value * 10).toLocaleString("en-US")}gp
+                    </button>
                   )}
                 </div>
               </div>
-            </button>
+            </div>
           ))}
         </div>
       </div>
@@ -331,24 +334,25 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
         <h6 className="text-center">Body Slot Items</h6>
         <div className="d-flex flex-row flex-wrap">
           {compositeItems.map((item) => (
-            <button
-              key={`resource-list-${item.name}`}
-              className={`card border mb-3`}
-              disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 10}
-              onClick={() => {
-                handleBuyingItem(item);
-              }}
-            >
+            <div className={`card border mb-3`} key={`resource-list-${item.name}`}>
               <div className="card-body text">
                 <h5 className="card-title">{item.displayName}</h5>
-                <div className="card-text">
-                  {item.playerOwnsThisItem && <div>Owned</div>}
+                <div className="card-text justify-content-center">
+                  {item.playerOwnsThisItem && <div className="text-center">Owned</div>}
                   {!item.playerOwnsThisItem && (
-                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 10).toLocaleString("en-US")}gp</button>
+                    <button
+                      disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 10}
+                      onClick={() => {
+                        handleBuyingItem(item);
+                      }}
+                      className={`btn border mb-3 ${handleButtonStyle(item)}`}
+                    >
+                      Cost: {(item.value * 10).toLocaleString("en-US")}gp
+                    </button>
                   )}
                 </div>
               </div>
-            </button>
+            </div>
           ))}
         </div>
       </div>
@@ -398,24 +402,25 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
         <h6 className="text-center">Legs Slot Items</h6>
         <div className="d-flex flex-row flex-wrap">
           {compositeItems.map((item) => (
-            <button
-              key={`resource-list-${item.name}`}
-              className={`card border mb-3`}
-              disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 10}
-              onClick={() => {
-                handleBuyingItem(item);
-              }}
-            >
+            <div className={`card border mb-3`} key={`resource-list-${item.name}`}>
               <div className="card-body text">
                 <h5 className="card-title">{item.displayName}</h5>
-                <div className="card-text">
-                  {item.playerOwnsThisItem && <div>Owned</div>}
+                <div className="card-text justify-content-center">
+                  {item.playerOwnsThisItem && <div className="text-center">Owned</div>}
                   {!item.playerOwnsThisItem && (
-                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 10).toLocaleString("en-US")}gp</button>
+                    <button
+                      disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 10}
+                      onClick={() => {
+                        handleBuyingItem(item);
+                      }}
+                      className={`btn border mb-3 ${handleButtonStyle(item)}`}
+                    >
+                      Cost: {(item.value * 10).toLocaleString("en-US")}gp
+                    </button>
                   )}
                 </div>
               </div>
-            </button>
+            </div>
           ))}
         </div>
       </div>
@@ -465,24 +470,25 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
         <h6 className="text-center">Hands Slot Items</h6>
         <div className="d-flex flex-row flex-wrap">
           {compositeItems.map((item) => (
-            <button
-              key={`resource-list-${item.name}`}
-              className={`card border mb-3`}
-              disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 10}
-              onClick={() => {
-                handleBuyingItem(item);
-              }}
-            >
+            <div className={`card border mb-3`} key={`resource-list-${item.name}`}>
               <div className="card-body text">
                 <h5 className="card-title">{item.displayName}</h5>
-                <div className="card-text">
-                  {item.playerOwnsThisItem && <div>Owned</div>}
+                <div className="card-text justify-content-center">
+                  {item.playerOwnsThisItem && <div className="text-center">Owned</div>}
                   {!item.playerOwnsThisItem && (
-                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 10).toLocaleString("en-US")}gp</button>
+                    <button
+                      disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 10}
+                      onClick={() => {
+                        handleBuyingItem(item);
+                      }}
+                      className={`btn border mb-3 ${handleButtonStyle(item)}`}
+                    >
+                      Cost: {(item.value * 10).toLocaleString("en-US")}gp
+                    </button>
                   )}
                 </div>
               </div>
-            </button>
+            </div>
           ))}
         </div>
       </div>
@@ -532,24 +538,25 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
         <h6 className="text-center">Feet Slot Items</h6>
         <div className="d-flex flex-row flex-wrap">
           {compositeItems.map((item) => (
-            <button
-              key={`resource-list-${item.name}`}
-              className={`card border mb-3`}
-              disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 10}
-              onClick={() => {
-                handleBuyingItem(item);
-              }}
-            >
+            <div className={`card border mb-3`} key={`resource-list-${item.name}`}>
               <div className="card-body text">
                 <h5 className="card-title">{item.displayName}</h5>
-                <div className="card-text">
-                  {item.playerOwnsThisItem && <div>Owned</div>}
+                <div className="card-text justify-content-center">
+                  {item.playerOwnsThisItem && <div className="text-center">Owned</div>}
                   {!item.playerOwnsThisItem && (
-                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 10).toLocaleString("en-US")}gp</button>
+                    <button
+                      disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 10}
+                      onClick={() => {
+                        handleBuyingItem(item);
+                      }}
+                      className={`btn border mb-3 ${handleButtonStyle(item)}`}
+                    >
+                      Cost: {(item.value * 10).toLocaleString("en-US")}gp
+                    </button>
                   )}
                 </div>
               </div>
-            </button>
+            </div>
           ))}
         </div>
       </div>
@@ -599,24 +606,25 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
         <h6 className="text-center">Two Hand Slot Items</h6>
         <div className="d-flex flex-row flex-wrap">
           {compositeItems.map((item) => (
-            <button
-              key={`resource-list-${item.name}`}
-              className={`card border mb-3`}
-              disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 10}
-              onClick={() => {
-                handleBuyingItem(item);
-              }}
-            >
+            <div className={`card border mb-3`} key={`resource-list-${item.name}`}>
               <div className="card-body text">
                 <h5 className="card-title">{item.displayName}</h5>
-                <div className="card-text">
-                  {item.playerOwnsThisItem && <div>Owned</div>}
+                <div className="card-text justify-content-center">
+                  {item.playerOwnsThisItem && <div className="text-center">Owned</div>}
                   {!item.playerOwnsThisItem && (
-                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 10).toLocaleString("en-US")}gp</button>
+                    <button
+                      disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 10}
+                      onClick={() => {
+                        handleBuyingItem(item);
+                      }}
+                      className={`btn border mb-3 ${handleButtonStyle(item)}`}
+                    >
+                      Cost: {(item.value * 10).toLocaleString("en-US")}gp
+                    </button>
                   )}
                 </div>
               </div>
-            </button>
+            </div>
           ))}
         </div>
       </div>
