@@ -18,10 +18,10 @@ import { setSkill } from "../../Redux/Slices/CurrentSkill";
 import { setActivity } from "../../Redux/Slices/CurrentActivity";
 import { setTarget } from "../../Redux/Slices/CurrentTarget";
 import { setQuest } from "../../Redux/Slices/CurrentQuest";
+import { useState } from "react";
 
 const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
   const dispatch = useDispatch();
-  // This grabs the current location from state
   const { CurrentLocation } = useSelector((state: Types.AllState) => state.Location) as Types.ICurrentLocation;
   const hatchetsFromState = useSelector((state: Types.AllState) => state.Hatchets) as Types.IHatchetsSlice;
   const pickaxesFromState = useSelector((state: Types.AllState) => state.Pickaxes) as Types.IPickaxesSlice;
@@ -34,6 +34,49 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
   let WoodcuttingLevel: number = getLevel(Experience.Woodcutting);
   let FishingLevel: number = getLevel(Experience.Fishing);
   let MiningLevel: number = getLevel(Experience.Mining);
+
+  interface SkillPanels {
+    Woodcutting: boolean;
+    Mining: boolean;
+    Fishing: boolean;
+    Thieving: boolean;
+    Farming: boolean;
+    Firemaking: boolean;
+    Hunter: boolean;
+    Divination: boolean;
+    Archaeology: boolean;
+    Runecrafting: boolean;
+    Construction: boolean;
+    Summoning: boolean;
+    Agility: boolean;
+  }
+
+  const [skillPanelsOpened, setSkillPanelsOpened] = useState({
+    Woodcutting: false,
+    Mining: false,
+    Fishing: false,
+    Thieving: false,
+    Farming: false,
+    Firemaking: false,
+    Hunter: false,
+    Divination: false,
+    Archaeology: false,
+    Runecrafting: false,
+    Construction: false,
+    Summoning: false,
+    Agility: false,
+  });
+
+  /**
+   * Added as an onClick handler to toggle the display state of the SkillPanels
+   *
+   * @param panel - A string used to index the skillPanelsOpened object.
+   */
+  const handleToggleSkillPanel = (panel: string) => {
+    let copyOfskillPanelsOpened = { ...skillPanelsOpened };
+    copyOfskillPanelsOpened[panel as keyof SkillPanels] = !copyOfskillPanelsOpened[panel as keyof SkillPanels];
+    setSkillPanelsOpened({ ...copyOfskillPanelsOpened });
+  };
 
   const panelHeaderJSX = () => {
     // returns the JSX for the panel header
@@ -56,9 +99,9 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
 
   const WoodcuttingOptions = (resourceArray: string[]) => {
     return (
-      <div onClick={() => {}} className="card-title border border-dark border-1 rounded-3">
-        <h6 className="text-center">Woodcutting Level {WoodcuttingLevel}</h6>
-        <div className="d-flex flex-row flex-wrap">
+      <div onClick={() => handleToggleSkillPanel(`Woodcutting`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
+        <h1 className="text-center">Woodcutting Level {WoodcuttingLevel}</h1>
+        <div className={`d-flex flex-row flex-wrap ${skillPanelsOpened.Woodcutting ? `` : `d-none`}`}>
           {resourceArray.map((resource) => (
             <button
               disabled={WoodcuttingLevel < ListOfLogs[resource as keyof Types.IListOfLogs].levelReqWoodcutting ? true : false}
@@ -98,9 +141,9 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
 
   const FishingOptions = (resourceArray: string[]) => {
     return (
-      <div className="card-title border border-dark border-1 rounded-3">
-        <h6 className="text-center">Fishing Level {FishingLevel}</h6>
-        <div className="d-flex flex-row flex-wrap">
+      <div onClick={() => handleToggleSkillPanel(`Fishing`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
+        <h1 className="text-center">Fishing Level {FishingLevel}</h1>
+        <div className={`d-flex flex-row flex-wrap ${skillPanelsOpened.Fishing ? `` : `d-none`}`}>
           {resourceArray.map((resource) => (
             <button
               disabled={FishingLevel < ListOfFish[resource as keyof Types.IListOfFish].levelReqFishing ? true : false}
@@ -139,9 +182,9 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
 
   const MiningOptions = (resourceArray: string[]) => {
     return (
-      <div className="card-title border border-dark border-1 rounded-3">
-        <h6 className="text-center">Mining Level {MiningLevel}</h6>
-        <div className="d-flex flex-row flex-wrap">
+      <div onClick={() => handleToggleSkillPanel(`Mining`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
+        <h1 className="text-center">Mining Level {MiningLevel}</h1>
+        <div className={`d-flex flex-row flex-wrap ${skillPanelsOpened.Mining ? `` : `d-none`}`}>
           {resourceArray.map((resource) => (
             <button
               disabled={MiningLevel < ListOfOres[resource as keyof Types.IListOfOres].levelReqMining ? true : false}
