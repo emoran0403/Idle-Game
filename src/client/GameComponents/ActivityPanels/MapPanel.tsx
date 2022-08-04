@@ -3,6 +3,11 @@ import * as React from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setLocation } from "../../Redux/Slices/CurrentLocation";
+import { setTarget } from "../../Redux/Slices/CurrentTarget";
+import { setActivity } from "../../Redux/Slices/CurrentActivity";
+import { setResource } from "../../Redux/Slices/CurrentResource";
+import { setQuest } from "../../Redux/Slices/CurrentQuest";
+import { setSkill } from "../../Redux/Slices/CurrentSkill";
 
 const MapPanel = (props: Types.MapPanelProps) => {
   const dispatch = useDispatch();
@@ -27,6 +32,13 @@ const MapPanel = (props: Types.MapPanelProps) => {
       </div>
     );
   };
+  const resetState = () => {
+    dispatch(setTarget(`none`));
+    dispatch(setActivity(`Idle`));
+    dispatch(setResource(`none`));
+    dispatch(setQuest(`none`));
+    dispatch(setSkill(`none`));
+  };
   return (
     <div className="container card border border-dark border-2 rounded-3" style={{ overflowY: "auto", position: "relative", height: "81%" }}>
       {panelHeaderJSX()}
@@ -38,6 +50,7 @@ const MapPanel = (props: Types.MapPanelProps) => {
               className="btn btn-primary"
               onClick={() => {
                 console.log(`travelling to Lumbridge`);
+                resetState();
                 dispatch(setLocation(`Lumbridge`));
               }}
             >
@@ -47,6 +60,7 @@ const MapPanel = (props: Types.MapPanelProps) => {
               className="btn btn-primary"
               onClick={() => {
                 console.log(`travelling to Draynor Village`);
+                resetState();
                 dispatch(setLocation(`Draynor`));
               }}
             >
