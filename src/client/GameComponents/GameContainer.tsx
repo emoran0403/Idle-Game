@@ -412,12 +412,17 @@ const GameContainer = (props: Types.GameContainerProps) => {
       if (targetLifePoints - damageDoneToTarget <= 0) {
         // then reset the lifepoints
         setTargetLifePoints(Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].lifePoints);
-        // and award the combat style xp
+        // award the combat style xp
         dispatch(
           gainXP({ skill: CurrentSkill, xp: Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].XPGivenCombatStyle })
         );
 
-        // and award the constitution xp
+        // award the prayer xp if the enemy drops prayer xp items
+        if (Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].XPGivenPrayer) {
+          dispatch(gainXP({ skill: `Prayer`, xp: Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].XPGivenPrayer }));
+        }
+
+        // award the constitution xp
         dispatch(
           gainXP({ skill: `Constitution`, xp: Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].XPGivenConstitution })
         );

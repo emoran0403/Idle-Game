@@ -4,12 +4,10 @@
 
 
 //# PRAYER
-* update combat tick to dispatch prayer xp for the XPGivenPrayer amount
-* update GameContainer to handle prayer skill
-* update currentresourcecomp to handle prayer skill
+* DONE - update combat tick to dispatch prayer xp for the XPGivenPrayer amount
 * DONE - update enemy object utility to account for bones being dropped
 * DONE - add an XPGivenPrayer property to all enemies, defaulting to 0
-* DONE -  update typings for enemies
+* DONE - update typings for enemies
 
 
 //# THIEVING
