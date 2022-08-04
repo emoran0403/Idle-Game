@@ -36,9 +36,9 @@
 * add chat logs for gaining xp in combat skills
 * add chat logs for gaining xp in gathering skills
 * content layout shift in levels component when xp is 10+ digits
-* clean up the functions in shoppanel - handle buying item can be a standalone function i think
 * inventory pushes down worn equipment component when it has items with long names
 * grammar when fishing anchovies
+* DONE - clean up the functions in shoppanel - handle buying item can be a standalone function i think
 * DONE - equipping a weapon while skilling stops the skilling
 * DONE - make it so that changing location resets all state to none or idle
 * DONE - check keys in quest panel = the requirements and reward Li's did not have keys
