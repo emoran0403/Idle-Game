@@ -5,6 +5,7 @@ export const pickpocketman: Types.IPickpocketNPC = {
   displayName: `Man`,
   levelReqThieving: 1,
   XPGivenThieving: 8,
+  stunTime: 1,
   doubleloot: {
     levelReqThieving: 11,
     levelReqAgility: 0,
@@ -22,6 +23,7 @@ export const pickpocketfarmer: Types.IPickpocketNPC = {
   displayName: `Farmer`,
   levelReqThieving: 10,
   XPGivenThieving: 14.5,
+  stunTime: 1,
   doubleloot: {
     levelReqThieving: 20,
     levelReqAgility: 10,
@@ -39,6 +41,7 @@ export const pickpockethamfemale: Types.IPickpocketNPC = {
   displayName: `H.A.M Member (female)`,
   levelReqThieving: 15,
   XPGivenThieving: 18.5,
+  stunTime: 2,
   doubleloot: {
     levelReqThieving: 25,
     levelReqAgility: 15,
@@ -56,6 +59,7 @@ export const pickpockethammale: Types.IPickpocketNPC = {
   displayName: `H.A.M Member (male)`,
   levelReqThieving: 20,
   XPGivenThieving: 22.2,
+  stunTime: 3,
   doubleloot: {
     levelReqThieving: 30,
     levelReqAgility: 20,
@@ -73,6 +77,7 @@ export const pickpocketwarriorwoman: Types.IPickpocketNPC = {
   displayName: "Warrior woman",
   levelReqThieving: 25,
   XPGivenThieving: 26,
+  stunTime: 3,
   doubleloot: {
     levelReqThieving: 35,
     levelReqAgility: 25,
@@ -96,6 +101,7 @@ export const pickpocketalkharidwarrior: Types.IPickpocketNPC = {
   displayName: "Al Kharid warrior",
   levelReqThieving: 25,
   XPGivenThieving: 26,
+  stunTime: 3,
   doubleloot: {
     levelReqThieving: 35,
     levelReqAgility: 25,
@@ -119,6 +125,7 @@ export const pickpocketcavegoblin: Types.IPickpocketNPC = {
   displayName: "Cave goblin",
   levelReqThieving: 36,
   XPGivenThieving: 40,
+  stunTime: 4,
   doubleloot: {
     levelReqThieving: 46,
     levelReqAgility: 36,
@@ -142,6 +149,7 @@ export const pickpocketmasterfarmer: Types.IPickpocketNPC = {
   displayName: "Master Farmer",
   levelReqThieving: 38,
   XPGivenThieving: 43,
+  stunTime: 4,
   doubleloot: {
     levelReqThieving: 48,
     levelReqAgility: 38,
@@ -165,6 +173,7 @@ export const pickpocketguard: Types.IPickpocketNPC = {
   displayName: "Guard",
   levelReqThieving: 40,
   XPGivenThieving: 46.8,
+  stunTime: 5,
   doubleloot: {
     levelReqThieving: 50,
     levelReqAgility: 40,
@@ -188,6 +197,7 @@ export const pickpocketfremennikcitizen: Types.IPickpocketNPC = {
   displayName: "Fremennik citizen",
   levelReqThieving: 45,
   XPGivenThieving: 65,
+  stunTime: 5,
   doubleloot: {
     levelReqThieving: 55,
     levelReqAgility: 45,
@@ -211,6 +221,7 @@ export const pickpocketardougneknight: Types.IPickpocketNPC = {
   displayName: "Knight of Ardougne",
   levelReqThieving: 55,
   XPGivenThieving: 84.3,
+  stunTime: 6,
   doubleloot: {
     levelReqThieving: 65,
     levelReqAgility: 55,
@@ -234,6 +245,7 @@ export const pickpocketmenaphitethug: Types.IPickpocketNPC = {
   displayName: "Menaphite Thug",
   levelReqThieving: 65,
   XPGivenThieving: 137.5,
+  stunTime: 7,
   doubleloot: {
     levelReqThieving: 75,
     levelReqAgility: 65,
@@ -257,6 +269,7 @@ export const pickpocketwatchman: Types.IPickpocketNPC = {
   displayName: "Yanille Watchman",
   levelReqThieving: 65,
   XPGivenThieving: 137.5,
+  stunTime: 7,
   doubleloot: {
     levelReqThieving: 75,
     levelReqAgility: 65,
@@ -280,6 +293,7 @@ export const pickpocketpaladin: Types.IPickpocketNPC = {
   displayName: "Paladin",
   levelReqThieving: 70,
   XPGivenThieving: 151.8,
+  stunTime: 8,
   doubleloot: {
     levelReqThieving: 80,
     levelReqAgility: 70,
@@ -303,6 +317,7 @@ export const pickpocketgnome: Types.IPickpocketNPC = {
   displayName: "Gnome",
   levelReqThieving: 75,
   XPGivenThieving: 198.3,
+  stunTime: 8,
   doubleloot: {
     levelReqThieving: 85,
     levelReqAgility: 75,
@@ -326,6 +341,7 @@ export const pickpockethero: Types.IPickpocketNPC = {
   displayName: "Hero",
   levelReqThieving: 80,
   XPGivenThieving: 273.3,
+  stunTime: 9,
   doubleloot: {
     levelReqThieving: 90,
     levelReqAgility: 80,
@@ -349,6 +365,7 @@ export const pickpockettrader: Types.IPickpocketNPC = {
   displayName: "Trader",
   levelReqThieving: 90,
   XPGivenThieving: 556.5,
+  stunTime: 10,
   doubleloot: {
     levelReqThieving: Infinity,
     levelReqAgility: Infinity,

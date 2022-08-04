@@ -298,6 +298,7 @@ export interface IPickpocketNPC {
   displayName: string;
   levelReqThieving: number;
   XPGivenThieving: number;
+  stunTime: number;
   doubleloot: IMultiLoot;
   tripleloot: IMultiLoot;
   quadloot: IMultiLoot;
@@ -307,8 +308,8 @@ export interface IPickpocketStall {
   name: string;
   displayName: string;
   levelreqThieving: number;
-  respawntime: number;
   XPGivenThieving: number;
+  stunTime: number;
   loot: IMainLoot;
 }
 
