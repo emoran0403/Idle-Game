@@ -39,7 +39,7 @@
 * clean up the functions in shoppanel - handle buying item can be a standalone function i think
 * inventory pushes down worn equipment component when it has items with long names
 * grammar when fishing anchovies
-* equipping a weapon while skilling stops the skilling
+* DONE - equipping a weapon while skilling stops the skilling
 * DONE - make it so that changing location resets all state to none or idle
 * DONE - check keys in quest panel = the requirements and reward Li's did not have keys
 * DONE - check buttons on shop panel - they cannot be nested
