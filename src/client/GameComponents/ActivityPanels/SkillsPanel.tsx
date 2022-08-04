@@ -223,6 +223,15 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
       props.setCurrentEquipment({ ...props.currentEquipment, [e.target.name as keyof Types.ICurrentEquipment]: e.target.value });
     };
 
+    // returns a string representing the item display name and the level required to wield the item
+    const displayOption = (Item: Types.ICompositeHatchet) => {
+      if (Item.levelReqWoodcutting >= 0) {
+        return `${Item.displayName} (Woodcutting Lv: ${Item.levelReqWoodcutting})`;
+      } else {
+        return `${Item.displayName} (Woodcutting Lv: 0)`;
+      }
+    };
+
     return (
       <select className="form-select" onChange={(e) => itemHasBeenEquipped(e)} name={`Hatchet`}>
         {compositeHatchetsNoCrystal.map((Hatchet) => (
@@ -233,7 +242,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
             disabled={applyDisabledAttribute(Hatchet)}
             selected={Hatchet.name === props.currentEquipment.Hatchet ? true : false}
           >
-            {Hatchet.displayName}
+            {displayOption(Hatchet)}
           </option>
         ))}
       </select>
@@ -289,6 +298,15 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
       props.setCurrentEquipment({ ...props.currentEquipment, [e.target.name as keyof Types.ICurrentEquipment]: e.target.value });
     };
 
+    // returns a string representing the item display name and the level required to wield the item
+    const displayOption = (Item: Types.ICompositePickaxe) => {
+      if (Item.levelReqMining >= 0) {
+        return `${Item.displayName} (Mining Lv: ${Item.levelReqMining})`;
+      } else {
+        return `${Item.displayName} (Mining Lv: 0)`;
+      }
+    };
+
     return (
       <select className="form-select" onChange={(e) => itemHasBeenEquipped(e)} name={`Pickaxe`}>
         {compositePickaxesNoCrystal.map((Pickaxe) => (
@@ -299,7 +317,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
             disabled={applyDisabledAttribute(Pickaxe)}
             selected={Pickaxe.name === props.currentEquipment.Pickaxe ? true : false}
           >
-            {Pickaxe.displayName}
+            {displayOption(Pickaxe)}
           </option>
         ))}
       </select>

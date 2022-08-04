@@ -50,17 +50,17 @@ import { TOKEN_KEY } from "../ClientUtils/Fetcher";
 
 const GameContainer = (props: Types.GameContainerProps) => {
   const dispatch = useDispatch();
-  const Target = useSelector((state: Types.AllState) => state.Target.CurrentTarget as Types.ICurrentTargetOptions);
-  const CurrentQuest = useSelector((state: Types.AllState) => state.Quest.CurrentQuest as Types.ICurrentQuestOptions);
-  const playerLocation = useSelector((state: Types.AllState) => state.Location.CurrentLocation as Types.ICurrentLocationOptions);
-  const LumbridgeQuestArray = useSelector((state: Types.AllState) => state.Quests_Lumbridge.LumbridgeQuestArray as Types.IStateQuest[]);
-  const DraynorQuestArray = useSelector((state: Types.AllState) => state.Quests_Draynor.DraynorQuestArray as Types.IStateQuest[]);
-  const CurrentResource = useSelector((state: Types.AllState) => state.Resource.CurrentResource);
-  const CurrentSkill = useSelector((state: Types.AllState) => state.Skill.CurrentSkill as Types.ListOfSkillOptions);
-  const Experience = useSelector((state: Types.AllState) => state.Experience);
-  const CurrentStyle = useSelector((state: Types.AllState) => state.CombatStyle.CurrentStyle as Types.ICurrentStyleOptions);
+  const Target = useSelector((state: Types.AllState) => state.Target.CurrentTarget) as Types.ICurrentTargetOptions;
+  const CurrentQuest = useSelector((state: Types.AllState) => state.Quest.CurrentQuest) as Types.ICurrentQuestOptions;
+  const playerLocation = useSelector((state: Types.AllState) => state.Location.CurrentLocation) as Types.ICurrentLocationOptions;
+  const LumbridgeQuestArray = useSelector((state: Types.AllState) => state.Quests_Lumbridge.LumbridgeQuestArray) as Types.IStateQuest[];
+  const DraynorQuestArray = useSelector((state: Types.AllState) => state.Quests_Draynor.DraynorQuestArray) as Types.IStateQuest[];
+  const CurrentResource = useSelector((state: Types.AllState) => state.Resource.CurrentResource) as Types.ICurrentResourceOptions;
+  const CurrentSkill = useSelector((state: Types.AllState) => state.Skill.CurrentSkill) as Types.ListOfSkillOptions;
+  const Experience = useSelector((state: Types.AllState) => state.Experience) as Types.ISkillList;
+  const CurrentStyle = useSelector((state: Types.AllState) => state.CombatStyle.CurrentStyle) as Types.ICurrentStyleOptions;
   const playerInventory = useSelector((state: Types.AllState) => state.Inventory.CurrentInventory);
-  const { CurrentActivity } = useSelector((state: Types.AllState) => state.Activity);
+  const CurrentActivity = useSelector((state: Types.AllState) => state.Activity.CurrentActivity) as Types.ICurrentActivityOptions;
   const bank_logs = useSelector((state: Types.AllState) => state.Bank_Logs) as Types.ILogBankSlice;
   const bank_fish = useSelector((state: Types.AllState) => state.Bank_Fish) as Types.IFishBankSlice;
   const bank_ores = useSelector((state: Types.AllState) => state.Bank_Ores) as Types.IOreBankSlice;
@@ -204,9 +204,8 @@ const GameContainer = (props: Types.GameContainerProps) => {
     setQuestStepProgress(questStepProgress + 1);
 
     // if the progress counter hits 30, reset it to 0, and then run the quest logic based on location
-
-    //! change this to 30 for production
-    if (questStepProgress === 30) {
+    //! change this to 24 for production (24 ticks at 2.5 secs ea = 1 min per quest step)
+    if (questStepProgress === 24) {
       setQuestStepProgress(0);
       switch (playerLocation) {
         case `Lumbridge`: {
@@ -413,12 +412,17 @@ const GameContainer = (props: Types.GameContainerProps) => {
       if (targetLifePoints - damageDoneToTarget <= 0) {
         // then reset the lifepoints
         setTargetLifePoints(Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].lifePoints);
-        // and award the combat style xp
+        // award the combat style xp
         dispatch(
           gainXP({ skill: CurrentSkill, xp: Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].XPGivenCombatStyle })
         );
 
-        // and award the constitution xp
+        // award the prayer xp if the enemy drops prayer xp items
+        if (Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].XPGivenPrayer) {
+          dispatch(gainXP({ skill: `Prayer`, xp: Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].XPGivenPrayer }));
+        }
+
+        // award the constitution xp
         dispatch(
           gainXP({ skill: `Constitution`, xp: Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].XPGivenConstitution })
         );

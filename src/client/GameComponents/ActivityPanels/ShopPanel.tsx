@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { removeFromWallet } from "../../Redux/Slices/Wallet";
 
 import { playerNowOwnsHatchetItem } from "../../Redux/Slices/SkillingEquipmentSlices/Hatchets";
+import { playerNowOwnsPickaxeItem } from "../../Redux/Slices/SkillingEquipmentSlices/Pickaxes";
 
 import { playerNowOwnsHeadItem } from "../../Redux/Slices/EquipmentSlices/HeadSlotSlice";
 import { playerNowOwnsBodyItem } from "../../Redux/Slices/EquipmentSlices/BodySlotSlice";
@@ -14,6 +15,7 @@ import { playerNowOwnsFeetItem } from "../../Redux/Slices/EquipmentSlices/FeetSl
 import { playerNowOwnsTwoHandItem } from "../../Redux/Slices/EquipmentSlices/TwoHandSlotSlice";
 
 import { listOfHatchets } from "../../../../Constants/SkillingEquipment/Hatchets";
+import { listOfPickaxes } from "../../../../Constants/SkillingEquipment/Pickaxes";
 
 import { HeadSlot } from "../../../../Constants/Equipment/HeadSlot";
 import { BodySlot } from "../../../../Constants/Equipment/BodySlot";
@@ -21,8 +23,6 @@ import { LegsSlot } from "../../../../Constants/Equipment/LegsSlot";
 import { HandsSlot } from "../../../../Constants/Equipment/HandsSlot";
 import { FeetSlot } from "../../../../Constants/Equipment/FeetSlot";
 import { TwoHandSlot } from "../../../../Constants/Equipment/TwoHandSlot";
-import { listOfPickaxes } from "../../../../Constants/SkillingEquipment/Pickaxes";
-import { playerNowOwnsPickaxeItem } from "../../Redux/Slices/SkillingEquipmentSlices/Pickaxes";
 
 const ShopPanel = (props: Types.ShopPanelProps) => {
   const dispatch = useDispatch();
@@ -60,7 +60,7 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
     );
   };
 
-  const handleButtonStyle = (item: Types.ICompositeArmorItem | Types.ICompositeHatchet | Types.ICompositePickaxe) => {
+  const handleButtonStyle = (item: Types.ICompositeArmorItem | Types.ICompositeHatchet | Types.ICompositePickaxe | Types.ICompositeWeaponItem) => {
     // hatchets are more expensive, so we need to check for that - use the `in` operator to type guard
     if (`armor` in item) {
       if (Wallet.coins >= item.value * 10 && !item.playerOwnsThisItem) {
@@ -78,6 +78,65 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
         // item is not buyable
         return `bg-danger`;
       }
+    }
+  };
+  /**
+   * Updates the state of ownership of the item, removes an appropriate amount of coins from the wallet, and sends a chatlog
+   * @param item - Item is the item the player is buying as Types.ICompositeArmorItem | Types.ICompositeHatchet | Types.ICompositePickaxe | Types.ICompositeWeaponItem
+   * @param isSkillingEquipment - Boolean describing if the item is a hatchet or pickaxe, used to apply the appropriate item cost
+   * @param slot - A string signifying the slot of the item, used to update the appropriate state
+   */
+  const handleBuyingItem = (
+    item: Types.ICompositeArmorItem | Types.ICompositeHatchet | Types.ICompositePickaxe | Types.ICompositeWeaponItem,
+    isSkillingEquipment: boolean,
+    slot: string
+  ) => {
+    // define vowels for grammar in chatlog
+    let vowels: string[] = [`a`, `e`, `i`, `o`, `u`];
+
+    // match the bought item to its counterpart in state
+    let itemForState = `playerOwns${item.name}`;
+
+    // remove the coins from the wallet
+    if (isSkillingEquipment) {
+      dispatch(removeFromWallet(item.value * 25));
+    } else {
+      dispatch(removeFromWallet(item.value * 10));
+    }
+
+    // based on the item, add the item to state
+    switch (slot) {
+      case `hatchet`:
+        dispatch(playerNowOwnsHatchetItem(itemForState));
+        break;
+      case `pickaxe`:
+        dispatch(playerNowOwnsPickaxeItem(itemForState));
+        break;
+      case `head`:
+        dispatch(playerNowOwnsHeadItem(itemForState));
+        break;
+      case `body`:
+        dispatch(playerNowOwnsBodyItem(itemForState));
+        break;
+      case `legs`:
+        dispatch(playerNowOwnsLegItem(itemForState));
+        break;
+      case `hands`:
+        dispatch(playerNowOwnsHandItem(itemForState));
+        break;
+      case `feet`:
+        dispatch(playerNowOwnsFeetItem(itemForState));
+        break;
+      case `twohand`:
+        dispatch(playerNowOwnsTwoHandItem(itemForState));
+        break;
+    }
+
+    // send a gramatically correct message to the chat window
+    if (vowels.includes(item.displayName[0].toLocaleLowerCase())) {
+      props.newChatLog(`Bought an ${item.displayName}`, `Nonfilterable`);
+    } else {
+      props.newChatLog(`Bought a ${item.displayName}`, `Nonfilterable`);
     }
   };
 
@@ -100,51 +159,31 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
     //@ remove crystal hatchet until implemented
     let compositeItemsNoCrystal = compositeItems.filter((hatchet) => hatchet.name !== "crystalhatchet");
 
-    const handleBuyingItem = (item: Types.ICompositeHatchet) => {
-      // define vowels for grammar in chatlog
-      let vowels: string[] = [`a`, `e`, `i`, `o`, `u`];
-
-      // match the bought item to its counterpart in state
-      let itemForState = `playerOwns${item.name}`;
-
-      // remove the coins from the wallet
-      dispatch(removeFromWallet(item.value * 25));
-
-      // add the item to state
-      dispatch(playerNowOwnsHatchetItem(itemForState));
-
-      // send a gramatically correct message to the chat window
-      if (vowels.includes(item.displayName[0].toLocaleLowerCase())) {
-        props.newChatLog(`Bought an ${item.displayName}`, `Nonfilterable`);
-      } else {
-        props.newChatLog(`Bought a ${item.displayName}`, `Nonfilterable`);
-      }
-    };
-
     // disable the item if the player already owns it
     return (
       <div className="card-title border border-dark border-1 rounded-3">
         <h6 className="text-center">Hatchets</h6>
         <div className="d-flex flex-row flex-wrap">
           {compositeItemsNoCrystal.map((item) => (
-            <button
-              key={`resource-list-${item.name}`}
-              className={`card border mb-3`}
-              disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 25}
-              onClick={() => {
-                handleBuyingItem(item);
-              }}
-            >
+            <div className={`card border mb-3`} key={`resource-list-${item.name}`}>
               <div className="card-body text">
                 <h5 className="card-title">{item.displayName}</h5>
-                <div className="card-text">
-                  {item.playerOwnsThisItem && <div>Owned</div>}
+                <div className="card-text justify-content-center">
+                  {item.playerOwnsThisItem && <div className="text-center">Owned</div>}
                   {!item.playerOwnsThisItem && (
-                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 25).toLocaleString("en-US")}gp</button>
+                    <button
+                      disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 25}
+                      onClick={() => {
+                        handleBuyingItem(item, true, `hatchet`);
+                      }}
+                      className={`btn border mb-3 ${handleButtonStyle(item)}`}
+                    >
+                      Cost: {(item.value * 25).toLocaleString("en-US")}gp
+                    </button>
                   )}
                 </div>
               </div>
-            </button>
+            </div>
           ))}
         </div>
       </div>
@@ -170,51 +209,31 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
     //@ remove crystal pickaxe until implemented
     let compositeItemsNoCrystal = compositeItems.filter((pickaxe) => pickaxe.name !== "crystalpickaxe");
 
-    const handleBuyingItem = (item: Types.ICompositePickaxe) => {
-      // define vowels for grammar in chatlog
-      let vowels: string[] = [`a`, `e`, `i`, `o`, `u`];
-
-      // match the bought item to its counterpart in state
-      let itemForState = `playerOwns${item.name}`;
-
-      // remove the coins from the wallet
-      dispatch(removeFromWallet(item.value * 25));
-
-      // add the item to state
-      dispatch(playerNowOwnsPickaxeItem(itemForState));
-
-      // send a gramatically correct message to the chat window
-      if (vowels.includes(item.displayName[0].toLocaleLowerCase())) {
-        props.newChatLog(`Bought an ${item.displayName}`, `Nonfilterable`);
-      } else {
-        props.newChatLog(`Bought a ${item.displayName}`, `Nonfilterable`);
-      }
-    };
-
     // disable the item if the player already owns it
     return (
       <div className="card-title border border-dark border-1 rounded-3">
         <h6 className="text-center">Pickaxes</h6>
         <div className="d-flex flex-row flex-wrap">
           {compositeItemsNoCrystal.map((item) => (
-            <button
-              key={`resource-list-${item.name}`}
-              className={`card border mb-3`}
-              disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 25}
-              onClick={() => {
-                handleBuyingItem(item);
-              }}
-            >
+            <div className={`card border mb-3`} key={`resource-list-${item.name}`}>
               <div className="card-body text">
                 <h5 className="card-title">{item.displayName}</h5>
-                <div className="card-text">
-                  {item.playerOwnsThisItem && <div>Owned</div>}
+                <div className="card-text justify-content-center">
+                  {item.playerOwnsThisItem && <div className="text-center">Owned</div>}
                   {!item.playerOwnsThisItem && (
-                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 25).toLocaleString("en-US")}gp</button>
+                    <button
+                      disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 25}
+                      onClick={() => {
+                        handleBuyingItem(item, true, `pickaxe`);
+                      }}
+                      className={`btn border mb-3 ${handleButtonStyle(item)}`}
+                    >
+                      Cost: {(item.value * 25).toLocaleString("en-US")}gp
+                    </button>
                   )}
                 </div>
               </div>
-            </button>
+            </div>
           ))}
         </div>
       </div>
@@ -237,51 +256,31 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
       compositeItems.push(tempItem);
     }
 
-    const handleBuyingItem = (item: Types.ICompositeArmorItem) => {
-      // define vowels for grammar in chatlog
-      let vowels: string[] = [`a`, `e`, `i`, `o`, `u`];
-
-      // match the bought item to its counterpart in state
-      let itemForState = `playerOwns${item.name}`;
-
-      // remove the coins from the wallet
-      dispatch(removeFromWallet(item.value * 10));
-
-      // add the item to state
-      dispatch(playerNowOwnsHeadItem(itemForState));
-
-      // send a gramatically correct message to the chat window
-      if (vowels.includes(item.displayName[0].toLocaleLowerCase())) {
-        props.newChatLog(`Bought an ${item.displayName}`, `Nonfilterable`);
-      } else {
-        props.newChatLog(`Bought a ${item.displayName}`, `Nonfilterable`);
-      }
-    };
-
     // disable the item if the player already owns it
     return (
       <div className="card-title border border-dark border-1 rounded-3">
         <h6 className="text-center">Head Slot Items</h6>
         <div className="d-flex flex-row flex-wrap">
           {compositeItems.map((item) => (
-            <button
-              key={`resource-list-${item.name}`}
-              className={`card border mb-3`}
-              disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 10}
-              onClick={() => {
-                handleBuyingItem(item);
-              }}
-            >
+            <div className={`card border mb-3`} key={`resource-list-${item.name}`}>
               <div className="card-body text">
                 <h5 className="card-title">{item.displayName}</h5>
-                <div className="card-text">
-                  {item.playerOwnsThisItem && <div>Owned</div>}
+                <div className="card-text justify-content-center">
+                  {item.playerOwnsThisItem && <div className="text-center">Owned</div>}
                   {!item.playerOwnsThisItem && (
-                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 10).toLocaleString("en-US")}gp</button>
+                    <button
+                      disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 10}
+                      onClick={() => {
+                        handleBuyingItem(item, false, `head`);
+                      }}
+                      className={`btn border mb-3 ${handleButtonStyle(item)}`}
+                    >
+                      Cost: {(item.value * 10).toLocaleString("en-US")}gp
+                    </button>
                   )}
                 </div>
               </div>
-            </button>
+            </div>
           ))}
         </div>
       </div>
@@ -304,51 +303,31 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
       compositeItems.push(tempItem);
     }
 
-    const handleBuyingItem = (item: Types.ICompositeArmorItem) => {
-      // define vowels for grammar in chatlog
-      let vowels: string[] = [`a`, `e`, `i`, `o`, `u`];
-
-      // match the bought item to its counterpart in state
-      let itemForState = `playerOwns${item.name}`;
-
-      // remove the coins from the wallet
-      dispatch(removeFromWallet(item.value * 10));
-
-      // add the item to state
-      dispatch(playerNowOwnsBodyItem(itemForState));
-
-      // send a gramatically correct message to the chat window
-      if (vowels.includes(item.displayName[0].toLocaleLowerCase())) {
-        props.newChatLog(`Bought an ${item.displayName}`, `Nonfilterable`);
-      } else {
-        props.newChatLog(`Bought a ${item.displayName}`, `Nonfilterable`);
-      }
-    };
-
     // disable the item if the player already owns it
     return (
       <div className="card-title border border-dark border-1 rounded-3">
         <h6 className="text-center">Body Slot Items</h6>
         <div className="d-flex flex-row flex-wrap">
           {compositeItems.map((item) => (
-            <button
-              key={`resource-list-${item.name}`}
-              className={`card border mb-3`}
-              disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 10}
-              onClick={() => {
-                handleBuyingItem(item);
-              }}
-            >
+            <div className={`card border mb-3`} key={`resource-list-${item.name}`}>
               <div className="card-body text">
                 <h5 className="card-title">{item.displayName}</h5>
-                <div className="card-text">
-                  {item.playerOwnsThisItem && <div>Owned</div>}
+                <div className="card-text justify-content-center">
+                  {item.playerOwnsThisItem && <div className="text-center">Owned</div>}
                   {!item.playerOwnsThisItem && (
-                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 10).toLocaleString("en-US")}gp</button>
+                    <button
+                      disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 10}
+                      onClick={() => {
+                        handleBuyingItem(item, false, `body`);
+                      }}
+                      className={`btn border mb-3 ${handleButtonStyle(item)}`}
+                    >
+                      Cost: {(item.value * 10).toLocaleString("en-US")}gp
+                    </button>
                   )}
                 </div>
               </div>
-            </button>
+            </div>
           ))}
         </div>
       </div>
@@ -371,51 +350,31 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
       compositeItems.push(tempItem);
     }
 
-    const handleBuyingItem = (item: Types.ICompositeArmorItem) => {
-      // define vowels for grammar in chatlog
-      let vowels: string[] = [`a`, `e`, `i`, `o`, `u`];
-
-      // match the bought item to its counterpart in state
-      let itemForState = `playerOwns${item.name}`;
-
-      // remove the coins from the wallet
-      dispatch(removeFromWallet(item.value * 10));
-
-      // add the item to state
-      dispatch(playerNowOwnsLegItem(itemForState));
-
-      // send a gramatically correct message to the chat window
-      if (vowels.includes(item.displayName[0].toLocaleLowerCase())) {
-        props.newChatLog(`Bought an ${item.displayName}`, `Nonfilterable`);
-      } else {
-        props.newChatLog(`Bought a ${item.displayName}`, `Nonfilterable`);
-      }
-    };
-
     // disable the item if the player already owns it
     return (
       <div className="card-title border border-dark border-1 rounded-3">
         <h6 className="text-center">Legs Slot Items</h6>
         <div className="d-flex flex-row flex-wrap">
           {compositeItems.map((item) => (
-            <button
-              key={`resource-list-${item.name}`}
-              className={`card border mb-3`}
-              disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 10}
-              onClick={() => {
-                handleBuyingItem(item);
-              }}
-            >
+            <div className={`card border mb-3`} key={`resource-list-${item.name}`}>
               <div className="card-body text">
                 <h5 className="card-title">{item.displayName}</h5>
-                <div className="card-text">
-                  {item.playerOwnsThisItem && <div>Owned</div>}
+                <div className="card-text justify-content-center">
+                  {item.playerOwnsThisItem && <div className="text-center">Owned</div>}
                   {!item.playerOwnsThisItem && (
-                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 10).toLocaleString("en-US")}gp</button>
+                    <button
+                      disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 10}
+                      onClick={() => {
+                        handleBuyingItem(item, false, `legs`);
+                      }}
+                      className={`btn border mb-3 ${handleButtonStyle(item)}`}
+                    >
+                      Cost: {(item.value * 10).toLocaleString("en-US")}gp
+                    </button>
                   )}
                 </div>
               </div>
-            </button>
+            </div>
           ))}
         </div>
       </div>
@@ -438,51 +397,31 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
       compositeItems.push(tempItem);
     }
 
-    const handleBuyingItem = (item: Types.ICompositeArmorItem) => {
-      // define vowels for grammar in chatlog
-      let vowels: string[] = [`a`, `e`, `i`, `o`, `u`];
-
-      // match the bought item to its counterpart in state
-      let itemForState = `playerOwns${item.name}`;
-
-      // remove the coins from the wallet
-      dispatch(removeFromWallet(item.value * 10));
-
-      // add the item to state
-      dispatch(playerNowOwnsHandItem(itemForState));
-
-      // send a gramatically correct message to the chat window
-      if (vowels.includes(item.displayName[0].toLocaleLowerCase())) {
-        props.newChatLog(`Bought an ${item.displayName}`, `Nonfilterable`);
-      } else {
-        props.newChatLog(`Bought a ${item.displayName}`, `Nonfilterable`);
-      }
-    };
-
     // disable the item if the player already owns it
     return (
       <div className="card-title border border-dark border-1 rounded-3">
         <h6 className="text-center">Hands Slot Items</h6>
         <div className="d-flex flex-row flex-wrap">
           {compositeItems.map((item) => (
-            <button
-              key={`resource-list-${item.name}`}
-              className={`card border mb-3`}
-              disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 10}
-              onClick={() => {
-                handleBuyingItem(item);
-              }}
-            >
+            <div className={`card border mb-3`} key={`resource-list-${item.name}`}>
               <div className="card-body text">
                 <h5 className="card-title">{item.displayName}</h5>
-                <div className="card-text">
-                  {item.playerOwnsThisItem && <div>Owned</div>}
+                <div className="card-text justify-content-center">
+                  {item.playerOwnsThisItem && <div className="text-center">Owned</div>}
                   {!item.playerOwnsThisItem && (
-                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 10).toLocaleString("en-US")}gp</button>
+                    <button
+                      disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 10}
+                      onClick={() => {
+                        handleBuyingItem(item, false, `hands`);
+                      }}
+                      className={`btn border mb-3 ${handleButtonStyle(item)}`}
+                    >
+                      Cost: {(item.value * 10).toLocaleString("en-US")}gp
+                    </button>
                   )}
                 </div>
               </div>
-            </button>
+            </div>
           ))}
         </div>
       </div>
@@ -505,51 +444,31 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
       compositeItems.push(tempItem);
     }
 
-    const handleBuyingItem = (item: Types.ICompositeArmorItem) => {
-      // define vowels for grammar in chatlog
-      let vowels: string[] = [`a`, `e`, `i`, `o`, `u`];
-
-      // match the bought item to its counterpart in state
-      let itemForState = `playerOwns${item.name}`;
-
-      // remove the coins from the wallet
-      dispatch(removeFromWallet(item.value * 10));
-
-      // add the item to state
-      dispatch(playerNowOwnsFeetItem(itemForState));
-
-      // send a gramatically correct message to the chat window
-      if (vowels.includes(item.displayName[0].toLocaleLowerCase())) {
-        props.newChatLog(`Bought an ${item.displayName}`, `Nonfilterable`);
-      } else {
-        props.newChatLog(`Bought a ${item.displayName}`, `Nonfilterable`);
-      }
-    };
-
     // disable the item if the player already owns it
     return (
       <div className="card-title border border-dark border-1 rounded-3">
         <h6 className="text-center">Feet Slot Items</h6>
         <div className="d-flex flex-row flex-wrap">
           {compositeItems.map((item) => (
-            <button
-              key={`resource-list-${item.name}`}
-              className={`card border mb-3`}
-              disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 10}
-              onClick={() => {
-                handleBuyingItem(item);
-              }}
-            >
+            <div className={`card border mb-3`} key={`resource-list-${item.name}`}>
               <div className="card-body text">
                 <h5 className="card-title">{item.displayName}</h5>
-                <div className="card-text">
-                  {item.playerOwnsThisItem && <div>Owned</div>}
+                <div className="card-text justify-content-center">
+                  {item.playerOwnsThisItem && <div className="text-center">Owned</div>}
                   {!item.playerOwnsThisItem && (
-                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 10).toLocaleString("en-US")}gp</button>
+                    <button
+                      disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 10}
+                      onClick={() => {
+                        handleBuyingItem(item, false, `feet`);
+                      }}
+                      className={`btn border mb-3 ${handleButtonStyle(item)}`}
+                    >
+                      Cost: {(item.value * 10).toLocaleString("en-US")}gp
+                    </button>
                   )}
                 </div>
               </div>
-            </button>
+            </div>
           ))}
         </div>
       </div>
@@ -558,40 +477,19 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
 
   const displayTwoHandSlotItems = () => {
     // create an array of twoHand slot items from those in constants
-    let twoHandsFromConstants: Types.IArmorItem[] = Object.values(TwoHandSlot);
+    let twoHandsFromConstants: Types.IWeaponItem[] = Object.values(TwoHandSlot);
 
     // remove the first item, which is the `none` item
     twoHandsFromConstants.shift();
 
     // create an empty array to store the composite twoHand items
-    let compositeItems: Types.ICompositeArmorItem[] = [];
+    let compositeItems: Types.ICompositeWeaponItem[] = [];
 
     for (let i = 0; i < twoHandsFromConstants.length; i++) {
       let playerOwnsThisItem: boolean = twoHandFromState[`playerOwns${twoHandsFromConstants[i].name}` as keyof Types.AllSliceKeys];
-      let tempItem: Types.ICompositeArmorItem = { ...twoHandsFromConstants[i], playerOwnsThisItem };
+      let tempItem: Types.ICompositeWeaponItem = { ...twoHandsFromConstants[i], playerOwnsThisItem };
       compositeItems.push(tempItem);
     }
-
-    const handleBuyingItem = (item: Types.ICompositeArmorItem) => {
-      // define vowels for grammar in chatlog
-      let vowels: string[] = [`a`, `e`, `i`, `o`, `u`];
-
-      // match the bought item to its counterpart in state
-      let itemForState = `playerOwns${item.name}`;
-
-      // remove the coins from the wallet
-      dispatch(removeFromWallet(item.value * 10));
-
-      // add the item to state
-      dispatch(playerNowOwnsTwoHandItem(itemForState));
-
-      // send a gramatically correct message to the chat window
-      if (vowels.includes(item.displayName[0].toLocaleLowerCase())) {
-        props.newChatLog(`Bought an ${item.displayName}`, `Nonfilterable`);
-      } else {
-        props.newChatLog(`Bought a ${item.displayName}`, `Nonfilterable`);
-      }
-    };
 
     // disable the item if the player already owns it
     return (
@@ -599,24 +497,25 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
         <h6 className="text-center">Two Hand Slot Items</h6>
         <div className="d-flex flex-row flex-wrap">
           {compositeItems.map((item) => (
-            <button
-              key={`resource-list-${item.name}`}
-              className={`card border mb-3`}
-              disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 10}
-              onClick={() => {
-                handleBuyingItem(item);
-              }}
-            >
+            <div className={`card border mb-3`} key={`resource-list-${item.name}`}>
               <div className="card-body text">
                 <h5 className="card-title">{item.displayName}</h5>
-                <div className="card-text">
-                  {item.playerOwnsThisItem && <div>Owned</div>}
+                <div className="card-text justify-content-center">
+                  {item.playerOwnsThisItem && <div className="text-center">Owned</div>}
                   {!item.playerOwnsThisItem && (
-                    <button className={`btn border mb-3 ${handleButtonStyle(item)}`}>Cost: {(item.value * 10).toLocaleString("en-US")}gp</button>
+                    <button
+                      disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 10}
+                      onClick={() => {
+                        handleBuyingItem(item, false, `twohand`);
+                      }}
+                      className={`btn border mb-3 ${handleButtonStyle(item)}`}
+                    >
+                      Cost: {(item.value * 10).toLocaleString("en-US")}gp
+                    </button>
                   )}
                 </div>
               </div>
-            </button>
+            </div>
           ))}
         </div>
       </div>

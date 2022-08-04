@@ -16,7 +16,6 @@
         return `enterTHISmanually`;
       }
     })(),
-
     displayName: (() => {
       try {
         return document.title.split(` `)[0];
@@ -31,7 +30,6 @@
         return `enterLEVELmanually`;
       }
     })(),
-
     lifePoints: (() => {
       try {
         return Number(document.getElementsByTagName(`tbody`)[0].children[12].children[1].textContent);
@@ -51,6 +49,31 @@
         return Math.round(Number(document.getElementsByTagName(`tbody`)[0].children[12].children[3].textContent));
       } catch (error) {
         return `enterXPGivenConstitutionmanually`;
+      }
+    })(),
+    XPGivenPrayer: (() => {
+      try {
+        let boneDrop = document.getElementsByClassName(
+          `wikitable sortable filterable sticky-header item-drops autosort=1,a jquery-tablesorter rsw-dropsline-hidealch`
+        )[0].children[1].children[0].children[1].textContent;
+
+        switch (boneDrop) {
+          case "Bones":
+            return 4.5;
+          case "Big bones":
+            return 15;
+          default:
+            return `ADD NEW SWITCH CASE TO ENEMY UTILITY`;
+        }
+      } catch (error) {
+        return `ENTERMANUALLY`;
+      }
+    })(),
+    XPGivenSlayer: (() => {
+      try {
+        return Number(document.getElementsByTagName(`TBODY`)[0].children[18].children[1].textContent);
+      } catch (error) {
+        return `ENTERMANUALLY`;
       }
     })(),
 

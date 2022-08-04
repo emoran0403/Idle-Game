@@ -4,12 +4,10 @@
 
 
 //# PRAYER
-* add an XPGivenPrayer property to all enemies, defaulting to 0
-* update typings for enemies
-* update enemy object utility to account for bones being dropped
-* update combat tick to dispatch prayer xp for the XPGivenPrayer amount
-* update GameContainer to handle thieving skill
-* update currentresourcecomp to handle thieving skill
+* DONE - update combat tick to dispatch prayer xp for the XPGivenPrayer amount
+* DONE - update enemy object utility to account for bones being dropped
+* DONE - add an XPGivenPrayer property to all enemies, defaulting to 0
+* DONE - update typings for enemies
 
 
 //# THIEVING
@@ -20,9 +18,7 @@
 * update currentresourcecomp to handle thieving skill
 
 
-//# MINING
-* I cant get clay to show up in the bank lol - it is not being saved for some reason
-* make clay work lol
+//# MINING DONE**************************************
 * DONE - add mining to skills panel
 * DONE - add mining to game GameContainer
 * DONE - add case to currentresourcecomp for mining
@@ -34,17 +30,17 @@
 * DONE - update IListOfPickaxeOptions for all picks
 
 //# Fixes
-* check buttons on shop panel - they cannot be nested
-* check keys in quest panel
 * can clean up chat logs in game component under woodcutting and fishing
 * add chat logs for gaining xp in combat skills
 * add chat logs for gaining xp in gathering skills
 * content layout shift in levels component when xp is 10+ digits
-* make it so that changing location resets all state to none or idle
-* clean up the functions in shoppanel - handle buying item can be a standalone function i think
 * inventory pushes down worn equipment component when it has items with long names
 * grammar when fishing anchovies
-* equipping a weapon while skilling stops the skilling
+* DONE - clean up the functions in shoppanel - handle buying item can be a standalone function i think
+* DONE - equipping a weapon while skilling stops the skilling
+* DONE - make it so that changing location resets all state to none or idle
+* DONE - check keys in quest panel = the requirements and reward Li's did not have keys
+* DONE - check buttons on shop panel - they cannot be nested
 * DONE - inventory needs to display ore display names
 
 //# world map
@@ -57,12 +53,12 @@
 //# Quality of life
 * quest is colored yellow when i have the combat level req
 * Bank shows items in ascending level order
-* hatchet options in skill panel display their woodcutting
 ** timer showing the progress until the next tick, red bar if the player is idle
 *** need a way to reward those quest which give ANY xp
 *** maybe make the game choose the next available quest automatically
 *** get a changelog from github for the lobby
 *** offline progress
+* DONE -  hatchet options in skill panel display their woodcutting
 * DONE -  globe picture for the world map icon
 * DONE -  double check the buttons on quest panel - allowing player to begin a quest without the combat requirements
 * DONE - more info on quests

@@ -530,6 +530,8 @@ export interface IEnemySummary {
   lifePoints: number;
   XPGivenCombatStyle: number;
   XPGivenConstitution: number;
+  XPGivenPrayer: number;
+  XPGivenSlayer: number;
   affinities: {
     explicitWeakness: CombatStyle | SpellElement;
     weakStyle: CombatStyle;

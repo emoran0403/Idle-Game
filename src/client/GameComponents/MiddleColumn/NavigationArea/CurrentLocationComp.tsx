@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 const CurrentLocationComp = (props: Types.NoProps) => {
   const { CurrentLocation } = useSelector((state: Types.AllState) => state.Location) as Types.ICurrentLocation;
 
-  useEffect(() => {}, []);
+  // useEffect(() => {}, []);
 
   return (
     <div className="text-center border border-dark border-2 rounded-3" style={{ width: `105px` }}>
