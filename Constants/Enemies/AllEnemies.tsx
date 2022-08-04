@@ -8,6 +8,8 @@ export const man: Types.IEnemySummary = {
   lifePoints: 150,
   XPGivenCombatStyle: 25,
   XPGivenConstitution: 8,
+  XPGivenPrayer: 4.5,
+  XPGivenSlayer: 0,
   affinities: {
     explicitWeakness: `fire`,
     weakStyle: `magic`,
@@ -25,6 +27,8 @@ export const goblin: Types.IEnemySummary = {
   lifePoints: 100,
   XPGivenCombatStyle: 25,
   XPGivenConstitution: 8,
+  XPGivenPrayer: 4.5,
+  XPGivenSlayer: 6.4,
   affinities: {
     explicitWeakness: `air`,
     weakStyle: `magic`,
@@ -42,6 +46,8 @@ export const giantspider: Types.IEnemySummary = {
   lifePoints: 100,
   XPGivenCombatStyle: 25,
   XPGivenConstitution: 8,
+  XPGivenPrayer: 0,
+  XPGivenSlayer: 6.4,
   affinities: {
     explicitWeakness: "melee",
     weakStyle: "melee",
@@ -59,6 +65,8 @@ export const chicken: Types.IEnemySummary = {
   lifePoints: 50,
   XPGivenCombatStyle: 25,
   XPGivenConstitution: 8,
+  XPGivenPrayer: 4.5,
+  XPGivenSlayer: 6.4,
   affinities: {
     explicitWeakness: "fire",
     weakStyle: "magic",
@@ -76,6 +84,8 @@ export const cow: Types.IEnemySummary = {
   lifePoints: 150,
   XPGivenCombatStyle: 26,
   XPGivenConstitution: 8,
+  XPGivenPrayer: 4.5,
+  XPGivenSlayer: 3.3,
   affinities: {
     explicitWeakness: "earth",
     weakStyle: "magic",
@@ -93,6 +103,8 @@ export const spider: Types.IEnemySummary = {
   lifePoints: 50,
   XPGivenCombatStyle: 25,
   XPGivenConstitution: 8,
+  XPGivenPrayer: 0,
+  XPGivenSlayer: 6.4,
   affinities: {
     explicitWeakness: "melee",
     weakStyle: "melee",
@@ -110,6 +122,8 @@ export const giantrat: Types.IEnemySummary = {
   lifePoints: 250,
   XPGivenCombatStyle: 27,
   XPGivenConstitution: 9,
+  XPGivenPrayer: 4.5,
+  XPGivenSlayer: 8.2,
   affinities: {
     explicitWeakness: "earth",
     weakStyle: "magic",
@@ -127,6 +141,8 @@ export const swampfrog: Types.IEnemySummary = {
   lifePoints: 650,
   XPGivenCombatStyle: 36,
   XPGivenConstitution: 12,
+  XPGivenPrayer: 4.5,
+  XPGivenSlayer: 10,
   affinities: {
     explicitWeakness: "water",
     weakStyle: "magic",
@@ -144,6 +160,8 @@ export const farmer: Types.IEnemySummary = {
   lifePoints: 250,
   XPGivenCombatStyle: 27,
   XPGivenConstitution: 9,
+  XPGivenPrayer: 4.5,
+  XPGivenSlayer: 0,
   affinities: {
     explicitWeakness: "fire",
     weakStyle: "magic",
@@ -161,6 +179,8 @@ export const rat: Types.IEnemySummary = {
   lifePoints: 50,
   XPGivenCombatStyle: 25,
   XPGivenConstitution: 8,
+  XPGivenPrayer: 4.5,
+  XPGivenSlayer: 4.5,
   affinities: {
     explicitWeakness: "earth",
     weakStyle: "magic",
@@ -178,6 +198,8 @@ export const skeleton15: Types.IEnemySummary = {
   lifePoints: 550,
   XPGivenCombatStyle: 34,
   XPGivenConstitution: 11,
+  XPGivenPrayer: 4.5,
+  XPGivenSlayer: 8.8,
   affinities: {
     explicitWeakness: "earth",
     weakStyle: "magic",
@@ -195,6 +217,8 @@ export const skeleton32: Types.IEnemySummary = {
   lifePoints: 1150,
   XPGivenCombatStyle: 50,
   XPGivenConstitution: 17,
+  XPGivenPrayer: 4.5,
+  XPGivenSlayer: 13,
   affinities: {
     explicitWeakness: "earth",
     weakStyle: "magic",
@@ -212,6 +236,8 @@ export const zombie12: Types.IEnemySummary = {
   lifePoints: 900,
   XPGivenCombatStyle: 31,
   XPGivenConstitution: 10,
+  XPGivenPrayer: 4.5,
+  XPGivenSlayer: 8,
   affinities: {
     explicitWeakness: "fire",
     weakStyle: "magic",
@@ -229,6 +255,8 @@ export const zombie29: Types.IEnemySummary = {
   lifePoints: 1050,
   XPGivenCombatStyle: 47,
   XPGivenConstitution: 15,
+  XPGivenPrayer: 4.5,
+  XPGivenSlayer: 12,
   affinities: {
     explicitWeakness: "fire",
     weakStyle: "magic",
@@ -246,6 +274,8 @@ export const ghost25: Types.IEnemySummary = {
   lifePoints: 90,
   XPGivenCombatStyle: 41,
   XPGivenConstitution: 13,
+  XPGivenPrayer: 0,
+  XPGivenSlayer: 10.6,
   affinities: {
     explicitWeakness: "ranged",
     weakStyle: "ranged",
@@ -263,6 +293,8 @@ export const blackknight: Types.IEnemySummary = {
   lifePoints: 1100,
   XPGivenCombatStyle: 49,
   XPGivenConstitution: 16,
+  XPGivenPrayer: 4.5,
+  XPGivenSlayer: 0,
   affinities: {
     explicitWeakness: "water",
     weakStyle: "magic",

@@ -4,8 +4,8 @@
 
 
 //# PRAYER
-* add an XPGivenPrayer property to all enemies, defaulting to 0
 * update typings for enemies
+* add an XPGivenPrayer property to all enemies, defaulting to 0
 * update enemy object utility to account for bones being dropped
 * update combat tick to dispatch prayer xp for the XPGivenPrayer amount
 * update GameContainer to handle thieving skill
@@ -55,12 +55,12 @@
 //# Quality of life
 * quest is colored yellow when i have the combat level req
 * Bank shows items in ascending level order
-* hatchet options in skill panel display their woodcutting
 ** timer showing the progress until the next tick, red bar if the player is idle
 *** need a way to reward those quest which give ANY xp
 *** maybe make the game choose the next available quest automatically
 *** get a changelog from github for the lobby
 *** offline progress
+* DONE -  hatchet options in skill panel display their woodcutting
 * DONE -  globe picture for the world map icon
 * DONE -  double check the buttons on quest panel - allowing player to begin a quest without the combat requirements
 * DONE - more info on quests
