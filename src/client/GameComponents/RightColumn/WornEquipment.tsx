@@ -12,7 +12,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { EmptyArmorItemComposite, EmptyWeaponItemComposite } from "../../../../Constants/Equipment/EmptyItem";
 import { getLevel } from "../../../../Constants/XP Levels";
-import { setSkill } from "../../Redux/Slices/CurrentSkill";
+import { setTarget } from "../../Redux/Slices/CurrentTarget";
 
 const WornEquipment = (props: Types.WornEquipmentCompProps) => {
   const dispatch = useDispatch();
@@ -207,7 +207,7 @@ const WornEquipment = (props: Types.WornEquipmentCompProps) => {
 
     const itemHasBeenEquipped = (e: React.ChangeEvent<HTMLSelectElement>) => {
       //@ when a weapon is swapped, reset the current skill to none, forcing the player to switch styles
-      dispatch(setSkill("none"));
+      dispatch(setTarget(`none`));
 
       let newlyEquippedItemDisplayName: string = ``;
       let oldEquippedItemDisplayName: string = ``;
