@@ -58,6 +58,8 @@
               ></div>
 
 //# Quality of life
+* make skills in skills panel into collapsible panels
+* make resources in bank panel into collapsible panels
 * add dropping messages to ores if the player is dropping resources
 * quest is colored yellow when i have the combat level req
 * Bank shows items in ascending level order

@@ -72,6 +72,9 @@ const GameContainer = (props: Types.GameContainerProps) => {
   // console.log(playerInventory);
   const AllQuestsFromState: Types.IStateQuest[] = [...LumbridgeQuestArray, ...DraynorQuestArray];
 
+  //@ this is how we keep track of the `time` in game
+  const [progress, setProgress] = useState<number>(0);
+
   //@ initialize the chatLogArray with a default welcome message
   //@ this will hold ALL chatLogs, a subset of which will be displayed based on the current filter settings
   const [chatLogArray, setChatLogArray] = useState<Types.IChatLog[]>([
@@ -584,11 +587,8 @@ const GameContainer = (props: Types.GameContainerProps) => {
       } else if (CurrentActivity === `Questing` && CurrentQuest !== `none`) {
         handleQuestingTick();
       }
-
       handleSavePoint();
-
-      //! set this to 2500ms in production
-    }, 500);
+    }, 2500);
 
     // console.log({ interval });
     return () => clearInterval(interval);
@@ -642,6 +642,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
             setCurrentEquipment={setCurrentEquipment}
             currentEquipment={currentEquipment}
             questStepProgress={questStepProgress}
+            progress={progress}
           />
         </div>
 
