@@ -204,8 +204,8 @@ const GameContainer = (props: Types.GameContainerProps) => {
     setQuestStepProgress(questStepProgress + 1);
 
     // if the progress counter hits 30, reset it to 0, and then run the quest logic based on location
-    //! change this to 30 for production
-    if (questStepProgress === 2) {
+    //! change this to 24 for production (24 ticks at 2.5 secs ea = 1 min per quest step)
+    if (questStepProgress === 24) {
       setQuestStepProgress(0);
       switch (playerLocation) {
         case `Lumbridge`: {
@@ -588,7 +588,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
       handleSavePoint();
 
       //! set this to 2500ms in production
-    }, 500);
+    }, 2500);
 
     // console.log({ interval });
     return () => clearInterval(interval);
