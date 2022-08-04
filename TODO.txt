@@ -2,16 +2,37 @@
 * - add cases to switch statements (questing tick func and quest rewards useEffect) in GameContainer
 * - add typings for enemies search => //@ recreate this for each location
 
+//! ARTISAN - skills that involve taking resources and transforming or consuming them
+//# SMITHING
+//# SUMMONING
+//# CRAFTING
+//# COOKING
+//# FIREKAMKING
+//# RUNECRAFTING
+//# FLETCHING
+//# HERBLORE
+//# CONSTRUCTION
 
-//! do soon
-scale coin drops to the enemy level, not lifepoints
-
+//! SUPPORT - skills that just take some time to complete
+//# AGILITY
+//# SLAYER
+//# DUNGEONEERING
 //# THIEVING
 * update location summaries to include thieving opportunities
 * create a constants file with thieving opportunities
 * update skills panel to include thieving opportunities
 * update GameContainer to handle thieving skill
 * update currentresourcecomp to handle thieving skill
+
+//! GATHERING - skills that generate new resources
+//# FARMING
+//# HUNTER
+//# DIVINATION
+
+//! BIG LOL - wide variety of interactions to deal with
+//# INVENTION
+//# ARCHAEOLOGY
+
 
 
 //# Fixes
@@ -21,6 +42,7 @@ scale coin drops to the enemy level, not lifepoints
 * content layout shift in levels component when xp is 10+ digits
 * inventory pushes down worn equipment component when it has items with long names
 * grammar when fishing anchovies
+* DONE - scale coin drops to the enemy level, not lifepoints
 * DONE - clean up the functions in shoppanel - handle buying item can be a standalone function i think
 * DONE - equipping a weapon while skilling stops the skilling
 * DONE - make it so that changing location resets all state to none or idle
@@ -36,6 +58,7 @@ scale coin drops to the enemy level, not lifepoints
               ></div>
 
 //# Quality of life
+* add dropping messages to ores if the player is dropping resources
 * quest is colored yellow when i have the combat level req
 * Bank shows items in ascending level order
 ** timer showing the progress until the next tick, red bar if the player is idle
