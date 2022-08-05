@@ -429,7 +429,12 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
     setCompositeQuestArray(tempCompArray);
     // to make this component rerender when a quest step is completed,
     // pass down the questStepProgress from gameContainer
-  }, [props.questStepProgress, LumbridgeQuestArray, DraynorQuestArray]);
+    /**
+     * to make the component rerender when a quest or quest step is completed,
+     * pass down the questStepProgress from gameContainer and the quest arrays.
+     * to make the component rerender when a level is gained, pass in Experience
+     */
+  }, [props.questStepProgress, LumbridgeQuestArray, DraynorQuestArray, Experience]);
 
   return (
     <div className="container border border-dark border-2 rounded-3" style={{ overflowY: "auto", position: "relative", height: "81%" }}>
