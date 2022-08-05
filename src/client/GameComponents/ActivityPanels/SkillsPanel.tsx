@@ -25,17 +25,21 @@ import { useState } from "react";
 
 const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
   const dispatch = useDispatch();
+
+  // select slices of state relevant to this component
   const { CurrentLocation } = useSelector((state: Types.AllState) => state.Location) as Types.ICurrentLocation;
   const hatchetsFromState = useSelector((state: Types.AllState) => state.Hatchets) as Types.IHatchetsSlice;
   const pickaxesFromState = useSelector((state: Types.AllState) => state.Pickaxes) as Types.IPickaxesSlice;
   const currentLocationSummary = AllLocations[CurrentLocation] as Types.ILocationSummary;
   const Experience = useSelector((state: Types.AllState) => state.Experience) as Types.ISkillList;
 
+  // define skill levels based off the players current experience
   let WoodcuttingLevel: number = getLevel(Experience.Woodcutting);
   let FishingLevel: number = getLevel(Experience.Fishing);
   let MiningLevel: number = getLevel(Experience.Mining);
   let ThievingLevel: number = getLevel(Experience.Thieving);
 
+  // defined to allow for indexing of the `skillPanelsOpened` in componente state
   interface SkillPanels {
     Woodcutting: boolean;
     Mining: boolean;
@@ -52,6 +56,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
     Agility: boolean;
   }
 
+  // tracks each skill panel's expanded or collapsed state
   const [skillPanelsOpened, setSkillPanelsOpened] = useState({
     Woodcutting: false,
     Mining: false,
