@@ -1,6 +1,7 @@
 @ Adding new Locations -
 * - add cases to switch statements (questing tick func and quest rewards useEffect) in GameContainer
 * - add typings for enemies search => //@ recreate this for each location
+* - just check all the places for locations
 
 //! ARTISAN - skills that involve taking resources and transforming or consuming them
 //# SMITHING
@@ -18,7 +19,7 @@
 //# SLAYER
 //# DUNGEONEERING
 //# THIEVING
-* update GameContainer to handle thieving skill - need a stun state as a number in component state, each game tick decrements if >0
+* DONE - update GameContainer to handle thieving skill - need a stun state as a number in component state, each game tick decrements if >0
 * DONE - define a function to determine of the player succeeds or fails at thieving
 * DONE - update skills panel to include thieving opportunities
 * DONE - update location summaries to include thieving opportunities
@@ -42,6 +43,8 @@
 * add chat logs for gaining xp in gathering skills
 * content layout shift in levels component when xp is 10+ digits
 * inventory pushes down worn equipment component when it has items with long names
+* ^^== maybe fix this with just assets in inventory, and item names as title / alt text?
+
 * grammar when fishing anchovies
 * DONE - scale coin drops to the enemy level, not lifepoints
 * DONE - clean up the functions in shoppanel - handle buying item can be a standalone function i think
@@ -59,15 +62,16 @@
               ></div>
 
 //# Quality of life
+* add currentEquipment to redux state to persist outfits across logins
 * make resources in bank panel into collapsible panels - copy skillspanel
 * add dropping messages to ores if the player is dropping resources
-* quest is colored yellow when i have the combat level req
 * Bank shows items in ascending level order
 ** timer showing the progress until the next tick, red bar if the player is idle
 *** need a way to reward those quest which give ANY xp
 *** maybe make the game choose the next available quest automatically
 *** get a changelog from github for the lobby
 *** offline progress
+* DONE - quest is colored yellow when i have the combat level req = adding experience to useEffect in quest panel
 * DONE -  make skills in skills panel into collapsible panels
 * DONE -  hatchet options in skill panel display their woodcutting
 * DONE -  globe picture for the world map icon

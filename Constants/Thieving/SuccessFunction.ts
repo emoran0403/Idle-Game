@@ -60,23 +60,16 @@ export const resolveThieving = (target: Types.IThievingTarget, ThievingXP: numbe
   //* determing the number of coins the player will receive
   // check if the player's target is a pickpocketing option via typeguarding so we can assign the coins
   if (`doubleloot` in target) {
-    //! is there a better way to do this?
+    // each is<X> will be either false or the multiplier we want to use
+    const isDouble = ThievingLevel >= target.doubleloot.levelReqThieving && AgilityLevel >= target.doubleloot.levelReqAgility && 2;
+    const isTriple = isDouble && ThievingLevel >= target.tripleloot.levelReqThieving && AgilityLevel >= target.tripleloot.levelReqAgility && 3;
+    const isQuad = isTriple && ThievingLevel >= target.quadloot.levelReqThieving && AgilityLevel >= target.quadloot.levelReqAgility && 4;
+
+    // set the multiplier as the largest true result, which will the be multiplier to use
+    const multiplier = isQuad || isTriple || isDouble || 1;
 
     // set the coin reward
-    resultObj.coins = target.loot.Coins;
-
-    // check if the player's levels are high enough to receive extra loot
-    if (ThievingLevel >= target.quadloot.levelReqThieving && AgilityLevel >= target.quadloot.levelReqAgility) {
-      resultObj.coins = target.loot.Coins * 2;
-    }
-
-    if (ThievingLevel >= target.tripleloot.levelReqThieving && AgilityLevel >= target.tripleloot.levelReqAgility) {
-      resultObj.coins = target.loot.Coins * 3;
-    }
-
-    if (ThievingLevel >= target.doubleloot.levelReqThieving && AgilityLevel >= target.doubleloot.levelReqAgility) {
-      resultObj.coins = target.loot.Coins * 4;
-    }
+    resultObj.coins = target.loot.Coins * multiplier;
   }
 
   return resultObj;
