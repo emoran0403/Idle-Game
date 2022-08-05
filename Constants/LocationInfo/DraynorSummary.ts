@@ -16,7 +16,10 @@ export const DraynorSummary: Types.IDraynorLocationSummary = {
     Woodcutting: [`logs`, `oak`, `willow`, `yew`],
     Mining: [`clay`],
     Fishing: [`raw_shrimp`, `raw_sardine`, `raw_anchovies`, `raw_herring`],
-    Thieving: [`pickpocketman`, `pickpocketfarmer`, `pickpocketmasterfarmer`, `stallwine`, `stallseed`],
+    Thieving: {
+      stalls: [`stallwine`, `stallseed`],
+      pickpocketing: [`pickpocketman`, `pickpocketfarmer`, `pickpocketmasterfarmer`],
+    },
     Farming: [],
     Firemaking: [],
     Hunter: [],

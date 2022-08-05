@@ -6,7 +6,10 @@ export const LumbridgeSummary: Types.ILumbridgeLocationSummary = {
     Woodcutting: [`logs`, `oak`, `willow`, `yew`],
     Mining: [`clay`, `tinore`, `copperore`, `ironore`, `coalore`],
     Fishing: [`raw_crayfish`, `raw_shrimp`, `raw_sardine`, `raw_anchovies`, `raw_trout`, `raw_herring`, `raw_pike`, `raw_salmon`],
-    Thieving: [`pickpocketman`, `pickpocketfarmer`, `pickpockethamfemale`, `pickpockethammale`, `pickpocketmasterfarmer`, `stallvegetable`, `stallcrafting`],
+    Thieving: {
+      stalls: [`stallvegetable`, `stallcrafting`],
+      pickpocketing: [`pickpocketman`, `pickpocketfarmer`, `pickpockethamfemale`, `pickpockethammale`, `pickpocketmasterfarmer`],
+    },
     Farming: [],
     Firemaking: [],
     Hunter: [],

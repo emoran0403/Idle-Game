@@ -6,20 +6,3 @@ export const AllLocations: Types.IAllLocations = {
   Lumbridge: LumbridgeSummary,
   Draynor: DraynorSummary,
 };
-
-/**
- * 
- * 
- * import * as Types from "../../Types";
-
-export const TOWNNAMEHERE: Types.ILocationSummary = {
-  Quests: [],
-  Skills: {
-    Woodcutting: [],
-    Mining: [],
-    Fishing: [],
-  },
-  Combat: [],
-};
-
- */

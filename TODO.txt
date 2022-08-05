@@ -18,11 +18,11 @@
 //# SLAYER
 //# DUNGEONEERING
 //# THIEVING
-* update location summaries to include thieving opportunities
-* create a constants file with thieving opportunities
-* update skills panel to include thieving opportunities
 * update GameContainer to handle thieving skill
-* update currentresourcecomp to handle thieving skill
+* DONE - update skills panel to include thieving opportunities
+* DONE - update location summaries to include thieving opportunities
+* DONE - update currentresourcecomp to handle thieving skill
+* DONE - create a constants file with thieving opportunities
 
 //! GATHERING - skills that generate new resources
 //# FARMING

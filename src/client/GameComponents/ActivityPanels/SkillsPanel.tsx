@@ -13,6 +13,9 @@ import { listOfHatchets } from "../../../../Constants/SkillingEquipment/Hatchets
 import { ListOfOres } from "../../../../Constants/Items/Ores";
 import { listOfPickaxes } from "../../../../Constants/SkillingEquipment/Pickaxes";
 
+import { ListOfPickpocketNPC } from "../../../../Constants/Thieving/Pickpocketing";
+import { ListOfPickpocketStalls } from "../../../../Constants/Thieving/Stalls";
+
 import { setResource } from "../../Redux/Slices/CurrentResource";
 import { setSkill } from "../../Redux/Slices/CurrentSkill";
 import { setActivity } from "../../Redux/Slices/CurrentActivity";
@@ -34,6 +37,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
   let WoodcuttingLevel: number = getLevel(Experience.Woodcutting);
   let FishingLevel: number = getLevel(Experience.Fishing);
   let MiningLevel: number = getLevel(Experience.Mining);
+  let ThievingLevel: number = getLevel(Experience.Thieving);
 
   interface SkillPanels {
     Woodcutting: boolean;
@@ -208,6 +212,86 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
                 <h5 className="card-title">{ListOfOres[resource as keyof Types.IListOfOres].displayName}</h5>
                 <div className="card-text">
                   <div>Level {ListOfOres[resource as keyof Types.IListOfOres].levelReqMining}</div>
+                </div>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
+  //! left off here
+  const ThievingOptions = (thievingOptions: Types.IThievingStallsAndPickpocketing) => {
+    const pickpocketingArray = thievingOptions.pickpocketing;
+    const stallsArray = thievingOptions.stalls;
+
+    return (
+      <div role="button" onClick={() => handleToggleSkillPanel(`Thieving`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
+        <h1 className="text-center">Thieving Level {ThievingLevel}</h1>
+        <div className={`d-flex flex-row flex-wrap ${skillPanelsOpened.Thieving ? `` : `d-none`}`}>
+          {pickpocketingArray.map((resource) => (
+            <button
+              disabled={ThievingLevel < ListOfPickpocketNPC[resource as keyof Types.IListOfPickpocketNPC].levelReqThieving ? true : false}
+              onClick={(e) => {
+                dispatch(setTarget(`none`));
+                dispatch(setActivity(`Skilling`));
+                dispatch(setResource(resource));
+                dispatch(setQuest(`none`));
+                dispatch(setSkill(`Thieving`));
+                // send a contextual message to the chat window
+                // if the last log contains the same message, don't send it
+                if (
+                  `Now Thieving from ${ListOfPickpocketNPC[resource as keyof Types.IListOfPickpocketNPC].displayName}` ===
+                  props.chatLogArray[props.chatLogArray.length - 1].message
+                ) {
+                  return;
+                }
+                props.newChatLog(`Now Thieving from ${ListOfPickpocketNPC[resource as keyof Types.IListOfPickpocketNPC].displayName}`, `Activity Swap`);
+              }}
+              key={`resource-list-${resource}`}
+              className={`btn border mb-3 ${
+                ThievingLevel >= ListOfPickpocketNPC[resource as keyof Types.IListOfPickpocketNPC].levelReqThieving ? `bg-success` : `bg-danger`
+              }`}
+            >
+              <div className="card-body text">
+                <h5 className="card-title">{ListOfPickpocketNPC[resource as keyof Types.IListOfPickpocketNPC].displayName}</h5>
+                <div className="card-text">
+                  <div>Level {ListOfPickpocketNPC[resource as keyof Types.IListOfPickpocketNPC].levelReqThieving}</div>
+                  <div>{ListOfPickpocketNPC[resource as keyof Types.IListOfPickpocketNPC].XPGivenThieving} XP</div>
+                </div>
+              </div>
+            </button>
+          ))}
+          {stallsArray.map((resource) => (
+            <button
+              disabled={ThievingLevel < ListOfPickpocketStalls[resource as keyof Types.IListOfPickpocketStall].levelReqThieving ? true : false}
+              onClick={(e) => {
+                dispatch(setTarget(`none`));
+                dispatch(setActivity(`Skilling`));
+                dispatch(setResource(resource));
+                dispatch(setQuest(`none`));
+                dispatch(setSkill(`Thieving`));
+                // send a contextual message to the chat window
+                // if the last log contains the same message, don't send it
+                if (
+                  `Now Thieving from ${ListOfPickpocketStalls[resource as keyof Types.IListOfPickpocketStall].displayName}` ===
+                  props.chatLogArray[props.chatLogArray.length - 1].message
+                ) {
+                  return;
+                }
+                props.newChatLog(`Now Thieving from ${ListOfPickpocketStalls[resource as keyof Types.IListOfPickpocketStall].displayName}`, `Activity Swap`);
+              }}
+              key={`resource-list-${resource}`}
+              className={`btn border mb-3 ${
+                ThievingLevel >= ListOfPickpocketStalls[resource as keyof Types.IListOfPickpocketStall].levelReqThieving ? `bg-success` : `bg-danger`
+              }`}
+            >
+              <div className="card-body text">
+                <h5 className="card-title">{ListOfPickpocketStalls[resource as keyof Types.IListOfPickpocketStall].displayName}</h5>
+                <div className="card-text">
+                  <div>Level {ListOfPickpocketStalls[resource as keyof Types.IListOfPickpocketStall].levelReqThieving}</div>
+                  <div>{ListOfPickpocketStalls[resource as keyof Types.IListOfPickpocketStall].XPGivenThieving} XP</div>
                 </div>
               </div>
             </button>
@@ -429,6 +513,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
             {WoodcuttingOptions(currentLocationSummary.Skills.Woodcutting)}
             {FishingOptions(currentLocationSummary.Skills.Fishing)}
             {MiningOptions(currentLocationSummary.Skills.Mining)}
+            {ThievingOptions(currentLocationSummary.Skills.Thieving)}
             {/* end of panel specific content */}
           </div>
         </div>

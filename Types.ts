@@ -331,7 +331,7 @@ export interface IPickpocketNPC {
 export interface IPickpocketStall {
   name: string;
   displayName: string;
-  levelreqThieving: number;
+  levelReqThieving: number;
   XPGivenThieving: number;
   stunTime: number;
   loot: IMainLoot;
@@ -376,6 +376,10 @@ export interface IListOfPickpocketStall {
   stallspice: IPickpocketStall;
   stallgem: IPickpocketStall;
 }
+export type IListOfAllThievingOptions = IListOfPickpocketNPC | IListOfPickpocketStall;
+
+export type IAllThievingOptions = IPickpocketNPCOptions | IPickpocketStallOptions;
+
 export type IPickpocketNPCOptions =
   | `pickpocketman`
   | `pickpocketfarmer`
@@ -414,7 +418,6 @@ export type IPickpocketStallOptions =
   | `stallscimitar`
   | `stallspice`
   | `stallgem`;
-export type IAllPickpocketOptions = IPickpocketNPCOptions | IPickpocketStallOptions;
 
 //@ ******************************* FISH *******************************
 
@@ -555,7 +558,11 @@ export interface LocationSkills {
   Construction: string[];
   Summoning: string[];
   Agility: string[];
-  Thieving: IAllPickpocketOptions[];
+  Thieving: IThievingStallsAndPickpocketing;
+}
+export interface IThievingStallsAndPickpocketing {
+  pickpocketing: IPickpocketNPCOptions[];
+  stalls: IPickpocketStallOptions[];
 }
 export type ListOfSkillOptions =
   | `none`
@@ -736,42 +743,7 @@ export type ICurrentTargetOptions =
 export interface ICurrentResource {
   CurrentResource: ICurrentResourceOptions;
 }
-export type ICurrentResourceOptions =
-  | `none`
-  | `raw_shrimp`
-  | `raw_crayfish`
-  | `raw_anchovies`
-  | `raw_trout`
-  | `raw_salmon`
-  | `raw_pike`
-  | `raw_sardine`
-  | `raw_herring`
-  | `logs`
-  | `oak`
-  | `willow`
-  | `maple`
-  | `yew`
-  | `magic`
-  | `elder`
-  | `clay`
-  | `runeEssence`
-  | `pureEssence`
-  | `tinore`
-  | `copperore`
-  | `ironore`
-  | `coalore`
-  | `mithrilore`
-  | `goldore`
-  | `adamantiteore`
-  | `luminiteore`
-  | `runiteore`
-  | `orichalciteore`
-  | `drakolithore`
-  | `necriteore`
-  | `phasmatiteore`
-  | `baniteore`
-  | `lightAnimicaore`
-  | `darkAnimicaore`;
+export type ICurrentResourceOptions = "none" | IFishOptions | ILogOptions | IOreOptions | IAllThievingOptions;
 
 //@ ******************************* STATE *******************************
 
