@@ -28,12 +28,9 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
   const { CurrentLocation } = useSelector((state: Types.AllState) => state.Location) as Types.ICurrentLocation;
   const hatchetsFromState = useSelector((state: Types.AllState) => state.Hatchets) as Types.IHatchetsSlice;
   const pickaxesFromState = useSelector((state: Types.AllState) => state.Pickaxes) as Types.IPickaxesSlice;
-
-  // This chooses the current location summary from AllLocations
   const currentLocationSummary = AllLocations[CurrentLocation] as Types.ILocationSummary;
-
-  // gets the player's experience
   const Experience = useSelector((state: Types.AllState) => state.Experience) as Types.ISkillList;
+
   let WoodcuttingLevel: number = getLevel(Experience.Woodcutting);
   let FishingLevel: number = getLevel(Experience.Fishing);
   let MiningLevel: number = getLevel(Experience.Mining);
@@ -72,8 +69,8 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
   });
 
   /**
-   * Added as an onClick handler to toggle the display state of the SkillPanels
-   *
+   * Added as an onClick handler to toggle the display state of the SkillPanels.
+   * Used to toggle the expanded or collapsed state of the SkillPanels.
    * @param panel - A string used to index the skillPanelsOpened object.
    */
   const handleToggleSkillPanel = (panel: string) => {
@@ -82,8 +79,11 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
     setSkillPanelsOpened({ ...copyOfskillPanelsOpened });
   };
 
+  /**
+   *
+   * @returns Returns the skill panel header JSX for consistency across panels
+   */
   const panelHeaderJSX = () => {
-    // returns the JSX for the panel header
     return (
       <div className="row justify-content-lg-center">
         <div className="col-lg-3 justify-content-lg-center">
@@ -101,6 +101,11 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
     );
   };
 
+  /**
+   *
+   * @param resourceArray The array of resources for the Woodcutting skill at the current location.
+   * @returns Returns a panel of Woodcutting option buttons.
+   */
   const WoodcuttingOptions = (resourceArray: string[]) => {
     return (
       <div role="button" onClick={() => handleToggleSkillPanel(`Woodcutting`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
@@ -143,6 +148,11 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
     );
   };
 
+  /**
+   *
+   * @param resourceArray The array of resources for the Fishing skill at the current location.
+   * @returns Returns a panel of Fishing option buttons.
+   */
   const FishingOptions = (resourceArray: string[]) => {
     return (
       <div role="button" onClick={() => handleToggleSkillPanel(`Fishing`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
@@ -184,6 +194,11 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
     );
   };
 
+  /**
+   *
+   * @param resourceArray The array of resources for the Mining skill at the current location.
+   * @returns Returns a panel of Mining option buttons.
+   */
   const MiningOptions = (resourceArray: string[]) => {
     return (
       <div role="button" onClick={() => handleToggleSkillPanel(`Mining`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
@@ -221,7 +236,11 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
     );
   };
 
-  //! left off here
+  /**
+   *
+   * @param thievingOptions The array of resources for the Thieving skill at the current location.
+   * @returns Returns a panel of Thieving option buttons, combining pickpocketing and stall options.
+   */
   const ThievingOptions = (thievingOptions: Types.IThievingStallsAndPickpocketing) => {
     const pickpocketingArray = thievingOptions.pickpocketing;
     const stallsArray = thievingOptions.stalls;
@@ -301,6 +320,11 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
     );
   };
 
+  /**
+   * Combines hatchet info from state with info from constants to populate a selector tag.
+   * Sends a chatlog message when a hatchet is equipped.
+   * @returns Returns JSX for a selector tag populated with hatchet options.
+   */
   const displayHatchetSelectorTag = () => {
     // define an empty array where composite hatchets will be pushed to
     let compositeHatchets: Types.ICompositeHatchet[] = [];
@@ -376,6 +400,11 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
     );
   };
 
+  /**
+   * Combines pickaxe info from state with info from constants to populate a selector tag.
+   * Sends a chatlog message when a pickaxe is equipped.
+   * @returns Returns JSX for a selector tag populated with pickaxe options.
+   */
   const displayPickaxeSelectorTag = () => {
     // define an empty array where composite pickaxes will be pushed to
     let compositePickaxes: Types.ICompositePickaxe[] = [];
@@ -451,6 +480,11 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
     );
   };
 
+  /**
+   * Styles the option tag conditionally based on: if the player can wield the given item, and if the item is owned by the player.
+   * @param item The hatchet or pickaxe item whose option tag is to be styled.
+   * @returns Returns a string to be used as a className.
+   */
   const handleSelectorStyle = (item: Types.ICompositeHatchet | Types.ICompositePickaxe) => {
     // use type guarding to decide which item is being styled
 
@@ -477,12 +511,17 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
       // has levels and does not own item = orange background
 
       return `bg-orangelol`;
-    } else if (!playerOwnsItem && !canWear) {
+    } else {
       // missing levels and does not own item = red background
       return `bg-danger`;
     }
   };
 
+  /**
+   * Used to check if the player can wield the hatchet or pickaxe based on the appropriate level.
+   * @param item The hatchet or pickaxe represented by the option tag.
+   * @returns Returns a boolean indicating whether the player has the appropriate level to use the tool.
+   */
   const applyDisabledAttribute = (item: Types.ICompositeHatchet | Types.ICompositePickaxe) => {
     // set canWear to false,
     let canWear = false;
