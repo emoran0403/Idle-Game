@@ -18,7 +18,8 @@
 //# SLAYER
 //# DUNGEONEERING
 //# THIEVING
-* update GameContainer to handle thieving skill
+* update GameContainer to handle thieving skill - need a stun state as a number in component state, each game tick decrements if >0
+* DONE - define a function to determine of the player succeeds or fails at thieving
 * DONE - update skills panel to include thieving opportunities
 * DONE - update location summaries to include thieving opportunities
 * DONE - update currentresourcecomp to handle thieving skill

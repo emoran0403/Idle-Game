@@ -376,6 +376,8 @@ export interface IListOfPickpocketStall {
   stallspice: IPickpocketStall;
   stallgem: IPickpocketStall;
 }
+export type IThievingTarget = IPickpocketNPC | IPickpocketStall;
+
 export type IListOfAllThievingOptions = IListOfPickpocketNPC | IListOfPickpocketStall;
 
 export type IAllThievingOptions = IPickpocketNPCOptions | IPickpocketStallOptions;
