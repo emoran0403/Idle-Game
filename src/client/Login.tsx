@@ -6,8 +6,14 @@ import Fetcher, { TOKEN_KEY } from "../client/ClientUtils/Fetcher";
 const Loginpage = (props: Types.LoginCompProps) => {
   const nav = useNavigate();
 
+  //! swap for production
+  //@=============================================================================
   const [password, setPassword] = useState<string>("");
   const [username, setUsername] = useState<string>("");
+  //@======PRODUCTION ABOVE, DEV BELOW============================================
+  // const [password, setPassword] = useState<string>("hunter2");
+  // const [username, setUsername] = useState<string>("bigwow");
+  //@=============================================================================
 
   const handleLogin = (e?: React.MouseEvent<HTMLButtonElement>) => {
     e?.preventDefault();

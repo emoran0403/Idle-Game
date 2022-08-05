@@ -310,7 +310,7 @@ export type IPickaxeOptions =
 //@ ******************************* THIEVING *******************************
 
 export interface IMainLoot {
-  Coins: Number;
+  Coins: number;
   Items: string[];
 }
 export interface IMultiLoot {
@@ -745,7 +745,7 @@ export type ICurrentTargetOptions =
 export interface ICurrentResource {
   CurrentResource: ICurrentResourceOptions;
 }
-export type ICurrentResourceOptions = "none" | IFishOptions | ILogOptions | IOreOptions | IAllThievingOptions;
+export type ICurrentResourceOptions = "none" | IFishOptions | ILogOptions | IOreOptions | IListOfAllThievingOptions;
 
 //@ ******************************* STATE *******************************
 
