@@ -84,6 +84,10 @@ export interface ActivityAreaCompProps {
   setCurrentEquipment: Function;
   currentEquipment: ICurrentEquipment;
   questStepProgress: number;
+  progress: number;
+}
+export interface ActivityDisplayCompProps {
+  progress: number;
 }
 export interface ChatWindowCompProps {
   chatLogArray: IChatLog[];
@@ -130,6 +134,7 @@ export interface ILogBankSlice {
   magic: IBankItem;
   elder: IBankItem;
 }
+export type ILogOptions = `logs` | `oak` | `willow` | `maple` | `yew` | `magic` | `elder`;
 
 //@ ******************************* HATCHETS *******************************
 
@@ -162,8 +167,7 @@ export interface IHatchetsSlice {
 export interface ICompositeHatchet extends IHatchet {
   playerOwnsThisItem: boolean;
 }
-
-export type IListOfHatchetOptions =
+export type IHatchetOptions =
   | `bronzehatchet`
   | `ironhatchet`
   | `steelhatchet`
@@ -226,6 +230,26 @@ export interface IOreBankSlice {
   lightAnimicaore: IBankItem;
   darkAnimicaore: IBankItem;
 }
+export type IOreOptions =
+  | `clay`
+  | `runeEssence`
+  | `pureEssence`
+  | `tinore`
+  | `copperore`
+  | `ironore`
+  | `coalore`
+  | `mithrilore`
+  | `goldore`
+  | `adamantiteore`
+  | `luminiteore`
+  | `runiteore`
+  | `orichalciteore`
+  | `drakolithore`
+  | `necriteore`
+  | `phasmatiteore`
+  | `baniteore`
+  | `lightAnimicaore`
+  | `darkAnimicaore`;
 
 //@ ******************************* PICKAXES *******************************
 
@@ -269,7 +293,7 @@ export interface IPickaxesSlice {
 export interface ICompositePickaxe extends IPickaxe {
   playerOwnsThisItem: boolean;
 }
-export type IListOfPickaxeOptions =
+export type IPickaxeOptions =
   | `bronzepickaxe`
   | `ironpickaxe`
   | `steelpickaxe`
@@ -282,6 +306,120 @@ export type IListOfPickaxeOptions =
   | `crystalpickaxe`
   | `banepickaxe`
   | `elderrunepickaxe`;
+
+//@ ******************************* THIEVING *******************************
+
+export interface IMainLoot {
+  Coins: number;
+  Items: string[];
+}
+export interface IMultiLoot {
+  levelReqThieving: number;
+  levelReqAgility: number;
+}
+export interface IPickpocketNPC {
+  name: string;
+  displayName: string;
+  levelReqThieving: number;
+  XPGivenThieving: number;
+  stunTime: number;
+  doubleloot: IMultiLoot;
+  tripleloot: IMultiLoot;
+  quadloot: IMultiLoot;
+  loot: IMainLoot;
+}
+export interface IPickpocketStall {
+  name: string;
+  displayName: string;
+  levelReqThieving: number;
+  XPGivenThieving: number;
+  stunTime: number;
+  loot: IMainLoot;
+}
+export interface IListOfPickpocketNPC {
+  pickpocketman: IPickpocketNPC;
+  pickpocketfarmer: IPickpocketNPC;
+  pickpockethamfemale: IPickpocketNPC;
+  pickpockethammale: IPickpocketNPC;
+  pickpocketwarriorwoman: IPickpocketNPC;
+  pickpocketalkharidwarrior: IPickpocketNPC;
+  pickpocketcavegoblin: IPickpocketNPC;
+  pickpocketmasterfarmer: IPickpocketNPC;
+  pickpocketguard: IPickpocketNPC;
+  pickpocketfremennikcitizen: IPickpocketNPC;
+  pickpocketardougneknight: IPickpocketNPC;
+  pickpocketmenaphitethug: IPickpocketNPC;
+  pickpocketwatchman: IPickpocketNPC;
+  pickpocketpaladin: IPickpocketNPC;
+  pickpocketgnome: IPickpocketNPC;
+  pickpockethero: IPickpocketNPC;
+  pickpockettrader: IPickpocketNPC;
+}
+export interface IListOfPickpocketStall {
+  stallvegetable: IPickpocketStall;
+  stallbaker: IPickpocketStall;
+  stallmonkeygeneralstore: IPickpocketStall;
+  stalltea: IPickpocketStall;
+  stallcrafting: IPickpocketStall;
+  stallmonkeyfood: IPickpocketStall;
+  stallrockcake: IPickpocketStall;
+  stallsilk: IPickpocketStall;
+  stallwine: IPickpocketStall;
+  stallseed: IPickpocketStall;
+  stallfur: IPickpocketStall;
+  stallfish: IPickpocketStall;
+  stalllamp: IPickpocketStall;
+  stallcrossbow: IPickpocketStall;
+  stallsilver: IPickpocketStall;
+  stallmagic: IPickpocketStall;
+  stallscimitar: IPickpocketStall;
+  stallspice: IPickpocketStall;
+  stallgem: IPickpocketStall;
+}
+export type IThievingTarget = IPickpocketNPC | IPickpocketStall;
+
+export type IListOfAllThievingOptions = IListOfPickpocketNPC | IListOfPickpocketStall;
+
+export type IAllThievingOptions = IPickpocketNPCOptions | IPickpocketStallOptions;
+
+export type IPickpocketNPCOptions =
+  | `pickpocketman`
+  | `pickpocketfarmer`
+  | `pickpockethamfemale`
+  | `pickpockethammale`
+  | `pickpocketwarriorwoman`
+  | `pickpocketalkharidwarrior`
+  | `pickpocketcavegoblin`
+  | `pickpocketmasterfarmer`
+  | `pickpocketguard`
+  | `pickpocketfremennikcitizen`
+  | `pickpocketardougneknight`
+  | `pickpocketmenaphitethug`
+  | `pickpocketwatchman`
+  | `pickpocketpaladin`
+  | `pickpocketgnome`
+  | `pickpockethero`
+  | `pickpockettrader`;
+export type IPickpocketStallOptions =
+  | `stallvegetable`
+  | `stallbaker`
+  | `stallmonkeygeneralstore`
+  | `stalltea`
+  | `stallcrafting`
+  | `stallmonkeyfood`
+  | `stallrockcake`
+  | `stallsilk`
+  | `stallwine`
+  | `stallseed`
+  | `stallfur`
+  | `stallfish`
+  | `stalllamp`
+  | `stallcrossbow`
+  | `stallsilver`
+  | `stallmagic`
+  | `stallscimitar`
+  | `stallspice`
+  | `stallgem`;
 
 //@ ******************************* FISH *******************************
 
@@ -317,6 +455,7 @@ export interface IListOfFish {
   raw_sardine: IFish;
   raw_herring: IFish;
 }
+export type IFishOptions = `raw_shrimp` | `raw_crayfish` | `raw_anchovies` | `raw_trout` | `raw_salmon` | `raw_pike` | `raw_sardine` | `raw_herring`;
 
 //@ ******************************* MISC *******************************
 
@@ -409,9 +548,9 @@ export interface ListOfSkills {
   CurrentSkill: ListOfSkillOptions;
 }
 export interface LocationSkills {
-  Mining: string[];
-  Fishing: string[];
-  Woodcutting: string[];
+  Mining: IOreOptions[];
+  Fishing: IFishOptions[];
+  Woodcutting: ILogOptions[];
   Farming: string[];
   Firemaking: string[];
   Hunter: string[];
@@ -421,7 +560,11 @@ export interface LocationSkills {
   Construction: string[];
   Summoning: string[];
   Agility: string[];
-  Thieving: string[];
+  Thieving: IThievingStallsAndPickpocketing;
+}
+export interface IThievingStallsAndPickpocketing {
+  pickpocketing: IPickpocketNPCOptions[];
+  stalls: IPickpocketStallOptions[];
 }
 export type ListOfSkillOptions =
   | `none`
@@ -602,42 +745,7 @@ export type ICurrentTargetOptions =
 export interface ICurrentResource {
   CurrentResource: ICurrentResourceOptions;
 }
-export type ICurrentResourceOptions =
-  | `none`
-  | `raw_shrimp`
-  | `raw_crayfish`
-  | `raw_anchovies`
-  | `raw_trout`
-  | `raw_salmon`
-  | `raw_pike`
-  | `raw_sardine`
-  | `raw_herring`
-  | `logs`
-  | `oak`
-  | `willow`
-  | `maple`
-  | `yew`
-  | `magic`
-  | `elder`
-  | `clay`
-  | `runeEssence`
-  | `pureEssence`
-  | `tinore`
-  | `copperore`
-  | `ironore`
-  | `coalore`
-  | `mithrilore`
-  | `goldore`
-  | `adamantiteore`
-  | `luminiteore`
-  | `runiteore`
-  | `orichalciteore`
-  | `drakolithore`
-  | `necriteore`
-  | `phasmatiteore`
-  | `baniteore`
-  | `lightAnimicaore`
-  | `darkAnimicaore`;
+export type ICurrentResourceOptions = "none" | IFishOptions | ILogOptions | IOreOptions | IListOfAllThievingOptions;
 
 //@ ******************************* STATE *******************************
 
@@ -714,6 +822,8 @@ export interface IPlayerPayload {
   password?: string;
 }
 
+//@ ******************************* LOCATIONS *******************************
+
 //@ copy this and trim it down to match the location summary
 export interface ILocationSummary {
   Quests: string[];
@@ -721,26 +831,15 @@ export interface ILocationSummary {
   Combat: string[];
   Bosses: string[];
 }
-
-//@ ******************************* LOCATIONS *******************************
-
 export interface ILumbridgeLocationSummary {
   Quests: string[];
-  Skills: {
-    Mining: string[];
-    Fishing: string[];
-    Woodcutting: string[];
-  };
+  Skills: LocationSkills;
   Combat: string[];
   Bosses: string[];
 }
 export interface IDraynorLocationSummary {
   Quests: string[];
-  Skills: {
-    Mining: string[];
-    Fishing: string[];
-    Woodcutting: string[];
-  };
+  Skills: LocationSkills;
   Combat: string[];
   Bosses: string[];
 }
@@ -828,8 +927,8 @@ export interface ICurrentEquipment {
   NeckSlot: `none` | IArmorSlotNeck;
   RingSlot: `none` | IArmorSlotRing;
   TwoHandSlot: `none` | IArmorSlotTwoHand;
-  Hatchet: `none` | IListOfHatchetOptions;
-  Pickaxe: `none` | IListOfPickaxeOptions;
+  Hatchet: `none` | IHatchetOptions;
+  Pickaxe: `none` | IPickaxeOptions;
 }
 export type IEquipmentSlotOptions = IArmorSlotBody | IArmorSlotHead | IArmorSlotLegs | IArmorSlotHands | IArmorSlotFeet | IArmorSlotTwoHand;
 

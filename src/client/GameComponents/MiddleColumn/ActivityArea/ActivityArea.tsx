@@ -29,7 +29,7 @@ const ActivityArea = (props: Types.ActivityAreaCompProps) => {
       <ActivityButtons handleUpdateDisplay={handleUpdateDisplay} />
       {
         {
-          activityDisplay: <ActivityDisplay />,
+          activityDisplay: <ActivityDisplay progress={props.progress} />,
           skills: (
             <SkillsPanel
               handleUpdateDisplay={handleUpdateDisplay}

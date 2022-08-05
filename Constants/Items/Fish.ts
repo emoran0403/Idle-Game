@@ -102,7 +102,13 @@ export const ListOfFish: Types.IListOfFish = {
   },
 };
 
-// if the player is fishing, and the game interval has ticked, run this function
+/**
+ * Determines if the player is successful in catching a fish.
+ * if the player is fishing, and the game interval has ticked, run this function
+ * @param fish The fish the player is attempting to catch.
+ * @param FishEXP The player's XP in Fishing.
+ * @returns Returns a boolean indicating whether the player successfully caught a fish.
+ */
 export const playerEarnsFish = (fish: Types.IFish, FishEXP: number) => {
   //? adjust function to account for buffs and boosts later
   // calculate the player's Fishing level
@@ -111,7 +117,7 @@ export const playerEarnsFish = (fish: Types.IFish, FishEXP: number) => {
   // calculate the rawRoll needed for the player to catch a fish - formula obtained from wiki: https://runescape.wiki/w/Fishing#Mechanics
   let playerRoll = Math.floor(((99 - FishingLevel) * Number(fish.low) + (FishingLevel - 1) * Number(fish.high)) / 98);
 
-  // roll in the range 0-255 inclusive
+  // roll in the range 0-256 inclusive
   let gameRoll = Math.floor(Math.random() * 256);
 
   // if the player rolled higher than the game, return true

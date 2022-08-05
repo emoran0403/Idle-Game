@@ -2,32 +2,39 @@
 * - add cases to switch statements (questing tick func and quest rewards useEffect) in GameContainer
 * - add typings for enemies search => //@ recreate this for each location
 
+//! ARTISAN - skills that involve taking resources and transforming or consuming them
+//# SMITHING
+//# SUMMONING
+//# CRAFTING
+//# COOKING
+//# FIREKAMKING
+//# RUNECRAFTING
+//# FLETCHING
+//# HERBLORE
+//# CONSTRUCTION
 
-//# PRAYER
-* DONE - update combat tick to dispatch prayer xp for the XPGivenPrayer amount
-* DONE - update enemy object utility to account for bones being dropped
-* DONE - add an XPGivenPrayer property to all enemies, defaulting to 0
-* DONE - update typings for enemies
-
-
+//! SUPPORT - skills that just take some time to complete
+//# AGILITY
+//# SLAYER
+//# DUNGEONEERING
 //# THIEVING
-* update location summaries to include thieving opportunities
-* create a constants file with thieving opportunities
-* update skills panel to include thieving opportunities
-* update GameContainer to handle thieving skill
-* update currentresourcecomp to handle thieving skill
+* update GameContainer to handle thieving skill - need a stun state as a number in component state, each game tick decrements if >0
+* DONE - define a function to determine of the player succeeds or fails at thieving
+* DONE - update skills panel to include thieving opportunities
+* DONE - update location summaries to include thieving opportunities
+* DONE - update currentresourcecomp to handle thieving skill
+* DONE - create a constants file with thieving opportunities
+
+//! GATHERING - skills that generate new resources
+//# FARMING
+//# HUNTER
+//# DIVINATION
+
+//! BIG LOL - wide variety of interactions to deal with
+//# INVENTION
+//# ARCHAEOLOGY
 
 
-//# MINING DONE**************************************
-* DONE - add mining to skills panel
-* DONE - add mining to game GameContainer
-* DONE - add case to currentresourcecomp for mining
-* DONE - conditionally check for crystal hatchets and pickaxes in shop and skilling panel, as these are special items
-* DONE - add mining resources to bank
-* DONE - add mining calculations to Ores file under constants
-* DONE - add ores to resource options type
-* DONE - add mining options to location summaries
-* DONE - update IListOfPickaxeOptions for all picks
 
 //# Fixes
 * can clean up chat logs in game component under woodcutting and fishing
@@ -36,6 +43,7 @@
 * content layout shift in levels component when xp is 10+ digits
 * inventory pushes down worn equipment component when it has items with long names
 * grammar when fishing anchovies
+* DONE - scale coin drops to the enemy level, not lifepoints
 * DONE - clean up the functions in shoppanel - handle buying item can be a standalone function i think
 * DONE - equipping a weapon while skilling stops the skilling
 * DONE - make it so that changing location resets all state to none or idle
@@ -51,6 +59,8 @@
               ></div>
 
 //# Quality of life
+* make resources in bank panel into collapsible panels - copy skillspanel
+* add dropping messages to ores if the player is dropping resources
 * quest is colored yellow when i have the combat level req
 * Bank shows items in ascending level order
 ** timer showing the progress until the next tick, red bar if the player is idle
@@ -58,6 +68,7 @@
 *** maybe make the game choose the next available quest automatically
 *** get a changelog from github for the lobby
 *** offline progress
+* DONE -  make skills in skills panel into collapsible panels
 * DONE -  hatchet options in skill panel display their woodcutting
 * DONE -  globe picture for the world map icon
 * DONE -  double check the buttons on quest panel - allowing player to begin a quest without the combat requirements
@@ -71,14 +82,12 @@
 * DONE - quest panel to show missing level requirements
 
 //# Content
-* Draynor Village + enemies
 * Varrock
 * Al-Kharid
 * bosses
 * clue scrolls
 * enemy item drops
 * high scores list - read multiple MongoDB call
-* add more skills
 * DONE - implement combat into quests
 
 //# Misc / Bug Fixes
@@ -86,5 +95,20 @@
 * Logic - experience and levels is displaying too high for some reason :/
 * remove boilerplate commits
 
-//# mining
-https://runescape.wiki/w/Module:Sandbox/User:Doktor/Mining
+
+//# PRAYER DONE**********************************
+* DONE - update combat tick to dispatch prayer xp for the XPGivenPrayer amount
+* DONE - update enemy object utility to account for bones being dropped
+* DONE - add an XPGivenPrayer property to all enemies, defaulting to 0
+* DONE - update typings for enemies
+
+//# MINING DONE**************************************
+* DONE - add mining to skills panel
+* DONE - add mining to game GameContainer
+* DONE - add case to currentresourcecomp for mining
+* DONE - conditionally check for crystal hatchets and pickaxes in shop and skilling panel, as these are special items
+* DONE - add mining resources to bank
+* DONE - add mining calculations to Ores file under constants
+* DONE - add ores to resource options type
+* DONE - add mining options to location summaries
+* DONE - update IListOfPickaxeOptions for all picks

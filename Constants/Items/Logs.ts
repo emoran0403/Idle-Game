@@ -83,7 +83,14 @@ export const ListOfLogs: Types.IListOfLogs = {
   },
 };
 
-// if the player is woodcutting, and the game interval has ticked, run this function
+/**
+ * Determines if the player is successful in chopping a log.
+ * If the player is woodcutting, and the game interval has ticked, run this function
+ * @param log The log the player is attempting to chop.
+ * @param WCEXP The player's XP in Woodcutting.
+ * @param hatchet The hatchet the player is using.
+ * @returns Returns a boolean indicating whether the player successfully gathered a log.
+ */
 export const playerEarnsLog = (log: Types.ILog, WCEXP: number, hatchet: Types.IHatchet) => {
   //? adjust function to account for buffs and boosts later
   // calculate the player's Woodcutting level
@@ -98,7 +105,7 @@ export const playerEarnsLog = (log: Types.ILog, WCEXP: number, hatchet: Types.IH
     ((99 - WCLevel) * Number(log.low[hatchetName as keyof Types.logRoll]) + (WCLevel - 1) * Number(log.high[hatchetName as keyof Types.logRoll])) / 98
   );
 
-  // roll in the range 0-255 inclusive
+  // roll in the range 0-256 inclusive
   let gameRoll = Math.floor(Math.random() * 256);
 
   // if the player rolled higher than the game, return true

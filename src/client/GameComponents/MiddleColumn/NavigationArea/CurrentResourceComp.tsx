@@ -7,6 +7,9 @@ import { ListOfFish } from "../../../../../Constants/Items/Fish";
 import { Enemies } from "../../../../../Constants/Enemies";
 import { ListOfOres } from "../../../../../Constants/Items/Ores";
 
+import { ListOfPickpocketNPC } from "../../../../../Constants/Thieving/Pickpocketing";
+import { ListOfPickpocketStalls } from "../../../../../Constants/Thieving/Stalls";
+
 const CurrentResourceComp = (props: Types.NoProps) => {
   const Resource = useSelector((state: Types.AllState) => state.Resource.CurrentResource as Types.ICurrentResourceOptions);
   const Target = useSelector((state: Types.AllState) => state.Target.CurrentTarget as Types.ICurrentTargetOptions);
@@ -39,6 +42,13 @@ const CurrentResourceComp = (props: Types.NoProps) => {
         case `Mining`: {
           return <div>{ListOfOres[Resource as keyof Types.IListOfOres].displayName}</div>;
         }
+        case `Thieving`: {
+          if (ListOfPickpocketNPC[Resource as keyof Types.IListOfPickpocketNPC]) {
+            return <div>{ListOfPickpocketNPC[Resource as keyof Types.IListOfPickpocketNPC].displayName}</div>;
+          } else {
+            return <div>{ListOfPickpocketStalls[Resource as keyof Types.IListOfPickpocketStall].displayName}</div>;
+          }
+        }
         default:
           return <div>none</div>;
       }
@@ -58,7 +68,7 @@ const CurrentResourceComp = (props: Types.NoProps) => {
         </div>
       ) : (
         <div>
-          <div>Collecting</div>
+          {Skill === `Thieving` ? <div>Stealing from</div> : <div>Collecting</div>}
           {displayResource()}
         </div>
       )}

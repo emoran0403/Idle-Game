@@ -30,20 +30,28 @@ import { LumbridgeQuests } from "../../../Constants/Quests/LumbridgeQuests";
 import { DraynorQuests } from "../../../Constants/Quests/DraynorQuests";
 import { EmptyQuestRewards } from "../../../Constants/Quests";
 
+// combat
+import { didPlayerLevelUp, getLevel } from "../../../Constants/XP Levels";
+import { Enemies, playerAttacksTarget } from "../../../Constants/Enemies";
+
+// woodcutting
 import { addLogToBank } from "../Redux/Slices/BankSlices/LogsSlice";
 import { ListOfLogs, playerEarnsLog } from "../../../Constants/Items/Logs";
 import { listOfHatchets } from "../../../Constants/SkillingEquipment/Hatchets";
 
+// mining
 import { addOreToBank } from "../Redux/Slices/BankSlices/OresSlice";
 import { ListOfOres, resolveMining } from "../../../Constants/Items/Ores";
 import { listOfPickaxes } from "../../../Constants/SkillingEquipment/Pickaxes";
 
+// fishing
 import { addFishToBank } from "../Redux/Slices/BankSlices/FishSlice";
 import { ListOfFish, playerEarnsFish } from "../../../Constants/Items/Fish";
 
-import { didPlayerLevelUp, getLevel } from "../../../Constants/XP Levels";
-import { Enemies, playerAttacksTarget } from "../../../Constants/Enemies";
-
+// thieving
+import { resolveThieving } from "../../../Constants/Thieving/SuccessFunction";
+import { ListOfPickpocketNPC } from "../../../Constants/Thieving/Pickpocketing";
+import { ListOfPickpocketStalls } from "../../../Constants/Thieving/Stalls";
 // misc imports
 import { saveState } from "../Redux/store";
 import { TOKEN_KEY } from "../ClientUtils/Fetcher";
@@ -71,6 +79,9 @@ const GameContainer = (props: Types.GameContainerProps) => {
 
   // console.log(playerInventory);
   const AllQuestsFromState: Types.IStateQuest[] = [...LumbridgeQuestArray, ...DraynorQuestArray];
+
+  //@ this is how we keep track of the `time` in game
+  const [progress, setProgress] = useState<number>(0);
 
   //@ initialize the chatLogArray with a default welcome message
   //@ this will hold ALL chatLogs, a subset of which will be displayed based on the current filter settings
@@ -116,11 +127,14 @@ const GameContainer = (props: Types.GameContainerProps) => {
   // const [playerLifePoints, setPlayerLifePoints] = useState<number>(getLevel(Experience.Consitution) * 100);
   const [targetLifePoints, setTargetLifePoints] = useState<number>(0);
 
-  //@ this is set when the player gains an item which will fill their inventory
-  const [needsToBank, setNeedsToBank] = useState<boolean>(false);
-
   //@ assign the ore rock's durability to state to track progress towards receiving an ore
   const [oreRockDurability, setOreRockDurability] = useState<number>(0);
+
+  //@ use this to keep track of the stun time remaining for when a player fails a thieving attempt
+  const [stunTimeRemaining, setStunTimeRemaining] = useState<number>(0);
+
+  //@ this is set when the player gains an item which will fill their inventory
+  const [needsToBank, setNeedsToBank] = useState<boolean>(false);
 
   //@ this keeps track of time, used to 'save' progress in localStorage, and to update DB
   const [checkPointTimer, setcheckPointTimer] = useState<number>(1);
@@ -203,9 +217,14 @@ const GameContainer = (props: Types.GameContainerProps) => {
     // increment the progress counter
     setQuestStepProgress(questStepProgress + 1);
 
-    // if the progress counter hits 30, reset it to 0, and then run the quest logic based on location
-    //! change this to 24 for production (24 ticks at 2.5 secs ea = 1 min per quest step)
+    // if the progress counter hits 24, reset it to 0, and then run the quest logic based on location
+    //! swap for production
+    //@================================================
     if (questStepProgress === 24) {
+      //@======PRODUCTION ABOVE, DEV BELOW============================================
+      // if (questStepProgress === 2) {
+      //@================================================
+
       setQuestStepProgress(0);
       switch (playerLocation) {
         case `Lumbridge`: {
@@ -373,6 +392,130 @@ const GameContainer = (props: Types.GameContainerProps) => {
           handleMultipleChatLogs(miningMessages, miningMessagesTags);
           break;
         }
+
+        case `Thieving`: {
+          //* initialize empty chatlogs
+          let thievingMessages: string[] = [];
+          let thievingMessagesTags: Types.ChatLogTag[] = [];
+
+          //* if the player has been caught and is currently stunned,
+          if (stunTimeRemaining > 0) {
+            // send a chatlog
+            thievingMessages.push(`You are still stunned from your previous thieving attempt`);
+            thievingMessagesTags.push(`Misc`);
+            handleMultipleChatLogs(thievingMessages, thievingMessagesTags);
+
+            // and decrement the timer
+            setStunTimeRemaining(stunTimeRemaining - 1);
+
+            //* if the player is not currently stunned, they may attempt to steal
+          } else {
+            //* since thieving has 2 major options, call resolveThieving on the chosen option, and store the return object.
+            if (ListOfPickpocketNPC[CurrentResource as keyof Types.IListOfPickpocketNPC]) {
+              // pickpocketing logic here
+
+              let ThievingResult = resolveThieving(
+                ListOfPickpocketNPC[CurrentResource as keyof Types.IListOfPickpocketNPC],
+                Experience.Thieving,
+                Experience.Agility
+              );
+              console.log({ ThievingResult });
+              //* if the player is successful in their pickpocketing attempt
+              if (ThievingResult.outcome) {
+                // queue up a chatlog with the outcome
+                thievingMessages.push(
+                  `Stole ${ThievingResult.coins} coins from ${ListOfPickpocketNPC[CurrentResource as keyof Types.IListOfPickpocketNPC].displayName}`
+                );
+                thievingMessagesTags.push(`Gained Resource`);
+
+                // give coins
+                dispatch(addToWallet(ThievingResult.coins));
+
+                // give xp and queue a chatlog
+                dispatch(gainXP({ skill: `Thieving`, xp: ListOfPickpocketNPC[CurrentResource as keyof Types.IListOfPickpocketNPC].XPGivenThieving }));
+                thievingMessages.push(`Gained ${ListOfPickpocketNPC[CurrentResource as keyof Types.IListOfPickpocketNPC].XPGivenThieving} xp in Thieving`);
+                thievingMessagesTags.push(`Gained XP`);
+
+                // decide if the player gained a level, and queue a chatlog if so
+                const playerLevelled = didPlayerLevelUp(
+                  Experience.Thieving,
+                  ListOfPickpocketNPC[CurrentResource as keyof Types.IListOfPickpocketNPC].XPGivenThieving
+                );
+                if (playerLevelled) {
+                  thievingMessages.push(`Thieving Level up!`);
+                  thievingMessagesTags.push(`Level Up`);
+                }
+
+                //* finally send the chatlogs
+                handleMultipleChatLogs(thievingMessages, thievingMessagesTags);
+              } else {
+                //* if the player is not successful in their pickpocketing attempt
+
+                // queue up a chatlog with the outcome
+                thievingMessages.push(`The ${ListOfPickpocketNPC[CurrentResource as keyof Types.IListOfPickpocketNPC].displayName} caught you!`);
+                thievingMessagesTags.push(`Misc`);
+
+                // set the stun time
+                setStunTimeRemaining(ListOfPickpocketNPC[CurrentResource as keyof Types.IListOfPickpocketNPC].stunTime);
+
+                //* finally send the chatlogs
+                handleMultipleChatLogs(thievingMessages, thievingMessagesTags);
+              }
+            } else {
+              //*  otherwise, the player is thieving from stalls, so do these steps
+              // stall logic here
+
+              let ThievingResult = resolveThieving(
+                ListOfPickpocketStalls[CurrentResource as keyof Types.IListOfPickpocketStall],
+                Experience.Thieving,
+                Experience.Agility
+              );
+              console.log({ ThievingResult });
+
+              if (ThievingResult.outcome) {
+                //* if the player is successful in their thieving stall attempt
+
+                // queue up a chatlog with the outcome
+                thievingMessages.push(
+                  `Stole from the ${ListOfPickpocketStalls[CurrentResource as keyof Types.IListOfPickpocketStall].displayName}. Items coming soon(tm)`
+                );
+                thievingMessagesTags.push(`Gained Resource`);
+
+                // give xp and queue a chatlog
+                dispatch(gainXP({ skill: `Thieving`, xp: ListOfPickpocketStalls[CurrentResource as keyof Types.IListOfPickpocketStall].XPGivenThieving }));
+                thievingMessages.push(`Gained ${ListOfPickpocketStalls[CurrentResource as keyof Types.IListOfPickpocketStall].XPGivenThieving} xp in Thieving`);
+                thievingMessagesTags.push(`Gained XP`);
+
+                // decide if the player gained a level, and queue a chatlog if so
+                const playerLevelled = didPlayerLevelUp(
+                  Experience.Thieving,
+                  ListOfPickpocketStalls[CurrentResource as keyof Types.IListOfPickpocketStall].XPGivenThieving
+                );
+                if (playerLevelled) {
+                  thievingMessages.push(`Thieving Level up!`);
+                  thievingMessagesTags.push(`Level Up`);
+                }
+
+                //* finally send the chatlogs
+                handleMultipleChatLogs(thievingMessages, thievingMessagesTags);
+              } else {
+                //* if the player is not successful in their thieving stall attempt
+
+                // queue up a chatlog with the outcome
+                thievingMessages.push(`The ${ListOfPickpocketStalls[CurrentResource as keyof Types.IListOfPickpocketStall].displayName}'s owner caught you!`);
+                thievingMessagesTags.push(`Misc`);
+
+                // set the stun time
+                setStunTimeRemaining(ListOfPickpocketStalls[CurrentResource as keyof Types.IListOfPickpocketStall].stunTime);
+
+                //* finally send the chatlogs
+                handleMultipleChatLogs(thievingMessages, thievingMessagesTags);
+              }
+            }
+          }
+
+          break;
+        }
       }
     } else {
       // Otherwise, the player needs to bank
@@ -429,7 +572,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
 
         // award the coins 0-half of lifepoints
         let coinDrop: number = Math.floor(
-          Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].lifePoints * (Math.random() * 0.5)
+          Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].level * (Math.random() * 0.5)
         );
         dispatch(addToWallet(coinDrop));
 
@@ -579,16 +722,21 @@ const GameContainer = (props: Types.GameContainerProps) => {
 
       if (CurrentActivity === `In combat` && Target !== `none`) {
         handleCombatTick();
-      } else if (CurrentActivity === `Skilling` && (CurrentSkill === `Woodcutting` || CurrentSkill === `Fishing` || CurrentSkill === `Mining`)) {
+      } else if (
+        CurrentActivity === `Skilling` &&
+        (CurrentSkill === `Woodcutting` || CurrentSkill === `Fishing` || CurrentSkill === `Mining` || CurrentSkill === `Thieving`)
+      ) {
         handleSkillingTick();
       } else if (CurrentActivity === `Questing` && CurrentQuest !== `none`) {
         handleQuestingTick();
       }
-
       handleSavePoint();
-
-      //! set this to 2500ms in production
+      //! swap for production
+      //@================================================
     }, 2500);
+    //@======PRODUCTION ABOVE, DEV BELOW============================================
+    // }, 500);
+    //@================================================
 
     // console.log({ interval });
     return () => clearInterval(interval);
@@ -642,6 +790,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
             setCurrentEquipment={setCurrentEquipment}
             currentEquipment={currentEquipment}
             questStepProgress={questStepProgress}
+            progress={progress}
           />
         </div>
 

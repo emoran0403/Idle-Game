@@ -13,30 +13,82 @@ import { listOfHatchets } from "../../../../Constants/SkillingEquipment/Hatchets
 import { ListOfOres } from "../../../../Constants/Items/Ores";
 import { listOfPickaxes } from "../../../../Constants/SkillingEquipment/Pickaxes";
 
+import { ListOfPickpocketNPC } from "../../../../Constants/Thieving/Pickpocketing";
+import { ListOfPickpocketStalls } from "../../../../Constants/Thieving/Stalls";
+
 import { setResource } from "../../Redux/Slices/CurrentResource";
 import { setSkill } from "../../Redux/Slices/CurrentSkill";
 import { setActivity } from "../../Redux/Slices/CurrentActivity";
 import { setTarget } from "../../Redux/Slices/CurrentTarget";
 import { setQuest } from "../../Redux/Slices/CurrentQuest";
+import { useState } from "react";
 
 const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
   const dispatch = useDispatch();
-  // This grabs the current location from state
+
+  // select slices of state relevant to this component
   const { CurrentLocation } = useSelector((state: Types.AllState) => state.Location) as Types.ICurrentLocation;
   const hatchetsFromState = useSelector((state: Types.AllState) => state.Hatchets) as Types.IHatchetsSlice;
   const pickaxesFromState = useSelector((state: Types.AllState) => state.Pickaxes) as Types.IPickaxesSlice;
-
-  // This chooses the current location summary from AllLocations
   const currentLocationSummary = AllLocations[CurrentLocation] as Types.ILocationSummary;
-
-  // gets the player's experience
   const Experience = useSelector((state: Types.AllState) => state.Experience) as Types.ISkillList;
+
+  // define skill levels based off the players current experience
   let WoodcuttingLevel: number = getLevel(Experience.Woodcutting);
   let FishingLevel: number = getLevel(Experience.Fishing);
   let MiningLevel: number = getLevel(Experience.Mining);
+  let ThievingLevel: number = getLevel(Experience.Thieving);
 
+  // defined to allow for indexing of the `skillPanelsOpened` in componente state
+  interface SkillPanels {
+    Woodcutting: boolean;
+    Mining: boolean;
+    Fishing: boolean;
+    Thieving: boolean;
+    Farming: boolean;
+    Firemaking: boolean;
+    Hunter: boolean;
+    Divination: boolean;
+    Archaeology: boolean;
+    Runecrafting: boolean;
+    Construction: boolean;
+    Summoning: boolean;
+    Agility: boolean;
+  }
+
+  // tracks each skill panel's expanded or collapsed state
+  const [skillPanelsOpened, setSkillPanelsOpened] = useState({
+    Woodcutting: false,
+    Mining: false,
+    Fishing: false,
+    Thieving: false,
+    Farming: false,
+    Firemaking: false,
+    Hunter: false,
+    Divination: false,
+    Archaeology: false,
+    Runecrafting: false,
+    Construction: false,
+    Summoning: false,
+    Agility: false,
+  });
+
+  /**
+   * Added as an onClick handler to toggle the display state of the SkillPanels.
+   * Used to toggle the expanded or collapsed state of the SkillPanels.
+   * @param panel - A string used to index the skillPanelsOpened object.
+   */
+  const handleToggleSkillPanel = (panel: string) => {
+    let copyOfskillPanelsOpened = { ...skillPanelsOpened };
+    copyOfskillPanelsOpened[panel as keyof SkillPanels] = !copyOfskillPanelsOpened[panel as keyof SkillPanels];
+    setSkillPanelsOpened({ ...copyOfskillPanelsOpened });
+  };
+
+  /**
+   *
+   * @returns Returns the skill panel header JSX for consistency across panels
+   */
   const panelHeaderJSX = () => {
-    // returns the JSX for the panel header
     return (
       <div className="row justify-content-lg-center">
         <div className="col-lg-3 justify-content-lg-center">
@@ -54,11 +106,16 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
     );
   };
 
+  /**
+   *
+   * @param resourceArray The array of resources for the Woodcutting skill at the current location.
+   * @returns Returns a panel of Woodcutting option buttons.
+   */
   const WoodcuttingOptions = (resourceArray: string[]) => {
     return (
-      <div onClick={() => {}} className="card-title border border-dark border-1 rounded-3">
-        <h6 className="text-center">Woodcutting Level {WoodcuttingLevel}</h6>
-        <div className="d-flex flex-row flex-wrap">
+      <div role="button" onClick={() => handleToggleSkillPanel(`Woodcutting`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
+        <h1 className="text-center">Woodcutting Level {WoodcuttingLevel}</h1>
+        <div className={`d-flex flex-row flex-wrap ${skillPanelsOpened.Woodcutting ? `` : `d-none`}`}>
           {resourceArray.map((resource) => (
             <button
               disabled={WoodcuttingLevel < ListOfLogs[resource as keyof Types.IListOfLogs].levelReqWoodcutting ? true : false}
@@ -96,11 +153,16 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
     );
   };
 
+  /**
+   *
+   * @param resourceArray The array of resources for the Fishing skill at the current location.
+   * @returns Returns a panel of Fishing option buttons.
+   */
   const FishingOptions = (resourceArray: string[]) => {
     return (
-      <div className="card-title border border-dark border-1 rounded-3">
-        <h6 className="text-center">Fishing Level {FishingLevel}</h6>
-        <div className="d-flex flex-row flex-wrap">
+      <div role="button" onClick={() => handleToggleSkillPanel(`Fishing`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
+        <h1 className="text-center">Fishing Level {FishingLevel}</h1>
+        <div className={`d-flex flex-row flex-wrap ${skillPanelsOpened.Fishing ? `` : `d-none`}`}>
           {resourceArray.map((resource) => (
             <button
               disabled={FishingLevel < ListOfFish[resource as keyof Types.IListOfFish].levelReqFishing ? true : false}
@@ -137,11 +199,16 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
     );
   };
 
+  /**
+   *
+   * @param resourceArray The array of resources for the Mining skill at the current location.
+   * @returns Returns a panel of Mining option buttons.
+   */
   const MiningOptions = (resourceArray: string[]) => {
     return (
-      <div className="card-title border border-dark border-1 rounded-3">
-        <h6 className="text-center">Mining Level {MiningLevel}</h6>
-        <div className="d-flex flex-row flex-wrap">
+      <div role="button" onClick={() => handleToggleSkillPanel(`Mining`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
+        <h1 className="text-center">Mining Level {MiningLevel}</h1>
+        <div className={`d-flex flex-row flex-wrap ${skillPanelsOpened.Mining ? `` : `d-none`}`}>
           {resourceArray.map((resource) => (
             <button
               disabled={MiningLevel < ListOfOres[resource as keyof Types.IListOfOres].levelReqMining ? true : false}
@@ -174,6 +241,95 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
     );
   };
 
+  /**
+   *
+   * @param thievingOptions The array of resources for the Thieving skill at the current location.
+   * @returns Returns a panel of Thieving option buttons, combining pickpocketing and stall options.
+   */
+  const ThievingOptions = (thievingOptions: Types.IThievingStallsAndPickpocketing) => {
+    const pickpocketingArray = thievingOptions.pickpocketing;
+    const stallsArray = thievingOptions.stalls;
+
+    return (
+      <div role="button" onClick={() => handleToggleSkillPanel(`Thieving`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
+        <h1 className="text-center">Thieving Level {ThievingLevel}</h1>
+        <div className={`d-flex flex-row flex-wrap ${skillPanelsOpened.Thieving ? `` : `d-none`}`}>
+          {pickpocketingArray.map((resource) => (
+            <button
+              disabled={ThievingLevel < ListOfPickpocketNPC[resource as keyof Types.IListOfPickpocketNPC].levelReqThieving ? true : false}
+              onClick={(e) => {
+                dispatch(setTarget(`none`));
+                dispatch(setActivity(`Skilling`));
+                dispatch(setResource(resource));
+                dispatch(setQuest(`none`));
+                dispatch(setSkill(`Thieving`));
+                // send a contextual message to the chat window
+                // if the last log contains the same message, don't send it
+                if (
+                  `Now Thieving from ${ListOfPickpocketNPC[resource as keyof Types.IListOfPickpocketNPC].displayName}` ===
+                  props.chatLogArray[props.chatLogArray.length - 1].message
+                ) {
+                  return;
+                }
+                props.newChatLog(`Now Thieving from ${ListOfPickpocketNPC[resource as keyof Types.IListOfPickpocketNPC].displayName}`, `Activity Swap`);
+              }}
+              key={`resource-list-${resource}`}
+              className={`btn border mb-3 ${
+                ThievingLevel >= ListOfPickpocketNPC[resource as keyof Types.IListOfPickpocketNPC].levelReqThieving ? `bg-success` : `bg-danger`
+              }`}
+            >
+              <div className="card-body text">
+                <h5 className="card-title">{ListOfPickpocketNPC[resource as keyof Types.IListOfPickpocketNPC].displayName}</h5>
+                <div className="card-text">
+                  <div>Level {ListOfPickpocketNPC[resource as keyof Types.IListOfPickpocketNPC].levelReqThieving}</div>
+                  <div>{ListOfPickpocketNPC[resource as keyof Types.IListOfPickpocketNPC].XPGivenThieving} XP</div>
+                </div>
+              </div>
+            </button>
+          ))}
+          {stallsArray.map((resource) => (
+            <button
+              disabled={ThievingLevel < ListOfPickpocketStalls[resource as keyof Types.IListOfPickpocketStall].levelReqThieving ? true : false}
+              onClick={(e) => {
+                dispatch(setTarget(`none`));
+                dispatch(setActivity(`Skilling`));
+                dispatch(setResource(resource));
+                dispatch(setQuest(`none`));
+                dispatch(setSkill(`Thieving`));
+                // send a contextual message to the chat window
+                // if the last log contains the same message, don't send it
+                if (
+                  `Now Thieving from ${ListOfPickpocketStalls[resource as keyof Types.IListOfPickpocketStall].displayName}` ===
+                  props.chatLogArray[props.chatLogArray.length - 1].message
+                ) {
+                  return;
+                }
+                props.newChatLog(`Now Thieving from ${ListOfPickpocketStalls[resource as keyof Types.IListOfPickpocketStall].displayName}`, `Activity Swap`);
+              }}
+              key={`resource-list-${resource}`}
+              className={`btn border mb-3 ${
+                ThievingLevel >= ListOfPickpocketStalls[resource as keyof Types.IListOfPickpocketStall].levelReqThieving ? `bg-success` : `bg-danger`
+              }`}
+            >
+              <div className="card-body text">
+                <h5 className="card-title">{ListOfPickpocketStalls[resource as keyof Types.IListOfPickpocketStall].displayName}</h5>
+                <div className="card-text">
+                  <div>Level {ListOfPickpocketStalls[resource as keyof Types.IListOfPickpocketStall].levelReqThieving}</div>
+                  <div>{ListOfPickpocketStalls[resource as keyof Types.IListOfPickpocketStall].XPGivenThieving} XP</div>
+                </div>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
+  /**
+   * Combines hatchet info from state with info from constants to populate a selector tag.
+   * Sends a chatlog message when a hatchet is equipped.
+   * @returns Returns JSX for a selector tag populated with hatchet options.
+   */
   const displayHatchetSelectorTag = () => {
     // define an empty array where composite hatchets will be pushed to
     let compositeHatchets: Types.ICompositeHatchet[] = [];
@@ -249,6 +405,11 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
     );
   };
 
+  /**
+   * Combines pickaxe info from state with info from constants to populate a selector tag.
+   * Sends a chatlog message when a pickaxe is equipped.
+   * @returns Returns JSX for a selector tag populated with pickaxe options.
+   */
   const displayPickaxeSelectorTag = () => {
     // define an empty array where composite pickaxes will be pushed to
     let compositePickaxes: Types.ICompositePickaxe[] = [];
@@ -324,6 +485,11 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
     );
   };
 
+  /**
+   * Styles the option tag conditionally based on: if the player can wield the given item, and if the item is owned by the player.
+   * @param item The hatchet or pickaxe item whose option tag is to be styled.
+   * @returns Returns a string to be used as a className.
+   */
   const handleSelectorStyle = (item: Types.ICompositeHatchet | Types.ICompositePickaxe) => {
     // use type guarding to decide which item is being styled
 
@@ -350,12 +516,17 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
       // has levels and does not own item = orange background
 
       return `bg-orangelol`;
-    } else if (!playerOwnsItem && !canWear) {
+    } else {
       // missing levels and does not own item = red background
       return `bg-danger`;
     }
   };
 
+  /**
+   * Used to check if the player can wield the hatchet or pickaxe based on the appropriate level.
+   * @param item The hatchet or pickaxe represented by the option tag.
+   * @returns Returns a boolean indicating whether the player has the appropriate level to use the tool.
+   */
   const applyDisabledAttribute = (item: Types.ICompositeHatchet | Types.ICompositePickaxe) => {
     // set canWear to false,
     let canWear = false;
@@ -386,6 +557,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
             {WoodcuttingOptions(currentLocationSummary.Skills.Woodcutting)}
             {FishingOptions(currentLocationSummary.Skills.Fishing)}
             {MiningOptions(currentLocationSummary.Skills.Mining)}
+            {ThievingOptions(currentLocationSummary.Skills.Thieving)}
             {/* end of panel specific content */}
           </div>
         </div>
