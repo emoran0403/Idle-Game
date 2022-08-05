@@ -57,7 +57,7 @@ export const resolveThieving = (target: Types.IThievingTarget, ThievingXP: numbe
     resultObj.outcome = false;
   }
 
-  //* determing the number of coins the player will receive
+  //* determine the number of coins the player will receive
   // check if the player's target is a pickpocketing option via typeguarding so we can assign the coins
   if (`doubleloot` in target) {
     // each is<X> will be either false or the multiplier we want to use
