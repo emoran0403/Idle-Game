@@ -11,28 +11,45 @@
   let ENEMYINFO = {
     name: (() => {
       try {
-        return document.getElementById(`firstHeading`).textContent.toLowerCase();
+        return document.getElementsByTagName(`tbody`)[0].children[1].textContent.replaceAll(" ", "").toLowerCase();
       } catch (error) {
         return null;
       }
     })(),
     displayName: (() => {
       try {
-        return document.title.split(` `)[0];
+        return document.getElementsByTagName(`tbody`)[0].children[1].textContent;
       } catch (error) {
         return null;
       }
     })(),
     level: (() => {
       try {
-        return Number(document.getElementsByTagName(`tbody`)[0].children[12].children[0].textContent);
+        let spot1 = Number(document.getElementsByTagName(`tbody`)[0].children[11].children[0].textContent);
+        if (!isNaN(spot1)) {
+          return spot1;
+        }
+        let spot2 = Number(document.getElementsByTagName(`tbody`)[0].children[12].children[0].textContent);
+
+        if (!isNaN(spot2)) {
+          return spot2;
+        }
+        return null;
       } catch (error) {
         return null;
       }
     })(),
     lifePoints: (() => {
       try {
-        return Number(document.getElementsByTagName(`tbody`)[0].children[12].children[1].textContent);
+        let spot1 = Number(document.getElementsByTagName(`tbody`)[0].children[11].children[1].textContent.replace(",", ""));
+        if (!isNaN(spot1)) {
+          return spot1;
+        }
+        let spot2 = Number(document.getElementsByTagName(`tbody`)[0].children[12].children[1].textContent.replace(",", ""));
+        if (!isNaN(spot2)) {
+          return spot2;
+        }
+        return null;
       } catch (error) {
         return null;
       }
@@ -56,6 +73,9 @@
         let boneDrop = document.getElementsByClassName(
           `wikitable sortable filterable sticky-header item-drops autosort=1,a jquery-tablesorter rsw-dropsline-hidealch`
         )[0].children[1].children[0].children[1].textContent;
+        if (!boneDrop) {
+          return 0;
+        }
 
         switch (boneDrop) {
           case "Bones":
@@ -97,18 +117,13 @@
 
     armor: (() => {
       try {
-        if (isNaN(Number(document.getElementsByTagName(`tbody`)[0].children[31].children[0].textContent))) {
-          throw new error();
+        if (document.getElementsByTagName(`tbody`)[0].children[35].children[0].textContent.replace(",", "").length > 0) {
+          if (!isNaN(Number(document.getElementsByTagName(`tbody`)[0].children[35].children[0].textContent.replace(",", "")))) {
+            return Number(document.getElementsByTagName(`tbody`)[0].children[35].children[0].textContent.replace(",", ""));
+          }
         }
-        return Number(document.getElementsByTagName(`tbody`)[0].children[31].children[0].textContent);
-      } catch (error) {
-        return null;
-      }
-    })(),
 
-    defence: (() => {
-      try {
-        return Number(document.getElementsByTagName(`tbody`)[0].children[31].children[1].textContent);
+        return null;
       } catch (error) {
         return null;
       }
@@ -116,11 +131,55 @@
 
     accuracy: (() => {
       try {
-        return Math.max(
-          Number(document.getElementsByTagName(`tbody`)[0].children[28].children[0].textContent),
-          Number(document.getElementsByTagName(`tbody`)[0].children[28].children[1].textContent),
-          Number(document.getElementsByTagName(`tbody`)[0].children[28].children[2].textContent)
-        );
+        if (
+          document.getElementsByTagName(`tbody`)[0].children[28].children[0].textContent.replace(",", "").length > 0 &&
+          document.getElementsByTagName(`tbody`)[0].children[28].children[1].textContent.replace(",", "").length > 0 &&
+          document.getElementsByTagName(`tbody`)[0].children[28].children[2].textContent.replace(",", "").length > 0
+        ) {
+          let spot1 = Math.max(
+            Number(document.getElementsByTagName(`tbody`)[0].children[28].children[0].textContent.replace(",", "")),
+            Number(document.getElementsByTagName(`tbody`)[0].children[28].children[1].textContent.replace(",", "")),
+            Number(document.getElementsByTagName(`tbody`)[0].children[28].children[2].textContent.replace(",", ""))
+          );
+          if (!isNaN(spot1)) {
+            return spot1;
+          }
+        }
+        if (
+          document.getElementsByTagName(`tbody`)[0].children[32].children[0].textContent.replace(",", "").length > 0 &&
+          document.getElementsByTagName(`tbody`)[0].children[32].children[1].textContent.replace(",", "").length > 0 &&
+          document.getElementsByTagName(`tbody`)[0].children[32].children[2].textContent.replace(",", "").length > 0
+        ) {
+          let spot2 = Math.max(
+            Number(document.getElementsByTagName(`tbody`)[0].children[32].children[0].textContent.replace(",", "")),
+            Number(document.getElementsByTagName(`tbody`)[0].children[32].children[1].textContent.replace(",", "")),
+            Number(document.getElementsByTagName(`tbody`)[0].children[32].children[2].textContent.replace(",", ""))
+          );
+          if (!isNaN(spot2)) {
+            return spot2;
+          }
+        }
+
+        return null;
+      } catch (error) {
+        return null;
+      }
+    })(),
+    defence: (() => {
+      try {
+        if (document.getElementsByTagName(`tbody`)[0].children[31].children[1].textContent.replace(",", "").length > 0) {
+          if (!isNaN(Number(document.getElementsByTagName(`tbody`)[0].children[31].children[1].textContent.replace(",", "")))) {
+            return Number(document.getElementsByTagName(`tbody`)[0].children[31].children[1].textContent.replace(",", ""));
+          }
+        }
+
+        if (document.getElementsByTagName(`tbody`)[0].children[35].children[1].textContent.replace(",", "").length > 0) {
+          if (!isNaN(Number(document.getElementsByTagName(`tbody`)[0].children[35].children[1].textContent.replace(",", "")))) {
+            return Number(document.getElementsByTagName(`tbody`)[0].children[35].children[1].textContent.replace(",", ""));
+          }
+        }
+
+        return null;
       } catch (error) {
         return null;
       }
