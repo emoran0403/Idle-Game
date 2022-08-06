@@ -56,14 +56,32 @@
     })(),
     XPGivenCombatStyle: (() => {
       try {
-        return Math.round(Number(document.getElementsByTagName(`tbody`)[0].children[12].children[2].textContent));
+        let spot1 = Number(document.getElementsByTagName(`tbody`)[0].children[11].children[2].textContent);
+        if (!isNaN(spot1)) {
+          return spot1;
+        }
+        let spot2 = Number(document.getElementsByTagName(`tbody`)[0].children[12].children[2].textContent);
+
+        if (!isNaN(spot2)) {
+          return spot2;
+        }
+        return null;
       } catch (error) {
         return null;
       }
     })(),
     XPGivenConstitution: (() => {
       try {
-        return Math.round(Number(document.getElementsByTagName(`tbody`)[0].children[12].children[3].textContent));
+        let spot1 = Number(document.getElementsByTagName(`tbody`)[0].children[11].children[3].textContent);
+        if (!isNaN(spot1)) {
+          return spot1;
+        }
+        let spot2 = Number(document.getElementsByTagName(`tbody`)[0].children[12].children[3].textContent);
+
+        if (!isNaN(spot2)) {
+          return spot2;
+        }
+        return null;
       } catch (error) {
         return null;
       }
@@ -98,7 +116,6 @@
         return null;
       }
     })(),
-
     levelReqSlayer: (() => {
       try {
         return Number(document.getElementsByTagName(`TBODY`)[0].children[18].children[0].textContent);
@@ -106,7 +123,46 @@
         return null;
       }
     })(),
-    slayerClass: null,
+    slayerClass: [""],
+    monsterStyle: (() => {
+      try {
+        if (
+          document.getElementsByTagName(`tbody`)[0].children[28].children[0].textContent.replace(",", "").length > 0 &&
+          document.getElementsByTagName(`tbody`)[0].children[28].children[1].textContent.replace(",", "").length > 0 &&
+          document.getElementsByTagName(`tbody`)[0].children[28].children[2].textContent.replace(",", "").length > 0
+        ) {
+          let melee = Number(document.getElementsByTagName(`tbody`)[0].children[28].children[0].textContent.replace(",", ""));
+          let ranged = Number(document.getElementsByTagName(`tbody`)[0].children[28].children[1].textContent.replace(",", ""));
+          let magic = Number(document.getElementsByTagName(`tbody`)[0].children[28].children[2].textContent.replace(",", ""));
+          if (melee > ranged && melee > magic) {
+            return `melee`;
+          } else if (ranged > magic) {
+            return `ranged`;
+          } else {
+            return `magic`;
+          }
+        }
+        if (
+          document.getElementsByTagName(`tbody`)[0].children[32].children[0].textContent.replace(",", "").length > 0 &&
+          document.getElementsByTagName(`tbody`)[0].children[32].children[1].textContent.replace(",", "").length > 0 &&
+          document.getElementsByTagName(`tbody`)[0].children[32].children[2].textContent.replace(",", "").length > 0
+        ) {
+          let melee = Number(document.getElementsByTagName(`tbody`)[0].children[32].children[0].textContent.replace(",", ""));
+          let ranged = Number(document.getElementsByTagName(`tbody`)[0].children[32].children[1].textContent.replace(",", ""));
+          let magic = Number(document.getElementsByTagName(`tbody`)[0].children[32].children[2].textContent.replace(",", ""));
+          if (melee > ranged && melee > magic) {
+            return `melee`;
+          } else if (ranged > magic) {
+            return `ranged`;
+          } else {
+            return `magic`;
+          }
+        }
+      } catch (error) {
+        return null;
+      }
+    })(),
+    drops: [],
 
     affinities: {
       explicitWeakness: null,

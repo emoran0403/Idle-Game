@@ -11,7 +11,9 @@ export const man: Types.IEnemySummary = {
   XPGivenPrayer: 4.5,
   XPGivenSlayer: 0,
   levelReqSlayer: 0,
-  slayerClass: ``,
+  slayerClass: [``],
+  monsterStyle: `melee`,
+  drops: [],
 
   affinities: {
     explicitWeakness: `fire`,
@@ -33,7 +35,9 @@ export const goblin: Types.IEnemySummary = {
   XPGivenPrayer: 4.5,
   XPGivenSlayer: 6.4,
   levelReqSlayer: 0,
-  slayerClass: `goblins`,
+  slayerClass: [`goblins`],
+  monsterStyle: `melee`,
+  drops: [],
 
   affinities: {
     explicitWeakness: `air`,
@@ -55,7 +59,9 @@ export const giantspider: Types.IEnemySummary = {
   XPGivenPrayer: 0,
   XPGivenSlayer: 6.4,
   levelReqSlayer: 0,
-  slayerClass: `spiders`,
+  slayerClass: [`spiders`],
+  monsterStyle: `ranged`,
+  drops: [],
 
   affinities: {
     explicitWeakness: "melee",
@@ -77,7 +83,9 @@ export const chicken: Types.IEnemySummary = {
   XPGivenPrayer: 4.5,
   XPGivenSlayer: 6.4,
   levelReqSlayer: 0,
-  slayerClass: `birds`,
+  slayerClass: [`birds`],
+  monsterStyle: `melee`,
+  drops: [],
 
   affinities: {
     explicitWeakness: "fire",
@@ -99,7 +107,9 @@ export const cow: Types.IEnemySummary = {
   XPGivenPrayer: 4.5,
   XPGivenSlayer: 3.3,
   levelReqSlayer: 0,
-  slayerClass: `cows`,
+  slayerClass: [`cows`],
+  monsterStyle: `melee`,
+  drops: [],
 
   affinities: {
     explicitWeakness: "earth",
@@ -121,7 +131,9 @@ export const spider: Types.IEnemySummary = {
   XPGivenPrayer: 0,
   XPGivenSlayer: 6.4,
   levelReqSlayer: 0,
-  slayerClass: `spiders`,
+  slayerClass: [`spiders`],
+  monsterStyle: `ranged`,
+  drops: [],
 
   affinities: {
     explicitWeakness: "melee",
@@ -143,7 +155,9 @@ export const giantrat: Types.IEnemySummary = {
   XPGivenPrayer: 4.5,
   XPGivenSlayer: 8.2,
   levelReqSlayer: 0,
-  slayerClass: `rats`,
+  slayerClass: [`rats`],
+  monsterStyle: `melee`,
+  drops: [],
 
   affinities: {
     explicitWeakness: "earth",
@@ -165,8 +179,9 @@ export const swampfrog: Types.IEnemySummary = {
   XPGivenPrayer: 4.5,
   XPGivenSlayer: 10,
   levelReqSlayer: 0,
-  slayerClass: `frogs`,
-
+  slayerClass: [`frogs`],
+  monsterStyle: `melee`,
+  drops: [],
   affinities: {
     explicitWeakness: "water",
     weakStyle: "magic",
@@ -187,7 +202,9 @@ export const farmer: Types.IEnemySummary = {
   XPGivenPrayer: 4.5,
   XPGivenSlayer: 0,
   levelReqSlayer: 0,
-  slayerClass: ``,
+  slayerClass: [``],
+  monsterStyle: `melee`,
+  drops: [],
 
   affinities: {
     explicitWeakness: "fire",
@@ -209,7 +226,9 @@ export const rat: Types.IEnemySummary = {
   XPGivenPrayer: 4.5,
   XPGivenSlayer: 4.5,
   levelReqSlayer: 0,
-  slayerClass: `rats`,
+  slayerClass: [`rats`],
+  monsterStyle: `melee`,
+  drops: [],
 
   affinities: {
     explicitWeakness: "earth",
@@ -231,7 +250,9 @@ export const skeleton15: Types.IEnemySummary = {
   XPGivenPrayer: 4.5,
   XPGivenSlayer: 8.8,
   levelReqSlayer: 0,
-  slayerClass: `skeletons`,
+  slayerClass: [`skeletons`],
+  monsterStyle: `melee`,
+  drops: [],
 
   affinities: {
     explicitWeakness: "earth",
@@ -253,7 +274,9 @@ export const skeleton32: Types.IEnemySummary = {
   XPGivenPrayer: 4.5,
   XPGivenSlayer: 13,
   levelReqSlayer: 0,
-  slayerClass: `skeletons`,
+  slayerClass: [`skeletons`],
+  monsterStyle: `melee`,
+  drops: [],
 
   affinities: {
     explicitWeakness: "earth",
@@ -275,7 +298,9 @@ export const zombie12: Types.IEnemySummary = {
   XPGivenPrayer: 4.5,
   XPGivenSlayer: 8,
   levelReqSlayer: 0,
-  slayerClass: `zombies`,
+  slayerClass: [`zombies`],
+  monsterStyle: `melee`,
+  drops: [],
 
   affinities: {
     explicitWeakness: "fire",
@@ -297,7 +322,9 @@ export const zombie29: Types.IEnemySummary = {
   XPGivenPrayer: 4.5,
   XPGivenSlayer: 12,
   levelReqSlayer: 0,
-  slayerClass: `zombies`,
+  slayerClass: [`zombies`],
+  monsterStyle: `melee`,
+  drops: [],
 
   affinities: {
     explicitWeakness: "fire",
@@ -319,7 +346,9 @@ export const ghost25: Types.IEnemySummary = {
   XPGivenPrayer: 0,
   XPGivenSlayer: 10.6,
   levelReqSlayer: 0,
-  slayerClass: `ghosts`,
+  slayerClass: [`ghosts`],
+  monsterStyle: `magic`,
+  drops: [],
 
   affinities: {
     explicitWeakness: "ranged",
@@ -341,7 +370,9 @@ export const blackknight: Types.IEnemySummary = {
   XPGivenPrayer: 4.5,
   XPGivenSlayer: 0,
   levelReqSlayer: 0,
-  slayerClass: ``,
+  slayerClass: [``],
+  monsterStyle: `melee`,
+  drops: [],
   affinities: {
     explicitWeakness: "water",
     weakStyle: "magic",
@@ -362,7 +393,9 @@ export const giantbat: Types.IEnemySummary = {
   XPGivenPrayer: 5.3,
   XPGivenSlayer: 18.8,
   levelReqSlayer: 0,
-  slayerClass: `bats`,
+  slayerClass: [`bats`],
+  monsterStyle: `magic`,
+  drops: [],
   affinities: {
     explicitWeakness: "ranged",
     weakStyle: "ranged",
@@ -383,7 +416,9 @@ export const warpedbat: Types.IEnemySummary = {
   XPGivenPrayer: 5.3,
   XPGivenSlayer: 9.2,
   levelReqSlayer: 0,
-  slayerClass: `bats`,
+  slayerClass: [`bats`],
+  monsterStyle: `magic`,
+  drops: [],
   affinities: {
     explicitWeakness: "ranged",
     weakStyle: "ranged",
@@ -404,7 +439,9 @@ export const cavebug8: Types.IEnemySummary = {
   XPGivenPrayer: 0,
   XPGivenSlayer: 7,
   levelReqSlayer: 7,
-  slayerClass: "cavebugs",
+  slayerClass: ["cavebugs"],
+  monsterStyle: `ranged`,
+  drops: [],
   affinities: {
     explicitWeakness: "melee",
     weakStyle: "melee",
@@ -425,7 +462,9 @@ export const cavebug12: Types.IEnemySummary = {
   XPGivenPrayer: 0,
   XPGivenSlayer: 8,
   levelReqSlayer: 7,
-  slayerClass: "cavebugs",
+  slayerClass: ["cavebugs"],
+  monsterStyle: `ranged`,
+  drops: [],
   affinities: {
     explicitWeakness: "melee",
     weakStyle: "melee",
@@ -446,7 +485,9 @@ export const caveslime: Types.IEnemySummary = {
   XPGivenPrayer: 0,
   XPGivenSlayer: 11,
   levelReqSlayer: 17,
-  slayerClass: "caveslimes",
+  slayerClass: ["caveslimes"],
+  monsterStyle: `ranged`,
+  drops: [],
   affinities: {
     explicitWeakness: "melee",
     weakStyle: "melee",
@@ -467,7 +508,9 @@ export const bigfrog: Types.IEnemySummary = {
   XPGivenPrayer: 4.5,
   XPGivenSlayer: 14.4,
   levelReqSlayer: 1,
-  slayerClass: `frogs`,
+  slayerClass: [`frogs`],
+  monsterStyle: `ranged`,
+  drops: [],
   affinities: {
     explicitWeakness: "melee",
     weakStyle: "melee",
@@ -488,7 +531,9 @@ export const giantfrog: Types.IEnemySummary = {
   XPGivenPrayer: 15,
   XPGivenSlayer: 18.8,
   levelReqSlayer: 1,
-  slayerClass: `frogs`,
+  slayerClass: [`frogs`],
+  monsterStyle: `ranged`,
+  drops: [],
   affinities: {
     explicitWeakness: "melee",
     weakStyle: "melee",
@@ -509,7 +554,9 @@ export const cavecrawler53: Types.IEnemySummary = {
   XPGivenPrayer: 0,
   XPGivenSlayer: 24.5,
   levelReqSlayer: 10,
-  slayerClass: "cavecrawlers",
+  slayerClass: ["cavecrawlers"],
+  monsterStyle: `ranged`,
+  drops: [],
   affinities: {
     explicitWeakness: "melee",
     weakStyle: "melee",
@@ -530,7 +577,9 @@ export const cavecrawler78: Types.IEnemySummary = {
   XPGivenPrayer: 0,
   XPGivenSlayer: 49.5,
   levelReqSlayer: 10,
-  slayerClass: "cavecrawlers",
+  slayerClass: ["cavecrawlers"],
+  monsterStyle: `ranged`,
+  drops: [],
   affinities: {
     explicitWeakness: "melee",
     weakStyle: "melee",
@@ -551,7 +600,9 @@ export const rockslug42: Types.IEnemySummary = {
   XPGivenPrayer: 0,
   XPGivenSlayer: 20,
   levelReqSlayer: 20,
-  slayerClass: "rockslugs",
+  slayerClass: ["rockslugs"],
+  monsterStyle: `melee`,
+  drops: [],
   affinities: {
     explicitWeakness: "water",
     weakStyle: "magic",
@@ -572,7 +623,9 @@ export const rockslug49: Types.IEnemySummary = {
   XPGivenPrayer: 0,
   XPGivenSlayer: 22,
   levelReqSlayer: 20,
-  slayerClass: "rockslugs",
+  slayerClass: ["rockslugs"],
+  monsterStyle: `melee`,
+  drops: [],
   affinities: {
     explicitWeakness: "water",
     weakStyle: "magic",
@@ -593,7 +646,9 @@ export const wallbeast: Types.IEnemySummary = {
   XPGivenPrayer: 0,
   XPGivenSlayer: 20.6,
   levelReqSlayer: 35,
-  slayerClass: "wallbeasts",
+  slayerClass: ["wallbeasts"],
+  monsterStyle: `melee`,
+  drops: [],
   affinities: {
     explicitWeakness: "water",
     weakStyle: "magic",
@@ -614,7 +669,9 @@ export const warpedcockroach: Types.IEnemySummary = {
   XPGivenPrayer: 4.5,
   XPGivenSlayer: 0,
   levelReqSlayer: 0,
-  slayerClass: "",
+  slayerClass: [""],
+  monsterStyle: `ranged`,
+  drops: [],
   affinities: {
     explicitWeakness: "melee",
     weakStyle: "melee",
@@ -635,7 +692,9 @@ export const corpsespider: Types.IEnemySummary = {
   XPGivenPrayer: 4.5,
   XPGivenSlayer: 6.6,
   levelReqSlayer: 1,
-  slayerClass: "spiders",
+  slayerClass: ["spiders", `zombies`],
+  monsterStyle: `ranged`,
+  drops: [],
   affinities: {
     explicitWeakness: "melee",
     weakStyle: "melee",
@@ -656,7 +715,9 @@ export const warpedfly: Types.IEnemySummary = {
   XPGivenPrayer: 4.5,
   XPGivenSlayer: 0,
   levelReqSlayer: 0,
-  slayerClass: "",
+  slayerClass: [""],
+  monsterStyle: `ranged`,
+  drops: [],
   affinities: {
     explicitWeakness: "melee",
     weakStyle: "melee",
@@ -666,4 +727,119 @@ export const warpedfly: Types.IEnemySummary = {
   armor: 150,
   accuracy: 150,
   defence: 5,
+};
+export const crawlingcorpsetorso: Types.IEnemySummary = {
+  name: "crawlingcorpsetorso",
+  displayName: "Crawling corpse torso",
+  level: 9,
+  lifePoints: 350,
+  XPGivenCombatStyle: 28,
+  XPGivenConstitution: 9,
+  XPGivenPrayer: 4.5,
+  XPGivenSlayer: 10,
+  levelReqSlayer: 1,
+  slayerClass: [`zombies`],
+  monsterStyle: `magic`,
+  drops: [],
+  affinities: {
+    explicitWeakness: "melee",
+    weakStyle: "melee",
+    neutralStyle: "ranged",
+    strongStyle: "magic",
+  },
+  armor: 171,
+  accuracy: 171,
+  defence: 7,
+};
+export const warpedrat: Types.IEnemySummary = {
+  name: "warpedrat",
+  displayName: "Warped rat",
+  level: 12,
+  lifePoints: 450,
+  XPGivenCombatStyle: 30.9,
+  XPGivenConstitution: 10.1,
+  XPGivenPrayer: 4.5,
+  XPGivenSlayer: 8,
+  levelReqSlayer: 1,
+  slayerClass: [`rats`],
+  monsterStyle: `melee`,
+  drops: [],
+  affinities: {
+    explicitWeakness: "fire",
+    weakStyle: "magic",
+    neutralStyle: "melee",
+    strongStyle: "ranged",
+  },
+  armor: 191,
+  accuracy: 191,
+  defence: 9,
+};
+export const corpsearcher: Types.IEnemySummary = {
+  name: "corpsearcher",
+  displayName: "Corpse archer",
+  level: 18,
+  lifePoints: 650,
+  XPGivenCombatStyle: 35.7,
+  XPGivenConstitution: 11.7,
+  XPGivenPrayer: 4.5,
+  XPGivenSlayer: 10,
+  levelReqSlayer: 1,
+  slayerClass: [`zombies`],
+  monsterStyle: `ranged`,
+  drops: [],
+  affinities: {
+    explicitWeakness: "melee",
+    weakStyle: "melee",
+    neutralStyle: "ranged",
+    strongStyle: "magic",
+  },
+  armor: 234,
+  accuracy: 234,
+  defence: 13,
+};
+export const skoblin: Types.IEnemySummary = {
+  name: "skoblin",
+  displayName: "Skoblin",
+  level: 19,
+  lifePoints: 700,
+  XPGivenCombatStyle: 36.6,
+  XPGivenConstitution: 12,
+  XPGivenPrayer: 4.5,
+  XPGivenSlayer: 9.4,
+  levelReqSlayer: 1,
+  slayerClass: [`skeletons`, `zombies`],
+  monsterStyle: `melee`,
+  drops: [],
+  affinities: {
+    explicitWeakness: "water",
+    weakStyle: "magic",
+    neutralStyle: "melee",
+    strongStyle: "ranged",
+  },
+  armor: 245,
+  accuracy: 245,
+  defence: 14,
+};
+export const corpsemage: Types.IEnemySummary = {
+  name: "corpsemage",
+  displayName: "Corpse mage",
+  level: 21,
+  lifePoints: 750,
+  XPGivenCombatStyle: 37.2,
+  XPGivenConstitution: 12.2,
+  XPGivenPrayer: 4.5,
+  XPGivenSlayer: 9,
+  levelReqSlayer: 1,
+  slayerClass: [`zombies`],
+  monsterStyle: `magic`,
+  drops: [],
+  affinities: {
+    explicitWeakness: "melee",
+    weakStyle: "melee",
+    neutralStyle: "ranged",
+    strongStyle: "magic",
+  },
+  armor: 257,
+  accuracy: 257,
+  defence: 15,
 };
