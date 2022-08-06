@@ -10,6 +10,9 @@ export const man: Types.IEnemySummary = {
   XPGivenConstitution: 8,
   XPGivenPrayer: 4.5,
   XPGivenSlayer: 0,
+  levelReqSlayer: 0,
+  slayerClass: ``,
+
   affinities: {
     explicitWeakness: `fire`,
     weakStyle: `magic`,
@@ -29,6 +32,9 @@ export const goblin: Types.IEnemySummary = {
   XPGivenConstitution: 8,
   XPGivenPrayer: 4.5,
   XPGivenSlayer: 6.4,
+  levelReqSlayer: 0,
+  slayerClass: ``,
+
   affinities: {
     explicitWeakness: `air`,
     weakStyle: `magic`,
@@ -48,6 +54,9 @@ export const giantspider: Types.IEnemySummary = {
   XPGivenConstitution: 8,
   XPGivenPrayer: 0,
   XPGivenSlayer: 6.4,
+  levelReqSlayer: 0,
+  slayerClass: ``,
+
   affinities: {
     explicitWeakness: "melee",
     weakStyle: "melee",
@@ -67,6 +76,9 @@ export const chicken: Types.IEnemySummary = {
   XPGivenConstitution: 8,
   XPGivenPrayer: 4.5,
   XPGivenSlayer: 6.4,
+  levelReqSlayer: 0,
+  slayerClass: ``,
+
   affinities: {
     explicitWeakness: "fire",
     weakStyle: "magic",
@@ -86,6 +98,9 @@ export const cow: Types.IEnemySummary = {
   XPGivenConstitution: 8,
   XPGivenPrayer: 4.5,
   XPGivenSlayer: 3.3,
+  levelReqSlayer: 0,
+  slayerClass: ``,
+
   affinities: {
     explicitWeakness: "earth",
     weakStyle: "magic",
@@ -105,6 +120,9 @@ export const spider: Types.IEnemySummary = {
   XPGivenConstitution: 8,
   XPGivenPrayer: 0,
   XPGivenSlayer: 6.4,
+  levelReqSlayer: 0,
+  slayerClass: ``,
+
   affinities: {
     explicitWeakness: "melee",
     weakStyle: "melee",
@@ -124,6 +142,9 @@ export const giantrat: Types.IEnemySummary = {
   XPGivenConstitution: 9,
   XPGivenPrayer: 4.5,
   XPGivenSlayer: 8.2,
+  levelReqSlayer: 0,
+  slayerClass: ``,
+
   affinities: {
     explicitWeakness: "earth",
     weakStyle: "magic",
@@ -143,6 +164,9 @@ export const swampfrog: Types.IEnemySummary = {
   XPGivenConstitution: 12,
   XPGivenPrayer: 4.5,
   XPGivenSlayer: 10,
+  levelReqSlayer: 0,
+  slayerClass: ``,
+
   affinities: {
     explicitWeakness: "water",
     weakStyle: "magic",
@@ -162,6 +186,9 @@ export const farmer: Types.IEnemySummary = {
   XPGivenConstitution: 9,
   XPGivenPrayer: 4.5,
   XPGivenSlayer: 0,
+  levelReqSlayer: 0,
+  slayerClass: ``,
+
   affinities: {
     explicitWeakness: "fire",
     weakStyle: "magic",
@@ -181,6 +208,9 @@ export const rat: Types.IEnemySummary = {
   XPGivenConstitution: 8,
   XPGivenPrayer: 4.5,
   XPGivenSlayer: 4.5,
+  levelReqSlayer: 0,
+  slayerClass: ``,
+
   affinities: {
     explicitWeakness: "earth",
     weakStyle: "magic",
@@ -200,6 +230,9 @@ export const skeleton15: Types.IEnemySummary = {
   XPGivenConstitution: 11,
   XPGivenPrayer: 4.5,
   XPGivenSlayer: 8.8,
+  levelReqSlayer: 0,
+  slayerClass: ``,
+
   affinities: {
     explicitWeakness: "earth",
     weakStyle: "magic",
@@ -219,6 +252,9 @@ export const skeleton32: Types.IEnemySummary = {
   XPGivenConstitution: 17,
   XPGivenPrayer: 4.5,
   XPGivenSlayer: 13,
+  levelReqSlayer: 0,
+  slayerClass: ``,
+
   affinities: {
     explicitWeakness: "earth",
     weakStyle: "magic",
@@ -238,6 +274,9 @@ export const zombie12: Types.IEnemySummary = {
   XPGivenConstitution: 10,
   XPGivenPrayer: 4.5,
   XPGivenSlayer: 8,
+  levelReqSlayer: 0,
+  slayerClass: ``,
+
   affinities: {
     explicitWeakness: "fire",
     weakStyle: "magic",
@@ -257,6 +296,9 @@ export const zombie29: Types.IEnemySummary = {
   XPGivenConstitution: 15,
   XPGivenPrayer: 4.5,
   XPGivenSlayer: 12,
+  levelReqSlayer: 0,
+  slayerClass: ``,
+
   affinities: {
     explicitWeakness: "fire",
     weakStyle: "magic",
@@ -276,6 +318,9 @@ export const ghost25: Types.IEnemySummary = {
   XPGivenConstitution: 13,
   XPGivenPrayer: 0,
   XPGivenSlayer: 10.6,
+  levelReqSlayer: 0,
+  slayerClass: ``,
+
   affinities: {
     explicitWeakness: "ranged",
     weakStyle: "ranged",
@@ -295,6 +340,9 @@ export const blackknight: Types.IEnemySummary = {
   XPGivenConstitution: 16,
   XPGivenPrayer: 4.5,
   XPGivenSlayer: 0,
+  levelReqSlayer: 0,
+  slayerClass: ``,
+
   affinities: {
     explicitWeakness: "water",
     weakStyle: "magic",

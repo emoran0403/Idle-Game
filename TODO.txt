@@ -17,14 +17,8 @@
 //! SUPPORT - skills that just take some time to complete
 //# AGILITY
 //# SLAYER
+* add slayer level req to enemies and their type
 //# DUNGEONEERING
-//# THIEVING
-* DONE - update GameContainer to handle thieving skill - need a stun state as a number in component state, each game tick decrements if >0
-* DONE - define a function to determine of the player succeeds or fails at thieving
-* DONE - update skills panel to include thieving opportunities
-* DONE - update location summaries to include thieving opportunities
-* DONE - update currentresourcecomp to handle thieving skill
-* DONE - create a constants file with thieving opportunities
 
 //! GATHERING - skills that generate new resources
 //# FARMING
@@ -62,11 +56,12 @@
               ></div>
 
 //# Quality of life
+* make the header in combat bigger to match those in bank, shop, and skilling panels
+* add collapsible panels to the bank and shop panels
 * add currentEquipment to redux state to persist outfits across logins
 * make resources in bank panel into collapsible panels - copy skillspanel
 * add dropping messages to ores if the player is dropping resources
 * Bank shows items in ascending level order
-** timer showing the progress until the next tick, red bar if the player is idle
 *** need a way to reward those quest which give ANY xp
 *** maybe make the game choose the next available quest automatically
 *** get a changelog from github for the lobby
@@ -99,6 +94,13 @@
 * Logic - experience and levels is displaying too high for some reason :/
 * remove boilerplate commits
 
+//# THIEVING DONE***********************
+* DONE - update GameContainer to handle thieving skill - need a stun state as a number in component state, each game tick decrements if >0
+* DONE - define a function to determine of the player succeeds or fails at thieving
+* DONE - update skills panel to include thieving opportunities
+* DONE - update location summaries to include thieving opportunities
+* DONE - update currentresourcecomp to handle thieving skill
+* DONE - create a constants file with thieving opportunities
 
 //# PRAYER DONE**********************************
 * DONE - update combat tick to dispatch prayer xp for the XPGivenPrayer amount

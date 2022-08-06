@@ -675,6 +675,8 @@ export interface IEnemySummary {
   XPGivenConstitution: number;
   XPGivenPrayer: number;
   XPGivenSlayer: number;
+  levelReqSlayer: number;
+  slayerClass: string;
   affinities: {
     explicitWeakness: CombatStyle | SpellElement;
     weakStyle: CombatStyle;
