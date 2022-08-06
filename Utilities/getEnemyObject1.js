@@ -13,42 +13,42 @@
       try {
         return document.getElementById(`firstHeading`).textContent.toLowerCase();
       } catch (error) {
-        return `enterTHISmanually`;
+        return null;
       }
     })(),
     displayName: (() => {
       try {
         return document.title.split(` `)[0];
       } catch (error) {
-        return `enterLEVELmanually`;
+        return null;
       }
     })(),
     level: (() => {
       try {
         return Number(document.getElementsByTagName(`tbody`)[0].children[12].children[0].textContent);
       } catch (error) {
-        return `enterLEVELmanually`;
+        return null;
       }
     })(),
     lifePoints: (() => {
       try {
         return Number(document.getElementsByTagName(`tbody`)[0].children[12].children[1].textContent);
       } catch (error) {
-        return `enterlifepointsmanually`;
+        return null;
       }
     })(),
     XPGivenCombatStyle: (() => {
       try {
         return Math.round(Number(document.getElementsByTagName(`tbody`)[0].children[12].children[2].textContent));
       } catch (error) {
-        return `enterXPGivenCombatStylemanually`;
+        return null;
       }
     })(),
     XPGivenConstitution: (() => {
       try {
         return Math.round(Number(document.getElementsByTagName(`tbody`)[0].children[12].children[3].textContent));
       } catch (error) {
-        return `enterXPGivenConstitutionmanually`;
+        return null;
       }
     })(),
     XPGivenPrayer: (() => {
@@ -60,28 +60,39 @@
         switch (boneDrop) {
           case "Bones":
             return 4.5;
+          case "Bat bones":
+            return 5.3;
           case "Big bones":
             return 15;
           default:
             return `ADD NEW SWITCH CASE TO ENEMY UTILITY`;
         }
       } catch (error) {
-        return `ENTERMANUALLY`;
+        return null;
       }
     })(),
     XPGivenSlayer: (() => {
       try {
         return Number(document.getElementsByTagName(`TBODY`)[0].children[18].children[1].textContent);
       } catch (error) {
-        return `ENTERMANUALLY`;
+        return null;
       }
     })(),
 
+    levelReqSlayer: (() => {
+      try {
+        return Number(document.getElementsByTagName(`TBODY`)[0].children[18].children[0].textContent);
+      } catch (error) {
+        return null;
+      }
+    })(),
+    slayerClass: null,
+
     affinities: {
-      explicitWeakness: `enterManually`,
-      weakStyle: `enterManually`,
-      neutralStyle: `enterManually`,
-      strongStyle: `enterManually`,
+      explicitWeakness: null,
+      weakStyle: null,
+      neutralStyle: null,
+      strongStyle: null,
     },
 
     armor: (() => {
@@ -91,7 +102,7 @@
         }
         return Number(document.getElementsByTagName(`tbody`)[0].children[31].children[0].textContent);
       } catch (error) {
-        return `enterManually`;
+        return null;
       }
     })(),
 
@@ -99,7 +110,7 @@
       try {
         return Number(document.getElementsByTagName(`tbody`)[0].children[31].children[1].textContent);
       } catch (error) {
-        return `enterManually`;
+        return null;
       }
     })(),
 
@@ -111,7 +122,7 @@
           Number(document.getElementsByTagName(`tbody`)[0].children[28].children[2].textContent)
         );
       } catch (error) {
-        return `enterManually`;
+        return null;
       }
     })(),
   };
@@ -140,7 +151,7 @@ const exampleEnemyInfo = {
 //   try {
 //     return `statementhere`;
 //   } catch (error) {
-//     return `enterTHISmanually`;
+//     return null;
 //   }
 // })();
 

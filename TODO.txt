@@ -18,6 +18,16 @@
 //# AGILITY
 //# SLAYER
 * add slayer level req to enemies and their type
+* add lumbridge cave enemies to all enemies
+* add lumbridge cave location
+* add lumbridge catacomb enemies to all enemies
+* add lumbridge catacomb location
+* add function to randomly choose a task, if a task is chosen with a too high lvl, then reroll
+* add state slice to track the slayer task
+* add a check in combat to see ifthe player has chosen a slayer task monster
+* add a check in combat panel to disable enemies based on their slayer level
+* add slayer level req to enemies if it is > 1
+
 //# DUNGEONEERING
 
 //! GATHERING - skills that generate new resources
