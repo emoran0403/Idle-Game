@@ -638,7 +638,7 @@ export const rockslug49: Types.IEnemySummary = {
 };
 export const wallbeast: Types.IEnemySummary = {
   name: "wall beast",
-  displayName: "Wall",
+  displayName: "Wall Beast",
   level: 47,
   lifePoints: 1700,
   XPGivenCombatStyle: 80,

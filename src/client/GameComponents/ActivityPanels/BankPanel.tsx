@@ -41,16 +41,20 @@ const BankPanel = (props: Types.BankPanelProps) => {
       <div className="card-title border border-dark border-1 rounded-3">
         <h6 className="text-center">Woodcutting Resources</h6>
         <div className="d-flex flex-row flex-wrap">
-          {arrayOfLogs.map((item) => (
-            <div key={`resource-list-${item.name}`} className={`card border mb-3`}>
-              <div className="card-body text">
-                <h5 className="card-title">{ListOfLogs[item.name as keyof Types.IListOfLogs].displayName}</h5>
-                <div className="card-text">
-                  <div>{item.amount}</div>
+          {arrayOfLogs.map((item) => {
+            return item.amount ? (
+              <div key={`resource-list-${item.name}`} className={`card border mb-3`}>
+                <div className="card-body text">
+                  <h5 className="card-title">{ListOfLogs[item.name as keyof Types.IListOfLogs].displayName}</h5>
+                  <div className="card-text">
+                    <div>{item.amount}</div>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ) : (
+              ``
+            );
+          })}
         </div>
       </div>
     );
@@ -61,16 +65,20 @@ const BankPanel = (props: Types.BankPanelProps) => {
       <div className="card-title border border-dark border-1 rounded-3">
         <h6 className="text-center">Fishing Resources</h6>
         <div className="d-flex flex-row flex-wrap">
-          {arrayOfFish.map((item) => (
-            <div key={`resource-list-${item.name}`} className={`card border mb-3`}>
-              <div className="card-body text">
-                <h5 className="card-title">Raw {ListOfFish[item.name as keyof Types.IListOfFish].displayName}</h5>
-                <div className="card-text">
-                  <div>{item.amount}</div>
+          {arrayOfFish.map((item) => {
+            return item.amount ? (
+              <div key={`resource-list-${item.name}`} className={`card border mb-3`}>
+                <div className="card-body text">
+                  <h5 className="card-title">Raw {ListOfFish[item.name as keyof Types.IListOfFish].displayName}</h5>
+                  <div className="card-text">
+                    <div>{item.amount}</div>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ) : (
+              ``
+            );
+          })}
         </div>
       </div>
     );
@@ -81,16 +89,20 @@ const BankPanel = (props: Types.BankPanelProps) => {
       <div className="card-title border border-dark border-1 rounded-3">
         <h6 className="text-center">Mining Resources</h6>
         <div className="d-flex flex-row flex-wrap">
-          {arrayOfOres.map((item) => (
-            <div key={`resource-list-${item.name}`} className={`card border mb-3`}>
-              <div className="card-body text">
-                <h5 className="card-title">{ListOfOres[item.name as keyof Types.IListOfOres].displayName}</h5>
-                <div className="card-text">
-                  <div>{item.amount}</div>
+          {arrayOfOres.map((item) => {
+            return item.amount ? (
+              <div key={`resource-list-${item.name}`} className={`card border mb-3`}>
+                <div className="card-body text">
+                  <h5 className="card-title">{ListOfOres[item.name as keyof Types.IListOfOres].displayName}</h5>
+                  <div className="card-text">
+                    <div>{item.amount}</div>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ) : (
+              ``
+            );
+          })}
         </div>
       </div>
     );

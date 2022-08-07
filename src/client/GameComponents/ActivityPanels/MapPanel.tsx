@@ -71,6 +71,17 @@ const MapPanel = (props: Types.MapPanelProps) => {
             <button
               className="btn btn-primary"
               onClick={() => {
+                console.log(`travelling to Lumbridge Catacombs`);
+                resetState();
+                dispatch(setLocation(`LumbridgeCatacombs`));
+              }}
+            >
+              Lumbridge Catacombs
+            </button>
+
+            <button
+              className="btn btn-primary"
+              onClick={() => {
                 console.log(`travelling to Draynor Village`);
                 resetState();
                 dispatch(setLocation(`Draynor`));

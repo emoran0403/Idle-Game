@@ -17,14 +17,15 @@
 //! SUPPORT - skills that just take some time to complete
 //# AGILITY
 //# SLAYER
-* add lumbridge cave enemies to all enemies
-* add lumbridge cave location
-* add lumbridge catacomb enemies to all enemies
-* add lumbridge catacomb location
+** wall beast and warped cockroach do not show up
 * add function to randomly choose a task, if a task is chosen with a too high lvl, then reroll
 * add state slice to track the slayer task
 * add a check in combat to see ifthe player has chosen a slayer task monster
 * add a check in combat panel to disable enemies based on their slayer level
+* DONE - add lumbridge cave enemies to all enemies
+* DONE - add lumbridge catacomb enemies to all enemies
+* DONE - add lumbridge cave location
+* DONE - add lumbridge catacomb location
 * DONE - add slayer level req to enemies if it is > 1
 * DONE -  add slayer level req to enemies and their type
 
@@ -42,6 +43,8 @@
 
 
 //# Fixes
+* skills panel only displays skill options if there are those options at the location
+* DONE - bank panel - if the player has 0 of an item, dont display it
 * currentLocationComp - location needs to wrap to fit inside the div
 * can clean up chat logs in game component under woodcutting and fishing
 * add chat logs for gaining xp in combat skills

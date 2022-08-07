@@ -723,11 +723,24 @@ export interface ILumbridgeSwampCaveEnemies {
   cavecrawler78: IEnemySummary;
   giantfrog: IEnemySummary;
 }
+export interface ILumbridgeCatacombsEnemies {
+  warpedcockroach: IEnemySummary;
+  corpsespider: IEnemySummary;
+  warpedfly: IEnemySummary;
+  crawlingcorpsetorso: IEnemySummary;
+  warpedrat: IEnemySummary;
+  skeleton15: IEnemySummary;
+  warpedbat: IEnemySummary;
+  corpsearcher: IEnemySummary;
+  skoblin: IEnemySummary;
+  corpsemage: IEnemySummary;
+}
 //* extend this as more locations are added
 export interface IAllEnemies {
   Lumbridge: ILumbridgeEnemies;
   Draynor: IDraynorEnemies;
   LumbridgeSwampCave: ILumbridgeSwampCaveEnemies;
+  LumbridgeCatacombs: ILumbridgeCatacombsEnemies;
 }
 export type ListOfCombatStyleSkills = `Attack` | `Strength` | `Defence` | `Ranged` | `Magic`;
 export type ICurrentStyleOptions = `none` | `melee` | `ranged` | `air` | `fire` | `water` | `earth`;
@@ -735,7 +748,7 @@ export type CombatStyle = `melee` | `magic` | `ranged`;
 export type SpellElement = `typeless` | `air` | `fire` | `water` | `earth`;
 
 //* extend this as more locations are added
-export type IEnemyLocations = ILumbridgeEnemies | IDraynorEnemies | ILumbridgeSwampCaveEnemies;
+export type IEnemyLocations = ILumbridgeEnemies | IDraynorEnemies | ILumbridgeSwampCaveEnemies | ILumbridgeCatacombsEnemies;
 
 //* add to this as more enemies are added
 export type ICurrentTargetOptions =
@@ -880,6 +893,12 @@ export interface ILumbridgeSwampCaveLocationSummary {
   Combat: string[];
   Bosses: string[];
 }
+export interface ILumbridgeCatacombsSummary {
+  Quests: string[];
+  Skills: LocationSkills;
+  Combat: string[];
+  Bosses: string[];
+}
 export interface IDraynorLocationSummary {
   Quests: string[];
   Skills: LocationSkills;
@@ -890,13 +909,14 @@ export interface IAllLocations {
   Lumbridge: ILumbridgeLocationSummary;
   Draynor: IDraynorLocationSummary;
   LumbridgeSwampCave: ILumbridgeSwampCaveLocationSummary;
+  LumbridgeCatacombs: ILumbridgeCatacombsSummary;
   // Varrock: ILocationSummary;
 }
 //* extend this as needed to account for future locations
 export interface ICurrentLocation {
   CurrentLocation: ICurrentLocationOptions;
 }
-export type ICurrentLocationOptions = `Lumbridge` | `Draynor` | `LumbridgeSwampCave`;
+export type ICurrentLocationOptions = `Lumbridge` | `Draynor` | `LumbridgeSwampCave` | `LumbridgeCatacombs`;
 
 //@ ******************************* CHAT *******************************
 

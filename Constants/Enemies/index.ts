@@ -37,11 +37,20 @@ import {
   cavecrawler53,
   cavecrawler78,
   giantfrog,
+  warpedcockroach,
+  corpsespider,
+  warpedfly,
+  crawlingcorpsetorso,
+  warpedrat,
+  warpedbat,
+  corpsearcher,
+  skoblin,
+  corpsemage,
 } from "./AllEnemies";
 
 // collecting all enemies within each location lets us access each location and their enemies via dynamic keys
 //@ when adding new locations, also add to types under I<Location> Enemies => (ILumbridgeEnemies)
-export const Draynor = {
+export const Draynor: Types.IDraynorEnemies = {
   man,
   farmer,
   rat,
@@ -52,7 +61,7 @@ export const Draynor = {
   ghost25,
   blackknight,
 };
-export const Lumbridge = {
+export const Lumbridge: Types.ILumbridgeEnemies = {
   man,
   goblin,
   giantspider,
@@ -62,7 +71,7 @@ export const Lumbridge = {
   giantrat,
   swampfrog,
 };
-export const LumbridgeSwampCave = {
+export const LumbridgeSwampCave: Types.ILumbridgeSwampCaveEnemies = {
   bigfrog,
   rockslug42,
   rockslug49,
@@ -74,10 +83,23 @@ export const LumbridgeSwampCave = {
   cavecrawler78,
   giantfrog,
 };
+export const LumbridgeCatacombs: Types.ILumbridgeCatacombsEnemies = {
+  warpedcockroach,
+  corpsespider,
+  warpedfly,
+  crawlingcorpsetorso,
+  warpedrat,
+  skeleton15,
+  warpedbat,
+  corpsearcher,
+  skoblin,
+  corpsemage,
+};
 export const Enemies: Types.IAllEnemies = {
   Lumbridge,
   Draynor,
   LumbridgeSwampCave,
+  LumbridgeCatacombs,
 };
 
 export const playerAttacksTarget = (
@@ -230,6 +252,3 @@ export const playerAttacksTarget = (
   // if the game rolled higher than the hitchance, the player missed, so return 0 damage
   return 0;
 };
-
-// Enemies.LumbridgeSwampCave.bigfrog.XPGivenCombatStyle;
-// Enemies[location][target];

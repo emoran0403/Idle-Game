@@ -54,7 +54,7 @@ const CurrentResourceComp = (props: Types.NoProps) => {
       }
     }
   };
-
+  // Types.IEnemyLocations
   return (
     <div className="text-center border border-dark border-2 rounded-3" style={{ width: `130px` }}>
       {Activity === `In combat` ? (
