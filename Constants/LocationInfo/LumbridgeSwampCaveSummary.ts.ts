@@ -1,6 +1,8 @@
 import * as Types from "../../Types";
 
 export const LumbridgeSwampCaveSummary: Types.ILumbridgeSwampCaveLocationSummary = {
+  name: `LumbridgeSwampCaveSummary`,
+  displayName: `Lumbridge Swamp Cave`,
   Quests: [],
   Skills: {
     Woodcutting: [],

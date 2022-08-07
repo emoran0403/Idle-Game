@@ -101,7 +101,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
             Back
           </button>
         </div>
-        <div className="col-lg-9 justify-content-lg-center">Skilling in {CurrentLocation}</div>
+        <div className="col-lg-9 justify-content-lg-center">Skilling in {AllLocations[CurrentLocation as keyof Types.IAllLocations].displayName}</div>
       </div>
     );
   };
@@ -112,45 +112,49 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
    * @returns Returns a panel of Woodcutting option buttons.
    */
   const WoodcuttingOptions = (resourceArray: string[]) => {
-    return (
-      <div role="button" onClick={() => handleToggleSkillPanel(`Woodcutting`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
-        <h1 className="text-center">Woodcutting Level {WoodcuttingLevel}</h1>
-        <div className={`d-flex flex-row flex-wrap ${skillPanelsOpened.Woodcutting ? `` : `d-none`}`}>
-          {resourceArray.map((resource) => (
-            <button
-              disabled={WoodcuttingLevel < ListOfLogs[resource as keyof Types.IListOfLogs].levelReqWoodcutting ? true : false}
-              onClick={(e) => {
-                dispatch(setTarget(`none`));
-                dispatch(setActivity(`Skilling`));
-                dispatch(setResource(resource));
-                dispatch(setQuest(`none`));
-                dispatch(setSkill(`Woodcutting`));
-                // send a contextual message to the chat window
-                // if the last log contains the same message, don't send it
-                if (
-                  `Now cutting ${ListOfLogs[resource as keyof Types.IListOfLogs].displayName}` === props.chatLogArray[props.chatLogArray.length - 1].message
-                ) {
-                  return;
-                }
-                props.newChatLog(`Now cutting ${ListOfLogs[resource as keyof Types.IListOfLogs].displayName}`, `Activity Swap`);
-              }}
-              key={`resource-list-${resource}`}
-              className={`btn border mb-3 ${
-                WoodcuttingLevel >= ListOfLogs[resource as keyof Types.IListOfLogs].levelReqWoodcutting ? `bg-success` : `bg-danger`
-              }`}
-            >
-              <div className="card-body text">
-                <h5 className="card-title">{ListOfLogs[resource as keyof Types.IListOfLogs].displayName}</h5>
-                <div className="card-text">
-                  <div>Level {ListOfLogs[resource as keyof Types.IListOfLogs].levelReqWoodcutting}</div>
-                  <div>{ListOfLogs[resource as keyof Types.IListOfLogs].XPGivenWoodcutting} XP</div>
+    if (resourceArray.length) {
+      return (
+        <div role="button" onClick={() => handleToggleSkillPanel(`Woodcutting`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
+          <h1 className="text-center">Woodcutting Level {WoodcuttingLevel}</h1>
+          <div className={`d-flex flex-row flex-wrap ${skillPanelsOpened.Woodcutting ? `` : `d-none`}`}>
+            {resourceArray.map((resource) => (
+              <button
+                disabled={WoodcuttingLevel < ListOfLogs[resource as keyof Types.IListOfLogs].levelReqWoodcutting ? true : false}
+                onClick={(e) => {
+                  dispatch(setTarget(`none`));
+                  dispatch(setActivity(`Skilling`));
+                  dispatch(setResource(resource));
+                  dispatch(setQuest(`none`));
+                  dispatch(setSkill(`Woodcutting`));
+                  // send a contextual message to the chat window
+                  // if the last log contains the same message, don't send it
+                  if (
+                    `Now cutting ${ListOfLogs[resource as keyof Types.IListOfLogs].displayName}` === props.chatLogArray[props.chatLogArray.length - 1].message
+                  ) {
+                    return;
+                  }
+                  props.newChatLog(`Now cutting ${ListOfLogs[resource as keyof Types.IListOfLogs].displayName}`, `Activity Swap`);
+                }}
+                key={`resource-list-${resource}`}
+                className={`btn border mb-3 ${
+                  WoodcuttingLevel >= ListOfLogs[resource as keyof Types.IListOfLogs].levelReqWoodcutting ? `bg-success` : `bg-danger`
+                }`}
+              >
+                <div className="card-body text">
+                  <h5 className="card-title">{ListOfLogs[resource as keyof Types.IListOfLogs].displayName}</h5>
+                  <div className="card-text">
+                    <div>Level {ListOfLogs[resource as keyof Types.IListOfLogs].levelReqWoodcutting}</div>
+                    <div>{ListOfLogs[resource as keyof Types.IListOfLogs].XPGivenWoodcutting} XP</div>
+                  </div>
                 </div>
-              </div>
-            </button>
-          ))}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return;
+    }
   };
 
   /**
@@ -159,44 +163,48 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
    * @returns Returns a panel of Fishing option buttons.
    */
   const FishingOptions = (resourceArray: string[]) => {
-    return (
-      <div role="button" onClick={() => handleToggleSkillPanel(`Fishing`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
-        <h1 className="text-center">Fishing Level {FishingLevel}</h1>
-        <div className={`d-flex flex-row flex-wrap ${skillPanelsOpened.Fishing ? `` : `d-none`}`}>
-          {resourceArray.map((resource) => (
-            <button
-              disabled={FishingLevel < ListOfFish[resource as keyof Types.IListOfFish].levelReqFishing ? true : false}
-              onClick={(e) => {
-                dispatch(setTarget(`none`));
-                dispatch(setActivity(`Skilling`));
-                dispatch(setResource(resource));
-                dispatch(setQuest(`none`));
-                dispatch(setSkill(`Fishing`));
+    if (resourceArray.length) {
+      return (
+        <div role="button" onClick={() => handleToggleSkillPanel(`Fishing`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
+          <h1 className="text-center">Fishing Level {FishingLevel}</h1>
+          <div className={`d-flex flex-row flex-wrap ${skillPanelsOpened.Fishing ? `` : `d-none`}`}>
+            {resourceArray.map((resource) => (
+              <button
+                disabled={FishingLevel < ListOfFish[resource as keyof Types.IListOfFish].levelReqFishing ? true : false}
+                onClick={(e) => {
+                  dispatch(setTarget(`none`));
+                  dispatch(setActivity(`Skilling`));
+                  dispatch(setResource(resource));
+                  dispatch(setQuest(`none`));
+                  dispatch(setSkill(`Fishing`));
 
-                // send a contextual message to the chat window
-                // if the last log contains the same message, don't send it
-                if (
-                  `Now fishing ${ListOfFish[resource as keyof Types.IListOfFish].displayName}` === props.chatLogArray[props.chatLogArray.length - 1].message
-                ) {
-                  return;
-                }
-                props.newChatLog(`Now fishing ${ListOfFish[resource as keyof Types.IListOfFish].displayName}`, `Activity Swap`);
-              }}
-              key={`resource-list-${resource}`}
-              className={`btn border mb-3 ${FishingLevel >= ListOfFish[resource as keyof Types.IListOfFish].levelReqFishing ? `bg-success` : `bg-danger`}`}
-            >
-              <div className="card-body text">
-                <h5 className="card-title">{ListOfFish[resource as keyof Types.IListOfFish].displayName}</h5>
-                <div className="card-text">
-                  <div>Level {ListOfFish[resource as keyof Types.IListOfFish].levelReqFishing}</div>
-                  <div>{ListOfFish[resource as keyof Types.IListOfFish].XPGivenFishing} XP</div>
+                  // send a contextual message to the chat window
+                  // if the last log contains the same message, don't send it
+                  if (
+                    `Now fishing ${ListOfFish[resource as keyof Types.IListOfFish].displayName}` === props.chatLogArray[props.chatLogArray.length - 1].message
+                  ) {
+                    return;
+                  }
+                  props.newChatLog(`Now fishing ${ListOfFish[resource as keyof Types.IListOfFish].displayName}`, `Activity Swap`);
+                }}
+                key={`resource-list-${resource}`}
+                className={`btn border mb-3 ${FishingLevel >= ListOfFish[resource as keyof Types.IListOfFish].levelReqFishing ? `bg-success` : `bg-danger`}`}
+              >
+                <div className="card-body text">
+                  <h5 className="card-title">{ListOfFish[resource as keyof Types.IListOfFish].displayName}</h5>
+                  <div className="card-text">
+                    <div>Level {ListOfFish[resource as keyof Types.IListOfFish].levelReqFishing}</div>
+                    <div>{ListOfFish[resource as keyof Types.IListOfFish].XPGivenFishing} XP</div>
+                  </div>
                 </div>
-              </div>
-            </button>
-          ))}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return;
+    }
   };
 
   /**
@@ -205,40 +213,46 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
    * @returns Returns a panel of Mining option buttons.
    */
   const MiningOptions = (resourceArray: string[]) => {
-    return (
-      <div role="button" onClick={() => handleToggleSkillPanel(`Mining`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
-        <h1 className="text-center">Mining Level {MiningLevel}</h1>
-        <div className={`d-flex flex-row flex-wrap ${skillPanelsOpened.Mining ? `` : `d-none`}`}>
-          {resourceArray.map((resource) => (
-            <button
-              disabled={MiningLevel < ListOfOres[resource as keyof Types.IListOfOres].levelReqMining ? true : false}
-              onClick={(e) => {
-                dispatch(setTarget(`none`));
-                dispatch(setActivity(`Skilling`));
-                dispatch(setResource(resource));
-                dispatch(setQuest(`none`));
-                dispatch(setSkill(`Mining`));
-                // send a contextual message to the chat window
-                // if the last log contains the same message, don't send it
-                if (`Now mining ${ListOfOres[resource as keyof Types.IListOfOres].displayName}` === props.chatLogArray[props.chatLogArray.length - 1].message) {
-                  return;
-                }
-                props.newChatLog(`Now mining ${ListOfOres[resource as keyof Types.IListOfOres].displayName}`, `Activity Swap`);
-              }}
-              key={`resource-list-${resource}`}
-              className={`btn border mb-3 ${MiningLevel >= ListOfOres[resource as keyof Types.IListOfOres].levelReqMining ? `bg-success` : `bg-danger`}`}
-            >
-              <div className="card-body text">
-                <h5 className="card-title">{ListOfOres[resource as keyof Types.IListOfOres].displayName}</h5>
-                <div className="card-text">
-                  <div>Level {ListOfOres[resource as keyof Types.IListOfOres].levelReqMining}</div>
+    if (resourceArray.length) {
+      return (
+        <div role="button" onClick={() => handleToggleSkillPanel(`Mining`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
+          <h1 className="text-center">Mining Level {MiningLevel}</h1>
+          <div className={`d-flex flex-row flex-wrap ${skillPanelsOpened.Mining ? `` : `d-none`}`}>
+            {resourceArray.map((resource) => (
+              <button
+                disabled={MiningLevel < ListOfOres[resource as keyof Types.IListOfOres].levelReqMining ? true : false}
+                onClick={(e) => {
+                  dispatch(setTarget(`none`));
+                  dispatch(setActivity(`Skilling`));
+                  dispatch(setResource(resource));
+                  dispatch(setQuest(`none`));
+                  dispatch(setSkill(`Mining`));
+                  // send a contextual message to the chat window
+                  // if the last log contains the same message, don't send it
+                  if (
+                    `Now mining ${ListOfOres[resource as keyof Types.IListOfOres].displayName}` === props.chatLogArray[props.chatLogArray.length - 1].message
+                  ) {
+                    return;
+                  }
+                  props.newChatLog(`Now mining ${ListOfOres[resource as keyof Types.IListOfOres].displayName}`, `Activity Swap`);
+                }}
+                key={`resource-list-${resource}`}
+                className={`btn border mb-3 ${MiningLevel >= ListOfOres[resource as keyof Types.IListOfOres].levelReqMining ? `bg-success` : `bg-danger`}`}
+              >
+                <div className="card-body text">
+                  <h5 className="card-title">{ListOfOres[resource as keyof Types.IListOfOres].displayName}</h5>
+                  <div className="card-text">
+                    <div>Level {ListOfOres[resource as keyof Types.IListOfOres].levelReqMining}</div>
+                  </div>
                 </div>
-              </div>
-            </button>
-          ))}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return;
+    }
   };
 
   /**
@@ -249,80 +263,83 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
   const ThievingOptions = (thievingOptions: Types.IThievingStallsAndPickpocketing) => {
     const pickpocketingArray = thievingOptions.pickpocketing;
     const stallsArray = thievingOptions.stalls;
-
-    return (
-      <div role="button" onClick={() => handleToggleSkillPanel(`Thieving`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
-        <h1 className="text-center">Thieving Level {ThievingLevel}</h1>
-        <div className={`d-flex flex-row flex-wrap ${skillPanelsOpened.Thieving ? `` : `d-none`}`}>
-          {pickpocketingArray.map((resource) => (
-            <button
-              disabled={ThievingLevel < ListOfPickpocketNPC[resource as keyof Types.IListOfPickpocketNPC].levelReqThieving ? true : false}
-              onClick={(e) => {
-                dispatch(setTarget(`none`));
-                dispatch(setActivity(`Skilling`));
-                dispatch(setResource(resource));
-                dispatch(setQuest(`none`));
-                dispatch(setSkill(`Thieving`));
-                // send a contextual message to the chat window
-                // if the last log contains the same message, don't send it
-                if (
-                  `Now Thieving from ${ListOfPickpocketNPC[resource as keyof Types.IListOfPickpocketNPC].displayName}` ===
-                  props.chatLogArray[props.chatLogArray.length - 1].message
-                ) {
-                  return;
-                }
-                props.newChatLog(`Now Thieving from ${ListOfPickpocketNPC[resource as keyof Types.IListOfPickpocketNPC].displayName}`, `Activity Swap`);
-              }}
-              key={`resource-list-${resource}`}
-              className={`btn border mb-3 ${
-                ThievingLevel >= ListOfPickpocketNPC[resource as keyof Types.IListOfPickpocketNPC].levelReqThieving ? `bg-success` : `bg-danger`
-              }`}
-            >
-              <div className="card-body text">
-                <h5 className="card-title">{ListOfPickpocketNPC[resource as keyof Types.IListOfPickpocketNPC].displayName}</h5>
-                <div className="card-text">
-                  <div>Level {ListOfPickpocketNPC[resource as keyof Types.IListOfPickpocketNPC].levelReqThieving}</div>
-                  <div>{ListOfPickpocketNPC[resource as keyof Types.IListOfPickpocketNPC].XPGivenThieving} XP</div>
+    if (pickpocketingArray.length || stallsArray.length) {
+      return (
+        <div role="button" onClick={() => handleToggleSkillPanel(`Thieving`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
+          <h1 className="text-center">Thieving Level {ThievingLevel}</h1>
+          <div className={`d-flex flex-row flex-wrap ${skillPanelsOpened.Thieving ? `` : `d-none`}`}>
+            {pickpocketingArray.map((resource) => (
+              <button
+                disabled={ThievingLevel < ListOfPickpocketNPC[resource as keyof Types.IListOfPickpocketNPC].levelReqThieving ? true : false}
+                onClick={(e) => {
+                  dispatch(setTarget(`none`));
+                  dispatch(setActivity(`Skilling`));
+                  dispatch(setResource(resource));
+                  dispatch(setQuest(`none`));
+                  dispatch(setSkill(`Thieving`));
+                  // send a contextual message to the chat window
+                  // if the last log contains the same message, don't send it
+                  if (
+                    `Now Thieving from ${ListOfPickpocketNPC[resource as keyof Types.IListOfPickpocketNPC].displayName}` ===
+                    props.chatLogArray[props.chatLogArray.length - 1].message
+                  ) {
+                    return;
+                  }
+                  props.newChatLog(`Now Thieving from ${ListOfPickpocketNPC[resource as keyof Types.IListOfPickpocketNPC].displayName}`, `Activity Swap`);
+                }}
+                key={`resource-list-${resource}`}
+                className={`btn border mb-3 ${
+                  ThievingLevel >= ListOfPickpocketNPC[resource as keyof Types.IListOfPickpocketNPC].levelReqThieving ? `bg-success` : `bg-danger`
+                }`}
+              >
+                <div className="card-body text">
+                  <h5 className="card-title">{ListOfPickpocketNPC[resource as keyof Types.IListOfPickpocketNPC].displayName}</h5>
+                  <div className="card-text">
+                    <div>Level {ListOfPickpocketNPC[resource as keyof Types.IListOfPickpocketNPC].levelReqThieving}</div>
+                    <div>{ListOfPickpocketNPC[resource as keyof Types.IListOfPickpocketNPC].XPGivenThieving} XP</div>
+                  </div>
                 </div>
-              </div>
-            </button>
-          ))}
-          {stallsArray.map((resource) => (
-            <button
-              disabled={ThievingLevel < ListOfPickpocketStalls[resource as keyof Types.IListOfPickpocketStall].levelReqThieving ? true : false}
-              onClick={(e) => {
-                dispatch(setTarget(`none`));
-                dispatch(setActivity(`Skilling`));
-                dispatch(setResource(resource));
-                dispatch(setQuest(`none`));
-                dispatch(setSkill(`Thieving`));
-                // send a contextual message to the chat window
-                // if the last log contains the same message, don't send it
-                if (
-                  `Now Thieving from ${ListOfPickpocketStalls[resource as keyof Types.IListOfPickpocketStall].displayName}` ===
-                  props.chatLogArray[props.chatLogArray.length - 1].message
-                ) {
-                  return;
-                }
-                props.newChatLog(`Now Thieving from ${ListOfPickpocketStalls[resource as keyof Types.IListOfPickpocketStall].displayName}`, `Activity Swap`);
-              }}
-              key={`resource-list-${resource}`}
-              className={`btn border mb-3 ${
-                ThievingLevel >= ListOfPickpocketStalls[resource as keyof Types.IListOfPickpocketStall].levelReqThieving ? `bg-success` : `bg-danger`
-              }`}
-            >
-              <div className="card-body text">
-                <h5 className="card-title">{ListOfPickpocketStalls[resource as keyof Types.IListOfPickpocketStall].displayName}</h5>
-                <div className="card-text">
-                  <div>Level {ListOfPickpocketStalls[resource as keyof Types.IListOfPickpocketStall].levelReqThieving}</div>
-                  <div>{ListOfPickpocketStalls[resource as keyof Types.IListOfPickpocketStall].XPGivenThieving} XP</div>
+              </button>
+            ))}
+            {stallsArray.map((resource) => (
+              <button
+                disabled={ThievingLevel < ListOfPickpocketStalls[resource as keyof Types.IListOfPickpocketStall].levelReqThieving ? true : false}
+                onClick={(e) => {
+                  dispatch(setTarget(`none`));
+                  dispatch(setActivity(`Skilling`));
+                  dispatch(setResource(resource));
+                  dispatch(setQuest(`none`));
+                  dispatch(setSkill(`Thieving`));
+                  // send a contextual message to the chat window
+                  // if the last log contains the same message, don't send it
+                  if (
+                    `Now Thieving from ${ListOfPickpocketStalls[resource as keyof Types.IListOfPickpocketStall].displayName}` ===
+                    props.chatLogArray[props.chatLogArray.length - 1].message
+                  ) {
+                    return;
+                  }
+                  props.newChatLog(`Now Thieving from ${ListOfPickpocketStalls[resource as keyof Types.IListOfPickpocketStall].displayName}`, `Activity Swap`);
+                }}
+                key={`resource-list-${resource}`}
+                className={`btn border mb-3 ${
+                  ThievingLevel >= ListOfPickpocketStalls[resource as keyof Types.IListOfPickpocketStall].levelReqThieving ? `bg-success` : `bg-danger`
+                }`}
+              >
+                <div className="card-body text">
+                  <h5 className="card-title">{ListOfPickpocketStalls[resource as keyof Types.IListOfPickpocketStall].displayName}</h5>
+                  <div className="card-text">
+                    <div>Level {ListOfPickpocketStalls[resource as keyof Types.IListOfPickpocketStall].levelReqThieving}</div>
+                    <div>{ListOfPickpocketStalls[resource as keyof Types.IListOfPickpocketStall].XPGivenThieving} XP</div>
+                  </div>
                 </div>
-              </div>
-            </button>
-          ))}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return;
+    }
   };
 
   /**

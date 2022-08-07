@@ -12,6 +12,7 @@ import { getLevel } from "../../../../Constants/XP Levels";
 import { setQuest } from "../../Redux/Slices/CurrentQuest";
 import { setStyle } from "../../Redux/Slices/CurrentCombatStyle";
 import { TwoHandSlot } from "../../../../Constants/Equipment/TwoHandSlot";
+import { AllLocations } from "../../../../Constants/LocationInfo";
 
 //@ for simplicity, i'm not keeping track of ammunition / runes
 
@@ -44,7 +45,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
             Back
           </button>
         </div>
-        <div className="col-lg-9 justify-content-lg-center">Combat in {CurrentLocation}</div>
+        <div className="col-lg-9 justify-content-lg-center">Combat in {AllLocations[CurrentLocation as keyof Types.IAllLocations].displayName}</div>
       </div>
     );
   };

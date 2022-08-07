@@ -882,24 +882,32 @@ export interface ILocationSummary {
   Bosses: string[];
 }
 export interface ILumbridgeLocationSummary {
+  name: string;
+  displayName: string;
   Quests: string[];
   Skills: LocationSkills;
   Combat: string[];
   Bosses: string[];
 }
 export interface ILumbridgeSwampCaveLocationSummary {
+  name: string;
+  displayName: string;
   Quests: string[];
   Skills: LocationSkills;
   Combat: string[];
   Bosses: string[];
 }
 export interface ILumbridgeCatacombsSummary {
+  name: string;
+  displayName: string;
   Quests: string[];
   Skills: LocationSkills;
   Combat: string[];
   Bosses: string[];
 }
 export interface IDraynorLocationSummary {
+  name: string;
+  displayName: string;
   Quests: string[];
   Skills: LocationSkills;
   Combat: string[];
