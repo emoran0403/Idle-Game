@@ -11,7 +11,7 @@ const CurrentLocationComp = (props: Types.NoProps) => {
   return (
     <div className="text-center border border-dark border-2 rounded-3" style={{ width: `105px` }}>
       <div>You are in </div>
-      <div>{CurrentLocation}</div>
+      <div className="text-wrap">{CurrentLocation}</div>
     </div>
   );
 };

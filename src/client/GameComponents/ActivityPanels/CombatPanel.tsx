@@ -60,7 +60,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
       <div onClick={() => {}} className="card-title border border-dark border-1 rounded-3">
         <h6 className="text-center">Enemies in {CurrentLocation}</h6>
         <div className="d-flex flex-row flex-wrap">
-          {arrayOfEnemies.map((enemy: Types.IEnemySummary) => (
+          {arrayOfEnemies.map((enemy: Types.IEnemySummary, i) => (
             <button
               onClick={(e) => {
                 // console.log(`${enemy.displayName} was clicked`);
@@ -83,7 +83,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
                   // not choosing a combat style means combat will not continue, and the player should be notified
                 }
               }}
-              key={`enemy-list-${enemy.displayName}`}
+              key={`enemy-list-${enemy.displayName}-${i}`}
               className={`btn border mb-3 bg-${handleEnemyButtonsStyling(enemy.level)}`}
             >
               <div className="card-body text">

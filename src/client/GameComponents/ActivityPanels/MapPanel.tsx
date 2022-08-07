@@ -56,6 +56,18 @@ const MapPanel = (props: Types.MapPanelProps) => {
             >
               Lumbridge
             </button>
+
+            <button
+              className="btn btn-primary"
+              onClick={() => {
+                console.log(`travelling to Lumbridge Swamp Cave`);
+                resetState();
+                dispatch(setLocation(`LumbridgeSwampCave`));
+              }}
+            >
+              Lumbridge Swamp Cave
+            </button>
+
             <button
               className="btn btn-primary"
               onClick={() => {

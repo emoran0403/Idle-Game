@@ -711,10 +711,23 @@ export interface IDraynorEnemies {
   ghost25: IEnemySummary;
   blackknight: IEnemySummary;
 }
+export interface ILumbridgeSwampCaveEnemies {
+  bigfrog: IEnemySummary;
+  rockslug42: IEnemySummary;
+  rockslug49: IEnemySummary;
+  cavebug8: IEnemySummary;
+  cavebug12: IEnemySummary;
+  caveslime: IEnemySummary;
+  wallbeast: IEnemySummary;
+  cavecrawler53: IEnemySummary;
+  cavecrawler78: IEnemySummary;
+  giantfrog: IEnemySummary;
+}
 //* extend this as more locations are added
 export interface IAllEnemies {
   Lumbridge: ILumbridgeEnemies;
   Draynor: IDraynorEnemies;
+  LumbridgeSwampCave: ILumbridgeSwampCaveEnemies;
 }
 export type ListOfCombatStyleSkills = `Attack` | `Strength` | `Defence` | `Ranged` | `Magic`;
 export type ICurrentStyleOptions = `none` | `melee` | `ranged` | `air` | `fire` | `water` | `earth`;
@@ -722,7 +735,7 @@ export type CombatStyle = `melee` | `magic` | `ranged`;
 export type SpellElement = `typeless` | `air` | `fire` | `water` | `earth`;
 
 //* extend this as more locations are added
-export type IEnemyLocations = ILumbridgeEnemies | IDraynorEnemies;
+export type IEnemyLocations = ILumbridgeEnemies | IDraynorEnemies | ILumbridgeSwampCaveEnemies;
 
 //* add to this as more enemies are added
 export type ICurrentTargetOptions =
@@ -742,7 +755,27 @@ export type ICurrentTargetOptions =
   | `zombie29`
   | `skeleton32`
   | `ghost25`
-  | `blackknight`;
+  | `blackknight`
+  | `giantbat`
+  | `warpedbat`
+  | `cavebug8`
+  | `cavebug12`
+  | `caveslime`
+  | `bigfrog`
+  | `giantfrog`
+  | `cavecrawler53`
+  | `cavecrawler78`
+  | `rockslug42`
+  | `rockslug49`
+  | `wallbeast`
+  | `warpedcockroach`
+  | `corpsespider`
+  | `warpedfly`
+  | `crawlingcorpsetorso`
+  | `warpedrat`
+  | `corpsearcher`
+  | `skoblin`
+  | `corpsemage`;
 
 //@ ******************************* RESOURCES *******************************
 
@@ -841,6 +874,12 @@ export interface ILumbridgeLocationSummary {
   Combat: string[];
   Bosses: string[];
 }
+export interface ILumbridgeSwampCaveLocationSummary {
+  Quests: string[];
+  Skills: LocationSkills;
+  Combat: string[];
+  Bosses: string[];
+}
 export interface IDraynorLocationSummary {
   Quests: string[];
   Skills: LocationSkills;
@@ -850,13 +889,14 @@ export interface IDraynorLocationSummary {
 export interface IAllLocations {
   Lumbridge: ILumbridgeLocationSummary;
   Draynor: IDraynorLocationSummary;
+  LumbridgeSwampCave: ILumbridgeSwampCaveLocationSummary;
   // Varrock: ILocationSummary;
 }
 //* extend this as needed to account for future locations
 export interface ICurrentLocation {
   CurrentLocation: ICurrentLocationOptions;
 }
-export type ICurrentLocationOptions = `Lumbridge` | `Draynor`;
+export type ICurrentLocationOptions = `Lumbridge` | `Draynor` | `LumbridgeSwampCave`;
 
 //@ ******************************* CHAT *******************************
 

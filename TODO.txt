@@ -17,7 +17,6 @@
 //! SUPPORT - skills that just take some time to complete
 //# AGILITY
 //# SLAYER
-* add slayer level req to enemies and their type
 * add lumbridge cave enemies to all enemies
 * add lumbridge cave location
 * add lumbridge catacomb enemies to all enemies
@@ -26,7 +25,8 @@
 * add state slice to track the slayer task
 * add a check in combat to see ifthe player has chosen a slayer task monster
 * add a check in combat panel to disable enemies based on their slayer level
-* add slayer level req to enemies if it is > 1
+* DONE - add slayer level req to enemies if it is > 1
+* DONE -  add slayer level req to enemies and their type
 
 //# DUNGEONEERING
 
@@ -42,6 +42,7 @@
 
 
 //# Fixes
+* currentLocationComp - location needs to wrap to fit inside the div
 * can clean up chat logs in game component under woodcutting and fishing
 * add chat logs for gaining xp in combat skills
 * add chat logs for gaining xp in gathering skills

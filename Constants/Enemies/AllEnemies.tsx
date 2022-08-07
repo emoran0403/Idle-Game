@@ -431,7 +431,7 @@ export const warpedbat: Types.IEnemySummary = {
 };
 export const cavebug8: Types.IEnemySummary = {
   name: "cavebug8",
-  displayName: "Cave",
+  displayName: "Cave bug",
   level: 8,
   lifePoints: 300,
   XPGivenCombatStyle: 28,

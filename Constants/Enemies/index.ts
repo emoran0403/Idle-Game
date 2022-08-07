@@ -27,6 +27,16 @@ import {
   zombie12,
   zombie29,
   blackknight,
+  bigfrog,
+  rockslug42,
+  rockslug49,
+  cavebug8,
+  cavebug12,
+  caveslime,
+  wallbeast,
+  cavecrawler53,
+  cavecrawler78,
+  giantfrog,
 } from "./AllEnemies";
 
 // collecting all enemies within each location lets us access each location and their enemies via dynamic keys
@@ -52,9 +62,22 @@ export const Lumbridge = {
   giantrat,
   swampfrog,
 };
+export const LumbridgeSwampCave = {
+  bigfrog,
+  rockslug42,
+  rockslug49,
+  cavebug8,
+  cavebug12,
+  caveslime,
+  wallbeast,
+  cavecrawler53,
+  cavecrawler78,
+  giantfrog,
+};
 export const Enemies: Types.IAllEnemies = {
   Lumbridge,
   Draynor,
+  LumbridgeSwampCave,
 };
 
 export const playerAttacksTarget = (
@@ -207,3 +230,6 @@ export const playerAttacksTarget = (
   // if the game rolled higher than the hitchance, the player missed, so return 0 damage
   return 0;
 };
+
+// Enemies.LumbridgeSwampCave.bigfrog.XPGivenCombatStyle;
+// Enemies[location][target];
