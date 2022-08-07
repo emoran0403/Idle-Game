@@ -43,8 +43,6 @@
 
 
 //# Fixes
-* skills, quest, combat panel needs to show display names for locations
-* currentLocationComp - location needs to wrap to fit inside the div
 * can clean up chat logs in game component under woodcutting and fishing
 * add chat logs for gaining xp in combat skills
 * add chat logs for gaining xp in gathering skills
@@ -53,6 +51,8 @@
 * ^^== maybe fix this with just assets in inventory, and item names as title / alt text?
 
 * grammar when fishing anchovies
+* DONE - skills, quest, combat panel needs to show display names for locations
+* DONE - currentLocationComp - location needs to wrap to fit inside the div
 * DONE - skills panel only displays skill options if there are those options at the location
 * DONE - bank panel - if the player has 0 of an item, dont display it
 * DONE - scale coin drops to the enemy level, not lifepoints
