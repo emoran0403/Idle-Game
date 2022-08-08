@@ -10,3 +10,13 @@ export const AllLocations: Types.IAllLocations = {
   LumbridgeSwampCave: LumbridgeSwampCaveSummary,
   LumbridgeCatacombs: LumbridgeCatacombsSummary,
 };
+// ILumbridgeSwampCaveEnemies
+// Edgeville
+// Canifis
+// Zanaris
+// Pollnivneach
+// ShiloVillage
+// AncientCavern
+// Prifddinas
+// AnachroniaBaseCamp
+// Wilderness

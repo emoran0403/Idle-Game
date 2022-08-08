@@ -1,6 +1,6 @@
 import * as Types from "../../Types";
 
-export const DraynorSummary: Types.IDraynorLocationSummary = {
+export const DraynorSummary: Types.ILocationSummary = {
   name: `DraynorSummary`,
   displayName: `Draynor Village`,
   Quests: [

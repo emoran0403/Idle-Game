@@ -188,7 +188,7 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
 
     // disable the item if the player already owns it
     return (
-      <div role="button" onClick={() => handleToggleEquipmentPanel(`Hatchets`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
+      <div onClick={() => handleToggleEquipmentPanel(`Hatchets`)} className="card-title border border-dark border-1 rounded-3 user-select-none cursor-pointer">
         <h1 className="text-center">Hatchets</h1>
         <div className={`d-flex flex-row flex-wrap ${equipmentPanelsOpened.Hatchets ? `` : `d-none`}`}>
           {compositeItemsNoCrystal.map((item) => (
@@ -238,7 +238,7 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
 
     // disable the item if the player already owns it
     return (
-      <div role="button" onClick={() => handleToggleEquipmentPanel(`Pickaxes`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
+      <div onClick={() => handleToggleEquipmentPanel(`Pickaxes`)} className="card-title border border-dark border-1 rounded-3 user-select-none cursor-pointer">
         <h1 className="text-center">Pickaxes</h1>
         <div className={`d-flex flex-row flex-wrap ${equipmentPanelsOpened.Pickaxes ? `` : `d-none`}`}>
           {compositeItemsNoCrystal.map((item) => (
@@ -285,7 +285,7 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
 
     // disable the item if the player already owns it
     return (
-      <div role="button" onClick={() => handleToggleEquipmentPanel(`HeadSlot`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
+      <div onClick={() => handleToggleEquipmentPanel(`HeadSlot`)} className="card-title border border-dark border-1 rounded-3 user-select-none cursor-pointer">
         <h1 className="text-center">Head Slot Items</h1>
         <div className={`d-flex flex-row flex-wrap ${equipmentPanelsOpened.HeadSlot ? `` : `d-none`}`}>
           {compositeItems.map((item) => (
@@ -332,7 +332,7 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
 
     // disable the item if the player already owns it
     return (
-      <div role="button" onClick={() => handleToggleEquipmentPanel(`BodySlot`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
+      <div onClick={() => handleToggleEquipmentPanel(`BodySlot`)} className="card-title border border-dark border-1 rounded-3 user-select-none cursor-pointer">
         <h1 className="text-center">Body Slot Items</h1>
         <div className={`d-flex flex-row flex-wrap ${equipmentPanelsOpened.BodySlot ? `` : `d-none`}`}>
           {compositeItems.map((item) => (
@@ -379,7 +379,7 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
 
     // disable the item if the player already owns it
     return (
-      <div role="button" onClick={() => handleToggleEquipmentPanel(`LegsSlot`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
+      <div onClick={() => handleToggleEquipmentPanel(`LegsSlot`)} className="card-title border border-dark border-1 rounded-3 user-select-none cursor-pointer">
         <h1 className="text-center">Legs Slot Items</h1>
         <div className={`d-flex flex-row flex-wrap ${equipmentPanelsOpened.LegsSlot ? `` : `d-none`}`}>
           {compositeItems.map((item) => (
@@ -426,7 +426,7 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
 
     // disable the item if the player already owns it
     return (
-      <div role="button" onClick={() => handleToggleEquipmentPanel(`HandSlot`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
+      <div onClick={() => handleToggleEquipmentPanel(`HandsSlot`)} className="card-title border border-dark border-1 rounded-3 user-select-none cursor-pointer">
         <h1 className="text-center">Hands Slot Items</h1>
         <div className={`d-flex flex-row flex-wrap ${equipmentPanelsOpened.HandsSlot ? `` : `d-none`}`}>
           {compositeItems.map((item) => (
@@ -473,7 +473,7 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
 
     // disable the item if the player already owns it
     return (
-      <div role="button" onClick={() => handleToggleEquipmentPanel(`FeetSlot`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
+      <div onClick={() => handleToggleEquipmentPanel(`FeetSlot`)} className="card-title border border-dark border-1 rounded-3 user-select-none cursor-pointer">
         <h1 className="text-center">Feet Slot Items</h1>
         <div className={`d-flex flex-row flex-wrap ${equipmentPanelsOpened.FeetSlot ? `` : `d-none`}`}>
           {compositeItems.map((item) => (

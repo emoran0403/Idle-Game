@@ -1,8 +1,9 @@
 import * as Types from "../../Types";
 
-const slayermasterjacquelyn = {
+const slayermasterjacquelyn: Types.ISlayerMasterSummary = {
   name: `slayermasterjacquelyn`,
   displayName: `Jacquelyn Manslaughter`,
+  location: `Lumbridge`,
   levelReqCombat: 0,
   levelReqSlayer: 0,
   taskList: [
@@ -21,73 +22,82 @@ const slayermasterjacquelyn = {
   ],
 };
 
-const slayermastervannaka = {
+const slayermastervannaka: Types.ISlayerMasterSummary = {
   name: `slayermastervannaka`,
   displayName: `Vannaka`,
+  location: `Edgeville`,
   levelReqCombat: 30,
   levelReqSlayer: 0,
   taskList: [],
 };
 
-const slayermastermazchna = {
+const slayermastermazchna: Types.ISlayerMasterSummary = {
   name: `slayermastermazchna`,
   displayName: `Mazchna`,
+  location: `Canifis`,
   levelReqCombat: 50,
   levelReqSlayer: 0,
   taskList: [],
 };
 
-const slayermasterchaeldar = {
+const slayermasterchaeldar: Types.ISlayerMasterSummary = {
   name: `slayermasterchaeldar`,
   displayName: `Chaeldar`,
+  location: `Zanaris`,
   levelReqCombat: 75,
   levelReqSlayer: 0,
   taskList: [],
 };
 
-const slayermastersumona = {
+const slayermastersumona: Types.ISlayerMasterSummary = {
   name: `slayermastersumona`,
   displayName: `Sumona`,
+  location: `Pollnivneach`,
   levelReqCombat: 90,
   levelReqSlayer: 35,
   taskList: [],
 };
 
-const slayermasterduradel = {
+const slayermasterduradel: Types.ISlayerMasterSummary = {
   name: `slayermasterduradel`,
   displayName: `Duradel`,
+  location: `ShiloVillage`,
   levelReqCombat: 100,
   levelReqSlayer: 50,
   taskList: [],
 };
 
-const slayermasterkuradal = {
+const slayermasterkuradal: Types.ISlayerMasterSummary = {
   name: `slayermasterkuradal`,
   displayName: `Kuradal`,
+  location: `AncientCavern`,
   levelReqCombat: 110,
   levelReqSlayer: 75,
   taskList: [],
 };
 
-const slayermastermorvran = {
+const slayermastermorvran: Types.ISlayerMasterSummary = {
   name: `slayermastermorvran`,
   displayName: `Morvran`,
+  location: `Prifddinas`,
   levelReqCombat: 120,
   levelReqSlayer: 85,
   taskList: [],
 };
 
-const slayermasterlaniakea = {
+const slayermasterlaniakea: Types.ISlayerMasterSummary = {
   name: `slayermasterlaniakea`,
   displayName: `Laniakea`,
+  location: `AnachroniaBaseCamp`,
   levelReqCombat: 120,
   levelReqSlayer: 90,
   taskList: [],
 };
 
-const slayermastermandrith = {
+const slayermastermandrith: Types.ISlayerMasterSummary = {
   name: `slayermastermandrith`,
   displayName: `Mandrith`,
+  location: `Wilderness`,
   levelReqCombat: 120,
   levelReqSlayer: 95,
   taskList: [],

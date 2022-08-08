@@ -691,6 +691,18 @@ export type ICurrentQuestOptions =
   | `Stolen Hearts`;
 //@ ******************************* COMBAT *******************************
 
+export interface ISlayerMasterSummary {
+  name: string;
+  displayName: string;
+  location: string;
+  levelReqCombat: number;
+  levelReqSlayer: number;
+  taskList: {
+    task: string;
+    min: number;
+    max: number;
+  }[];
+}
 export interface IListOfCombatStyles {
   CurrentStyle: ICurrentStyleOptions;
 }
@@ -779,7 +791,8 @@ export type CombatStyle = `melee` | `magic` | `ranged`;
 export type SpellElement = `typeless` | `air` | `fire` | `water` | `earth`;
 
 //* extend this as more locations are added
-export type IEnemyLocations = ILumbridgeEnemies | IDraynorEnemies | ILumbridgeSwampCaveEnemies | ILumbridgeCatacombsEnemies;
+export type IEnemyLocations = ILumbridgeEnemies | IDraynorEnemies | ILumbridgeCatacombsEnemies | ILumbridgeSwampCaveEnemies;
+//
 
 //* add to this as more enemies are added
 export type ICurrentTargetOptions =
@@ -914,43 +927,43 @@ export interface ILocationSummary {
   Combat: string[];
   Bosses: string[];
 }
-export interface ILumbridgeLocationSummary {
-  name: string;
-  displayName: string;
-  Quests: string[];
-  Skills: LocationSkills;
-  Combat: string[];
-  Bosses: string[];
-}
-export interface ILumbridgeSwampCaveLocationSummary {
-  name: string;
-  displayName: string;
-  Quests: string[];
-  Skills: LocationSkills;
-  Combat: string[];
-  Bosses: string[];
-}
-export interface ILumbridgeCatacombsSummary {
-  name: string;
-  displayName: string;
-  Quests: string[];
-  Skills: LocationSkills;
-  Combat: string[];
-  Bosses: string[];
-}
-export interface IDraynorLocationSummary {
-  name: string;
-  displayName: string;
-  Quests: string[];
-  Skills: LocationSkills;
-  Combat: string[];
-  Bosses: string[];
-}
+// export interface ILumbridgeLocationSummary {
+//   name: string;
+//   displayName: string;
+//   Quests: string[];
+//   Skills: LocationSkills;
+//   Combat: string[];
+//   Bosses: string[];
+// }
+// export interface ILumbridgeSwampCaveLocationSummary {
+//   name: string;
+//   displayName: string;
+//   Quests: string[];
+//   Skills: LocationSkills;
+//   Combat: string[];
+//   Bosses: string[];
+// }
+// export interface ILumbridgeCatacombsSummary {
+//   name: string;
+//   displayName: string;
+//   Quests: string[];
+//   Skills: LocationSkills;
+//   Combat: string[];
+//   Bosses: string[];
+// }
+// export interface IDraynorLocationSummary {
+//   name: string;
+//   displayName: string;
+//   Quests: string[];
+//   Skills: LocationSkills;
+//   Combat: string[];
+//   Bosses: string[];
+// }
 export interface IAllLocations {
-  Lumbridge: ILumbridgeLocationSummary;
-  Draynor: IDraynorLocationSummary;
-  LumbridgeSwampCave: ILumbridgeSwampCaveLocationSummary;
-  LumbridgeCatacombs: ILumbridgeCatacombsSummary;
+  Lumbridge: ILocationSummary;
+  Draynor: ILocationSummary;
+  LumbridgeSwampCave: ILocationSummary;
+  LumbridgeCatacombs: ILocationSummary;
   // Varrock: ILocationSummary;
 }
 //* extend this as needed to account for future locations

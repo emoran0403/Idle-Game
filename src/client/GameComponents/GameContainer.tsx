@@ -547,6 +547,8 @@ const GameContainer = (props: Types.GameContainerProps) => {
     let arrayOfCombatStyleSkills = ["Attack", "Strength", "Defence", "Ranged", "Magic"];
     // console.log(`Combat Ticked`);
     // IF a target is selected, AND a combat skill is chosen, then we can proceed
+
+    //
     if (Target !== `none` && arrayOfCombatStyleSkills.includes(CurrentSkill)) {
       let damageDoneToTarget = playerAttacksTarget(Target, CurrentStyle, playerLocation, Experience, currentEquipment);
       // console.log(`you hit: ${damageDoneToTarget}`);
@@ -554,32 +556,39 @@ const GameContainer = (props: Types.GameContainerProps) => {
       // IF the hit would kill the target
       if (targetLifePoints - damageDoneToTarget <= 0) {
         // then reset the lifepoints
-        setTargetLifePoints(Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].lifePoints);
+        // console.log({ Enemies });
+        // console.log({ wow: Enemies[playerLocation as keyof Types.IEnemyLocations] });
+        // console.log({ wow2: Enemies[playerLocation as keyof Types.IEnemyLocations][Target as keyof Types.IAllEnemies] });
+        // console.log({ wow3: Enemies[playerLocation as keyof Types.IEnemyLocations][Target as keyof Types.IAllEnemies].lifePoints });
+        setTargetLifePoints(Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations][`lifePoints`]);
         // award the combat style xp
         dispatch(
-          gainXP({ skill: CurrentSkill, xp: Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].XPGivenCombatStyle })
+          gainXP({ skill: CurrentSkill, xp: Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations][`XPGivenCombatStyle`] })
         );
 
         // award the prayer xp if the enemy drops prayer xp items
-        if (Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].XPGivenPrayer) {
-          dispatch(gainXP({ skill: `Prayer`, xp: Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].XPGivenPrayer }));
+        if (Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations][`XPGivenPrayer`]) {
+          dispatch(gainXP({ skill: `Prayer`, xp: Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations][`XPGivenPrayer`] }));
         }
 
         // award the constitution xp
         dispatch(
-          gainXP({ skill: `Constitution`, xp: Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].XPGivenConstitution })
+          gainXP({
+            skill: `Constitution`,
+            xp: Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations][`XPGivenConstitution`],
+          })
         );
 
         // award the coins 0-half of lifepoints
         let coinDrop: number = Math.floor(
-          Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].level * (Math.random() * 0.5)
+          Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations][`level`] * (Math.random() * 0.5)
         );
         dispatch(addToWallet(coinDrop));
 
         // prepare chatlogs for defeating an enemy, and possibly for levelling up
         let combatMessages: string[] = [
           `Defeated a ${
-            Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].displayName
+            Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations][`displayName`]
           } and earned ${coinDrop.toLocaleString("en-US")} coins`,
         ];
         let combatMessagesTags: Types.ChatLogTag[] = [`Monster Defeated`];
@@ -588,7 +597,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
         if (
           didPlayerLevelUp(
             Experience[CurrentSkill as keyof Types.ISkillList],
-            Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].XPGivenCombatStyle
+            Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations][`XPGivenCombatStyle`]
           )
         ) {
           // if so, queue up a chatlog
@@ -600,7 +609,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
         if (
           didPlayerLevelUp(
             Experience[CurrentSkill as keyof Types.ISkillList],
-            Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].XPGivenConstitution
+            Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations][`XPGivenConstitution`]
           )
         ) {
           // if so, queue up a chatlog
@@ -618,7 +627,11 @@ const GameContainer = (props: Types.GameContainerProps) => {
 
       // console.log(`enemy lifepoints after hit: ${targetLifePoints}`);
     } else {
-      // console.log(`check your target and style`);
+      console.log({
+        target: Target,
+        wow: Enemies[playerLocation as keyof Types.IAllEnemies],
+        wow2: Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations],
+      });
     }
   };
 
@@ -699,8 +712,15 @@ const GameContainer = (props: Types.GameContainerProps) => {
   useEffect(() => {
     // IF a target is changed, set its lifepoints to component state
     // this ensures we have the correct lifepoints when the player changes targets, or starts combat for the first time
-    if (Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations]?.lifePoints) {
-      setTargetLifePoints(Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations].lifePoints);
+    if (Enemies[playerLocation as keyof Types.IAllEnemies] && Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations]) {
+      setTargetLifePoints(Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations][`lifePoints`]);
+    } else {
+      console.log({
+        loc: playerLocation,
+        enem: Enemies,
+        wow: Enemies[playerLocation as keyof Types.IAllEnemies],
+        // wow2: Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations],
+      });
     }
   }, [Target]);
 

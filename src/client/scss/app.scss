@@ -1,3 +1,6 @@
+@import "../../../node_modules/bootstrap/scss/bootstrap.scss";
+@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap/scss/bootstrap-utilities";
 // First override some or all individual color variables
 $primary: #1ba3e2; // rs button color
 $secondary: #8f5325;
@@ -51,4 +54,14 @@ div::-webkit-scrollbar-thumb {
   outline: 1px solid #7e8b92;
   border-radius: 5%;
 }
-@import "../../../node_modules/bootstrap/scss/bootstrap.scss";
+
+//Generate utilites for Cursor
+$utilities: map-merge(
+  $utilities,
+  (
+    "cursor": (
+      property: cursor,
+      values: auto default pointer wait text move help not-allowed,
+    ),
+  )
+);

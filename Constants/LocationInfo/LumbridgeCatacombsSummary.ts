@@ -1,6 +1,6 @@
 import * as Types from "../../Types";
 
-export const LumbridgeCatacombsSummary: Types.ILumbridgeCatacombsSummary = {
+export const LumbridgeCatacombsSummary: Types.ILocationSummary = {
   name: `LumbridgeCatacombsSummary`,
   displayName: `Lumbridge Catacombs`,
   Quests: [],
