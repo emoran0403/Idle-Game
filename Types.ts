@@ -469,6 +469,22 @@ export interface IFlatObjectOfNums {
 export interface IFlatObjectOfBooleans {
   [key: string]: boolean;
 }
+// defined to allow for indexing of the `skillPanelsOpened` in component state
+export interface SkillPanels {
+  Woodcutting: boolean;
+  Mining: boolean;
+  Fishing: boolean;
+  Thieving: boolean;
+  Farming: boolean;
+  Firemaking: boolean;
+  Hunter: boolean;
+  Divination: boolean;
+  Archaeology: boolean;
+  Runecrafting: boolean;
+  Construction: boolean;
+  Summoning: boolean;
+  Agility: boolean;
+}
 
 //@ ******************************* RUNES *******************************
 

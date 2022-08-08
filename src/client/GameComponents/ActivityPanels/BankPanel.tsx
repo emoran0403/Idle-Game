@@ -1,6 +1,6 @@
 import * as Types from "../../../../Types";
 import * as React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { ListOfFish } from "../../../../Constants/Items/Fish";
 import { ListOfLogs } from "../../../../Constants/Items/Logs";
@@ -16,7 +16,35 @@ const BankPanel = (props: Types.BankPanelProps) => {
   const arrayOfFish: Types.IBankItem[] = Object.values(bank_fish);
   const arrayOfOres: Types.IBankItem[] = Object.values(bank_ores);
 
-  useEffect(() => {}, []);
+  // useEffect(() => {}, []);
+
+  // tracks each skill panel's expanded or collapsed state
+  const [skillPanelsOpened, setSkillPanelsOpened] = useState({
+    Woodcutting: false,
+    Mining: false,
+    Fishing: false,
+    Thieving: false,
+    Farming: false,
+    Firemaking: false,
+    Hunter: false,
+    Divination: false,
+    Archaeology: false,
+    Runecrafting: false,
+    Construction: false,
+    Summoning: false,
+    Agility: false,
+  });
+
+  /**
+   * Added as an onClick handler to toggle the display state of the SkillPanels.
+   * Used to toggle the expanded or collapsed state of the SkillPanels.
+   * @param panel - A string used to index the skillPanelsOpened object.
+   */
+  const handleToggleSkillPanel = (panel: string) => {
+    let copyOfskillPanelsOpened = { ...skillPanelsOpened };
+    copyOfskillPanelsOpened[panel as keyof Types.SkillPanels] = !copyOfskillPanelsOpened[panel as keyof Types.SkillPanels];
+    setSkillPanelsOpened({ ...copyOfskillPanelsOpened });
+  };
 
   const panelHeaderJSX = () => {
     return (
@@ -38,9 +66,9 @@ const BankPanel = (props: Types.BankPanelProps) => {
 
   const WoodcuttingItems = () => {
     return (
-      <div className="card-title border border-dark border-1 rounded-3">
-        <h6 className="text-center">Woodcutting Resources</h6>
-        <div className="d-flex flex-row flex-wrap">
+      <div role="button" onClick={() => handleToggleSkillPanel(`Woodcutting`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
+        <h1 className="text-center">Woodcutting Resources</h1>
+        <div className={`d-flex flex-row flex-wrap ${skillPanelsOpened.Woodcutting ? `` : `d-none`}`}>
           {arrayOfLogs.map((item) => {
             return item.amount ? (
               <div key={`resource-list-${item.name}`} className={`card border mb-3`}>
@@ -62,9 +90,9 @@ const BankPanel = (props: Types.BankPanelProps) => {
 
   const FishingItems = () => {
     return (
-      <div className="card-title border border-dark border-1 rounded-3">
-        <h6 className="text-center">Fishing Resources</h6>
-        <div className="d-flex flex-row flex-wrap">
+      <div role="button" onClick={() => handleToggleSkillPanel(`Fishing`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
+        <h1 className="text-center">Fishing Resources</h1>
+        <div className={`d-flex flex-row flex-wrap ${skillPanelsOpened.Fishing ? `` : `d-none`}`}>
           {arrayOfFish.map((item) => {
             return item.amount ? (
               <div key={`resource-list-${item.name}`} className={`card border mb-3`}>
@@ -86,9 +114,9 @@ const BankPanel = (props: Types.BankPanelProps) => {
 
   const MiningItems = () => {
     return (
-      <div className="card-title border border-dark border-1 rounded-3">
-        <h6 className="text-center">Mining Resources</h6>
-        <div className="d-flex flex-row flex-wrap">
+      <div role="button" onClick={() => handleToggleSkillPanel(`Mining`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
+        <h1 className="text-center">Mining Resources</h1>
+        <div className={`d-flex flex-row flex-wrap ${skillPanelsOpened.Mining ? `` : `d-none`}`}>
           {arrayOfOres.map((item) => {
             return item.amount ? (
               <div key={`resource-list-${item.name}`} className={`card border mb-3`}>

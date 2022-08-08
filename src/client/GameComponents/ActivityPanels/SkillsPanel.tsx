@@ -39,23 +39,6 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
   let MiningLevel: number = getLevel(Experience.Mining);
   let ThievingLevel: number = getLevel(Experience.Thieving);
 
-  // defined to allow for indexing of the `skillPanelsOpened` in componente state
-  interface SkillPanels {
-    Woodcutting: boolean;
-    Mining: boolean;
-    Fishing: boolean;
-    Thieving: boolean;
-    Farming: boolean;
-    Firemaking: boolean;
-    Hunter: boolean;
-    Divination: boolean;
-    Archaeology: boolean;
-    Runecrafting: boolean;
-    Construction: boolean;
-    Summoning: boolean;
-    Agility: boolean;
-  }
-
   // tracks each skill panel's expanded or collapsed state
   const [skillPanelsOpened, setSkillPanelsOpened] = useState({
     Woodcutting: false,
@@ -80,7 +63,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
    */
   const handleToggleSkillPanel = (panel: string) => {
     let copyOfskillPanelsOpened = { ...skillPanelsOpened };
-    copyOfskillPanelsOpened[panel as keyof SkillPanels] = !copyOfskillPanelsOpened[panel as keyof SkillPanels];
+    copyOfskillPanelsOpened[panel as keyof Types.SkillPanels] = !copyOfskillPanelsOpened[panel as keyof Types.SkillPanels];
     setSkillPanelsOpened({ ...copyOfskillPanelsOpened });
   };
 
