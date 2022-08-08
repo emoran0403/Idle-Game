@@ -34,8 +34,8 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
   const panelHeaderJSX = () => {
     // returns the JSX for the panel header
     return (
-      <div className="row justify-content-lg-center">
-        <div className="col-lg-3 justify-content-lg-center">
+      <div className="row justify-content-lg-center d-flex ">
+        <div className="col-lg-2 justify-content-lg-center">
           <button
             className="btn btn-primary"
             onClick={() => {
@@ -45,7 +45,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
             Back
           </button>
         </div>
-        <div className="col-lg-9 justify-content-lg-center">Combat in {AllLocations[CurrentLocation as keyof Types.IAllLocations].displayName}</div>
+        <h1 className="col-lg-10 justify-content-lg-center">Combat in {AllLocations[CurrentLocation as keyof Types.IAllLocations].displayName}</h1>
       </div>
     );
   };
@@ -59,7 +59,6 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
     //@ we don't need to disable enemies until a slayer level is implemented
     return (
       <div onClick={() => {}} className="card-title border border-dark border-1 rounded-3">
-        <h6 className="text-center">Enemies in {CurrentLocation}</h6>
         <div className="d-flex flex-row flex-wrap">
           {arrayOfEnemies.map((enemy: Types.IEnemySummary, i) => (
             <button

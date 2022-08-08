@@ -49,7 +49,7 @@ const BankPanel = (props: Types.BankPanelProps) => {
   const panelHeaderJSX = () => {
     return (
       <div className="row justify-content-lg-center">
-        <div className="col-lg-3 justify-content-lg-center">
+        <div className="col-lg-2 justify-content-lg-center">
           <button
             className="btn btn-primary"
             onClick={() => {
@@ -59,7 +59,7 @@ const BankPanel = (props: Types.BankPanelProps) => {
             Back
           </button>
         </div>
-        <div className="col-lg-9 justify-content-lg-center">Bank</div>
+        <h1 className="col-lg-10 justify-content-lg-center">Bank</h1>
       </div>
     );
   };

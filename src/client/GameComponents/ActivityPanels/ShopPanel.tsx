@@ -68,7 +68,7 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
   const panelHeaderJSX = () => {
     return (
       <div className="row justify-content-lg-center">
-        <div className="col-lg-3 justify-content-lg-center">
+        <div className="col-lg-2 justify-content-lg-center">
           <button
             className="btn btn-primary"
             onClick={() => {
@@ -78,7 +78,7 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
             Back
           </button>
         </div>
-        <div className="col-lg-9 justify-content-lg-center">Shop</div>
+        <h1 className="col-lg-10 justify-content-lg-center">Shop</h1>
       </div>
     );
   };

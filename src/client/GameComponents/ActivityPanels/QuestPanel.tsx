@@ -44,7 +44,7 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
     // returns the JSX for the panel header
     return (
       <div className="row justify-content-lg-center">
-        <div className="col-lg-3 justify-content-lg-center">
+        <div className="col-lg-2 justify-content-lg-center">
           <button
             className="btn btn-primary"
             onClick={() => {
@@ -54,7 +54,7 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
             Back
           </button>
         </div>
-        <div className="col-lg-9 justify-content-lg-center">Quests in {AllLocations[CurrentLocation as keyof Types.IAllLocations].displayName}</div>
+        <h1 className="col-lg-10 justify-content-lg-center">Quests in {AllLocations[CurrentLocation as keyof Types.IAllLocations].displayName}</h1>
       </div>
     );
   };

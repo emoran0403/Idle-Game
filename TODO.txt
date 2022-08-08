@@ -75,7 +75,7 @@
 
 //# Quality of life
 * stop the event propogation from bubbling up in shop panel (i do not want the panel to collapse when a player buys an item)
-* make the header in combat bigger to match those in bank, shop, and skilling panels
+* DONE - make the header in combat bigger to match those in bank, shop, and skilling panels
 * add currentEquipment to redux state to persist outfits across logins
 * make resources in bank panel into collapsible panels - copy skillspanel
 * add dropping messages to ores if the player is dropping resources
@@ -86,10 +86,10 @@
 *** offline progress
 * DONE - add collapsible panels to the bank and shop panels
 * DONE - quest is colored yellow when i have the combat level req = adding experience to useEffect in quest panel
-* DONE -  make skills in skills panel into collapsible panels
-* DONE -  hatchet options in skill panel display their woodcutting
-* DONE -  globe picture for the world map icon
-* DONE -  double check the buttons on quest panel - allowing player to begin a quest without the combat requirements
+* DONE - make skills in skills panel into collapsible panels
+* DONE - hatchet options in skill panel display their woodcutting
+* DONE - globe picture for the world map icon
+* DONE - double check the buttons on quest panel - allowing player to begin a quest without the combat requirements
 * DONE - more info on quests
 * DONE - level requirements for equipment
 * DONE - Skill images

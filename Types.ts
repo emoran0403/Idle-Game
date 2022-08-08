@@ -907,6 +907,8 @@ export interface IPlayerPayload {
 
 //@ copy this and trim it down to match the location summary
 export interface ILocationSummary {
+  name: string;
+  displayName: string;
   Quests: string[];
   Skills: LocationSkills;
   Combat: string[];
