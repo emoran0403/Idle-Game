@@ -42,19 +42,34 @@ export const resolveThieving = (target: Types.IThievingTarget, ThievingXP: numbe
   // define the starting roll as 20
   let playerRoll = 20;
 
-  // add a third of the difference of the player's level and the levelReqThieving rounded down
-  playerRoll += Math.floor((ThievingLevel - target.levelReqThieving) / 3);
+  // add to playerRoll if the player's level is much greater than the levelReqThieving
+  if (ThievingLevel >= target.levelReqThieving + 30) {
+    playerRoll += Math.floor(ThievingLevel / (target.levelReqThieving * 3)) * 5;
+  }
 
-  // roll in the range 0-100 inclusive
-  let gameRoll = Math.floor(Math.random() * 100);
-
-  // if the player rolled higher than the game, set the outcome to true
-  // console.log({ playerRoll, gameRoll });
-  if (playerRoll >= gameRoll) {
+  // after the previous bonus, it is possible for the player to not fail the roll
+  if (playerRoll >= 100) {
+    // if the player cannot fail the roll, set the outcome to true
     resultObj.outcome = true;
   } else {
-    // otherwise, set the outcome to false
-    resultObj.outcome = false;
+    // otherwise, add the other bonuses
+    // increase the player roll based on the player level compared to the target's level
+    let lvlbonus = target.levelReqThieving / 3;
+
+    // add a third of the difference of the player's level and the levelReqThieving rounded down
+    playerRoll += Math.floor((ThievingLevel - lvlbonus) / 3);
+
+    // roll in the range 0-100 inclusive
+    let gameRoll = Math.floor(Math.random() * 100);
+
+    // if the player rolled higher than the game, set the outcome to true
+    // console.log({ playerRoll, gameRoll });
+    if (playerRoll >= gameRoll) {
+      resultObj.outcome = true;
+    } else {
+      // otherwise, set the outcome to false
+      resultObj.outcome = false;
+    }
   }
 
   //* determine the number of coins the player will receive

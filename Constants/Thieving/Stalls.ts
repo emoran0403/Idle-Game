@@ -71,7 +71,7 @@ export const ListOfPickpocketStalls: Types.IListOfPickpocketStall = {
     name: "stallrockcake",
     displayName: "Rock cake stall",
     levelReqThieving: 15,
-    stunTime: 2,
+    stunTime: 1,
     XPGivenThieving: 6.5,
     loot: {
       Coins: 0,
@@ -82,7 +82,7 @@ export const ListOfPickpocketStalls: Types.IListOfPickpocketStall = {
     name: "stallsilk",
     displayName: "Silk stall",
     levelReqThieving: 20,
-    stunTime: 3,
+    stunTime: 1,
     XPGivenThieving: 24,
     loot: {
       Coins: 0,
@@ -93,7 +93,7 @@ export const ListOfPickpocketStalls: Types.IListOfPickpocketStall = {
     name: "stallwine",
     displayName: "Wine stall",
     levelReqThieving: 22,
-    stunTime: 3,
+    stunTime: 1,
     XPGivenThieving: 27,
     loot: {
       Coins: 0,
@@ -104,7 +104,7 @@ export const ListOfPickpocketStalls: Types.IListOfPickpocketStall = {
     name: "stallseed",
     displayName: "Seed stall",
     levelReqThieving: 27,
-    stunTime: 3,
+    stunTime: 1,
     XPGivenThieving: 10,
     loot: {
       Coins: 0,
@@ -115,7 +115,7 @@ export const ListOfPickpocketStalls: Types.IListOfPickpocketStall = {
     name: "stallfur",
     displayName: "Fur stall",
     levelReqThieving: 35,
-    stunTime: 4,
+    stunTime: 1,
     XPGivenThieving: 36,
     loot: {
       Coins: 0,
@@ -126,7 +126,7 @@ export const ListOfPickpocketStalls: Types.IListOfPickpocketStall = {
     name: "stallfish",
     displayName: "Fish stall",
     levelReqThieving: 42,
-    stunTime: 5,
+    stunTime: 1,
     XPGivenThieving: 42,
     loot: {
       Coins: 0,
@@ -137,7 +137,7 @@ export const ListOfPickpocketStalls: Types.IListOfPickpocketStall = {
     name: "stalllamp",
     displayName: "Lamp stall",
     levelReqThieving: 46,
-    stunTime: 5,
+    stunTime: 1,
     XPGivenThieving: 57.5,
     loot: {
       Coins: 0,
@@ -148,7 +148,7 @@ export const ListOfPickpocketStalls: Types.IListOfPickpocketStall = {
     name: "stallcrossbow",
     displayName: "Crossbow stall",
     levelReqThieving: 49,
-    stunTime: 5,
+    stunTime: 1,
     XPGivenThieving: 52,
     loot: {
       Coins: 0,
@@ -159,7 +159,7 @@ export const ListOfPickpocketStalls: Types.IListOfPickpocketStall = {
     name: "stallsilver",
     displayName: "Silver stall",
     levelReqThieving: 50,
-    stunTime: 6,
+    stunTime: 1,
     XPGivenThieving: 54,
     loot: {
       Coins: 0,
@@ -170,7 +170,7 @@ export const ListOfPickpocketStalls: Types.IListOfPickpocketStall = {
     name: "stallmagic",
     displayName: "Magic stall",
     levelReqThieving: 65,
-    stunTime: 7,
+    stunTime: 2,
     XPGivenThieving: 100,
     loot: {
       Coins: 0,
@@ -181,7 +181,7 @@ export const ListOfPickpocketStalls: Types.IListOfPickpocketStall = {
     name: "stallscimitar",
     displayName: "Scimitar stall",
     levelReqThieving: 65,
-    stunTime: 7,
+    stunTime: 2,
     XPGivenThieving: 160,
     loot: {
       Coins: 0,
@@ -192,7 +192,7 @@ export const ListOfPickpocketStalls: Types.IListOfPickpocketStall = {
     name: "stallspice",
     displayName: "Spice stall",
     levelReqThieving: 65,
-    stunTime: 7,
+    stunTime: 2,
     XPGivenThieving: 81,
     loot: {
       Coins: 0,
@@ -203,7 +203,7 @@ export const ListOfPickpocketStalls: Types.IListOfPickpocketStall = {
     name: "stallgem",
     displayName: "Gem stall",
     levelReqThieving: 75,
-    stunTime: 8,
+    stunTime: 2,
     XPGivenThieving: 160,
     loot: {
       Coins: 0,

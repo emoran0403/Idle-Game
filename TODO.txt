@@ -53,6 +53,7 @@
 * ^^== maybe fix this with just assets in inventory, and item names as title / alt text?
 
 * grammar when fishing anchovies
+* DONE - make thieving easier = decreased stun times, added possibility for guaranteed success, made successes overall easier
 * DONE - skills, quest, combat panel needs to show display names for locations
 * DONE - currentLocationComp - location needs to wrap to fit inside the div
 * DONE - skills panel only displays skill options if there are those options at the location
