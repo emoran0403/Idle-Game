@@ -220,9 +220,9 @@ const GameContainer = (props: Types.GameContainerProps) => {
     // if the progress counter hits 24, reset it to 0, and then run the quest logic based on location
     //! swap for production
     //@================================================
-    if (questStepProgress === 24) {
-      //@======PRODUCTION ABOVE, DEV BELOW============================================
-      // if (questStepProgress === 2) {
+    // if (questStepProgress === 24) {
+    //@======PRODUCTION ABOVE, DEV BELOW============================================
+    if (questStepProgress === 2) {
       //@================================================
 
       setQuestStepProgress(0);
@@ -733,9 +733,9 @@ const GameContainer = (props: Types.GameContainerProps) => {
       handleSavePoint();
       //! swap for production
       //@================================================
-    }, 2500);
-    //@======PRODUCTION ABOVE, DEV BELOW============================================
-    // }, 500);
+      // }, 2500);
+      //@======PRODUCTION ABOVE, DEV BELOW============================================
+    }, 500);
     //@================================================
 
     // console.log({ interval });

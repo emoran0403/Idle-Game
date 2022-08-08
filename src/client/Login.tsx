@@ -8,11 +8,11 @@ const Loginpage = (props: Types.LoginCompProps) => {
 
   //! swap for production
   //@=============================================================================
-  const [password, setPassword] = useState<string>("");
-  const [username, setUsername] = useState<string>("");
+  // const [password, setPassword] = useState<string>("");
+  // const [username, setUsername] = useState<string>("");
   //@======PRODUCTION ABOVE, DEV BELOW============================================
-  // const [password, setPassword] = useState<string>("hunter2");
-  // const [username, setUsername] = useState<string>("bigwow");
+  const [password, setPassword] = useState<string>("hunter2");
+  const [username, setUsername] = useState<string>("bigwow");
   //@=============================================================================
 
   const handleLogin = (e?: React.MouseEvent<HTMLButtonElement>) => {

@@ -43,6 +43,8 @@
 
 
 //# Fixes
+* swap out all instances of handleNewChatLog with handleMultipleChatLogs
+* delegate skilling tick functions to their own function / component
 * can clean up chat logs in game component under woodcutting and fishing
 * add chat logs for gaining xp in combat skills
 * add chat logs for gaining xp in gathering skills
