@@ -1,6 +1,7 @@
 import * as Types from "../../Types";
 
 //@ enemies with a number in their name indicates that their combat level varies, as well as their stats
+
 export const man: Types.IEnemySummary = {
   name: `man`,
   displayName: `Man`,
@@ -843,3 +844,42 @@ export const corpsemage: Types.IEnemySummary = {
   accuracy: 257,
   defence: 15,
 };
+
+export const AllEnemiesArray = [
+  man,
+  goblin,
+  giantspider,
+  chicken,
+  cow,
+  spider,
+  giantrat,
+  swampfrog,
+  rat,
+  farmer,
+  zombie12,
+  skeleton15,
+  zombie29,
+  skeleton32,
+  ghost25,
+  blackknight,
+  giantbat,
+  warpedbat,
+  cavebug8,
+  cavebug12,
+  caveslime,
+  bigfrog,
+  giantfrog,
+  cavecrawler53,
+  cavecrawler78,
+  rockslug42,
+  rockslug49,
+  wallbeast,
+  warpedcockroach,
+  corpsespider,
+  warpedfly,
+  crawlingcorpsetorso,
+  warpedrat,
+  corpsearcher,
+  skoblin,
+  corpsemage,
+];

@@ -38,6 +38,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
   let FishingLevel: number = getLevel(Experience.Fishing);
   let MiningLevel: number = getLevel(Experience.Mining);
   let ThievingLevel: number = getLevel(Experience.Thieving);
+  let SlayerLevel: number = getLevel(Experience.Slayer);
 
   // tracks each skill panel's expanded or collapsed state
   const [skillPanelsOpened, setSkillPanelsOpened] = useState({

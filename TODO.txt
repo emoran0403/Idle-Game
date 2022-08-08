@@ -2,6 +2,8 @@
 * - add cases to switch statements (questing tick func and quest rewards useEffect) in GameContainer
 * - add typings for enemies search => //@ recreate this for each location
 * - just check all the places for locations
+@ when adding new masters, make sure to add enemies that match taskList[i].task
+
 
 //! ARTISAN - skills that involve taking resources and transforming or consuming them
 //# SMITHING
@@ -24,7 +26,7 @@
 * add state slice to track the slayer task
 * add a check in combat to see if the player has chosen a slayer task monster
 * skillspanel needs a slayer panel where the player can get a slayer task from the master in that area
-* add function to randomly choose a task, if a task is chosen with a too high lvl, then reroll
+* DONE - add function to randomly choose a task, if a task is chosen with a too high lvl, then reroll
 * DONE - add a check in combat panel to disable enemies based on their slayer level
 * DONE - wall beast and warped cockroach do not show up = they had spaces in their name loool
 * DONE - add lumbridge cave enemies to all enemies
@@ -48,6 +50,7 @@
 
 
 //# Fixes
+* abstract out Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations] into smaller variables in gameContainer
 * swap out all instances of handleNewChatLog with handleMultipleChatLogs
 * delegate skilling tick functions to their own function / component
 * can clean up chat logs in game component under woodcutting and fishing
