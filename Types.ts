@@ -469,7 +469,7 @@ export interface IFlatObjectOfNums {
 export interface IFlatObjectOfBooleans {
   [key: string]: boolean;
 }
-// defined to allow for indexing of the `skillPanelsOpened` in component state
+// defined to allow for indexing of the `skillPanelsOpened` in SkillsPanel and BankPanel component state
 export interface SkillPanels {
   Woodcutting: boolean;
   Mining: boolean;
@@ -484,6 +484,21 @@ export interface SkillPanels {
   Construction: boolean;
   Summoning: boolean;
   Agility: boolean;
+}
+// defined to allow for indexing of the `equipmentPanelsOpened` in ShopPanel component state
+
+export interface EquipmentPanels {
+  Hatchets: boolean;
+  Pickaxes: boolean;
+  BackSlot: boolean;
+  NeckSlot: boolean;
+  RingSlot: boolean;
+  HeadSlot: boolean;
+  BodySlot: boolean;
+  LegsSlot: boolean;
+  HandsSlot: boolean;
+  FeetSlot: boolean;
+  TwoHandSlot: boolean;
 }
 
 //@ ******************************* RUNES *******************************

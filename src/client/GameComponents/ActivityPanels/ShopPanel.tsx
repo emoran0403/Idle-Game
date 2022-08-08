@@ -1,6 +1,6 @@
 import * as Types from "../../../../Types";
 import * as React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromWallet } from "../../Redux/Slices/Wallet";
 
@@ -39,8 +39,31 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
   const feetFromState = useSelector((state: Types.AllState) => state.FeetSlot) as Types.IFeetSlotSlice;
   const twoHandFromState = useSelector((state: Types.AllState) => state.TwoHandSlot) as Types.ITwoHandSlotSlice;
 
-  //   console.log(headsFromState);
-  //   useEffect(() => {}, []);
+  // tracks each skill panel's expanded or collapsed state
+  const [equipmentPanelsOpened, setequipmentPanelsOpened] = useState({
+    Hatchets: false,
+    Pickaxes: false,
+    BackSlot: false,
+    NeckSlot: false,
+    RingSlot: false,
+    HeadSlot: false,
+    BodySlot: false,
+    LegsSlot: false,
+    HandsSlot: false,
+    FeetSlot: false,
+    TwoHandSlot: false,
+  });
+
+  /**
+   * Added as an onClick handler to toggle the display state of the equipmentPanels.
+   * Used to toggle the expanded or collapsed state of the equipmentPanels.
+   * @param panel - A string used to index the equipmentPanelsOpened object.
+   */
+  const handleToggleEquipmentPanel = (panel: string) => {
+    let copyOfEquipmentPanelsOpened = { ...equipmentPanelsOpened };
+    copyOfEquipmentPanelsOpened[panel as keyof Types.EquipmentPanels] = !copyOfEquipmentPanelsOpened[panel as keyof Types.EquipmentPanels];
+    setequipmentPanelsOpened({ ...copyOfEquipmentPanelsOpened });
+  };
 
   const panelHeaderJSX = () => {
     return (
@@ -87,10 +110,14 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
    * @param slot - A string signifying the slot of the item, used to update the appropriate state
    */
   const handleBuyingItem = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     item: Types.ICompositeArmorItem | Types.ICompositeHatchet | Types.ICompositePickaxe | Types.ICompositeWeaponItem,
     isSkillingEquipment: boolean,
     slot: string
   ) => {
+    // a player may want to buy multiple items, so prevent the button click from collapsing the panel
+    // do this by stopping the event bubbling propogation to the parent elements
+    e.stopPropagation();
     // define vowels for grammar in chatlog
     let vowels: string[] = [`a`, `e`, `i`, `o`, `u`];
 
@@ -161,9 +188,9 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
 
     // disable the item if the player already owns it
     return (
-      <div className="card-title border border-dark border-1 rounded-3">
-        <h6 className="text-center">Hatchets</h6>
-        <div className="d-flex flex-row flex-wrap">
+      <div role="button" onClick={() => handleToggleEquipmentPanel(`Hatchets`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
+        <h1 className="text-center">Hatchets</h1>
+        <div className={`d-flex flex-row flex-wrap ${equipmentPanelsOpened.Hatchets ? `` : `d-none`}`}>
           {compositeItemsNoCrystal.map((item) => (
             <div className={`card border mb-3`} key={`resource-list-${item.name}`}>
               <div className="card-body text">
@@ -173,8 +200,8 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
                   {!item.playerOwnsThisItem && (
                     <button
                       disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 25}
-                      onClick={() => {
-                        handleBuyingItem(item, true, `hatchet`);
+                      onClick={(e) => {
+                        handleBuyingItem(e, item, true, `hatchet`);
                       }}
                       className={`btn border mb-3 ${handleButtonStyle(item)}`}
                     >
@@ -211,9 +238,9 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
 
     // disable the item if the player already owns it
     return (
-      <div className="card-title border border-dark border-1 rounded-3">
-        <h6 className="text-center">Pickaxes</h6>
-        <div className="d-flex flex-row flex-wrap">
+      <div role="button" onClick={() => handleToggleEquipmentPanel(`Pickaxes`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
+        <h1 className="text-center">Pickaxes</h1>
+        <div className={`d-flex flex-row flex-wrap ${equipmentPanelsOpened.Pickaxes ? `` : `d-none`}`}>
           {compositeItemsNoCrystal.map((item) => (
             <div className={`card border mb-3`} key={`resource-list-${item.name}`}>
               <div className="card-body text">
@@ -223,8 +250,8 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
                   {!item.playerOwnsThisItem && (
                     <button
                       disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 25}
-                      onClick={() => {
-                        handleBuyingItem(item, true, `pickaxe`);
+                      onClick={(e) => {
+                        handleBuyingItem(e, item, true, `pickaxe`);
                       }}
                       className={`btn border mb-3 ${handleButtonStyle(item)}`}
                     >
@@ -258,9 +285,9 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
 
     // disable the item if the player already owns it
     return (
-      <div className="card-title border border-dark border-1 rounded-3">
-        <h6 className="text-center">Head Slot Items</h6>
-        <div className="d-flex flex-row flex-wrap">
+      <div role="button" onClick={() => handleToggleEquipmentPanel(`HeadSlot`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
+        <h1 className="text-center">Head Slot Items</h1>
+        <div className={`d-flex flex-row flex-wrap ${equipmentPanelsOpened.HeadSlot ? `` : `d-none`}`}>
           {compositeItems.map((item) => (
             <div className={`card border mb-3`} key={`resource-list-${item.name}`}>
               <div className="card-body text">
@@ -270,8 +297,8 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
                   {!item.playerOwnsThisItem && (
                     <button
                       disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 10}
-                      onClick={() => {
-                        handleBuyingItem(item, false, `head`);
+                      onClick={(e) => {
+                        handleBuyingItem(e, item, false, `head`);
                       }}
                       className={`btn border mb-3 ${handleButtonStyle(item)}`}
                     >
@@ -305,9 +332,9 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
 
     // disable the item if the player already owns it
     return (
-      <div className="card-title border border-dark border-1 rounded-3">
-        <h6 className="text-center">Body Slot Items</h6>
-        <div className="d-flex flex-row flex-wrap">
+      <div role="button" onClick={() => handleToggleEquipmentPanel(`BodySlot`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
+        <h1 className="text-center">Body Slot Items</h1>
+        <div className={`d-flex flex-row flex-wrap ${equipmentPanelsOpened.BodySlot ? `` : `d-none`}`}>
           {compositeItems.map((item) => (
             <div className={`card border mb-3`} key={`resource-list-${item.name}`}>
               <div className="card-body text">
@@ -317,8 +344,8 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
                   {!item.playerOwnsThisItem && (
                     <button
                       disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 10}
-                      onClick={() => {
-                        handleBuyingItem(item, false, `body`);
+                      onClick={(e) => {
+                        handleBuyingItem(e, item, false, `body`);
                       }}
                       className={`btn border mb-3 ${handleButtonStyle(item)}`}
                     >
@@ -352,9 +379,9 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
 
     // disable the item if the player already owns it
     return (
-      <div className="card-title border border-dark border-1 rounded-3">
-        <h6 className="text-center">Legs Slot Items</h6>
-        <div className="d-flex flex-row flex-wrap">
+      <div role="button" onClick={() => handleToggleEquipmentPanel(`LegsSlot`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
+        <h1 className="text-center">Legs Slot Items</h1>
+        <div className={`d-flex flex-row flex-wrap ${equipmentPanelsOpened.LegsSlot ? `` : `d-none`}`}>
           {compositeItems.map((item) => (
             <div className={`card border mb-3`} key={`resource-list-${item.name}`}>
               <div className="card-body text">
@@ -364,8 +391,8 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
                   {!item.playerOwnsThisItem && (
                     <button
                       disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 10}
-                      onClick={() => {
-                        handleBuyingItem(item, false, `legs`);
+                      onClick={(e) => {
+                        handleBuyingItem(e, item, false, `legs`);
                       }}
                       className={`btn border mb-3 ${handleButtonStyle(item)}`}
                     >
@@ -399,9 +426,9 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
 
     // disable the item if the player already owns it
     return (
-      <div className="card-title border border-dark border-1 rounded-3">
-        <h6 className="text-center">Hands Slot Items</h6>
-        <div className="d-flex flex-row flex-wrap">
+      <div role="button" onClick={() => handleToggleEquipmentPanel(`HandSlot`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
+        <h1 className="text-center">Hands Slot Items</h1>
+        <div className={`d-flex flex-row flex-wrap ${equipmentPanelsOpened.HandsSlot ? `` : `d-none`}`}>
           {compositeItems.map((item) => (
             <div className={`card border mb-3`} key={`resource-list-${item.name}`}>
               <div className="card-body text">
@@ -411,8 +438,8 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
                   {!item.playerOwnsThisItem && (
                     <button
                       disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 10}
-                      onClick={() => {
-                        handleBuyingItem(item, false, `hands`);
+                      onClick={(e) => {
+                        handleBuyingItem(e, item, false, `hands`);
                       }}
                       className={`btn border mb-3 ${handleButtonStyle(item)}`}
                     >
@@ -446,9 +473,9 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
 
     // disable the item if the player already owns it
     return (
-      <div className="card-title border border-dark border-1 rounded-3">
-        <h6 className="text-center">Feet Slot Items</h6>
-        <div className="d-flex flex-row flex-wrap">
+      <div role="button" onClick={() => handleToggleEquipmentPanel(`FeetSlot`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
+        <h1 className="text-center">Feet Slot Items</h1>
+        <div className={`d-flex flex-row flex-wrap ${equipmentPanelsOpened.FeetSlot ? `` : `d-none`}`}>
           {compositeItems.map((item) => (
             <div className={`card border mb-3`} key={`resource-list-${item.name}`}>
               <div className="card-body text">
@@ -458,8 +485,8 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
                   {!item.playerOwnsThisItem && (
                     <button
                       disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 10}
-                      onClick={() => {
-                        handleBuyingItem(item, false, `feet`);
+                      onClick={(e) => {
+                        handleBuyingItem(e, item, false, `feet`);
                       }}
                       className={`btn border mb-3 ${handleButtonStyle(item)}`}
                     >
@@ -493,9 +520,13 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
 
     // disable the item if the player already owns it
     return (
-      <div className="card-title border border-dark border-1 rounded-3">
-        <h6 className="text-center">Two Hand Slot Items</h6>
-        <div className="d-flex flex-row flex-wrap">
+      <div
+        role="button"
+        onClick={() => handleToggleEquipmentPanel(`TwoHandSlot`)}
+        className="card-title border border-dark border-1 rounded-3 user-select-none"
+      >
+        <h1 className="text-center">Two Hand Slot Items</h1>
+        <div className={`d-flex flex-row flex-wrap ${equipmentPanelsOpened.TwoHandSlot ? `` : `d-none`}`}>
           {compositeItems.map((item) => (
             <div className={`card border mb-3`} key={`resource-list-${item.name}`}>
               <div className="card-body text">
@@ -505,8 +536,8 @@ const ShopPanel = (props: Types.ShopPanelProps) => {
                   {!item.playerOwnsThisItem && (
                     <button
                       disabled={item.playerOwnsThisItem || Wallet.coins < item.value * 10}
-                      onClick={() => {
-                        handleBuyingItem(item, false, `twohand`);
+                      onClick={(e) => {
+                        handleBuyingItem(e, item, false, `twohand`);
                       }}
                       className={`btn border mb-3 ${handleButtonStyle(item)}`}
                     >
