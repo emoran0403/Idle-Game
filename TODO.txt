@@ -17,11 +17,15 @@
 //! SUPPORT - skills that just take some time to complete
 //# AGILITY
 //# SLAYER
-** wall beast and warped cockroach do not show up
+* implement a function calculating damage done to the player
+* implement player lifepoints in game GameContainer
+* have combat tick respect player life points
+ - if player is dead, start healing, and heal to full before doing more combat
 * add function to randomly choose a task, if a task is chosen with a too high lvl, then reroll
 * add state slice to track the slayer task
 * add a check in combat to see ifthe player has chosen a slayer task monster
 * add a check in combat panel to disable enemies based on their slayer level
+* DONE -  wall beast and warped cockroach do not show up = they had spaces in their name loool
 * DONE - add lumbridge cave enemies to all enemies
 * DONE - add lumbridge catacomb enemies to all enemies
 * DONE - add lumbridge cave location
@@ -75,7 +79,6 @@
 
 //# Quality of life
 * stop the event propogation from bubbling up in shop panel (i do not want the panel to collapse when a player buys an item)
-* DONE - make the header in combat bigger to match those in bank, shop, and skilling panels
 * add currentEquipment to redux state to persist outfits across logins
 * make resources in bank panel into collapsible panels - copy skillspanel
 * add dropping messages to ores if the player is dropping resources
@@ -84,6 +87,7 @@
 *** maybe make the game choose the next available quest automatically
 *** get a changelog from github for the lobby
 *** offline progress
+* DONE - make the header in combat bigger to match those in bank, shop, and skilling panels
 * DONE - add collapsible panels to the bank and shop panels
 * DONE - quest is colored yellow when i have the combat level req = adding experience to useEffect in quest panel
 * DONE - make skills in skills panel into collapsible panels
@@ -109,7 +113,6 @@
 * DONE - implement combat into quests
 
 //# Misc / Bug Fixes
-* implement player lifepoints
 * Logic - experience and levels is displaying too high for some reason :/
 * remove boilerplate commits
 

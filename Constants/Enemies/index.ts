@@ -110,8 +110,14 @@ export const playerAttacksTarget = (
   Equipment: Types.ICurrentEquipment
 ) => {
   // define the enemy
+  //! problem here with the mistyping of enemies :(
   let Enemy: Types.IEnemySummary = Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations];
-  // console.log(Enemies);
+  console.log({
+    wow: Enemies[playerLocation as keyof Types.IAllEnemies],
+    Target,
+    look: Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations],
+  });
+  // console.log(Target);
   // console.log(playerLocation);
   // console.log(Target);
   // console.log(`filler lol`);

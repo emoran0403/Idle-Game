@@ -26,6 +26,9 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
   const { CurrentTarget } = useSelector((state: Types.AllState) => state.Target) as Types.ICurrentTarget;
   const Experience = useSelector((state: Types.AllState) => state.Experience) as Types.ISkillList;
 
+  // multiple functions use slayer level, define it here for scoping purposes
+  let slayerLevel = getLevel(Experience.Slayer);
+
   //@ Enemies[Current as keyof Types.IAllEnemies] is the list of enemies at the current location
 
   //@ rerender when the player equips a new weapon
@@ -50,6 +53,15 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
     );
   };
 
+  /**
+   * conditionally disables the enemy button based on the player's slayer level and the required slayer level of the enemy
+   * @param enemy The enemy summary of the current target
+   * @returns Returns a boolean, enabling or disabling the current target's button
+   */
+  const checkSlayerReqs = (enemy: Types.IEnemySummary) => {
+    return slayerLevel >= enemy.levelReqSlayer ? false : true;
+  };
+
   const enemyButtonsJSX = (enemyObject: Types.IEnemyLocations) => {
     // spread out the enemies into an array, then sort them by their level in ascending order
     let arrayOfEnemies: Types.IEnemySummary[] = [...Object.values(enemyObject)].sort((a, b) => a.level - b.level);
@@ -62,8 +74,9 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
         <div className="d-flex flex-row flex-wrap">
           {arrayOfEnemies.map((enemy: Types.IEnemySummary, i) => (
             <button
+              disabled={checkSlayerReqs(enemy)}
               onClick={(e) => {
-                // console.log(`${enemy.displayName} was clicked`);
+                console.log({ enemy, CurrentLocation });
 
                 if (!arrayOfCombatStyleSkills.includes(CurrentSkill) || CurrentSkill === `none`) {
                   // if the player is currently not training a combat skill, set skill to none
@@ -84,14 +97,13 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
                 }
               }}
               key={`enemy-list-${enemy.displayName}-${i}`}
-              className={`btn border mb-3 bg-${handleEnemyButtonsStyling(enemy.level)}`}
+              className={`btn border mb-3 bg-${handleEnemyButtonsStyling(enemy)}`}
             >
               <div className="card-body text">
                 <h5 className="card-title">{enemy.displayName}</h5>
                 <div className="card-text">
                   <div>Lvl {enemy.level}</div>
                   <div>LP {enemy.lifePoints}</div>
-                  {/* <div>{ListOfLogs[enemy as keyof Types.IListOfLogs].XPGivenWoodcutting} XP</div> */}
                 </div>
               </div>
             </button>
@@ -245,20 +257,27 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
     return combatLevel;
   };
 
-  const handleEnemyButtonsStyling = (enemyLevel: number) => {
+  const handleEnemyButtonsStyling = (enemy: Types.IEnemySummary) => {
     // conditionally return the appropriate background color for the enemy buttons based on the player and enemy combat levels
-    let lvlDifference: number = showCombatLevel() - enemyLevel; // player - enemy
+    let lvlDifference: number = showCombatLevel() - enemy.level; // player - enemy
 
-    if (lvlDifference > 5) {
-      return `cbGreen`;
-    } else if (lvlDifference > 0 && lvlDifference <= 5) {
-      return `cbYellow-Green`;
-    } else if (lvlDifference === 0) {
-      return `cbYellow`;
-    } else if (lvlDifference < 0 && lvlDifference >= -5) {
-      return `cbOrange`;
-    } else if (lvlDifference < -5) {
-      return `cbRed`;
+    // check the player's slayer level against the enemy's slayer level requirement
+    if (slayerLevel < enemy.levelReqSlayer) {
+      // if the player does not have a high enough slayer level, style the button gray
+      return `cbGray`;
+    } else {
+      // otherwise, style the button based on the difference in combat levels
+      if (lvlDifference > 5) {
+        return `cbGreen`;
+      } else if (lvlDifference > 0 && lvlDifference <= 5) {
+        return `cbYellow-Green`;
+      } else if (lvlDifference === 0) {
+        return `cbYellow`;
+      } else if (lvlDifference < 0 && lvlDifference >= -5) {
+        return `cbOrange`;
+      } else if (lvlDifference < -5) {
+        return `cbRed`;
+      }
     }
   };
 

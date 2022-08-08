@@ -16,6 +16,10 @@ export const bank_fish = createSlice({
       name: `raw_crayfish`,
       amount: 0,
     },
+    raw_sardine: {
+      name: `raw_sardine`,
+      amount: 0,
+    },
     raw_anchovies: {
       name: `raw_anchovies`,
       amount: 0,
@@ -24,20 +28,16 @@ export const bank_fish = createSlice({
       name: `raw_trout`,
       amount: 0,
     },
-    raw_salmon: {
-      name: `raw_salmon`,
-      amount: 0,
-    },
     raw_pike: {
       name: `raw_pike`,
       amount: 0,
     },
-    raw_sardine: {
-      name: `raw_sardine`,
-      amount: 0,
-    },
     raw_herring: {
       name: `raw_herring`,
+      amount: 0,
+    },
+    raw_salmon: {
+      name: `raw_salmon`,
       amount: 0,
     },
   },

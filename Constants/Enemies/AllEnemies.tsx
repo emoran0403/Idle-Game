@@ -637,7 +637,7 @@ export const rockslug49: Types.IEnemySummary = {
   accuracy: 536,
 };
 export const wallbeast: Types.IEnemySummary = {
-  name: "wall beast",
+  name: "wallbeast",
   displayName: "Wall Beast",
   level: 47,
   lifePoints: 1700,
@@ -660,7 +660,7 @@ export const wallbeast: Types.IEnemySummary = {
   defence: 34,
 };
 export const warpedcockroach: Types.IEnemySummary = {
-  name: "warpedcockroach ",
+  name: "warpedcockroach",
   displayName: "Warped cockroach",
   level: 1,
   lifePoints: 50,
