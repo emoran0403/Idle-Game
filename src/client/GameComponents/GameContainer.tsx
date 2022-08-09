@@ -239,308 +239,617 @@ const GameContainer = (props: Types.GameContainerProps) => {
     }
   };
 
-  //@ this will run every game tick (while skilling) and holds the logic for resolving a skilling action
-  const handleSkillingTick = () => {
-    // console.log(`Skilling Ticked`);
-    // console.log(CurrentSkill);
-
-    // IF the player does not need to bank, continue with the skilling logic
+  //@ one of these will run every game tick (while skilling) and holds the logic for resolving a skilling action
+  /**
+   * This function handles the logic of what to do when the player is woodcutting.
+   * It determines if the player earns a log, levels up, and (depending on state) adds the log to the inventory.
+   */
+  const handleWoodcuttingTick = () => {
+    //* if the player does not need to bank, proceed with the handling
     if (!needsToBank) {
-      switch (CurrentSkill) {
-        case `Woodcutting`: {
-          if (
-            playerEarnsLog(
-              ListOfLogs[CurrentResource as keyof Types.IListOfLogs],
-              Experience.Woodcutting,
-              listOfHatchets[currentEquipment.Hatchet as keyof Types.IListOfHatchets]
-            )
-          ) {
-            // IF the player earned a log - apply gained xp
-            dispatch(gainXP({ skill: `Woodcutting`, xp: ListOfLogs[CurrentResource as keyof Types.IListOfLogs].XPGivenWoodcutting }));
-            // decide if the player gained a level
-            const playerLevelled = didPlayerLevelUp(Experience.Woodcutting, ListOfLogs[CurrentResource as keyof Types.IListOfLogs].XPGivenWoodcutting);
-            if (playerIsBanking) {
-              // IF the player earns a log, AND the player is banking the items, we need to add the item to the inventory
-              dispatch(addItemToInventory(ListOfLogs[CurrentResource as keyof Types.IListOfLogs].name));
-              // console.log(playerInventory.length);
-              // when the player's inventory will be full with the next item added, queue a bank run
-              if (playerInventory.length === 27) {
-                // console.log(`will need to bank next time`);
-                setNeedsToBank(!needsToBank);
-              }
-              if (playerLevelled) {
-                // yes level and yes banking
-                handleMultipleChatLogs(
-                  [`Woodcutting Level up!`, `Chopped some ${ListOfLogs[CurrentResource as keyof Types.IListOfLogs].displayName}`],
-                  [`Level Up`, `Gained Resource`]
-                );
-              } else {
-                // no level and yes banking
-                handleNewChatLog(`Chopped some ${ListOfLogs[CurrentResource as keyof Types.IListOfLogs].displayName}`, `Gained Resource`);
-              }
-            } else {
-              // the player is not banking in this block
-              if (playerLevelled) {
-                // yes level and no banking
-                handleMultipleChatLogs(
-                  [`Woodcutting Level up!`, `Chopped and dropped some ${ListOfLogs[CurrentResource as keyof Types.IListOfLogs].displayName}`],
-                  [`Level Up`, `Gained Resource`]
-                );
-              } else {
-                // no level and no banking
-                handleNewChatLog(`Chopped and dropped some ${ListOfLogs[CurrentResource as keyof Types.IListOfLogs].displayName}`, `Gained Resource`);
-              }
-            }
-          }
-          break;
-        }
-        case `Fishing`: {
-          // decide if the player caught a fish
-          if (playerEarnsFish(ListOfFish[CurrentResource as keyof Types.IListOfFish], Experience.Fishing)) {
-            // apply gained xp
-            dispatch(gainXP({ skill: `Fishing`, xp: ListOfFish[CurrentResource as keyof Types.IListOfFish].XPGivenFishing }));
-            const playerLevelled = didPlayerLevelUp(Experience.Fishing, ListOfFish[CurrentResource as keyof Types.IListOfFish].XPGivenFishing);
+      //* if the player earned a log, continue with the logic, otherwise, do nothing
+      // define the current log for readability
+      const thisLog = ListOfLogs[CurrentResource as keyof Types.IListOfLogs];
+      if (playerEarnsLog(thisLog, Experience[`Woodcutting`], listOfHatchets[currentEquipment[`Hatchet`] as keyof Types.IListOfHatchets])) {
+        //* initialize empty chatlogs
+        let woodcuttingMessages: string[] = [];
+        let woodcuttingMessagesTags: Types.ChatLogTag[] = [];
 
-            // if the player catches a fish, AND the player is banking the items, we need to add the item to the inventory
-            if (playerIsBanking) {
-              dispatch(addItemToInventory(ListOfFish[CurrentResource as keyof Types.IListOfFish].name));
+        //* apply gained xp and queue a chatlog
+        dispatch(gainXP({ skill: `Woodcutting`, xp: thisLog[`XPGivenWoodcutting`] }));
+        woodcuttingMessages.push(`Gained ${thisLog[`XPGivenWoodcutting`]} xp in Woodcutting`);
+        woodcuttingMessagesTags.push(`Gained XP`);
 
-              // when the player's inventory will be full with the next item added, queue a bank run
-              if (playerInventory.length === 27) {
-                // console.log(`will need to bank next time`);
-                // do bank stuff here
-                setNeedsToBank(!needsToBank);
-              }
-              if (playerLevelled) {
-                // yes level and yes banking
-                handleMultipleChatLogs(
-                  [`Fishing Level up!`, `Fished a ${ListOfFish[CurrentResource as keyof Types.IListOfFish].displayName}`],
-                  [`Level Up`, `Gained Resource`]
-                );
-              } else {
-                // no level and yes banking
-                handleNewChatLog(`Fished a ${ListOfFish[CurrentResource as keyof Types.IListOfFish].displayName}`, `Gained Resource`);
-              }
-            } else {
-              // yes level and no banking
-              if (playerLevelled) {
-                handleMultipleChatLogs(
-                  [`Fishing Level up!`, `Fished and dropped a ${ListOfFish[CurrentResource as keyof Types.IListOfFish].displayName}`],
-                  [`Level Up`, `Gained Resource`]
-                );
-              } else {
-                // no level and no banking
-                handleNewChatLog(`Fished and dropped a ${ListOfFish[CurrentResource as keyof Types.IListOfFish].displayName}`, `Gained Resource`);
-              }
-            }
-          }
-          break;
-        }
-        case `Mining`: {
-          /**
-           * The logic to handle mining is slightly different from woodcutting and fishing.  The player always gets xp, albeit a variable amount.
-           * The player does damage to the ore rock, and receives an ore when the rock takes enough damage, making it similar to combat
-           */
+        //* decide if the player gained a level
+        const playerLevelled = didPlayerLevelUp(Experience[`Woodcutting`], thisLog[`XPGivenWoodcutting`]);
 
-          //* call resolveMining, and store the return value.  this holds the experience and damage dealt to the rock
-          let MiningResult = resolveMining(
-            ListOfOres[CurrentResource as keyof Types.IListOfOres],
-            listOfPickaxes[currentEquipment.Pickaxe as keyof Types.IListOfPickaxes],
-            Experience.Mining,
-            Experience.Strength
-          );
-
-          //* initialize chatlogs with the experience message
-          let miningMessages: string[] = [`Gained ${MiningResult.experience} xp in Mining`];
-          let miningMessagesTags: Types.ChatLogTag[] = [`Gained XP`];
-
-          //* mining always yields experience, so dispatch it
-          dispatch(gainXP({ skill: `Mining`, xp: MiningResult.experience }));
-
-          //* decide if the player gained a level, and send a chatlog if so
-          const playerLevelled = didPlayerLevelUp(Experience.Mining, MiningResult.experience);
-          if (playerLevelled) {
-            miningMessages = [...miningMessages, `Mining Level up!`];
-            miningMessagesTags = [...miningMessagesTags, `Level Up`];
-          }
-
-          //* apply the damage to the ore rock
-          // IF the damage would deplete the rock (or cause the durability to go negative), reset the durability and give an ore to the player
-          if (oreRockDurability - MiningResult.damage <= 0) {
-            // reset the durability
-            setOreRockDurability(ListOfOres[CurrentResource as keyof Types.IListOfOres].durability);
-
-            // add a message for gaining an ore
-            miningMessages = [...miningMessages, `Mined some ${ListOfOres[CurrentResource as keyof Types.IListOfOres].displayName}`];
-            miningMessagesTags = [...miningMessagesTags, `Gained Resource`];
-
-            // IF the player earns an ore, AND the player is banking the items, we need to add the item to the inventory
-            // IF the player is not banking, we can skip this step
-            if (playerIsBanking) {
-              dispatch(addItemToInventory(ListOfOres[CurrentResource as keyof Types.IListOfOres].name));
-              // when the player's inventory will be full with the next item added, queue a bank run
-              if (playerInventory.length === 27) {
-                // console.log(`will need to bank next time`);
-                setNeedsToBank(!needsToBank);
-              }
-            }
-          } else {
-            // Otherwise, just apply the damage
-            setOreRockDurability(oreRockDurability - MiningResult.damage);
-          }
-
-          handleMultipleChatLogs(miningMessages, miningMessagesTags);
-          break;
+        //* if the player gained a level, queue a chatlog
+        if (playerLevelled) {
+          woodcuttingMessages.push(`Woodcutting Level up!`);
+          woodcuttingMessagesTags.push(`Level Up`);
         }
 
-        case `Thieving`: {
-          //* initialize empty chatlogs
-          let thievingMessages: string[] = [];
-          let thievingMessagesTags: Types.ChatLogTag[] = [];
+        //* if the player is banking do inventory logic and queue the relevant chatlog
+        if (playerIsBanking) {
+          // add the item to the inventory
+          dispatch(addItemToInventory(thisLog[`name`]));
 
-          //* if the player has been caught and is currently stunned,
-          if (stunTimeRemaining > 0) {
-            // send a chatlog
-            thievingMessages.push(`You are still stunned from your previous thieving attempt`);
-            thievingMessagesTags.push(`Misc`);
-            handleMultipleChatLogs(thievingMessages, thievingMessagesTags);
+          // queue the chatlogs
+          woodcuttingMessages.push(`Chopped some ${thisLog[`displayName`]}`);
+          woodcuttingMessagesTags.push(`Gained Resource`);
 
-            // and decrement the timer
-            setStunTimeRemaining(stunTimeRemaining - 1);
-
-            //* if the player is not currently stunned, they may attempt to steal
-          } else {
-            //* since thieving has 2 major options, call resolveThieving on the chosen option, and store the return object.
-            if (ListOfPickpocketNPC[CurrentResource as keyof Types.IListOfPickpocketNPC]) {
-              // pickpocketing logic here
-
-              let ThievingResult = resolveThieving(
-                ListOfPickpocketNPC[CurrentResource as keyof Types.IListOfPickpocketNPC],
-                Experience.Thieving,
-                Experience.Agility
-              );
-              console.log({ ThievingResult });
-              //* if the player is successful in their pickpocketing attempt
-              if (ThievingResult.outcome) {
-                // queue up a chatlog with the outcome
-                thievingMessages.push(
-                  `Stole ${ThievingResult.coins} coins from ${ListOfPickpocketNPC[CurrentResource as keyof Types.IListOfPickpocketNPC].displayName}`
-                );
-                thievingMessagesTags.push(`Gained Resource`);
-
-                // give coins
-                dispatch(addCoinsToWallet(ThievingResult.coins));
-
-                // give xp and queue a chatlog
-                dispatch(gainXP({ skill: `Thieving`, xp: ListOfPickpocketNPC[CurrentResource as keyof Types.IListOfPickpocketNPC].XPGivenThieving }));
-                thievingMessages.push(`Gained ${ListOfPickpocketNPC[CurrentResource as keyof Types.IListOfPickpocketNPC].XPGivenThieving} xp in Thieving`);
-                thievingMessagesTags.push(`Gained XP`);
-
-                // decide if the player gained a level, and queue a chatlog if so
-                const playerLevelled = didPlayerLevelUp(
-                  Experience.Thieving,
-                  ListOfPickpocketNPC[CurrentResource as keyof Types.IListOfPickpocketNPC].XPGivenThieving
-                );
-                if (playerLevelled) {
-                  thievingMessages.push(`Thieving Level up!`);
-                  thievingMessagesTags.push(`Level Up`);
-                }
-
-                //* finally send the chatlogs
-                handleMultipleChatLogs(thievingMessages, thievingMessagesTags);
-              } else {
-                //* if the player is not successful in their pickpocketing attempt
-
-                // queue up a chatlog with the outcome
-                thievingMessages.push(`The ${ListOfPickpocketNPC[CurrentResource as keyof Types.IListOfPickpocketNPC].displayName} caught you!`);
-                thievingMessagesTags.push(`Misc`);
-
-                // set the stun time
-                setStunTimeRemaining(ListOfPickpocketNPC[CurrentResource as keyof Types.IListOfPickpocketNPC].stunTime);
-
-                //* finally send the chatlogs
-                handleMultipleChatLogs(thievingMessages, thievingMessagesTags);
-              }
-            } else {
-              //*  otherwise, the player is thieving from stalls, so do these steps
-              // stall logic here
-
-              let ThievingResult = resolveThieving(
-                ListOfPickpocketStalls[CurrentResource as keyof Types.IListOfPickpocketStall],
-                Experience.Thieving,
-                Experience.Agility
-              );
-              console.log({ ThievingResult });
-
-              if (ThievingResult.outcome) {
-                //* if the player is successful in their thieving stall attempt
-
-                // queue up a chatlog with the outcome
-                thievingMessages.push(
-                  `Stole from the ${ListOfPickpocketStalls[CurrentResource as keyof Types.IListOfPickpocketStall].displayName}. Items coming soon(tm)`
-                );
-                thievingMessagesTags.push(`Gained Resource`);
-
-                // give xp and queue a chatlog
-                dispatch(gainXP({ skill: `Thieving`, xp: ListOfPickpocketStalls[CurrentResource as keyof Types.IListOfPickpocketStall].XPGivenThieving }));
-                thievingMessages.push(`Gained ${ListOfPickpocketStalls[CurrentResource as keyof Types.IListOfPickpocketStall].XPGivenThieving} xp in Thieving`);
-                thievingMessagesTags.push(`Gained XP`);
-
-                // decide if the player gained a level, and queue a chatlog if so
-                const playerLevelled = didPlayerLevelUp(
-                  Experience.Thieving,
-                  ListOfPickpocketStalls[CurrentResource as keyof Types.IListOfPickpocketStall].XPGivenThieving
-                );
-                if (playerLevelled) {
-                  thievingMessages.push(`Thieving Level up!`);
-                  thievingMessagesTags.push(`Level Up`);
-                }
-
-                //* finally send the chatlogs
-                handleMultipleChatLogs(thievingMessages, thievingMessagesTags);
-              } else {
-                //* if the player is not successful in their thieving stall attempt
-
-                // queue up a chatlog with the outcome
-                thievingMessages.push(`The ${ListOfPickpocketStalls[CurrentResource as keyof Types.IListOfPickpocketStall].displayName}'s owner caught you!`);
-                thievingMessagesTags.push(`Misc`);
-
-                // set the stun time
-                setStunTimeRemaining(ListOfPickpocketStalls[CurrentResource as keyof Types.IListOfPickpocketStall].stunTime);
-
-                //* finally send the chatlogs
-                handleMultipleChatLogs(thievingMessages, thievingMessagesTags);
-              }
-            }
+          // if the new log will be the 28th, set the needsToBank component state to true
+          if (playerInventory.length === 27) {
+            // console.log(`will need to bank next time`);
+            setNeedsToBank(true);
           }
-
-          break;
+        } else {
+          //* otherwise, the player is not banking, so queue the relevant chatlog
+          // queue the chatlogs
+          woodcuttingMessages.push(`Chopped and dropped some ${thisLog[`displayName`]}`);
+          woodcuttingMessagesTags.push(`Gained Resource`);
         }
+
+        //* finally, send the queued chatlogs
+        handleMultipleChatLogs(woodcuttingMessages, woodcuttingMessagesTags);
       }
     } else {
-      // Otherwise, the player needs to bank
-      // iterate through the inventory array, adding items from the inventory to the bank
-      for (let i = 0; i < playerInventory.length; i++) {
-        // find the item, don't shift here as that is mutative
-        let item = playerInventory[i];
-        let amount = 1;
-        // check each bank slice to see if it's the correct slice, if so, add it to the bank
-        //@ using bracket notation for a property that does not exist on an object returns undefined, which is considered falsy
-        if (bank_logs[item as keyof Types.IListOfLogs]) {
-          dispatch(addLogToBank({ item, amount }));
-        } else if (bank_fish[item as keyof Types.IListOfFish]) {
-          dispatch(addFishToBank({ item, amount }));
-        } else if (bank_ores[item as keyof Types.IListOfOres]) {
-          dispatch(addOreToBank({ item, amount }));
-        }
-      }
-      // remove all items from the inventory, since they're now in the bank
-      dispatch(removeItemFromInventory());
-
-      // after the banking is finished, flip this state
-      setNeedsToBank(!needsToBank);
+      //* otherwise, call handleBanking
+      handleBanking();
     }
   };
+  /**
+   * This function handles the logic of what to do when the player is fishing.
+   * It determines if the player catches a fish, levels up, and (depending on state) adds the fish to the inventory.
+   */
+  const handleFishingTick = () => {
+    //* if the player does not need to bank, proceed with the handling
+    if (!needsToBank) {
+      //* if the player caught a fish, continue with the logic, otherwise, do nothing
+      // define the current fish for readability
+      let thisFish = ListOfFish[CurrentResource as keyof Types.IListOfFish];
+      if (playerEarnsFish(thisFish, Experience[`Fishing`])) {
+        //* initialize empty chatlogs
+        let FishingMessages: string[] = [];
+        let FishingMessagesTags: Types.ChatLogTag[] = [];
+
+        //* apply gained xp and queue a chatlog
+        dispatch(gainXP({ skill: `Fishing`, xp: thisFish[`XPGivenFishing`] }));
+        FishingMessages.push(`Gained ${thisFish[`XPGivenFishing`]} xp in Fishing`);
+        FishingMessagesTags.push(`Gained XP`);
+
+        //* decide if the player gained a level
+        const playerLevelled = didPlayerLevelUp(Experience[`Fishing`], thisFish[`XPGivenFishing`]);
+
+        //* if the player gained a level, queue a chatlog
+        if (playerLevelled) {
+          FishingMessages.push(`Fishing Level up!`);
+          FishingMessagesTags.push(`Level Up`);
+        }
+
+        //* if the player is banking do inventory logic and queue the relevant chatlog
+        if (playerIsBanking) {
+          // add the item to the inventory
+          dispatch(addItemToInventory(thisFish[`name`]));
+
+          // queue the chatlogs
+          FishingMessages.push(`Fished a ${thisFish[`displayName`]}`);
+          FishingMessagesTags.push(`Gained Resource`);
+
+          // if the new fish will be the 28th, set the needsToBank component state to true
+          if (playerInventory.length === 27) {
+            // console.log(`will need to bank next time`);
+            setNeedsToBank(true);
+          }
+        } else {
+          //* otherwise, the player is not banking, so queue the relevant chatlog
+          // queue the chatlogs
+          FishingMessages.push(`Fished and dropped a ${thisFish[`displayName`]}`);
+          FishingMessagesTags.push(`Gained Resource`);
+        }
+
+        //* finally, send the queued chatlogs
+        handleMultipleChatLogs(FishingMessages, FishingMessagesTags);
+      }
+    } else {
+      //* otherwise, call handleBanking
+      handleBanking();
+    }
+  };
+  /**
+   * This function handles the logic of what to do when the player is mining.
+   * It determines if the player mines an ore, levels up, and (depending on state) adds the ore to the inventory.
+   */
+  const handleMiningTick = () => {
+    /**
+     * The logic to handle mining is slightly different from woodcutting and fishing.  The player always gets xp, albeit a variable amount.
+     * The player does damage to the ore rock, and receives an ore when the rock takes enough damage, making it similar to combat
+     */
+
+    //* if the player does not need to bank, proceed with the handling
+    if (!needsToBank) {
+      //* call resolveMining, and store the return value. this holds the experience and damage dealt to the rock
+      // define the current orerock for readability
+      let thisRock = ListOfOres[CurrentResource as keyof Types.IListOfOres];
+      let MiningResult = resolveMining(
+        thisRock,
+        listOfPickaxes[currentEquipment[`Pickaxe`] as keyof Types.IListOfPickaxes],
+        Experience[`Mining`],
+        Experience[`Strength`]
+      );
+
+      //* mining always yields experience, so dispatch it
+      dispatch(gainXP({ skill: `Mining`, xp: MiningResult[`experience`] }));
+
+      //* initialize chatlogs with the experience message
+      let miningMessages: string[] = [`Gained ${MiningResult[`experience`]} xp in Mining`];
+      let miningMessagesTags: Types.ChatLogTag[] = [`Gained XP`];
+
+      //* decide if the player gained a level, and if so queue a chatlog
+      const playerLevelled = didPlayerLevelUp(Experience[`Mining`], MiningResult[`experience`]);
+      if (playerLevelled) {
+        miningMessages.push(`Mining Level up!`);
+        miningMessagesTags.push(`Level Up`);
+      }
+
+      //* apply the damage to the ore rock and queue relevant chatlogs
+      // IF the damage would deplete the rock (or cause the durability to go negative), reset the durability and give an ore to the player
+      if (oreRockDurability - MiningResult.damage <= 0) {
+        // reset the durability
+        setOreRockDurability(thisRock[`durability`]);
+
+        // IF the player earns an ore, AND the player is banking the items, we need to add the item to the inventory and queue the relevant chatlog
+        if (playerIsBanking) {
+          // add the item to the inventory
+          dispatch(addItemToInventory(thisRock[`name`]));
+
+          // queue a chatlog for gaining an ore
+          miningMessages.push(`Mined some ${thisRock[`displayName`]}`);
+          miningMessagesTags.push(`Gained Resource`);
+
+          // when the player's inventory will be full with the next item added, queue a bank run
+          if (playerInventory.length === 27) {
+            // console.log(`will need to bank next time`);
+            setNeedsToBank(true);
+          }
+        } else {
+          //* otherwise the player is dropping items, so queue the relevant chatlog
+          // queue a chatlog for gaining an ore
+          miningMessages.push(`Mined and dropped some ${thisRock[`displayName`]}`);
+          miningMessagesTags.push(`Gained Resource`);
+        }
+      } else {
+        // Otherwise, just apply the damage
+        setOreRockDurability(oreRockDurability - MiningResult[`damage`]);
+      }
+
+      handleMultipleChatLogs(miningMessages, miningMessagesTags);
+    } else {
+      //* otherwise, call handleBanking
+      handleBanking();
+    }
+  };
+  /**
+   * This function handles the logic of what to do when the player is thieving.
+   * It determines if the player successfully pickpockets and levels up, based on the player's choice of NPC or stall.
+   */
+  const handleThievingTick = () => {
+    //* initialize empty chatlogs
+    let thievingMessages: string[] = [];
+    let thievingMessagesTags: Types.ChatLogTag[] = [];
+
+    //* if the player has been caught and is currently stunned,
+    if (stunTimeRemaining > 0) {
+      // send a chatlog
+      thievingMessages.push(`You are still stunned from your previous thieving attempt`);
+      thievingMessagesTags.push(`Misc`);
+      handleMultipleChatLogs(thievingMessages, thievingMessagesTags);
+
+      // and decrement the timer
+      setStunTimeRemaining(stunTimeRemaining - 1);
+
+      //* if the player is not currently stunned, they may attempt to steal
+    } else {
+      //* since thieving has 2 major options, call resolveThieving on the chosen option, and store the return object.
+      if (ListOfPickpocketNPC[CurrentResource as keyof Types.IListOfPickpocketNPC]) {
+        //* pickpocketing logic here
+
+        // define this pickpocket npc for readability
+        let thisPickpocketNPC = ListOfPickpocketNPC[CurrentResource as keyof Types.IListOfPickpocketNPC];
+        let ThievingResult = resolveThieving(thisPickpocketNPC, Experience[`Thieving`], Experience[`Agility`]);
+        console.log({ ThievingResult });
+        //* if the player is successful in their pickpocketing attempt
+        if (ThievingResult[`outcome`]) {
+          // queue up a chatlog with the outcome
+          thievingMessages.push(`Stole ${ThievingResult[`coins`]} coins from ${thisPickpocketNPC[`displayName`]}`);
+          thievingMessagesTags.push(`Gained Resource`);
+
+          // give coins
+          dispatch(addCoinsToWallet(ThievingResult[`coins`]));
+
+          // give xp and queue a chatlog
+          dispatch(gainXP({ skill: `Thieving`, xp: thisPickpocketNPC[`XPGivenThieving`] }));
+          thievingMessages.push(`Gained ${thisPickpocketNPC[`XPGivenThieving`]} xp in Thieving`);
+          thievingMessagesTags.push(`Gained XP`);
+
+          // decide if the player gained a level, and queue a chatlog if so
+          const playerLevelled = didPlayerLevelUp(Experience[`Thieving`], thisPickpocketNPC[`XPGivenThieving`]);
+          if (playerLevelled) {
+            thievingMessages.push(`Thieving Level up!`);
+            thievingMessagesTags.push(`Level Up`);
+          }
+
+          //* finally send the chatlogs
+          handleMultipleChatLogs(thievingMessages, thievingMessagesTags);
+        } else {
+          //* if the player is not successful in their pickpocketing attempt
+
+          // queue up a chatlog with the outcome
+          thievingMessages.push(`The ${thisPickpocketNPC[`displayName`]} caught you!`);
+          thievingMessagesTags.push(`Misc`);
+
+          // set the stun time
+          setStunTimeRemaining(thisPickpocketNPC[`stunTime`]);
+
+          //* finally send the chatlogs
+          handleMultipleChatLogs(thievingMessages, thievingMessagesTags);
+        }
+      } else {
+        //*  otherwise, the player is thieving from stalls, so do these steps
+        // stall logic here
+        // define this picket stall for readability
+        let thisPickpocketStall = ListOfPickpocketStalls[CurrentResource as keyof Types.IListOfPickpocketStall];
+        let ThievingResult = resolveThieving(thisPickpocketStall, Experience[`Thieving`], Experience[`Agility`]);
+        console.log({ ThievingResult });
+
+        if (ThievingResult[`outcome`]) {
+          //* if the player is successful in their thieving stall attempt
+
+          // queue up a chatlog with the outcome
+          thievingMessages.push(`Stole from the ${thisPickpocketStall[`displayName`]}. Items coming soon(tm)`);
+          thievingMessagesTags.push(`Gained Resource`);
+
+          // give xp and queue a chatlog
+          dispatch(gainXP({ skill: `Thieving`, xp: thisPickpocketStall[`XPGivenThieving`] }));
+          thievingMessages.push(`Gained ${thisPickpocketStall[`XPGivenThieving`]} xp in Thieving`);
+          thievingMessagesTags.push(`Gained XP`);
+
+          // decide if the player gained a level, and queue a chatlog if so
+          const playerLevelled = didPlayerLevelUp(Experience[`Thieving`], thisPickpocketStall[`XPGivenThieving`]);
+          if (playerLevelled) {
+            thievingMessages.push(`Thieving Level up!`);
+            thievingMessagesTags.push(`Level Up`);
+          }
+
+          //* finally send the chatlogs
+          handleMultipleChatLogs(thievingMessages, thievingMessagesTags);
+        } else {
+          //* if the player is not successful in their thieving stall attempt
+
+          // queue up a chatlog with the outcome
+          thievingMessages.push(`The ${thisPickpocketStall[`displayName`]}'s owner caught you!`);
+          thievingMessagesTags.push(`Misc`);
+
+          // set the stun time
+          setStunTimeRemaining(thisPickpocketStall[`stunTime`]);
+
+          //* finally send the chatlogs
+          handleMultipleChatLogs(thievingMessages, thievingMessagesTags);
+        }
+      }
+    }
+  };
+  /**
+   * This function removes items from the player's inventory and adds them to the bank.
+   * Then, it resets the needsToBank component state to false.
+   * Call this at the end of every skilling function.
+   */
+  const handleBanking = () => {
+    // Otherwise, the player needs to bank
+    // iterate through the inventory array, adding items from the inventory to the bank
+    for (let i = 0; i < playerInventory.length; i++) {
+      // find the item, don't shift here as that is mutative
+      let item = playerInventory[i];
+      let amount = 1;
+      // check each bank slice to see if it's the correct slice, if so, add it to the bank
+      //@ using bracket notation for a property that does not exist on an object returns undefined, which is considered falsy
+      if (bank_logs[item as keyof Types.IListOfLogs]) {
+        dispatch(addLogToBank({ item, amount }));
+      } else if (bank_fish[item as keyof Types.IListOfFish]) {
+        dispatch(addFishToBank({ item, amount }));
+      } else if (bank_ores[item as keyof Types.IListOfOres]) {
+        dispatch(addOreToBank({ item, amount }));
+      }
+    }
+    // remove all items from the inventory, since they're now in the bank
+    dispatch(removeItemFromInventory());
+
+    // after the banking is finished, flip this state
+    setNeedsToBank(!needsToBank);
+  };
+
+  // const handleSkillingTick = () => {
+  //   // console.log(`Skilling Ticked`);
+  //   // console.log(CurrentSkill);
+
+  //   // IF the player does not need to bank, continue with the skilling logic
+  //   if (!needsToBank) {
+  //     switch (CurrentSkill) {
+  //       case `Woodcutting`: {
+  //         if (
+  //           playerEarnsLog(
+  //             ListOfLogs[CurrentResource as keyof Types.IListOfLogs],
+  //             Experience.Woodcutting,
+  //             listOfHatchets[currentEquipment.Hatchet as keyof Types.IListOfHatchets]
+  //           )
+  //         ) {
+  //           // IF the player earned a log - apply gained xp
+  //           dispatch(gainXP({ skill: `Woodcutting`, xp: ListOfLogs[CurrentResource as keyof Types.IListOfLogs].XPGivenWoodcutting }));
+  //           // decide if the player gained a level
+  //           const playerLevelled = didPlayerLevelUp(Experience.Woodcutting, ListOfLogs[CurrentResource as keyof Types.IListOfLogs].XPGivenWoodcutting);
+  //           if (playerIsBanking) {
+  //             // IF the player earns a log, AND the player is banking the items, we need to add the item to the inventory
+  //             dispatch(addItemToInventory(ListOfLogs[CurrentResource as keyof Types.IListOfLogs].name));
+  //             // console.log(playerInventory.length);
+  //             // when the player's inventory will be full with the next item added, queue a bank run
+  //             if (playerInventory.length === 27) {
+  //               // console.log(`will need to bank next time`);
+  //               setNeedsToBank(!needsToBank);
+  //             }
+  //             if (playerLevelled) {
+  //               // yes level and yes banking
+  //               handleMultipleChatLogs(
+  //                 [`Woodcutting Level up!`, `Chopped some ${ListOfLogs[CurrentResource as keyof Types.IListOfLogs].displayName}`],
+  //                 [`Level Up`, `Gained Resource`]
+  //               );
+  //             } else {
+  //               // no level and yes banking
+  //               handleNewChatLog(`Chopped some ${ListOfLogs[CurrentResource as keyof Types.IListOfLogs].displayName}`, `Gained Resource`);
+  //             }
+  //           } else {
+  //             // the player is not banking in this block
+  //             if (playerLevelled) {
+  //               // yes level and no banking
+  //               handleMultipleChatLogs(
+  //                 [`Woodcutting Level up!`, `Chopped and dropped some ${ListOfLogs[CurrentResource as keyof Types.IListOfLogs].displayName}`],
+  //                 [`Level Up`, `Gained Resource`]
+  //               );
+  //             } else {
+  //               // no level and no banking
+  //               handleNewChatLog(`Chopped and dropped some ${ListOfLogs[CurrentResource as keyof Types.IListOfLogs].displayName}`, `Gained Resource`);
+  //             }
+  //           }
+  //         }
+  //         break;
+  //       }
+  //       case `Fishing`: {
+  //         // decide if the player caught a fish
+  //         if (playerEarnsFish(ListOfFish[CurrentResource as keyof Types.IListOfFish], Experience.Fishing)) {
+  //           // apply gained xp
+  //           dispatch(gainXP({ skill: `Fishing`, xp: ListOfFish[CurrentResource as keyof Types.IListOfFish].XPGivenFishing }));
+  //           const playerLevelled = didPlayerLevelUp(Experience.Fishing, ListOfFish[CurrentResource as keyof Types.IListOfFish].XPGivenFishing);
+
+  //           // if the player catches a fish, AND the player is banking the items, we need to add the item to the inventory
+  //           if (playerIsBanking) {
+  //             dispatch(addItemToInventory(ListOfFish[CurrentResource as keyof Types.IListOfFish].name));
+
+  //             // when the player's inventory will be full with the next item added, queue a bank run
+  //             if (playerInventory.length === 27) {
+  //               // console.log(`will need to bank next time`);
+  //               // do bank stuff here
+  //               setNeedsToBank(!needsToBank);
+  //             }
+  //             if (playerLevelled) {
+  //               // yes level and yes banking
+  //               handleMultipleChatLogs(
+  //                 [`Fishing Level up!`, `Fished a ${ListOfFish[CurrentResource as keyof Types.IListOfFish].displayName}`],
+  //                 [`Level Up`, `Gained Resource`]
+  //               );
+  //             } else {
+  //               // no level and yes banking
+  //               handleNewChatLog(`Fished a ${ListOfFish[CurrentResource as keyof Types.IListOfFish].displayName}`, `Gained Resource`);
+  //             }
+  //           } else {
+  //             // yes level and no banking
+  //             if (playerLevelled) {
+  //               handleMultipleChatLogs(
+  //                 [`Fishing Level up!`, `Fished and dropped a ${ListOfFish[CurrentResource as keyof Types.IListOfFish].displayName}`],
+  //                 [`Level Up`, `Gained Resource`]
+  //               );
+  //             } else {
+  //               // no level and no banking
+  //               handleNewChatLog(`Fished and dropped a ${ListOfFish[CurrentResource as keyof Types.IListOfFish].displayName}`, `Gained Resource`);
+  //             }
+  //           }
+  //         }
+  //         break;
+  //       }
+  //       case `Mining`: {
+  //         /**
+  //          * The logic to handle mining is slightly different from woodcutting and fishing.  The player always gets xp, albeit a variable amount.
+  //          * The player does damage to the ore rock, and receives an ore when the rock takes enough damage, making it similar to combat
+  //          */
+
+  //         //* call resolveMining, and store the return value.  this holds the experience and damage dealt to the rock
+  //         let MiningResult = resolveMining(
+  //           ListOfOres[CurrentResource as keyof Types.IListOfOres],
+  //           listOfPickaxes[currentEquipment.Pickaxe as keyof Types.IListOfPickaxes],
+  //           Experience.Mining,
+  //           Experience.Strength
+  //         );
+
+  //         //* initialize chatlogs with the experience message
+  //         let miningMessages: string[] = [`Gained ${MiningResult.experience} xp in Mining`];
+  //         let miningMessagesTags: Types.ChatLogTag[] = [`Gained XP`];
+
+  //         //* mining always yields experience, so dispatch it
+  //         dispatch(gainXP({ skill: `Mining`, xp: MiningResult.experience }));
+
+  //         //* decide if the player gained a level, and send a chatlog if so
+  //         const playerLevelled = didPlayerLevelUp(Experience.Mining, MiningResult.experience);
+  //         if (playerLevelled) {
+  //           miningMessages = [...miningMessages, `Mining Level up!`];
+  //           miningMessagesTags = [...miningMessagesTags, `Level Up`];
+  //         }
+
+  //         //* apply the damage to the ore rock
+  //         // IF the damage would deplete the rock (or cause the durability to go negative), reset the durability and give an ore to the player
+  //         if (oreRockDurability - MiningResult.damage <= 0) {
+  //           // reset the durability
+  //           setOreRockDurability(ListOfOres[CurrentResource as keyof Types.IListOfOres].durability);
+
+  //           // add a message for gaining an ore
+  //           miningMessages = [...miningMessages, `Mined some ${ListOfOres[CurrentResource as keyof Types.IListOfOres].displayName}`];
+  //           miningMessagesTags = [...miningMessagesTags, `Gained Resource`];
+
+  //           // IF the player earns an ore, AND the player is banking the items, we need to add the item to the inventory
+  //           // IF the player is not banking, we can skip this step
+  //           if (playerIsBanking) {
+  //             dispatch(addItemToInventory(ListOfOres[CurrentResource as keyof Types.IListOfOres].name));
+  //             // when the player's inventory will be full with the next item added, queue a bank run
+  //             if (playerInventory.length === 27) {
+  //               // console.log(`will need to bank next time`);
+  //               setNeedsToBank(!needsToBank);
+  //             }
+  //           }
+  //         } else {
+  //           // Otherwise, just apply the damage
+  //           setOreRockDurability(oreRockDurability - MiningResult.damage);
+  //         }
+
+  //         handleMultipleChatLogs(miningMessages, miningMessagesTags);
+  //         break;
+  //       }
+
+  //       case `Thieving`: {
+  //         //* initialize empty chatlogs
+  //         let thievingMessages: string[] = [];
+  //         let thievingMessagesTags: Types.ChatLogTag[] = [];
+
+  //         //* if the player has been caught and is currently stunned,
+  //         if (stunTimeRemaining > 0) {
+  //           // send a chatlog
+  //           thievingMessages.push(`You are still stunned from your previous thieving attempt`);
+  //           thievingMessagesTags.push(`Misc`);
+  //           handleMultipleChatLogs(thievingMessages, thievingMessagesTags);
+
+  //           // and decrement the timer
+  //           setStunTimeRemaining(stunTimeRemaining - 1);
+
+  //           //* if the player is not currently stunned, they may attempt to steal
+  //         } else {
+  //           //* since thieving has 2 major options, call resolveThieving on the chosen option, and store the return object.
+  //           if (ListOfPickpocketNPC[CurrentResource as keyof Types.IListOfPickpocketNPC]) {
+  //             // pickpocketing logic here
+
+  //             let ThievingResult = resolveThieving(
+  //               ListOfPickpocketNPC[CurrentResource as keyof Types.IListOfPickpocketNPC],
+  //               Experience.Thieving,
+  //               Experience.Agility
+  //             );
+  //             console.log({ ThievingResult });
+  //             //* if the player is successful in their pickpocketing attempt
+  //             if (ThievingResult.outcome) {
+  //               // queue up a chatlog with the outcome
+  //               thievingMessages.push(
+  //                 `Stole ${ThievingResult.coins} coins from ${ListOfPickpocketNPC[CurrentResource as keyof Types.IListOfPickpocketNPC].displayName}`
+  //               );
+  //               thievingMessagesTags.push(`Gained Resource`);
+
+  //               // give coins
+  //               dispatch(addCoinsToWallet(ThievingResult.coins));
+
+  //               // give xp and queue a chatlog
+  //               dispatch(gainXP({ skill: `Thieving`, xp: ListOfPickpocketNPC[CurrentResource as keyof Types.IListOfPickpocketNPC].XPGivenThieving }));
+  //               thievingMessages.push(`Gained ${ListOfPickpocketNPC[CurrentResource as keyof Types.IListOfPickpocketNPC].XPGivenThieving} xp in Thieving`);
+  //               thievingMessagesTags.push(`Gained XP`);
+
+  //               // decide if the player gained a level, and queue a chatlog if so
+  //               const playerLevelled = didPlayerLevelUp(
+  //                 Experience.Thieving,
+  //                 ListOfPickpocketNPC[CurrentResource as keyof Types.IListOfPickpocketNPC].XPGivenThieving
+  //               );
+  //               if (playerLevelled) {
+  //                 thievingMessages.push(`Thieving Level up!`);
+  //                 thievingMessagesTags.push(`Level Up`);
+  //               }
+
+  //               //* finally send the chatlogs
+  //               handleMultipleChatLogs(thievingMessages, thievingMessagesTags);
+  //             } else {
+  //               //* if the player is not successful in their pickpocketing attempt
+
+  //               // queue up a chatlog with the outcome
+  //               thievingMessages.push(`The ${ListOfPickpocketNPC[CurrentResource as keyof Types.IListOfPickpocketNPC].displayName} caught you!`);
+  //               thievingMessagesTags.push(`Misc`);
+
+  //               // set the stun time
+  //               setStunTimeRemaining(ListOfPickpocketNPC[CurrentResource as keyof Types.IListOfPickpocketNPC].stunTime);
+
+  //               //* finally send the chatlogs
+  //               handleMultipleChatLogs(thievingMessages, thievingMessagesTags);
+  //             }
+  //           } else {
+  //             //*  otherwise, the player is thieving from stalls, so do these steps
+  //             // stall logic here
+
+  //             let ThievingResult = resolveThieving(
+  //               ListOfPickpocketStalls[CurrentResource as keyof Types.IListOfPickpocketStall],
+  //               Experience.Thieving,
+  //               Experience.Agility
+  //             );
+  //             console.log({ ThievingResult });
+
+  //             if (ThievingResult.outcome) {
+  //               //* if the player is successful in their thieving stall attempt
+
+  //               // queue up a chatlog with the outcome
+  //               thievingMessages.push(
+  //                 `Stole from the ${ListOfPickpocketStalls[CurrentResource as keyof Types.IListOfPickpocketStall].displayName}. Items coming soon(tm)`
+  //               );
+  //               thievingMessagesTags.push(`Gained Resource`);
+
+  //               // give xp and queue a chatlog
+  //               dispatch(gainXP({ skill: `Thieving`, xp: ListOfPickpocketStalls[CurrentResource as keyof Types.IListOfPickpocketStall].XPGivenThieving }));
+  //               thievingMessages.push(`Gained ${ListOfPickpocketStalls[CurrentResource as keyof Types.IListOfPickpocketStall].XPGivenThieving} xp in Thieving`);
+  //               thievingMessagesTags.push(`Gained XP`);
+
+  //               // decide if the player gained a level, and queue a chatlog if so
+  //               const playerLevelled = didPlayerLevelUp(
+  //                 Experience.Thieving,
+  //                 ListOfPickpocketStalls[CurrentResource as keyof Types.IListOfPickpocketStall].XPGivenThieving
+  //               );
+  //               if (playerLevelled) {
+  //                 thievingMessages.push(`Thieving Level up!`);
+  //                 thievingMessagesTags.push(`Level Up`);
+  //               }
+
+  //               //* finally send the chatlogs
+  //               handleMultipleChatLogs(thievingMessages, thievingMessagesTags);
+  //             } else {
+  //               //* if the player is not successful in their thieving stall attempt
+
+  //               // queue up a chatlog with the outcome
+  //               thievingMessages.push(`The ${ListOfPickpocketStalls[CurrentResource as keyof Types.IListOfPickpocketStall].displayName}'s owner caught you!`);
+  //               thievingMessagesTags.push(`Misc`);
+
+  //               // set the stun time
+  //               setStunTimeRemaining(ListOfPickpocketStalls[CurrentResource as keyof Types.IListOfPickpocketStall].stunTime);
+
+  //               //* finally send the chatlogs
+  //               handleMultipleChatLogs(thievingMessages, thievingMessagesTags);
+  //             }
+  //           }
+  //         }
+
+  //         break;
+  //       }
+  //     }
+  //   } else {
+  //     // Otherwise, the player needs to bank
+  //     handleBanking();
+  //   }
+  // };
 
   //@ this will run every game tick (while in combat) and holds the logic for resolving combat turns
   const handleCombatTick = () => {
@@ -742,11 +1051,21 @@ const GameContainer = (props: Types.GameContainerProps) => {
 
       if (CurrentActivity === `In combat` && Target !== `none`) {
         handleCombatTick();
-      } else if (
-        CurrentActivity === `Skilling` &&
-        (CurrentSkill === `Woodcutting` || CurrentSkill === `Fishing` || CurrentSkill === `Mining` || CurrentSkill === `Thieving`)
-      ) {
-        handleSkillingTick();
+      } else if (CurrentActivity === `Skilling`) {
+        switch (CurrentSkill) {
+          case `Woodcutting`:
+            handleWoodcuttingTick();
+            break;
+          case `Fishing`:
+            handleFishingTick();
+            break;
+          case `Mining`:
+            handleMiningTick();
+            break;
+          case `Thieving`:
+            handleThievingTick();
+            break;
+        }
       } else if (CurrentActivity === `Questing` && CurrentQuest !== `none`) {
         handleQuestingTick();
       }
@@ -775,6 +1094,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
     questStepProgress,
     playerIsBanking,
     checkPointTimer,
+    stunTimeRemaining,
   ]);
 
   return (

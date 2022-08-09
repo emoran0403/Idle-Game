@@ -50,17 +50,17 @@
 
 
 //# Fixes
-* abstract out Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations] into smaller variables in gameContainer
+* add a check upon logging in that checks the inventory and sets the needsToBank component state appropriately
 * swap out all instances of handleNewChatLog with handleMultipleChatLogs
-* delegate skilling tick functions to their own function / component
-* can clean up chat logs in game component under woodcutting and fishing
 * add chat logs for gaining xp in combat skills
-* add chat logs for gaining xp in gathering skills
 * content layout shift in levels component when xp is 10+ digits
 * inventory pushes down worn equipment component when it has items with long names
 * ^^== maybe fix this with just assets in inventory, and item names as title / alt text?
-
 * grammar when fishing anchovies
+* DONE - abstract out Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations] into smaller variables in gameContainer
+* DONE - delegate skilling tick functions to their own function / component
+* DONE - can clean up chat logs in game component under woodcutting and fishing
+* DONE - add chat logs for gaining xp in gathering skills
 * DONE - make thieving easier = decreased stun times, added possibility for guaranteed success, made successes overall easier
 * DONE - skills, quest, combat panel needs to show display names for locations
 * DONE - currentLocationComp - location needs to wrap to fit inside the div
