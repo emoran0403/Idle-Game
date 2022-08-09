@@ -46,10 +46,10 @@ const Levels = (props: Types.NoProps) => {
       <div className="card-body">
         <h5 className="card-header text-center">
           Levels
-          <div className="d-flex row">
-            <h6 className="card-subtitle text-muted col-4">Combat Level: {showCombatLevel()}</h6>
-            <h6 className="card-subtitle text-muted col-4">Total Levels: {totalLevel.toLocaleString("en-US")}</h6>
-            <h6 className="card-subtitle text-muted col-4">Total Experience: {totalExperience.toLocaleString("en-US")}</h6>
+          <div className="row justify-content-center mx-neg-1">
+            <h6 className="card-subtitle text-muted col-4 mx-neg-1">Combat Level: {showCombatLevel()}</h6>
+            <h6 className="card-subtitle text-muted col-4 mx-neg-1">Total Levels: {totalLevel.toLocaleString("en-US")}</h6>
+            <h6 className="card-subtitle text-muted col-4 px-1 mx-neg-1">Total Experience: {Math.floor(totalExperience).toLocaleString("en-US")}</h6>
           </div>
         </h5>
 
@@ -61,7 +61,7 @@ const Levels = (props: Types.NoProps) => {
                 <div className="badge rounded-pill bg-primary border border-2 border-dark mx-3">{`${skill} Lv. ${getLevel(xp)}`}</div>
               </div>
               <div className="col-4">
-                <div>{` XP: ${Experience[skill as keyof Types.ISkillList].toLocaleString("en-US")}`}</div>
+                <div>{` XP: ${Math.floor(Experience[skill as keyof Types.ISkillList]).toLocaleString("en-US")}`}</div>
               </div>
             </div>
             <ProgressBar className="border border-dark border-2">
