@@ -20,7 +20,7 @@ import { doQuestLogicLumbridge } from "../Redux/Slices/QuestSlices/Lumbridge";
 import { doQuestLogicDraynor } from "../Redux/Slices/QuestSlices/Draynor";
 import { setActivity } from "../Redux/Slices/CurrentActivity";
 import { setQuest } from "../Redux/Slices/CurrentQuest";
-import { addToWallet } from "../Redux/Slices/Wallet";
+import { addCoinsToWallet } from "../Redux/Slices/Wallet";
 import { gainXP } from "../Redux/Slices/Experience";
 import { addQuestPoints } from "../Redux/Slices/QuestPoints";
 import { addItemToInventory, removeItemFromInventory } from "../Redux/Slices/Inventory";
@@ -429,7 +429,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
                 thievingMessagesTags.push(`Gained Resource`);
 
                 // give coins
-                dispatch(addToWallet(ThievingResult.coins));
+                dispatch(addCoinsToWallet(ThievingResult.coins));
 
                 // give xp and queue a chatlog
                 dispatch(gainXP({ skill: `Thieving`, xp: ListOfPickpocketNPC[CurrentResource as keyof Types.IListOfPickpocketNPC].XPGivenThieving }));
@@ -584,7 +584,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
         let coinDrop: number = Math.floor(
           Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations][`level`] * (Math.random() * 0.5)
         );
-        dispatch(addToWallet(coinDrop));
+        dispatch(addCoinsToWallet(coinDrop));
 
         // prepare chatlogs for defeating an enemy, and possibly for levelling up
         let combatMessages: string[] = [
@@ -678,7 +678,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
         //@ give item rewards
         // if Coins are rewarded, add them to the wallet
         if (questRewards.itemRewards?.Coins) {
-          dispatch(addToWallet(questRewards.itemRewards.Coins));
+          dispatch(addCoinsToWallet(questRewards.itemRewards.Coins));
         }
 
         //@ give the quest point rewards

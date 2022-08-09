@@ -137,8 +137,13 @@ export const defaultPlayerData: Types.AllState = {
   Target: { CurrentTarget: "none" },
   Quest: { CurrentQuest: "none" },
   Resources: { Banking: true, Dropping: false },
-  Wallet: { coins: 100 },
+  Wallet: { coins: 100, slayerPoints: 0 },
   QuestPoints: { CurrentQuestPoints: 0 },
+  SlayerTask: {
+    task: ``,
+    amount: 0,
+    taskCounter: 0,
+  },
   Quests_Lumbridge: {
     LumbridgeQuestArray: [
       { name: "Cook's Assistant", stepsComplete: 0, stepsTotal: 20, complete: false },

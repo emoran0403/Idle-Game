@@ -10,6 +10,18 @@ export const slayermasterjacquelyn: Types.ISlayerMasterSummary = {
   location: `Lumbridge`,
   levelReqCombat: 0,
   levelReqSlayer: 0,
+  smokingKills: {
+    complete: {
+      taskPoints: 1,
+      task10: 5,
+      task50: 15,
+    },
+    incomplete: {
+      taskPoints: 1,
+      task10: 2,
+      task50: 7,
+    },
+  },
   taskList: [
     { task: `bats`, min: 15, max: 30 },
     { task: `birds`, min: 15, max: 30 },
@@ -32,6 +44,18 @@ export const slayermastervannaka: Types.ISlayerMasterSummary = {
   location: `Edgeville`,
   levelReqCombat: 30,
   levelReqSlayer: 0,
+  smokingKills: {
+    complete: {
+      taskPoints: 0,
+      task10: 0,
+      task50: 0,
+    },
+    incomplete: {
+      taskPoints: 0,
+      task10: 0,
+      task50: 0,
+    },
+  },
   taskList: [],
 };
 
@@ -41,6 +65,18 @@ export const slayermastermazchna: Types.ISlayerMasterSummary = {
   location: `Canifis`,
   levelReqCombat: 50,
   levelReqSlayer: 0,
+  smokingKills: {
+    complete: {
+      taskPoints: 0,
+      task10: 0,
+      task50: 0,
+    },
+    incomplete: {
+      taskPoints: 0,
+      task10: 0,
+      task50: 0,
+    },
+  },
   taskList: [],
 };
 
@@ -50,6 +86,18 @@ export const slayermasterchaeldar: Types.ISlayerMasterSummary = {
   location: `Zanaris`,
   levelReqCombat: 75,
   levelReqSlayer: 0,
+  smokingKills: {
+    complete: {
+      taskPoints: 0,
+      task10: 0,
+      task50: 0,
+    },
+    incomplete: {
+      taskPoints: 0,
+      task10: 0,
+      task50: 0,
+    },
+  },
   taskList: [],
 };
 
@@ -59,6 +107,18 @@ export const slayermastersumona: Types.ISlayerMasterSummary = {
   location: `Pollnivneach`,
   levelReqCombat: 90,
   levelReqSlayer: 35,
+  smokingKills: {
+    complete: {
+      taskPoints: 0,
+      task10: 0,
+      task50: 0,
+    },
+    incomplete: {
+      taskPoints: 0,
+      task10: 0,
+      task50: 0,
+    },
+  },
   taskList: [],
 };
 
@@ -68,6 +128,18 @@ export const slayermasterduradel: Types.ISlayerMasterSummary = {
   location: `ShiloVillage`,
   levelReqCombat: 100,
   levelReqSlayer: 50,
+  smokingKills: {
+    complete: {
+      taskPoints: 0,
+      task10: 0,
+      task50: 0,
+    },
+    incomplete: {
+      taskPoints: 0,
+      task10: 0,
+      task50: 0,
+    },
+  },
   taskList: [],
 };
 
@@ -77,6 +149,18 @@ export const slayermasterkuradal: Types.ISlayerMasterSummary = {
   location: `AncientCavern`,
   levelReqCombat: 110,
   levelReqSlayer: 75,
+  smokingKills: {
+    complete: {
+      taskPoints: 0,
+      task10: 0,
+      task50: 0,
+    },
+    incomplete: {
+      taskPoints: 0,
+      task10: 0,
+      task50: 0,
+    },
+  },
   taskList: [],
 };
 
@@ -86,6 +170,18 @@ export const slayermastermorvran: Types.ISlayerMasterSummary = {
   location: `Prifddinas`,
   levelReqCombat: 120,
   levelReqSlayer: 85,
+  smokingKills: {
+    complete: {
+      taskPoints: 0,
+      task10: 0,
+      task50: 0,
+    },
+    incomplete: {
+      taskPoints: 0,
+      task10: 0,
+      task50: 0,
+    },
+  },
   taskList: [],
 };
 
@@ -95,6 +191,18 @@ export const slayermasterlaniakea: Types.ISlayerMasterSummary = {
   location: `AnachroniaBaseCamp`,
   levelReqCombat: 120,
   levelReqSlayer: 90,
+  smokingKills: {
+    complete: {
+      taskPoints: 0,
+      task10: 0,
+      task50: 0,
+    },
+    incomplete: {
+      taskPoints: 0,
+      task10: 0,
+      task50: 0,
+    },
+  },
   taskList: [],
 };
 
@@ -104,6 +212,18 @@ export const slayermastermandrith: Types.ISlayerMasterSummary = {
   location: `Wilderness`,
   levelReqCombat: 120,
   levelReqSlayer: 95,
+  smokingKills: {
+    complete: {
+      taskPoints: 0,
+      task10: 0,
+      task50: 0,
+    },
+    incomplete: {
+      taskPoints: 0,
+      task10: 0,
+      task50: 0,
+    },
+  },
   taskList: [],
 };
 
@@ -120,20 +240,34 @@ export const ListOfSlayerMasters: Types.ISlayerMasterSummary[] = [
   slayermastermandrith,
 ];
 
-export const getSlayerTask = (slayerMaster: Types.ISlayerMasterSummary, slayerXp: number) => {
+interface ITaskObj {
+  task: string;
+  amount: number;
+}
+/**
+ *
+ * @param slayerMaster The SlayerMasterSummary for the given slayerMaster.
+ * @param slayerXp The player's experience in slayer.
+ * @returns Returns an object containing the task and an amount, or calls itself if the first randomly chosen task was invalid.
+ */
+export const getSlayerTask = (slayerMaster: Types.ISlayerMasterSummary, slayerXp: number): ITaskObj => {
+  // translate the player's slayer experience to a level
   const slayerLevel = getLevel(slayerXp);
+
+  // define the return object
   let taskObj = {
     task: ``,
     amount: 0,
   };
 
-  // randomly choose a task from the slayer master's task list
+  //* randomly choose a slayer class from the slayer master's task list
   let FullTaskIndex = Math.floor(Math.random() * slayerMaster.taskList.length);
   let FullTaskEntry = slayerMaster.taskList[FullTaskIndex];
 
-  // validEnemies is a subset of the chosen task where the player's slayer level is sufficient
+  //* decide if the player has the appropriate slayer level for the chosen class
+  // validEnemies is a subset of all enemies where the player's slayer level is sufficient AND matches the selected slayer class
   const validEnemies = AllEnemiesArray.filter((enemy) => {
-    // show enemies whose slayer level req is less than the player's level
+    // show enemies whose slayer level req is less than or equal to the player's level
     let levelOK = enemy.levelReqSlayer <= slayerLevel;
 
     // only choose enemies who match the assigned slayer class
@@ -142,13 +276,14 @@ export const getSlayerTask = (slayerMaster: Types.ISlayerMasterSummary, slayerXp
     return levelOK && classOK;
   });
 
+  //* if no enemies were found who match the class and have a slayer level req the player has satisfied, call this function again
   // if we don't find any enemies the player has a slayer level for, choose a new task by calling THIS function recursively
   if (!validEnemies.length) {
     console.log({ msg: `slayer task had to reroll`, target: FullTaskEntry, slayerLevel });
     return getSlayerTask(slayerMaster, slayerXp);
   }
 
-  // otherwise, we did find an acceptable subset of slayer tasks
+  //* otherwise, we did find an acceptable subset of slayer tasks, so choose one and assign it
   let SubsetTaskIndex = Math.floor(Math.random() * validEnemies.length);
   let SubsetTaskEntry = validEnemies[SubsetTaskIndex];
 

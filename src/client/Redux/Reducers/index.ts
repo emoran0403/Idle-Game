@@ -27,6 +27,7 @@ import NeckSlotSliceReducer from "../Slices/EquipmentSlices/NeckSlotSlice";
 import TwoHandSlotSliceReducer from "../Slices/EquipmentSlices/TwoHandSlotSlice";
 import HatchetsSliceReducer from "../Slices/SkillingEquipmentSlices/Hatchets";
 import PickaxesSliceReducer from "../Slices/SkillingEquipmentSlices/Pickaxes";
+import SlayerTaskReducer from "../Slices/SlayerTask";
 
 const AppReducer = combineReducers({
   Experience: experienceReducer,
@@ -57,6 +58,7 @@ const AppReducer = combineReducers({
   TwoHandSlot: TwoHandSlotSliceReducer,
   Hatchets: HatchetsSliceReducer,
   Pickaxes: PickaxesSliceReducer,
+  SlayerTask: SlayerTaskReducer,
 });
 
 // wrapping app reducer in another reducer so that we can hydrate with data from the database

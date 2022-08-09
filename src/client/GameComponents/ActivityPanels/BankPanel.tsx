@@ -24,6 +24,7 @@ const BankPanel = (props: Types.BankPanelProps) => {
     Mining: false,
     Fishing: false,
     Thieving: false,
+    Slayer: false,
     Farming: false,
     Firemaking: false,
     Hunter: false,

@@ -692,12 +692,30 @@ export type ICurrentQuestOptions =
   | `Stolen Hearts`;
 //@ ******************************* COMBAT *******************************
 
+export interface SlayerTaskSlice {
+  task: string;
+  amount: number;
+  taskCounter: number;
+}
+
 export interface ISlayerMasterSummary {
   name: string;
   displayName: string;
   location: string;
   levelReqCombat: number;
   levelReqSlayer: number;
+  smokingKills: {
+    complete: {
+      taskPoints: number;
+      task10: number;
+      task50: number;
+    };
+    incomplete: {
+      taskPoints: number;
+      task10: number;
+      task50: number;
+    };
+  };
   taskList: {
     task: string;
     min: number;
@@ -875,6 +893,7 @@ export interface AllState extends AllSlots {
   QuestPoints: IQuestPointsSlice;
   Quests_Lumbridge: LumbridgeQuestSlice;
   Quests_Draynor: DraynorQuestSlice;
+  SlayerTask: SlayerTaskSlice;
 }
 export interface IPlayerDataFromMongo extends AllState, IPlayerPayload {
   _id: string;
@@ -885,6 +904,7 @@ export interface AllStateQuestSlices {
 }
 export interface IWallet {
   coins: number;
+  slayerPoints: number;
 }
 export interface I_Inventory {
   CurrentInventory: string[];

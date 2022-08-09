@@ -16,7 +16,7 @@ import { listOfPickaxes } from "../../../../Constants/SkillingEquipment/Pickaxes
 import { ListOfPickpocketNPC } from "../../../../Constants/Thieving/Pickpocketing";
 import { ListOfPickpocketStalls } from "../../../../Constants/Thieving/Stalls";
 
-import { ListOfSlayerMasters } from "../../../../Constants/Slayer/SlayerMasters";
+import { getSlayerTask, ListOfSlayerMasters } from "../../../../Constants/Slayer/SlayerMasters";
 
 import { setResource } from "../../Redux/Slices/CurrentResource";
 import { setSkill } from "../../Redux/Slices/CurrentSkill";
@@ -24,6 +24,8 @@ import { setActivity } from "../../Redux/Slices/CurrentActivity";
 import { setTarget } from "../../Redux/Slices/CurrentTarget";
 import { setQuest } from "../../Redux/Slices/CurrentQuest";
 import { useState } from "react";
+import { setTask, skipTask } from "../../Redux/Slices/SlayerTask";
+import { removeSlayerPointsFromWallet } from "../../Redux/Slices/Wallet";
 
 const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
   const dispatch = useDispatch();
@@ -34,6 +36,8 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
   const pickaxesFromState = useSelector((state: Types.AllState) => state.Pickaxes) as Types.IPickaxesSlice;
   const currentLocationSummary = AllLocations[CurrentLocation] as Types.ILocationSummary;
   const Experience = useSelector((state: Types.AllState) => state.Experience) as Types.ISkillList;
+  const SlayerTask = useSelector((state: Types.AllState) => state.SlayerTask);
+  const Wallet = useSelector((state: Types.AllState) => state.Wallet);
 
   // define skill levels based off the players current experience
   let WoodcuttingLevel: number = getLevel(Experience.Woodcutting);
@@ -329,22 +333,69 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
     }
   };
 
+  /**
+   *
+   * @returns Returns JSX with buttons allowing the player to get a new slayer task, or to skip their task at the cost of slayer points
+   */
   const SlayerOptions = () => {
-    // choose the slayer master at the present location
+    // choose the slayer master at the present location (if any)
     const [masterHere] = ListOfSlayerMasters.filter((master) => master.location === CurrentLocation);
 
-    //! left off here
-    // if there is a master at the present location
+    /**
+     * This function gets a slayer task from the master at the present location, and sets those values to state.
+     * It could've been done inline on the click event, but defining it here and calling it inline looks cleaner.
+     */
+    const assignSlayerTask = () => {
+      let taskObject = getSlayerTask(masterHere, SlayerLevel);
+      dispatch(setTask({ task: taskObject.task, amount: taskObject.amount }));
+    };
+
+    /**
+     *
+     * This function removes the current slayer task, deducts the slayerPoint cost from the Wallet.
+     * Then it calls the assignSlayerTask, which gives a new task
+     */
+    const cancelTaskAndReroll = () => {
+      // check if the player has enough slayer points to cancel the task
+      if (Wallet.slayerPoints >= 30) {
+        // if so, deduce the slayer points
+        dispatch(removeSlayerPointsFromWallet(30));
+        // cancel the current task
+        dispatch(skipTask(``));
+        // and get a new one
+        assignSlayerTask();
+      }
+      // otherwise, do nothing (this outcome should be prevented by the button being disabled)
+    };
+
+    // if there is a master at the present location, then return JSX
+    // disable the `New Task` button if the player already has a task
+    // disable the `Skip Task` button if the player does not have a task
     if (masterHere) {
       return (
         <div role="button" onClick={() => handleToggleSkillPanel(`Slayer`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
           <h1 className="text-center">Slayer Level {SlayerLevel}</h1>
           <div className={`d-flex flex-row flex-wrap ${skillPanelsOpened.Slayer ? `` : `d-none`}`}>
-            <div>{}</div>
+            <div className="card-body text">
+              <h5 className="card-title text-center">{masterHere.displayName}</h5>
+              <div className="card-text d-flex flex-row justify-content-center">
+                <button onClick={() => assignSlayerTask()} className="btn btn-primary mx-1" disabled={SlayerTask.amount ? true : false}>
+                  New Task
+                </button>
+                <button
+                  onClick={() => cancelTaskAndReroll()}
+                  className="btn bbtn-primary mx-1"
+                  disabled={SlayerTask.amount && Wallet.slayerPoints >= 30 ? false : true}
+                >
+                  Skip Task
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       );
     } else {
+      // otherwise, there is no slayer master, so return nothing
       return;
     }
   };
@@ -582,6 +633,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
             {FishingOptions(currentLocationSummary.Skills.Fishing)}
             {MiningOptions(currentLocationSummary.Skills.Mining)}
             {ThievingOptions(currentLocationSummary.Skills.Thieving)}
+            {SlayerOptions()}
             {/* end of panel specific content */}
           </div>
         </div>
