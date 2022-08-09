@@ -475,6 +475,7 @@ export interface SkillPanels {
   Mining: boolean;
   Fishing: boolean;
   Thieving: boolean;
+  Slayer: boolean;
   Farming: boolean;
   Firemaking: boolean;
   Hunter: boolean;

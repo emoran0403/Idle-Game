@@ -16,6 +16,8 @@ import { listOfPickaxes } from "../../../../Constants/SkillingEquipment/Pickaxes
 import { ListOfPickpocketNPC } from "../../../../Constants/Thieving/Pickpocketing";
 import { ListOfPickpocketStalls } from "../../../../Constants/Thieving/Stalls";
 
+import { ListOfSlayerMasters } from "../../../../Constants/Slayer/SlayerMasters";
+
 import { setResource } from "../../Redux/Slices/CurrentResource";
 import { setSkill } from "../../Redux/Slices/CurrentSkill";
 import { setActivity } from "../../Redux/Slices/CurrentActivity";
@@ -46,6 +48,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
     Mining: false,
     Fishing: false,
     Thieving: false,
+    Slayer: false,
     Farming: false,
     Firemaking: false,
     Hunter: false,
@@ -318,6 +321,26 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
                 </div>
               </button>
             ))}
+          </div>
+        </div>
+      );
+    } else {
+      return;
+    }
+  };
+
+  const SlayerOptions = () => {
+    // choose the slayer master at the present location
+    const [masterHere] = ListOfSlayerMasters.filter((master) => master.location === CurrentLocation);
+
+    //! left off here
+    // if there is a master at the present location
+    if (masterHere) {
+      return (
+        <div role="button" onClick={() => handleToggleSkillPanel(`Slayer`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
+          <h1 className="text-center">Slayer Level {SlayerLevel}</h1>
+          <div className={`d-flex flex-row flex-wrap ${skillPanelsOpened.Slayer ? `` : `d-none`}`}>
+            <div>{}</div>
           </div>
         </div>
       );

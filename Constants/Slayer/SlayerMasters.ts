@@ -2,9 +2,9 @@ import * as Types from "../../Types";
 import { AllEnemiesArray } from "../Enemies/AllEnemies";
 import { getLevel } from "../XP Levels";
 
-//! when adding new masters, make sure to add enemies that match taskList[i].task
+//@ when adding new masters, make sure to add enemies that match each taskList task
 
-const slayermasterjacquelyn: Types.ISlayerMasterSummary = {
+export const slayermasterjacquelyn: Types.ISlayerMasterSummary = {
   name: `slayermasterjacquelyn`,
   displayName: `Jacquelyn Manslaughter`,
   location: `Lumbridge`,
@@ -26,7 +26,7 @@ const slayermasterjacquelyn: Types.ISlayerMasterSummary = {
   ],
 };
 
-const slayermastervannaka: Types.ISlayerMasterSummary = {
+export const slayermastervannaka: Types.ISlayerMasterSummary = {
   name: `slayermastervannaka`,
   displayName: `Vannaka`,
   location: `Edgeville`,
@@ -35,7 +35,7 @@ const slayermastervannaka: Types.ISlayerMasterSummary = {
   taskList: [],
 };
 
-const slayermastermazchna: Types.ISlayerMasterSummary = {
+export const slayermastermazchna: Types.ISlayerMasterSummary = {
   name: `slayermastermazchna`,
   displayName: `Mazchna`,
   location: `Canifis`,
@@ -44,7 +44,7 @@ const slayermastermazchna: Types.ISlayerMasterSummary = {
   taskList: [],
 };
 
-const slayermasterchaeldar: Types.ISlayerMasterSummary = {
+export const slayermasterchaeldar: Types.ISlayerMasterSummary = {
   name: `slayermasterchaeldar`,
   displayName: `Chaeldar`,
   location: `Zanaris`,
@@ -53,7 +53,7 @@ const slayermasterchaeldar: Types.ISlayerMasterSummary = {
   taskList: [],
 };
 
-const slayermastersumona: Types.ISlayerMasterSummary = {
+export const slayermastersumona: Types.ISlayerMasterSummary = {
   name: `slayermastersumona`,
   displayName: `Sumona`,
   location: `Pollnivneach`,
@@ -62,7 +62,7 @@ const slayermastersumona: Types.ISlayerMasterSummary = {
   taskList: [],
 };
 
-const slayermasterduradel: Types.ISlayerMasterSummary = {
+export const slayermasterduradel: Types.ISlayerMasterSummary = {
   name: `slayermasterduradel`,
   displayName: `Duradel`,
   location: `ShiloVillage`,
@@ -71,7 +71,7 @@ const slayermasterduradel: Types.ISlayerMasterSummary = {
   taskList: [],
 };
 
-const slayermasterkuradal: Types.ISlayerMasterSummary = {
+export const slayermasterkuradal: Types.ISlayerMasterSummary = {
   name: `slayermasterkuradal`,
   displayName: `Kuradal`,
   location: `AncientCavern`,
@@ -80,7 +80,7 @@ const slayermasterkuradal: Types.ISlayerMasterSummary = {
   taskList: [],
 };
 
-const slayermastermorvran: Types.ISlayerMasterSummary = {
+export const slayermastermorvran: Types.ISlayerMasterSummary = {
   name: `slayermastermorvran`,
   displayName: `Morvran`,
   location: `Prifddinas`,
@@ -89,7 +89,7 @@ const slayermastermorvran: Types.ISlayerMasterSummary = {
   taskList: [],
 };
 
-const slayermasterlaniakea: Types.ISlayerMasterSummary = {
+export const slayermasterlaniakea: Types.ISlayerMasterSummary = {
   name: `slayermasterlaniakea`,
   displayName: `Laniakea`,
   location: `AnachroniaBaseCamp`,
@@ -98,7 +98,7 @@ const slayermasterlaniakea: Types.ISlayerMasterSummary = {
   taskList: [],
 };
 
-const slayermastermandrith: Types.ISlayerMasterSummary = {
+export const slayermastermandrith: Types.ISlayerMasterSummary = {
   name: `slayermastermandrith`,
   displayName: `Mandrith`,
   location: `Wilderness`,
@@ -106,6 +106,19 @@ const slayermastermandrith: Types.ISlayerMasterSummary = {
   levelReqSlayer: 95,
   taskList: [],
 };
+
+export const ListOfSlayerMasters: Types.ISlayerMasterSummary[] = [
+  slayermasterjacquelyn,
+  slayermastervannaka,
+  slayermastermazchna,
+  slayermasterchaeldar,
+  slayermastersumona,
+  slayermasterduradel,
+  slayermasterkuradal,
+  slayermastermorvran,
+  slayermasterlaniakea,
+  slayermastermandrith,
+];
 
 export const getSlayerTask = (slayerMaster: Types.ISlayerMasterSummary, slayerXp: number) => {
   const slayerLevel = getLevel(slayerXp);
