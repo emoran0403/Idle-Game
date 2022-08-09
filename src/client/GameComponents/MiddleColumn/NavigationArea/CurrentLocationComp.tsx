@@ -10,11 +10,13 @@ const CurrentLocationComp = (props: Types.NoProps) => {
   // useEffect(() => {}, []);
 
   return (
-    <div className="text-center border border-dark border-2 rounded-3" style={{ width: `105px` }}>
+    <div className="text-center border border-dark border-2 rounded-3 h-100">
       <div>You are in </div>
-      <div className="text-wrap">{AllLocations[CurrentLocation as keyof Types.IAllLocations].displayName}</div>
+      <div className="text-wrap">{AllLocations[CurrentLocation as keyof Types.IAllLocations][`displayName`]}</div>
     </div>
   );
 };
 
 export default CurrentLocationComp;
+
+// style={{ width: `105px` }}

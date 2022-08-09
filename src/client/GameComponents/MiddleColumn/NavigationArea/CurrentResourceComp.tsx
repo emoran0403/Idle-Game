@@ -56,7 +56,7 @@ const CurrentResourceComp = (props: Types.NoProps) => {
   };
   // Types.IEnemyLocations
   return (
-    <div className="text-center border border-dark border-2 rounded-3" style={{ width: `130px` }}>
+    <div className="text-center border border-dark border-2 rounded-3 h-100">
       {Activity === `In combat` ? (
         <div className={returnBackgroundColor()}>
           <div>Fighting </div>
@@ -77,3 +77,5 @@ const CurrentResourceComp = (props: Types.NoProps) => {
 };
 
 export default CurrentResourceComp;
+
+// style={{ width: `130px` }}

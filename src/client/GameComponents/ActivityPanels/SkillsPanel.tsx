@@ -396,7 +396,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
                 </button>
                 <button
                   onClick={() => cancelTaskAndReroll()}
-                  className="btn bbtn-primary mx-1"
+                  className="btn btn-primary mx-1"
                   disabled={SlayerTask.amount && Wallet.slayerPoints >= 30 ? false : true}
                 >
                   Skip Task

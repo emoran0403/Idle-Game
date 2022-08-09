@@ -13,12 +13,24 @@ const NavigationArea = (props: Types.NavigationAreaCompProps) => {
   // useEffect(() => {}, []);
 
   return (
-    <div className="d-flex justify-content-evenly border border-dark border-2 rounded-3" style={{ height: "100px" }}>
-      <CurrentLocationComp />
-      <CurrentActivityComp />
-      <CurrentSkillComp />
-      <CurrentResourceComp />
-      <Resources newChatLog={props.newChatLog} />
+    <div className="">
+      <div className="row justify-content-between" style={{ height: "100px" }}>
+        <div className="col mh-100">
+          <CurrentLocationComp />
+        </div>
+        <div className="col-2 mh-100">
+          <CurrentActivityComp />
+        </div>
+        <div className="col-3 mh-100">
+          <CurrentSkillComp />
+        </div>
+        <div className="col mh-100">
+          <CurrentResourceComp />
+        </div>
+        <div className="col-3 mh-100">
+          <Resources newChatLog={props.newChatLog} />
+        </div>
+      </div>
     </div>
   );
 };

@@ -59,7 +59,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
    * @returns Returns a boolean, enabling or disabling the current target's button
    */
   const checkSlayerReqs = (enemy: Types.IEnemySummary) => {
-    return slayerLevel >= enemy.levelReqSlayer ? false : true;
+    return slayerLevel < enemy.levelReqSlayer;
   };
 
   const enemyButtonsJSX = (enemyObject: Types.IEnemyLocations) => {

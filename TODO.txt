@@ -50,13 +50,13 @@
 
 
 //# Fixes
-* add a check upon logging in that checks the inventory and sets the needsToBank component state appropriately
+* add a check to prevent xp from going over 200M
 * swap out all instances of handleNewChatLog with handleMultipleChatLogs
-* add chat logs for gaining xp in combat skills
-* content layout shift in levels component when xp is 10+ digits
-* inventory pushes down worn equipment component when it has items with long names
-* ^^== maybe fix this with just assets in inventory, and item names as title / alt text?
+* add assets for all items so that inventory component can work with images
 * grammar when fishing anchovies
+* DONE - inventory pushes down worn equipment component when it has items with long names
+* DONE - add a check upon logging in that checks the inventory and sets the needsToBank component state appropriately
+* DONE - content layout shift in levels component when xp is 10+ digits
 * DONE - abstract out Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations] into smaller variables in gameContainer
 * DONE - delegate skilling tick functions to their own function / component
 * DONE - can clean up chat logs in game component under woodcutting and fishing
@@ -82,15 +82,15 @@
               ></div>
 
 //# Quality of life
-* stop the event propogation from bubbling up in shop panel (i do not want the panel to collapse when a player buys an item)
 * add currentEquipment to redux state to persist outfits across logins
-* make resources in bank panel into collapsible panels - copy skillspanel
-* add dropping messages to ores if the player is dropping resources
 * Bank shows items in ascending level order
 *** need a way to reward those quest which give ANY xp
 *** maybe make the game choose the next available quest automatically
 *** get a changelog from github for the lobby
 *** offline progress
+* DONE - add dropping messages to ores if the player is dropping resources
+* DONE - make resources in bank panel into collapsible panels - copy skillspanel
+* DONE - stop the event propogation from bubbling up in shop panel (i do not want the panel to collapse when a player buys an item)
 * DONE - make the header in combat bigger to match those in bank, shop, and skilling panels
 * DONE - add collapsible panels to the bank and shop panels
 * DONE - quest is colored yellow when i have the combat level req = adding experience to useEffect in quest panel
