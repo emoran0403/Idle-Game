@@ -544,7 +544,6 @@ const GameContainer = (props: Types.GameContainerProps) => {
 
   //@ this will run every game tick (while in combat) and holds the logic for resolving combat turns
   const handleCombatTick = () => {
-    let testlocationlol = playerLocation as keyof Types.IAllEnemies;
     let arrayOfCombatStyleSkills = ["Attack", "Strength", "Defence", "Ranged", "Magic"];
     // console.log(`Combat Ticked`);
     // IF a target is selected, AND a combat skill is chosen, then we can proceed

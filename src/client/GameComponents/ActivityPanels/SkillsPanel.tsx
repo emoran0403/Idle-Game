@@ -25,7 +25,8 @@ import { setTarget } from "../../Redux/Slices/CurrentTarget";
 import { setQuest } from "../../Redux/Slices/CurrentQuest";
 import { useState } from "react";
 import { setTask, skipTask } from "../../Redux/Slices/SlayerTask";
-import { removeSlayerPointsFromWallet } from "../../Redux/Slices/Wallet";
+import { removeSlayerPoints } from "../../Redux/Slices/SlayerTask";
+import { AllEnemiesArray } from "../../../../Constants/Enemies/AllEnemies";
 
 const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
   const dispatch = useDispatch();
@@ -348,25 +349,30 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
     const assignSlayerTask = () => {
       let taskObject = getSlayerTask(masterHere, SlayerLevel);
       dispatch(setTask({ task: taskObject.task, amount: taskObject.amount }));
+      //@ send a chat log
     };
 
     /**
-     *
      * This function removes the current slayer task, deducts the slayerPoint cost from the Wallet.
-     * Then it calls the assignSlayerTask, which gives a new task
+     * Then it calls the assignSlayerTask, which gives a new task.
+     * It could've been done inline on the click event, but defining it here and calling it inline looks cleaner.
      */
     const cancelTaskAndReroll = () => {
       // check if the player has enough slayer points to cancel the task
       if (Wallet.slayerPoints >= 30) {
         // if so, deduce the slayer points
-        dispatch(removeSlayerPointsFromWallet(30));
+        dispatch(removeSlayerPoints(30));
         // cancel the current task
-        dispatch(skipTask(``));
+        dispatch(skipTask());
         // and get a new one
         assignSlayerTask();
       }
       // otherwise, do nothing (this outcome should be prevented by the button being disabled)
     };
+
+    // grab the enemy summary from the array of All Enemies
+    let copyOfAllEnemiesArray = [...AllEnemiesArray];
+    let [taskEnemySummary] = copyOfAllEnemiesArray.filter((enemy) => enemy.name === SlayerTask.task);
 
     // if there is a master at the present location, then return JSX
     // disable the `New Task` button if the player already has a task
@@ -377,7 +383,13 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
           <h1 className="text-center">Slayer Level {SlayerLevel}</h1>
           <div className={`d-flex flex-row flex-wrap ${skillPanelsOpened.Slayer ? `` : `d-none`}`}>
             <div className="card-body text">
-              <h5 className="card-title text-center">{masterHere.displayName}</h5>
+              {SlayerTask.amount && (
+                <h5 className="card-title text-center">
+                  {masterHere.displayName} has assigned you {SlayerTask.amount} {taskEnemySummary.displayName}
+                </h5>
+              )}
+              {!SlayerTask.amount && <h5 className="card-title text-center">{masterHere.displayName}</h5>}
+
               <div className="card-text d-flex flex-row justify-content-center">
                 <button onClick={() => assignSlayerTask()} className="btn btn-primary mx-1" disabled={SlayerTask.amount ? true : false}>
                   New Task

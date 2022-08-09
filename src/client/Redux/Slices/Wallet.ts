@@ -8,32 +8,12 @@ export const Wallet = createSlice({
   initialState: {
     // wallet only holds coins
     coins: 100,
-    slayerPoints: 0,
   },
   reducers: {
     // use this when we need to add coins to the wallet
     addCoinsToWallet: (state: Types.IFlatObjectOfNums, action) => {
       const amount: number = Number(action.payload); // this will be the number of coins added to the wallet
       state.coins += amount;
-    },
-
-    // use this when we need to add slayerPoints to the wallet
-    addSlayerPointsToWallet: (state: Types.IFlatObjectOfNums, action) => {
-      const amount: number = Number(action.payload); // this will be the number of slayerPoints added to the wallet
-      state.slayerPoints += amount;
-    },
-
-    // use this when we need to remove slayerPoints to the wallet
-    removeSlayerPointsFromWallet: (state: Types.IFlatObjectOfNums, action) => {
-      const amount: number = Number(action.payload); // this will be the number of slayerPoints removed to the wallet
-
-      if (state.slayerPoints - amount >= 0) {
-        // prevent the removal of an amount that would result in a negative
-        state.slayerPoints -= amount; // subtract the slayerPoints
-      } else {
-        // remove all of the slayerPoints, setting state to 0
-        state.slayerPoints = 0;
-      }
     },
 
     // use this when we need to remove coins from the bank
@@ -52,6 +32,6 @@ export const Wallet = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { addCoinsToWallet, addSlayerPointsToWallet, removeSlayerPointsFromWallet, removeFromWallet } = Wallet.actions;
+export const { addCoinsToWallet, removeFromWallet } = Wallet.actions;
 
 export default Wallet.reducer;

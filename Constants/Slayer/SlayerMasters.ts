@@ -279,7 +279,7 @@ export const getSlayerTask = (slayerMaster: Types.ISlayerMasterSummary, slayerXp
   //* if no enemies were found who match the class and have a slayer level req the player has satisfied, call this function again
   // if we don't find any enemies the player has a slayer level for, choose a new task by calling THIS function recursively
   if (!validEnemies.length) {
-    console.log({ msg: `slayer task had to reroll`, target: FullTaskEntry, slayerLevel });
+    // console.log({ msg: `slayer task had to reroll`, target: FullTaskEntry, slayerLevel });
     return getSlayerTask(slayerMaster, slayerXp);
   }
 
