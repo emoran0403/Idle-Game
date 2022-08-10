@@ -25,7 +25,7 @@ export const man: Types.IEnemySummary = {
   armor: 130,
   defence: 3,
   accuracy: 130,
-  maxHit: 0,
+  maxHit: 12,
 };
 export const goblin: Types.IEnemySummary = {
   name: `goblin`,
@@ -50,7 +50,7 @@ export const goblin: Types.IEnemySummary = {
   armor: 120,
   defence: 2,
   accuracy: 120,
-  maxHit: 0,
+  maxHit: 8,
 };
 export const giantspider: Types.IEnemySummary = {
   name: "giantspider",
@@ -75,7 +75,7 @@ export const giantspider: Types.IEnemySummary = {
   armor: 120,
   defence: 2,
   accuracy: 120,
-  maxHit: 0,
+  maxHit: 12,
 };
 export const chicken: Types.IEnemySummary = {
   name: "chicken",
@@ -100,7 +100,7 @@ export const chicken: Types.IEnemySummary = {
   armor: 110,
   defence: 1,
   accuracy: 110,
-  maxHit: 0,
+  maxHit: 4,
 };
 export const cow: Types.IEnemySummary = {
   name: "cow",
@@ -125,7 +125,7 @@ export const cow: Types.IEnemySummary = {
   armor: 130,
   defence: 3,
   accuracy: 130,
-  maxHit: 0,
+  maxHit: 12,
 };
 export const spider: Types.IEnemySummary = {
   name: "spider",
@@ -150,7 +150,7 @@ export const spider: Types.IEnemySummary = {
   armor: 110,
   defence: 1,
   accuracy: 10,
-  maxHit: 0,
+  maxHit: 4,
 };
 export const giantrat: Types.IEnemySummary = {
   name: "giantrat",
@@ -175,7 +175,7 @@ export const giantrat: Types.IEnemySummary = {
   armor: 150,
   defence: 5,
   accuracy: 150,
-  maxHit: 0,
+  maxHit: 20,
 };
 export const swampfrog: Types.IEnemySummary = {
   name: "swampfrog",
@@ -199,7 +199,7 @@ export const swampfrog: Types.IEnemySummary = {
   armor: 223,
   defence: 12,
   accuracy: 223,
-  maxHit: 0,
+  maxHit: 172,
 };
 export const farmer: Types.IEnemySummary = {
   name: "farmer",
@@ -224,7 +224,7 @@ export const farmer: Types.IEnemySummary = {
   armor: 150,
   defence: 5,
   accuracy: 150,
-  maxHit: 0,
+  maxHit: 30,
 };
 export const rat: Types.IEnemySummary = {
   name: "rat",
@@ -249,7 +249,7 @@ export const rat: Types.IEnemySummary = {
   armor: 110,
   defence: 1,
   accuracy: 110,
-  maxHit: 0,
+  maxHit: 4,
 };
 export const skeleton15: Types.IEnemySummary = {
   name: "skeleton15",
@@ -274,7 +274,7 @@ export const skeleton15: Types.IEnemySummary = {
   armor: 213,
   defence: 11,
   accuracy: 213,
-  maxHit: 0,
+  maxHit: 44,
 };
 export const skeleton32: Types.IEnemySummary = {
   name: "skeleton32",
@@ -299,7 +299,7 @@ export const skeleton32: Types.IEnemySummary = {
   armor: 354,
   defence: 23,
   accuracy: 354,
-  maxHit: 0,
+  maxHit: 92,
 };
 export const zombie12: Types.IEnemySummary = {
   name: "zombie12",
@@ -324,7 +324,7 @@ export const zombie12: Types.IEnemySummary = {
   armor: 191,
   defence: 9,
   accuracy: 191,
-  maxHit: 0,
+  maxHit: 36,
 };
 export const zombie29: Types.IEnemySummary = {
   name: "zombie29",
@@ -349,7 +349,7 @@ export const zombie29: Types.IEnemySummary = {
   armor: 329,
   defence: 21,
   accuracy: 329,
-  maxHit: 0,
+  maxHit: 105,
 };
 export const ghost25: Types.IEnemySummary = {
   name: "ghost25",
@@ -374,7 +374,7 @@ export const ghost25: Types.IEnemySummary = {
   armor: 292,
   defence: 18,
   accuracy: 292,
-  maxHit: 0,
+  maxHit: 72,
 };
 export const blackknight: Types.IEnemySummary = {
   name: "blackknight",
@@ -398,7 +398,7 @@ export const blackknight: Types.IEnemySummary = {
   armor: 341,
   defence: 22,
   accuracy: 341,
-  maxHit: 0,
+  maxHit: 110,
 };
 export const giantbat: Types.IEnemySummary = {
   name: "giantbat",
@@ -422,7 +422,7 @@ export const giantbat: Types.IEnemySummary = {
   armor: 486,
   defence: 32,
   accuracy: 486,
-  maxHit: 0,
+  maxHit: 128,
 };
 export const warpedbat: Types.IEnemySummary = {
   name: "warpedbat",
@@ -446,7 +446,7 @@ export const warpedbat: Types.IEnemySummary = {
   armor: 223,
   defence: 12,
   accuracy: 223,
-  maxHit: 0,
+  maxHit: 48,
 };
 export const cavebug8: Types.IEnemySummary = {
   name: "cavebug8",
@@ -470,7 +470,7 @@ export const cavebug8: Types.IEnemySummary = {
   armor: 160,
   defence: 6,
   accuracy: 160,
-  maxHit: 0,
+  maxHit: 24,
 };
 export const cavebug12: Types.IEnemySummary = {
   name: "cavebug12",
@@ -494,7 +494,7 @@ export const cavebug12: Types.IEnemySummary = {
   armor: 191,
   defence: 9,
   accuracy: 191,
-  maxHit: 0,
+  maxHit: 36,
 };
 export const caveslime: Types.IEnemySummary = {
   name: "caveslime",
@@ -518,7 +518,7 @@ export const caveslime: Types.IEnemySummary = {
   armor: 304,
   defence: 19,
   accuracy: 304,
-  maxHit: 0,
+  maxHit: 76,
 };
 export const bigfrog: Types.IEnemySummary = {
   name: "bigfrog",
@@ -542,7 +542,7 @@ export const bigfrog: Types.IEnemySummary = {
   armor: 395,
   defence: 26,
   accuracy: 395,
-  maxHit: 0,
+  maxHit: 104,
 };
 export const giantfrog: Types.IEnemySummary = {
   name: "giantfrog",
@@ -566,7 +566,7 @@ export const giantfrog: Types.IEnemySummary = {
   armor: 486,
   defence: 32,
   accuracy: 486,
-  maxHit: 0,
+  maxHit: 128,
 };
 export const cavecrawler53: Types.IEnemySummary = {
   name: "cavecrawler53",
@@ -590,7 +590,7 @@ export const cavecrawler53: Types.IEnemySummary = {
   armor: 590,
   defence: 38,
   accuracy: 590,
-  maxHit: 0,
+  maxHit: 152,
 };
 export const cavecrawler78: Types.IEnemySummary = {
   name: "cavecrawler78",
@@ -614,7 +614,7 @@ export const cavecrawler78: Types.IEnemySummary = {
   armor: 928,
   defence: 53,
   accuracy: 928,
-  maxHit: 0,
+  maxHit: 224,
 };
 export const rockslug42: Types.IEnemySummary = {
   name: "rockslug42",
@@ -638,7 +638,7 @@ export const rockslug42: Types.IEnemySummary = {
   armor: 454,
   defence: 30,
   accuracy: 454,
-  maxHit: 0,
+  maxHit: 120,
 };
 export const rockslug49: Types.IEnemySummary = {
   name: "rockslug49",
@@ -662,7 +662,7 @@ export const rockslug49: Types.IEnemySummary = {
   armor: 536,
   defence: 35,
   accuracy: 536,
-  maxHit: 0,
+  maxHit: 140,
 };
 export const wallbeast: Types.IEnemySummary = {
   name: "wallbeast",
@@ -685,8 +685,8 @@ export const wallbeast: Types.IEnemySummary = {
   },
   armor: 519,
   accuracy: 519,
-  maxHit: 0,
   defence: 34,
+  maxHit: 136,
 };
 export const warpedcockroach: Types.IEnemySummary = {
   name: "warpedcockroach",
@@ -709,8 +709,8 @@ export const warpedcockroach: Types.IEnemySummary = {
   },
   armor: 110,
   accuracy: 110,
-  maxHit: 0,
   defence: 1,
+  maxHit: 110,
 };
 export const corpsespider: Types.IEnemySummary = {
   name: "corpsespider",
@@ -733,8 +733,8 @@ export const corpsespider: Types.IEnemySummary = {
   },
   armor: 130,
   accuracy: 130,
-  maxHit: 0,
   defence: 3,
+  maxHit: 12,
 };
 export const warpedfly: Types.IEnemySummary = {
   name: "warpedfly",
@@ -757,8 +757,8 @@ export const warpedfly: Types.IEnemySummary = {
   },
   armor: 150,
   accuracy: 150,
-  maxHit: 0,
   defence: 5,
+  maxHit: 20,
 };
 export const crawlingcorpsetorso: Types.IEnemySummary = {
   name: "crawlingcorpsetorso",
@@ -781,8 +781,8 @@ export const crawlingcorpsetorso: Types.IEnemySummary = {
   },
   armor: 171,
   accuracy: 171,
-  maxHit: 0,
   defence: 7,
+  maxHit: 28,
 };
 export const warpedrat: Types.IEnemySummary = {
   name: "warpedrat",
@@ -805,8 +805,8 @@ export const warpedrat: Types.IEnemySummary = {
   },
   armor: 191,
   accuracy: 191,
-  maxHit: 0,
   defence: 9,
+  maxHit: 36,
 };
 export const corpsearcher: Types.IEnemySummary = {
   name: "corpsearcher",
@@ -829,8 +829,8 @@ export const corpsearcher: Types.IEnemySummary = {
   },
   armor: 234,
   accuracy: 234,
-  maxHit: 0,
   defence: 13,
+  maxHit: 52,
 };
 export const skoblin: Types.IEnemySummary = {
   name: "skoblin",
@@ -853,8 +853,8 @@ export const skoblin: Types.IEnemySummary = {
   },
   armor: 245,
   accuracy: 245,
-  maxHit: 0,
   defence: 14,
+  maxHit: 56,
 };
 export const corpsemage: Types.IEnemySummary = {
   name: "corpsemage",
@@ -877,8 +877,8 @@ export const corpsemage: Types.IEnemySummary = {
   },
   armor: 257,
   accuracy: 257,
-  maxHit: 0,
   defence: 15,
+  maxHit: 60,
 };
 
 export const AllEnemiesArray = [
