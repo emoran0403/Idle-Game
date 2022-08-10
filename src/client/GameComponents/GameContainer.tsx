@@ -625,7 +625,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
       // define the enemy for readability
       let thisEnemy = Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations];
 
-      console.log({ CurrentStyle, damageToPlayer, damageToEnemy, playerLifePoints, targetLifePoints, healTimeRemaining });
+      console.log({ SlayerTask, CurrentStyle, damageToPlayer, damageToEnemy, playerLifePoints, targetLifePoints, healTimeRemaining });
 
       // IF the hit would kill the target
       if (targetLifePoints - damageToEnemy <= 0) {
@@ -674,8 +674,11 @@ const GameContainer = (props: Types.GameContainerProps) => {
           }
         }
         //* if the current enemy's slayer classes include the current slayer task, proceed.  otherwise, do nothing
+        //! double check which array needs to be the outer array - which slayer classes are more general???
+        // an enemy may belong to more than one class
+        // masters assign only one class at a time
         // @ts-ignore
-        if (thisEnemy[`slayerClass`].includes(SlayerTask.task)) {
+        if (thisEnemy[`slayerClass`].some((enemyClass) => SlayerTask[`task`].includes(enemyClass))) {
           handleSlayerTask(thisEnemy);
         }
 
@@ -698,7 +701,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
       // if the player will have completed their healing time, set that timer to zero and their lifepoints to full health
       console.log({ msg: "player is dead lols", playerLifePoints, targetLifePoints, healTimeRemaining });
 
-      if (healTimeRemaining === 1) {
+      if (healTimeRemaining <= 1) {
         setHealTimeRemaining(0);
         setPlayerLifePoints(getLevel(Experience[`Constitution`]) * 100);
       } else {

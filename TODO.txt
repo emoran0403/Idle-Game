@@ -19,10 +19,11 @@
 //! SUPPORT - skills that just take some time to complete
 //# AGILITY
 //# SLAYER
+@! slayer task assigns name (skeleton32) when it should be a general task instead
 @ healing seems to work
 @ damage to player seems to work
-@ damage to enemy is not working - forgot to add an else statements
-@! player damage is waaay too low LOL
+@ FIXED damage to enemy is not working - forgot to add an else statements
+@ FIXED - player damage is waaay too low LOL
 @! equipping headslot items - Uncaught TypeError: Cannot read properties of undefined (reading 'styleBonusMelee')
 --- insdie switch statement in combat damage function
 * DONE - add a check in combat to see if the player has chosen a slayer task monster

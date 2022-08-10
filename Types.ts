@@ -693,7 +693,7 @@ export type ICurrentQuestOptions =
 //@ ******************************* COMBAT *******************************
 
 export interface SlayerTaskSlice {
-  task: string;
+  task: string[];
   amount: number;
   taskCounter: number;
   taskMaster: string;

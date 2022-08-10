@@ -241,7 +241,7 @@ export const ListOfSlayerMasters: Types.ISlayerMasterSummary[] = [
 ];
 
 interface ITaskObj {
-  task: string;
+  task: string[];
   amount: number;
 }
 /**
@@ -256,7 +256,7 @@ export const getSlayerTask = (slayerMaster: Types.ISlayerMasterSummary, slayerXp
 
   // define the return object
   let taskObj = {
-    task: ``,
+    task: [``],
     amount: 0,
   };
 
@@ -288,7 +288,7 @@ export const getSlayerTask = (slayerMaster: Types.ISlayerMasterSummary, slayerXp
   let SubsetTaskEntry = validEnemies[SubsetTaskIndex];
 
   // assign the task
-  taskObj.task = SubsetTaskEntry.name;
+  taskObj.task = SubsetTaskEntry.slayerClass;
 
   // assign a random amount within the min and max range defined for each entry
   taskObj.amount = Math.floor(Math.random() * (FullTaskEntry.max - FullTaskEntry.min) + FullTaskEntry.min);

@@ -4,7 +4,7 @@ import * as Types from "../../../../Types";
 export const SlayerTask = createSlice({
   name: "SlayerTask",
   initialState: {
-    task: `none`,
+    task: [`none`],
     taskMaster: ``,
     amount: 0,
     taskCounter: 0,
@@ -25,7 +25,7 @@ export const SlayerTask = createSlice({
 
       // if that was the last enemy on task, mark the task as complete, and increment the task counter
       if (state.amount === 0) {
-        state.task = `none`;
+        state.task = [`none`];
         state.taskCounter += 1;
         state.taskMaster = ``;
 
@@ -36,7 +36,7 @@ export const SlayerTask = createSlice({
 
     // use this when the task is skipped
     skipTask: (state) => {
-      state.task = `none`;
+      state.task = [`none`];
       state.taskMaster = ``;
       state.amount = 0;
     },

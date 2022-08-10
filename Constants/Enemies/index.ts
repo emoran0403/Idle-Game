@@ -189,6 +189,9 @@ export const resolveCombat = (
     // damage = randomDamageScaler * maxHit
     let randomDamageScaler: number = Math.random();
 
+    // calculate the damage done to the target based on the player's style
+
+    //! update damage when implementing runes and spells and arrows for ammunition
     switch (playerStyle) {
       case `melee`:
         boosts =
@@ -201,12 +204,13 @@ export const resolveCombat = (
           RingSlot[Equipment[`RingSlot`] as keyof Types.IArmorSlotRing][`styleBonusMelee`] +
           TwoHandSlot[Equipment[`TwoHandSlot`] as keyof Types.IArmorSlotTwoHand][`styleBonusMelee`];
 
-        if (Math.floor(randomDamageScaler * (3.75 * getLevel(Experience[`Strength`]) + 1.5 * boosts))) {
-          // assign the damage to the result object
-          resultObj[`damageToEnemy`] = Math.floor(randomDamageScaler * ((3.75 * getLevel(Experience[`Strength`]) + 1.5 * boosts) * 10));
-        } else {
-          resultObj[`damageToEnemy`] = 1;
-        }
+        // assign the damage to the result object
+        resultObj[`damageToEnemy`] = Math.floor(
+          randomDamageScaler *
+            ((3.75 * getLevel(Experience[`Strength`]) + 1.5 * TwoHandSlot[Equipment[`TwoHandSlot`] as keyof Types.IArmorSlotTwoHand][`damage`] * boosts) * 10)
+        );
+
+        break;
 
       case `ranged`:
         boosts =
@@ -219,11 +223,13 @@ export const resolveCombat = (
           RingSlot[Equipment[`RingSlot`] as keyof Types.IArmorSlotRing][`styleBonusRanged`] +
           TwoHandSlot[Equipment[`TwoHandSlot`] as keyof Types.IArmorSlotTwoHand][`styleBonusRanged`];
 
-        if (Math.floor(randomDamageScaler * (3.75 * getLevel(Experience[`Ranged`]) + 1.5 * boosts))) {
-          resultObj[`damageToEnemy`] = Math.floor(randomDamageScaler * ((3.75 * getLevel(Experience[`Ranged`]) + 1.5 * boosts) * 10));
-        } else {
-          resultObj[`damageToEnemy`] = 1;
-        }
+        resultObj[`damageToEnemy`] = Math.floor(
+          randomDamageScaler *
+            ((3.75 * getLevel(Experience[`Ranged`]) + 14.4 * TwoHandSlot[Equipment[`TwoHandSlot`] as keyof Types.IArmorSlotTwoHand][`tier`] * boosts) * 10)
+        );
+
+        break;
+
       default:
         boosts =
           BackSlot[Equipment[`BackSlot`] as keyof Types.IArmorSlotBack][`styleBonusMagic`] +
@@ -235,11 +241,10 @@ export const resolveCombat = (
           RingSlot[Equipment[`RingSlot`] as keyof Types.IArmorSlotRing][`styleBonusMagic`] +
           TwoHandSlot[Equipment[`TwoHandSlot`] as keyof Types.IArmorSlotTwoHand][`styleBonusMagic`];
 
-        if (Math.floor(randomDamageScaler * (3.75 * getLevel(Experience[`Magic`]) + 1.5 * boosts))) {
-          resultObj[`damageToEnemy`] = Math.floor(randomDamageScaler * ((3.75 * getLevel(Experience[`Magic`]) + 1.5 * boosts) * 10));
-        } else {
-          resultObj[`damageToEnemy`] = 1;
-        }
+        resultObj[`damageToEnemy`] = Math.floor(
+          randomDamageScaler *
+            ((3.75 * getLevel(Experience[`Magic`]) + 14.4 * TwoHandSlot[Equipment[`TwoHandSlot`] as keyof Types.IArmorSlotTwoHand][`tier`] * boosts) * 10)
+        );
     }
   } else {
     // if the game rolled higher than the hitchance, the player missed, so return 0 damage

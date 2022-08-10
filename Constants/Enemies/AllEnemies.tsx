@@ -710,7 +710,7 @@ export const warpedcockroach: Types.IEnemySummary = {
   armor: 110,
   accuracy: 110,
   defence: 1,
-  maxHit: 110,
+  maxHit: 4,
 };
 export const corpsespider: Types.IEnemySummary = {
   name: "corpsespider",
