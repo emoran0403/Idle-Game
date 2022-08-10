@@ -50,6 +50,7 @@
 
 
 //# Fixes
+* update get enemy object to scrape max hit from the wiki
 * add a check to prevent xp from going over 200M
 * swap out all instances of handleNewChatLog with handleMultipleChatLogs
 * add assets for all items so that inventory component can work with images

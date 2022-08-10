@@ -750,6 +750,7 @@ export interface IEnemySummary {
   armor: number;
   defence: number;
   accuracy: number;
+  maxHit: number;
 }
 //* copy this as more locations are added
 export interface ILumbridgeEnemies {

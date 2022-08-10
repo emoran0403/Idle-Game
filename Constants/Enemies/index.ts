@@ -102,7 +102,7 @@ export const Enemies: Types.IAllEnemies = {
   LumbridgeCatacombs,
 };
 
-export const playerAttacksTarget = (
+export const resolveCombat = (
   Target: Types.ICurrentTargetOptions,
   playerStyle: Types.ICurrentStyleOptions,
   playerLocation: Types.ICurrentLocationOptions,
@@ -177,8 +177,8 @@ export const playerAttacksTarget = (
   /******************************************************************************************************* */
 
   // #5 determine if the player hits the enemy
-  // the player may have a hitchance greater than 100%, so return true if that occurs
-  // OR, roll 1-100, and if the player hitchance is greater, return true
+  // the player may have a hitchance greater than 100%, so calculate damage if that occurs
+  // OR, roll 1-100, and if the player hitchance is greater, calculate damage
   if (hitChance >= 100 || Math.floor(Math.random() * 100) < hitChance) {
     // #6 calculate the damage done to the target
     //* boosts are available on capes and certain jewellery, default to 0 if no boosts present
@@ -202,9 +202,10 @@ export const playerAttacksTarget = (
           TwoHandSlot[Equipment[`TwoHandSlot`] as keyof Types.IArmorSlotTwoHand][`styleBonusMelee`];
 
         if (Math.floor(randomDamageScaler * (3.75 * getLevel(Experience[`Strength`]) + 1.5 * boosts))) {
-          return Math.floor(randomDamageScaler * ((3.75 * getLevel(Experience[`Strength`]) + 1.5 * boosts) * 10));
+          // assign the damage to the result object
+          resultObj[`damageToEnemy`] = Math.floor(randomDamageScaler * ((3.75 * getLevel(Experience[`Strength`]) + 1.5 * boosts) * 10));
         } else {
-          return 1;
+          resultObj[`damageToEnemy`] = 1;
         }
 
       case `ranged`:
@@ -219,9 +220,9 @@ export const playerAttacksTarget = (
           TwoHandSlot[Equipment[`TwoHandSlot`] as keyof Types.IArmorSlotTwoHand][`styleBonusRanged`];
 
         if (Math.floor(randomDamageScaler * (3.75 * getLevel(Experience[`Ranged`]) + 1.5 * boosts))) {
-          return Math.floor(randomDamageScaler * ((3.75 * getLevel(Experience[`Ranged`]) + 1.5 * boosts) * 10));
+          resultObj[`damageToEnemy`] = Math.floor(randomDamageScaler * ((3.75 * getLevel(Experience[`Ranged`]) + 1.5 * boosts) * 10));
         } else {
-          return 1;
+          resultObj[`damageToEnemy`] = 1;
         }
       default:
         boosts =
@@ -235,23 +236,60 @@ export const playerAttacksTarget = (
           TwoHandSlot[Equipment[`TwoHandSlot`] as keyof Types.IArmorSlotTwoHand][`styleBonusMagic`];
 
         if (Math.floor(randomDamageScaler * (3.75 * getLevel(Experience[`Magic`]) + 1.5 * boosts))) {
-          return Math.floor(randomDamageScaler * ((3.75 * getLevel(Experience[`Magic`]) + 1.5 * boosts) * 10));
+          resultObj[`damageToEnemy`] = Math.floor(randomDamageScaler * ((3.75 * getLevel(Experience[`Magic`]) + 1.5 * boosts) * 10));
         } else {
-          return 1;
+          resultObj[`damageToEnemy`] = 1;
         }
     }
   }
   // if the game rolled higher than the hitchance, the player missed, so return 0 damage
-  return 0;
-};
+  resultObj[`damageToEnemy`] = 0;
 
-//! put this functionality into the other combat function and return an object with the damages
-/**
- *
- * @param playerArmor The currentEquipment of the player
- */
-export const targetAttacksPlayer = (playerArmor: Types.ICurrentEquipment) => {
-  //# calculate affinity
-  // for players, this is alwyas 55
-  let affinity: number = 55;
+  //@ calculation for damageToPlayer below
+
+  //# calculate affinity, accuracy, and defence rating of the player
+  // for players, affinity is alwyas 55
+  let e_affinity: number = 55;
+  // enemy accuracy is hardcoded in their info, no calculation needed
+  let e_accuracy: number = Enemy[`accuracy`];
+  // sum the player's armor rating
+  let playerDefenceRating: number =
+    BackSlot[Equipment[`BackSlot`] as keyof Types.IArmorSlotBack][`armor`] +
+    BodySlot[Equipment[`BodySlot`] as keyof Types.IArmorSlotBody][`armor`] +
+    HandsSlot[Equipment[`HandsSlot`] as keyof Types.IArmorSlotHands][`armor`] +
+    HeadSlot[Equipment[`HeadSlot`] as keyof Types.IArmorSlotHead][`armor`] +
+    LegsSlot[Equipment[`HeadSlot`] as keyof Types.IArmorSlotLegs][`armor`] +
+    NeckSlot[Equipment[`NeckSlot`] as keyof Types.IArmorSlotNeck][`armor`] +
+    RingSlot[Equipment[`RingSlot`] as keyof Types.IArmorSlotRing][`armor`] +
+    TwoHandSlot[Equipment[`TwoHandSlot`] as keyof Types.IArmorSlotTwoHand][`armor`];
+
+  // #4 calculate enemies hitChance
+  let e_hitChance: number = e_affinity * (e_accuracy / playerDefenceRating);
+
+  // the enemy may have a hitchance greater than 100%, so calculate damage if that occurs
+  // OR, roll 1-100, and if the enemy hitchance is greater, calculate damage
+  if (e_hitChance >= 100 || Math.floor(Math.random() * 100) < e_hitChance) {
+    //* calculate damage here
+    let maxDamage = Enemy.maxHit;
+    let e_randomDamageScaler: number = Math.random();
+
+    // choose a random amount of damage between 0 and the enemy's max damage
+    let dmgInRange: number = maxDamage * e_randomDamageScaler;
+
+    // calculate the player's damage reduction percent from their armor
+    let playerDamageReductionPercent: number =
+      (BackSlot[Equipment[`BackSlot`] as keyof Types.IArmorSlotBack][`damageReduction`] +
+        BodySlot[Equipment[`BodySlot`] as keyof Types.IArmorSlotBody][`damageReduction`] +
+        HandsSlot[Equipment[`HandsSlot`] as keyof Types.IArmorSlotHands][`damageReduction`] +
+        HeadSlot[Equipment[`HeadSlot`] as keyof Types.IArmorSlotHead][`damageReduction`] +
+        LegsSlot[Equipment[`HeadSlot`] as keyof Types.IArmorSlotLegs][`damageReduction`] +
+        NeckSlot[Equipment[`NeckSlot`] as keyof Types.IArmorSlotNeck][`damageReduction`] +
+        RingSlot[Equipment[`RingSlot`] as keyof Types.IArmorSlotRing][`damageReduction`]) /
+      100;
+
+    //apply the player's damage reduction from their armor, and assign the result to the resultObj
+    resultObj[`damageToPlayer`] = dmgInRange - dmgInRange * playerDamageReductionPercent;
+  }
+
+  return resultObj;
 };

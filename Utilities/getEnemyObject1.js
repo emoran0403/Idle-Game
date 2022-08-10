@@ -240,6 +240,7 @@
         return null;
       }
     })(),
+    maxHit: null,
   };
 
   console.log(ENEMYINFO);

@@ -32,7 +32,7 @@ import { EmptyQuestRewards } from "../../../Constants/Quests";
 
 // combat
 import { didPlayerLevelUp, getLevel } from "../../../Constants/XP Levels";
-import { Enemies, playerAttacksTarget } from "../../../Constants/Enemies";
+import { Enemies, resolveCombat } from "../../../Constants/Enemies";
 
 // woodcutting
 import { addLogToBank } from "../Redux/Slices/BankSlices/LogsSlice";
@@ -586,14 +586,14 @@ const GameContainer = (props: Types.GameContainerProps) => {
     // IF a target is selected, AND a combat skill is chosen, AND the player is not healing, then we can proceed
 
     if (Target !== `none` && arrayOfCombatStyleSkills.includes(CurrentSkill) && healTimeRemaining === 0) {
-      // calculate the damage done to the target
-      let damageDoneToTarget = playerAttacksTarget(Target, CurrentStyle, playerLocation, Experience, currentEquipment);
+      // call resolveCombat and destructure the properties
+      let { damageToPlayer, damageToEnemy } = resolveCombat(Target, CurrentStyle, playerLocation, Experience, currentEquipment);
       // define the enemy for readability
       let thisEnemy = Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations];
       // console.log(`you hit: ${damageDoneToTarget}`);
 
       // IF the hit would kill the target
-      if (targetLifePoints - damageDoneToTarget <= 0) {
+      if (targetLifePoints - damageToEnemy <= 0) {
         // then reset the lifepoints
         setTargetLifePoints(thisEnemy[`lifePoints`]);
         // award the combat style xp
@@ -638,7 +638,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
         handleMultipleChatLogs(combatMessages, combatMessagesTags);
       } else {
         //* otherwise, apply the damage to the target
-        setTargetLifePoints(targetLifePoints - damageDoneToTarget);
+        setTargetLifePoints(targetLifePoints - damageToEnemy);
 
         //! calculate and apply the damage done to the player
         //! if the damage would kill the player, setHealTimeRemaining(24);
