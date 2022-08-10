@@ -19,7 +19,8 @@
 //! SUPPORT - skills that just take some time to complete
 //# AGILITY
 //# SLAYER
-@! slayer task assigns name (skeleton32) when it should be a general task instead
+@ FIXED - when there is no task, a 0 shows up in skills panel lol == the check for task amount now checks for an amount >0 lool
+@ FIXED - slayer task assigns name (skeleton32) when it should be a general task instead == task is now the actual task string, and it checks this against the slayer task of the enemy
 @ healing seems to work
 @ damage to player seems to work
 @ FIXED damage to enemy is not working - forgot to add an else statements

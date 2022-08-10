@@ -625,7 +625,16 @@ const GameContainer = (props: Types.GameContainerProps) => {
       // define the enemy for readability
       let thisEnemy = Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations];
 
-      console.log({ SlayerTask, CurrentStyle, damageToPlayer, damageToEnemy, playerLifePoints, targetLifePoints, healTimeRemaining });
+      console.log({
+        Task: SlayerTask.task[0],
+        Amount: SlayerTask.amount,
+        CurrentStyle,
+        damageToPlayer,
+        damageToEnemy,
+        playerLifePoints,
+        targetLifePoints,
+        healTimeRemaining,
+      });
 
       // IF the hit would kill the target
       if (targetLifePoints - damageToEnemy <= 0) {
@@ -677,7 +686,8 @@ const GameContainer = (props: Types.GameContainerProps) => {
         //! double check which array needs to be the outer array - which slayer classes are more general???
         // an enemy may belong to more than one class
         // masters assign only one class at a time
-        // @ts-ignore
+        //! left off here
+        // @ts-ignore not sure why this is necessary :( is it related to the ts issue where i've needed to switch to [] notation?
         if (thisEnemy[`slayerClass`].some((enemyClass) => SlayerTask[`task`].includes(enemyClass))) {
           handleSlayerTask(thisEnemy);
         }

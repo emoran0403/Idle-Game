@@ -370,10 +370,6 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
       // otherwise, do nothing (this outcome should be prevented by the button being disabled)
     };
 
-    // grab the enemy summary from the array of All Enemies
-    let copyOfAllEnemiesArray = [...AllEnemiesArray];
-    let [taskEnemySummary] = copyOfAllEnemiesArray.filter((enemy) => enemy.name === SlayerTask.task);
-
     // if there is a master at the present location, then return JSX
     // disable the `New Task` button if the player already has a task
     // disable the `Skip Task` button if the player does not have a task
@@ -383,9 +379,9 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
           <h1 className="text-center">Slayer Level {SlayerLevel}</h1>
           <div className={`d-flex flex-row flex-wrap ${skillPanelsOpened.Slayer ? `` : `d-none`}`}>
             <div className="card-body text">
-              {SlayerTask.amount && (
+              {SlayerTask.amount > 0 && (
                 <h5 className="card-title text-center">
-                  {masterHere.displayName} has assigned you {SlayerTask.amount} {taskEnemySummary.displayName}
+                  {masterHere.displayName} has assigned you {SlayerTask.amount} {SlayerTask.task}
                 </h5>
               )}
               {!SlayerTask.amount && <h5 className="card-title text-center">{masterHere.displayName}</h5>}
