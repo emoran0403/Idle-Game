@@ -696,6 +696,8 @@ export interface SlayerTaskSlice {
   task: string;
   amount: number;
   taskCounter: number;
+  taskMaster: string;
+  slayerPoints: number;
 }
 
 export interface ISlayerMasterSummary {

@@ -19,11 +19,16 @@
 //! SUPPORT - skills that just take some time to complete
 //# AGILITY
 //# SLAYER
-* implement a function calculating damage done to the player
-* implement player lifepoints in game GameContainer
-* have combat tick respect player life points
- - if player is dead, start healing, and heal to full before doing more combat
-* add a check in combat to see if the player has chosen a slayer task monster
+@ healing seems to work
+@ damage to player seems to work
+@ damage to enemy is not working - forgot to add an else statements
+@! player damage is waaay too low LOL
+@! equipping headslot items - Uncaught TypeError: Cannot read properties of undefined (reading 'styleBonusMelee')
+--- insdie switch statement in combat damage function
+* DONE - add a check in combat to see if the player has chosen a slayer task monster
+* DONE - have combat tick respect player life points
+* DONE - implement player lifepoints in game GameContainer
+* DONE - implement a function calculating damage done to the player
 * DONE - skillspanel needs a slayer panel where the player can get a slayer task from the master in that area
 * DONE - add state slice to track the slayer task
 * DONE - add function to randomly choose a task, if a task is chosen with a too high lvl, then reroll

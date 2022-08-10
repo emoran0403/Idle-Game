@@ -33,6 +33,8 @@ import { EmptyQuestRewards } from "../../../Constants/Quests";
 // combat
 import { didPlayerLevelUp, getLevel } from "../../../Constants/XP Levels";
 import { Enemies, resolveCombat } from "../../../Constants/Enemies";
+// slayer
+import { decrementTaskAmount } from "../Redux/Slices/SlayerTask";
 
 // woodcutting
 import { addLogToBank } from "../Redux/Slices/BankSlices/LogsSlice";
@@ -55,6 +57,7 @@ import { ListOfPickpocketStalls } from "../../../Constants/Thieving/Stalls";
 // misc imports
 import { saveState } from "../Redux/store";
 import { TOKEN_KEY } from "../ClientUtils/Fetcher";
+import { ListOfSlayerMasters } from "../../../Constants/Slayer/SlayerMasters";
 
 const GameContainer = (props: Types.GameContainerProps) => {
   const dispatch = useDispatch();
@@ -73,6 +76,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
   const bank_fish = useSelector((state: Types.AllState) => state.Bank_Fish) as Types.IFishBankSlice;
   const bank_ores = useSelector((state: Types.AllState) => state.Bank_Ores) as Types.IOreBankSlice;
   const playerIsBanking = useSelector((state: Types.AllState) => state.Resources.Banking);
+  const SlayerTask = useSelector((state: Types.AllState) => state.SlayerTask);
 
   const ALLSTATE = useSelector((state: Types.AllState) => state);
   // console.log(ALLSTATE);
@@ -80,6 +84,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
   // console.log(playerInventory);
   const AllQuestsFromState: Types.IStateQuest[] = [...LumbridgeQuestArray, ...DraynorQuestArray];
 
+  //! remove this - will need to update props and props types to do so
   //@ this is how we keep track of the `time` in game
   const [progress, setProgress] = useState<number>(0);
 
@@ -577,6 +582,35 @@ const GameContainer = (props: Types.GameContainerProps) => {
     setNeedsToBank(!needsToBank);
   };
 
+  const handleSlayerTask = (enemy: Types.IEnemySummary) => {
+    //* then dispatch slayer xp
+    dispatch(gainXP({ skill: `Slayer`, xp: enemy[`XPGivenSlayer`] }));
+
+    //* dispatch an action to decrement the counter
+    // decrementTaskAmount handles logic to decide if the task is complete, and to apple the slayer points when given an amount
+
+    //! when smoking kills quest is implemented, refactor this check to check for that
+    // if (smoking kills is complete) {
+    //   let slayerPointsEarned = masterHere.smokingKills.complete.taskPoints;
+    // } else {
+    //   let slayerPointsEarned = masterHere.smokingKills.incomplete.taskPoints;
+    // }
+
+    // create a new copy of the list of slayer masters
+    const copyOfListOfSlayerMasters = [...ListOfSlayerMasters];
+    // filter the copy for the master that assigned the task, then destructure that resultant array for ease of use
+    const [assigningMaster] = copyOfListOfSlayerMasters.filter((master) => master[`name`] === SlayerTask[`taskMaster`]);
+
+    //* reward with the appropriate amount for every 50th, 10th, or individual task
+    if (SlayerTask[`taskCounter`] % 50 === 0) {
+      dispatch(decrementTaskAmount(assigningMaster[`smokingKills`][`incomplete`][`task50`]));
+    } else if (SlayerTask[`taskCounter`] % 10 === 0) {
+      dispatch(decrementTaskAmount(assigningMaster[`smokingKills`][`incomplete`][`task10`]));
+    } else {
+      dispatch(decrementTaskAmount(assigningMaster[`smokingKills`][`incomplete`][`taskPoints`]));
+    }
+  };
+
   //! left off here - refactor chatlogs to send xp message for skill
   //! also add a chatlog for damaging but not killing an enemy
   //@ this will run every game tick (while in combat) and holds the logic for resolving combat turns
@@ -590,29 +624,17 @@ const GameContainer = (props: Types.GameContainerProps) => {
       let { damageToPlayer, damageToEnemy } = resolveCombat(Target, CurrentStyle, playerLocation, Experience, currentEquipment);
       // define the enemy for readability
       let thisEnemy = Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations];
-      // console.log(`you hit: ${damageDoneToTarget}`);
+
+      console.log({ CurrentStyle, damageToPlayer, damageToEnemy, playerLifePoints, targetLifePoints, healTimeRemaining });
 
       // IF the hit would kill the target
       if (targetLifePoints - damageToEnemy <= 0) {
         // then reset the lifepoints
         setTargetLifePoints(thisEnemy[`lifePoints`]);
-        // award the combat style xp
-        dispatch(gainXP({ skill: CurrentSkill, xp: thisEnemy[`XPGivenCombatStyle`] }));
 
-        // award the prayer xp if the enemy drops prayer xp items
-        if (thisEnemy[`XPGivenPrayer`]) {
-          dispatch(gainXP({ skill: `Prayer`, xp: thisEnemy[`XPGivenPrayer`] }));
-        }
+        //* award coins; award xp in the chosen combat skill, constitution, and possibly prayer and slayer
 
-        // award the constitution xp
-        dispatch(
-          gainXP({
-            skill: `Constitution`,
-            xp: thisEnemy[`XPGivenConstitution`],
-          })
-        );
-
-        // award the coins in the range of 0-half of lifepoints
+        // award the coins in the range of 0 - half of lifepoints
         let coinDrop: number = Math.floor(thisEnemy[`level`] * (Math.random() * 0.5));
         dispatch(addCoinsToWallet(coinDrop));
 
@@ -620,32 +642,62 @@ const GameContainer = (props: Types.GameContainerProps) => {
         let combatMessages: string[] = [`Defeated a ${thisEnemy[`displayName`]} and earned ${coinDrop.toLocaleString("en-US")} coins`];
         let combatMessagesTags: Types.ChatLogTag[] = [`Monster Defeated`];
 
-        // check if the player gained a level in their combat style
+        // award the combat style xp and check if the player gained a level in their combat style
+        dispatch(gainXP({ skill: CurrentSkill, xp: thisEnemy[`XPGivenCombatStyle`] }));
         if (didPlayerLevelUp(Experience[CurrentSkill as keyof Types.ISkillList], thisEnemy[`XPGivenCombatStyle`])) {
           // if so, queue up a chatlog
           combatMessages.push(`${CurrentSkill} Level up!`);
           combatMessagesTags.push(`Level Up`);
         }
 
-        // check if the player gained a level in constitution
+        // award the constitution xp and check if the player gained a level in constitution
+        dispatch(
+          gainXP({
+            skill: `Constitution`,
+            xp: thisEnemy[`XPGivenConstitution`],
+          })
+        );
         if (didPlayerLevelUp(Experience[CurrentSkill as keyof Types.ISkillList], thisEnemy[`XPGivenConstitution`])) {
           // if so, queue up a chatlog
           combatMessages.push(`Constitution Level up!`);
           combatMessagesTags.push(`Level Up`);
         }
 
+        // award the prayer xp if the enemy drops prayer xp items, and check if the player gained a level in prayer
+        if (thisEnemy[`XPGivenPrayer`]) {
+          dispatch(gainXP({ skill: `Prayer`, xp: thisEnemy[`XPGivenPrayer`] }));
+
+          if (didPlayerLevelUp(Experience[`Prayer`], thisEnemy[`XPGivenPrayer`])) {
+            // if so, queue up a chatlog
+            combatMessages.push(`Prayer Level up!`);
+            combatMessagesTags.push(`Level Up`);
+          }
+        }
+        //* if the current enemy's slayer classes include the current slayer task, proceed.  otherwise, do nothing
+        // @ts-ignore
+        if (thisEnemy[`slayerClass`].includes(SlayerTask.task)) {
+          handleSlayerTask(thisEnemy);
+        }
+
         // send those queued up chatlogs
         handleMultipleChatLogs(combatMessages, combatMessagesTags);
       } else {
-        //* otherwise, apply the damage to the target
+        //* otherwise, apply the damage to the target and apply the damage to the player
         setTargetLifePoints(targetLifePoints - damageToEnemy);
 
-        //! calculate and apply the damage done to the player
-        //! if the damage would kill the player, setHealTimeRemaining(24);
+        // if the hit will damage the player, apply damage
+        if (playerLifePoints - damageToPlayer > 0) {
+          setPlayerLifePoints(playerLifePoints - damageToPlayer);
+        } else {
+          // otherwise, the damage would kill the player, so set healing time
+          setHealTimeRemaining(24);
+        }
       }
     } else {
       //* if combat cannot happen, check if the player is healing
       // if the player will have completed their healing time, set that timer to zero and their lifepoints to full health
+      console.log({ msg: "player is dead lols", playerLifePoints, targetLifePoints, healTimeRemaining });
+
       if (healTimeRemaining === 1) {
         setHealTimeRemaining(0);
         setPlayerLifePoints(getLevel(Experience[`Constitution`]) * 100);
@@ -786,7 +838,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
       //@================================================
       // }, 2500);
       //@======PRODUCTION ABOVE, DEV BELOW============================================
-    }, 500);
+    }, 1000);
     //@================================================
 
     // console.log({ interval });
@@ -860,9 +912,23 @@ const GameContainer = (props: Types.GameContainerProps) => {
         >
           max xp
         </button>
-      </div>
-      <div>
+      </div> */}
+      {/* <div>
+        <button
+          onClick={() => {
+            dispatch(gainXP({ skill: `Strength`, xp: 199999999 }));
+            dispatch(gainXP({ skill: `Attack`, xp: 199999999 }));
+            dispatch(gainXP({ skill: `Defence`, xp: 199999999 }));
+          }}
+        >
+          max atk str def
+        </button>
+      </div> */}
+      {/* <div>
         <button onClick={() => dispatch(resetXP())}>reset skills</button>
+      </div> */}
+      {/* <div>
+        <button onClick={() => dispatch(addCoinsToWallet(200000000))}>200M coins</button>
       </div> */}
 
       {/* Remove this button, its for testing*/}

@@ -348,7 +348,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
      */
     const assignSlayerTask = () => {
       let taskObject = getSlayerTask(masterHere, SlayerLevel);
-      dispatch(setTask({ task: taskObject.task, amount: taskObject.amount }));
+      dispatch(setTask({ task: taskObject.task, taskMaster: masterHere.name, amount: taskObject.amount }));
       //@ send a chat log
     };
 

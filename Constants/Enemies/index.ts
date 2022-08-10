@@ -176,7 +176,7 @@ export const resolveCombat = (
   let hitChance: number = affinity * (accuracy / enemyDefence);
   /******************************************************************************************************* */
 
-  // #5 determine if the player hits the enemy
+  // #5 determine if the player hits the enemy and calculate the damage
   // the player may have a hitchance greater than 100%, so calculate damage if that occurs
   // OR, roll 1-100, and if the player hitchance is greater, calculate damage
   if (hitChance >= 100 || Math.floor(Math.random() * 100) < hitChance) {
@@ -241,9 +241,10 @@ export const resolveCombat = (
           resultObj[`damageToEnemy`] = 1;
         }
     }
+  } else {
+    // if the game rolled higher than the hitchance, the player missed, so return 0 damage
+    resultObj[`damageToEnemy`] = 0;
   }
-  // if the game rolled higher than the hitchance, the player missed, so return 0 damage
-  resultObj[`damageToEnemy`] = 0;
 
   //@ calculation for damageToPlayer below
 
@@ -288,7 +289,7 @@ export const resolveCombat = (
       100;
 
     //apply the player's damage reduction from their armor, and assign the result to the resultObj
-    resultObj[`damageToPlayer`] = dmgInRange - dmgInRange * playerDamageReductionPercent;
+    resultObj[`damageToPlayer`] = Math.floor(dmgInRange - dmgInRange * playerDamageReductionPercent);
   }
 
   return resultObj;
