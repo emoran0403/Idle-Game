@@ -24,7 +24,7 @@
 * have combat tick respect player life points
  - if player is dead, start healing, and heal to full before doing more combat
 * add a check in combat to see if the player has chosen a slayer task monster
-* - skillspanel needs a slayer panel where the player can get a slayer task from the master in that area
+* DONE - skillspanel needs a slayer panel where the player can get a slayer task from the master in that area
 * DONE - add state slice to track the slayer task
 * DONE - add function to randomly choose a task, if a task is chosen with a too high lvl, then reroll
 * DONE - add a check in combat panel to disable enemies based on their slayer level

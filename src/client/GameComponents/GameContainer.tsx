@@ -122,10 +122,19 @@ const GameContainer = (props: Types.GameContainerProps) => {
   //@ questStepProgress is holds the progress between completing quest steps
   const [questStepProgress, setQuestStepProgress] = useState<number>(0);
 
-  //@ assign lifepoints to the player based on levels, and to the target in the usestate
-  //? I might not use player Lifepoints lol
-  // const [playerLifePoints, setPlayerLifePoints] = useState<number>(getLevel(Experience.Consitution) * 100);
+  /**
+   * assign lifepoints to the player based on their constitution level.  this will be decremented in combat.
+   * assign lifepoints to the target.
+   * a usestate will track changes to the current target, setting lifepoints accordingly.
+   */
+  const [playerLifePoints, setPlayerLifePoints] = useState<number>(getLevel(Experience[`Constitution`]) * 100);
   const [targetLifePoints, setTargetLifePoints] = useState<number>(0);
+
+  /**
+   * use this to keep track of the time remaining to heal the player to full lifepoints
+   * when the player is reduced to 0 lifepoints, set this to 24 to incur a 1 minute healing time
+   */
+  const [healTimeRemaining, setHealTimeRemaining] = useState<number>(0);
 
   //@ assign the ore rock's durability to state to track progress towards receiving an ore
   const [oreRockDurability, setOreRockDurability] = useState<number>(0);
@@ -574,9 +583,10 @@ const GameContainer = (props: Types.GameContainerProps) => {
   const handleCombatTick = () => {
     let arrayOfCombatStyleSkills = ["Attack", "Strength", "Defence", "Ranged", "Magic"];
     // console.log(`Combat Ticked`);
-    // IF a target is selected, AND a combat skill is chosen, then we can proceed
+    // IF a target is selected, AND a combat skill is chosen, AND the player is not healing, then we can proceed
 
-    if (Target !== `none` && arrayOfCombatStyleSkills.includes(CurrentSkill)) {
+    if (Target !== `none` && arrayOfCombatStyleSkills.includes(CurrentSkill) && healTimeRemaining === 0) {
+      // calculate the damage done to the target
       let damageDoneToTarget = playerAttacksTarget(Target, CurrentStyle, playerLocation, Experience, currentEquipment);
       // define the enemy for readability
       let thisEnemy = Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations];
@@ -627,14 +637,22 @@ const GameContainer = (props: Types.GameContainerProps) => {
         // send those queued up chatlogs
         handleMultipleChatLogs(combatMessages, combatMessagesTags);
       } else {
-        // Otherwise, apply the damage
+        //* otherwise, apply the damage to the target
         setTargetLifePoints(targetLifePoints - damageDoneToTarget);
+
+        //! calculate and apply the damage done to the player
+        //! if the damage would kill the player, setHealTimeRemaining(24);
       }
     } else {
-      console.log({
-        target: Target,
-        wow: Enemies[playerLocation as keyof Types.IAllEnemies],
-      });
+      //* if combat cannot happen, check if the player is healing
+      // if the player will have completed their healing time, set that timer to zero and their lifepoints to full health
+      if (healTimeRemaining === 1) {
+        setHealTimeRemaining(0);
+        setPlayerLifePoints(getLevel(Experience[`Constitution`]) * 100);
+      } else {
+        // otherwise, decrement the timer
+        setHealTimeRemaining(healTimeRemaining - 1);
+      }
     }
   };
 
@@ -718,12 +736,12 @@ const GameContainer = (props: Types.GameContainerProps) => {
     if (Enemies[playerLocation as keyof Types.IAllEnemies] && Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations]) {
       setTargetLifePoints(Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations][`lifePoints`]);
     } else {
-      console.log({
-        loc: playerLocation,
-        enem: Enemies,
-        wow: Enemies[playerLocation as keyof Types.IAllEnemies],
-        // wow2: Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations],
-      });
+      // console.log({
+      // loc: playerLocation,
+      // enem: Enemies,
+      // wow: Enemies[playerLocation as keyof Types.IAllEnemies],
+      // wow2: Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations],
+      // });
     }
   }, [Target]);
 
@@ -789,6 +807,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
     playerIsBanking,
     checkPointTimer,
     stunTimeRemaining,
+    playerLifePoints,
   ]);
 
   return (
