@@ -137,12 +137,14 @@ export const defaultPlayerData: Types.AllState = {
   Target: { CurrentTarget: "none" },
   Quest: { CurrentQuest: "none" },
   Resources: { Banking: true, Dropping: false },
-  Wallet: { coins: 100, slayerPoints: 0 },
+  Wallet: { coins: 100 },
   QuestPoints: { CurrentQuestPoints: 0 },
   SlayerTask: {
-    task: ``,
+    task: [``],
+    taskMaster: ``,
     amount: 0,
     taskCounter: 0,
+    slayerPoints: 0,
   },
   Quests_Lumbridge: {
     LumbridgeQuestArray: [

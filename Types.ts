@@ -907,7 +907,6 @@ export interface AllStateQuestSlices {
 }
 export interface IWallet {
   coins: number;
-  slayerPoints: number;
 }
 export interface I_Inventory {
   CurrentInventory: string[];
