@@ -38,7 +38,6 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
   const currentLocationSummary = AllLocations[CurrentLocation] as Types.ILocationSummary;
   const Experience = useSelector((state: Types.AllState) => state.Experience) as Types.ISkillList;
   const SlayerTask = useSelector((state: Types.AllState) => state.SlayerTask);
-  const Wallet = useSelector((state: Types.AllState) => state.Wallet);
 
   // define skill levels based off the players current experience
   let WoodcuttingLevel: number = getLevel(Experience.Woodcutting);
@@ -53,7 +52,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
     Mining: false,
     Fishing: false,
     Thieving: false,
-    Slayer: false,
+    Slayer: true,
     Farming: false,
     Firemaking: false,
     Hunter: false,
@@ -344,22 +343,31 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
 
     /**
      * This function gets a slayer task from the master at the present location, and sets those values to state.
+     * The button this function is tied to is disabled when the player's task amount if greater than 0, which should be an acceptable check.
+     * Just in case, the function itself checks other criteria to see if the player has a task.
      * It could've been done inline on the click event, but defining it here and calling it inline looks cleaner.
      */
     const assignSlayerTask = () => {
-      let taskObject = getSlayerTask(masterHere, SlayerLevel);
-      dispatch(setTask({ task: taskObject.task, taskMaster: masterHere.name, amount: taskObject.amount }));
-      //@ send a chat log
+      //! checks are too aggressive lol
+      // if the player currently does not have a task, then they may receive a new one
+      console.log(`clicked assign task button`);
+      if (SlayerTask.amount === 0 && SlayerTask.task[0] === `none` && SlayerTask.taskMaster === ``) {
+        let taskObject = getSlayerTask(masterHere, SlayerLevel);
+        dispatch(setTask({ task: taskObject.task, taskMaster: masterHere.name, amount: taskObject.amount }));
+        //@ send a chat log
+        console.log(`inside the if block - task should be next`);
+        console.log({ taskObject });
+      }
     };
 
     /**
-     * This function removes the current slayer task, deducts the slayerPoint cost from the Wallet.
+     * This function removes the current slayer task, deducts the slayerPoint cost from the SlayerTask slice.
      * Then it calls the assignSlayerTask, which gives a new task.
      * It could've been done inline on the click event, but defining it here and calling it inline looks cleaner.
      */
     const cancelTaskAndReroll = () => {
       // check if the player has enough slayer points to cancel the task
-      if (Wallet.slayerPoints >= 30) {
+      if (SlayerTask.slayerPoints >= 30) {
         // if so, deduce the slayer points
         dispatch(removeSlayerPoints(30));
         // cancel the current task
@@ -375,7 +383,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
     // disable the `Skip Task` button if the player does not have a task
     if (masterHere) {
       return (
-        <div role="button" onClick={() => handleToggleSkillPanel(`Slayer`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
+        <div className="card-title border border-dark border-1 rounded-3 user-select-none">
           <h1 className="text-center">Slayer Level {SlayerLevel}</h1>
           <div className={`d-flex flex-row flex-wrap ${skillPanelsOpened.Slayer ? `` : `d-none`}`}>
             <div className="card-body text">
@@ -387,13 +395,13 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
               {!SlayerTask.amount && <h5 className="card-title text-center">{masterHere.displayName}</h5>}
 
               <div className="card-text d-flex flex-row justify-content-center">
-                <button onClick={() => assignSlayerTask()} className="btn btn-primary mx-1" disabled={SlayerTask.amount ? true : false}>
+                <button onClick={() => assignSlayerTask()} className="btn btn-primary mx-1" disabled={SlayerTask.amount > 0 ? true : false}>
                   New Task
                 </button>
                 <button
                   onClick={() => cancelTaskAndReroll()}
                   className="btn btn-primary mx-1"
-                  disabled={SlayerTask.amount && Wallet.slayerPoints >= 30 ? false : true}
+                  disabled={SlayerTask.amount && SlayerTask.slayerPoints >= 30 ? false : true}
                 >
                   Skip Task
                 </button>

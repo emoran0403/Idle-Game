@@ -34,7 +34,7 @@ import { EmptyQuestRewards } from "../../../Constants/Quests";
 import { didPlayerLevelUp, getLevel } from "../../../Constants/XP Levels";
 import { Enemies, resolveCombat } from "../../../Constants/Enemies";
 // slayer
-import { decrementTaskAmount } from "../Redux/Slices/SlayerTask";
+import { completeSlayerTask, decrementTaskAmount } from "../Redux/Slices/SlayerTask";
 
 // woodcutting
 import { addLogToBank } from "../Redux/Slices/BankSlices/LogsSlice";
@@ -583,35 +583,74 @@ const GameContainer = (props: Types.GameContainerProps) => {
   };
 
   const handleSlayerTask = (enemy: Types.IEnemySummary) => {
-    //* then dispatch slayer xp
+    // define an interface for the return object
+    interface IreturnObj {
+      messagesArray: string[];
+      tagsArray: Types.ChatLogTag[];
+    }
+    // define the return object - this will hold the chat logs created by this function
+    let returnObj: IreturnObj = {
+      messagesArray: [],
+      tagsArray: [],
+    };
+
+    //* dispatch slayer xp, and queue up chat logs
     dispatch(gainXP({ skill: `Slayer`, xp: enemy[`XPGivenSlayer`] }));
+    let slayerMessages: string[] = [`Gained ${enemy[`XPGivenSlayer`]} xp in Slayer`];
+    let slayerMessagesTags: Types.ChatLogTag[] = [`Gained XP`];
 
-    //* dispatch an action to decrement the counter
-    // decrementTaskAmount handles logic to decide if the task is complete, and to apple the slayer points when given an amount
+    //* dispatch an action to decrement the task amount
 
-    //! when smoking kills quest is implemented, refactor this check to check for that
+    dispatch(decrementTaskAmount());
+
+    /**
+     * ! when smoking kills quest is implemented, refactor the logic below check to check for completion
+     *  - because smoking kills influences how many slayer points are rewarded
+     */
+
     // if (smoking kills is complete) {
     //   let slayerPointsEarned = masterHere.smokingKills.complete.taskPoints;
     // } else {
     //   let slayerPointsEarned = masterHere.smokingKills.incomplete.taskPoints;
     // }
 
-    // create a new copy of the list of slayer masters
-    const copyOfListOfSlayerMasters = [...ListOfSlayerMasters];
-    // filter the copy for the master that assigned the task, then destructure that resultant array for ease of use
-    const [assigningMaster] = copyOfListOfSlayerMasters.filter((master) => master[`name`] === SlayerTask[`taskMaster`]);
+    //! not quite sure on the timing with this part, might need to check if amount is 1
+    //! left off here
+    //* if the task is complete, reward the slayer points
+    if (SlayerTask.amount === 0) {
+      //* define the assigning master to reward slayer points appropriately
+      // create a new copy of the list of slayer masters
+      const copyOfListOfSlayerMasters = [...ListOfSlayerMasters];
+      // filter the copy for the master that assigned the task, then destructure that resultant array for ease of use
+      const [assigningMaster] = copyOfListOfSlayerMasters.filter((master) => master[`name`] === SlayerTask[`taskMaster`]);
 
-    //* reward with the appropriate amount for every 50th, 10th, or individual task
-    if (SlayerTask[`taskCounter`] % 50 === 0) {
-      dispatch(decrementTaskAmount(assigningMaster[`smokingKills`][`incomplete`][`task50`]));
-    } else if (SlayerTask[`taskCounter`] % 10 === 0) {
-      dispatch(decrementTaskAmount(assigningMaster[`smokingKills`][`incomplete`][`task10`]));
-    } else {
-      dispatch(decrementTaskAmount(assigningMaster[`smokingKills`][`incomplete`][`taskPoints`]));
+      //* reward with the appropriate amount for every 50th, 10th, or individual task, and queue up chatlogs
+      if ((SlayerTask[`taskCounter`] + 1) % 50 === 0) {
+        slayerMessages.push(
+          `Completed ${SlayerTask[`taskCounter`] + 1} tasks and earned ${assigningMaster[`smokingKills`][`incomplete`][`task50`]} Slayer Points`
+        );
+        slayerMessagesTags.push(`Misc`);
+        dispatch(completeSlayerTask(assigningMaster[`smokingKills`][`incomplete`][`task50`]));
+      } else if ((SlayerTask[`taskCounter`] + 1) % 10 === 0) {
+        slayerMessages.push(
+          `Completed ${SlayerTask[`taskCounter`] + 1} tasks and earned ${assigningMaster[`smokingKills`][`incomplete`][`task10`]} Slayer Points`
+        );
+        slayerMessagesTags.push(`Misc`);
+        dispatch(completeSlayerTask(assigningMaster[`smokingKills`][`incomplete`][`task10`]));
+      } else {
+        slayerMessages.push(
+          `Completed ${SlayerTask[`taskCounter`] + 1} tasks and earned ${assigningMaster[`smokingKills`][`incomplete`][`taskPoints`]} Slayer Points`
+        );
+        slayerMessagesTags.push(`Misc`);
+        dispatch(completeSlayerTask(assigningMaster[`smokingKills`][`incomplete`][`taskPoints`]));
+      }
     }
+    returnObj.messagesArray.push(...slayerMessages);
+    returnObj.tagsArray.push(...slayerMessagesTags);
+    return returnObj;
   };
 
-  //! left off here - refactor chatlogs to send xp message for skill
+  //! refactor chatlogs to send xp message for skill
   //! also add a chatlog for damaging but not killing an enemy
   //@ this will run every game tick (while in combat) and holds the logic for resolving combat turns
   const handleCombatTick = () => {
@@ -682,14 +721,13 @@ const GameContainer = (props: Types.GameContainerProps) => {
             combatMessagesTags.push(`Level Up`);
           }
         }
-        //* if the current enemy's slayer classes include the current slayer task, proceed.  otherwise, do nothing
-        //! double check which array needs to be the outer array - which slayer classes are more general???
-        // an enemy may belong to more than one class
-        // masters assign only one class at a time
+        //* if the current enemy's slayer classes include the current slayer task, call handleSlayerTask.
         //! left off here
         // @ts-ignore not sure why this is necessary :( is it related to the ts issue where i've needed to switch to [] notation?
         if (thisEnemy[`slayerClass`].some((enemyClass) => SlayerTask[`task`].includes(enemyClass))) {
-          handleSlayerTask(thisEnemy);
+          const slayerReturnObject = handleSlayerTask(thisEnemy);
+          combatMessages.push(...slayerReturnObject.messagesArray);
+          combatMessagesTags.push(...slayerReturnObject.tagsArray);
         }
 
         // send those queued up chatlogs

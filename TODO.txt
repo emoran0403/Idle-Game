@@ -5,7 +5,7 @@
 @ when adding new masters, make sure to add enemies that match taskList[i].task
 
 
-//! ARTISAN - skills that involve taking resources and transforming or consuming them
+//@ ARTISAN - skills that involve taking resources and transforming or consuming them
 //# SMITHING
 //# SUMMONING
 //# CRAFTING
@@ -16,10 +16,9 @@
 //# HERBLORE
 //# CONSTRUCTION
 
-//! SUPPORT - skills that just take some time to complete
+//@ SUPPORT - skills that just take some time to complete
 //# AGILITY
 //# SLAYER
-* add slayer task to the combat panel
 * slayer needs chat logs
 @ FIXED - when there is no task, a 0 shows up in skills panel lol == the check for task amount now checks for an amount >0 lool
 @ FIXED - slayer task assigns name (skeleton32) when it should be a general task instead == task is now the actual task string, and it checks this against the slayer task of the enemy
@@ -28,7 +27,8 @@
 @ FIXED damage to enemy is not working - forgot to add an else statements
 @ FIXED - player damage is waaay too low LOL
 @! equipping headslot items - Uncaught TypeError: Cannot read properties of undefined (reading 'styleBonusMelee')
---- insdie switch statement in combat damage function
+ --- ^^^ look insdie switch statement in combat damage function
+* DONE - add slayer task to the combat panel
 * DONE - add a check in combat to see if the player has chosen a slayer task monster
 * DONE - have combat tick respect player life points
 * DONE - implement player lifepoints in game GameContainer
@@ -45,20 +45,21 @@
 * DONE - add slayer level req to enemies if it is > 1
 * DONE - add slayer level req to enemies and their type
 
-//# DUNGEONEERING
 
-//! GATHERING - skills that generate new resources
+//@ GATHERING - skills that generate new resources
 //# FARMING
 //# HUNTER
 //# DIVINATION
 
-//! BIG LOL - wide variety of interactions to deal with
+//@ BIG LOL - wide variety of interactions to deal with
 //# INVENTION
 //# ARCHAEOLOGY
+//# DUNGEONEERING
 
 
 
 //# Fixes
+* change all props which use single chat log function to use the multiple chat log function
 * update get enemy object to scrape max hit from the wiki
 * add a check to prevent xp from going over 200M
 * swap out all instances of handleNewChatLog with handleMultipleChatLogs

@@ -13,6 +13,7 @@ import { setQuest } from "../../Redux/Slices/CurrentQuest";
 import { setStyle } from "../../Redux/Slices/CurrentCombatStyle";
 import { TwoHandSlot } from "../../../../Constants/Equipment/TwoHandSlot";
 import { AllLocations } from "../../../../Constants/LocationInfo";
+import { ListOfSlayerMasters } from "../../../../Constants/Slayer/SlayerMasters";
 
 //@ for simplicity, i'm not keeping track of ammunition / runes
 
@@ -25,14 +26,13 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
   const { CurrentSkill } = useSelector((state: Types.AllState) => state.Skill) as Types.ListOfSkills;
   const { CurrentTarget } = useSelector((state: Types.AllState) => state.Target) as Types.ICurrentTarget;
   const Experience = useSelector((state: Types.AllState) => state.Experience) as Types.ISkillList;
+  const SlayerTask = useSelector((state: Types.AllState) => state.SlayerTask);
 
   // multiple functions use slayer level, define it here for scoping purposes
   let slayerLevel = getLevel(Experience.Slayer);
 
-  //@ Enemies[Current as keyof Types.IAllEnemies] is the list of enemies at the current location
-
-  //@ rerender when the player equips a new weapon
-  useEffect(() => {}, [props.currentEquipment.TwoHandSlot]);
+  //@ rerender when the player equips a new weapon, or when the player defeats an assigned task enemy
+  useEffect(() => {}, [props.currentEquipment.TwoHandSlot, SlayerTask[`amount`]]);
 
   const panelHeaderJSX = () => {
     // returns the JSX for the panel header
@@ -281,12 +281,29 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
     }
   };
 
+  const showSlayerMessage = () => {
+    // if there curently is a slayer task, display the information
+    if (SlayerTask[`taskMaster`].length) {
+      const [assigningMaster] = ListOfSlayerMasters.filter((master) => master.name === SlayerTask[`taskMaster`]);
+
+      return (
+        <h4 className="text-center mt-3">
+          Current Slayer Task: {SlayerTask[`amount`]} {SlayerTask[`task`]}, assigned by {assigningMaster[`displayName`]}
+        </h4>
+      );
+    } else {
+      // otherwise inform the player they do not currently have a task
+      return <h4 className="text-center mt-3">You do not currently have a Slayer task assigned</h4>;
+    }
+  };
+
   return (
     <div className="container card border border-dark border-2 rounded-3" style={{ overflowY: "auto", position: "relative", height: "81%" }}>
       {panelHeaderJSX()}
       <div className="row justify-content-lg-center">
         <div className="card">
           {combatStyleButtonsJSX()}
+          {showSlayerMessage()}
           <div className="card-body">{enemyButtonsJSX(Enemies[CurrentLocation as keyof Types.IAllEnemies])}</div>
         </div>
       </div>
