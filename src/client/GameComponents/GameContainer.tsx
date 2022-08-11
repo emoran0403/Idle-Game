@@ -672,7 +672,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
       // call resolveCombat and destructure the properties
       let { damageToPlayer, damageToEnemy } = resolveCombat(Target, CurrentStyle, playerLocation, Experience, currentEquipment);
       // define the enemy for readability
-      let thisEnemy = Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations];
+      let thisEnemy = Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations] as Types.IEnemySummary;
 
       console.log({
         Task: SlayerTask.task[0],
@@ -732,8 +732,6 @@ const GameContainer = (props: Types.GameContainerProps) => {
           }
         }
         //* if the current enemy's slayer classes include the current slayer task, call handleSlayerTask.
-        //! left off here
-        // @ts-ignore not sure why this is necessary :( is it related to the ts issue where i've needed to switch to [] notation?
         if (thisEnemy[`slayerClass`].some((enemyClass) => SlayerTask[`task`].includes(enemyClass))) {
           const slayerReturnObject = handleSlayerTask(thisEnemy);
           combatMessages.push(...slayerReturnObject.messagesArray);
