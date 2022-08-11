@@ -348,9 +348,9 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
      * It could've been done inline on the click event, but defining it here and calling it inline looks cleaner.
      */
     const assignSlayerTask = () => {
-      //! checks are too aggressive lol
       // if the player currently does not have a task, then they may receive a new one
       console.log(`clicked assign task button`);
+      console.log({ amount: SlayerTask.amount, task: SlayerTask.task[0], master: SlayerTask.taskMaster });
       if (SlayerTask.amount === 0 && SlayerTask.task[0] === `none` && SlayerTask.taskMaster === ``) {
         let taskObject = getSlayerTask(masterHere, SlayerLevel);
         dispatch(setTask({ task: taskObject.task, taskMaster: masterHere.name, amount: taskObject.amount }));

@@ -55,6 +55,8 @@ export interface BossesPanelProps {
   newChatLog: Function;
 }
 export interface CombatPanelProps {
+  playerLifePoints: number;
+  targetLifePoints: number;
   handleUpdateDisplay: Function;
   newChatLog: Function;
   chatLogArray: IChatLog[];
@@ -79,6 +81,8 @@ export interface WornEquipmentCompProps {
   currentEquipment: ICurrentEquipment;
 }
 export interface ActivityAreaCompProps {
+  playerLifePoints: number;
+  targetLifePoints: number;
   newChatLog: Function;
   chatLogArray: IChatLog[];
   setCurrentEquipment: Function;

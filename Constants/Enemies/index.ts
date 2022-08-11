@@ -199,7 +199,7 @@ export const resolveCombat = (
           BodySlot[Equipment[`BodySlot`] as keyof Types.IArmorSlotBody][`styleBonusMelee`] +
           HandsSlot[Equipment[`HandsSlot`] as keyof Types.IArmorSlotHands][`styleBonusMelee`] +
           HeadSlot[Equipment[`HeadSlot`] as keyof Types.IArmorSlotHead][`styleBonusMelee`] +
-          LegsSlot[Equipment[`HeadSlot`] as keyof Types.IArmorSlotLegs][`styleBonusMelee`] +
+          LegsSlot[Equipment[`LegsSlot`] as keyof Types.IArmorSlotLegs][`styleBonusMelee`] +
           NeckSlot[Equipment[`NeckSlot`] as keyof Types.IArmorSlotNeck][`styleBonusMelee`] +
           RingSlot[Equipment[`RingSlot`] as keyof Types.IArmorSlotRing][`styleBonusMelee`] +
           TwoHandSlot[Equipment[`TwoHandSlot`] as keyof Types.IArmorSlotTwoHand][`styleBonusMelee`];
@@ -218,7 +218,7 @@ export const resolveCombat = (
           BodySlot[Equipment[`BodySlot`] as keyof Types.IArmorSlotBody][`styleBonusRanged`] +
           HandsSlot[Equipment[`HandsSlot`] as keyof Types.IArmorSlotHands][`styleBonusRanged`] +
           HeadSlot[Equipment[`HeadSlot`] as keyof Types.IArmorSlotHead][`styleBonusRanged`] +
-          LegsSlot[Equipment[`HeadSlot`] as keyof Types.IArmorSlotLegs][`styleBonusRanged`] +
+          LegsSlot[Equipment[`LegsSlot`] as keyof Types.IArmorSlotLegs][`styleBonusRanged`] +
           NeckSlot[Equipment[`NeckSlot`] as keyof Types.IArmorSlotNeck][`styleBonusRanged`] +
           RingSlot[Equipment[`RingSlot`] as keyof Types.IArmorSlotRing][`styleBonusRanged`] +
           TwoHandSlot[Equipment[`TwoHandSlot`] as keyof Types.IArmorSlotTwoHand][`styleBonusRanged`];
@@ -236,7 +236,7 @@ export const resolveCombat = (
           BodySlot[Equipment[`BodySlot`] as keyof Types.IArmorSlotBody][`styleBonusMagic`] +
           HandsSlot[Equipment[`HandsSlot`] as keyof Types.IArmorSlotHands][`styleBonusMagic`] +
           HeadSlot[Equipment[`HeadSlot`] as keyof Types.IArmorSlotHead][`styleBonusMagic`] +
-          LegsSlot[Equipment[`HeadSlot`] as keyof Types.IArmorSlotLegs][`styleBonusMagic`] +
+          LegsSlot[Equipment[`LegsSlot`] as keyof Types.IArmorSlotLegs][`styleBonusMagic`] +
           NeckSlot[Equipment[`NeckSlot`] as keyof Types.IArmorSlotNeck][`styleBonusMagic`] +
           RingSlot[Equipment[`RingSlot`] as keyof Types.IArmorSlotRing][`styleBonusMagic`] +
           TwoHandSlot[Equipment[`TwoHandSlot`] as keyof Types.IArmorSlotTwoHand][`styleBonusMagic`];

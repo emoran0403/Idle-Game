@@ -19,15 +19,18 @@
 //@ SUPPORT - skills that just take some time to complete
 //# AGILITY
 //# SLAYER
-* slayer needs chat logs
+* DONE - message in chat when the player died
+* DONE - combat panel needs to show a mesage saying the player is healing
+* DONE - message in chat saying the player is healing + a count down
+* DONE - player lp needs to go to zero 
 @ FIXED - when there is no task, a 0 shows up in skills panel lol == the check for task amount now checks for an amount >0 lool
 @ FIXED - slayer task assigns name (skeleton32) when it should be a general task instead == task is now the actual task string, and it checks this against the slayer task of the enemy
 @ healing seems to work
 @ damage to player seems to work
 @ FIXED damage to enemy is not working - forgot to add an else statements
 @ FIXED - player damage is waaay too low LOL
-@! equipping headslot items - Uncaught TypeError: Cannot read properties of undefined (reading 'styleBonusMelee')
- --- ^^^ look insdie switch statement in combat damage function
+@ FIXED equipping headslot items - Uncaught TypeError: Cannot read properties of undefined (reading 'styleBonusMelee')
+* DONE - slayer needs chat logs
 * DONE - add slayer task to the combat panel
 * DONE - add a check in combat to see if the player has chosen a slayer task monster
 * DONE - have combat tick respect player life points

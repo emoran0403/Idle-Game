@@ -596,15 +596,11 @@ const GameContainer = (props: Types.GameContainerProps) => {
 
     //* dispatch slayer xp, and queue up chat logs
     dispatch(gainXP({ skill: `Slayer`, xp: enemy[`XPGivenSlayer`] }));
-    let slayerMessages: string[] = [`Gained ${enemy[`XPGivenSlayer`]} xp in Slayer`];
+    let slayerMessages: string[] = [`Gained ${Math.floor(enemy[`XPGivenSlayer`])} xp in Slayer`];
     let slayerMessagesTags: Types.ChatLogTag[] = [`Gained XP`];
 
-    //* dispatch an action to decrement the task amount
-
-    dispatch(decrementTaskAmount());
-
     /**
-     * ! when smoking kills quest is implemented, refactor the logic below check to check for completion
+     * @ when smoking kills quest is implemented, refactor the logic below check to check for completion
      *  - because smoking kills influences how many slayer points are rewarded
      */
 
@@ -614,10 +610,10 @@ const GameContainer = (props: Types.GameContainerProps) => {
     //   let slayerPointsEarned = masterHere.smokingKills.incomplete.taskPoints;
     // }
 
-    //! not quite sure on the timing with this part, might need to check if amount is 1
-    //! left off here
-    //* if the task is complete, reward the slayer points
-    if (SlayerTask.amount === 0) {
+    //! have complete slaye task options return the object and end the function to prevent going negative loools
+
+    //* if the task will be complete after decrementing the counter, reward the slayer points
+    if (SlayerTask.amount === 1) {
       //* define the assigning master to reward slayer points appropriately
       // create a new copy of the list of slayer masters
       const copyOfListOfSlayerMasters = [...ListOfSlayerMasters];
@@ -631,20 +627,34 @@ const GameContainer = (props: Types.GameContainerProps) => {
         );
         slayerMessagesTags.push(`Misc`);
         dispatch(completeSlayerTask(assigningMaster[`smokingKills`][`incomplete`][`task50`]));
+        dispatch(decrementTaskAmount());
+        returnObj.messagesArray.push(...slayerMessages);
+        returnObj.tagsArray.push(...slayerMessagesTags);
+        return returnObj;
       } else if ((SlayerTask[`taskCounter`] + 1) % 10 === 0) {
         slayerMessages.push(
           `Completed ${SlayerTask[`taskCounter`] + 1} tasks and earned ${assigningMaster[`smokingKills`][`incomplete`][`task10`]} Slayer Points`
         );
         slayerMessagesTags.push(`Misc`);
         dispatch(completeSlayerTask(assigningMaster[`smokingKills`][`incomplete`][`task10`]));
+        dispatch(decrementTaskAmount());
+        returnObj.messagesArray.push(...slayerMessages);
+        returnObj.tagsArray.push(...slayerMessagesTags);
+        return returnObj;
       } else {
         slayerMessages.push(
           `Completed ${SlayerTask[`taskCounter`] + 1} tasks and earned ${assigningMaster[`smokingKills`][`incomplete`][`taskPoints`]} Slayer Points`
         );
         slayerMessagesTags.push(`Misc`);
         dispatch(completeSlayerTask(assigningMaster[`smokingKills`][`incomplete`][`taskPoints`]));
+        dispatch(decrementTaskAmount());
+        returnObj.messagesArray.push(...slayerMessages);
+        returnObj.tagsArray.push(...slayerMessagesTags);
+        return returnObj;
       }
     }
+    //* otherwise, dispatch an action to decrement the task amount
+    dispatch(decrementTaskAmount());
     returnObj.messagesArray.push(...slayerMessages);
     returnObj.tagsArray.push(...slayerMessagesTags);
     return returnObj;
@@ -740,7 +750,13 @@ const GameContainer = (props: Types.GameContainerProps) => {
         if (playerLifePoints - damageToPlayer > 0) {
           setPlayerLifePoints(playerLifePoints - damageToPlayer);
         } else {
-          // otherwise, the damage would kill the player, so set healing time
+          // prepare chatlogs death lol
+          let deathMessages: string[] = [`Oh dear, you are dead!`, `You will be fully healed in 24...`];
+          let deathMessagesTags: Types.ChatLogTag[] = [`Nonfilterable`, `Nonfilterable`];
+          handleMultipleChatLogs(deathMessages, deathMessagesTags);
+
+          // otherwise, the damage would kill the player, so set lifepoints to 0 and healing time to 24
+          setPlayerLifePoints(0);
           setHealTimeRemaining(24);
         }
       }
@@ -754,6 +770,11 @@ const GameContainer = (props: Types.GameContainerProps) => {
         setPlayerLifePoints(getLevel(Experience[`Constitution`]) * 100);
       } else {
         // otherwise, decrement the timer
+        // prepare chatlogs death lol
+        let deathMessages: string[] = [`You will be fully healed in ${healTimeRemaining - 1}...`];
+        let deathMessagesTags: Types.ChatLogTag[] = [`Nonfilterable`];
+        handleMultipleChatLogs(deathMessages, deathMessagesTags);
+
         setHealTimeRemaining(healTimeRemaining - 1);
       }
     }
@@ -911,6 +932,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
     checkPointTimer,
     stunTimeRemaining,
     playerLifePoints,
+    SlayerTask,
   ]);
 
   return (
@@ -994,6 +1016,8 @@ const GameContainer = (props: Types.GameContainerProps) => {
         <div id="middle-column" className="col-lg-6 border border-dark border-2 rounded-3" style={{ height: "90vh" }}>
           <NavigationArea newChatLog={handleNewChatLog} chatLogArray={chatLogArray} />
           <ActivityArea
+            playerLifePoints={playerLifePoints}
+            targetLifePoints={targetLifePoints}
             newChatLog={handleNewChatLog}
             chatLogArray={chatLogArray}
             setCurrentEquipment={setCurrentEquipment}

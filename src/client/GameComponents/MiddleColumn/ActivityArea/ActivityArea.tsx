@@ -53,6 +53,8 @@ const ActivityArea = (props: Types.ActivityAreaCompProps) => {
               newChatLog={props.newChatLog}
               chatLogArray={props.chatLogArray}
               currentEquipment={props.currentEquipment}
+              playerLifePoints={props.playerLifePoints}
+              targetLifePoints={props.targetLifePoints}
             />
           ),
           bank: <BankPanel handleUpdateDisplay={handleUpdateDisplay} newChatLog={props.newChatLog} />,

@@ -256,7 +256,7 @@ export const getSlayerTask = (slayerMaster: Types.ISlayerMasterSummary, slayerXp
 
   // define the return object
   let taskObj = {
-    task: [``],
+    task: [`none`],
     amount: 0,
   };
 
@@ -284,14 +284,11 @@ export const getSlayerTask = (slayerMaster: Types.ISlayerMasterSummary, slayerXp
   }
 
   //* otherwise, we did find an acceptable subset of slayer tasks, so choose one and assign it
-  let SubsetTaskIndex = Math.floor(Math.random() * validEnemies.length);
-  let SubsetTaskEntry = validEnemies[SubsetTaskIndex];
-
   // assign the task
-  taskObj.task = SubsetTaskEntry.slayerClass;
+  taskObj.task[0] = FullTaskEntry.task;
 
   // assign a random amount within the min and max range defined for each entry
-  // multiply by 10 to allow for longer idle times* 10
-  taskObj.amount = Math.floor(Math.random() * (FullTaskEntry.max - FullTaskEntry.min) + FullTaskEntry.min);
+  //! multiply by 10 to allow for longer idle times
+  taskObj.amount = Math.floor(Math.random() * (FullTaskEntry.max - FullTaskEntry.min) + FullTaskEntry.min) * 10;
   return taskObj;
 };

@@ -1,8 +1,9 @@
 import * as Types from "../../../../Types";
 import * as React from "react";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { ProgressBar } from "react-bootstrap";
+
 import { Enemies } from "../../../../Constants/Enemies";
 import { setResource } from "../../Redux/Slices/CurrentResource";
 import { setSkill } from "../../Redux/Slices/CurrentSkill";
@@ -31,8 +32,8 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
   // multiple functions use slayer level, define it here for scoping purposes
   let slayerLevel = getLevel(Experience.Slayer);
 
-  //@ rerender when the player equips a new weapon, or when the player defeats an assigned task enemy
-  useEffect(() => {}, [props.currentEquipment.TwoHandSlot, SlayerTask[`amount`]]);
+  //@ rerender when the player equips a new weapon, the player defeats an assigned task enemy, upon lifepoint changes
+  useEffect(() => {}, [props.currentEquipment.TwoHandSlot, SlayerTask[`amount`], props.playerLifePoints, props.targetLifePoints]);
 
   const panelHeaderJSX = () => {
     // returns the JSX for the panel header
@@ -297,6 +298,105 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
     }
   };
 
+  const showLifePointBars = () => {
+    if (Enemies[CurrentLocation as keyof Types.IAllEnemies][CurrentTarget as keyof Types.IEnemyLocations]) {
+      let thisEnemy = Enemies[CurrentLocation as keyof Types.IAllEnemies][CurrentTarget as keyof Types.IEnemyLocations];
+      let enemyLifepointsMax: number = thisEnemy[`lifePoints`];
+      return (
+        <div>
+          <div className="d-flex my-1">
+            <div className="col-3">
+              <h5>Your Lifepoints: </h5>
+            </div>
+            <div className="col-9">
+              <ProgressBar style={{ height: 25 }} className="border border-dark border-2">
+                <ProgressBar
+                  style={{ fontSize: `1.25rem` }}
+                  variant="success"
+                  label={`${props.playerLifePoints.toLocaleString("en-US")}`}
+                  now={Number(props.playerLifePoints)}
+                  key={`playerLifePoints-green-progress-bar`}
+                  min={0}
+                  max={getLevel(Experience[`Constitution`]) * 100}
+                />
+
+                <ProgressBar
+                  variant="danger"
+                  now={getLevel(Experience[`Constitution`]) * 100 - props.playerLifePoints}
+                  key={`playerLifePoints-red-progress-bar`}
+                  min={0}
+                  max={getLevel(Experience[`Constitution`]) * 100}
+                />
+              </ProgressBar>
+            </div>
+          </div>
+
+          <div className="d-flex my-1">
+            <div className="col-3">
+              <h5>{thisEnemy[`displayName`]} Lifepoints: </h5>
+            </div>
+            <div className="col-9">
+              <ProgressBar style={{ height: 25 }} className="border border-dark border-2">
+                <ProgressBar
+                  variant="success"
+                  style={{ fontSize: `1.25rem` }}
+                  label={`${props.targetLifePoints}`}
+                  now={props.targetLifePoints}
+                  key={`targetLifePoints-green-progress-bar`}
+                  min={0}
+                  max={enemyLifepointsMax}
+                />
+                <ProgressBar
+                  variant="danger"
+                  now={enemyLifepointsMax - props.targetLifePoints}
+                  key={`targetLifePoints-red-progress-bar`}
+                  min={0}
+                  max={enemyLifepointsMax}
+                />
+              </ProgressBar>
+            </div>
+          </div>
+
+          {/* <div>No Target Selected</div> */}
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <div className="d-flex my-1">
+            <div className="col-3">
+              <h5>Your Lifepoints: </h5>
+            </div>
+            <div className="col-9">
+              <ProgressBar style={{ height: 25 }} className="border border-dark border-2">
+                <ProgressBar
+                  variant="success"
+                  style={{ fontSize: `1.25rem` }}
+                  label={`${props.playerLifePoints.toLocaleString("en-US")}`}
+                  now={props.playerLifePoints}
+                  key={`playerLifePoints-green-progress-bar`}
+                  min={0}
+                  max={getLevel(Experience[`Constitution`]) * 100}
+                />
+                <ProgressBar
+                  variant="danger"
+                  now={getLevel(Experience[`Constitution`]) * 100 - props.playerLifePoints}
+                  key={`playerLifePoints-red-progress-bar`}
+                  min={0}
+                  max={getLevel(Experience[`Constitution`]) * 100}
+                />
+              </ProgressBar>
+            </div>
+          </div>
+
+          <div className="d-flex my-1">
+            <h5>No Target Selected</h5>
+          </div>
+        </div>
+      );
+    }
+  };
+
   return (
     <div className="container card border border-dark border-2 rounded-3" style={{ overflowY: "auto", position: "relative", height: "81%" }}>
       {panelHeaderJSX()}
@@ -304,6 +404,7 @@ const CombatPanel = (props: Types.CombatPanelProps) => {
         <div className="card">
           {combatStyleButtonsJSX()}
           {showSlayerMessage()}
+          {showLifePointBars()}
           <div className="card-body">{enemyButtonsJSX(Enemies[CurrentLocation as keyof Types.IAllEnemies])}</div>
         </div>
       </div>

@@ -26,16 +26,16 @@ export const SlayerTask = createSlice({
 
     // use this when the player will complete the task
     completeSlayerTask: (state, action) => {
-      // if that was the last enemy on task, restore to default values, and increment task counter and slayer points
-      if (state.amount === 0) {
-        state.task = [`none`];
-        state.taskMaster = ``;
-        state.amount = 0;
-        state.taskCounter += 1;
+      // set values back to default
+      state.task = [`none`];
+      state.taskMaster = ``;
 
-        const amount: number = Number(action.payload); // this will be the number of slayerPoints added to state
-        state.slayerPoints += amount;
-      }
+      // increment the task counter
+      state.taskCounter += 1;
+
+      // increment the slayer points
+      const amount: number = Number(action.payload); // this will be the number of slayerPoints added to state
+      state.slayerPoints += amount;
     },
 
     // use this when the task is skipped

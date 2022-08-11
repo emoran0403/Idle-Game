@@ -140,7 +140,7 @@ export const defaultPlayerData: Types.AllState = {
   Wallet: { coins: 100 },
   QuestPoints: { CurrentQuestPoints: 0 },
   SlayerTask: {
-    task: [``],
+    task: [`none`],
     taskMaster: ``,
     amount: 0,
     taskCounter: 0,
