@@ -388,9 +388,12 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
           <div className={`d-flex flex-row flex-wrap ${skillPanelsOpened.Slayer ? `` : `d-none`}`}>
             <div className="card-body text">
               {SlayerTask.amount > 0 && (
-                <h5 className="card-title text-center">
-                  {masterHere.displayName} has assigned you {SlayerTask.amount} {SlayerTask.task}
-                </h5>
+                <div>
+                  <h5 className="card-title text-center">
+                    {masterHere.displayName} has assigned you {SlayerTask.amount} {SlayerTask.task}
+                  </h5>
+                  <h6 className="card-body text-center">Slayer Points: {SlayerTask.slayerPoints}</h6>
+                </div>
               )}
               {!SlayerTask.amount && <h5 className="card-title text-center">{masterHere.displayName}</h5>}
 
@@ -403,7 +406,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
                   className="btn btn-primary mx-1"
                   disabled={SlayerTask.amount && SlayerTask.slayerPoints >= 30 ? false : true}
                 >
-                  Skip Task
+                  Skip Task (30 Slayer Points)
                 </button>
               </div>
             </div>
@@ -441,10 +444,8 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
     let compositeHatchetsNoCrystal = compositeHatchets.filter((hatchet) => hatchet.name !== "crystalhatchet");
 
     const itemHasBeenEquipped = (e: React.ChangeEvent<HTMLSelectElement>) => {
-      //! string type is `ok` since they can be keys of Types.ICurrentEquipment
       /**
        * this can be better described by stating the possible options of each slot in Types.ICurrentEquipment
-       *
        */
       let newlyEquippedItemDisplayName: string = ``;
       let oldEquippedItemDisplayName: string = ``;
@@ -521,10 +522,8 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
     let compositePickaxesNoCrystal = compositePickaxes.filter((hatchet) => hatchet.name !== "crystalpickaxe");
 
     const itemHasBeenEquipped = (e: React.ChangeEvent<HTMLSelectElement>) => {
-      //! string type is `ok` since they can be keys of Types.ICurrentEquipment
       /**
        * this can be better described by stating the possible options of each slot in Types.ICurrentEquipment
-       *
        */
       let newlyEquippedItemDisplayName: string = ``;
       let oldEquippedItemDisplayName: string = ``;

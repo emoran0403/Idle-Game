@@ -88,11 +88,8 @@ export interface ActivityAreaCompProps {
   setCurrentEquipment: Function;
   currentEquipment: ICurrentEquipment;
   questStepProgress: number;
-  progress: number;
 }
-export interface ActivityDisplayCompProps {
-  progress: number;
-}
+export interface ActivityDisplayCompProps {}
 export interface ChatWindowCompProps {
   chatLogArray: IChatLog[];
 }

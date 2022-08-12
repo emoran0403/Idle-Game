@@ -50,7 +50,7 @@ const Inventory = (props: Types.NoProps) => {
                   blank
                 </span>
               ) : (
-                <img src={`/Assets/Logs/${item}.png`} height={27} alt={`${getItemDisplayName(item)}`} />
+                <img src={`/Assets/Inventory/${item}.png`} height={27} alt={`${getItemDisplayName(item)}`} />
               )}
             </div>
           ))}

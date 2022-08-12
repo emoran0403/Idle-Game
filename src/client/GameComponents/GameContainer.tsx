@@ -84,10 +84,6 @@ const GameContainer = (props: Types.GameContainerProps) => {
   // console.log(playerInventory);
   const AllQuestsFromState: Types.IStateQuest[] = [...LumbridgeQuestArray, ...DraynorQuestArray];
 
-  //! remove this - will need to update props and props types to do so
-  //@ this is how we keep track of the `time` in game
-  const [progress, setProgress] = useState<number>(0);
-
   //@ initialize the chatLogArray with a default welcome message
   //@ this will hold ALL chatLogs, a subset of which will be displayed based on the current filter settings
   const [chatLogArray, setChatLogArray] = useState<Types.IChatLog[]>([
@@ -234,9 +230,9 @@ const GameContainer = (props: Types.GameContainerProps) => {
     // if the progress counter hits 24, reset it to 0, and then run the quest logic based on location
     //! swap for production
     //@================================================
-    // if (questStepProgress === 24) {
-    //@======PRODUCTION ABOVE, DEV BELOW============================================
-    if (questStepProgress === 2) {
+    if (questStepProgress === 24) {
+      //@======PRODUCTION ABOVE, DEV BELOW============================================
+      // if (questStepProgress === 2) {
       //@================================================
 
       setQuestStepProgress(0);
@@ -599,6 +595,13 @@ const GameContainer = (props: Types.GameContainerProps) => {
     let slayerMessages: string[] = [`Gained ${Math.floor(enemy[`XPGivenSlayer`])} xp in Slayer`];
     let slayerMessagesTags: Types.ChatLogTag[] = [`Gained XP`];
 
+    //* if the player gained a level in Slayer, queue a chatlog
+    if (didPlayerLevelUp(Experience.Slayer, enemy.XPGivenSlayer)) {
+      // if so, queue up a chatlog
+      slayerMessages.push(`Slayer Level up!`);
+      slayerMessagesTags.push(`Level Up`);
+    }
+
     /**
      * @ when smoking kills quest is implemented, refactor the logic below check to check for completion
      *  - because smoking kills influences how many slayer points are rewarded
@@ -609,8 +612,6 @@ const GameContainer = (props: Types.GameContainerProps) => {
     // } else {
     //   let slayerPointsEarned = masterHere.smokingKills.incomplete.taskPoints;
     // }
-
-    //! have complete slaye task options return the object and end the function to prevent going negative loools
 
     //* if the task will be complete after decrementing the counter, reward the slayer points
     if (SlayerTask.amount === 1) {
@@ -660,8 +661,6 @@ const GameContainer = (props: Types.GameContainerProps) => {
     return returnObj;
   };
 
-  //! refactor chatlogs to send xp message for skill
-  //! also add a chatlog for damaging but not killing an enemy
   //@ this will run every game tick (while in combat) and holds the logic for resolving combat turns
   const handleCombatTick = () => {
     let arrayOfCombatStyleSkills = ["Attack", "Strength", "Defence", "Ranged", "Magic"];
@@ -702,6 +701,10 @@ const GameContainer = (props: Types.GameContainerProps) => {
 
         // award the combat style xp and check if the player gained a level in their combat style
         dispatch(gainXP({ skill: CurrentSkill, xp: thisEnemy[`XPGivenCombatStyle`] }));
+
+        combatMessages.push(`Gained ${thisEnemy[`XPGivenCombatStyle`]} xp in ${CurrentSkill}`);
+        combatMessagesTags.push(`Gained XP`);
+
         if (didPlayerLevelUp(Experience[CurrentSkill as keyof Types.ISkillList], thisEnemy[`XPGivenCombatStyle`])) {
           // if so, queue up a chatlog
           combatMessages.push(`${CurrentSkill} Level up!`);
@@ -906,9 +909,9 @@ const GameContainer = (props: Types.GameContainerProps) => {
       handleSavePoint();
       //! swap for production
       //@================================================
-      // }, 2500);
-      //@======PRODUCTION ABOVE, DEV BELOW============================================
-    }, 1000);
+    }, 2500);
+    //@======PRODUCTION ABOVE, DEV BELOW============================================
+    // }, 1000);
     //@================================================
 
     // console.log({ interval });
@@ -1021,7 +1024,6 @@ const GameContainer = (props: Types.GameContainerProps) => {
             setCurrentEquipment={setCurrentEquipment}
             currentEquipment={currentEquipment}
             questStepProgress={questStepProgress}
-            progress={progress}
           />
         </div>
 

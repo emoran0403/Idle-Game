@@ -128,10 +128,8 @@ const WornEquipment = (props: Types.WornEquipmentCompProps) => {
     }
 
     const itemHasBeenEquipped = (e: React.ChangeEvent<HTMLSelectElement>) => {
-      //! string type is `ok` since they can be keys of Types.ICurrentEquipment
       /**
        * this can be better described by stating the possible options of each slot in Types.ICurrentEquipment
-       *
        */
       let newlyEquippedItemDisplayName: string = ``;
       let oldEquippedItemDisplayName: string = ``;

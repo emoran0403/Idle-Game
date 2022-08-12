@@ -288,7 +288,7 @@ export const getSlayerTask = (slayerMaster: Types.ISlayerMasterSummary, slayerXp
   taskObj.task[0] = FullTaskEntry.task;
 
   // assign a random amount within the min and max range defined for each entry
-  //! multiply by 10 to allow for longer idle times
+  //@ multiply by 10 to allow for longer idle times
   taskObj.amount = Math.floor(Math.random() * (FullTaskEntry.max - FullTaskEntry.min) + FullTaskEntry.min) * 10;
   return taskObj;
 };

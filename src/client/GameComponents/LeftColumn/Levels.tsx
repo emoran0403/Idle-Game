@@ -84,6 +84,3 @@ const Levels = (props: Types.NoProps) => {
 };
 
 export default Levels;
-
-//! once we have icons, display it to the left of the div holding the name and the progress bar - almost like the icon as a bullet point
-//! https://getbootstrap.com/docs/5.1/components/progress/

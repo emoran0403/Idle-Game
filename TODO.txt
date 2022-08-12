@@ -62,6 +62,8 @@
 
 
 //# Fixes
+* I forgot to add silver ore lol
+* add a chatlog for damaging but not killing an enemy
 * change all props which use single chat log function to use the multiple chat log function
 * update get enemy object to scrape max hit from the wiki
 * add a check to prevent xp from going over 200M

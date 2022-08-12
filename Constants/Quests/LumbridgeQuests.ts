@@ -47,14 +47,13 @@ export const LumbridgeQuests: Types.IQuestInfo[] = [
     },
     itemRewards: { Coins: 0 },
   },
-  //! add "Goblin Diplomacy"  to The Lost Tribe
   {
     name: "The Lost Tribe",
     location: "Lumbridge",
     stepsTotal: 33,
     questPoints: 1,
     combatRequirements: 0,
-    questRequirements: [],
+    questRequirements: ["Goblin Diplomacy"],
     levelRequirements: {
       Agility: 13,
       Mining: 17,
