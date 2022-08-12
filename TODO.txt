@@ -4,10 +4,80 @@
 * - just check all the places for locations
 @ when adding new masters, make sure to add enemies that match taskList[i].task
 
+//# Fixes
+* Logic - experience and levels is displaying too high for some reason :/
+* remove boilerplate commits
+* I forgot to add silver ore lol
+* add a chatlog for damaging but not killing an enemy
+* change all props which use single chat log function to use the multiple chat log function
+* update get enemy object to scrape max hit from the wiki
+* add a check to prevent xp from going over 200M
+* swap out all instances of handleNewChatLog with handleMultipleChatLogs
+* add assets for all items so that inventory component can work with images
+* grammar when fishing anchovies
+* DONE - alt text does not display - needs to be title for that tooltip to show up
+* DONE - clay does not have an asset
+* DONE - inventory pushes down worn equipment component when it has items with long names
+* DONE - add a check upon logging in that checks the inventory and sets the needsToBank component state appropriately
+* DONE - content layout shift in levels component when xp is 10+ digits
+* DONE - abstract out Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations] into smaller variables in gameContainer
+* DONE - delegate skilling tick functions to their own function / component
+* DONE - can clean up chat logs in game component under woodcutting and fishing
+* DONE - add chat logs for gaining xp in gathering skills
+* DONE - make thieving easier = decreased stun times, added possibility for guaranteed success, made successes overall easier
+* DONE - skills, quest, combat panel needs to show display names for locations
+* DONE - currentLocationComp - location needs to wrap to fit inside the div
+* DONE - skills panel only displays skill options if there are those options at the location
+* DONE - bank panel - if the player has 0 of an item, dont display it
+* DONE - scale coin drops to the enemy level, not lifepoints
+* DONE - clean up the functions in shoppanel - handle buying item can be a standalone function i think
+* DONE - equipping a weapon while skilling stops the skilling
+* DONE - make it so that changing location resets all state to none or idle
+* DONE - check keys in quest panel = the requirements and reward Li's did not have keys
+* DONE - check buttons on shop panel - they cannot be nested
+* DONE - inventory needs to display ore display names
+
+//# Quality of life
+* add currentEquipment to redux state to persist outfits across logins
+* Bank shows items in ascending level order
+*** need a way to reward those quest which give ANY xp
+*** maybe make the game choose the next available quest automatically
+*** get a changelog from github for the lobby
+*** offline progress
+* DONE - add dropping messages to ores if the player is dropping resources
+* DONE - make resources in bank panel into collapsible panels - copy skillspanel
+* DONE - stop the event propogation from bubbling up in shop panel (i do not want the panel to collapse when a player buys an item)
+* DONE - make the header in combat bigger to match those in bank, shop, and skilling panels
+* DONE - add collapsible panels to the bank and shop panels
+* DONE - quest is colored yellow when i have the combat level req = adding experience to useEffect in quest panel
+* DONE - make skills in skills panel into collapsible panels
+* DONE - hatchet options in skill panel display their woodcutting
+* DONE - globe picture for the world map icon
+* DONE - double check the buttons on quest panel - allowing player to begin a quest without the combat requirements
+* DONE - more info on quests
+* DONE - level requirements for equipment
+* DONE - Skill images
+* DONE - levels component does not update xp live - use effect
+* DONE - Levels component displays the level and experience
+* DONE - chatwindow greets the player by username
+* DONE - show location of quest in questlist component
+* DONE - quest panel to show missing level requirements
 
 //@ ARTISAN - skills that involve taking resources and transforming or consuming them
 //# SMITHING
 //# SUMMONING
+@ summoning may need to wait until active buffs
+@ summoning may need to wait until item drops are added
+* update get enemy object to grab charm chances 
+* build out function to determine if the player earns a charm
+* add spirit shards to the store
+* add sections to the store (summoning, runes, ammunition, weapons, armor, tools, etc)
+* build out list of summoning familiars
+* add their tertiary ingredients to the store or as monster drops
+* bank slice needs to be made to hold summoning items
+* how will summoning familairs interact with combat?
+* how will summoning familairs interact with skilling?
+
 //# CRAFTING
 //# COOKING
 //# FIREKAMKING
@@ -18,6 +88,67 @@
 
 //@ SUPPORT - skills that just take some time to complete
 //# AGILITY
+
+
+//@ GATHERING - skills that generate new resources
+//# FARMING
+//# HUNTER
+//# DIVINATION
+
+//@ BIG LOL - wide variety of interactions to deal with
+//# INVENTION
+//# ARCHAEOLOGY
+//# DUNGEONEERING
+
+//# World Map
+* grab an image for the world map, place these divs over it, setting the pixels as needed
+<div
+                onClick={(e) => doClick(e)}
+                style={{ border: "2px solid red", position: "absolute", top: "20px", left: "20px", width: "30px", height: "30px", zIndex: "5" }}
+              ></div>
+
+
+//# Locations
+* Varrock
+* Al-Kharid
+* Wizard tower + runespan
+* Slayer dungeons / caves
+
+//# Features
+* bosses
+
+* clue scrolls
+
+* enemy item drops
+
+* high scores list - read multiple MongoDB call
+
+
+//# THIEVING DONE***********************
+* DONE - update GameContainer to handle thieving skill - need a stun state as a number in component state, each game tick decrements if >0
+* DONE - define a function to determine of the player succeeds or fails at thieving
+* DONE - update skills panel to include thieving opportunities
+* DONE - update location summaries to include thieving opportunities
+* DONE - update currentresourcecomp to handle thieving skill
+* DONE - create a constants file with thieving opportunities
+
+//# PRAYER DONE**********************************
+* DONE - update combat tick to dispatch prayer xp for the XPGivenPrayer amount
+* DONE - update enemy object utility to account for bones being dropped
+* DONE - add an XPGivenPrayer property to all enemies, defaulting to 0
+* DONE - update typings for enemies
+
+//# MINING DONE**************************************
+* DONE - add mining to skills panel
+* DONE - add mining to game GameContainer
+* DONE - add case to currentresourcecomp for mining
+* DONE - conditionally check for crystal hatchets and pickaxes in shop and skilling panel, as these are special items
+* DONE - add mining resources to bank
+* DONE - add mining calculations to Ores file under constants
+* DONE - add ores to resource options type
+* DONE - add mining options to location summaries
+* DONE - update IListOfPickaxeOptions for all picks
+
 //# SLAYER
 * DONE - message in chat when the player died
 * DONE - combat panel needs to show a mesage saying the player is healing
@@ -47,116 +178,3 @@
 * DONE - add lumbridge catacomb location
 * DONE - add slayer level req to enemies if it is > 1
 * DONE - add slayer level req to enemies and their type
-
-
-//@ GATHERING - skills that generate new resources
-//# FARMING
-//# HUNTER
-//# DIVINATION
-
-//@ BIG LOL - wide variety of interactions to deal with
-//# INVENTION
-//# ARCHAEOLOGY
-//# DUNGEONEERING
-
-
-
-//# Fixes
-* I forgot to add silver ore lol
-* add a chatlog for damaging but not killing an enemy
-* change all props which use single chat log function to use the multiple chat log function
-* update get enemy object to scrape max hit from the wiki
-* add a check to prevent xp from going over 200M
-* swap out all instances of handleNewChatLog with handleMultipleChatLogs
-* add assets for all items so that inventory component can work with images
-* grammar when fishing anchovies
-* DONE - inventory pushes down worn equipment component when it has items with long names
-* DONE - add a check upon logging in that checks the inventory and sets the needsToBank component state appropriately
-* DONE - content layout shift in levels component when xp is 10+ digits
-* DONE - abstract out Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations] into smaller variables in gameContainer
-* DONE - delegate skilling tick functions to their own function / component
-* DONE - can clean up chat logs in game component under woodcutting and fishing
-* DONE - add chat logs for gaining xp in gathering skills
-* DONE - make thieving easier = decreased stun times, added possibility for guaranteed success, made successes overall easier
-* DONE - skills, quest, combat panel needs to show display names for locations
-* DONE - currentLocationComp - location needs to wrap to fit inside the div
-* DONE - skills panel only displays skill options if there are those options at the location
-* DONE - bank panel - if the player has 0 of an item, dont display it
-* DONE - scale coin drops to the enemy level, not lifepoints
-* DONE - clean up the functions in shoppanel - handle buying item can be a standalone function i think
-* DONE - equipping a weapon while skilling stops the skilling
-* DONE - make it so that changing location resets all state to none or idle
-* DONE - check keys in quest panel = the requirements and reward Li's did not have keys
-* DONE - check buttons on shop panel - they cannot be nested
-* DONE - inventory needs to display ore display names
-
-//# world map
-* grab an image for the world map, place these divs over it, setting the pixels as needed
-<div
-                onClick={(e) => doClick(e)}
-                style={{ border: "2px solid red", position: "absolute", top: "20px", left: "20px", width: "30px", height: "30px", zIndex: "5" }}
-              ></div>
-
-//# Quality of life
-* add currentEquipment to redux state to persist outfits across logins
-* Bank shows items in ascending level order
-*** need a way to reward those quest which give ANY xp
-*** maybe make the game choose the next available quest automatically
-*** get a changelog from github for the lobby
-*** offline progress
-* DONE - add dropping messages to ores if the player is dropping resources
-* DONE - make resources in bank panel into collapsible panels - copy skillspanel
-* DONE - stop the event propogation from bubbling up in shop panel (i do not want the panel to collapse when a player buys an item)
-* DONE - make the header in combat bigger to match those in bank, shop, and skilling panels
-* DONE - add collapsible panels to the bank and shop panels
-* DONE - quest is colored yellow when i have the combat level req = adding experience to useEffect in quest panel
-* DONE - make skills in skills panel into collapsible panels
-* DONE - hatchet options in skill panel display their woodcutting
-* DONE - globe picture for the world map icon
-* DONE - double check the buttons on quest panel - allowing player to begin a quest without the combat requirements
-* DONE - more info on quests
-* DONE - level requirements for equipment
-* DONE - Skill images
-* DONE - levels component does not update xp live - use effect
-* DONE - Levels component displays the level and experience
-* DONE - chatwindow greets the player by username
-* DONE - show location of quest in questlist component
-* DONE - quest panel to show missing level requirements
-
-//# Content
-* Varrock
-* Al-Kharid
-* bosses
-* clue scrolls
-* enemy item drops
-* high scores list - read multiple MongoDB call
-* DONE - implement combat into quests
-
-//# Misc / Bug Fixes
-* Logic - experience and levels is displaying too high for some reason :/
-* remove boilerplate commits
-
-//# THIEVING DONE***********************
-* DONE - update GameContainer to handle thieving skill - need a stun state as a number in component state, each game tick decrements if >0
-* DONE - define a function to determine of the player succeeds or fails at thieving
-* DONE - update skills panel to include thieving opportunities
-* DONE - update location summaries to include thieving opportunities
-* DONE - update currentresourcecomp to handle thieving skill
-* DONE - create a constants file with thieving opportunities
-
-//# PRAYER DONE**********************************
-* DONE - update combat tick to dispatch prayer xp for the XPGivenPrayer amount
-* DONE - update enemy object utility to account for bones being dropped
-* DONE - add an XPGivenPrayer property to all enemies, defaulting to 0
-* DONE - update typings for enemies
-
-//# MINING DONE**************************************
-* DONE - add mining to skills panel
-* DONE - add mining to game GameContainer
-* DONE - add case to currentresourcecomp for mining
-* DONE - conditionally check for crystal hatchets and pickaxes in shop and skilling panel, as these are special items
-* DONE - add mining resources to bank
-* DONE - add mining calculations to Ores file under constants
-* DONE - add ores to resource options type
-* DONE - add mining options to location summaries
-* DONE - update IListOfPickaxeOptions for all picks
