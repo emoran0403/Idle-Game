@@ -250,7 +250,7 @@ interface ITaskObj {
  * @param slayerXp The player's experience in slayer.
  * @returns Returns an object containing the task and an amount, or calls itself if the first randomly chosen task was invalid.
  */
-export const getSlayerTask = (slayerMaster: Types.ISlayerMasterSummary, slayerXp: number): ITaskObj => {
+export const getSlayerTask = (slayerMaster: Types.ISlayerMasterSummary, slayerXp: number, Experience: Types.ISkillList): ITaskObj => {
   // translate the player's slayer experience to a level
   const slayerLevel = getLevel(slayerXp);
 
@@ -267,20 +267,42 @@ export const getSlayerTask = (slayerMaster: Types.ISlayerMasterSummary, slayerXp
   //* decide if the player has the appropriate slayer level for the chosen class
   // validEnemies is a subset of all enemies where the player's slayer level is sufficient AND matches the selected slayer class
   const validEnemies = AllEnemiesArray.filter((enemy) => {
-    // show enemies whose slayer level req is less than or equal to the player's level
-    let levelOK = enemy.levelReqSlayer <= slayerLevel;
-
     // only choose enemies who match the assigned slayer class
     let classOK = enemy.slayerClass.includes(FullTaskEntry.task);
 
-    return levelOK && classOK;
+    // only choose enemies whose slayer level req is less than or equal to the player's level
+    let levelOK = enemy.levelReqSlayer <= slayerLevel;
+
+    // only choose enemies who have a combat level near the player's combat level
+    // IF the player has a low combat level, set this to false
+    let combatLevelOK = true;
+
+    let att: number = getLevel(Experience.Attack);
+    let str: number = getLevel(Experience.Strength);
+    let mag: number = getLevel(Experience.Magic);
+    let rng: number = getLevel(Experience.Ranged);
+    let def: number = getLevel(Experience.Defence);
+    let con: number = getLevel(Experience.Constitution);
+    let pray: number = getLevel(Experience.Prayer);
+    let summ: number = getLevel(Experience.Summoning);
+
+    // define the player's combat level
+    const combatLevel = Math.floor(((13 / 10) * Math.max(att + str, 2 * mag, 2 * rng) + def + con + Math.floor(0.5 * pray) + Math.floor(0.5 * summ)) / 4);
+
+    // if the player has a low combat level, AND the chosen enemy has a higher combat level, then set combatLevelOK = false to choose a new task
+    // this helps lower level players receive a more appropriate task for their combat level
+    if (combatLevel < 20 && combatLevel < enemy.level) {
+      combatLevelOK = false;
+    }
+
+    return levelOK && classOK && combatLevelOK;
   });
 
   //* if no enemies were found who match the class and have a slayer level req the player has satisfied, call this function again
   // if we don't find any enemies the player has a slayer level for, choose a new task by calling THIS function recursively
   if (!validEnemies.length) {
     // console.log({ msg: `slayer task had to reroll`, target: FullTaskEntry, slayerLevel });
-    return getSlayerTask(slayerMaster, slayerXp);
+    return getSlayerTask(slayerMaster, slayerXp, Experience);
   }
 
   //* otherwise, we did find an acceptable subset of slayer tasks, so choose one and assign it

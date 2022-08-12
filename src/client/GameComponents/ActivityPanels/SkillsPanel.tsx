@@ -352,7 +352,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
       console.log(`clicked assign task button`);
       console.log({ amount: SlayerTask.amount, task: SlayerTask.task[0], master: SlayerTask.taskMaster });
       if (SlayerTask.amount === 0 && SlayerTask.task[0] === `none` && SlayerTask.taskMaster === ``) {
-        let taskObject = getSlayerTask(masterHere, SlayerLevel);
+        let taskObject = getSlayerTask(masterHere, SlayerLevel, Experience);
         dispatch(setTask({ task: taskObject.task, taskMaster: masterHere.name, amount: taskObject.amount }));
         //@ send a chat log
         console.log(`inside the if block - task should be next`);
