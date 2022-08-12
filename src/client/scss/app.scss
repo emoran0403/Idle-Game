@@ -14,6 +14,7 @@ $cbYellow-Green: #bfdc00;
 $cbYellow: #e7e700;
 $cbOrange: #ffa500;
 $cbRed: #ff0000;
+$slayerGray: #777777;
 // Then add them to your custom theme-colors map, together with any additional colors you might need
 $theme-colors: (
   primary: $primary,
@@ -31,6 +32,7 @@ $theme-colors: (
   cbYellow: $cbYellow,
   cbOrange: $cbOrange,
   cbRed: $cbRed,
+  cbGray: $slayerGray,
   // add any additional color below
 );
 
@@ -49,4 +51,26 @@ div::-webkit-scrollbar-thumb {
   outline: 1px solid #7e8b92;
   border-radius: 5%;
 }
+
+.mx-neg-1 {
+  margin-right: -0.5rem;
+  margin-left: -0.5rem;
+}
+.mx-neg-1K {
+  margin-right: -5rem !important;
+  margin-left: -5rem !important;
+}
+
 @import "../../../node_modules/bootstrap/scss/bootstrap.scss";
+@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap/scss/bootstrap-utilities";
+//Generate utilites for Cursor
+$utilities: map-merge(
+  $utilities,
+  (
+    "cursor": (
+      property: cursor,
+      values: auto default pointer wait text move help not-allowed,
+    ),
+  )
+);

@@ -37,10 +37,11 @@ const Lobby = (props: Types.LobbyProps) => {
     // toggle state for the lobby button
     props.setShowLobbyButton(true);
   };
-  const doClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    e.preventDefault();
-    console.log(`hi`);
-  };
+
+  // const doClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  //   e.preventDefault();
+  //   console.log(`hi`);
+  // };
 
   return (
     <div className="border border-dark shadow border-2 rounded-3">
@@ -119,14 +120,15 @@ const Lobby = (props: Types.LobbyProps) => {
             <div className="card-body">
               <h5 className="card-title text-center">Combat</h5>
               <p className="card-text">
-                Players who choose combat will make progress in defeating enemies via a chosen combat style, and will be rewarded when the enemy is defeated.{" "}
+                Players who choose combat will make progress in defeating enemies via a chosen combat style, and will be rewarded when the enemy is defeated.
               </p>
               <p className="card-text">
                 To start Combat, click the combat activity button. You will need to select an enemy, and a combat style. Combat style determines which combat
-                skill is trained, and some enemies are weaker to certain styles. Enemies with a green background are at a lower combat level than you, while
-                those in orange and red are higher, and therefore will take longer to defeat. Defeating an ememy wil earn you experience in the chosen skill,
-                and Coins.
+                skill is trained, and some enemies are weaker to certain styles. Enemies with a green background are at a lower combat level than you, and those
+                in orange and red are higher, and therefore will take longer to defeat. Enemies with a <span className="bg-cbGray">gray background</span>{" "}
+                require a higher slayer level in order to fight them. Defeating an ememy will earn you experience in the chosen skill, and Coins.
               </p>
+
               <ul>
                 <li>
                   Equipment you own and can wield will have a <span className="bg-success">green background</span>.

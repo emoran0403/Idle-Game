@@ -128,10 +128,8 @@ const WornEquipment = (props: Types.WornEquipmentCompProps) => {
     }
 
     const itemHasBeenEquipped = (e: React.ChangeEvent<HTMLSelectElement>) => {
-      //! string type is `ok` since they can be keys of Types.ICurrentEquipment
       /**
        * this can be better described by stating the possible options of each slot in Types.ICurrentEquipment
-       *
        */
       let newlyEquippedItemDisplayName: string = ``;
       let oldEquippedItemDisplayName: string = ``;
@@ -311,19 +309,31 @@ const WornEquipment = (props: Types.WornEquipmentCompProps) => {
   return (
     <div className="border border-dark border-2 rounded-3" style={{ overflowY: "auto", position: "relative", height: "44%" }}>
       <h5 className="card-header text-center">WornEquipment</h5>
-      <div className="d-flex flex-column">
-        <div className="text-center">Head Slot:</div>
-        {displaySelectorTagArmor(headsFromState, HeadSlot, `HeadSlot`)}
-        <div className="text-center">Body Slot:</div>
-        {displaySelectorTagArmor(bodiesFromState, BodySlot, `BodySlot`)}
-        <div className="text-center">Legs Slot:</div>
-        {displaySelectorTagArmor(legsFromState, LegsSlot, `LegsSlot`)}
-        <div className="text-center">Hands Slot:</div>
-        {displaySelectorTagArmor(handsFromState, HandsSlot, `HandsSlot`)}
-        <div className="text-center">Feet Slot:</div>
-        {displaySelectorTagArmor(feetFromState, FeetSlot, `FeetSlot`)}
-        <div className="text-center">TwoHand Slot:</div>
-        {displaySelectorTagWeapon(twoHandFromState, TwoHandSlot, `TwoHandSlot`)}
+      <div className="">
+        <div className="row mx-2">
+          <div className="text-center col-4">Head Slot:</div>
+          <div className="col-8">{displaySelectorTagArmor(headsFromState, HeadSlot, `HeadSlot`)}</div>
+        </div>
+        <div className="row mx-2">
+          <div className="text-center col-4">Body Slot:</div>
+          <div className="col-8">{displaySelectorTagArmor(bodiesFromState, BodySlot, `BodySlot`)}</div>
+        </div>
+        <div className="row mx-2">
+          <div className="text-center col-4">Legs Slot:</div>
+          <div className="col-8">{displaySelectorTagArmor(legsFromState, LegsSlot, `LegsSlot`)}</div>
+        </div>
+        <div className="row mx-2">
+          <div className="text-center col-4">Hands Slot:</div>
+          <div className="col-8">{displaySelectorTagArmor(handsFromState, HandsSlot, `HandsSlot`)}</div>
+        </div>
+        <div className="row mx-2">
+          <div className="text-center col-4">Feet Slot:</div>
+          <div className="col-8">{displaySelectorTagArmor(feetFromState, FeetSlot, `FeetSlot`)}</div>
+        </div>
+        <div className="row mx-2">
+          <div className="text-center col-4">TwoHand Slot:</div>
+          <div className="col-8">{displaySelectorTagWeapon(twoHandFromState, TwoHandSlot, `TwoHandSlot`)}</div>
+        </div>
       </div>
     </div>
   );

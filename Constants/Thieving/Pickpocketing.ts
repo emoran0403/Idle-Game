@@ -42,7 +42,7 @@ export const ListOfPickpocketNPC: Types.IListOfPickpocketNPC = {
     displayName: `H.A.M Member (female)`,
     levelReqThieving: 15,
     XPGivenThieving: 18.5,
-    stunTime: 2,
+    stunTime: 1,
     doubleloot: {
       levelReqThieving: 25,
       levelReqAgility: 15,
@@ -60,7 +60,7 @@ export const ListOfPickpocketNPC: Types.IListOfPickpocketNPC = {
     displayName: `H.A.M Member (male)`,
     levelReqThieving: 20,
     XPGivenThieving: 22.2,
-    stunTime: 3,
+    stunTime: 1,
     doubleloot: {
       levelReqThieving: 30,
       levelReqAgility: 20,
@@ -78,7 +78,7 @@ export const ListOfPickpocketNPC: Types.IListOfPickpocketNPC = {
     displayName: "Warrior woman",
     levelReqThieving: 25,
     XPGivenThieving: 26,
-    stunTime: 3,
+    stunTime: 1,
     doubleloot: {
       levelReqThieving: 35,
       levelReqAgility: 25,
@@ -102,7 +102,7 @@ export const ListOfPickpocketNPC: Types.IListOfPickpocketNPC = {
     displayName: "Al Kharid warrior",
     levelReqThieving: 25,
     XPGivenThieving: 26,
-    stunTime: 3,
+    stunTime: 1,
     doubleloot: {
       levelReqThieving: 35,
       levelReqAgility: 25,
@@ -126,7 +126,7 @@ export const ListOfPickpocketNPC: Types.IListOfPickpocketNPC = {
     displayName: "Cave goblin",
     levelReqThieving: 36,
     XPGivenThieving: 40,
-    stunTime: 4,
+    stunTime: 1,
     doubleloot: {
       levelReqThieving: 46,
       levelReqAgility: 36,
@@ -150,7 +150,7 @@ export const ListOfPickpocketNPC: Types.IListOfPickpocketNPC = {
     displayName: "Master Farmer",
     levelReqThieving: 38,
     XPGivenThieving: 43,
-    stunTime: 4,
+    stunTime: 1,
     doubleloot: {
       levelReqThieving: 48,
       levelReqAgility: 38,
@@ -174,7 +174,7 @@ export const ListOfPickpocketNPC: Types.IListOfPickpocketNPC = {
     displayName: "Guard",
     levelReqThieving: 40,
     XPGivenThieving: 46.8,
-    stunTime: 5,
+    stunTime: 1,
     doubleloot: {
       levelReqThieving: 50,
       levelReqAgility: 40,
@@ -198,7 +198,7 @@ export const ListOfPickpocketNPC: Types.IListOfPickpocketNPC = {
     displayName: "Fremennik citizen",
     levelReqThieving: 45,
     XPGivenThieving: 65,
-    stunTime: 5,
+    stunTime: 1,
     doubleloot: {
       levelReqThieving: 55,
       levelReqAgility: 45,
@@ -222,7 +222,7 @@ export const ListOfPickpocketNPC: Types.IListOfPickpocketNPC = {
     displayName: "Knight of Ardougne",
     levelReqThieving: 55,
     XPGivenThieving: 84.3,
-    stunTime: 6,
+    stunTime: 1,
     doubleloot: {
       levelReqThieving: 65,
       levelReqAgility: 55,
@@ -246,7 +246,7 @@ export const ListOfPickpocketNPC: Types.IListOfPickpocketNPC = {
     displayName: "Menaphite Thug",
     levelReqThieving: 65,
     XPGivenThieving: 137.5,
-    stunTime: 7,
+    stunTime: 2,
     doubleloot: {
       levelReqThieving: 75,
       levelReqAgility: 65,
@@ -270,7 +270,7 @@ export const ListOfPickpocketNPC: Types.IListOfPickpocketNPC = {
     displayName: "Yanille Watchman",
     levelReqThieving: 65,
     XPGivenThieving: 137.5,
-    stunTime: 7,
+    stunTime: 2,
     doubleloot: {
       levelReqThieving: 75,
       levelReqAgility: 65,
@@ -294,7 +294,7 @@ export const ListOfPickpocketNPC: Types.IListOfPickpocketNPC = {
     displayName: "Paladin",
     levelReqThieving: 70,
     XPGivenThieving: 151.8,
-    stunTime: 8,
+    stunTime: 2,
     doubleloot: {
       levelReqThieving: 80,
       levelReqAgility: 70,
@@ -318,7 +318,7 @@ export const ListOfPickpocketNPC: Types.IListOfPickpocketNPC = {
     displayName: "Gnome",
     levelReqThieving: 75,
     XPGivenThieving: 198.3,
-    stunTime: 8,
+    stunTime: 2,
     doubleloot: {
       levelReqThieving: 85,
       levelReqAgility: 75,
@@ -342,7 +342,7 @@ export const ListOfPickpocketNPC: Types.IListOfPickpocketNPC = {
     displayName: "Hero",
     levelReqThieving: 80,
     XPGivenThieving: 273.3,
-    stunTime: 9,
+    stunTime: 2,
     doubleloot: {
       levelReqThieving: 90,
       levelReqAgility: 80,
@@ -366,7 +366,7 @@ export const ListOfPickpocketNPC: Types.IListOfPickpocketNPC = {
     displayName: "Trader",
     levelReqThieving: 90,
     XPGivenThieving: 556.5,
-    stunTime: 10,
+    stunTime: 3,
     doubleloot: {
       levelReqThieving: Infinity,
       levelReqAgility: Infinity,

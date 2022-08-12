@@ -11,12 +11,12 @@ export const Wallet = createSlice({
   },
   reducers: {
     // use this when we need to add coins to the wallet
-    addToWallet: (state: Types.IFlatObjectOfNums, action) => {
+    addCoinsToWallet: (state: Types.IFlatObjectOfNums, action) => {
       const amount: number = Number(action.payload); // this will be the number of coins added to the wallet
-      state.coins += amount; // add the coins to state, then reassign (ty immer)
+      state.coins += amount;
     },
 
-    // use this when we need to remove an item from the bank
+    // use this when we need to remove coins from the bank
     removeFromWallet: (state: Types.IFlatObjectOfNums, action) => {
       const amount: number = Number(action.payload); // this will be the number of coins removed from the wallet
 
@@ -32,6 +32,6 @@ export const Wallet = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { addToWallet, removeFromWallet } = Wallet.actions;
+export const { addCoinsToWallet, removeFromWallet } = Wallet.actions;
 
 export default Wallet.reducer;

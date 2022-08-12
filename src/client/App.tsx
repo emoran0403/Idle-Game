@@ -69,5 +69,4 @@ const App = (props: Types.AppProps) => {
   );
 };
 
-//! swapped game and lobby for testing
 export default App;

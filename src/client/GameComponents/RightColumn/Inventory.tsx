@@ -22,11 +22,11 @@ const Inventory = (props: Types.NoProps) => {
   //@ given an item, this returns the item display name
   const getItemDisplayName = (item: string) => {
     if (ListOfFish[item as keyof Types.IListOfFish]) {
-      return ListOfFish[item as keyof Types.IListOfFish].displayName;
+      return ListOfFish[item as keyof Types.IListOfFish][`displayName`];
     } else if (ListOfLogs[item as keyof Types.IListOfLogs]) {
-      return ListOfLogs[item as keyof Types.IListOfLogs].displayName;
+      return ListOfLogs[item as keyof Types.IListOfLogs][`displayName`];
     } else if (ListOfOres[item as keyof Types.IListOfOres]) {
-      return ListOfOres[item as keyof Types.IListOfOres].displayName;
+      return ListOfOres[item as keyof Types.IListOfOres][`displayName`];
     } else {
       return item;
     }
@@ -38,14 +38,20 @@ const Inventory = (props: Types.NoProps) => {
         <h5 className="card-header text-center">
           Inventory
           <div className="d-flex row">
-            <h6 className="card-subtitle text-muted">Coins: {Wallet.coins.toLocaleString("en-US")}</h6>
+            <h6 className="card-subtitle text-muted">Coins: {Wallet[`coins`].toLocaleString("en-US")}</h6>
           </div>
         </h5>
 
         <div className="d-flex flex-wrap justify-content-between container">
           {makeCompositeCurrent().map((item, i) => (
-            <div key={`Inventory-slot-${i + 1}`} className="border border-2 col-2 border-dark rounded flex-fill m-2">
-              <span className={item === `blank` ? `text-white` : `text-black`}>{getItemDisplayName(item)}</span>
+            <div key={`Inventory-slot-${i + 1}`} className="d-flex border border-2 col-2 border-dark rounded flex-fill m-2 justify-content-center">
+              {item === `blank` ? (
+                <span style={{ height: `27px` }} className="text-white">
+                  blank
+                </span>
+              ) : (
+                <img src={`/Assets/Inventory/${item}.png`} height={27} alt={`${getItemDisplayName(item)}`} />
+              )}
             </div>
           ))}
         </div>
@@ -55,12 +61,3 @@ const Inventory = (props: Types.NoProps) => {
 };
 
 export default Inventory;
-// className={`${i % 2 && `invisible`}`}
-{
-  /* <div className="card">
-  <div className="card-body">
-    <h5 className="card-title">Stuff</h5>
-    <div>stuff map here</div>
-  </div>
-</div> */
-}

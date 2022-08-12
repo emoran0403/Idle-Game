@@ -9,6 +9,7 @@ import { setResource } from "../../Redux/Slices/CurrentResource";
 import { setSkill } from "../../Redux/Slices/CurrentSkill";
 import { setQuest } from "../../Redux/Slices/CurrentQuest";
 import { setTarget } from "../../Redux/Slices/CurrentTarget";
+import { AllLocations } from "../../../../Constants/LocationInfo";
 
 //! handleQuestStyle and handleQuestButtonDisplay have repeated logic that could be improved
 //! composing the constant quest info and state info can be improved by relegating that to a function, which then returns jsx
@@ -43,7 +44,7 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
     // returns the JSX for the panel header
     return (
       <div className="row justify-content-lg-center">
-        <div className="col-lg-3 justify-content-lg-center">
+        <div className="col-lg-2 justify-content-lg-center">
           <button
             className="btn btn-primary"
             onClick={() => {
@@ -53,7 +54,7 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
             Back
           </button>
         </div>
-        <div className="col-lg-9 justify-content-lg-center">Quests in {CurrentLocation}</div>
+        <h1 className="col-lg-10 justify-content-lg-center">Quests in {AllLocations[CurrentLocation as keyof Types.IAllLocations].displayName}</h1>
       </div>
     );
   };

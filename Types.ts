@@ -55,6 +55,8 @@ export interface BossesPanelProps {
   newChatLog: Function;
 }
 export interface CombatPanelProps {
+  playerLifePoints: number;
+  targetLifePoints: number;
   handleUpdateDisplay: Function;
   newChatLog: Function;
   chatLogArray: IChatLog[];
@@ -79,16 +81,15 @@ export interface WornEquipmentCompProps {
   currentEquipment: ICurrentEquipment;
 }
 export interface ActivityAreaCompProps {
+  playerLifePoints: number;
+  targetLifePoints: number;
   newChatLog: Function;
   chatLogArray: IChatLog[];
   setCurrentEquipment: Function;
   currentEquipment: ICurrentEquipment;
   questStepProgress: number;
-  progress: number;
 }
-export interface ActivityDisplayCompProps {
-  progress: number;
-}
+export interface ActivityDisplayCompProps {}
 export interface ChatWindowCompProps {
   chatLogArray: IChatLog[];
 }
@@ -469,6 +470,38 @@ export interface IFlatObjectOfNums {
 export interface IFlatObjectOfBooleans {
   [key: string]: boolean;
 }
+// defined to allow for indexing of the `skillPanelsOpened` in SkillsPanel and BankPanel component state
+export interface SkillPanels {
+  Woodcutting: boolean;
+  Mining: boolean;
+  Fishing: boolean;
+  Thieving: boolean;
+  Slayer: boolean;
+  Farming: boolean;
+  Firemaking: boolean;
+  Hunter: boolean;
+  Divination: boolean;
+  Archaeology: boolean;
+  Runecrafting: boolean;
+  Construction: boolean;
+  Summoning: boolean;
+  Agility: boolean;
+}
+// defined to allow for indexing of the `equipmentPanelsOpened` in ShopPanel component state
+
+export interface EquipmentPanels {
+  Hatchets: boolean;
+  Pickaxes: boolean;
+  BackSlot: boolean;
+  NeckSlot: boolean;
+  RingSlot: boolean;
+  HeadSlot: boolean;
+  BodySlot: boolean;
+  LegsSlot: boolean;
+  HandsSlot: boolean;
+  FeetSlot: boolean;
+  TwoHandSlot: boolean;
+}
 
 //@ ******************************* RUNES *******************************
 
@@ -660,6 +693,38 @@ export type ICurrentQuestOptions =
   | `Stolen Hearts`;
 //@ ******************************* COMBAT *******************************
 
+export interface SlayerTaskSlice {
+  task: string[];
+  amount: number;
+  taskCounter: number;
+  taskMaster: string;
+  slayerPoints: number;
+}
+
+export interface ISlayerMasterSummary {
+  name: string;
+  displayName: string;
+  location: string;
+  levelReqCombat: number;
+  levelReqSlayer: number;
+  smokingKills: {
+    complete: {
+      taskPoints: number;
+      task10: number;
+      task50: number;
+    };
+    incomplete: {
+      taskPoints: number;
+      task10: number;
+      task50: number;
+    };
+  };
+  taskList: {
+    task: string;
+    min: number;
+    max: number;
+  }[];
+}
 export interface IListOfCombatStyles {
   CurrentStyle: ICurrentStyleOptions;
 }
@@ -675,6 +740,10 @@ export interface IEnemySummary {
   XPGivenConstitution: number;
   XPGivenPrayer: number;
   XPGivenSlayer: number;
+  levelReqSlayer: number;
+  slayerClass: string[];
+  monsterStyle: CombatStyle;
+  drops: string[];
   affinities: {
     explicitWeakness: CombatStyle | SpellElement;
     weakStyle: CombatStyle;
@@ -684,6 +753,7 @@ export interface IEnemySummary {
   armor: number;
   defence: number;
   accuracy: number;
+  maxHit: number;
 }
 //* copy this as more locations are added
 export interface ILumbridgeEnemies {
@@ -707,10 +777,36 @@ export interface IDraynorEnemies {
   ghost25: IEnemySummary;
   blackknight: IEnemySummary;
 }
+export interface ILumbridgeSwampCaveEnemies {
+  bigfrog: IEnemySummary;
+  rockslug42: IEnemySummary;
+  rockslug49: IEnemySummary;
+  cavebug8: IEnemySummary;
+  cavebug12: IEnemySummary;
+  caveslime: IEnemySummary;
+  wallbeast: IEnemySummary;
+  cavecrawler53: IEnemySummary;
+  cavecrawler78: IEnemySummary;
+  giantfrog: IEnemySummary;
+}
+export interface ILumbridgeCatacombsEnemies {
+  warpedcockroach: IEnemySummary;
+  corpsespider: IEnemySummary;
+  warpedfly: IEnemySummary;
+  crawlingcorpsetorso: IEnemySummary;
+  warpedrat: IEnemySummary;
+  skeleton15: IEnemySummary;
+  warpedbat: IEnemySummary;
+  corpsearcher: IEnemySummary;
+  skoblin: IEnemySummary;
+  corpsemage: IEnemySummary;
+}
 //* extend this as more locations are added
 export interface IAllEnemies {
   Lumbridge: ILumbridgeEnemies;
   Draynor: IDraynorEnemies;
+  LumbridgeSwampCave: ILumbridgeSwampCaveEnemies;
+  LumbridgeCatacombs: ILumbridgeCatacombsEnemies;
 }
 export type ListOfCombatStyleSkills = `Attack` | `Strength` | `Defence` | `Ranged` | `Magic`;
 export type ICurrentStyleOptions = `none` | `melee` | `ranged` | `air` | `fire` | `water` | `earth`;
@@ -718,7 +814,8 @@ export type CombatStyle = `melee` | `magic` | `ranged`;
 export type SpellElement = `typeless` | `air` | `fire` | `water` | `earth`;
 
 //* extend this as more locations are added
-export type IEnemyLocations = ILumbridgeEnemies | IDraynorEnemies;
+export type IEnemyLocations = ILumbridgeEnemies | IDraynorEnemies | ILumbridgeCatacombsEnemies | ILumbridgeSwampCaveEnemies;
+//
 
 //* add to this as more enemies are added
 export type ICurrentTargetOptions =
@@ -738,7 +835,27 @@ export type ICurrentTargetOptions =
   | `zombie29`
   | `skeleton32`
   | `ghost25`
-  | `blackknight`;
+  | `blackknight`
+  | `giantbat`
+  | `warpedbat`
+  | `cavebug8`
+  | `cavebug12`
+  | `caveslime`
+  | `bigfrog`
+  | `giantfrog`
+  | `cavecrawler53`
+  | `cavecrawler78`
+  | `rockslug42`
+  | `rockslug49`
+  | `wallbeast`
+  | `warpedcockroach`
+  | `corpsespider`
+  | `warpedfly`
+  | `crawlingcorpsetorso`
+  | `warpedrat`
+  | `corpsearcher`
+  | `skoblin`
+  | `corpsemage`;
 
 //@ ******************************* RESOURCES *******************************
 
@@ -780,6 +897,7 @@ export interface AllState extends AllSlots {
   QuestPoints: IQuestPointsSlice;
   Quests_Lumbridge: LumbridgeQuestSlice;
   Quests_Draynor: DraynorQuestSlice;
+  SlayerTask: SlayerTaskSlice;
 }
 export interface IPlayerDataFromMongo extends AllState, IPlayerPayload {
   _id: string;
@@ -826,33 +944,57 @@ export interface IPlayerPayload {
 
 //@ copy this and trim it down to match the location summary
 export interface ILocationSummary {
+  name: string;
+  displayName: string;
   Quests: string[];
   Skills: LocationSkills;
   Combat: string[];
   Bosses: string[];
 }
-export interface ILumbridgeLocationSummary {
-  Quests: string[];
-  Skills: LocationSkills;
-  Combat: string[];
-  Bosses: string[];
-}
-export interface IDraynorLocationSummary {
-  Quests: string[];
-  Skills: LocationSkills;
-  Combat: string[];
-  Bosses: string[];
-}
+// export interface ILumbridgeLocationSummary {
+//   name: string;
+//   displayName: string;
+//   Quests: string[];
+//   Skills: LocationSkills;
+//   Combat: string[];
+//   Bosses: string[];
+// }
+// export interface ILumbridgeSwampCaveLocationSummary {
+//   name: string;
+//   displayName: string;
+//   Quests: string[];
+//   Skills: LocationSkills;
+//   Combat: string[];
+//   Bosses: string[];
+// }
+// export interface ILumbridgeCatacombsSummary {
+//   name: string;
+//   displayName: string;
+//   Quests: string[];
+//   Skills: LocationSkills;
+//   Combat: string[];
+//   Bosses: string[];
+// }
+// export interface IDraynorLocationSummary {
+//   name: string;
+//   displayName: string;
+//   Quests: string[];
+//   Skills: LocationSkills;
+//   Combat: string[];
+//   Bosses: string[];
+// }
 export interface IAllLocations {
-  Lumbridge: ILumbridgeLocationSummary;
-  Draynor: IDraynorLocationSummary;
+  Lumbridge: ILocationSummary;
+  Draynor: ILocationSummary;
+  LumbridgeSwampCave: ILocationSummary;
+  LumbridgeCatacombs: ILocationSummary;
   // Varrock: ILocationSummary;
 }
 //* extend this as needed to account for future locations
 export interface ICurrentLocation {
   CurrentLocation: ICurrentLocationOptions;
 }
-export type ICurrentLocationOptions = `Lumbridge` | `Draynor`;
+export type ICurrentLocationOptions = `Lumbridge` | `Draynor` | `LumbridgeSwampCave` | `LumbridgeCatacombs`;
 
 //@ ******************************* CHAT *******************************
 

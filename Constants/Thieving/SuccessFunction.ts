@@ -42,41 +42,49 @@ export const resolveThieving = (target: Types.IThievingTarget, ThievingXP: numbe
   // define the starting roll as 20
   let playerRoll = 20;
 
-  // add a third of the difference of the player's level and the levelReqThieving rounded down
-  playerRoll += Math.floor((ThievingLevel - target.levelReqThieving) / 3);
-
-  // roll in the range 0-100 inclusive
-  let gameRoll = Math.floor(Math.random() * 100);
-
-  // if the player rolled higher than the game, set the outcome to true
-  // console.log({ playerRoll, gameRoll });
-  if (playerRoll >= gameRoll) {
-    resultObj.outcome = true;
-  } else {
-    // otherwise, set the outcome to false
-    resultObj.outcome = false;
+  // add to playerRoll if the player's level is much greater than the levelReqThieving
+  if (ThievingLevel >= target.levelReqThieving + 30) {
+    playerRoll += Math.floor(ThievingLevel / (target.levelReqThieving * 3)) * 5;
   }
 
-  //* determing the number of coins the player will receive
+  // after the previous bonus, it is possible for the player to not fail the roll
+  if (playerRoll >= 100) {
+    // if the player cannot fail the roll, set the outcome to true
+    resultObj.outcome = true;
+  } else {
+    // otherwise, add the other bonuses
+    // increase the player roll based on the player level compared to the target's level
+    let lvlbonus = target.levelReqThieving / 3;
+
+    // add a third of the difference of the player's level and the levelReqThieving rounded down
+    playerRoll += Math.floor((ThievingLevel - lvlbonus) / 3);
+
+    // roll in the range 0-100 inclusive
+    let gameRoll = Math.floor(Math.random() * 100);
+
+    // if the player rolled higher than the game, set the outcome to true
+    // console.log({ playerRoll, gameRoll });
+    if (playerRoll >= gameRoll) {
+      resultObj.outcome = true;
+    } else {
+      // otherwise, set the outcome to false
+      resultObj.outcome = false;
+    }
+  }
+
+  //* determine the number of coins the player will receive
   // check if the player's target is a pickpocketing option via typeguarding so we can assign the coins
   if (`doubleloot` in target) {
-    //! is there a better way to do this?
+    // each is<X> will be either false or the multiplier we want to use
+    const isDouble = ThievingLevel >= target.doubleloot.levelReqThieving && AgilityLevel >= target.doubleloot.levelReqAgility && 2;
+    const isTriple = isDouble && ThievingLevel >= target.tripleloot.levelReqThieving && AgilityLevel >= target.tripleloot.levelReqAgility && 3;
+    const isQuad = isTriple && ThievingLevel >= target.quadloot.levelReqThieving && AgilityLevel >= target.quadloot.levelReqAgility && 4;
+
+    // set the multiplier as the largest true result, which will the be multiplier to use
+    const multiplier = isQuad || isTriple || isDouble || 1;
 
     // set the coin reward
-    resultObj.coins = target.loot.Coins;
-
-    // check if the player's levels are high enough to receive extra loot
-    if (ThievingLevel >= target.quadloot.levelReqThieving && AgilityLevel >= target.quadloot.levelReqAgility) {
-      resultObj.coins = target.loot.Coins * 2;
-    }
-
-    if (ThievingLevel >= target.tripleloot.levelReqThieving && AgilityLevel >= target.tripleloot.levelReqAgility) {
-      resultObj.coins = target.loot.Coins * 3;
-    }
-
-    if (ThievingLevel >= target.doubleloot.levelReqThieving && AgilityLevel >= target.doubleloot.levelReqAgility) {
-      resultObj.coins = target.loot.Coins * 4;
-    }
+    resultObj.coins = target.loot.Coins * multiplier;
   }
 
   return resultObj;

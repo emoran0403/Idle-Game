@@ -6,10 +6,18 @@ import Validation from "./ClientUtils/DataValidation";
 import Fetcher, { TOKEN_KEY } from "../client/ClientUtils/Fetcher";
 
 const NewUser = (props: Types.NewUserCompProps) => {
+  //! swap for production
+  //@=============================================================================
   const [password_A, setPassword_A] = useState<string>("");
   const [password_B, setPassword_B] = useState<string>("");
   const [email, setEmail] = useState<string>(``);
   const [username, setUsername] = useState<string>(``);
+  //@======PRODUCTION ABOVE, DEV BELOW============================================
+  // const [password_A, setPassword_A] = useState<string>("1111111111");
+  // const [password_B, setPassword_B] = useState<string>("1111111111");
+  // const [email, setEmail] = useState<string>(`wow@wow.com`);
+  // const [username, setUsername] = useState<string>(`bigwow`);
+  //@=============================================================================
 
   const nav = useNavigate();
 
