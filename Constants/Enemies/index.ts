@@ -264,7 +264,7 @@ export const resolveCombat = (
     BodySlot[Equipment[`BodySlot`] as keyof Types.IArmorSlotBody][`armor`] +
     HandsSlot[Equipment[`HandsSlot`] as keyof Types.IArmorSlotHands][`armor`] +
     HeadSlot[Equipment[`HeadSlot`] as keyof Types.IArmorSlotHead][`armor`] +
-    LegsSlot[Equipment[`HeadSlot`] as keyof Types.IArmorSlotLegs][`armor`] +
+    LegsSlot[Equipment[`LegsSlot`] as keyof Types.IArmorSlotLegs][`armor`] +
     NeckSlot[Equipment[`NeckSlot`] as keyof Types.IArmorSlotNeck][`armor`] +
     RingSlot[Equipment[`RingSlot`] as keyof Types.IArmorSlotRing][`armor`] +
     TwoHandSlot[Equipment[`TwoHandSlot`] as keyof Types.IArmorSlotTwoHand][`armor`];
@@ -288,7 +288,7 @@ export const resolveCombat = (
         BodySlot[Equipment[`BodySlot`] as keyof Types.IArmorSlotBody][`damageReduction`] +
         HandsSlot[Equipment[`HandsSlot`] as keyof Types.IArmorSlotHands][`damageReduction`] +
         HeadSlot[Equipment[`HeadSlot`] as keyof Types.IArmorSlotHead][`damageReduction`] +
-        LegsSlot[Equipment[`HeadSlot`] as keyof Types.IArmorSlotLegs][`damageReduction`] +
+        LegsSlot[Equipment[`LegsSlot`] as keyof Types.IArmorSlotLegs][`damageReduction`] +
         NeckSlot[Equipment[`NeckSlot`] as keyof Types.IArmorSlotNeck][`damageReduction`] +
         RingSlot[Equipment[`RingSlot`] as keyof Types.IArmorSlotRing][`damageReduction`]) /
       100;
