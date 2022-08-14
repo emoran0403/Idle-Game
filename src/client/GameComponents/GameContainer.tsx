@@ -23,7 +23,7 @@ import { setQuest } from "../Redux/Slices/CurrentQuest";
 import { addCoinsToWallet } from "../Redux/Slices/Wallet";
 import { gainXP, resetXP } from "../Redux/Slices/Experience";
 import { addQuestPoints } from "../Redux/Slices/QuestPoints";
-import { addItemToInventory, removeAllItemsFromInventory } from "../Redux/Slices/Inventory";
+import { addItemToInventory, addManyItemsToInventory, removeAllItemsFromInventory, removeItemFromInventory } from "../Redux/Slices/Inventory";
 
 // constants imports
 import { LumbridgeQuests } from "../../../Constants/Quests/LumbridgeQuests";
@@ -37,7 +37,7 @@ import { Enemies, resolveCombat } from "../../../Constants/Enemies";
 import { completeSlayerTask, decrementTaskAmount } from "../Redux/Slices/SlayerTask";
 
 // woodcutting
-import { addLogToBank } from "../Redux/Slices/BankSlices/LogsSlice";
+import { addLogToBank, removeLogFromBank } from "../Redux/Slices/BankSlices/LogsSlice";
 import { ListOfLogs, playerEarnsLog } from "../../../Constants/Items/Logs";
 import { listOfHatchets } from "../../../Constants/SkillingEquipment/Hatchets";
 
@@ -150,7 +150,11 @@ const GameContainer = (props: Types.GameContainerProps) => {
   //@ use this to keep track of the stun time remaining for when a player fails a thieving attempt
   const [stunTimeRemaining, setStunTimeRemaining] = useState<number>(0);
 
-  //@ this is set when the player gains an item which will fill their inventory
+  /**
+   * This piece of component state is set when the player gains an item which will fill their inventory.
+   * true will trigger the game to empty the player inventory.
+   * false will allow the game to fill up the player inventory.
+   */
   const [needsToBank, setNeedsToBank] = useState<boolean>(true);
 
   //@ this keeps track of time, used to 'save' progress in localStorage, and to update DB
@@ -312,7 +316,9 @@ const GameContainer = (props: Types.GameContainerProps) => {
       }
     } else {
       //* otherwise, call handleBanking
-      handleBanking();
+      emptyPlayerInventory();
+      //* after the banking is finished, set this state to false, since the player's inventory is now empty
+      setNeedsToBank(false);
     }
   };
   /**
@@ -370,7 +376,9 @@ const GameContainer = (props: Types.GameContainerProps) => {
       }
     } else {
       //* otherwise, call handleBanking
-      handleBanking();
+      emptyPlayerInventory();
+      //* after the banking is finished, set this state to false, since the player's inventory is now empty
+      setNeedsToBank(false);
     }
   };
   /**
@@ -443,7 +451,9 @@ const GameContainer = (props: Types.GameContainerProps) => {
       handleMultipleChatLogs(miningMessages, miningMessagesTags);
     } else {
       //* otherwise, call handleBanking
-      handleBanking();
+      emptyPlayerInventory();
+      //* after the banking is finished, set this state to false, since the player's inventory is now empty
+      setNeedsToBank(false);
     }
   };
   /**
@@ -556,13 +566,54 @@ const GameContainer = (props: Types.GameContainerProps) => {
       }
     }
   };
+
+  const handleFiremakingTick = () => {
+    // define the current log, and that log in the bank for readability
+    const thisLog = ListOfLogs[CurrentResource as keyof Types.IListOfLogs];
+    const thisLogInBank = bank_logs[CurrentResource as keyof Types.ILogBankSlice];
+
+    //* empty the player's inventory so that they can train firemaking with a full inventory of logs
+    emptyPlayerInventory();
+    //* set needsToBank to true to prevent a case of inventory overflow when switching to a new skill with a full inventory of logs
+    setNeedsToBank(true);
+
+    //* check if the player needs to withdraw more logs (do this at 0 for a full / empty inventory)
+    if (playerInventory.length === 0) {
+      // if the player has 28 or more of the chosen logs in the bank, then we can withdraw 28
+      if (thisLogInBank.amount >= 28) {
+        // remove the items from the bank, add them to the inventory
+        dispatch(removeLogFromBank({ item: thisLog.name, amount: 28 }));
+        dispatch(addManyItemsToInventory({ item: thisLog.name, amount: 28 }));
+      } else {
+        // otherwise, we can only withdraw the remaining logs
+        dispatch(removeLogFromBank({ item: thisLog.name, amount: thisLogInBank.amount }));
+        dispatch(addManyItemsToInventory({ item: thisLog.name, amount: thisLogInBank.amount }));
+      }
+    } else {
+      //* burn the log and queue up chat logs
+      dispatch(removeItemFromInventory(thisLog.name));
+      dispatch(gainXP({ skill: `Firemaking`, xp: thisLog.XPGivenFiremaking }));
+      let firemakingMessages: string[] = [`Gained ${thisLog.XPGivenFiremaking} xp in Firemaking`];
+      let firemakingMessagesTags: Types.ChatLogTag[] = [`Gained XP`];
+
+      //* if the player gained a level in Firemaking, queue a chatlog
+      if (didPlayerLevelUp(Experience.Firemaking, thisLog.XPGivenFiremaking)) {
+        // if so, queue up a chatlog
+        firemakingMessages.push(`Firemaking Level up!`);
+        firemakingMessagesTags.push(`Level Up`);
+      }
+
+      //* finally send the chatlogs
+      handleMultipleChatLogs(firemakingMessages, firemakingMessagesTags);
+    }
+  };
+
   /**
-   * This function removes items from the player's inventory and adds them to the bank.
+   * This function removes all items from the player's inventory and adds them to the bank.
    * Then, it resets the needsToBank component state to false.
-   * Call this at the end of every skilling function.
+   * Call this if the current action will fill the inventory.
    */
-  const handleBanking = () => {
-    // Otherwise, the player needs to bank
+  const emptyPlayerInventory = () => {
     // iterate through the inventory array, adding items from the inventory to the bank
     for (let i = 0; i < playerInventory.length; i++) {
       // find the item, don't shift here as that is mutative
@@ -581,8 +632,10 @@ const GameContainer = (props: Types.GameContainerProps) => {
     // remove all items from the inventory, since they're now in the bank
     dispatch(removeAllItemsFromInventory());
 
-    // after the banking is finished, flip this state
-    setNeedsToBank(!needsToBank);
+    // inform the player their items have been banked via chatlog
+    let bankingMessages: string[] = [`Your inventory has been banked`];
+    let bankingMessagesTags: Types.ChatLogTag[] = [`Misc`];
+    handleMultipleChatLogs(bankingMessages, bankingMessagesTags);
   };
 
   /**
@@ -917,6 +970,9 @@ const GameContainer = (props: Types.GameContainerProps) => {
             break;
           case `Thieving`:
             handleThievingTick();
+            break;
+          case `Firemaking`:
+            handleFiremakingTick();
             break;
         }
       } else if (CurrentActivity === `Questing` && CurrentQuest !== `none`) {

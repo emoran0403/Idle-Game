@@ -4,7 +4,20 @@
 * - just check all the places for locations
 @ when adding new masters, make sure to add enemies that match taskList[i].task
 
+//# FIREMAKING
+* function needs to find the first log item in the inventory, replace it with blank, then dispatch the xp
+* function needs to check the amount in inventory, and if it gets to 0, refill with more of the chosen log
+* function needs to be aware of the amount of the chosen log in the players bank
+* function needs to not withdraw into the negatives
+* function needs to be capable of dealing with withdrawing an amount under 28 and still executing as defined above
+* DONE - function needs to empty the inventory, then withdraw 28 of the chosen logs
+* DONE - clicking the buttons sets needsToBank to true, and sets another piece of component state (playerIsFiremaking) to true [not sure if i need this last boolean]
+* DONE - skills panel styles them based on the player's firemaking level
+* DONE - skills panel shows the logs the player currenly has, and their amount
+* DONE - inventory slice needs a way to remove individual items from the inventory
+
 //# Fixes
+* fix admin buttons in App
 * rework display logic in currentresourcecomponent
 * webworker / empty audio object for interval - inactive tabs slow down the interval
 * Logic - experience and levels is displaying too high for some reason :/
@@ -82,17 +95,7 @@
 
 //# CRAFTING
 //# COOKING
-//# FIREMAKING
-* skills panel shows the logs the player currenly has, and their amount
-* skills panel styles them based on the player's firemaking level
-* clicking the buttons sets needsToBank to true, and sets another piece of component state (playerIsFiremaking) to true [not sure if i need this last boolean]
-* function needs to empty the inventory, then withdraw 28 of the chosen logs
-* function needs to find the first log item in the inventory, replace it with blank, then dispatch the xp
-* function needs to check the amount in inventory, and if it gets to 0, refill with more of the chosen log
-* function needs to be aware of the amount of the chosen log in the players bank
-* function needs to not withdraw into the negatives
-* function needs to be capable of dealing with withdrawing an amount under 28 and still executing as defined above
-* DONE - inventory slice needs a way to remove individual items from the inventory
+
 //# RUNECRAFTING
 //# FLETCHING
 //# HERBLORE
