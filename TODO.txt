@@ -5,6 +5,7 @@
 @ when adding new masters, make sure to add enemies that match taskList[i].task
 
 //# Fixes
+* rework display logic in currentresourcecomponent
 * webworker / empty audio object for interval - inactive tabs slow down the interval
 * Logic - experience and levels is displaying too high for some reason :/
 * remove boilerplate commits

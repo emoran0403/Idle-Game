@@ -952,76 +952,8 @@ const GameContainer = (props: Types.GameContainerProps) => {
     SlayerTask,
   ]);
 
-  /**
-   * This function displays buttons to update state outside the bounds of the game for testing purposes.
-   * @returns Returns JSX for buttons
-   */
-  const ADMINBUTTONS = () => {
-    let skillsarray = [
-      `Attack`,
-      `Strength`,
-      `Defence`,
-      `Constitution`,
-      `Prayer`,
-      `Summoning`,
-      `Ranged`,
-      `Magic`,
-      `Crafting`,
-      `Mining`,
-      `Smithing`,
-      `Fishing`,
-      `Cooking`,
-      `Firemaking`,
-      `Woodcutting`,
-      `Runecrafting`,
-      `Dungeoneering`,
-      `Fletching`,
-      `Agility`,
-      `Herblore`,
-      `Thieving`,
-      `Slayer`,
-      `Farming`,
-      `Construction`,
-      `Hunter`,
-      `Divination`,
-      `Invention`,
-      `Archaeology`,
-    ];
-    return (
-      <div>
-        <div>
-          <button
-            onClick={() => {
-              skillsarray.forEach((skill) => dispatch(gainXP({ skill, xp: 199999999 })));
-            }}
-          >
-            max xp
-          </button>
-        </div>
-        <div>
-          <button
-            onClick={() => {
-              dispatch(gainXP({ skill: `Strength`, xp: 199999999 }));
-              dispatch(gainXP({ skill: `Attack`, xp: 199999999 }));
-              dispatch(gainXP({ skill: `Defence`, xp: 199999999 }));
-            }}
-          >
-            max atk str def
-          </button>
-        </div>
-        <div>
-          <button onClick={() => dispatch(resetXP())}>reset skills</button>
-        </div>
-        <div>
-          <button onClick={() => dispatch(addCoinsToWallet(200000000))}>200M coins</button>
-        </div>
-      </div>
-    );
-  };
-
   return (
     <div className="d-flex shadow">
-      {/* {ADMINBUTTONS()} */}
       <div id="gamecontainer" className="row justify-content-lg-center">
         <div id="left-column" className="col-lg-3 border border-dark border-2 rounded-3" style={{ height: "90vh", position: "relative" }}>
           <Levels />

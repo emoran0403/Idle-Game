@@ -58,6 +58,13 @@ const CurrentResourceComp = (props: Types.NoProps) => {
     }
   };
   // Types.IEnemyLocations
+
+  const ThievingJSX = () => {
+    return <div>Stealing from</div>;
+  };
+  const FiremakingJSX = () => {
+    return <div>Burning</div>;
+  };
   return (
     <div className="text-center border border-dark border-2 rounded-3 h-100">
       {Activity === `In combat` ? (
@@ -71,8 +78,8 @@ const CurrentResourceComp = (props: Types.NoProps) => {
         </div>
       ) : (
         <div>
-          {Skill === `Thieving` ? <div>Stealing from</div> : <div>Collecting</div>}
-          {Skill === `Firemaking` ? <div>Burning</div> : <div>Collecting</div>}
+          {Skill === `Thieving` && ThievingJSX()}
+          {Skill === `Firemaking` && FiremakingJSX()}
 
           {displayResource()}
         </div>

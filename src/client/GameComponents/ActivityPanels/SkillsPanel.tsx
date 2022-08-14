@@ -169,39 +169,44 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
         <div role="button" onClick={() => handleToggleSkillPanel(`Firemaking`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
           <h1 className="text-center">Firemaking Level {FiremakingLevel}</h1>
           <div className={`d-flex flex-row flex-wrap ${skillPanelsOpened.Firemaking ? `` : `d-none`}`}>
-            {arrayOfLogsFromBank.map((resource) => (
-              <button
-                disabled={FiremakingLevel < ListOfLogs[resource.name as keyof Types.IListOfLogs].levelReqFiremaking ? true : false}
-                onClick={(e) => {
-                  dispatch(setTarget(`none`));
-                  dispatch(setActivity(`Skilling`));
-                  dispatch(setResource(resource.name));
-                  dispatch(setQuest(`none`));
-                  dispatch(setSkill(`Firemaking`));
-                  // send a contextual message to the chat window
-                  // if the last log contains the same message, don't send it
-                  if (
-                    `Now burning ${ListOfLogs[resource.name as keyof Types.IListOfLogs].displayName}` ===
-                    props.chatLogArray[props.chatLogArray.length - 1].message
-                  ) {
-                    return;
-                  }
-                  props.newChatLog(`Now burning ${ListOfLogs[resource.name as keyof Types.IListOfLogs].displayName}`, `Activity Swap`);
-                }}
-                key={`resource-list-${resource.name}`}
-                className={`btn border mb-3 ${
-                  FiremakingLevel >= ListOfLogs[resource.name as keyof Types.IListOfLogs].levelReqFiremaking ? `bg-success` : `bg-danger`
-                }`}
-              >
-                <div className="card-body text">
-                  <h5 className="card-title">{ListOfLogs[resource.name as keyof Types.IListOfLogs].displayName}</h5>
-                  <div className="card-text">
-                    <div>Level {ListOfLogs[resource.name as keyof Types.IListOfLogs].levelReqFiremaking}</div>
-                    <div>{ListOfLogs[resource.name as keyof Types.IListOfLogs].XPGivenFiremaking} XP</div>
+            {arrayOfLogsFromBank.map((resource) => {
+              return resource.amount ? (
+                <button
+                  disabled={FiremakingLevel < ListOfLogs[resource.name as keyof Types.IListOfLogs].levelReqFiremaking ? true : false}
+                  onClick={(e) => {
+                    dispatch(setTarget(`none`));
+                    dispatch(setActivity(`Skilling`));
+                    dispatch(setResource(resource.name));
+                    dispatch(setQuest(`none`));
+                    dispatch(setSkill(`Firemaking`));
+                    // send a contextual message to the chat window
+                    // if the last log contains the same message, don't send it
+                    if (
+                      `Now burning ${ListOfLogs[resource.name as keyof Types.IListOfLogs].displayName}` ===
+                      props.chatLogArray[props.chatLogArray.length - 1].message
+                    ) {
+                      return;
+                    }
+                    props.newChatLog(`Now burning ${ListOfLogs[resource.name as keyof Types.IListOfLogs].displayName}`, `Activity Swap`);
+                  }}
+                  key={`resource-list-${resource.name}`}
+                  className={`btn border mb-3 ${
+                    FiremakingLevel >= ListOfLogs[resource.name as keyof Types.IListOfLogs].levelReqFiremaking ? `bg-success` : `bg-danger`
+                  }`}
+                >
+                  <div className="card-body text">
+                    <h5 className="card-title">{ListOfLogs[resource.name as keyof Types.IListOfLogs].displayName}</h5>
+                    <div className="card-text">
+                      <div>Level {ListOfLogs[resource.name as keyof Types.IListOfLogs].levelReqFiremaking}</div>
+                      <div>{ListOfLogs[resource.name as keyof Types.IListOfLogs].XPGivenFiremaking} XP</div>
+                      <div>Qty: {resource.amount}</div>
+                    </div>
                   </div>
-                </div>
-              </button>
-            ))}
+                </button>
+              ) : (
+                ""
+              );
+            })}
           </div>
         </div>
       );
