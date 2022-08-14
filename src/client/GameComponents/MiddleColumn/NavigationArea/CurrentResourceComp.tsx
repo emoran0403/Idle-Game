@@ -36,6 +36,9 @@ const CurrentResourceComp = (props: Types.NoProps) => {
         case `Woodcutting`: {
           return <div>{ListOfLogs[Resource as keyof Types.IListOfLogs].displayName}</div>;
         }
+        case `Firemaking`: {
+          return <div>{ListOfLogs[Resource as keyof Types.IListOfLogs].displayName}</div>;
+        }
         case `Fishing`: {
           return <div>{ListOfFish[Resource as keyof Types.IListOfFish].displayName}</div>;
         }
@@ -69,6 +72,8 @@ const CurrentResourceComp = (props: Types.NoProps) => {
       ) : (
         <div>
           {Skill === `Thieving` ? <div>Stealing from</div> : <div>Collecting</div>}
+          {Skill === `Firemaking` ? <div>Burning</div> : <div>Collecting</div>}
+
           {displayResource()}
         </div>
       )}

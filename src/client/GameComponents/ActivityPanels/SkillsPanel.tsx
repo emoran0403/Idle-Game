@@ -39,8 +39,18 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
   const Experience = useSelector((state: Types.AllState) => state.Experience) as Types.ISkillList;
   const SlayerTask = useSelector((state: Types.AllState) => state.SlayerTask);
 
+  // grab the bank slices from state
+  const bank_logs = useSelector((state: Types.AllState) => state.Bank_Logs) as Types.ILogBankSlice;
+  const bank_fish = useSelector((state: Types.AllState) => state.Bank_Fish) as Types.IFishBankSlice;
+  const bank_ores = useSelector((state: Types.AllState) => state.Bank_Ores) as Types.IOreBankSlice;
+
+  const arrayOfLogsFromBank: Types.IBankItem[] = Object.values(bank_logs);
+  const arrayOfFishFromBank: Types.IBankItem[] = Object.values(bank_fish);
+  const arrayOfOresFromBank: Types.IBankItem[] = Object.values(bank_ores);
+
   // define skill levels based off the players current experience
   let WoodcuttingLevel: number = getLevel(Experience.Woodcutting);
+  let FiremakingLevel: number = getLevel(Experience.Firemaking);
   let FishingLevel: number = getLevel(Experience.Fishing);
   let MiningLevel: number = getLevel(Experience.Mining);
   let ThievingLevel: number = getLevel(Experience.Thieving);
@@ -136,6 +146,58 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
                   <div className="card-text">
                     <div>Level {ListOfLogs[resource as keyof Types.IListOfLogs].levelReqWoodcutting}</div>
                     <div>{ListOfLogs[resource as keyof Types.IListOfLogs].XPGivenWoodcutting} XP</div>
+                  </div>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+      );
+    } else {
+      return;
+    }
+  };
+
+  /**
+   *
+   * @param resourceArray The array of resources for the Firemaking skill at the current location.
+   * @returns Returns a panel of Firemaking option buttons.
+   */
+  const FiremakingOptions = () => {
+    if (arrayOfLogsFromBank.length) {
+      return (
+        <div role="button" onClick={() => handleToggleSkillPanel(`Firemaking`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
+          <h1 className="text-center">Firemaking Level {FiremakingLevel}</h1>
+          <div className={`d-flex flex-row flex-wrap ${skillPanelsOpened.Firemaking ? `` : `d-none`}`}>
+            {arrayOfLogsFromBank.map((resource) => (
+              <button
+                disabled={FiremakingLevel < ListOfLogs[resource.name as keyof Types.IListOfLogs].levelReqFiremaking ? true : false}
+                onClick={(e) => {
+                  dispatch(setTarget(`none`));
+                  dispatch(setActivity(`Skilling`));
+                  dispatch(setResource(resource.name));
+                  dispatch(setQuest(`none`));
+                  dispatch(setSkill(`Firemaking`));
+                  // send a contextual message to the chat window
+                  // if the last log contains the same message, don't send it
+                  if (
+                    `Now burning ${ListOfLogs[resource.name as keyof Types.IListOfLogs].displayName}` ===
+                    props.chatLogArray[props.chatLogArray.length - 1].message
+                  ) {
+                    return;
+                  }
+                  props.newChatLog(`Now burning ${ListOfLogs[resource.name as keyof Types.IListOfLogs].displayName}`, `Activity Swap`);
+                }}
+                key={`resource-list-${resource.name}`}
+                className={`btn border mb-3 ${
+                  FiremakingLevel >= ListOfLogs[resource.name as keyof Types.IListOfLogs].levelReqFiremaking ? `bg-success` : `bg-danger`
+                }`}
+              >
+                <div className="card-body text">
+                  <h5 className="card-title">{ListOfLogs[resource.name as keyof Types.IListOfLogs].displayName}</h5>
+                  <div className="card-text">
+                    <div>Level {ListOfLogs[resource.name as keyof Types.IListOfLogs].levelReqFiremaking}</div>
+                    <div>{ListOfLogs[resource.name as keyof Types.IListOfLogs].XPGivenFiremaking} XP</div>
                   </div>
                 </div>
               </button>
@@ -645,6 +707,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
           <div className="card-body">
             {/* panel specific content goes here */}
             {WoodcuttingOptions(currentLocationSummary.Skills.Woodcutting)}
+            {FiremakingOptions()}
             {FishingOptions(currentLocationSummary.Skills.Fishing)}
             {MiningOptions(currentLocationSummary.Skills.Mining)}
             {ThievingOptions(currentLocationSummary.Skills.Thieving)}
