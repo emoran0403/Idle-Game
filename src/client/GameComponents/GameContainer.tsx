@@ -23,7 +23,7 @@ import { setQuest } from "../Redux/Slices/CurrentQuest";
 import { addCoinsToWallet } from "../Redux/Slices/Wallet";
 import { gainXP, resetXP } from "../Redux/Slices/Experience";
 import { addQuestPoints } from "../Redux/Slices/QuestPoints";
-import { addItemToInventory, removeItemFromInventory } from "../Redux/Slices/Inventory";
+import { addItemToInventory, removeAllItemsFromInventory } from "../Redux/Slices/Inventory";
 
 // constants imports
 import { LumbridgeQuests } from "../../../Constants/Quests/LumbridgeQuests";
@@ -572,7 +572,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
       }
     }
     // remove all items from the inventory, since they're now in the bank
-    dispatch(removeItemFromInventory());
+    dispatch(removeAllItemsFromInventory());
 
     // after the banking is finished, flip this state
     setNeedsToBank(!needsToBank);

@@ -91,15 +91,18 @@ export const bank_ores = createSlice({
       state[item as keyof Types.IOreBankSlice].amount += amount; // add the item to state, then reassign (ty immer)
     },
 
+    //* we need to prevent the removal of an amount that would result in a negative
+    //* functions removing ores from the bank must be aware of the amount of that ore remaining in the bank
+
     // use this when we need to remove an item from the bank
     removeOreFromBank: (state: Types.IOreBankSlice, action) => {
       const item: string = action.payload.item; // decide which item to remove
       const amount: number = Number(action.payload.amount); // this will be the number of items removed from the bank
 
-      //@ this will need to add to the player inventory
+      // prevent the removal of an amount that would result in a negative
       if (state[item as keyof Types.IOreBankSlice].amount - amount >= 0) {
-        // prevent the removal of an amount that would result in a negative
-        state[item as keyof Types.IOreBankSlice].amount -= amount; // subtract the item from state
+        // subtract the item from state
+        state[item as keyof Types.IOreBankSlice].amount -= amount;
       } else {
         // remove all of that item, setting state to 0
         state[item as keyof Types.IOreBankSlice].amount = 0;

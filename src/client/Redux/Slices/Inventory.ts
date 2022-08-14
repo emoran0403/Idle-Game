@@ -16,8 +16,21 @@ export const Inventory = createSlice({
       state.CurrentInventory.push(item);
     },
 
+    // use this when we want to remove an item from the inventory.  Will remove the first instance of that item from the inventory
+    removeAnItemFromInventory: (state: Types.I_Inventory, action) => {
+      // define the item to be removed for readability
+      const targetItem = action.payload;
+
+      const targetIndex = state.CurrentInventory.findIndex((item) => item === targetItem);
+      // findIndex returns -1 if the item cannot be found, so make sure the item IS found
+      if (targetIndex !== -1) {
+        // given the index, remove 1 item
+        state.CurrentInventory.splice(targetIndex, 1);
+      }
+    },
+
     // use this when we need to remove items from the inventory
-    removeItemFromInventory: (state: Types.I_Inventory) => {
+    removeAllItemsFromInventory: (state: Types.I_Inventory) => {
       // removes all items from the inventory
       // logic of moving item to the bank or whatnot is handled elsewhere
       state.CurrentInventory.splice(0, state.CurrentInventory.length);
@@ -26,6 +39,6 @@ export const Inventory = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { addItemToInventory, removeItemFromInventory } = Inventory.actions;
+export const { addItemToInventory, removeAnItemFromInventory, removeAllItemsFromInventory } = Inventory.actions;
 
 export default Inventory.reducer;

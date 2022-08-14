@@ -48,12 +48,15 @@ export const bank_logs = createSlice({
       const item: string = action.payload.item; // decide which item to remove
       const amount: number = Number(action.payload.amount); // this will be the number of items removed from the bank
 
-      //@ this will need to add to the player inventory
+      //* we need to prevent the removal of an amount that would result in a negative
+      //* functions removing logs from the bank must be aware of the amount of that log remaining in the bank
+
+      // if there will be enough items remaining, then subtract the amount
       if (state[item as keyof Types.ILogBankSlice].amount - amount >= 0) {
-        // prevent the removal of an amount that would result in a negative
-        state[item as keyof Types.ILogBankSlice].amount -= amount; // subtract the item from state
+        // remove the given amount
+        state[item as keyof Types.ILogBankSlice].amount -= amount;
       } else {
-        // remove all of that item, setting state to 0
+        // otherwise, remove all of that item, setting state to 0
         state[item as keyof Types.ILogBankSlice].amount = 0;
       }
     },
