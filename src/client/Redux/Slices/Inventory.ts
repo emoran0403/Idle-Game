@@ -11,13 +11,28 @@ export const Inventory = createSlice({
   reducers: {
     // use this when we need to add an item to the inventory
     addItemToInventory: (state: Types.I_Inventory, action) => {
-      // Logic of when to bank is handled elsewhere
       const item: string = action.payload; // the item to push into the inventory
       state.CurrentInventory.push(item);
     },
 
+    // use this when we need to add multiple items to the inventory
+    addManyItemsToInventory: (state: Types.I_Inventory, action) => {
+      // define the item to push into the inventory for readability
+      const item: string = action.payload.item;
+      // define the amount of items to push into the inventory for readability
+      const amount: number = action.payload.amount;
+      // define a temporary array to store the items to be added
+      let tempArray: string[] = [];
+      // fill the temporary array with the items to be added
+      for (let i = 0; i < amount; i++) {
+        tempArray.push(item);
+      }
+      // finally, empty the temporary array items out into state
+      state.CurrentInventory.push(...tempArray);
+    },
+
     // use this when we want to remove an item from the inventory.  Will remove the first instance of that item from the inventory
-    removeAnItemFromInventory: (state: Types.I_Inventory, action) => {
+    removeItemFromInventory: (state: Types.I_Inventory, action) => {
       // define the item to be removed for readability
       const targetItem = action.payload;
 
@@ -39,6 +54,6 @@ export const Inventory = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { addItemToInventory, removeAnItemFromInventory, removeAllItemsFromInventory } = Inventory.actions;
+export const { addItemToInventory, addManyItemsToInventory, removeItemFromInventory, removeAllItemsFromInventory } = Inventory.actions;
 
 export default Inventory.reducer;
