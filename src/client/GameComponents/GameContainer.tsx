@@ -567,13 +567,27 @@ const GameContainer = (props: Types.GameContainerProps) => {
     }
   };
 
+  /**
+   * This function allows the player to burn logs to gain Firemaking Experience.
+   * It determines whether the player's inventory contains an item other than the log they're trying to burn.
+   * It will refill the player's inventory with that log, and will not break the bank.
+   */
   const handleFiremakingTick = () => {
     // define the current log, and that log in the bank for readability
     const thisLog = ListOfLogs[CurrentResource as keyof Types.IListOfLogs];
     const thisLogInBank = bank_logs[CurrentResource as keyof Types.ILogBankSlice];
 
-    //* empty the player's inventory so that they can train firemaking with a full inventory of logs
-    emptyPlayerInventory();
+    //* check if the player's inventory only contains the the log they're trying to burn
+    const inventoryIsAllLogs = playerInventory.every((item) => {
+      item === thisLog.name;
+    });
+
+    //* if the player's inventory contains an item that is not the log they're trying to burn, then empty their inventory
+    if (!inventoryIsAllLogs) {
+      //* empty the player's inventory so that they can train firemaking with a full inventory of logs
+      emptyPlayerInventory();
+    }
+
     //* set needsToBank to true to prevent a case of inventory overflow when switching to a new skill with a full inventory of logs
     setNeedsToBank(true);
 
