@@ -12,9 +12,9 @@ const BankPanel = (props: Types.BankPanelProps) => {
   const bank_fish = useSelector((state: Types.AllState) => state.Bank_Fish) as Types.IFishBankSlice;
   const bank_ores = useSelector((state: Types.AllState) => state.Bank_Ores) as Types.IOreBankSlice;
 
-  const arrayOfLogs: Types.IBankItem[] = Object.values(bank_logs);
-  const arrayOfFish: Types.IBankItem[] = Object.values(bank_fish);
-  const arrayOfOres: Types.IBankItem[] = Object.values(bank_ores);
+  const arrayOfLogsFromBank: Types.IBankItem[] = Object.values(bank_logs);
+  const arrayOfFishFromBank: Types.IBankItem[] = Object.values(bank_fish);
+  const arrayOfOresFromBank: Types.IBankItem[] = Object.values(bank_ores);
 
   // useEffect(() => {}, []);
 
@@ -70,7 +70,7 @@ const BankPanel = (props: Types.BankPanelProps) => {
       <div role="button" onClick={() => handleToggleSkillPanel(`Woodcutting`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
         <h1 className="text-center">Woodcutting Resources</h1>
         <div className={`d-flex flex-row flex-wrap ${skillPanelsOpened.Woodcutting ? `` : `d-none`}`}>
-          {arrayOfLogs.map((item) => {
+          {arrayOfLogsFromBank.map((item) => {
             return item.amount ? (
               <div key={`resource-list-${item.name}`} className={`card border mb-3`}>
                 <div className="card-body text">
@@ -94,7 +94,7 @@ const BankPanel = (props: Types.BankPanelProps) => {
       <div role="button" onClick={() => handleToggleSkillPanel(`Fishing`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
         <h1 className="text-center">Fishing Resources</h1>
         <div className={`d-flex flex-row flex-wrap ${skillPanelsOpened.Fishing ? `` : `d-none`}`}>
-          {arrayOfFish.map((item) => {
+          {arrayOfFishFromBank.map((item) => {
             return item.amount ? (
               <div key={`resource-list-${item.name}`} className={`card border mb-3`}>
                 <div className="card-body text">
@@ -118,7 +118,7 @@ const BankPanel = (props: Types.BankPanelProps) => {
       <div role="button" onClick={() => handleToggleSkillPanel(`Mining`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
         <h1 className="text-center">Mining Resources</h1>
         <div className={`d-flex flex-row flex-wrap ${skillPanelsOpened.Mining ? `` : `d-none`}`}>
-          {arrayOfOres.map((item) => {
+          {arrayOfOresFromBank.map((item) => {
             return item.amount ? (
               <div key={`resource-list-${item.name}`} className={`card border mb-3`}>
                 <div className="card-body text">

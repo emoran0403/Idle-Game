@@ -61,6 +61,8 @@ import { ListOfSlayerMasters } from "../../../Constants/Slayer/SlayerMasters";
 
 const GameContainer = (props: Types.GameContainerProps) => {
   const dispatch = useDispatch();
+
+  //* import slices of state
   const Target = useSelector((state: Types.AllState) => state.Target.CurrentTarget) as Types.ICurrentTargetOptions;
   const CurrentQuest = useSelector((state: Types.AllState) => state.Quest.CurrentQuest) as Types.ICurrentQuestOptions;
   const playerLocation = useSelector((state: Types.AllState) => state.Location.CurrentLocation) as Types.ICurrentLocationOptions;
@@ -77,6 +79,11 @@ const GameContainer = (props: Types.GameContainerProps) => {
   const bank_ores = useSelector((state: Types.AllState) => state.Bank_Ores) as Types.IOreBankSlice;
   const playerIsBanking = useSelector((state: Types.AllState) => state.Resources.Banking);
   const SlayerTask = useSelector((state: Types.AllState) => state.SlayerTask);
+
+  //* creates an array of items from bank slices
+  const arrayOfLogsFromBank: Types.IBankItem[] = Object.values(bank_logs);
+  const arrayOfFishFromBank: Types.IBankItem[] = Object.values(bank_fish);
+  const arrayOfOresFromBank: Types.IBankItem[] = Object.values(bank_ores);
 
   const ALLSTATE = useSelector((state: Types.AllState) => state);
   // console.log(ALLSTATE);
@@ -578,6 +585,15 @@ const GameContainer = (props: Types.GameContainerProps) => {
     setNeedsToBank(!needsToBank);
   };
 
+  /**
+   * This function:
+   * - dispatches slayer xp from the defeated target,
+   * - dispatches a decrement action the slayer task counter amount,
+   * - dispatches slayer points if the task is complete,
+   * - generates chatlog messages for the above.
+   * @param enemy - The current enemy target.
+   * @returns Returns an object containing chatlogs generated within the function.
+   */
   const handleSlayerTask = (enemy: Types.IEnemySummary) => {
     // define an interface for the return object
     interface IreturnObj {
@@ -936,77 +952,76 @@ const GameContainer = (props: Types.GameContainerProps) => {
     SlayerTask,
   ]);
 
+  /**
+   * This function displays buttons to update state outside the bounds of the game for testing purposes.
+   * @returns Returns JSX for buttons
+   */
+  const ADMINBUTTONS = () => {
+    let skillsarray = [
+      `Attack`,
+      `Strength`,
+      `Defence`,
+      `Constitution`,
+      `Prayer`,
+      `Summoning`,
+      `Ranged`,
+      `Magic`,
+      `Crafting`,
+      `Mining`,
+      `Smithing`,
+      `Fishing`,
+      `Cooking`,
+      `Firemaking`,
+      `Woodcutting`,
+      `Runecrafting`,
+      `Dungeoneering`,
+      `Fletching`,
+      `Agility`,
+      `Herblore`,
+      `Thieving`,
+      `Slayer`,
+      `Farming`,
+      `Construction`,
+      `Hunter`,
+      `Divination`,
+      `Invention`,
+      `Archaeology`,
+    ];
+    return (
+      <div>
+        <div>
+          <button
+            onClick={() => {
+              skillsarray.forEach((skill) => dispatch(gainXP({ skill, xp: 199999999 })));
+            }}
+          >
+            max xp
+          </button>
+        </div>
+        <div>
+          <button
+            onClick={() => {
+              dispatch(gainXP({ skill: `Strength`, xp: 199999999 }));
+              dispatch(gainXP({ skill: `Attack`, xp: 199999999 }));
+              dispatch(gainXP({ skill: `Defence`, xp: 199999999 }));
+            }}
+          >
+            max atk str def
+          </button>
+        </div>
+        <div>
+          <button onClick={() => dispatch(resetXP())}>reset skills</button>
+        </div>
+        <div>
+          <button onClick={() => dispatch(addCoinsToWallet(200000000))}>200M coins</button>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="d-flex shadow">
-      {/* Remove this button, its for testing*/}
-      {/* <div>
-        <button onClick={() => handleQuestingTick()}>test quest</button>
-      </div> */}
-      {/* <div>
-        <button onClick={() => handleSkillingTick()}>test skillTick</button>
-      </div> */}
-      {/* <div>
-        <button onClick={() => handleCombatTick()}>test combatTick</button>
-      </div> */}
-      {/* <div>
-        <button
-          onClick={() => {
-            let skillsarray = [
-              `Attack`,
-              `Strength`,
-              `Defence`,
-              `Constitution`,
-              `Prayer`,
-              `Summoning`,
-              `Ranged`,
-              `Magic`,
-              `Crafting`,
-              `Mining`,
-              `Smithing`,
-              `Fishing`,
-              `Cooking`,
-              `Firemaking`,
-              `Woodcutting`,
-              `Runecrafting`,
-              `Dungeoneering`,
-              `Fletching`,
-              `Agility`,
-              `Herblore`,
-              `Thieving`,
-              `Slayer`,
-              `Farming`,
-              `Construction`,
-              `Hunter`,
-              `Divination`,
-              `Invention`,
-              `Archaeology`,
-            ];
-            skillsarray.forEach((skill) => dispatch(gainXP({ skill, xp: 199999999 })));
-          }}
-        >
-          max xp
-        </button>
-      </div> */}
-      {/* <div>
-        <button
-          onClick={() => {
-            dispatch(gainXP({ skill: `Strength`, xp: 199999999 }));
-            dispatch(gainXP({ skill: `Attack`, xp: 199999999 }));
-            dispatch(gainXP({ skill: `Defence`, xp: 199999999 }));
-          }}
-        >
-          max atk str def
-        </button>
-      </div> */}
-      {/* <div>
-        <button onClick={() => dispatch(resetXP())}>reset skills</button>
-      </div> */}
-      {/* <div>
-        <button onClick={() => dispatch(addCoinsToWallet(200000000))}>200M coins</button>
-      </div> */}
-
-      {/* Remove this button, its for testing*/}
-
+      {/* {ADMINBUTTONS()} */}
       <div id="gamecontainer" className="row justify-content-lg-center">
         <div id="left-column" className="col-lg-3 border border-dark border-2 rounded-3" style={{ height: "90vh", position: "relative" }}>
           <Levels />
