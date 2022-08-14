@@ -5,11 +5,12 @@
 @ when adding new masters, make sure to add enemies that match taskList[i].task
 
 //# FIREMAKING
-* function needs to find the first log item in the inventory, replace it with blank, then dispatch the xp
-* function needs to check the amount in inventory, and if it gets to 0, refill with more of the chosen log
-* function needs to be aware of the amount of the chosen log in the players bank
-* function needs to not withdraw into the negatives
-* function needs to be capable of dealing with withdrawing an amount under 28 and still executing as defined above
+* need to test lol
+* DONE - function needs to find the first log item in the inventory, replace it with blank, then dispatch the xp
+* DONE - function needs to check the amount in inventory, and if it gets to 0, refill with more of the chosen log
+* DONE - function needs to be aware of the amount of the chosen log in the players bank
+* DONE - function needs to not withdraw into the negatives
+* DONE - function needs to be capable of dealing with withdrawing an amount under 28 and still executing as defined above
 * DONE - function needs to empty the inventory, then withdraw 28 of the chosen logs
 * DONE - clicking the buttons sets needsToBank to true, and sets another piece of component state (playerIsFiremaking) to true [not sure if i need this last boolean]
 * DONE - skills panel styles them based on the player's firemaking level
