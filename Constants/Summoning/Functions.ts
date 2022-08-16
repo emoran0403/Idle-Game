@@ -44,5 +44,45 @@ let tempObj2 = {
   green: 75,
   crimson: 95,
   blue: 100,
-  max: 101,
+  max: 101 / 25,
+};
+
+let wow = {
+  drop1: 25,
+  drop2: 50,
+  drop3: 20,
+  // drop4: 4.55,
+  // drop5: 0.45,
+};
+let wowadjusted = {
+  drop1: 25,
+  drop2: 75,
+  drop3: 95,
+};
+// 24 - drop1
+// 25 - drop1
+// 26 - drop2
+
+const getDrop = (lootTable: Types.IFlatObjectOfNums) => {
+  // create a tuple array from the loot Table
+  let tupleArrayFromInput = Object.entries(lootTable);
+  // define an empty object to place the drops and their adjusted values
+  let adjustedLootTable: Types.IFlatObjectOfNums = {};
+  // define a running sum to calculate relative weights
+  let currentSum = 0;
+  // iterate through each tuple, adding the current drop and its relative weight to the adjustedLootTable,
+  for (const [drop, rate] of tupleArrayFromInput) {
+    // increment the current sum
+    currentSum += rate;
+    // add to the adjustedLootTable object, giving it the drop property and the adjust value
+    adjustedLootTable[`${drop}`] = currentSum + rate;
+  }
+  // define a random number between 0 and the current sum - this allows us to weight the table relatively
+  let randNum = Math.floor(Math.random() * currentSum);
+  // sort the array to ensure the first element has the lowest value
+  let sortedTupleArrayFromAdjustedLootTable = Object.entries(adjustedLootTable).sort((a, b) => a[1] - b[1]);
+  // filter the array, leaving only tuples whose value is greater than randNum
+  sortedTupleArrayFromAdjustedLootTable.filter((tuple) => tuple[1] >= randNum);
+  // return the drop
+  return sortedTupleArrayFromAdjustedLootTable[0][0];
 };
