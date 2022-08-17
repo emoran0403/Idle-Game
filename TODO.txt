@@ -56,6 +56,7 @@
 //# Quality of life
 * add currentEquipment to redux state to persist outfits across logins
 * Bank shows items in ascending level order
+* Bank to show images for items
 *** need a way to reward those quest which give ANY xp
 *** maybe make the game choose the next available quest automatically
 *** get a changelog from github for the lobby
