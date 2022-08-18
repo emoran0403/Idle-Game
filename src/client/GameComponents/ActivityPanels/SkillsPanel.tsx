@@ -127,6 +127,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
                   dispatch(setResource(resource));
                   dispatch(setQuest(`none`));
                   dispatch(setSkill(`Woodcutting`));
+                  props.setNeedsToBank(true);
                   // send a contextual message to the chat window
                   // if the last log contains the same message, don't send it
                   if (
@@ -179,6 +180,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
                     dispatch(setResource(resource.name));
                     dispatch(setQuest(`none`));
                     dispatch(setSkill(`Firemaking`));
+                    props.setNeedsToBank(true);
                     // send a contextual message to the chat window
                     // if the last log contains the same message, don't send it
                     if (
@@ -235,7 +237,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
                   dispatch(setResource(resource));
                   dispatch(setQuest(`none`));
                   dispatch(setSkill(`Fishing`));
-
+                  props.setNeedsToBank(true);
                   // send a contextual message to the chat window
                   // if the last log contains the same message, don't send it
                   if (
@@ -285,6 +287,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
                   dispatch(setResource(resource));
                   dispatch(setQuest(`none`));
                   dispatch(setSkill(`Mining`));
+                  props.setNeedsToBank(true);
                   // send a contextual message to the chat window
                   // if the last log contains the same message, don't send it
                   if (
@@ -335,6 +338,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
                   dispatch(setResource(resource));
                   dispatch(setQuest(`none`));
                   dispatch(setSkill(`Thieving`));
+                  props.setNeedsToBank(true);
                   // send a contextual message to the chat window
                   // if the last log contains the same message, don't send it
                   if (

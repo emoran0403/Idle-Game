@@ -582,14 +582,14 @@ const GameContainer = (props: Types.GameContainerProps) => {
       item === thisLog.name;
     });
 
+    //! why is this boolean logic not flipped?
     //* if the player's inventory contains an item that is not the log they're trying to burn, then empty their inventory
-    if (!inventoryIsAllLogs) {
+    if (inventoryIsAllLogs) {
       //* empty the player's inventory so that they can train firemaking with a full inventory of logs
+      console.log(`inventory contains an item that is not the log they're trying to burn`);
+      console.log({ playerInventory });
       emptyPlayerInventory();
     }
-
-    //* set needsToBank to true to prevent a case of inventory overflow when switching to a new skill with a full inventory of logs
-    setNeedsToBank(true);
 
     //* check if the player needs to withdraw more logs (do this at 0 for a full / empty inventory)
     if (playerInventory.length === 0) {
@@ -607,7 +607,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
       //* burn the log and queue up chat logs
       dispatch(removeItemFromInventory(thisLog.name));
       dispatch(gainXP({ skill: `Firemaking`, xp: thisLog.XPGivenFiremaking }));
-      let firemakingMessages: string[] = [`Gained ${thisLog.XPGivenFiremaking} xp in Firemaking`];
+      let firemakingMessages: string[] = [`Burned some ${thisLog.displayName} and gained ${thisLog.XPGivenFiremaking} xp in Firemaking`];
       let firemakingMessagesTags: Types.ChatLogTag[] = [`Gained XP`];
 
       //* if the player gained a level in Firemaking, queue a chatlog
@@ -1034,6 +1034,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
         <div id="middle-column" className="col-lg-6 border border-dark border-2 rounded-3" style={{ height: "90vh" }}>
           <NavigationArea newChatLog={handleNewChatLog} chatLogArray={chatLogArray} />
           <ActivityArea
+            setNeedsToBank={setNeedsToBank}
             playerLifePoints={playerLifePoints}
             targetLifePoints={targetLifePoints}
             newChatLog={handleNewChatLog}

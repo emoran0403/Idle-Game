@@ -124,4 +124,5 @@ Implement additional features
 
 ## Contact
 
+Contact Eric at emoran0403@gmail.com
 Project Link: [https://ejmdev-idlescape.herokuapp.com/](https://ejmdev-idlescape.herokuapp.com/)
