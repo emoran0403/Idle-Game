@@ -31,7 +31,7 @@
 <!--
 <div align="center">
   <h1>The something update</h1>
-  <p>Release 1.2.3</p>
+  <p>Release 1.2.4</p>
   <a href="https://ejmdev-idlescape.herokuapp.com/">Play now</a>
 </div>
 # ADDED
@@ -43,6 +43,7 @@
 - Bronze and Iron hatchets now show a woodcutting level requirement of 1 (0 looks silly).
 - Combat was ignoring footwear, but now respects your kicks.
 - The current resource is now more accurately described based on the your current activity.
+- Prevented a possible crash with current resource component trying to access .displayname of an undefined item.
 # SECURITY -->
 
 <!-- Currently in Production -->

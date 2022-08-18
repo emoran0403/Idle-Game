@@ -462,6 +462,30 @@ export type IFishOptions = `raw_shrimp` | `raw_crayfish` | `raw_anchovies` | `ra
 
 //@ ******************************* RUNECRAFTING *******************************
 
+export interface IRune {
+  name: string;
+  displayName: string;
+  levelReqRunecrafting: number;
+  XPGivenRunecrafting: number;
+  value: number;
+  multirunes: number[];
+}
+export interface IListOfRunes {
+  airrune: IRune;
+  mindrune: IRune;
+  waterrune: IRune;
+  earthrune: IRune;
+  firerune: IRune;
+  bodyrune: IRune;
+  cosmicrune: IRune;
+  chaosrune: IRune;
+  astralrune: IRune;
+  naturerune: IRune;
+  lawrune: IRune;
+  deathrune: IRune;
+  bloodrune: IRune;
+  soulrune: IRune;
+}
 export interface IRunespanNode {
   name: string;
   displayName: string;
@@ -507,6 +531,26 @@ export interface IRunespanNodePoints {
   blood: number;
   soul: number;
 }
+export interface IRunecraftSkillingSetPiece {
+  name: string;
+  displayName: string;
+  cost: number;
+  XPBonusRunecrafting: number;
+}
+export interface IRunespanShopItem {
+  name: string;
+  displayName: string;
+  cost: number;
+  amount: number;
+}
+export interface IRunespanShop {
+  runecrafterhat: IRunecraftSkillingSetPiece;
+  runecrafterrobe: IRunecraftSkillingSetPiece;
+  runecrafterskirt: IRunecraftSkillingSetPiece;
+  runecrafterboots: IRunecraftSkillingSetPiece;
+  pureEssence: IRunespanShopItem;
+}
+export type IRuneTypes = `air` | `mind` | `water` | `earth` | `fire` | `body` | `cosmic` | `chaos` | `astral` | `nature` | `law` | `death` | `blood` | `soul`;
 
 //@ ******************************* MISC *******************************
 
@@ -551,31 +595,6 @@ export interface EquipmentPanels {
   HandsSlot: boolean;
   FeetSlot: boolean;
   TwoHandSlot: boolean;
-}
-
-//@ ******************************* RUNES *******************************
-
-export interface IRune {
-  name: string;
-  levelReqRunecrafting: number;
-  XPGivenRunecrafting: number;
-  value: number;
-}
-export interface IListOfRunes {
-  air: IRune;
-  mind: IRune;
-  water: IRune;
-  earth: IRune;
-  fire: IRune;
-  body: IRune;
-  cosmic: IRune;
-  chaos: IRune;
-  astral: IRune;
-  nature: IRune;
-  law: IRune;
-  death: IRune;
-  blood: IRune;
-  soul: IRune;
 }
 
 //@ ******************************* ARROWS *******************************

@@ -191,7 +191,7 @@ export const listOfRunespanNodes: Types.IListOfRunespanNodes = {
   undeadsoulNode,
 };
 
-export const runespanNodePoints = {
+export const runespanNodePoints: Types.IRunespanNodePoints = {
   air: 0.1,
   mind: 0.2,
   water: 0.3,
@@ -206,4 +206,37 @@ export const runespanNodePoints = {
   death: 2.5,
   blood: 3,
   soul: 3.5,
+};
+
+export const runespanShop: Types.IRunespanShop = {
+  runecrafterhat: {
+    name: `runecrafterhat`,
+    displayName: `Master runecrafter hat`,
+    cost: 4000,
+    XPBonusRunecrafting: 1.01,
+  },
+  runecrafterrobe: {
+    name: `runecrafterrobe`,
+    displayName: `Master runecrafter robe`,
+    cost: 4000,
+    XPBonusRunecrafting: 1.01,
+  },
+  runecrafterskirt: {
+    name: `runecrafterskirt`,
+    displayName: `Master runecrafter skirt`,
+    cost: 4000,
+    XPBonusRunecrafting: 1.01,
+  },
+  runecrafterboots: {
+    name: `runecrafterboots`,
+    displayName: `Master runecrafter boots`,
+    cost: 4000,
+    XPBonusRunecrafting: 1.01,
+  },
+  pureEssence: {
+    name: `pureEssence`,
+    displayName: `Pure essence`,
+    cost: 500,
+    amount: 200,
+  },
 };

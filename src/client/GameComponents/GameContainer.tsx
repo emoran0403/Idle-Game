@@ -575,7 +575,6 @@ const GameContainer = (props: Types.GameContainerProps) => {
       }
     }
   };
-
   /**
    * This function allows the player to burn logs to gain Firemaking Experience.
    * It determines whether the player's inventory contains an item other than the log they're trying to burn.
