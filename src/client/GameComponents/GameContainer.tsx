@@ -58,6 +58,8 @@ import { ListOfPickpocketStalls } from "../../../Constants/Thieving/Stalls";
 import { saveState } from "../Redux/store";
 import { TOKEN_KEY } from "../ClientUtils/Fetcher";
 import { ListOfSlayerMasters } from "../../../Constants/Slayer/SlayerMasters";
+import { setResource } from "../Redux/Slices/CurrentResource";
+import { setSkill } from "../Redux/Slices/CurrentSkill";
 
 const GameContainer = (props: Types.GameContainerProps) => {
   const dispatch = useDispatch();
@@ -573,53 +575,61 @@ const GameContainer = (props: Types.GameContainerProps) => {
    * It will refill the player's inventory with that log, and will not break the bank.
    */
   const handleFiremakingTick = () => {
-    // define the current log, and that log in the bank for readability
-    const thisLog = ListOfLogs[CurrentResource as keyof Types.IListOfLogs];
-    const thisLogInBank = bank_logs[CurrentResource as keyof Types.ILogBankSlice];
+    //* if the player does not need to bank, proceed with the handling
+    if (!needsToBank) {
+      // define the current log, and that log in the bank for readability
+      const thisLog = ListOfLogs[CurrentResource as keyof Types.IListOfLogs];
+      const thisLogInBank = bank_logs[CurrentResource as keyof Types.ILogBankSlice];
 
-    //* check if the player's inventory only contains the the log they're trying to burn
-    const inventoryIsAllLogs = playerInventory.every((item) => {
-      item === thisLog.name;
-    });
+      //* if the player has logs in their inventory
+      if (playerInventory.length >= 1) {
+        // console.log(`player can burn a log`);
+        //* burn the log and queue up chat logs
+        dispatch(removeItemFromInventory(thisLog.name));
+        dispatch(gainXP({ skill: `Firemaking`, xp: thisLog.XPGivenFiremaking }));
+        let firemakingMessages: string[] = [`Burned some ${thisLog.displayName} and gained ${thisLog.XPGivenFiremaking} xp in Firemaking`];
+        let firemakingMessagesTags: Types.ChatLogTag[] = [`Gained XP`];
 
-    //! why is this boolean logic not flipped?
-    //* if the player's inventory contains an item that is not the log they're trying to burn, then empty their inventory
-    if (inventoryIsAllLogs) {
-      //* empty the player's inventory so that they can train firemaking with a full inventory of logs
-      console.log(`inventory contains an item that is not the log they're trying to burn`);
-      console.log({ playerInventory });
-      emptyPlayerInventory();
-    }
+        //* if the player gained a level in Firemaking, queue a chatlog
+        if (didPlayerLevelUp(Experience.Firemaking, thisLog.XPGivenFiremaking)) {
+          // if so, queue up a chatlog
+          firemakingMessages.push(`Firemaking Level up!`);
+          firemakingMessagesTags.push(`Level Up`);
+        }
+        //* send the chatlogs
+        handleMultipleChatLogs(firemakingMessages, firemakingMessagesTags);
+      }
 
-    //* check if the player needs to withdraw more logs (do this at 0 for a full / empty inventory)
-    if (playerInventory.length === 0) {
-      // if the player has 28 or more of the chosen logs in the bank, then we can withdraw 28
-      if (thisLogInBank.amount >= 28) {
-        // remove the items from the bank, add them to the inventory
-        dispatch(removeLogFromBank({ item: thisLog.name, amount: 28 }));
-        dispatch(addManyItemsToInventory({ item: thisLog.name, amount: 28 }));
-      } else {
-        // otherwise, we can only withdraw the remaining logs
-        dispatch(removeLogFromBank({ item: thisLog.name, amount: thisLogInBank.amount }));
-        dispatch(addManyItemsToInventory({ item: thisLog.name, amount: thisLogInBank.amount }));
+      //* check if the player needs to withdraw more logs AND has the capability to do so
+      if (playerInventory.length === 0 && thisLogInBank.amount > 0) {
+        // if the player has 28 or more of the chosen logs in the bank, then we can withdraw 28
+        if (thisLogInBank.amount >= 28) {
+          // remove the items from the bank, add them to the inventory
+          // console.log(`player has sufficient logs in bank`);
+          dispatch(removeLogFromBank({ item: thisLog.name, amount: 28 }));
+          dispatch(addManyItemsToInventory({ item: thisLog.name, amount: 28 }));
+        } else {
+          // otherwise, we can only withdraw the remaining logs
+          // console.log(`player has only a few logs in bank`);
+          dispatch(removeLogFromBank({ item: thisLog.name, amount: thisLogInBank.amount }));
+          dispatch(addManyItemsToInventory({ item: thisLog.name, amount: thisLogInBank.amount }));
+        }
+      }
+
+      //* if the player runs out of logs entirely, set them to idle
+      if (playerInventory.length === 0 && thisLogInBank.amount === 0) {
+        dispatch(setActivity(`Idle`));
+        dispatch(setResource(`none`));
+        dispatch(setSkill(`none`));
       }
     } else {
-      //* burn the log and queue up chat logs
-      dispatch(removeItemFromInventory(thisLog.name));
-      dispatch(gainXP({ skill: `Firemaking`, xp: thisLog.XPGivenFiremaking }));
-      let firemakingMessages: string[] = [`Burned some ${thisLog.displayName} and gained ${thisLog.XPGivenFiremaking} xp in Firemaking`];
-      let firemakingMessagesTags: Types.ChatLogTag[] = [`Gained XP`];
-
-      //* if the player gained a level in Firemaking, queue a chatlog
-      if (didPlayerLevelUp(Experience.Firemaking, thisLog.XPGivenFiremaking)) {
-        // if so, queue up a chatlog
-        firemakingMessages.push(`Firemaking Level up!`);
-        firemakingMessagesTags.push(`Level Up`);
-      }
-
-      //* finally send the chatlogs
-      handleMultipleChatLogs(firemakingMessages, firemakingMessagesTags);
+      //* otherwise, call handleBanking
+      emptyPlayerInventory();
+      //* after the banking is finished, set this state to false, since the player's inventory is now empty
+      setNeedsToBank(false);
     }
+
+    // console.log(`end of firemaking function`);
   };
 
   /**
