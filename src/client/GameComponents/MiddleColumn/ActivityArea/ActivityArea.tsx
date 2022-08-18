@@ -32,6 +32,7 @@ const ActivityArea = (props: Types.ActivityAreaCompProps) => {
           activityDisplay: <ActivityDisplay />,
           skills: (
             <SkillsPanel
+              setNeedsToBank={props.setNeedsToBank}
               handleUpdateDisplay={handleUpdateDisplay}
               newChatLog={props.newChatLog}
               chatLogArray={props.chatLogArray}

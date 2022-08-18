@@ -4,7 +4,12 @@
 * - just check all the places for locations
 @ when adding new masters, make sure to add enemies that match taskList[i].task
 
+
+
 //# Fixes
+* fix admin buttons in App
+* rework display logic in currentresourcecomponent
+* webworker / empty audio object for interval - inactive tabs slow down the interval
 * Logic - experience and levels is displaying too high for some reason :/
 * remove boilerplate commits
 * I forgot to add silver ore lol
@@ -40,6 +45,7 @@
 //# Quality of life
 * add currentEquipment to redux state to persist outfits across logins
 * Bank shows items in ascending level order
+* Bank to show images for items
 *** need a way to reward those quest which give ANY xp
 *** maybe make the game choose the next available quest automatically
 *** get a changelog from github for the lobby
@@ -80,7 +86,7 @@
 
 //# CRAFTING
 //# COOKING
-//# FIREKAMKING
+
 //# RUNECRAFTING
 //# FLETCHING
 //# HERBLORE
@@ -178,3 +184,14 @@
 * DONE - add lumbridge catacomb location
 * DONE - add slayer level req to enemies if it is > 1
 * DONE - add slayer level req to enemies and their type
+
+
+
+player has some logs in their inventory
+player has a full inventory
+player has no logs in inventory
+
+player has excess logs in bank
+player has exactly enough logs in bank
+player has under 28 logs in bank
+player has 0 logs in bank

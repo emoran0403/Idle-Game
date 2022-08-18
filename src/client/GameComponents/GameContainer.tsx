@@ -23,7 +23,7 @@ import { setQuest } from "../Redux/Slices/CurrentQuest";
 import { addCoinsToWallet } from "../Redux/Slices/Wallet";
 import { gainXP, resetXP } from "../Redux/Slices/Experience";
 import { addQuestPoints } from "../Redux/Slices/QuestPoints";
-import { addItemToInventory, removeItemFromInventory } from "../Redux/Slices/Inventory";
+import { addItemToInventory, addManyItemsToInventory, removeAllItemsFromInventory, removeItemFromInventory } from "../Redux/Slices/Inventory";
 
 // constants imports
 import { LumbridgeQuests } from "../../../Constants/Quests/LumbridgeQuests";
@@ -37,7 +37,7 @@ import { Enemies, resolveCombat } from "../../../Constants/Enemies";
 import { completeSlayerTask, decrementTaskAmount } from "../Redux/Slices/SlayerTask";
 
 // woodcutting
-import { addLogToBank } from "../Redux/Slices/BankSlices/LogsSlice";
+import { addLogToBank, removeLogFromBank } from "../Redux/Slices/BankSlices/LogsSlice";
 import { ListOfLogs, playerEarnsLog } from "../../../Constants/Items/Logs";
 import { listOfHatchets } from "../../../Constants/SkillingEquipment/Hatchets";
 
@@ -58,9 +58,13 @@ import { ListOfPickpocketStalls } from "../../../Constants/Thieving/Stalls";
 import { saveState } from "../Redux/store";
 import { TOKEN_KEY } from "../ClientUtils/Fetcher";
 import { ListOfSlayerMasters } from "../../../Constants/Slayer/SlayerMasters";
+import { setResource } from "../Redux/Slices/CurrentResource";
+import { setSkill } from "../Redux/Slices/CurrentSkill";
 
 const GameContainer = (props: Types.GameContainerProps) => {
   const dispatch = useDispatch();
+
+  //* import slices of state
   const Target = useSelector((state: Types.AllState) => state.Target.CurrentTarget) as Types.ICurrentTargetOptions;
   const CurrentQuest = useSelector((state: Types.AllState) => state.Quest.CurrentQuest) as Types.ICurrentQuestOptions;
   const playerLocation = useSelector((state: Types.AllState) => state.Location.CurrentLocation) as Types.ICurrentLocationOptions;
@@ -77,6 +81,11 @@ const GameContainer = (props: Types.GameContainerProps) => {
   const bank_ores = useSelector((state: Types.AllState) => state.Bank_Ores) as Types.IOreBankSlice;
   const playerIsBanking = useSelector((state: Types.AllState) => state.Resources.Banking);
   const SlayerTask = useSelector((state: Types.AllState) => state.SlayerTask);
+
+  //* creates an array of items from bank slices
+  const arrayOfLogsFromBank: Types.IBankItem[] = Object.values(bank_logs);
+  const arrayOfFishFromBank: Types.IBankItem[] = Object.values(bank_fish);
+  const arrayOfOresFromBank: Types.IBankItem[] = Object.values(bank_ores);
 
   const ALLSTATE = useSelector((state: Types.AllState) => state);
   // console.log(ALLSTATE);
@@ -143,7 +152,11 @@ const GameContainer = (props: Types.GameContainerProps) => {
   //@ use this to keep track of the stun time remaining for when a player fails a thieving attempt
   const [stunTimeRemaining, setStunTimeRemaining] = useState<number>(0);
 
-  //@ this is set when the player gains an item which will fill their inventory
+  /**
+   * This piece of component state is set when the player gains an item which will fill their inventory.
+   * true will trigger the game to empty the player inventory.
+   * false will allow the game to fill up the player inventory.
+   */
   const [needsToBank, setNeedsToBank] = useState<boolean>(true);
 
   //@ this keeps track of time, used to 'save' progress in localStorage, and to update DB
@@ -305,7 +318,9 @@ const GameContainer = (props: Types.GameContainerProps) => {
       }
     } else {
       //* otherwise, call handleBanking
-      handleBanking();
+      emptyPlayerInventory();
+      //* after the banking is finished, set this state to false, since the player's inventory is now empty
+      setNeedsToBank(false);
     }
   };
   /**
@@ -363,7 +378,9 @@ const GameContainer = (props: Types.GameContainerProps) => {
       }
     } else {
       //* otherwise, call handleBanking
-      handleBanking();
+      emptyPlayerInventory();
+      //* after the banking is finished, set this state to false, since the player's inventory is now empty
+      setNeedsToBank(false);
     }
   };
   /**
@@ -436,7 +453,9 @@ const GameContainer = (props: Types.GameContainerProps) => {
       handleMultipleChatLogs(miningMessages, miningMessagesTags);
     } else {
       //* otherwise, call handleBanking
-      handleBanking();
+      emptyPlayerInventory();
+      //* after the banking is finished, set this state to false, since the player's inventory is now empty
+      setNeedsToBank(false);
     }
   };
   /**
@@ -549,13 +568,76 @@ const GameContainer = (props: Types.GameContainerProps) => {
       }
     }
   };
+
   /**
-   * This function removes items from the player's inventory and adds them to the bank.
-   * Then, it resets the needsToBank component state to false.
-   * Call this at the end of every skilling function.
+   * This function allows the player to burn logs to gain Firemaking Experience.
+   * It determines whether the player's inventory contains an item other than the log they're trying to burn.
+   * It will refill the player's inventory with that log, and will not break the bank.
    */
-  const handleBanking = () => {
-    // Otherwise, the player needs to bank
+  const handleFiremakingTick = () => {
+    //* if the player does not need to bank, proceed with the handling
+    if (!needsToBank) {
+      // define the current log, and that log in the bank for readability
+      const thisLog = ListOfLogs[CurrentResource as keyof Types.IListOfLogs];
+      const thisLogInBank = bank_logs[CurrentResource as keyof Types.ILogBankSlice];
+
+      //* if the player has logs in their inventory
+      if (playerInventory.length >= 1) {
+        // console.log(`player can burn a log`);
+        //* burn the log and queue up chat logs
+        dispatch(removeItemFromInventory(thisLog.name));
+        dispatch(gainXP({ skill: `Firemaking`, xp: thisLog.XPGivenFiremaking }));
+        let firemakingMessages: string[] = [`Burned some ${thisLog.displayName} and gained ${thisLog.XPGivenFiremaking} xp in Firemaking`];
+        let firemakingMessagesTags: Types.ChatLogTag[] = [`Gained XP`];
+
+        //* if the player gained a level in Firemaking, queue a chatlog
+        if (didPlayerLevelUp(Experience.Firemaking, thisLog.XPGivenFiremaking)) {
+          // if so, queue up a chatlog
+          firemakingMessages.push(`Firemaking Level up!`);
+          firemakingMessagesTags.push(`Level Up`);
+        }
+        //* send the chatlogs
+        handleMultipleChatLogs(firemakingMessages, firemakingMessagesTags);
+      }
+
+      //* check if the player needs to withdraw more logs AND has the capability to do so
+      if (playerInventory.length === 0 && thisLogInBank.amount > 0) {
+        // if the player has 28 or more of the chosen logs in the bank, then we can withdraw 28
+        if (thisLogInBank.amount >= 28) {
+          // remove the items from the bank, add them to the inventory
+          // console.log(`player has sufficient logs in bank`);
+          dispatch(removeLogFromBank({ item: thisLog.name, amount: 28 }));
+          dispatch(addManyItemsToInventory({ item: thisLog.name, amount: 28 }));
+        } else {
+          // otherwise, we can only withdraw the remaining logs
+          // console.log(`player has only a few logs in bank`);
+          dispatch(removeLogFromBank({ item: thisLog.name, amount: thisLogInBank.amount }));
+          dispatch(addManyItemsToInventory({ item: thisLog.name, amount: thisLogInBank.amount }));
+        }
+      }
+
+      //* if the player runs out of logs entirely, set them to idle
+      if (playerInventory.length === 0 && thisLogInBank.amount === 0) {
+        dispatch(setActivity(`Idle`));
+        dispatch(setResource(`none`));
+        dispatch(setSkill(`none`));
+      }
+    } else {
+      //* otherwise, call handleBanking
+      emptyPlayerInventory();
+      //* after the banking is finished, set this state to false, since the player's inventory is now empty
+      setNeedsToBank(false);
+    }
+
+    // console.log(`end of firemaking function`);
+  };
+
+  /**
+   * This function removes all items from the player's inventory and adds them to the bank.
+   * Then, it resets the needsToBank component state to false.
+   * Call this if the current action will fill the inventory.
+   */
+  const emptyPlayerInventory = () => {
     // iterate through the inventory array, adding items from the inventory to the bank
     for (let i = 0; i < playerInventory.length; i++) {
       // find the item, don't shift here as that is mutative
@@ -572,12 +654,23 @@ const GameContainer = (props: Types.GameContainerProps) => {
       }
     }
     // remove all items from the inventory, since they're now in the bank
-    dispatch(removeItemFromInventory());
+    dispatch(removeAllItemsFromInventory());
 
-    // after the banking is finished, flip this state
-    setNeedsToBank(!needsToBank);
+    // inform the player their items have been banked via chatlog
+    let bankingMessages: string[] = [`Your inventory has been banked`];
+    let bankingMessagesTags: Types.ChatLogTag[] = [`Misc`];
+    handleMultipleChatLogs(bankingMessages, bankingMessagesTags);
   };
 
+  /**
+   * This function:
+   * - dispatches slayer xp from the defeated target,
+   * - dispatches a decrement action the slayer task counter amount,
+   * - dispatches slayer points if the task is complete,
+   * - generates chatlog messages for the above.
+   * @param enemy - The current enemy target.
+   * @returns Returns an object containing chatlogs generated within the function.
+   */
   const handleSlayerTask = (enemy: Types.IEnemySummary) => {
     // define an interface for the return object
     interface IreturnObj {
@@ -902,6 +995,9 @@ const GameContainer = (props: Types.GameContainerProps) => {
           case `Thieving`:
             handleThievingTick();
             break;
+          case `Firemaking`:
+            handleFiremakingTick();
+            break;
         }
       } else if (CurrentActivity === `Questing` && CurrentQuest !== `none`) {
         handleQuestingTick();
@@ -938,75 +1034,6 @@ const GameContainer = (props: Types.GameContainerProps) => {
 
   return (
     <div className="d-flex shadow">
-      {/* Remove this button, its for testing*/}
-      {/* <div>
-        <button onClick={() => handleQuestingTick()}>test quest</button>
-      </div> */}
-      {/* <div>
-        <button onClick={() => handleSkillingTick()}>test skillTick</button>
-      </div> */}
-      {/* <div>
-        <button onClick={() => handleCombatTick()}>test combatTick</button>
-      </div> */}
-      {/* <div>
-        <button
-          onClick={() => {
-            let skillsarray = [
-              `Attack`,
-              `Strength`,
-              `Defence`,
-              `Constitution`,
-              `Prayer`,
-              `Summoning`,
-              `Ranged`,
-              `Magic`,
-              `Crafting`,
-              `Mining`,
-              `Smithing`,
-              `Fishing`,
-              `Cooking`,
-              `Firemaking`,
-              `Woodcutting`,
-              `Runecrafting`,
-              `Dungeoneering`,
-              `Fletching`,
-              `Agility`,
-              `Herblore`,
-              `Thieving`,
-              `Slayer`,
-              `Farming`,
-              `Construction`,
-              `Hunter`,
-              `Divination`,
-              `Invention`,
-              `Archaeology`,
-            ];
-            skillsarray.forEach((skill) => dispatch(gainXP({ skill, xp: 199999999 })));
-          }}
-        >
-          max xp
-        </button>
-      </div> */}
-      {/* <div>
-        <button
-          onClick={() => {
-            dispatch(gainXP({ skill: `Strength`, xp: 199999999 }));
-            dispatch(gainXP({ skill: `Attack`, xp: 199999999 }));
-            dispatch(gainXP({ skill: `Defence`, xp: 199999999 }));
-          }}
-        >
-          max atk str def
-        </button>
-      </div> */}
-      {/* <div>
-        <button onClick={() => dispatch(resetXP())}>reset skills</button>
-      </div> */}
-      {/* <div>
-        <button onClick={() => dispatch(addCoinsToWallet(200000000))}>200M coins</button>
-      </div> */}
-
-      {/* Remove this button, its for testing*/}
-
       <div id="gamecontainer" className="row justify-content-lg-center">
         <div id="left-column" className="col-lg-3 border border-dark border-2 rounded-3" style={{ height: "90vh", position: "relative" }}>
           <Levels />
@@ -1017,6 +1044,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
         <div id="middle-column" className="col-lg-6 border border-dark border-2 rounded-3" style={{ height: "90vh" }}>
           <NavigationArea newChatLog={handleNewChatLog} chatLogArray={chatLogArray} />
           <ActivityArea
+            setNeedsToBank={setNeedsToBank}
             playerLifePoints={playerLifePoints}
             targetLifePoints={targetLifePoints}
             newChatLog={handleNewChatLog}

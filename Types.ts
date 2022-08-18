@@ -37,6 +37,7 @@ export interface SkillsPanelCompProps {
   chatLogArray: IChatLog[];
   setCurrentEquipment: Function;
   currentEquipment: ICurrentEquipment;
+  setNeedsToBank: Function;
 }
 export interface ActivityButtonsCompProps {
   handleUpdateDisplay: Function;
@@ -81,6 +82,7 @@ export interface WornEquipmentCompProps {
   currentEquipment: ICurrentEquipment;
 }
 export interface ActivityAreaCompProps {
+  setNeedsToBank: Function;
   playerLifePoints: number;
   targetLifePoints: number;
   newChatLog: Function;

@@ -50,14 +50,17 @@ export const bank_fish = createSlice({
     },
 
     // use this when we need to remove an item from the bank
-    removeItemFromBank: (state: Types.IFishBankSlice, action) => {
+    removeFishFromBank: (state: Types.IFishBankSlice, action) => {
       const item: string = action.payload.item; // decide which item to remove
       const amount: number = Number(action.payload.amount); // this will be the number of items removed from the bank
 
-      //@ this will need to add to the player inventory
+      //* we need to prevent the removal of an amount that would result in a negative
+      //* functions removing fish from the bank must be aware of the amount of that fish remaining in the bank
+
+      // prevent the removal of an amount that would result in a negative
       if (state[item as keyof Types.IFishBankSlice].amount - amount >= 0) {
-        // prevent the removal of an amount that would result in a negative
-        state[item as keyof Types.IFishBankSlice].amount -= amount; // subtract the item from state
+        // subtract the item from state
+        state[item as keyof Types.IFishBankSlice].amount -= amount;
       } else {
         // remove all of that item, setting state to 0
         state[item as keyof Types.IFishBankSlice].amount = 0;
@@ -67,6 +70,6 @@ export const bank_fish = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { addFishToBank, removeItemFromBank } = bank_fish.actions;
+export const { addFishToBank, removeFishFromBank } = bank_fish.actions;
 
 export default bank_fish.reducer;

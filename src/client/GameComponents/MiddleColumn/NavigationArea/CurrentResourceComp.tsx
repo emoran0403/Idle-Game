@@ -36,6 +36,9 @@ const CurrentResourceComp = (props: Types.NoProps) => {
         case `Woodcutting`: {
           return <div>{ListOfLogs[Resource as keyof Types.IListOfLogs].displayName}</div>;
         }
+        case `Firemaking`: {
+          return <div>{ListOfLogs[Resource as keyof Types.IListOfLogs].displayName}</div>;
+        }
         case `Fishing`: {
           return <div>{ListOfFish[Resource as keyof Types.IListOfFish].displayName}</div>;
         }
@@ -55,6 +58,13 @@ const CurrentResourceComp = (props: Types.NoProps) => {
     }
   };
   // Types.IEnemyLocations
+
+  const ThievingJSX = () => {
+    return <div>Stealing from</div>;
+  };
+  const FiremakingJSX = () => {
+    return <div>Burning</div>;
+  };
   return (
     <div className="text-center border border-dark border-2 rounded-3 h-100">
       {Activity === `In combat` ? (
@@ -68,7 +78,9 @@ const CurrentResourceComp = (props: Types.NoProps) => {
         </div>
       ) : (
         <div>
-          {Skill === `Thieving` ? <div>Stealing from</div> : <div>Collecting</div>}
+          {Skill === `Thieving` && ThievingJSX()}
+          {Skill === `Firemaking` && FiremakingJSX()}
+
           {displayResource()}
         </div>
       )}
