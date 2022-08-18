@@ -4,7 +4,7 @@
 * - just check all the places for locations
 @ when adding new masters, make sure to add enemies that match taskList[i].task
 
-
+//! how can i use dev and prod vars on .env and on heroku?
 
 //# Fixes
 * fix admin buttons in App

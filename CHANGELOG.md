@@ -24,6 +24,7 @@
 <div align="center">
   <h1>The Firemaking update</h1>
   <p>Release 1.1.1</p>
+  <a href="https://ejmdev-idlescape.herokuapp.com/">Play now</a>
 </div>
 
 #### ADDED
