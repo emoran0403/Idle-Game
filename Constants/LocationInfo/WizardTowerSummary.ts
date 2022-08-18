@@ -6,7 +6,7 @@ export const WizardTowerSummary: Types.ILocationSummary = {
   Quests: ["Rune Mysteries", "Rune Memories", "Heart of Stone", "Beneath Cursed Tides"],
   Skills: {
     Woodcutting: [],
-    Mining: [],
+    Mining: ["runeEssence", "pureEssence"],
     Fishing: [],
     Thieving: {
       stalls: [],

@@ -460,6 +460,54 @@ export interface IListOfFish {
 }
 export type IFishOptions = `raw_shrimp` | `raw_crayfish` | `raw_anchovies` | `raw_trout` | `raw_salmon` | `raw_pike` | `raw_sardine` | `raw_herring`;
 
+//@ ******************************* RUNECRAFTING *******************************
+
+export interface IRunespanNode {
+  name: string;
+  displayName: string;
+  levelReqRunecrafting: number;
+  XPGivenRune_one: number;
+  XPGivenRune_two: number;
+  multiRune: boolean;
+  rune_one: string;
+  rune_two: string;
+}
+export interface IListOfRunespanNodes {
+  cycloneNode: IRunespanNode;
+  mindstormNode: IRunespanNode;
+  waterPoolNode: IRunespanNode;
+  rockfragmentNode: IRunespanNode;
+  fireballNode: IRunespanNode;
+  firestormNode: IRunespanNode;
+  vineNode: IRunespanNode;
+  fleshygrowthNode: IRunespanNode;
+  jumperNode: IRunespanNode;
+  skullsNode: IRunespanNode;
+  chaoticcloudNode: IRunespanNode;
+  bloodpoolNode: IRunespanNode;
+  shifterNode: IRunespanNode;
+  nebulaNode: IRunespanNode;
+  livingsoulNode: IRunespanNode;
+  bloodyskullsNode: IRunespanNode;
+  undeadsoulNode: IRunespanNode;
+}
+export interface IRunespanNodePoints {
+  air: number;
+  mind: number;
+  water: number;
+  earth: number;
+  fire: number;
+  body: number;
+  cosmic: number;
+  chaos: number;
+  astral: number;
+  nature: number;
+  law: number;
+  death: number;
+  blood: number;
+  soul: number;
+}
+
 //@ ******************************* MISC *******************************
 
 export interface IBankItem {

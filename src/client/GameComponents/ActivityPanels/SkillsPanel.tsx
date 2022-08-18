@@ -268,7 +268,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
   };
 
   /**
-   *
+   * XP given is not listed becasue the XP per rock varies
    * @param resourceArray The array of resources for the Mining skill at the current location.
    * @returns Returns a panel of Mining option buttons.
    */
