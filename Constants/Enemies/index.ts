@@ -46,6 +46,7 @@ import {
   corpsearcher,
   skoblin,
   corpsemage,
+  lesserdemonwizardtower,
 } from "./AllEnemies";
 
 // collecting all enemies within each location lets us access each location and their enemies via dynamic keys
@@ -95,11 +96,15 @@ export const LumbridgeCatacombs: Types.ILumbridgeCatacombsEnemies = {
   skoblin,
   corpsemage,
 };
+export const WizardTower: Types.IWizardTowerEnemies = {
+  lesserdemonwizardtower,
+};
 export const Enemies: Types.IAllEnemies = {
   Lumbridge,
   Draynor,
   LumbridgeSwampCave,
   LumbridgeCatacombs,
+  WizardTower,
 };
 
 export const resolveCombat = (
@@ -200,6 +205,7 @@ export const resolveCombat = (
           HandsSlot[Equipment[`HandsSlot`] as keyof Types.IArmorSlotHands][`styleBonusMelee`] +
           HeadSlot[Equipment[`HeadSlot`] as keyof Types.IArmorSlotHead][`styleBonusMelee`] +
           LegsSlot[Equipment[`LegsSlot`] as keyof Types.IArmorSlotLegs][`styleBonusMelee`] +
+          FeetSlot[Equipment[`FeetSlot`] as keyof Types.IArmorSlotFeet][`styleBonusMelee`] +
           NeckSlot[Equipment[`NeckSlot`] as keyof Types.IArmorSlotNeck][`styleBonusMelee`] +
           RingSlot[Equipment[`RingSlot`] as keyof Types.IArmorSlotRing][`styleBonusMelee`] +
           TwoHandSlot[Equipment[`TwoHandSlot`] as keyof Types.IArmorSlotTwoHand][`styleBonusMelee`];
@@ -219,6 +225,7 @@ export const resolveCombat = (
           HandsSlot[Equipment[`HandsSlot`] as keyof Types.IArmorSlotHands][`styleBonusRanged`] +
           HeadSlot[Equipment[`HeadSlot`] as keyof Types.IArmorSlotHead][`styleBonusRanged`] +
           LegsSlot[Equipment[`LegsSlot`] as keyof Types.IArmorSlotLegs][`styleBonusRanged`] +
+          FeetSlot[Equipment[`FeetSlot`] as keyof Types.IArmorSlotFeet][`styleBonusRanged`] +
           NeckSlot[Equipment[`NeckSlot`] as keyof Types.IArmorSlotNeck][`styleBonusRanged`] +
           RingSlot[Equipment[`RingSlot`] as keyof Types.IArmorSlotRing][`styleBonusRanged`] +
           TwoHandSlot[Equipment[`TwoHandSlot`] as keyof Types.IArmorSlotTwoHand][`styleBonusRanged`];
@@ -237,6 +244,7 @@ export const resolveCombat = (
           HandsSlot[Equipment[`HandsSlot`] as keyof Types.IArmorSlotHands][`styleBonusMagic`] +
           HeadSlot[Equipment[`HeadSlot`] as keyof Types.IArmorSlotHead][`styleBonusMagic`] +
           LegsSlot[Equipment[`LegsSlot`] as keyof Types.IArmorSlotLegs][`styleBonusMagic`] +
+          FeetSlot[Equipment[`FeetSlot`] as keyof Types.IArmorSlotFeet][`styleBonusMagic`] +
           NeckSlot[Equipment[`NeckSlot`] as keyof Types.IArmorSlotNeck][`styleBonusMagic`] +
           RingSlot[Equipment[`RingSlot`] as keyof Types.IArmorSlotRing][`styleBonusMagic`] +
           TwoHandSlot[Equipment[`TwoHandSlot`] as keyof Types.IArmorSlotTwoHand][`styleBonusMagic`];

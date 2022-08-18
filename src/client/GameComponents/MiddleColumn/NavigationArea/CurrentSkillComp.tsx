@@ -34,8 +34,8 @@ const CurrentSkillComp = (props: Types.NoProps) => {
       {Activity === `Questing` ? (
         <div>
           <div>Current Quest:</div>
-          {/* <div>{Quest}</div> */}
-          <div>A Fairy Tale II - Cure a Queen</div>
+          <div>{Quest}</div>
+          {/* <div>A Fairy Tale II - Cure a Queen</div> */}
         </div>
       ) : (
         <div className={returnBackgroundColor()}>

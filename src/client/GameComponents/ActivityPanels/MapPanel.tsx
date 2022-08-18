@@ -76,6 +76,7 @@ const MapPanel = (props: Types.MapPanelProps) => {
             {displayTravelButtonJSX(`LumbridgeSwampCave`)}
             {displayTravelButtonJSX(`LumbridgeCatacombs`)}
             {displayTravelButtonJSX(`Draynor`)}
+            {displayTravelButtonJSX(`WizardTower`)}
           </div>
         </div>
       </div>

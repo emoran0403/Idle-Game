@@ -31,15 +31,18 @@
 <!--
 <div align="center">
   <h1>The something update</h1>
-  <p>Release 1.2.1</p>
+  <p>Release 1.2.3</p>
   <a href="https://ejmdev-idlescape.herokuapp.com/">Play now</a>
 </div>
 # ADDED
+- Added Wizards' Tower as a location.  The Wizards' Tower features 4 quests, and a lesser demon to fight.
 # CHANGED
 # DEPRECATED
 # REMOVED
 # FIXED
 - Bronze and Iron hatchets now show a woodcutting level requirement of 1 (0 looks silly).
+- Combat was ignoring footwear, but now respects your kicks.
+- The current resource is now more accurately described based on the your current activity.
 # SECURITY -->
 
 <!-- Currently in Production -->

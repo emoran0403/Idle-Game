@@ -1,5 +1,23 @@
 @ Adding new Locations -
-* - add cases to switch statements (questing tick func and quest rewards useEffect) in GameContainer
+* add a location summary and update (IAllLocations) + (ICurrentLocationOptions)
+//# <location>summary where location is the name of the location for game purposes
+* IF quests - add those quests to (ICurrentQuestOptions) and (IAllQuests + the constant object export)
+* IF quests - add those quests to a slice + add reducer to main reducer + add this slice to (AllState) and (AllStateQuestSlices)
+* IF quests - {GameContainer} update the quest complete useEffect dependency array with the new quest array slice
+* IF quests - {GameContainer} update the quest complete useEffect switch statement and the quests import
+* IF quests - {GameContainer} update imports
+* IF quests - update default player data with the slice info
+* IF quests - {QuestPanel} update useSelector section to pull in new quest slice
+* IF quests - {QuestPanel} spread out new quests into AllQuestsFromStateFlat
+* IF quests - {QuestPanel} add new quest array slice to create composite quest useEffect
+* IF quests - {QuestPanel}
+* IF quests - {QuestPanel}
+* IF quests - {QuestPanel}
+* IF enemies - add enemy entries to constant file, and all enemies array in that file
+* IF enemies - update (IAllEnemies) and create an I<location>Summary interface
+* IF enemies - update (IEnemyLocations) with that interface
+* IF enemies - add enemies to (ICurrentTargetOptions)
+* {MapPanel} - add a button for the location
 * - add typings for enemies search => //@ recreate this for each location
 * - just check all the places for locations
 @ when adding new masters, make sure to add enemies that match taskList[i].task
@@ -43,9 +61,10 @@
 * DONE - inventory needs to display ore display names
 
 //# Quality of life
-* add currentEquipment to redux state to persist outfits across logins
+* in skillspanel - put the hatchet and pickaxe selectors side by side
 * Bank shows items in ascending level order
 * Bank to show images for items
+** add currentEquipment to redux state to persist outfits across logins
 *** need a way to reward those quest which give ANY xp
 *** maybe make the game choose the next available quest automatically
 *** get a changelog from github for the lobby

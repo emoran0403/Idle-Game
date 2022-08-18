@@ -17,8 +17,6 @@ const CurrentResourceComp = (props: Types.NoProps) => {
   const Skill = useSelector((state: Types.AllState) => state.Skill.CurrentSkill);
   const playerLocation = useSelector((state: Types.AllState) => state.Location.CurrentLocation as Types.ICurrentLocationOptions);
 
-  // useEffect(() => {}, []);
-
   //@ this sets the background color if a combat style has been selected, but a target has not been selected
   const returnBackgroundColor = () => {
     if (Activity === `In combat` && Target === `none`) {
@@ -27,7 +25,6 @@ const CurrentResourceComp = (props: Types.NoProps) => {
       return ``;
     }
   };
-
   const displayResource = () => {
     // this function shows the display name of the current resource
     // console.log(Skill);
@@ -57,37 +54,102 @@ const CurrentResourceComp = (props: Types.NoProps) => {
       }
     }
   };
-  // Types.IEnemyLocations
-
+  const MiningJSX = () => {
+    return (
+      <div>
+        <div>Mining</div>
+        {displayResource()}
+      </div>
+    );
+  };
+  const FishingJSX = () => {
+    return (
+      <div>
+        <div>Fishing</div>
+        {displayResource()}
+      </div>
+    );
+  };
+  const WoodcuttingJSX = () => {
+    return (
+      <div>
+        <div>Cutting</div>
+        {displayResource()}
+      </div>
+    );
+  };
   const ThievingJSX = () => {
-    return <div>Stealing from</div>;
+    return (
+      <div>
+        <div>Stealing from</div>
+        {displayResource()}
+      </div>
+    );
   };
   const FiremakingJSX = () => {
-    return <div>Burning</div>;
+    return (
+      <div>
+        <div>Burning</div>
+        {displayResource()}
+      </div>
+    );
   };
-  return (
-    <div className="text-center border border-dark border-2 rounded-3 h-100">
-      {Activity === `In combat` ? (
-        <div className={returnBackgroundColor()}>
-          <div>Fighting </div>
-          {Enemies[playerLocation as keyof Types.IAllEnemies] && Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations] ? (
+  const CombatJSX = () => {
+    return (
+      <div className={returnBackgroundColor()}>
+        {Enemies[playerLocation as keyof Types.IAllEnemies] && Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations] ? (
+          <div>
+            <div>Fighting</div>
             <div>{Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations][`displayName`]}</div>
-          ) : (
-            <div>none</div>
-          )}
-        </div>
-      ) : (
-        <div>
-          {Skill === `Thieving` && ThievingJSX()}
-          {Skill === `Firemaking` && FiremakingJSX()}
+          </div>
+        ) : (
+          <div>No Target Selected</div>
+        )}
+      </div>
+    );
+  };
+  const AllJSX = () => {
+    switch (Activity) {
+      case `In combat`:
+        return CombatJSX();
+        break;
+      case `Questing`:
+        return <div>You are Questing</div>;
+        break;
+      case `Skilling`:
+        switch (Skill) {
+          case `Fishing`:
+            return FishingJSX();
+            break;
+          case `Woodcutting`:
+            return WoodcuttingJSX();
+            break;
+          case `Thieving`:
+            return ThievingJSX();
+            break;
+          case `Firemaking`:
+            return FiremakingJSX();
+            break;
+          case `Mining`:
+            return MiningJSX();
+            break;
+        }
+        break;
+      default:
+        return <div>You are Idle</div>;
+    }
+  };
 
-          {displayResource()}
-        </div>
-      )}
-    </div>
-  );
+  return <div className="text-center border border-dark border-2 rounded-3 h-100">{AllJSX()}</div>;
 };
 
 export default CurrentResourceComp;
 
 // style={{ width: `130px` }}
+
+// questing;
+// Combat;
+// skilling;
+
+{
+}

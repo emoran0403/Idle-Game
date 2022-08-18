@@ -25,9 +25,10 @@ import { gainXP, resetXP } from "../Redux/Slices/Experience";
 import { addQuestPoints } from "../Redux/Slices/QuestPoints";
 import { addItemToInventory, addManyItemsToInventory, removeAllItemsFromInventory, removeItemFromInventory } from "../Redux/Slices/Inventory";
 
-// constants imports
+// quests imports
 import { LumbridgeQuests } from "../../../Constants/Quests/LumbridgeQuests";
 import { DraynorQuests } from "../../../Constants/Quests/DraynorQuests";
+import { WizardTowerQuests } from "../../../Constants/Quests/WizardTowerQuests";
 import { EmptyQuestRewards } from "../../../Constants/Quests";
 
 // combat
@@ -60,6 +61,7 @@ import { TOKEN_KEY } from "../ClientUtils/Fetcher";
 import { ListOfSlayerMasters } from "../../../Constants/Slayer/SlayerMasters";
 import { setResource } from "../Redux/Slices/CurrentResource";
 import { setSkill } from "../Redux/Slices/CurrentSkill";
+import { doQuestLogicWizardTower } from "../Redux/Slices/QuestSlices/WizardTower";
 
 const GameContainer = (props: Types.GameContainerProps) => {
   const dispatch = useDispatch();
@@ -70,6 +72,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
   const playerLocation = useSelector((state: Types.AllState) => state.Location.CurrentLocation) as Types.ICurrentLocationOptions;
   const LumbridgeQuestArray = useSelector((state: Types.AllState) => state.Quests_Lumbridge.LumbridgeQuestArray) as Types.IStateQuest[];
   const DraynorQuestArray = useSelector((state: Types.AllState) => state.Quests_Draynor.DraynorQuestArray) as Types.IStateQuest[];
+  const WizardTowerQuestArray = useSelector((state: Types.AllState) => state.Quests_WizardTower.WizardTowerQuestArray) as Types.IStateQuest[];
   const CurrentResource = useSelector((state: Types.AllState) => state.Resource.CurrentResource) as Types.ICurrentResourceOptions;
   const CurrentSkill = useSelector((state: Types.AllState) => state.Skill.CurrentSkill) as Types.ListOfSkillOptions;
   const Experience = useSelector((state: Types.AllState) => state.Experience) as Types.ISkillList;
@@ -243,9 +246,9 @@ const GameContainer = (props: Types.GameContainerProps) => {
     // if the progress counter hits 24, reset it to 0, and then run the quest logic based on location
     //! swap for production
     //@================================================
-    if (questStepProgress === 24) {
-      //@======PRODUCTION ABOVE, DEV BELOW============================================
-      // if (questStepProgress === 2) {
+    // if (questStepProgress === 24) {
+    //@======PRODUCTION ABOVE, DEV BELOW============================================
+    if (questStepProgress === 2) {
       //@================================================
 
       setQuestStepProgress(0);
@@ -256,6 +259,10 @@ const GameContainer = (props: Types.GameContainerProps) => {
         }
         case `Draynor`: {
           dispatch(doQuestLogicDraynor(CurrentQuest));
+          break;
+        }
+        case `WizardTower`: {
+          dispatch(doQuestLogicWizardTower(CurrentQuest));
           break;
         }
       }
@@ -911,6 +918,9 @@ const GameContainer = (props: Types.GameContainerProps) => {
           case `Draynor`:
             questRewards = DraynorQuests[DraynorQuests.findIndex((item) => item.name === CurrentQuest)];
             break;
+          case `WizardTower`:
+            questRewards = WizardTowerQuests[WizardTowerQuests.findIndex((item) => item.name === CurrentQuest)];
+            break;
         }
 
         //@ give item rewards
@@ -945,7 +955,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
         break;
       }
     }
-  }, [questStepProgress, LumbridgeQuestArray, DraynorQuestArray]);
+  }, [questStepProgress, LumbridgeQuestArray, DraynorQuestArray, WizardTowerQuestArray]);
 
   //@ this useEffect sets new enemy lifepoints to state if the player chooses to do combat
   useEffect(() => {
@@ -1005,9 +1015,9 @@ const GameContainer = (props: Types.GameContainerProps) => {
       handleSavePoint();
       //! swap for production
       //@================================================
-    }, 2500);
-    //@======PRODUCTION ABOVE, DEV BELOW============================================
-    // }, 1000);
+      // }, 2500);
+      //@======PRODUCTION ABOVE, DEV BELOW============================================
+    }, 1000);
     //@================================================
 
     // console.log({ interval });

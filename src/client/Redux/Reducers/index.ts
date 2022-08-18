@@ -16,6 +16,7 @@ import walletReducer from "../Slices/Wallet";
 import questPointsReducer from "../Slices/QuestPoints";
 import lumbridgequestReducer from "../Slices/QuestSlices/Lumbridge";
 import draynorquestReducer from "../Slices/QuestSlices/Draynor";
+import wizardTowerquestReducer from "../Slices/QuestSlices/WizardTower";
 import bodySlotSliceReducer from "../Slices/EquipmentSlices/BodySlotSlice";
 import handSlotSliceReducer from "../Slices/EquipmentSlices/HandsSlotSlice";
 import feetSlotSliceReducer from "../Slices/EquipmentSlices/FeetSlotSlice";
@@ -47,6 +48,7 @@ const AppReducer = combineReducers({
   QuestPoints: questPointsReducer,
   Quests_Lumbridge: lumbridgequestReducer,
   Quests_Draynor: draynorquestReducer,
+  Quests_WizardTower: wizardTowerquestReducer,
   BodySlot: bodySlotSliceReducer,
   HandSlot: handSlotSliceReducer,
   FeetSlot: feetSlotSliceReducer,

@@ -653,6 +653,9 @@ export interface LumbridgeQuestSlice {
 export interface DraynorQuestSlice {
   DraynorQuestArray: IStateQuest[];
 }
+export interface WizardTowerQuestSlice {
+  WizardTowerQuestArray: IStateQuest[];
+}
 export interface IQuestInfo {
   name: string;
   location: string;
@@ -671,6 +674,7 @@ export interface IAllQuests {
   Lumbridge: IQuestInfo[];
   Draynor: IQuestInfo[];
   Varrock: IQuestInfo[];
+  WizardTower: IQuestInfo[];
 }
 export interface ICompositeQuestInfo extends IQuestInfo {
   stepsComplete: number;
@@ -692,7 +696,11 @@ export type ICurrentQuestOptions =
   | `Love Story`
   | `Swept Away`
   | `Missing My Mummy`
-  | `Stolen Hearts`;
+  | `Stolen Hearts`
+  | "Rune Mysteries"
+  | "Rune Memories"
+  | "Heart of Stone"
+  | "Beneath Cursed Tides";
 //@ ******************************* COMBAT *******************************
 
 export interface SlayerTaskSlice {
@@ -803,12 +811,16 @@ export interface ILumbridgeCatacombsEnemies {
   skoblin: IEnemySummary;
   corpsemage: IEnemySummary;
 }
+export interface IWizardTowerEnemies {
+  lesserdemonwizardtower: IEnemySummary;
+}
 //* extend this as more locations are added
 export interface IAllEnemies {
   Lumbridge: ILumbridgeEnemies;
   Draynor: IDraynorEnemies;
   LumbridgeSwampCave: ILumbridgeSwampCaveEnemies;
   LumbridgeCatacombs: ILumbridgeCatacombsEnemies;
+  WizardTower: IWizardTowerEnemies;
 }
 export type ListOfCombatStyleSkills = `Attack` | `Strength` | `Defence` | `Ranged` | `Magic`;
 export type ICurrentStyleOptions = `none` | `melee` | `ranged` | `air` | `fire` | `water` | `earth`;
@@ -816,7 +828,7 @@ export type CombatStyle = `melee` | `magic` | `ranged`;
 export type SpellElement = `typeless` | `air` | `fire` | `water` | `earth`;
 
 //* extend this as more locations are added
-export type IEnemyLocations = ILumbridgeEnemies | IDraynorEnemies | ILumbridgeCatacombsEnemies | ILumbridgeSwampCaveEnemies;
+export type IEnemyLocations = ILumbridgeEnemies | IDraynorEnemies | ILumbridgeCatacombsEnemies | ILumbridgeSwampCaveEnemies | IWizardTowerEnemies;
 //
 
 //* add to this as more enemies are added
@@ -857,7 +869,8 @@ export type ICurrentTargetOptions =
   | `warpedrat`
   | `corpsearcher`
   | `skoblin`
-  | `corpsemage`;
+  | `corpsemage`
+  | "lesserdemonwizardtower";
 
 //@ ******************************* RESOURCES *******************************
 
@@ -899,6 +912,7 @@ export interface AllState extends AllSlots {
   QuestPoints: IQuestPointsSlice;
   Quests_Lumbridge: LumbridgeQuestSlice;
   Quests_Draynor: DraynorQuestSlice;
+  Quests_WizardTower: WizardTowerQuestSlice;
   SlayerTask: SlayerTaskSlice;
 }
 export interface IPlayerDataFromMongo extends AllState, IPlayerPayload {
@@ -907,6 +921,7 @@ export interface IPlayerDataFromMongo extends AllState, IPlayerPayload {
 export interface AllStateQuestSlices {
   Quests_Lumbridge: LumbridgeQuestSlice;
   Quests_Draynor: DraynorQuestSlice;
+  Quests_WizardTower: WizardTowerQuestSlice;
 }
 export interface IWallet {
   coins: number;
@@ -990,13 +1005,14 @@ export interface IAllLocations {
   Draynor: ILocationSummary;
   LumbridgeSwampCave: ILocationSummary;
   LumbridgeCatacombs: ILocationSummary;
+  WizardTower: ILocationSummary;
   // Varrock: ILocationSummary;
 }
 //* extend this as needed to account for future locations
 export interface ICurrentLocation {
   CurrentLocation: ICurrentLocationOptions;
 }
-export type ICurrentLocationOptions = `Lumbridge` | `Draynor` | `LumbridgeSwampCave` | `LumbridgeCatacombs`;
+export type ICurrentLocationOptions = `Lumbridge` | `Draynor` | `LumbridgeSwampCave` | `LumbridgeCatacombs` | `WizardTower`;
 
 //@ ******************************* CHAT *******************************
 

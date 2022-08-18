@@ -170,6 +170,34 @@ export const defaultPlayerData: Types.AllState = {
       { name: "Stolen Hearts", stepsComplete: 0, stepsTotal: 29, complete: false },
     ],
   },
+  Quests_WizardTower: {
+    WizardTowerQuestArray: [
+      {
+        name: "Rune Mysteries",
+        stepsComplete: 0,
+        stepsTotal: 39,
+        complete: false,
+      },
+      {
+        name: "Rune Memories",
+        stepsComplete: 0,
+        stepsTotal: 49,
+        complete: false,
+      },
+      {
+        name: "Heart of Stone",
+        stepsComplete: 0,
+        stepsTotal: 49,
+        complete: false,
+      },
+      {
+        name: "Beneath Cursed Tides",
+        stepsComplete: 0,
+        stepsTotal: 60,
+        complete: false,
+      },
+    ],
+  },
   BodySlot: {
     playerOwnsbronzeplatebody: false,
     playerOwnsironplatebody: false,
