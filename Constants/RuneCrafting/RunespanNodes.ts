@@ -1,4 +1,5 @@
 import * as Types from "../../Types";
+import { getLevel } from "../XP Levels";
 
 export const cycloneNode: Types.IRunespanNode = {
   name: `cycloneNode`,
@@ -239,4 +240,37 @@ export const runespanShop: Types.IRunespanShop = {
     cost: 500,
     amount: 200,
   },
+};
+
+export const resolveRunespan = (nodeToSiphon: Types.RunespanNodeTypes, runecraftingXP: number) => {
+  // define the return object, which will be updated based on further calculations
+  let returnObj = {
+    runeSpanpoints: 0,
+    runecraftingXP: 1,
+  };
+  // define the player's runecrafting level to account for multiple runes
+  const runecraftingLevel = getLevel(runecraftingXP);
+  // define the current node as thisNode for readability
+  const thisNode = listOfRunespanNodes[nodeToSiphon as keyof Types.IListOfRunespanNodes];
+  // define the success chance
+  const playerRoll = 20 + Math.min(runecraftingLevel / thisNode.levelReqRunecrafting, 5);
+
+  // roll in the range [0-100)
+  const gameRoll = Math.floor(Math.random() * 100);
+
+  // if the player rolls higher than the game, they successfully siphon and create a rune
+  if (playerRoll >= gameRoll) {
+    // determine if the current node has multiple runes, and if the player is lucky enough to create the beter rune
+    if (thisNode.multiRune && Math.random() >= 0.5) {
+      // if so, update returnObj
+      returnObj.runecraftingXP = thisNode.XPGivenRune_two;
+      returnObj.runeSpanpoints = runespanNodePoints[thisNode.rune_two];
+    } else {
+      // if the node does not have multiple runes, or the player was unlucky, then update returnObj
+      returnObj.runecraftingXP = thisNode.XPGivenRune_one;
+      returnObj.runeSpanpoints = runespanNodePoints[thisNode.rune_one];
+    }
+  }
+
+  return returnObj;
 };

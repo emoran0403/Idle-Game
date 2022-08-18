@@ -551,6 +551,24 @@ export interface IRunespanShop {
   pureEssence: IRunespanShopItem;
 }
 export type IRuneTypes = `air` | `mind` | `water` | `earth` | `fire` | `body` | `cosmic` | `chaos` | `astral` | `nature` | `law` | `death` | `blood` | `soul`;
+export type RunespanNodeTypes =
+  | `cycloneNode`
+  | `mindstormNode`
+  | `waterPoolNode`
+  | `rockfragmentNode`
+  | `fireballNode`
+  | `firestormNode`
+  | `vineNode`
+  | `fleshygrowthNode`
+  | `jumperNode`
+  | `skullsNode`
+  | `chaoticcloudNode`
+  | `bloodpoolNode`
+  | `shifterNode`
+  | `nebulaNode`
+  | `livingsoulNode`
+  | `bloodyskullsNode`
+  | `undeadsoulNode`;
 
 //@ ******************************* MISC *******************************
 

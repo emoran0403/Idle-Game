@@ -138,6 +138,7 @@ export const resolveRunecrafting = (runeToMake: Types.IRuneTypes, runecraftingXP
   const runecraftingLevel = getLevel(runecraftingXP);
   // define thisRune for readability
   const thisRune = ListOfRunes[`${runeToMake}rune` as keyof Types.IListOfRunes];
+  // define the return object, which will be updated based on further calculations
   let returnObj = {
     runesMade: 0,
     runecraftingXP: 0,
