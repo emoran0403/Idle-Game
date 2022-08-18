@@ -17,7 +17,12 @@ const CurrentResourceComp = (props: Types.NoProps) => {
   const Skill = useSelector((state: Types.AllState) => state.Skill.CurrentSkill);
   const playerLocation = useSelector((state: Types.AllState) => state.Location.CurrentLocation as Types.ICurrentLocationOptions);
 
-  //@ this sets the background color if a combat style has been selected, but a target has not been selected
+  useEffect(() => {}, [Resource, Target, Activity, Skill, playerLocation]);
+
+  /**
+   * This function sets the background color based on the current state.
+   * @returns Returns a classname to set the background color if a combat style has been selected, but a target has not been selected.
+   */
   const returnBackgroundColor = () => {
     if (Activity === `In combat` && Target === `none`) {
       return `bg-danger`;
@@ -25,6 +30,11 @@ const CurrentResourceComp = (props: Types.NoProps) => {
       return ``;
     }
   };
+  /**
+   * ! when adding new skills that consume resources, add an if else block like firemaking.
+   * Displays a conditional message based on the current resource the player is gathering / using.
+   * @returns Returns a conditional message based on the current resource the player is gathering / using.
+   */
   const displayResource = () => {
     // this function shows the display name of the current resource
     // console.log(Skill);
@@ -34,7 +44,11 @@ const CurrentResourceComp = (props: Types.NoProps) => {
           return <div>{ListOfLogs[Resource as keyof Types.IListOfLogs].displayName}</div>;
         }
         case `Firemaking`: {
-          return <div>{ListOfLogs[Resource as keyof Types.IListOfLogs].displayName}</div>;
+          if (ListOfLogs[Resource as keyof Types.IListOfLogs]) {
+            return <div>{ListOfLogs[Resource as keyof Types.IListOfLogs].displayName}</div>;
+          } else {
+            return <div>none</div>;
+          }
         }
         case `Fishing`: {
           return <div>{ListOfFish[Resource as keyof Types.IListOfFish].displayName}</div>;

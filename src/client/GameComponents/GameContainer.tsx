@@ -626,8 +626,8 @@ const GameContainer = (props: Types.GameContainerProps) => {
       //* if the player runs out of logs entirely, set them to idle
       if (playerInventory.length === 0 && thisLogInBank.amount === 0) {
         dispatch(setActivity(`Idle`));
-        dispatch(setResource(`none`));
         dispatch(setSkill(`none`));
+        dispatch(setResource(`none`));
       }
     } else {
       //* otherwise, call handleBanking
