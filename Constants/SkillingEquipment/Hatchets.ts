@@ -4,13 +4,13 @@ export const listOfHatchets: Types.IListOfHatchets = {
   bronzehatchet: {
     name: "bronzehatchet",
     displayName: `Bronze hatchet`,
-    levelReqWoodcutting: 0,
+    levelReqWoodcutting: 1,
     value: 1,
   },
   ironhatchet: {
     name: "ironhatchet",
     displayName: `Iron hatchet`,
-    levelReqWoodcutting: 0,
+    levelReqWoodcutting: 1,
     value: 126,
   },
   steelhatchet: {

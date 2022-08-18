@@ -1,4 +1,9 @@
-<!-- XX.XX.XX
+<!--
+<div align="center">
+  <h1>The something update</h1>
+  <p>Release XX.XX.XX</p>
+  <a href="https://ejmdev-idlescape.herokuapp.com/">Play now</a>
+</div>
 # ADDED
 # CHANGED
 # DEPRECATED
@@ -20,6 +25,24 @@
 - DONE - skills panel styles them based on the player's firemaking level
 - DONE - skills panel shows the logs the player currenly has, and their amount
 - DONE - inventory slice needs a way to remove individual items from the inventory -->
+
+<!-- Currently in Development -->
+
+<!--
+<div align="center">
+  <h1>The something update</h1>
+  <p>Release 1.2.1</p>
+  <a href="https://ejmdev-idlescape.herokuapp.com/">Play now</a>
+</div>
+# ADDED
+# CHANGED
+# DEPRECATED
+# REMOVED
+# FIXED
+- Bronze and Iron hatchets now show a woodcutting level requirement of 1 (0 looks silly).
+# SECURITY -->
+
+<!-- Currently in Production -->
 
 <div align="center">
   <h1>The Firemaking update</h1>
