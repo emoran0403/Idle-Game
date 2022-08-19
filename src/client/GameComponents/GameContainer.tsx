@@ -65,7 +65,7 @@ import { TOKEN_KEY } from "../ClientUtils/Fetcher";
 import { ListOfSlayerMasters } from "../../../Constants/Slayer/SlayerMasters";
 import { listOfRunespanNodes, resolveRunespan } from "../../../Constants/RuneCrafting/RunespanNodes";
 import { addPointsToState } from "../Redux/Slices/CurrencySlices/RunespanPoints";
-import { ListOfRunes } from "../../../Constants/RuneCrafting/Runes";
+import { ListOfRunes, resolveRunecrafting } from "../../../Constants/RuneCrafting/Runes";
 
 const GameContainer = (props: Types.GameContainerProps) => {
   const dispatch = useDispatch();
@@ -692,6 +692,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
         const thisRune = ListOfRunes[CurrentResource as keyof Types.IListOfRunes];
         const runeEssenceInBank = bank_ores.runeEssence.amount;
         const pureEssenceInBank = bank_ores.pureEssence.amount;
+        let essenceInInventory = 0;
 
         // const thisLogInBank = bank_logs[CurrentResource as keyof Types.ILogBankSlice];
 
@@ -702,7 +703,7 @@ const GameContainer = (props: Types.GameContainerProps) => {
         } else {
           // otherwise, the player has finished banking and may make runes
 
-          //* make sure the inventory is empty AND the player has enough of the correct essence
+          //* check if the inventory is empty AND the player has enough of the correct essence in the bank, then withdraw as appropriate
           if (playerInventory.length === 0) {
             // the player's inventory is empty
             if (thisRune.levelReqRunecrafting >= 21) {
@@ -711,10 +712,12 @@ const GameContainer = (props: Types.GameContainerProps) => {
                 // if the player has plenty of pure essence in the bank, withdraw it and add it to the inventory
                 dispatch(removeOreFromBank({ item: bank_ores.pureEssence.name, amount: 28 }));
                 dispatch(addManyItemsToInventory({ item: bank_ores.pureEssence.name, amount: 28 }));
+                essenceInInventory = 28;
               } else {
                 // the player has less than 28 pure essence in the bank, so only withdraw what the player has
                 dispatch(removeOreFromBank({ item: bank_ores.pureEssence.name, amount: pureEssenceInBank }));
                 dispatch(addManyItemsToInventory({ item: bank_ores.pureEssence.name, amount: pureEssenceInBank }));
+                essenceInInventory = pureEssenceInBank;
               }
             } else {
               // the player needs normal essence
@@ -722,20 +725,24 @@ const GameContainer = (props: Types.GameContainerProps) => {
                 // if the player has plenty of pure essence in the bank, withdraw it and add it to the inventory
                 dispatch(removeOreFromBank({ item: bank_ores.runeEssence.name, amount: 28 }));
                 dispatch(addManyItemsToInventory({ item: bank_ores.runeEssence.name, amount: 28 }));
+                essenceInInventory = 28;
               } else if (runeEssenceInBank >= 1 && runeEssenceInBank < 28) {
                 // the player has between 1 - 28 pure essence in the bank, so only withdraw what the player has
                 dispatch(removeOreFromBank({ item: bank_ores.runeEssence.name, amount: runeEssenceInBank }));
                 dispatch(addManyItemsToInventory({ item: bank_ores.runeEssence.name, amount: runeEssenceInBank }));
+                essenceInInventory = runeEssenceInBank;
               } else {
                 // the player may use pure essence
                 if (pureEssenceInBank >= 28) {
                   // if the player has plenty of pure essence in the bank, withdraw it and add it to the inventory
                   dispatch(removeOreFromBank({ item: bank_ores.pureEssence.name, amount: 28 }));
                   dispatch(addManyItemsToInventory({ item: bank_ores.pureEssence.name, amount: 28 }));
+                  essenceInInventory = 28;
                 } else {
                   // the player has less than 28 pure essence in the bank, so only withdraw what the player has
                   dispatch(removeOreFromBank({ item: bank_ores.pureEssence.name, amount: pureEssenceInBank }));
                   dispatch(addManyItemsToInventory({ item: bank_ores.pureEssence.name, amount: pureEssenceInBank }));
+                  essenceInInventory = pureEssenceInBank;
                 }
               }
             }
@@ -743,13 +750,16 @@ const GameContainer = (props: Types.GameContainerProps) => {
             // if the player's inventory is not empty, then empty it
             emptyPlayerInventory();
           }
+          //*
+          const { runesMade, runecraftingXP, bankingTime } = resolveRunecrafting(
+            thisRune.name.slice(0, -4) as Types.IRuneTypes,
+            Experience.Runecrafting,
+            essenceInInventory
+          );
         }
-        // if there is no banking time remaining, proceed
-        // check which rune the player is trying to craft
-        // if it is of level 21+ withdraw pure essence
-        // if it is level 20 or lower, withdraw rune essence - if there is no rune essence, then try to withdraw pure essence
-        // with essence in inventory, craft runes:
-        // call resolve function
+        //! left off here - how to show essence in inventory for 1 game tick while maintaining previous logic?
+        //@ maybe set a piece of state = playerhasessenceandisreadytocraft
+
         // empty all of inventory
         // dispatch to bank the amount of runes made
         // dispatch the xp gianed
