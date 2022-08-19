@@ -47,7 +47,7 @@ import { ListOfLogs, playerEarnsLog } from "../../../Constants/Items/Logs";
 import { listOfHatchets } from "../../../Constants/SkillingEquipment/Hatchets";
 
 // mining
-import { addOreToBank } from "../Redux/Slices/BankSlices/OresSlice";
+import { addOreToBank, removeOreFromBank } from "../Redux/Slices/BankSlices/OresSlice";
 import { ListOfOres, resolveMining } from "../../../Constants/Items/Ores";
 import { listOfPickaxes } from "../../../Constants/SkillingEquipment/Pickaxes";
 
@@ -63,6 +63,9 @@ import { ListOfPickpocketStalls } from "../../../Constants/Thieving/Stalls";
 import { saveState } from "../Redux/store";
 import { TOKEN_KEY } from "../ClientUtils/Fetcher";
 import { ListOfSlayerMasters } from "../../../Constants/Slayer/SlayerMasters";
+import { listOfRunespanNodes, resolveRunespan } from "../../../Constants/RuneCrafting/RunespanNodes";
+import { addPointsToState } from "../Redux/Slices/CurrencySlices/RunespanPoints";
+import { ListOfRunes } from "../../../Constants/RuneCrafting/Runes";
 
 const GameContainer = (props: Types.GameContainerProps) => {
   const dispatch = useDispatch();
@@ -149,6 +152,11 @@ const GameContainer = (props: Types.GameContainerProps) => {
    * when the player is reduced to 0 lifepoints, set this to 24 to incur a 1 minute healing time
    */
   const [healTimeRemaining, setHealTimeRemaining] = useState<number>(0);
+
+  /**
+   * use this to keep track of the time remaining for the player to walk back to the bank and get more essence for runecrafting
+   */
+  const [bankTimeRemaining, setBankTimeRemaining] = useState<number>(0);
 
   //@ assign the ore rock's durability to state to track progress towards receiving an ore
   const [oreRockDurability, setOreRockDurability] = useState<number>(0);
@@ -639,9 +647,171 @@ const GameContainer = (props: Types.GameContainerProps) => {
     // console.log(`end of firemaking function`);
   };
 
+  //!!
+  //!!
+  /**
+   * This function allows the player to skill in the Runespan or craft runes.
+   * IF making runes:
+   * - It determines whether the player's inventory contains an item other than rune essence.
+   * - It will refill the player's inventory with essence, and will not break the bank.
+   */
+  const handleRunecraftingTick = () => {
+    //* if the player does not need to bank, proceed with the handling
+    if (!needsToBank) {
+      // define empty arrays here to allow for runespan and crafting to have scope
+      let runecraftingMessages: string[] = [];
+      let runecraftingMessagesTags: Types.ChatLogTag[] = [];
+
+      //* determine if the player is in the runespan (located in the wizardtower)
+      if (playerLocation === `WizardTower`) {
+        //* the player is training via runespan
+
+        //* define the current node for readability
+        const thisNode = listOfRunespanNodes[CurrentResource as keyof Types.IListOfRunespanNodes];
+
+        //* call resolution function
+        const { runeSpanpoints, runecraftingXP } = resolveRunespan(thisNode.name, Experience.Runecrafting);
+        dispatch(addPointsToState(runeSpanpoints));
+        dispatch(gainXP({ skill: `Runecrafting`, xp: runecraftingXP }));
+
+        //* queue a chatlog based on succeeding or failing at siphoning a node
+        if (runecraftingXP > 1) {
+          // if the player succeeded
+          runecraftingMessages.push(`Sucessfully siphoned a ${thisNode.displayName}, and gained ${runecraftingXP} xp in Runecrafting`);
+          runecraftingMessagesTags.push(`Gained XP`);
+        } else {
+          // if the player failed
+          runecraftingMessages.push(`You failed to siphon a ${thisNode.displayName}, but you still gained ${runecraftingXP} xp in Runecrafting`);
+          runecraftingMessagesTags.push(`Gained XP`);
+        }
+        //* send the chatlogs
+        handleMultipleChatLogs(runecraftingMessages, runecraftingMessagesTags);
+      } else {
+        // the player is training via crafting runes
+        // define the current rune for readability
+        const thisRune = ListOfRunes[CurrentResource as keyof Types.IListOfRunes];
+        const runeEssenceInBank = bank_ores.runeEssence.amount;
+        const pureEssenceInBank = bank_ores.pureEssence.amount;
+
+        // const thisLogInBank = bank_logs[CurrentResource as keyof Types.ILogBankSlice];
+
+        //* if there is banking time remaining, the player is travelling back to the bank
+        if (bankTimeRemaining > 0) {
+          // decrement the timer
+          setBankTimeRemaining(bankTimeRemaining - 1);
+        } else {
+          // otherwise, the player has finished banking and may make runes
+
+          //* make sure the inventory is empty AND the player has enough of the correct essence
+          if (playerInventory.length === 0) {
+            // the player's inventory is empty
+            if (thisRune.levelReqRunecrafting >= 21) {
+              // the player needs pure essence
+              if (pureEssenceInBank >= 28) {
+                // if the player has plenty of pure essence in the bank, withdraw it and add it to the inventory
+                dispatch(removeOreFromBank({ item: bank_ores.pureEssence.name, amount: 28 }));
+                dispatch(addManyItemsToInventory({ item: bank_ores.pureEssence.name, amount: 28 }));
+              } else {
+                // the player has less than 28 pure essence in the bank, so only withdraw what the player has
+                dispatch(removeOreFromBank({ item: bank_ores.pureEssence.name, amount: pureEssenceInBank }));
+                dispatch(addManyItemsToInventory({ item: bank_ores.pureEssence.name, amount: pureEssenceInBank }));
+              }
+            } else {
+              // the player needs normal essence
+              if (runeEssenceInBank >= 28) {
+                // if the player has plenty of pure essence in the bank, withdraw it and add it to the inventory
+                dispatch(removeOreFromBank({ item: bank_ores.runeEssence.name, amount: 28 }));
+                dispatch(addManyItemsToInventory({ item: bank_ores.runeEssence.name, amount: 28 }));
+              } else if (runeEssenceInBank >= 1 && runeEssenceInBank < 28) {
+                // the player has between 1 - 28 pure essence in the bank, so only withdraw what the player has
+                dispatch(removeOreFromBank({ item: bank_ores.runeEssence.name, amount: runeEssenceInBank }));
+                dispatch(addManyItemsToInventory({ item: bank_ores.runeEssence.name, amount: runeEssenceInBank }));
+              } else {
+                // the player may use pure essence
+                if (pureEssenceInBank >= 28) {
+                  // if the player has plenty of pure essence in the bank, withdraw it and add it to the inventory
+                  dispatch(removeOreFromBank({ item: bank_ores.pureEssence.name, amount: 28 }));
+                  dispatch(addManyItemsToInventory({ item: bank_ores.pureEssence.name, amount: 28 }));
+                } else {
+                  // the player has less than 28 pure essence in the bank, so only withdraw what the player has
+                  dispatch(removeOreFromBank({ item: bank_ores.pureEssence.name, amount: pureEssenceInBank }));
+                  dispatch(addManyItemsToInventory({ item: bank_ores.pureEssence.name, amount: pureEssenceInBank }));
+                }
+              }
+            }
+          } else {
+            // if the player's inventory is not empty, then empty it
+            emptyPlayerInventory();
+          }
+        }
+        // if there is no banking time remaining, proceed
+        // check which rune the player is trying to craft
+        // if it is of level 21+ withdraw pure essence
+        // if it is level 20 or lower, withdraw rune essence - if there is no rune essence, then try to withdraw pure essence
+        // with essence in inventory, craft runes:
+        // call resolve function
+        // empty all of inventory
+        // dispatch to bank the amount of runes made
+        // dispatch the xp gianed
+        // set banking time
+      }
+
+      //* if the player has logs in their inventory
+      // if (playerInventory.length >= 1) {
+      //   // console.log(`player can burn a log`);
+      //   //* burn the log and queue up chat logs
+      //   dispatch(removeItemFromInventory(thisLog.name));
+      //   dispatch(gainXP({ skill: `Firemaking`, xp: thisLog.XPGivenFiremaking }));
+      //   let firemakingMessages: string[] = [`Burned some ${thisLog.displayName} and gained ${thisLog.XPGivenFiremaking} xp in Firemaking`];
+      //   let firemakingMessagesTags: Types.ChatLogTag[] = [`Gained XP`];
+
+      //   //* if the player gained a level in Firemaking, queue a chatlog
+      //   if (didPlayerLevelUp(Experience.Firemaking, thisLog.XPGivenFiremaking)) {
+      //     // if so, queue up a chatlog
+      //     firemakingMessages.push(`Firemaking Level up!`);
+      //     firemakingMessagesTags.push(`Level Up`);
+      //   }
+      //   //* send the chatlogs
+      //   handleMultipleChatLogs(firemakingMessages, firemakingMessagesTags);
+      // }
+
+      //* check if the player needs to withdraw more logs AND has the capability to do so
+      // if (playerInventory.length === 0 && thisLogInBank.amount > 0) {
+      //   // if the player has 28 or more of the chosen logs in the bank, then we can withdraw 28
+      //   if (thisLogInBank.amount >= 28) {
+      //     // remove the items from the bank, add them to the inventory
+      //     // console.log(`player has sufficient logs in bank`);
+      //     dispatch(removeLogFromBank({ item: thisLog.name, amount: 28 }));
+      //     dispatch(addManyItemsToInventory({ item: thisLog.name, amount: 28 }));
+      //   } else {
+      //     // otherwise, we can only withdraw the remaining logs
+      //     // console.log(`player has only a few logs in bank`);
+      //     dispatch(removeLogFromBank({ item: thisLog.name, amount: thisLogInBank.amount }));
+      //     dispatch(addManyItemsToInventory({ item: thisLog.name, amount: thisLogInBank.amount }));
+      //   }
+      // }
+
+      //* if the player runs out of logs entirely, set them to idle
+      // if (playerInventory.length === 0 && thisLogInBank.amount === 0) {
+      //   dispatch(setActivity(`Idle`));
+      //   dispatch(setSkill(`none`));
+      //   dispatch(setResource(`none`));
+      // }
+    } else {
+      //* otherwise, call handleBanking
+      emptyPlayerInventory();
+      //* after the banking is finished, set this state to false, since the player's inventory is now empty
+      setNeedsToBank(false);
+    }
+
+    // console.log(`end of runecrafting function`);
+  };
+
+  //!!
+  //!!
+
   /**
    * This function removes all items from the player's inventory and adds them to the bank.
-   * Then, it resets the needsToBank component state to false.
    * Call this if the current action will fill the inventory.
    */
   const emptyPlayerInventory = () => {

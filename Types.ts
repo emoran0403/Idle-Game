@@ -468,6 +468,7 @@ export interface IRune {
   levelReqRunecrafting: number;
   XPGivenRunecrafting: number;
   value: number;
+  bankTime: number;
   multirunes: number[];
 }
 export interface IListOfRunes {
@@ -503,14 +504,14 @@ export interface IRuneBankSlice {
   soulrune: IBankItem;
 }
 export interface IRunespanNode {
-  name: string;
+  name: RunespanNodeTypes;
   displayName: string;
   levelReqRunecrafting: number;
   XPGivenRune_one: number;
   XPGivenRune_two: number;
   multiRune: boolean;
-  rune_one: string;
-  rune_two: string;
+  rune_one: IRuneTypes;
+  rune_two: IRuneTypes | ``;
 }
 export interface IListOfRunespanNodes {
   cycloneNode: IRunespanNode;
