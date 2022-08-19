@@ -128,6 +128,64 @@ export const defaultPlayerData: Types.AllState = {
       amount: 0,
     },
   },
+  Bank_Runes: {
+    airrune: {
+      name: `airrune`,
+      amount: 0,
+    },
+    mindrune: {
+      name: `mindrune`,
+      amount: 0,
+    },
+    waterrune: {
+      name: `waterrune`,
+      amount: 0,
+    },
+    earthrune: {
+      name: `earthrune`,
+      amount: 0,
+    },
+    firerune: {
+      name: `firerune`,
+      amount: 0,
+    },
+    bodyrune: {
+      name: `bodyrune`,
+      amount: 0,
+    },
+    cosmicrune: {
+      name: `cosmicrune`,
+      amount: 0,
+    },
+    chaosrune: {
+      name: `chaosrune`,
+      amount: 0,
+    },
+    astralrune: {
+      name: `astralrune`,
+      amount: 0,
+    },
+    naturerune: {
+      name: `naturerune`,
+      amount: 0,
+    },
+    lawrune: {
+      name: `lawrune`,
+      amount: 0,
+    },
+    deathrune: {
+      name: `deathrune`,
+      amount: 0,
+    },
+    bloodrune: {
+      name: `bloodrune`,
+      amount: 0,
+    },
+    soulrune: {
+      name: `soulrune`,
+      amount: 0,
+    },
+  },
   Inventory: { CurrentInventory: [] },
   Location: { CurrentLocation: "Lumbridge" },
   Skill: { CurrentSkill: "none" },
@@ -138,6 +196,7 @@ export const defaultPlayerData: Types.AllState = {
   Quest: { CurrentQuest: "none" },
   Resources: { Banking: true, Dropping: false },
   Wallet: { coins: 100 },
+  RunespanPoints: { runespanPoints: 0 },
   QuestPoints: { CurrentQuestPoints: 0 },
   SlayerTask: {
     task: [`none`],

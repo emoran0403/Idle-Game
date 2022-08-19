@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import * as Types from "../../../../Types";
+import * as Types from "../../../../../Types";
 
 export const Target = createSlice({
   name: "currentTarget",

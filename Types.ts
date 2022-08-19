@@ -486,6 +486,22 @@ export interface IListOfRunes {
   bloodrune: IRune;
   soulrune: IRune;
 }
+export interface IRuneBankSlice {
+  airrune: IBankItem;
+  mindrune: IBankItem;
+  waterrune: IBankItem;
+  earthrune: IBankItem;
+  firerune: IBankItem;
+  bodyrune: IBankItem;
+  cosmicrune: IBankItem;
+  chaosrune: IBankItem;
+  astralrune: IBankItem;
+  naturerune: IBankItem;
+  lawrune: IBankItem;
+  deathrune: IBankItem;
+  bloodrune: IBankItem;
+  soulrune: IBankItem;
+}
 export interface IRunespanNode {
   name: string;
   displayName: string;
@@ -514,6 +530,9 @@ export interface IListOfRunespanNodes {
   livingsoulNode: IRunespanNode;
   bloodyskullsNode: IRunespanNode;
   undeadsoulNode: IRunespanNode;
+}
+export interface IRunespanPoints {
+  runespanPoints: number;
 }
 export interface IRunespanNodePoints {
   air: number;
@@ -962,7 +981,7 @@ export type ICurrentTargetOptions =
 export interface ICurrentResource {
   CurrentResource: ICurrentResourceOptions;
 }
-export type ICurrentResourceOptions = "none" | IFishOptions | ILogOptions | IOreOptions | IListOfAllThievingOptions;
+export type ICurrentResourceOptions = "none" | IFishOptions | ILogOptions | IOreOptions | IListOfAllThievingOptions | IRuneTypes | RunespanNodeTypes;
 
 //@ ******************************* STATE *******************************
 
@@ -982,6 +1001,7 @@ export interface AllState extends AllSlots {
   Bank_Fish: IFishBankSlice;
   Bank_Logs: ILogBankSlice;
   Bank_Ores: IOreBankSlice;
+  Bank_Runes: IRuneBankSlice;
   Inventory: I_Inventory;
   Location: ICurrentLocation;
   Activity: ICurrentActivity;
@@ -994,6 +1014,7 @@ export interface AllState extends AllSlots {
   Pickaxes: IPickaxesSlice;
   Resources: IResources;
   Wallet: IWallet;
+  RunespanPoints: IRunespanPoints;
   QuestPoints: IQuestPointsSlice;
   Quests_Lumbridge: LumbridgeQuestSlice;
   Quests_Draynor: DraynorQuestSlice;

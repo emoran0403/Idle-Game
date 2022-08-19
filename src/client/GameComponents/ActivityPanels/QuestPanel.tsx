@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { AllQuests } from "../../../../Constants/Quests";
 import { getLevel } from "../../../../Constants/XP Levels";
-import { setActivity } from "../../Redux/Slices/CurrentActivity";
-import { setResource } from "../../Redux/Slices/CurrentResource";
-import { setSkill } from "../../Redux/Slices/CurrentSkill";
-import { setQuest } from "../../Redux/Slices/CurrentQuest";
-import { setTarget } from "../../Redux/Slices/CurrentTarget";
+import { setActivity } from "../../Redux/Slices/GameStateSlices/CurrentActivity";
+import { setResource } from "../../Redux/Slices/GameStateSlices/CurrentResource";
+import { setSkill } from "../../Redux/Slices/GameStateSlices/CurrentSkill";
+import { setQuest } from "../../Redux/Slices/GameStateSlices/CurrentQuest";
+import { setTarget } from "../../Redux/Slices/GameStateSlices/CurrentTarget";
 import { AllLocations } from "../../../../Constants/LocationInfo";
 
 //! handleQuestStyle and handleQuestButtonDisplay have repeated logic that could be improved

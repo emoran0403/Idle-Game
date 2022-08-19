@@ -1,5 +1,3 @@
-//runes for magic goes here
-
 import * as Types from "../../Types";
 import { getLevel } from "../XP Levels";
 
@@ -133,7 +131,16 @@ export const ListOfRunes: Types.IListOfRunes = {
   soulrune,
 };
 
+/**
+ * This function calculates the number of runes made by the player, and the runecrafting experience for doing so.
+ * @param runeToMake - The rune the player is trying to make.
+ * @param runecraftingXP - The player's current runecrafting experience.
+ * @param essenceInInventory - The amount of essence in the player's inventory.
+ * @returns Returns an object containing the number of runes made, and the runecrafting experience gained.
+ */
 export const resolveRunecrafting = (runeToMake: Types.IRuneTypes, runecraftingXP: number, essenceInInventory: number) => {
+  //* define variables
+
   // define the player's runecrafting level to account for multiple runes
   const runecraftingLevel = getLevel(runecraftingXP);
   // define thisRune for readability
@@ -144,11 +151,11 @@ export const resolveRunecrafting = (runeToMake: Types.IRuneTypes, runecraftingXP
     runecraftingXP: 0,
   };
 
-  // calculate the runecrafting experience gained, and update the return object
+  //* calculate the runecrafting experience gained, and update the return object
   const runecraftingXPGained = thisRune.XPGivenRunecrafting * essenceInInventory;
   returnObj.runecraftingXP = runecraftingXPGained;
 
-  // calculate how the multiplier the player qualifies for based on the player's level
+  //* calculate how the multiplier the player qualifies for based on the player's level
   /**
    * first, find how many thresholds the player passes => thisRune.multirunes.filter((threshold) => threshold <= runecraftinglevel)
    * we find that amount by calling .length

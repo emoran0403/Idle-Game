@@ -191,7 +191,6 @@ export const listOfRunespanNodes: Types.IListOfRunespanNodes = {
   bloodyskullsNode,
   undeadsoulNode,
 };
-
 export const runespanNodePoints: Types.IRunespanNodePoints = {
   air: 0.1,
   mind: 0.2,
@@ -208,7 +207,6 @@ export const runespanNodePoints: Types.IRunespanNodePoints = {
   blood: 3,
   soul: 3.5,
 };
-
 export const runespanShop: Types.IRunespanShop = {
   runecrafterhat: {
     name: `runecrafterhat`,
@@ -242,7 +240,15 @@ export const runespanShop: Types.IRunespanShop = {
   },
 };
 
+/**
+ *
+ * @param nodeToSiphon The runespan node the player is currently attempting to siphon.
+ * @param runecraftingXP The player's current runecrafting experience.
+ * @returns Return an object containing the runecrafting experience gained, and the number of runespan points the player earned from siphoning.
+ */
 export const resolveRunespan = (nodeToSiphon: Types.RunespanNodeTypes, runecraftingXP: number) => {
+  //* define variables
+
   // define the return object, which will be updated based on further calculations
   let returnObj = {
     runeSpanpoints: 0,
@@ -254,9 +260,10 @@ export const resolveRunespan = (nodeToSiphon: Types.RunespanNodeTypes, runecraft
   const thisNode = listOfRunespanNodes[nodeToSiphon as keyof Types.IListOfRunespanNodes];
   // define the success chance
   const playerRoll = 20 + Math.min(runecraftingLevel / thisNode.levelReqRunecrafting, 5);
-
   // roll in the range [0-100)
   const gameRoll = Math.floor(Math.random() * 100);
+
+  //* decide if the player successfully siphoned the node
 
   // if the player rolls higher than the game, they successfully siphon and create a rune
   if (playerRoll >= gameRoll) {

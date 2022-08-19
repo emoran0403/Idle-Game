@@ -18,11 +18,11 @@ import { ListOfPickpocketStalls } from "../../../../Constants/Thieving/Stalls";
 
 import { getSlayerTask, ListOfSlayerMasters } from "../../../../Constants/Slayer/SlayerMasters";
 
-import { setResource } from "../../Redux/Slices/CurrentResource";
-import { setSkill } from "../../Redux/Slices/CurrentSkill";
-import { setActivity } from "../../Redux/Slices/CurrentActivity";
-import { setTarget } from "../../Redux/Slices/CurrentTarget";
-import { setQuest } from "../../Redux/Slices/CurrentQuest";
+import { setResource } from "../../Redux/Slices/GameStateSlices/CurrentResource";
+import { setSkill } from "../../Redux/Slices/GameStateSlices/CurrentSkill";
+import { setActivity } from "../../Redux/Slices/GameStateSlices/CurrentActivity";
+import { setTarget } from "../../Redux/Slices/GameStateSlices/CurrentTarget";
+import { setQuest } from "../../Redux/Slices/GameStateSlices/CurrentQuest";
 import { useState } from "react";
 import { setTask, skipTask } from "../../Redux/Slices/SlayerTask";
 import { removeSlayerPoints } from "../../Redux/Slices/SlayerTask";

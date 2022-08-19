@@ -3,17 +3,18 @@ import experienceReducer from "../Slices/Experience";
 import fishReducer from "../Slices/BankSlices/FishSlice";
 import logsReducer from "../Slices/BankSlices/LogsSlice";
 import oresReducer from "../Slices/BankSlices/OresSlice";
+import runesreducer from "../Slices/BankSlices/RunesSlice";
 import inventoryReducer from "../Slices/Inventory";
-import currentLocationReducer from "../Slices/CurrentLocation";
-import currentSkillReducer from "../Slices/CurrentSkill";
-import currentCombatStyleReducer from "../Slices/CurrentCombatStyle";
-import currentActivityReducer from "../Slices/CurrentActivity";
-import currentResourceReducer from "../Slices/CurrentResource";
-import currentTargetReducer from "../Slices/CurrentTarget";
-import currentQuestReducer from "../Slices/CurrentQuest";
+import currentLocationReducer from "../Slices/GameStateSlices/CurrentLocation";
+import currentSkillReducer from "../Slices/GameStateSlices/CurrentSkill";
+import currentCombatStyleReducer from "../Slices/GameStateSlices/CurrentCombatStyle";
+import currentActivityReducer from "../Slices/GameStateSlices/CurrentActivity";
+import currentResourceReducer from "../Slices/GameStateSlices/CurrentResource";
+import currentTargetReducer from "../Slices/GameStateSlices/CurrentTarget";
+import currentQuestReducer from "../Slices/GameStateSlices/CurrentQuest";
 import resourcesReducer from "../Slices/Resources";
-import walletReducer from "../Slices/Wallet";
-import questPointsReducer from "../Slices/QuestPoints";
+import walletReducer from "../Slices/CurrencySlices/Wallet";
+import questPointsReducer from "../Slices/CurrencySlices/QuestPoints";
 import lumbridgequestReducer from "../Slices/QuestSlices/Lumbridge";
 import draynorquestReducer from "../Slices/QuestSlices/Draynor";
 import wizardTowerquestReducer from "../Slices/QuestSlices/WizardTower";
@@ -35,6 +36,7 @@ const AppReducer = combineReducers({
   Bank_Fish: fishReducer,
   Bank_Logs: logsReducer,
   Bank_Ores: oresReducer,
+  Bank_Runes: runesreducer,
   Inventory: inventoryReducer,
   Location: currentLocationReducer,
   Skill: currentSkillReducer,

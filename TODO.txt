@@ -22,11 +22,18 @@
 * - just check all the places for locations
 @ when adding new masters, make sure to add enemies that match taskList[i].task
 
+@ Adding new Skills - 
+ * {Types} - update (ICurrentResourceOptions) with the skilling options
+ * {Redux} - create a slice
+ * {Reducers} - implement that slice in main reducer
+ * {Types} - create a type for the new slice
+ * {Types} - update (AllState) with new slice
+ * {DefaultPlayerData} - update with new slice defaults
+
 //! how can i use dev and prod vars on .env and on heroku?
 
 //# Fixes
 * fix admin buttons in App
-* rework display logic in currentresourcecomponent
 * webworker / empty audio object for interval - inactive tabs slow down the interval
 * Logic - experience and levels is displaying too high for some reason :/
 * remove boilerplate commits
@@ -36,7 +43,6 @@
 * update get enemy object to scrape max hit from the wiki
 * add a check to prevent xp from going over 200M
 * swap out all instances of handleNewChatLog with handleMultipleChatLogs
-* add assets for all items so that inventory component can work with images
 * grammar when fishing anchovies
 
 
@@ -72,6 +78,9 @@
 //# COOKING
 
 //# RUNECRAFTING
+- add runecrafting altar locations to existing locations
+- update game container with runecrafting function
+- create a slice for runes
 //# FLETCHING
 //# HERBLORE
 //# CONSTRUCTION

@@ -1,7 +1,9 @@
 <!--
 <div align="center">
   <h1>The something update</h1>
-  <p>Release XX.XX.XX</p>
+  <p>Version XX.XX.XX</p>
+  <p>Released 2022-MM-DD</p>
+
   <a href="https://ejmdev-idlescape.herokuapp.com/">Play now</a>
 </div>
 # ADDED
@@ -10,47 +12,44 @@
 # REMOVED
 # FIXED
 # SECURITY -->
-
-<!-- V# 1.1.0
-# FIREMAKING
-
-- DONE - need to test lol
-- DONE - function needs to find the first log item in the inventory, replace it with blank, then dispatch the xp
-- DONE - function needs to check the amount in inventory, and if it gets to 0, refill with more of the chosen log
-- DONE - function needs to be aware of the amount of the chosen log in the players bank
-- DONE - function needs to not withdraw into the negatives
-- DONE - function needs to be capable of dealing with withdrawing an amount under 28 and still executing as defined above
-- DONE - function needs to empty the inventory, then withdraw 28 of the chosen logs
-- DONE - clicking the buttons sets needsToBank to true, and sets another piece of component state (playerIsFiremaking) to true [not sure if i need this last boolean]
-- DONE - skills panel styles them based on the player's firemaking level
-- DONE - skills panel shows the logs the player currenly has, and their amount
-- DONE - inventory slice needs a way to remove individual items from the inventory -->
 
 <!-- Currently in Development -->
 
-<!--
-<div align="center">
-  <h1>The something update</h1>
-  <p>Release 1.2.4</p>
+<!-- <div align="center">
+  <h1>The Runecrafting update</h1>
+  <p>Version 1.2.4</p>
+  <p>Released 2022-MM-DD</p>
+
   <a href="https://ejmdev-idlescape.herokuapp.com/">Play now</a>
 </div>
-# ADDED
-- Added Wizards' Tower as a location.  The Wizards' Tower features 4 quests, and a lesser demon to fight.
-# CHANGED
-# DEPRECATED
-# REMOVED
-# FIXED
+
+#### ADDED
+
+- Added Runecrafting as a skill! Players may create runes from essence at the altars in certain locations, or train their skills in the Runespan, located in the Wizards' Tower.
+- Added Wizards' Tower as a location. The Wizards' Tower features 4 quests, and a lesser demon to fight.
+
+#### CHANGED
+
 - Bronze and Iron hatchets now show a woodcutting level requirement of 1 (0 looks silly).
-- Combat was ignoring footwear, but now respects your kicks.
 - The current resource is now more accurately described based on the your current activity.
+
+#### DEPRECATED
+
+#### REMOVED
+
+#### FIXED
+
+- Combat was ignoring footwear, but now respects your kicks.
 - Prevented a possible crash with current resource component trying to access .displayname of an undefined item.
-# SECURITY -->
+
+#### SECURITY -->
 
 <!-- Currently in Production -->
 
 <div align="center">
   <h1>The Firemaking update</h1>
-  <p>Release 1.1.1</p>
+  <p>Version 1.1.1 </p>
+  <p>Released 2022-8-17</p>
   <a href="https://ejmdev-idlescape.herokuapp.com/">Play now</a>
 </div>
 

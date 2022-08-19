@@ -16,24 +16,28 @@ import ActivityArea from "./MiddleColumn/ActivityArea/ActivityArea";
 import ChatWindow from "./LeftColumn/ChatWindow";
 
 // slice imports
-import { doQuestLogicLumbridge } from "../Redux/Slices/QuestSlices/Lumbridge";
-import { doQuestLogicDraynor } from "../Redux/Slices/QuestSlices/Draynor";
-import { setActivity } from "../Redux/Slices/CurrentActivity";
-import { setQuest } from "../Redux/Slices/CurrentQuest";
-import { addCoinsToWallet } from "../Redux/Slices/Wallet";
+import { setActivity } from "../Redux/Slices/GameStateSlices/CurrentActivity";
+import { setQuest } from "../Redux/Slices/GameStateSlices/CurrentQuest";
+import { setResource } from "../Redux/Slices/GameStateSlices/CurrentResource";
+import { setSkill } from "../Redux/Slices/GameStateSlices/CurrentSkill";
+import { addCoinsToWallet } from "../Redux/Slices/CurrencySlices/Wallet";
 import { gainXP, resetXP } from "../Redux/Slices/Experience";
-import { addQuestPoints } from "../Redux/Slices/QuestPoints";
+import { addQuestPoints } from "../Redux/Slices/CurrencySlices/QuestPoints";
 import { addItemToInventory, addManyItemsToInventory, removeAllItemsFromInventory, removeItemFromInventory } from "../Redux/Slices/Inventory";
 
 // quests imports
-import { LumbridgeQuests } from "../../../Constants/Quests/LumbridgeQuests";
-import { DraynorQuests } from "../../../Constants/Quests/DraynorQuests";
-import { WizardTowerQuests } from "../../../Constants/Quests/WizardTowerQuests";
 import { EmptyQuestRewards } from "../../../Constants/Quests";
+import { LumbridgeQuests } from "../../../Constants/Quests/LumbridgeQuests";
+import { doQuestLogicLumbridge } from "../Redux/Slices/QuestSlices/Lumbridge";
+import { DraynorQuests } from "../../../Constants/Quests/DraynorQuests";
+import { doQuestLogicDraynor } from "../Redux/Slices/QuestSlices/Draynor";
+import { WizardTowerQuests } from "../../../Constants/Quests/WizardTowerQuests";
+import { doQuestLogicWizardTower } from "../Redux/Slices/QuestSlices/WizardTower";
 
 // combat
 import { didPlayerLevelUp, getLevel } from "../../../Constants/XP Levels";
 import { Enemies, resolveCombat } from "../../../Constants/Enemies";
+
 // slayer
 import { completeSlayerTask, decrementTaskAmount } from "../Redux/Slices/SlayerTask";
 
@@ -59,9 +63,6 @@ import { ListOfPickpocketStalls } from "../../../Constants/Thieving/Stalls";
 import { saveState } from "../Redux/store";
 import { TOKEN_KEY } from "../ClientUtils/Fetcher";
 import { ListOfSlayerMasters } from "../../../Constants/Slayer/SlayerMasters";
-import { setResource } from "../Redux/Slices/CurrentResource";
-import { setSkill } from "../Redux/Slices/CurrentSkill";
-import { doQuestLogicWizardTower } from "../Redux/Slices/QuestSlices/WizardTower";
 
 const GameContainer = (props: Types.GameContainerProps) => {
   const dispatch = useDispatch();
