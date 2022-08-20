@@ -610,6 +610,10 @@ export interface IBankItem {
   name: string;
   amount: number;
 }
+export interface IDisplayNamesForCurrencies {
+  coinsDisplay: string;
+  runespanPointsDisplay: string;
+}
 export interface IFlatObjectOfNums {
   [key: string]: number;
 }

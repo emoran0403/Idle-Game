@@ -20,7 +20,7 @@ const BankPanel = (props: Types.BankPanelProps) => {
   // collect all the currencies together into one array
   const AllCurrenciesArray = [...WalletArray, ...RunespanPointsArray];
   // define an object containing key names for the currencies
-  const displayNamesForCurrencies = {
+  const displayNamesForCurrencies: Types.IDisplayNamesForCurrencies = {
     coinsDisplay: `Coins`,
     runespanPointsDisplay: `Runespan points`,
   };
@@ -89,7 +89,7 @@ const BankPanel = (props: Types.BankPanelProps) => {
               <div key={`resource-list-${name}`} className={`card border mb-3`}>
                 <div className="card-body text">
                   <div className="card-text">
-                    <h5 className="card-title">{displayNamesForCurrencies[`${name}Display`]}</h5>
+                    <h5 className="card-title">{displayNamesForCurrencies[`${name}Display` as keyof Types.IDisplayNamesForCurrencies]}</h5>
                     <div>{Math.floor(amount).toLocaleString("en-US")}</div>
                   </div>
                 </div>
