@@ -33,6 +33,7 @@
 //! how can i use dev and prod vars on .env and on heroku?
 
 //# Fixes
+* {Game Container} clean up runecrafting tick function
 * fix admin buttons in App
 * webworker / empty audio object for interval - inactive tabs slow down the interval
 * Logic - experience and levels is displaying too high for some reason :/

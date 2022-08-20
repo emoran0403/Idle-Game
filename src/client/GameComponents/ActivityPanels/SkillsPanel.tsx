@@ -510,29 +510,66 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
    * @returns Returns a panel of Runecrafting option buttons.
    */
   const RunecraftingOptions = (resourceArray: Types.IRuneTypes[] | Types.RunespanNodeTypes[]) => {
-    /**
-     * This function type guards against the union of Types.IRuneTypes[] | Types.RunespanNodeTypes[]
-     * @param resource The current resource, as a Types.IRuneTypes or Types.RunespanNodeTypes.
-     * @returns Boolean.
-     */
-    const handleDisabledAttribute = (resource) => {
-      if (ListOfRunes[resource as keyof Types.IListOfRunes] && ListOfRunes[resource as keyof Types.IListOfRunes].levelReqRunecrafting) {
-        return RunecraftingLevel < ListOfRunes[resource as keyof Types.IListOfRunes].levelReqRunecrafting;
-      } else {
-        return RunecraftingLevel < listOfRunespanNodes[resource as keyof Types.IListOfRunespanNodes].levelReqRunecrafting;
-      }
-    };
-
-    //! need to do major type guarding here for Types.IRuneTypes[] | Types.RunespanNodeTypes[]
-    // either make one function handle both sides, or one function for each
-    if (resourceArray.length) {
+    // check if the player is at the wizard tower to show runespan options
+    if (CurrentLocation === `WizardTower`) {
       return (
         <div role="button" onClick={() => handleToggleSkillPanel(`Runecrafting`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
           <h1 className="text-center">Runecrafting Level {RunecraftingLevel}</h1>
           <div className={`d-flex flex-row flex-wrap ${skillPanelsOpened.Runecrafting ? `` : `d-none`}`}>
             {resourceArray.map((resource) => (
               <button
-                disabled={handleDisabledAttribute(resource) ? true : false}
+                disabled={RunecraftingLevel < listOfRunespanNodes[resource as keyof Types.IListOfRunespanNodes].levelReqRunecrafting ? true : false}
+                onClick={(e) => {
+                  dispatch(setTarget(`none`));
+                  dispatch(setActivity(`Skilling`));
+                  dispatch(setResource(resource));
+                  dispatch(setQuest(`none`));
+                  dispatch(setSkill(`Runecrafting`));
+                  props.setNeedsToBank(true);
+                  // send a contextual message to the chat window
+                  // if the last log contains the same message, don't send it
+                  if (
+                    `Now siphoning from ${listOfRunespanNodes[resource as keyof Types.IListOfRunespanNodes].displayName}s` ===
+                    props.chatLogArray[props.chatLogArray.length - 1].message
+                  ) {
+                    return;
+                  }
+                  props.newChatLog(`Now siphoning from ${listOfRunespanNodes[resource as keyof Types.IListOfRunespanNodes].displayName}s`, `Activity Swap`);
+                }}
+                key={`resource-list-${resource}`}
+                className={`btn border mb-3 ${
+                  RunecraftingLevel >= listOfRunespanNodes[resource as keyof Types.IListOfRunespanNodes].levelReqRunecrafting ? `bg-success` : `bg-danger`
+                }`}
+              >
+                <div className="card-body text">
+                  <h5 className="card-title">{listOfRunespanNodes[resource as keyof Types.IListOfRunespanNodes].displayName}</h5>
+                  <div className="card-text">
+                    <div>Level {listOfRunespanNodes[resource as keyof Types.IListOfRunespanNodes].levelReqRunecrafting}</div>
+
+                    {listOfRunespanNodes[resource as keyof Types.IListOfRunespanNodes].multiRune ? (
+                      <div>
+                        {listOfRunespanNodes[resource as keyof Types.IListOfRunespanNodes].XPGivenRune_one} XP or{" "}
+                        {listOfRunespanNodes[resource as keyof Types.IListOfRunespanNodes].XPGivenRune_two} XP
+                      </div>
+                    ) : (
+                      <div>{listOfRunespanNodes[resource as keyof Types.IListOfRunespanNodes].XPGivenRune_one} XP</div>
+                    )}
+                  </div>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+      );
+    } else if (resourceArray.length) {
+      // otherwise, check if there is a runecrafting altar at the player's location
+      return (
+        <div role="button" onClick={() => handleToggleSkillPanel(`Runecrafting`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
+          <h1 className="text-center">Runecrafting Level {RunecraftingLevel}</h1>
+          <div className={`d-flex flex-row flex-wrap ${skillPanelsOpened.Runecrafting ? `` : `d-none`}`}>
+            {resourceArray.map((resource) => (
+              <button
+                disabled={RunecraftingLevel < ListOfRunes[resource as keyof Types.IListOfRunes].levelReqRunecrafting ? true : false}
                 onClick={(e) => {
                   dispatch(setTarget(`none`));
                   dispatch(setActivity(`Skilling`));

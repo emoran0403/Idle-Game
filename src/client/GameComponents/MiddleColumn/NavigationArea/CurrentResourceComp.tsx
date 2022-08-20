@@ -2,13 +2,15 @@ import * as Types from "../../../../../Types";
 import * as React from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+
 import { ListOfLogs } from "../../../../../Constants/Items/Logs";
 import { ListOfFish } from "../../../../../Constants/Items/Fish";
 import { Enemies } from "../../../../../Constants/Enemies";
 import { ListOfOres } from "../../../../../Constants/Items/Ores";
-
 import { ListOfPickpocketNPC } from "../../../../../Constants/Thieving/Pickpocketing";
 import { ListOfPickpocketStalls } from "../../../../../Constants/Thieving/Stalls";
+import { listOfRunespanNodes } from "../../../../../Constants/RuneCrafting/RunespanNodes";
+import { ListOfRunes } from "../../../../../Constants/RuneCrafting/Runes";
 
 const CurrentResourceComp = (props: Types.NoProps) => {
   const Resource = useSelector((state: Types.AllState) => state.Resource.CurrentResource as Types.ICurrentResourceOptions);
@@ -63,15 +65,30 @@ const CurrentResourceComp = (props: Types.NoProps) => {
             return <div>{ListOfPickpocketStalls[Resource as keyof Types.IListOfPickpocketStall].displayName}</div>;
           }
         }
+        case `Runecrafting`: {
+          if (listOfRunespanNodes[Resource as keyof Types.IListOfRunespanNodes]) {
+            return <div>{listOfRunespanNodes[Resource as keyof Types.IListOfRunespanNodes].displayName}</div>;
+          } else {
+            return <div>{ListOfRunes[Resource as keyof Types.IListOfRunes].displayName}</div>;
+          }
+        }
         default:
           return <div>none</div>;
       }
     }
   };
-  const MiningJSX = () => {
+  const WoodcuttingJSX = () => {
     return (
       <div>
-        <div>Mining</div>
+        <div>Cutting</div>
+        {displayResource()}
+      </div>
+    );
+  };
+  const FiremakingJSX = () => {
+    return (
+      <div>
+        <div>Burning</div>
         {displayResource()}
       </div>
     );
@@ -84,10 +101,10 @@ const CurrentResourceComp = (props: Types.NoProps) => {
       </div>
     );
   };
-  const WoodcuttingJSX = () => {
+  const MiningJSX = () => {
     return (
       <div>
-        <div>Cutting</div>
+        <div>Mining</div>
         {displayResource()}
       </div>
     );
@@ -100,13 +117,22 @@ const CurrentResourceComp = (props: Types.NoProps) => {
       </div>
     );
   };
-  const FiremakingJSX = () => {
-    return (
-      <div>
-        <div>Burning</div>
-        {displayResource()}
-      </div>
-    );
+  const RunecraftingJSX = () => {
+    if (listOfRunespanNodes[Resource as keyof Types.IListOfRunespanNodes]) {
+      return (
+        <div>
+          <div>Siphoning</div>
+          {displayResource()}
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <div>Crafting</div>
+          {displayResource()}
+        </div>
+      );
+    }
   };
   const CombatJSX = () => {
     return (
@@ -132,20 +158,23 @@ const CurrentResourceComp = (props: Types.NoProps) => {
         break;
       case `Skilling`:
         switch (Skill) {
-          case `Fishing`:
-            return FishingJSX();
-            break;
           case `Woodcutting`:
             return WoodcuttingJSX();
-            break;
-          case `Thieving`:
-            return ThievingJSX();
             break;
           case `Firemaking`:
             return FiremakingJSX();
             break;
+          case `Fishing`:
+            return FishingJSX();
+            break;
           case `Mining`:
             return MiningJSX();
+            break;
+          case `Thieving`:
+            return ThievingJSX();
+            break;
+          case `Runecrafting`:
+            return RunecraftingJSX();
             break;
         }
         break;
