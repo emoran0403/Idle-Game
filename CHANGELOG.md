@@ -26,7 +26,7 @@
 #### ADDED
 
 - Added Runecrafting as a skill! Players may create runes from essence at the altars in certain locations, or train their skills in the Runespan, located in the Wizards' Tower.
-- Added Wizards' Tower as a location. The Wizards' Tower features 4 quests, and a lesser demon to fight.
+- Added Wizards' Tower as a location. The Wizards' Tower features 4 quests, rune and pure essence mining options, and a lesser demon to fight.
 
 #### CHANGED
 

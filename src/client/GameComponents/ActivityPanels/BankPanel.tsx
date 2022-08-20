@@ -5,16 +5,14 @@ import { useSelector } from "react-redux";
 import { ListOfFish } from "../../../../Constants/Items/Fish";
 import { ListOfLogs } from "../../../../Constants/Items/Logs";
 import { ListOfOres } from "../../../../Constants/Items/Ores";
+import { ListOfRunes } from "../../../../Constants/RuneCrafting/Runes";
 
 const BankPanel = (props: Types.BankPanelProps) => {
-  // grab the bank slices from state
-  const bank_logs = useSelector((state: Types.AllState) => state.Bank_Logs) as Types.ILogBankSlice;
-  const bank_fish = useSelector((state: Types.AllState) => state.Bank_Fish) as Types.IFishBankSlice;
-  const bank_ores = useSelector((state: Types.AllState) => state.Bank_Ores) as Types.IOreBankSlice;
-
-  const arrayOfLogsFromBank: Types.IBankItem[] = Object.values(bank_logs);
-  const arrayOfFishFromBank: Types.IBankItem[] = Object.values(bank_fish);
-  const arrayOfOresFromBank: Types.IBankItem[] = Object.values(bank_ores);
+  // grab the bank slices from state, and turn them into arrays for JSX mapping
+  const arrayOfLogsFromBank: Types.IBankItem[] = Object.values(useSelector((state: Types.AllState) => state.Bank_Logs) as Types.ILogBankSlice);
+  const arrayOfFishFromBank: Types.IBankItem[] = Object.values(useSelector((state: Types.AllState) => state.Bank_Fish) as Types.IFishBankSlice);
+  const arrayOfOresFromBank: Types.IBankItem[] = Object.values(useSelector((state: Types.AllState) => state.Bank_Ores) as Types.IOreBankSlice);
+  const arrayOfRunesFromBank: Types.IBankItem[] = Object.values(useSelector((state: Types.AllState) => state.Bank_Runes) as Types.IRuneBankSlice);
 
   // useEffect(() => {}, []);
 
@@ -113,6 +111,34 @@ const BankPanel = (props: Types.BankPanelProps) => {
     );
   };
 
+  //!
+  //!
+  const RunecraftingItems = () => {
+    return (
+      <div role="button" onClick={() => handleToggleSkillPanel(`Runecrafting`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
+        <h1 className="text-center">Runecrafting Resources</h1>
+        <div className={`d-flex flex-row flex-wrap ${skillPanelsOpened.Runecrafting ? `` : `d-none`}`}>
+          {arrayOfRunesFromBank.map((item) => {
+            return item.amount ? (
+              <div key={`resource-list-${item.name}`} className={`card border mb-3`}>
+                <div className="card-body text">
+                  <h5 className="card-title">{ListOfRunes[item.name as keyof Types.IListOfRunes].displayName}</h5>
+                  <div className="card-text">
+                    <div>{item.amount}</div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              ``
+            );
+          })}
+        </div>
+      </div>
+    );
+  };
+  //!
+  //!
+
   const MiningItems = () => {
     return (
       <div role="button" onClick={() => handleToggleSkillPanel(`Mining`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
@@ -147,6 +173,7 @@ const BankPanel = (props: Types.BankPanelProps) => {
             {WoodcuttingItems()}
             {FishingItems()}
             {MiningItems()}
+            {RunecraftingItems()}
             {/* end of panel specific content */}
           </div>
         </div>
