@@ -1,4 +1,5 @@
 import * as Types from "../../Types";
+import { listOfRunespanNodes } from "../RuneCrafting/RunespanNodes";
 
 export const WizardTowerSummary: Types.ILocationSummary = {
   name: `WizardTowerSummary`,
@@ -17,7 +18,25 @@ export const WizardTowerSummary: Types.ILocationSummary = {
     Hunter: [],
     Divination: [],
     Archaeology: [],
-    Runecrafting: [],
+    Runecrafting: [
+      `cycloneNode`,
+      `mindstormNode`,
+      `waterPoolNode`,
+      `rockfragmentNode`,
+      `fireballNode`,
+      `firestormNode`,
+      `vineNode`,
+      `fleshygrowthNode`,
+      `jumperNode`,
+      `skullsNode`,
+      `chaoticcloudNode`,
+      `bloodpoolNode`,
+      `shifterNode`,
+      `nebulaNode`,
+      `livingsoulNode`,
+      `bloodyskullsNode`,
+      `undeadsoulNode`,
+    ],
     Construction: [],
     Summoning: [],
     Agility: [],

@@ -8,7 +8,7 @@ export const cycloneNode: Types.IRunespanNode = {
   XPGivenRune_one: 19,
   XPGivenRune_two: 0,
   multiRune: false,
-  rune_one: `air`,
+  rune_one: `airrune`,
   rune_two: ``,
 };
 export const mindstormNode: Types.IRunespanNode = {
@@ -18,7 +18,7 @@ export const mindstormNode: Types.IRunespanNode = {
   XPGivenRune_one: 20,
   XPGivenRune_two: 0,
   multiRune: false,
-  rune_one: `mind`,
+  rune_one: `mindrune`,
   rune_two: ``,
 };
 export const waterPoolNode: Types.IRunespanNode = {
@@ -28,7 +28,7 @@ export const waterPoolNode: Types.IRunespanNode = {
   XPGivenRune_one: 25.3,
   XPGivenRune_two: 0,
   multiRune: false,
-  rune_one: `water`,
+  rune_one: `waterrune`,
   rune_two: ``,
 };
 export const rockfragmentNode: Types.IRunespanNode = {
@@ -38,7 +38,7 @@ export const rockfragmentNode: Types.IRunespanNode = {
   XPGivenRune_one: 28.6,
   XPGivenRune_two: 0,
   multiRune: false,
-  rune_one: `earth`,
+  rune_one: `earthrune`,
   rune_two: ``,
 };
 export const fireballNode: Types.IRunespanNode = {
@@ -48,7 +48,7 @@ export const fireballNode: Types.IRunespanNode = {
   XPGivenRune_one: 34.8,
   XPGivenRune_two: 0,
   multiRune: false,
-  rune_one: `fire`,
+  rune_one: `firerune`,
   rune_two: ``,
 };
 export const vineNode: Types.IRunespanNode = {
@@ -58,8 +58,8 @@ export const vineNode: Types.IRunespanNode = {
   XPGivenRune_one: 30.3,
   XPGivenRune_two: 34.3,
   multiRune: true,
-  rune_one: `water`,
-  rune_two: `earth`,
+  rune_one: `waterrune`,
+  rune_two: `earthrune`,
 };
 export const fleshygrowthNode: Types.IRunespanNode = {
   name: `fleshygrowthNode`,
@@ -68,7 +68,7 @@ export const fleshygrowthNode: Types.IRunespanNode = {
   XPGivenRune_one: 46.2,
   XPGivenRune_two: 0,
   multiRune: false,
-  rune_one: `body`,
+  rune_one: `bodyrune`,
   rune_two: ``,
 };
 export const firestormNode: Types.IRunespanNode = {
@@ -78,8 +78,8 @@ export const firestormNode: Types.IRunespanNode = {
   XPGivenRune_one: 22.8,
   XPGivenRune_two: 41.7,
   multiRune: true,
-  rune_one: `air`,
-  rune_two: `fire`,
+  rune_one: `airrune`,
+  rune_two: `firerune`,
 };
 export const chaoticcloudNode: Types.IRunespanNode = {
   name: `chaoticcloudNode`,
@@ -88,7 +88,7 @@ export const chaoticcloudNode: Types.IRunespanNode = {
   XPGivenRune_one: 61.6,
   XPGivenRune_two: 0,
   multiRune: false,
-  rune_one: `chaos`,
+  rune_one: `chaosrune`,
   rune_two: ``,
 };
 export const nebulaNode: Types.IRunespanNode = {
@@ -98,8 +98,8 @@ export const nebulaNode: Types.IRunespanNode = {
   XPGivenRune_one: 63.8,
   XPGivenRune_two: 85.6,
   multiRune: true,
-  rune_one: `cosmic`,
-  rune_two: `astral`,
+  rune_one: `cosmicrune`,
+  rune_two: `astralrune`,
 };
 export const shifterNode: Types.IRunespanNode = {
   name: `shifterNode`,
@@ -108,7 +108,7 @@ export const shifterNode: Types.IRunespanNode = {
   XPGivenRune_one: 86.8,
   XPGivenRune_two: 0,
   multiRune: false,
-  rune_one: `nature`,
+  rune_one: `naturerune`,
   rune_two: ``,
 };
 export const jumperNode: Types.IRunespanNode = {
@@ -118,7 +118,7 @@ export const jumperNode: Types.IRunespanNode = {
   XPGivenRune_one: 107.8,
   XPGivenRune_two: 0,
   multiRune: false,
-  rune_one: `law`,
+  rune_one: `lawrune`,
   rune_two: ``,
 };
 export const skullsNode: Types.IRunespanNode = {
@@ -128,7 +128,7 @@ export const skullsNode: Types.IRunespanNode = {
   XPGivenRune_one: 120,
   XPGivenRune_two: 0,
   multiRune: false,
-  rune_one: `death`,
+  rune_one: `deathrune`,
   rune_two: ``,
 };
 export const bloodpoolNode: Types.IRunespanNode = {
@@ -138,7 +138,7 @@ export const bloodpoolNode: Types.IRunespanNode = {
   XPGivenRune_one: 146.3,
   XPGivenRune_two: 0,
   multiRune: false,
-  rune_one: `blood`,
+  rune_one: `bloodrune`,
   rune_two: ``,
 };
 export const bloodyskullsNode: Types.IRunespanNode = {
@@ -148,8 +148,8 @@ export const bloodyskullsNode: Types.IRunespanNode = {
   XPGivenRune_one: 144,
   XPGivenRune_two: 175.5,
   multiRune: true,
-  rune_one: `death`,
-  rune_two: `blood`,
+  rune_one: `deathrune`,
+  rune_two: `bloodrune`,
 };
 export const livingsoulNode: Types.IRunespanNode = {
   name: `livingsoulNode`,
@@ -158,7 +158,7 @@ export const livingsoulNode: Types.IRunespanNode = {
   XPGivenRune_one: 213,
   XPGivenRune_two: 0,
   multiRune: false,
-  rune_one: `soul`,
+  rune_one: `soulrune`,
   rune_two: ``,
 };
 export const undeadsoulNode: Types.IRunespanNode = {
@@ -168,8 +168,8 @@ export const undeadsoulNode: Types.IRunespanNode = {
   XPGivenRune_one: 144,
   XPGivenRune_two: 255.6,
   multiRune: true,
-  rune_one: `death`,
-  rune_two: `soul`,
+  rune_one: `deathrune`,
+  rune_two: `soulrune`,
 };
 
 export const listOfRunespanNodes: Types.IListOfRunespanNodes = {
@@ -192,20 +192,20 @@ export const listOfRunespanNodes: Types.IListOfRunespanNodes = {
   undeadsoulNode,
 };
 export const runespanNodePoints: Types.IRunespanNodePoints = {
-  air: 0.1,
-  mind: 0.2,
-  water: 0.3,
-  earth: 0.4,
-  fire: 0.5,
-  body: 0.7,
-  cosmic: 0.9,
-  chaos: 1.1,
-  astral: 1.3,
-  nature: 1.5,
-  law: 1.7,
-  death: 2.5,
-  blood: 3,
-  soul: 3.5,
+  airrune: 0.1,
+  mindrune: 0.2,
+  waterrune: 0.3,
+  earthrune: 0.4,
+  firerune: 0.5,
+  bodyrune: 0.7,
+  cosmicrune: 0.9,
+  chaosrune: 1.1,
+  astralrune: 1.3,
+  naturerune: 1.5,
+  lawrune: 1.7,
+  deathrune: 2.5,
+  bloodrune: 3,
+  soulrune: 3.5,
 };
 export const runespanShop: Types.IRunespanShop = {
   runecrafterhat: {
@@ -271,6 +271,7 @@ export const resolveRunespan = (nodeToSiphon: Types.RunespanNodeTypes, runecraft
     if (thisNode.multiRune && Math.random() >= 0.5) {
       // if so, update returnObj
       returnObj.runecraftingXP = thisNode.XPGivenRune_two;
+      //@ts-ignore
       returnObj.runeSpanpoints = runespanNodePoints[thisNode.rune_two];
     } else {
       // if the node does not have multiple runes, or the player was unlucky, then update returnObj

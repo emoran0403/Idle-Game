@@ -16,7 +16,7 @@ export const mindrune: Types.IRune = {
   levelReqRunecrafting: 1,
   XPGivenRunecrafting: 5.5,
   value: 17,
-  bankTime: 6,
+  bankTime: 5,
   multirunes: [14, 28, 42, 56, 70, 84, 98],
 };
 export const waterrune: Types.IRune = {
@@ -25,7 +25,7 @@ export const waterrune: Types.IRune = {
   levelReqRunecrafting: 5,
   XPGivenRunecrafting: 6,
   value: 17,
-  bankTime: 7,
+  bankTime: 6,
   multirunes: [19, 38, 57, 76, 95],
 };
 export const earthrune: Types.IRune = {
@@ -34,7 +34,7 @@ export const earthrune: Types.IRune = {
   levelReqRunecrafting: 9,
   XPGivenRunecrafting: 6.5,
   value: 17,
-  bankTime: 8,
+  bankTime: 6,
   multirunes: [26, 52, 78],
 };
 export const firerune: Types.IRune = {
@@ -43,7 +43,7 @@ export const firerune: Types.IRune = {
   levelReqRunecrafting: 14,
   XPGivenRunecrafting: 7,
   value: 17,
-  bankTime: 9,
+  bankTime: 7,
   multirunes: [35, 70],
 };
 export const bodyrune: Types.IRune = {
@@ -61,7 +61,7 @@ export const cosmicrune: Types.IRune = {
   levelReqRunecrafting: 27,
   XPGivenRunecrafting: 8,
   value: 232,
-  bankTime: 10,
+  bankTime: 8,
   multirunes: [59],
 };
 export const chaosrune: Types.IRune = {
@@ -70,7 +70,7 @@ export const chaosrune: Types.IRune = {
   levelReqRunecrafting: 35,
   XPGivenRunecrafting: 8.5,
   value: 140,
-  bankTime: 15,
+  bankTime: 10,
   multirunes: [74],
 };
 export const astralrune: Types.IRune = {
@@ -88,7 +88,7 @@ export const naturerune: Types.IRune = {
   levelReqRunecrafting: 44,
   XPGivenRunecrafting: 9,
   value: 372,
-  bankTime: 19,
+  bankTime: 15,
   multirunes: [91],
 };
 export const lawrune: Types.IRune = {
@@ -97,7 +97,7 @@ export const lawrune: Types.IRune = {
   levelReqRunecrafting: 54,
   XPGivenRunecrafting: 9.5,
   value: 378,
-  bankTime: 20,
+  bankTime: 15,
   multirunes: [],
 };
 export const deathrune: Types.IRune = {
@@ -106,7 +106,7 @@ export const deathrune: Types.IRune = {
   levelReqRunecrafting: 65,
   XPGivenRunecrafting: 10,
   value: 310,
-  bankTime: 20,
+  bankTime: 17,
   multirunes: [],
 };
 export const bloodrune: Types.IRune = {
@@ -115,7 +115,7 @@ export const bloodrune: Types.IRune = {
   levelReqRunecrafting: 77,
   XPGivenRunecrafting: 10.5,
   value: 550,
-  bankTime: 25,
+  bankTime: 20,
   multirunes: [],
 };
 export const soulrune: Types.IRune = {
@@ -124,7 +124,7 @@ export const soulrune: Types.IRune = {
   levelReqRunecrafting: 90,
   XPGivenRunecrafting: 91.7,
   value: 410,
-  bankTime: 30,
+  bankTime: 20,
   multirunes: [],
 };
 

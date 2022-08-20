@@ -536,20 +536,20 @@ export interface IRunespanPoints {
   runespanPoints: number;
 }
 export interface IRunespanNodePoints {
-  air: number;
-  mind: number;
-  water: number;
-  earth: number;
-  fire: number;
-  body: number;
-  cosmic: number;
-  chaos: number;
-  astral: number;
-  nature: number;
-  law: number;
-  death: number;
-  blood: number;
-  soul: number;
+  airrune: number;
+  mindrune: number;
+  waterrune: number;
+  earthrune: number;
+  firerune: number;
+  bodyrune: number;
+  cosmicrune: number;
+  chaosrune: number;
+  astralrune: number;
+  naturerune: number;
+  lawrune: number;
+  deathrune: number;
+  bloodrune: number;
+  soulrune: number;
 }
 export interface IRunecraftSkillingSetPiece {
   name: string;
@@ -570,7 +570,21 @@ export interface IRunespanShop {
   runecrafterboots: IRunecraftSkillingSetPiece;
   pureEssence: IRunespanShopItem;
 }
-export type IRuneTypes = `air` | `mind` | `water` | `earth` | `fire` | `body` | `cosmic` | `chaos` | `astral` | `nature` | `law` | `death` | `blood` | `soul`;
+export type IRuneTypes =
+  | `airrune`
+  | `mindrune`
+  | `waterrune`
+  | `earthrune`
+  | `firerune`
+  | `bodyrune`
+  | `cosmicrune`
+  | `chaosrune`
+  | `astralrune`
+  | `naturerune`
+  | `lawrune`
+  | `deathrune`
+  | `bloodrune`
+  | `soulrune`;
 export type RunespanNodeTypes =
   | `cycloneNode`
   | `mindstormNode`
@@ -696,7 +710,7 @@ export interface LocationSkills {
   Hunter: string[];
   Divination: string[];
   Archaeology: string[];
-  Runecrafting: string[];
+  Runecrafting: IRuneTypes[] | RunespanNodeTypes[];
   Construction: string[];
   Summoning: string[];
   Agility: string[];

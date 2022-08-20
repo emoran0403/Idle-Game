@@ -27,7 +27,7 @@ export const DraynorSummary: Types.ILocationSummary = {
     Hunter: [],
     Divination: [],
     Archaeology: [],
-    Runecrafting: [],
+    Runecrafting: [`waterrune`],
     Construction: [],
     Summoning: [],
     Agility: [],

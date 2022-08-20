@@ -1,29 +1,40 @@
 import * as Types from "../../../../Types";
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
 
+//
 import { AllLocations } from "../../../../Constants/LocationInfo";
 import { getLevel } from "../../../../Constants/XP Levels";
 
+// fishing
 import { ListOfFish } from "../../../../Constants/Items/Fish";
 
+// woodcutting
 import { ListOfLogs } from "../../../../Constants/Items/Logs";
 import { listOfHatchets } from "../../../../Constants/SkillingEquipment/Hatchets";
 
+// mining
 import { ListOfOres } from "../../../../Constants/Items/Ores";
 import { listOfPickaxes } from "../../../../Constants/SkillingEquipment/Pickaxes";
 
+// thieving
 import { ListOfPickpocketNPC } from "../../../../Constants/Thieving/Pickpocketing";
 import { ListOfPickpocketStalls } from "../../../../Constants/Thieving/Stalls";
 
+// slayer
 import { getSlayerTask, ListOfSlayerMasters } from "../../../../Constants/Slayer/SlayerMasters";
 
+// runecrafting
+import { ListOfRunes } from "../../../../Constants/RuneCrafting/Runes";
+import { listOfRunespanNodes } from "../../../../Constants/RuneCrafting/RunespanNodes";
+
+// game state
 import { setResource } from "../../Redux/Slices/GameStateSlices/CurrentResource";
 import { setSkill } from "../../Redux/Slices/GameStateSlices/CurrentSkill";
 import { setActivity } from "../../Redux/Slices/GameStateSlices/CurrentActivity";
 import { setTarget } from "../../Redux/Slices/GameStateSlices/CurrentTarget";
 import { setQuest } from "../../Redux/Slices/GameStateSlices/CurrentQuest";
-import { useState } from "react";
 import { setTask, skipTask } from "../../Redux/Slices/SlayerTask";
 import { removeSlayerPoints } from "../../Redux/Slices/SlayerTask";
 import { AllEnemiesArray } from "../../../../Constants/Enemies/AllEnemies";
@@ -55,6 +66,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
   let MiningLevel: number = getLevel(Experience.Mining);
   let ThievingLevel: number = getLevel(Experience.Thieving);
   let SlayerLevel: number = getLevel(Experience.Slayer);
+  let RunecraftingLevel: number = getLevel(Experience.Runecrafting);
 
   // tracks each skill panel's expanded or collapsed state
   const [skillPanelsOpened, setSkillPanelsOpened] = useState({
@@ -490,6 +502,78 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
     }
   };
 
+  //!
+  //!
+  /**
+   *
+   * @param resourceArray The array of resources for the Runecrafting skill at the current location.
+   * @returns Returns a panel of Runecrafting option buttons.
+   */
+  const RunecraftingOptions = (resourceArray: Types.IRuneTypes[] | Types.RunespanNodeTypes[]) => {
+    /**
+     * This function type guards against the union of Types.IRuneTypes[] | Types.RunespanNodeTypes[]
+     * @param resource The current resource, as a Types.IRuneTypes or Types.RunespanNodeTypes.
+     * @returns Boolean.
+     */
+    const handleDisabledAttribute = (resource) => {
+      if (ListOfRunes[resource as keyof Types.IListOfRunes] && ListOfRunes[resource as keyof Types.IListOfRunes].levelReqRunecrafting) {
+        return RunecraftingLevel < ListOfRunes[resource as keyof Types.IListOfRunes].levelReqRunecrafting;
+      } else {
+        return RunecraftingLevel < listOfRunespanNodes[resource as keyof Types.IListOfRunespanNodes].levelReqRunecrafting;
+      }
+    };
+
+    //! need to do major type guarding here for Types.IRuneTypes[] | Types.RunespanNodeTypes[]
+    // either make one function handle both sides, or one function for each
+    if (resourceArray.length) {
+      return (
+        <div role="button" onClick={() => handleToggleSkillPanel(`Runecrafting`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
+          <h1 className="text-center">Runecrafting Level {RunecraftingLevel}</h1>
+          <div className={`d-flex flex-row flex-wrap ${skillPanelsOpened.Runecrafting ? `` : `d-none`}`}>
+            {resourceArray.map((resource) => (
+              <button
+                disabled={handleDisabledAttribute(resource) ? true : false}
+                onClick={(e) => {
+                  dispatch(setTarget(`none`));
+                  dispatch(setActivity(`Skilling`));
+                  dispatch(setResource(resource));
+                  dispatch(setQuest(`none`));
+                  dispatch(setSkill(`Runecrafting`));
+                  props.setNeedsToBank(true);
+                  // send a contextual message to the chat window
+                  // if the last log contains the same message, don't send it
+                  if (
+                    `Now crafting ${ListOfRunes[resource as keyof Types.IListOfRunes].displayName}s` ===
+                    props.chatLogArray[props.chatLogArray.length - 1].message
+                  ) {
+                    return;
+                  }
+                  props.newChatLog(`Now crafting ${ListOfRunes[resource as keyof Types.IListOfRunes].displayName}s`, `Activity Swap`);
+                }}
+                key={`resource-list-${resource}`}
+                className={`btn border mb-3 ${
+                  RunecraftingLevel >= ListOfRunes[resource as keyof Types.IListOfRunes].levelReqRunecrafting ? `bg-success` : `bg-danger`
+                }`}
+              >
+                <div className="card-body text">
+                  <h5 className="card-title">{ListOfRunes[resource as keyof Types.IListOfRunes].displayName}</h5>
+                  <div className="card-text">
+                    <div>Level {ListOfRunes[resource as keyof Types.IListOfRunes].levelReqRunecrafting}</div>
+                    <div>{ListOfRunes[resource as keyof Types.IListOfRunes].XPGivenRunecrafting} XP</div>
+                  </div>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+      );
+    } else {
+      return;
+    }
+  };
+  //!
+  //!
+
   /**
    * Combines hatchet info from state with info from constants to populate a selector tag.
    * Sends a chatlog message when a hatchet is equipped.
@@ -720,6 +804,7 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
             {FishingOptions(currentLocationSummary.Skills.Fishing)}
             {MiningOptions(currentLocationSummary.Skills.Mining)}
             {ThievingOptions(currentLocationSummary.Skills.Thieving)}
+            {RunecraftingOptions(currentLocationSummary.Skills.Runecrafting)}
             {SlayerOptions()}
             {/* end of panel specific content */}
           </div>
