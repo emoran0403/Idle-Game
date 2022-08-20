@@ -82,11 +82,11 @@ Idlescape is deployed on Heroku at [https://ejmdev-idlescape.herokuapp.com/](htt
 
 Implement the remaining skills
 
-- [ ] Firemaking
+- [x] Firemaking
+- [x] Runecrafting
 - [ ] Cooking
 - [ ] Agility
 - [ ] Divination
-- [ ] Runecrafting
 - [ ] Fletching
 - [ ] Crafting
 - [ ] Farming
@@ -102,7 +102,7 @@ Implement additional locations and their associated quests / skills / enemies
 
 - [ ] Varrock
 - [ ] Varrock Dungeons / Caves
-- [ ] Wizard Tower
+- [x] Wizard Tower
 - [ ] Slayer Dungeon / Cave
 - [ ] Edgeville / Barbarian Outpost
 - [ ] Falador

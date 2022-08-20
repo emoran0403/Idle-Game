@@ -14,6 +14,7 @@ import currentTargetReducer from "../Slices/GameStateSlices/CurrentTarget";
 import currentQuestReducer from "../Slices/GameStateSlices/CurrentQuest";
 import resourcesReducer from "../Slices/Resources";
 import walletReducer from "../Slices/CurrencySlices/Wallet";
+import runespanPointsreducer from "../Slices/CurrencySlices/RunespanPoints";
 import questPointsReducer from "../Slices/CurrencySlices/QuestPoints";
 import lumbridgequestReducer from "../Slices/QuestSlices/Lumbridge";
 import draynorquestReducer from "../Slices/QuestSlices/Draynor";
@@ -47,6 +48,7 @@ const AppReducer = combineReducers({
   Quest: currentQuestReducer,
   Resources: resourcesReducer,
   Wallet: walletReducer,
+  RunespanPoints: runespanPointsreducer,
   QuestPoints: questPointsReducer,
   Quests_Lumbridge: lumbridgequestReducer,
   Quests_Draynor: draynorquestReducer,

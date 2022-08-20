@@ -14,10 +14,19 @@ const BankPanel = (props: Types.BankPanelProps) => {
   const arrayOfOresFromBank: Types.IBankItem[] = Object.values(useSelector((state: Types.AllState) => state.Bank_Ores) as Types.IOreBankSlice);
   const arrayOfRunesFromBank: Types.IBankItem[] = Object.values(useSelector((state: Types.AllState) => state.Bank_Runes) as Types.IRuneBankSlice);
 
+  const Wallet = useSelector((state: Types.AllState) => state.Wallet) as Types.IWallet;
+  const RunespanPoints = useSelector((state: Types.AllState) => state.RunespanPoints) as Types.IRunespanPoints;
+
+  let wow = Object.entries(Wallet);
+  let wow2 = Object.entries(RunespanPoints);
+  let wow3 = [...wow, ...wow2];
+  console.log({ wow3 });
+
   // useEffect(() => {}, []);
 
   // tracks each skill panel's expanded or collapsed state
   const [skillPanelsOpened, setSkillPanelsOpened] = useState({
+    Currencies: true,
     Woodcutting: false,
     Mining: false,
     Fishing: false,
@@ -63,6 +72,37 @@ const BankPanel = (props: Types.BankPanelProps) => {
     );
   };
 
+  /**
+   * This function displays the currencies the player has in the bank.
+   * @returns JSX for currencies.
+   */
+  const CurrencyJSX = () => {
+    return (
+      <div className="card-title border border-dark border-1 rounded-3 user-select-none">
+        <h1 className="text-center">Currencies</h1>
+        <div className={`d-flex flex-row flex-wrap ${skillPanelsOpened.Woodcutting ? `` : `d-none`}`}>
+          {arrayOfLogsFromBank.map((item) => {
+            return item.amount ? (
+              <div key={`resource-list-${item.name}`} className={`card border mb-3`}>
+                <div className="card-body text">
+                  <h5 className="card-title">{ListOfLogs[item.name as keyof Types.IListOfLogs].displayName}</h5>
+                  <div className="card-text">
+                    <div>{item.amount}</div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              ``
+            );
+          })}
+        </div>
+      </div>
+    );
+  };
+  /**
+   * This function displays the woodcutting items the player has in the bank.
+   * @returns JSX for woodcutting items.
+   */
   const WoodcuttingItems = () => {
     return (
       <div role="button" onClick={() => handleToggleSkillPanel(`Woodcutting`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
@@ -86,7 +126,10 @@ const BankPanel = (props: Types.BankPanelProps) => {
       </div>
     );
   };
-
+  /**
+   * This function displays the fishing items the player has in the bank.
+   * @returns JSX for fishing items.
+   */
   const FishingItems = () => {
     return (
       <div role="button" onClick={() => handleToggleSkillPanel(`Fishing`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
@@ -110,9 +153,10 @@ const BankPanel = (props: Types.BankPanelProps) => {
       </div>
     );
   };
-
-  //!
-  //!
+  /**
+   * This function displays the runecrafting items the player has in the bank.
+   * @returns JSX for runecrafting items.
+   */
   const RunecraftingItems = () => {
     return (
       <div role="button" onClick={() => handleToggleSkillPanel(`Runecrafting`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
@@ -136,9 +180,10 @@ const BankPanel = (props: Types.BankPanelProps) => {
       </div>
     );
   };
-  //!
-  //!
-
+  /**
+   * This function displays the mining items the player has in the bank.
+   * @returns JSX for mining items.
+   */
   const MiningItems = () => {
     return (
       <div role="button" onClick={() => handleToggleSkillPanel(`Mining`)} className="card-title border border-dark border-1 rounded-3 user-select-none">
