@@ -14,13 +14,16 @@ const BankPanel = (props: Types.BankPanelProps) => {
   const arrayOfOresFromBank: Types.IBankItem[] = Object.values(useSelector((state: Types.AllState) => state.Bank_Ores) as Types.IOreBankSlice);
   const arrayOfRunesFromBank: Types.IBankItem[] = Object.values(useSelector((state: Types.AllState) => state.Bank_Runes) as Types.IRuneBankSlice);
 
-  const Wallet = useSelector((state: Types.AllState) => state.Wallet) as Types.IWallet;
-  const RunespanPoints = useSelector((state: Types.AllState) => state.RunespanPoints) as Types.IRunespanPoints;
-
-  let wow = Object.entries(Wallet);
-  let wow2 = Object.entries(RunespanPoints);
-  let wow3 = [...wow, ...wow2];
-  console.log({ wow3 });
+  // grab the currencies from state and turn them into arrays for JSX mapping
+  const WalletArray = Object.entries(useSelector((state: Types.AllState) => state.Wallet) as Types.IWallet);
+  const RunespanPointsArray = Object.entries(useSelector((state: Types.AllState) => state.RunespanPoints) as Types.IRunespanPoints);
+  // collect all the currencies together into one array
+  const AllCurrenciesArray = [...WalletArray, ...RunespanPointsArray];
+  // define an object containing key names for the currencies
+  const displayNamesForCurrencies = {
+    coinsDisplay: `Coins`,
+    runespanPointsDisplay: `Runespan points`,
+  };
 
   // useEffect(() => {}, []);
 
@@ -80,19 +83,17 @@ const BankPanel = (props: Types.BankPanelProps) => {
     return (
       <div className="card-title border border-dark border-1 rounded-3 user-select-none">
         <h1 className="text-center">Currencies</h1>
-        <div className={`d-flex flex-row flex-wrap ${skillPanelsOpened.Woodcutting ? `` : `d-none`}`}>
-          {arrayOfLogsFromBank.map((item) => {
-            return item.amount ? (
-              <div key={`resource-list-${item.name}`} className={`card border mb-3`}>
+        <div className={`d-flex flex-row flex-wrap`}>
+          {AllCurrenciesArray.map(([name, amount]) => {
+            return (
+              <div key={`resource-list-${name}`} className={`card border mb-3`}>
                 <div className="card-body text">
-                  <h5 className="card-title">{ListOfLogs[item.name as keyof Types.IListOfLogs].displayName}</h5>
                   <div className="card-text">
-                    <div>{item.amount}</div>
+                    <h5 className="card-title">{displayNamesForCurrencies[`${name}Display`]}</h5>
+                    <div>{Math.floor(amount).toLocaleString("en-US")}</div>
                   </div>
                 </div>
               </div>
-            ) : (
-              ``
             );
           })}
         </div>
@@ -215,6 +216,7 @@ const BankPanel = (props: Types.BankPanelProps) => {
         <div className="card">
           <div className="card-body">
             {/* panel specific content goes here */}
+            {CurrencyJSX()}
             {WoodcuttingItems()}
             {FishingItems()}
             {MiningItems()}
