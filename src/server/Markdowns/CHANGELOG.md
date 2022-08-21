@@ -33,6 +33,7 @@
 - Bronze and Iron hatchets now show a woodcutting level requirement of 1 (0 looks silly).
 - The current resource is now more accurately described based on the your current activity.
 - The Bank panel now displays currencies (currently only coins and runespan points).
+- The lobby now displays this lovely Changelog!
 
 #### DEPRECATED
 

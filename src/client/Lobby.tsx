@@ -11,7 +11,7 @@ import Fetcher from "./ClientUtils/Fetcher";
 const Lobby = (props: Types.LobbyProps) => {
   const nav = useNavigate();
   const dispatch = useDispatch();
-  // const [changelogText, setChangelogText] = useState("");
+  const [changelogText, setChangelogText] = useState("");
 
   //@ this useEffect hydrates the data from Mongo in case there is no token in localStorage
   useEffect(() => {
@@ -34,7 +34,16 @@ const Lobby = (props: Types.LobbyProps) => {
   }, []);
 
   //@ get the changelog text
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log(changelogText);
+    fetch("/api/getchangelog")
+      .then((res) => res.text())
+      .then((res) => {
+        console.log(res);
+        setChangelogText(res);
+      })
+      .catch();
+  }, []);
 
   const handleMoveToGame = () => {
     // move the player to the game
