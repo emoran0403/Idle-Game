@@ -10,6 +10,7 @@
 * IF quests - {QuestPanel} update useSelector section to pull in new quest slice
 * IF quests - {QuestPanel} spread out new quests into AllQuestsFromStateFlat
 * IF quests - {QuestPanel} add new quest array slice to create composite quest useEffect
+* IF quests - {QuestList} add new quest array here as well
 * IF enemies - add enemy entries to constant file, and all enemies array in that file
 * IF enemies - update (IAllEnemies) and create an I<location>Summary interface
 * IF enemies - update (IEnemyLocations) with that interface
