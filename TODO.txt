@@ -26,6 +26,8 @@
  * {Types} - create a type for the new slice
  * {Types} - update (AllState) with new slice
  * {DefaultPlayerData} - update with new slice defaults
+ * {Gamecontainer} - needs a handle skill function
+ * {Gamecontainer} -put the new handle skill function into the switch statement that runs game tick logic
 
 //! how can i use dev and prod vars on .env and on heroku?
 
@@ -44,13 +46,10 @@
 
 
 //# Quality of life
-* {lobby} - Display changelog markdown in lobby -- https://lieuzhenghong.com/how_to_import_markdown_in_react/ 
-or use this -- https://dev.to/anobjectisa/how-to-dynamically-load-markdown-files-in-react-markdown-to-jsx-53fl
-== npm install react-markdown
-== npm i markdown-to-jsx
 * {MapPanel} - organize locations.  maybe towns / cities and then their related areas?
 * {BankPanel} - use images for the items, with display name as title tag
 * {skillspanel} - put the hatchet and pickaxe selectors side by side
+* {skillspanel} runespan nodes should be in ascending level order
 * Bank shows items in ascending level order
 * Bank to show images for items
 ** add currentEquipment to redux state to persist outfits across logins
