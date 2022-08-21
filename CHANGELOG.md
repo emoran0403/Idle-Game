@@ -12,13 +12,14 @@
 # REMOVED
 # FIXED
 # SECURITY -->
+<!-- The copy of this file in the server cannot have comments, so remove them lol -->
 
 <!-- Currently in Development -->
 
 <!-- <div align="center">
   <h1>The Runecrafting update</h1>
   <p>Version 1.2.4</p>
-  <p>Released 2022-MM-DD</p>
+  <p>Released 2022-8-21</p>
 
   <a href="https://ejmdev-idlescape.herokuapp.com/">Play now</a>
 </div>
@@ -34,10 +35,6 @@
 - The current resource is now more accurately described based on the your current activity.
 - The Bank panel now displays currencies (currently only coins and runespan points).
 - The lobby now displays this lovely Changelog!
-
-#### DEPRECATED
-
-#### REMOVED
 
 #### FIXED
 
@@ -64,11 +61,7 @@
 - Selecting any skill will cause your inventory to be deposited on the next game tick, making logic that removes certain items from the inventory easier.
 - Updated state triggering the player to bank their inventory upon loggin in to prevent possible inventory overflow.
 
-#### REMOVED
-
 #### FIXED
 
 - Items in the inventory now display their display name when hovering over them. (I needed to use the title attribute, not alt)
 - Added an asset for clay.
-
-#### SECURITY

@@ -4,14 +4,15 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Fetcher from "./ClientUtils/Fetcher";
-// import Markdown from "markdown-to-jsx";
+import ReactMarkdown from "react-markdown";
 
 //@ This component is displayed after the player logs in.
 //@ Tutorial info and updates to the game will be shown while the server hydrates the player information.
 const Lobby = (props: Types.LobbyProps) => {
   const nav = useNavigate();
   const dispatch = useDispatch();
-  const [changelogText, setChangelogText] = useState("");
+  const [changelogText, setChangelogText] = useState<string>("");
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   //@ this useEffect hydrates the data from Mongo in case there is no token in localStorage
   useEffect(() => {
@@ -40,6 +41,7 @@ const Lobby = (props: Types.LobbyProps) => {
       .then((res) => res.text())
       .then((res) => {
         console.log(res);
+        setIsLoaded(true);
         setChangelogText(res);
       })
       .catch();
@@ -55,7 +57,6 @@ const Lobby = (props: Types.LobbyProps) => {
   const gameIntroJSX = () => {
     return (
       <div>
-        <p className="text-center">Welcome to the game!</p>
         <p>
           This is an idle game based on the MMORPG Runescape. An idle game, also known as an incremental game, is a genre of games defined by the primary
           feature of its strategy: leaving the game running by itself with minimum or zero player interaction. Interaction with the game, while often useful for
@@ -169,28 +170,39 @@ const Lobby = (props: Types.LobbyProps) => {
     );
   };
 
-  // const changeLogJSX = () => {
-  //   console.log(`i am here in changelog jsx`);
-  //   return (
-  //     <div>
-  //       <Markdown>{changelogText}</Markdown>
-  //     </div>
-  //   );
-  // };
+  const changeLogJSX = () => {
+    if (isLoaded) {
+      return (
+        <div>
+          <ReactMarkdown>{changelogText}</ReactMarkdown>
+        </div>
+      );
+    } else {
+    }
+  };
+
+  const ALLJSX = () => {
+    return (
+      <div style={{ overflowY: "auto", position: "relative", height: "90vh" }}>
+        {gameIntroJSX()}
+        {imgDivJSX()}
+        {skillQuestCombatJSX()}
+        {changeLogJSX()}
+      </div>
+    );
+  };
 
   return (
     <div className="border border-dark shadow border-2 rounded-3">
       <div>
-        {gameIntroJSX()}
-        {imgDivJSX()}
-        {skillQuestCombatJSX()}
+        <div className="d-flex flex-wrap justify-content-center border border-dark">
+          <p className="text-center col-12">Welcome to the game!</p>
+          <button className="btn btn-primary" onClick={() => handleMoveToGame()}>
+            Play Now
+          </button>
+        </div>
+        {ALLJSX()}
       </div>
-      <div className="d-flex justify-content-center">
-        <button className="btn btn-primary" onClick={() => handleMoveToGame()}>
-          Play Now
-        </button>
-      </div>
-      {/* {changeLogJSX()} */}
     </div>
   );
 };
