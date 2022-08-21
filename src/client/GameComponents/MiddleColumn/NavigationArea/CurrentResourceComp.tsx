@@ -2,13 +2,15 @@ import * as Types from "../../../../../Types";
 import * as React from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+
 import { ListOfLogs } from "../../../../../Constants/Items/Logs";
 import { ListOfFish } from "../../../../../Constants/Items/Fish";
 import { Enemies } from "../../../../../Constants/Enemies";
 import { ListOfOres } from "../../../../../Constants/Items/Ores";
-
 import { ListOfPickpocketNPC } from "../../../../../Constants/Thieving/Pickpocketing";
 import { ListOfPickpocketStalls } from "../../../../../Constants/Thieving/Stalls";
+import { listOfRunespanNodes } from "../../../../../Constants/RuneCrafting/RunespanNodes";
+import { ListOfRunes } from "../../../../../Constants/RuneCrafting/Runes";
 
 const CurrentResourceComp = (props: Types.NoProps) => {
   const Resource = useSelector((state: Types.AllState) => state.Resource.CurrentResource as Types.ICurrentResourceOptions);
@@ -17,9 +19,12 @@ const CurrentResourceComp = (props: Types.NoProps) => {
   const Skill = useSelector((state: Types.AllState) => state.Skill.CurrentSkill);
   const playerLocation = useSelector((state: Types.AllState) => state.Location.CurrentLocation as Types.ICurrentLocationOptions);
 
-  // useEffect(() => {}, []);
+  useEffect(() => {}, [Resource, Target, Activity, Skill, playerLocation]);
 
-  //@ this sets the background color if a combat style has been selected, but a target has not been selected
+  /**
+   * This function sets the background color based on the current state.
+   * @returns Returns a classname to set the background color if a combat style has been selected, but a target has not been selected.
+   */
   const returnBackgroundColor = () => {
     if (Activity === `In combat` && Target === `none`) {
       return `bg-danger`;
@@ -27,7 +32,11 @@ const CurrentResourceComp = (props: Types.NoProps) => {
       return ``;
     }
   };
-
+  /**
+   * ! when adding new skills that consume resources, add an if else block like firemaking.
+   * Displays a conditional message based on the current resource the player is gathering / using.
+   * @returns Returns a conditional message based on the current resource the player is gathering / using.
+   */
   const displayResource = () => {
     // this function shows the display name of the current resource
     // console.log(Skill);
@@ -37,7 +46,11 @@ const CurrentResourceComp = (props: Types.NoProps) => {
           return <div>{ListOfLogs[Resource as keyof Types.IListOfLogs].displayName}</div>;
         }
         case `Firemaking`: {
-          return <div>{ListOfLogs[Resource as keyof Types.IListOfLogs].displayName}</div>;
+          if (ListOfLogs[Resource as keyof Types.IListOfLogs]) {
+            return <div>{ListOfLogs[Resource as keyof Types.IListOfLogs].displayName}</div>;
+          } else {
+            return <div>none</div>;
+          }
         }
         case `Fishing`: {
           return <div>{ListOfFish[Resource as keyof Types.IListOfFish].displayName}</div>;
@@ -52,42 +65,134 @@ const CurrentResourceComp = (props: Types.NoProps) => {
             return <div>{ListOfPickpocketStalls[Resource as keyof Types.IListOfPickpocketStall].displayName}</div>;
           }
         }
+        case `Runecrafting`: {
+          if (listOfRunespanNodes[Resource as keyof Types.IListOfRunespanNodes]) {
+            return <div>{listOfRunespanNodes[Resource as keyof Types.IListOfRunespanNodes].displayName}</div>;
+          } else {
+            return <div>{ListOfRunes[Resource as keyof Types.IListOfRunes].displayName}</div>;
+          }
+        }
         default:
           return <div>none</div>;
       }
     }
   };
-  // Types.IEnemyLocations
-
-  const ThievingJSX = () => {
-    return <div>Stealing from</div>;
+  const WoodcuttingJSX = () => {
+    return (
+      <div>
+        <div>Cutting</div>
+        {displayResource()}
+      </div>
+    );
   };
   const FiremakingJSX = () => {
-    return <div>Burning</div>;
+    return (
+      <div>
+        <div>Burning</div>
+        {displayResource()}
+      </div>
+    );
   };
-  return (
-    <div className="text-center border border-dark border-2 rounded-3 h-100">
-      {Activity === `In combat` ? (
-        <div className={returnBackgroundColor()}>
-          <div>Fighting </div>
-          {Enemies[playerLocation as keyof Types.IAllEnemies] && Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations] ? (
-            <div>{Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations][`displayName`]}</div>
-          ) : (
-            <div>none</div>
-          )}
-        </div>
-      ) : (
+  const FishingJSX = () => {
+    return (
+      <div>
+        <div>Fishing</div>
+        {displayResource()}
+      </div>
+    );
+  };
+  const MiningJSX = () => {
+    return (
+      <div>
+        <div>Mining</div>
+        {displayResource()}
+      </div>
+    );
+  };
+  const ThievingJSX = () => {
+    return (
+      <div>
+        <div>Stealing from</div>
+        {displayResource()}
+      </div>
+    );
+  };
+  const RunecraftingJSX = () => {
+    if (listOfRunespanNodes[Resource as keyof Types.IListOfRunespanNodes]) {
+      return (
         <div>
-          {Skill === `Thieving` && ThievingJSX()}
-          {Skill === `Firemaking` && FiremakingJSX()}
-
+          <div>Siphoning</div>
           {displayResource()}
         </div>
-      )}
-    </div>
-  );
+      );
+    } else {
+      return (
+        <div>
+          <div>Crafting</div>
+          {displayResource()}
+        </div>
+      );
+    }
+  };
+  const CombatJSX = () => {
+    return (
+      <div className={returnBackgroundColor()}>
+        {Enemies[playerLocation as keyof Types.IAllEnemies] && Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations] ? (
+          <div>
+            <div>Fighting</div>
+            <div>{Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations][`displayName`]}</div>
+          </div>
+        ) : (
+          <div>No Target Selected</div>
+        )}
+      </div>
+    );
+  };
+  const AllJSX = () => {
+    switch (Activity) {
+      case `In combat`:
+        return CombatJSX();
+        break;
+      case `Questing`:
+        return <div>You are Questing</div>;
+        break;
+      case `Skilling`:
+        switch (Skill) {
+          case `Woodcutting`:
+            return WoodcuttingJSX();
+            break;
+          case `Firemaking`:
+            return FiremakingJSX();
+            break;
+          case `Fishing`:
+            return FishingJSX();
+            break;
+          case `Mining`:
+            return MiningJSX();
+            break;
+          case `Thieving`:
+            return ThievingJSX();
+            break;
+          case `Runecrafting`:
+            return RunecraftingJSX();
+            break;
+        }
+        break;
+      default:
+        return <div>You are Idle</div>;
+    }
+  };
+
+  return <div className="text-center border border-dark border-2 rounded-3 h-100">{AllJSX()}</div>;
 };
 
 export default CurrentResourceComp;
 
 // style={{ width: `130px` }}
+
+// questing;
+// Combat;
+// skilling;
+
+{
+}

@@ -2,7 +2,7 @@ import * as Types from "../../../../Types";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { removeFromWallet } from "../../Redux/Slices/Wallet";
+import { removeFromWallet } from "../../Redux/Slices/CurrencySlices/Wallet";
 
 import { playerNowOwnsHatchetItem } from "../../Redux/Slices/SkillingEquipmentSlices/Hatchets";
 import { playerNowOwnsPickaxeItem } from "../../Redux/Slices/SkillingEquipmentSlices/Pickaxes";

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import * as Types from "../../../../Types";
+import * as Types from "../../../../../Types";
 
 // this allows us to assert the type of state as a specific set of strings, as opposed to any general string
 // const Current: Types.ICurrentLocation[`Current`] = `Lumbridge`;

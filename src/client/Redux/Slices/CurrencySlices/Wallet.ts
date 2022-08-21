@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import * as Types from "../../../../Types";
+import * as Types from "../../../../../Types";
 
 //object[key] is how we can access an object's value by passing in a key
 

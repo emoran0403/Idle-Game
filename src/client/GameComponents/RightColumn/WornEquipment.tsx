@@ -12,7 +12,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { EmptyArmorItemComposite, EmptyWeaponItemComposite } from "../../../../Constants/Equipment/EmptyItem";
 import { getLevel } from "../../../../Constants/XP Levels";
-import { setTarget } from "../../Redux/Slices/CurrentTarget";
+import { setTarget } from "../../Redux/Slices/GameStateSlices/CurrentTarget";
 
 const WornEquipment = (props: Types.WornEquipmentCompProps) => {
   const dispatch = useDispatch();

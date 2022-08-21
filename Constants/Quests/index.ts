@@ -3,11 +3,13 @@ import * as Types from "../../Types";
 import { VarrockQuests } from "./VarrockQuests";
 import { LumbridgeQuests } from "./LumbridgeQuests";
 import { DraynorQuests } from "./DraynorQuests";
+import { WizardTowerQuests } from "./WizardTowerQuests";
 
 export const AllQuests: Types.IAllQuests = {
   Lumbridge: LumbridgeQuests,
   Draynor: DraynorQuests,
   Varrock: VarrockQuests,
+  WizardTower: WizardTowerQuests,
 };
 
 export const EmptyQuestRewards: Types.IQuestInfo = {

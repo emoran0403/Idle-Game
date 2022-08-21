@@ -1,0 +1,46 @@
+import * as Types from "../../Types";
+import { listOfRunespanNodes } from "../RuneCrafting/RunespanNodes";
+
+export const WizardTowerSummary: Types.ILocationSummary = {
+  name: `WizardTowerSummary`,
+  displayName: `Wizards' Tower`,
+  Quests: ["Rune Mysteries", "Rune Memories", "Heart of Stone", "Beneath Cursed Tides"],
+  Skills: {
+    Woodcutting: [],
+    Mining: ["runeEssence", "pureEssence"],
+    Fishing: [],
+    Thieving: {
+      stalls: [],
+      pickpocketing: [],
+    },
+    Farming: [],
+    Firemaking: [],
+    Hunter: [],
+    Divination: [],
+    Archaeology: [],
+    Runecrafting: [
+      `cycloneNode`,
+      `mindstormNode`,
+      `waterPoolNode`,
+      `rockfragmentNode`,
+      `fireballNode`,
+      `firestormNode`,
+      `vineNode`,
+      `fleshygrowthNode`,
+      `jumperNode`,
+      `skullsNode`,
+      `chaoticcloudNode`,
+      `bloodpoolNode`,
+      `shifterNode`,
+      `nebulaNode`,
+      `livingsoulNode`,
+      `bloodyskullsNode`,
+      `undeadsoulNode`,
+    ],
+    Construction: [],
+    Summoning: [],
+    Agility: [],
+  },
+  Combat: ["lesserdemonwizardtower"],
+  Bosses: [],
+};

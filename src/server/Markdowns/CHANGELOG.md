@@ -1,28 +1,12 @@
-<!--
-<div align="center">
-  <h1>The something update</h1>
-  <p>Version XX.XX.XX</p>
-  <p>Released 2022-MM-DD</p>
+# The Runecrafting update
 
-  <a href="https://ejmdev-idlescape.herokuapp.com/">Play now</a>
-</div>
-# ADDED
-# CHANGED
-# DEPRECATED
-# REMOVED
-# FIXED
-# SECURITY -->
-<!-- The copy of this file in the server cannot have comments, so remove them lol -->
+Version 1.2.4
 
-<!-- Currently in Development -->
+Released 2022-8-21
 
-<!-- <div align="center">
-  <h1>The Runecrafting update</h1>
-  <p>Version 1.2.4</p>
-  <p>Released 2022-8-21</p>
+---
 
-  <a href="https://ejmdev-idlescape.herokuapp.com/">Play now</a>
-</div>
+[Play now](https://ejmdev-idlescape.herokuapp.com/)
 
 #### ADDED
 
@@ -41,16 +25,17 @@
 - Combat was ignoring footwear, but now respects your kicks.
 - Prevented a possible crash with current resource component trying to access .displayname of an undefined item.
 
-#### SECURITY -->
+---
 
-<!-- Currently in Production -->
+# The Firemaking update
 
-<div align="center">
-  <h1>The Firemaking update</h1>
-  <p>Version 1.1.1 </p>
-  <p>Released 2022-8-17</p>
-  <a href="https://ejmdev-idlescape.herokuapp.com/">Play now</a>
-</div>
+Version 1.1.1
+
+Released 2022-8-17
+
+---
+
+[Play now](https://ejmdev-idlescape.herokuapp.com/)
 
 #### ADDED
 

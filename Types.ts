@@ -460,11 +460,159 @@ export interface IListOfFish {
 }
 export type IFishOptions = `raw_shrimp` | `raw_crayfish` | `raw_anchovies` | `raw_trout` | `raw_salmon` | `raw_pike` | `raw_sardine` | `raw_herring`;
 
+//@ ******************************* RUNECRAFTING *******************************
+
+export interface IRune {
+  name: string;
+  displayName: string;
+  levelReqRunecrafting: number;
+  XPGivenRunecrafting: number;
+  value: number;
+  bankTime: number;
+  multirunes: number[];
+}
+export interface IListOfRunes {
+  airrune: IRune;
+  mindrune: IRune;
+  waterrune: IRune;
+  earthrune: IRune;
+  firerune: IRune;
+  bodyrune: IRune;
+  cosmicrune: IRune;
+  chaosrune: IRune;
+  astralrune: IRune;
+  naturerune: IRune;
+  lawrune: IRune;
+  deathrune: IRune;
+  bloodrune: IRune;
+  soulrune: IRune;
+}
+export interface IRuneBankSlice {
+  airrune: IBankItem;
+  mindrune: IBankItem;
+  waterrune: IBankItem;
+  earthrune: IBankItem;
+  firerune: IBankItem;
+  bodyrune: IBankItem;
+  cosmicrune: IBankItem;
+  chaosrune: IBankItem;
+  astralrune: IBankItem;
+  naturerune: IBankItem;
+  lawrune: IBankItem;
+  deathrune: IBankItem;
+  bloodrune: IBankItem;
+  soulrune: IBankItem;
+}
+export interface IRunespanNode {
+  name: RunespanNodeTypes;
+  displayName: string;
+  levelReqRunecrafting: number;
+  XPGivenRune_one: number;
+  XPGivenRune_two: number;
+  multiRune: boolean;
+  rune_one: IRuneTypes;
+  rune_two: IRuneTypes | ``;
+}
+export interface IListOfRunespanNodes {
+  cycloneNode: IRunespanNode;
+  mindstormNode: IRunespanNode;
+  waterPoolNode: IRunespanNode;
+  rockfragmentNode: IRunespanNode;
+  fireballNode: IRunespanNode;
+  firestormNode: IRunespanNode;
+  vineNode: IRunespanNode;
+  fleshygrowthNode: IRunespanNode;
+  jumperNode: IRunespanNode;
+  skullsNode: IRunespanNode;
+  chaoticcloudNode: IRunespanNode;
+  bloodpoolNode: IRunespanNode;
+  shifterNode: IRunespanNode;
+  nebulaNode: IRunespanNode;
+  livingsoulNode: IRunespanNode;
+  bloodyskullsNode: IRunespanNode;
+  undeadsoulNode: IRunespanNode;
+}
+export interface IRunespanPoints {
+  runespanPoints: number;
+}
+export interface IRunespanNodePoints {
+  airrune: number;
+  mindrune: number;
+  waterrune: number;
+  earthrune: number;
+  firerune: number;
+  bodyrune: number;
+  cosmicrune: number;
+  chaosrune: number;
+  astralrune: number;
+  naturerune: number;
+  lawrune: number;
+  deathrune: number;
+  bloodrune: number;
+  soulrune: number;
+}
+export interface IRunecraftSkillingSetPiece {
+  name: string;
+  displayName: string;
+  cost: number;
+  XPBonusRunecrafting: number;
+}
+export interface IRunespanShopItem {
+  name: string;
+  displayName: string;
+  cost: number;
+  amount: number;
+}
+export interface IRunespanShop {
+  runecrafterhat: IRunecraftSkillingSetPiece;
+  runecrafterrobe: IRunecraftSkillingSetPiece;
+  runecrafterskirt: IRunecraftSkillingSetPiece;
+  runecrafterboots: IRunecraftSkillingSetPiece;
+  pureEssence: IRunespanShopItem;
+}
+export type IRuneTypes =
+  | `airrune`
+  | `mindrune`
+  | `waterrune`
+  | `earthrune`
+  | `firerune`
+  | `bodyrune`
+  | `cosmicrune`
+  | `chaosrune`
+  | `astralrune`
+  | `naturerune`
+  | `lawrune`
+  | `deathrune`
+  | `bloodrune`
+  | `soulrune`;
+export type RunespanNodeTypes =
+  | `cycloneNode`
+  | `mindstormNode`
+  | `waterPoolNode`
+  | `rockfragmentNode`
+  | `fireballNode`
+  | `firestormNode`
+  | `vineNode`
+  | `fleshygrowthNode`
+  | `jumperNode`
+  | `skullsNode`
+  | `chaoticcloudNode`
+  | `bloodpoolNode`
+  | `shifterNode`
+  | `nebulaNode`
+  | `livingsoulNode`
+  | `bloodyskullsNode`
+  | `undeadsoulNode`;
+
 //@ ******************************* MISC *******************************
 
 export interface IBankItem {
   name: string;
   amount: number;
+}
+export interface IDisplayNamesForCurrencies {
+  coinsDisplay: string;
+  runespanPointsDisplay: string;
 }
 export interface IFlatObjectOfNums {
   [key: string]: number;
@@ -503,31 +651,6 @@ export interface EquipmentPanels {
   HandsSlot: boolean;
   FeetSlot: boolean;
   TwoHandSlot: boolean;
-}
-
-//@ ******************************* RUNES *******************************
-
-export interface IRune {
-  name: string;
-  levelReqRunecrafting: number;
-  XPGivenRunecrafting: number;
-  value: number;
-}
-export interface IListOfRunes {
-  air: IRune;
-  mind: IRune;
-  water: IRune;
-  earth: IRune;
-  fire: IRune;
-  body: IRune;
-  cosmic: IRune;
-  chaos: IRune;
-  astral: IRune;
-  nature: IRune;
-  law: IRune;
-  death: IRune;
-  blood: IRune;
-  soul: IRune;
 }
 
 //@ ******************************* ARROWS *******************************
@@ -591,7 +714,7 @@ export interface LocationSkills {
   Hunter: string[];
   Divination: string[];
   Archaeology: string[];
-  Runecrafting: string[];
+  Runecrafting: IRuneTypes[] | RunespanNodeTypes[];
   Construction: string[];
   Summoning: string[];
   Agility: string[];
@@ -653,6 +776,9 @@ export interface LumbridgeQuestSlice {
 export interface DraynorQuestSlice {
   DraynorQuestArray: IStateQuest[];
 }
+export interface WizardTowerQuestSlice {
+  WizardTowerQuestArray: IStateQuest[];
+}
 export interface IQuestInfo {
   name: string;
   location: string;
@@ -671,6 +797,7 @@ export interface IAllQuests {
   Lumbridge: IQuestInfo[];
   Draynor: IQuestInfo[];
   Varrock: IQuestInfo[];
+  WizardTower: IQuestInfo[];
 }
 export interface ICompositeQuestInfo extends IQuestInfo {
   stepsComplete: number;
@@ -692,7 +819,11 @@ export type ICurrentQuestOptions =
   | `Love Story`
   | `Swept Away`
   | `Missing My Mummy`
-  | `Stolen Hearts`;
+  | `Stolen Hearts`
+  | "Rune Mysteries"
+  | "Rune Memories"
+  | "Heart of Stone"
+  | "Beneath Cursed Tides";
 //@ ******************************* COMBAT *******************************
 
 export interface SlayerTaskSlice {
@@ -803,12 +934,16 @@ export interface ILumbridgeCatacombsEnemies {
   skoblin: IEnemySummary;
   corpsemage: IEnemySummary;
 }
+export interface IWizardTowerEnemies {
+  lesserdemonwizardtower: IEnemySummary;
+}
 //* extend this as more locations are added
 export interface IAllEnemies {
   Lumbridge: ILumbridgeEnemies;
   Draynor: IDraynorEnemies;
   LumbridgeSwampCave: ILumbridgeSwampCaveEnemies;
   LumbridgeCatacombs: ILumbridgeCatacombsEnemies;
+  WizardTower: IWizardTowerEnemies;
 }
 export type ListOfCombatStyleSkills = `Attack` | `Strength` | `Defence` | `Ranged` | `Magic`;
 export type ICurrentStyleOptions = `none` | `melee` | `ranged` | `air` | `fire` | `water` | `earth`;
@@ -816,7 +951,7 @@ export type CombatStyle = `melee` | `magic` | `ranged`;
 export type SpellElement = `typeless` | `air` | `fire` | `water` | `earth`;
 
 //* extend this as more locations are added
-export type IEnemyLocations = ILumbridgeEnemies | IDraynorEnemies | ILumbridgeCatacombsEnemies | ILumbridgeSwampCaveEnemies;
+export type IEnemyLocations = ILumbridgeEnemies | IDraynorEnemies | ILumbridgeCatacombsEnemies | ILumbridgeSwampCaveEnemies | IWizardTowerEnemies;
 //
 
 //* add to this as more enemies are added
@@ -857,14 +992,15 @@ export type ICurrentTargetOptions =
   | `warpedrat`
   | `corpsearcher`
   | `skoblin`
-  | `corpsemage`;
+  | `corpsemage`
+  | "lesserdemonwizardtower";
 
 //@ ******************************* RESOURCES *******************************
 
 export interface ICurrentResource {
   CurrentResource: ICurrentResourceOptions;
 }
-export type ICurrentResourceOptions = "none" | IFishOptions | ILogOptions | IOreOptions | IListOfAllThievingOptions;
+export type ICurrentResourceOptions = "none" | IFishOptions | ILogOptions | IOreOptions | IListOfAllThievingOptions | IRuneTypes | RunespanNodeTypes;
 
 //@ ******************************* STATE *******************************
 
@@ -884,6 +1020,7 @@ export interface AllState extends AllSlots {
   Bank_Fish: IFishBankSlice;
   Bank_Logs: ILogBankSlice;
   Bank_Ores: IOreBankSlice;
+  Bank_Runes: IRuneBankSlice;
   Inventory: I_Inventory;
   Location: ICurrentLocation;
   Activity: ICurrentActivity;
@@ -896,9 +1033,11 @@ export interface AllState extends AllSlots {
   Pickaxes: IPickaxesSlice;
   Resources: IResources;
   Wallet: IWallet;
+  RunespanPoints: IRunespanPoints;
   QuestPoints: IQuestPointsSlice;
   Quests_Lumbridge: LumbridgeQuestSlice;
   Quests_Draynor: DraynorQuestSlice;
+  Quests_WizardTower: WizardTowerQuestSlice;
   SlayerTask: SlayerTaskSlice;
 }
 export interface IPlayerDataFromMongo extends AllState, IPlayerPayload {
@@ -907,6 +1046,7 @@ export interface IPlayerDataFromMongo extends AllState, IPlayerPayload {
 export interface AllStateQuestSlices {
   Quests_Lumbridge: LumbridgeQuestSlice;
   Quests_Draynor: DraynorQuestSlice;
+  Quests_WizardTower: WizardTowerQuestSlice;
 }
 export interface IWallet {
   coins: number;
@@ -990,13 +1130,14 @@ export interface IAllLocations {
   Draynor: ILocationSummary;
   LumbridgeSwampCave: ILocationSummary;
   LumbridgeCatacombs: ILocationSummary;
+  WizardTower: ILocationSummary;
   // Varrock: ILocationSummary;
 }
 //* extend this as needed to account for future locations
 export interface ICurrentLocation {
   CurrentLocation: ICurrentLocationOptions;
 }
-export type ICurrentLocationOptions = `Lumbridge` | `Draynor` | `LumbridgeSwampCave` | `LumbridgeCatacombs`;
+export type ICurrentLocationOptions = `Lumbridge` | `Draynor` | `LumbridgeSwampCave` | `LumbridgeCatacombs` | `WizardTower`;
 
 //@ ******************************* CHAT *******************************
 

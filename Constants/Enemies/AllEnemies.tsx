@@ -880,6 +880,30 @@ export const corpsemage: Types.IEnemySummary = {
   defence: 15,
   maxHit: 60,
 };
+export const lesserdemonwizardtower: Types.IEnemySummary = {
+  name: "lesserdemonwizardtower",
+  displayName: "Lesser demon",
+  level: 70,
+  lifePoints: 5000,
+  XPGivenCombatStyle: 250.2,
+  XPGivenConstitution: 82.5,
+  XPGivenPrayer: 0,
+  XPGivenSlayer: 86.6,
+  levelReqSlayer: 1,
+  slayerClass: ["lesser demons", "demons"],
+  monsterStyle: "magic",
+  drops: [],
+  affinities: {
+    explicitWeakness: "ranged",
+    weakStyle: "ranged",
+    neutralStyle: "magic",
+    strongStyle: "melee",
+  },
+  armor: 850,
+  accuracy: 850,
+  defence: 50,
+  maxHit: 480,
+};
 
 export const AllEnemiesArray = [
   man,
@@ -918,4 +942,5 @@ export const AllEnemiesArray = [
   corpsearcher,
   skoblin,
   corpsemage,
+  lesserdemonwizardtower,
 ];

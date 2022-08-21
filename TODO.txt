@@ -1,15 +1,37 @@
 @ Adding new Locations -
-* - add cases to switch statements (questing tick func and quest rewards useEffect) in GameContainer
+* add a location summary and update (IAllLocations) + (ICurrentLocationOptions)
+//# <location>summary where location is the name of the location for game purposes
+* IF quests - add those quests to (ICurrentQuestOptions) and (IAllQuests + the constant object export)
+* IF quests - add those quests to a slice + add reducer to main reducer + add this slice to (AllState) and (AllStateQuestSlices)
+* IF quests - {GameContainer} update the quest complete useEffect dependency array with the new quest array slice
+* IF quests - {GameContainer} update the quest complete useEffect switch statement and the quests import
+* IF quests - {GameContainer} update imports
+* IF quests - update default player data with the slice info
+* IF quests - {QuestPanel} update useSelector section to pull in new quest slice
+* IF quests - {QuestPanel} spread out new quests into AllQuestsFromStateFlat
+* IF quests - {QuestPanel} add new quest array slice to create composite quest useEffect
+* IF enemies - add enemy entries to constant file, and all enemies array in that file
+* IF enemies - update (IAllEnemies) and create an I<location>Summary interface
+* IF enemies - update (IEnemyLocations) with that interface
+* IF enemies - add enemies to (ICurrentTargetOptions)
+* {MapPanel} - add a button for the location
 * - add typings for enemies search => //@ recreate this for each location
 * - just check all the places for locations
 @ when adding new masters, make sure to add enemies that match taskList[i].task
 
+@ Adding new Skills - 
+ * {Types} - update (ICurrentResourceOptions) with the skilling options
+ * {Redux} - create a slice
+ * {Reducers} - implement that slice in main reducer
+ * {Types} - create a type for the new slice
+ * {Types} - update (AllState) with new slice
+ * {DefaultPlayerData} - update with new slice defaults
 
+//! how can i use dev and prod vars on .env and on heroku?
 
 //# Fixes
+* {Game Container} clean up runecrafting tick function
 * fix admin buttons in App
-* rework display logic in currentresourcecomponent
-* webworker / empty audio object for interval - inactive tabs slow down the interval
 * Logic - experience and levels is displaying too high for some reason :/
 * remove boilerplate commits
 * I forgot to add silver ore lol
@@ -18,56 +40,26 @@
 * update get enemy object to scrape max hit from the wiki
 * add a check to prevent xp from going over 200M
 * swap out all instances of handleNewChatLog with handleMultipleChatLogs
-* add assets for all items so that inventory component can work with images
 * grammar when fishing anchovies
-* DONE - alt text does not display - needs to be title for that tooltip to show up
-* DONE - clay does not have an asset
-* DONE - inventory pushes down worn equipment component when it has items with long names
-* DONE - add a check upon logging in that checks the inventory and sets the needsToBank component state appropriately
-* DONE - content layout shift in levels component when xp is 10+ digits
-* DONE - abstract out Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations] into smaller variables in gameContainer
-* DONE - delegate skilling tick functions to their own function / component
-* DONE - can clean up chat logs in game component under woodcutting and fishing
-* DONE - add chat logs for gaining xp in gathering skills
-* DONE - make thieving easier = decreased stun times, added possibility for guaranteed success, made successes overall easier
-* DONE - skills, quest, combat panel needs to show display names for locations
-* DONE - currentLocationComp - location needs to wrap to fit inside the div
-* DONE - skills panel only displays skill options if there are those options at the location
-* DONE - bank panel - if the player has 0 of an item, dont display it
-* DONE - scale coin drops to the enemy level, not lifepoints
-* DONE - clean up the functions in shoppanel - handle buying item can be a standalone function i think
-* DONE - equipping a weapon while skilling stops the skilling
-* DONE - make it so that changing location resets all state to none or idle
-* DONE - check keys in quest panel = the requirements and reward Li's did not have keys
-* DONE - check buttons on shop panel - they cannot be nested
-* DONE - inventory needs to display ore display names
+
 
 //# Quality of life
-* add currentEquipment to redux state to persist outfits across logins
+* {lobby} - Display changelog markdown in lobby -- https://lieuzhenghong.com/how_to_import_markdown_in_react/ 
+or use this -- https://dev.to/anobjectisa/how-to-dynamically-load-markdown-files-in-react-markdown-to-jsx-53fl
+== npm install react-markdown
+== npm i markdown-to-jsx
+* {MapPanel} - organize locations.  maybe towns / cities and then their related areas?
+* {BankPanel} - use images for the items, with display name as title tag
+* {skillspanel} - put the hatchet and pickaxe selectors side by side
 * Bank shows items in ascending level order
 * Bank to show images for items
+** add currentEquipment to redux state to persist outfits across logins
+** add hatchet and pickaxe selection to state to persist options across logins
 *** need a way to reward those quest which give ANY xp
 *** maybe make the game choose the next available quest automatically
 *** get a changelog from github for the lobby
 *** offline progress
-* DONE - add dropping messages to ores if the player is dropping resources
-* DONE - make resources in bank panel into collapsible panels - copy skillspanel
-* DONE - stop the event propogation from bubbling up in shop panel (i do not want the panel to collapse when a player buys an item)
-* DONE - make the header in combat bigger to match those in bank, shop, and skilling panels
-* DONE - add collapsible panels to the bank and shop panels
-* DONE - quest is colored yellow when i have the combat level req = adding experience to useEffect in quest panel
-* DONE - make skills in skills panel into collapsible panels
-* DONE - hatchet options in skill panel display their woodcutting
-* DONE - globe picture for the world map icon
-* DONE - double check the buttons on quest panel - allowing player to begin a quest without the combat requirements
-* DONE - more info on quests
-* DONE - level requirements for equipment
-* DONE - Skill images
-* DONE - levels component does not update xp live - use effect
-* DONE - Levels component displays the level and experience
-* DONE - chatwindow greets the player by username
-* DONE - show location of quest in questlist component
-* DONE - quest panel to show missing level requirements
+
 
 //@ ARTISAN - skills that involve taking resources and transforming or consuming them
 //# SMITHING
@@ -88,6 +80,9 @@
 //# COOKING
 
 //# RUNECRAFTING
+- add runecrafting altar locations to existing locations
+- update game container with runecrafting function
+- create a slice for runes
 //# FLETCHING
 //# HERBLORE
 //# CONSTRUCTION

@@ -2,12 +2,12 @@ import * as Types from "../../../../Types";
 import * as React from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setLocation } from "../../Redux/Slices/CurrentLocation";
-import { setTarget } from "../../Redux/Slices/CurrentTarget";
-import { setActivity } from "../../Redux/Slices/CurrentActivity";
-import { setResource } from "../../Redux/Slices/CurrentResource";
-import { setQuest } from "../../Redux/Slices/CurrentQuest";
-import { setSkill } from "../../Redux/Slices/CurrentSkill";
+import { setLocation } from "../../Redux/Slices/GameStateSlices/CurrentLocation";
+import { setTarget } from "../../Redux/Slices/GameStateSlices/CurrentTarget";
+import { setActivity } from "../../Redux/Slices/GameStateSlices/CurrentActivity";
+import { setResource } from "../../Redux/Slices/GameStateSlices/CurrentResource";
+import { setQuest } from "../../Redux/Slices/GameStateSlices/CurrentQuest";
+import { setSkill } from "../../Redux/Slices/GameStateSlices/CurrentSkill";
 import { AllLocations } from "../../../../Constants/LocationInfo";
 
 const MapPanel = (props: Types.MapPanelProps) => {
@@ -76,6 +76,7 @@ const MapPanel = (props: Types.MapPanelProps) => {
             {displayTravelButtonJSX(`LumbridgeSwampCave`)}
             {displayTravelButtonJSX(`LumbridgeCatacombs`)}
             {displayTravelButtonJSX(`Draynor`)}
+            {displayTravelButtonJSX(`WizardTower`)}
           </div>
         </div>
       </div>

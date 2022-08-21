@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { AllQuests } from "../../../../Constants/Quests";
 import { getLevel } from "../../../../Constants/XP Levels";
-import { setActivity } from "../../Redux/Slices/CurrentActivity";
-import { setResource } from "../../Redux/Slices/CurrentResource";
-import { setSkill } from "../../Redux/Slices/CurrentSkill";
-import { setQuest } from "../../Redux/Slices/CurrentQuest";
-import { setTarget } from "../../Redux/Slices/CurrentTarget";
+import { setActivity } from "../../Redux/Slices/GameStateSlices/CurrentActivity";
+import { setResource } from "../../Redux/Slices/GameStateSlices/CurrentResource";
+import { setSkill } from "../../Redux/Slices/GameStateSlices/CurrentSkill";
+import { setQuest } from "../../Redux/Slices/GameStateSlices/CurrentQuest";
+import { setTarget } from "../../Redux/Slices/GameStateSlices/CurrentTarget";
 import { AllLocations } from "../../../../Constants/LocationInfo";
 
 //! handleQuestStyle and handleQuestButtonDisplay have repeated logic that could be improved
@@ -26,15 +26,15 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
   // This represents all the quests coming from constants as a flat array
   const AllQuestsFlat: Types.IQuestInfo[] = [...Object.values(AllQuests)].flat();
 
-  // this represents all the Lumbridge quests coming from state
+  //@ Add more quests here
+  // this represents all the Quests coming from state
   const { LumbridgeQuestArray } = useSelector((state: Types.AllState) => state.Quests_Lumbridge);
-
-  // this represents all the Draynor quests coming from state
   const { DraynorQuestArray } = useSelector((state: Types.AllState) => state.Quests_Draynor);
+  const { WizardTowerQuestArray } = useSelector((state: Types.AllState) => state.Quests_WizardTower);
 
   // spread out all the quests from state into a flat array
   //@spread out future quests into the AllQuestsFromStateFlat array
-  const AllQuestsFromStateFlat = [...LumbridgeQuestArray, ...DraynorQuestArray];
+  const AllQuestsFromStateFlat = [...LumbridgeQuestArray, ...DraynorQuestArray, ...WizardTowerQuestArray];
   // console.log({ allquests: AllQuestsFromStateFlat });
 
   // we establish an array of composite quests, pulling in the progress from state, and the static info from the summary
@@ -401,12 +401,12 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
     return combatLevel;
   };
 
+  //@ create composite quests
+  /**
+   * this useEffect shuffles the quest array coming from constants and the quest array coming from state together
+   * adding in the stateful keys to the constant quest info
+   */
   useEffect(() => {
-    /**
-     * this useEffect shuffles the quest array coming from constants and the quest array coming from state together
-     * adding in the stateful keys to the constant quest info
-     */
-
     let tempCompArray: Types.ICompositeQuestInfo[] = [];
     for (let i = 0; i < AllQuestsFlat.length; i++) {
       // run through all quests from constants
@@ -435,7 +435,7 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
      * pass down the questStepProgress from gameContainer and the quest arrays.
      * to make the component rerender when a level is gained, pass in Experience
      */
-  }, [props.questStepProgress, LumbridgeQuestArray, DraynorQuestArray, Experience]);
+  }, [props.questStepProgress, LumbridgeQuestArray, DraynorQuestArray, WizardTowerQuestArray, Experience]);
 
   return (
     <div className="container border border-dark border-2 rounded-3" style={{ overflowY: "auto", position: "relative", height: "81%" }}>

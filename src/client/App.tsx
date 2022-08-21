@@ -8,12 +8,13 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Lobby from "./Lobby";
 import { saveState } from "./Redux/store";
-import { useSelector } from "react-redux";
 import { gainXP, resetXP } from "./Redux/Slices/Experience";
-import { addCoinsToWallet } from "./Redux/Slices/Wallet";
+import { addCoinsToWallet } from "./Redux/Slices/CurrencySlices/Wallet";
+import { useSelector, useDispatch } from "react-redux";
 
 const App = (props: Types.AppProps) => {
   const nav = useNavigate();
+  const dispatch = useDispatch();
 
   const ALLSTATE = useSelector((state: Types.AllState) => state);
 
@@ -156,6 +157,6 @@ const App = (props: Types.AppProps) => {
 };
 
 export default App;
-function dispatch(arg0: any): void {
-  throw new Error("Function not implemented.");
-}
+// function dispatch(arg0: any): void {
+//   throw new Error("Function not implemented.");
+// }

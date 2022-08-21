@@ -2,6 +2,8 @@
 import * as Types from "../../../../Types";
 import * as express from "express";
 import * as passport from "passport";
+import * as path from "path";
+
 import { MongoQuery } from "../../mongodb";
 
 // current route is /api
@@ -49,6 +51,15 @@ apiRouter.put("/updateplayerinfo", passport.authenticate("jwt", { session: false
     // if an error was thrown, log it
     console.log(error);
     // and respond with the error message
+    res.status(400).json({ message: `${error.message}` });
+  }
+});
+
+apiRouter.get("/getchangelog", async (req, res) => {
+  try {
+    res.sendFile(path.join(__dirname, "../src/server/Markdowns/CHANGELOG.md"));
+  } catch (error) {
+    console.log(error);
     res.status(400).json({ message: `${error.message}` });
   }
 });
