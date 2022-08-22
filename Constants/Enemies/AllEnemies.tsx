@@ -900,9 +900,9 @@ export const lesserdemonwizardtower: Types.IEnemySummary = {
     strongStyle: "melee",
   },
   armor: 850,
-  accuracy: 850,
+  accuracy: 0,
   defence: 50,
-  maxHit: 480,
+  maxHit: 1,
 };
 
 export const AllEnemiesArray = [

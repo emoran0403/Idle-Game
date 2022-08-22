@@ -278,7 +278,7 @@ export const resolveCombat = (
     TwoHandSlot[Equipment[`TwoHandSlot`] as keyof Types.IArmorSlotTwoHand][`armor`];
 
   // #4 calculate enemies hitChance
-  let e_hitChance: number = e_affinity * (e_accuracy / playerDefenceRating);
+  let e_hitChance: number = e_affinity * (e_accuracy / Math.max(playerDefenceRating, 1));
 
   // the enemy may have a hitchance greater than 100%, so calculate damage if that occurs
   // OR, roll 1-100, and if the enemy hitchance is greater, calculate damage

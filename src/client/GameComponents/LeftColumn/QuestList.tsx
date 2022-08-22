@@ -9,15 +9,16 @@ const QuestList = (props: Types.NoProps) => {
   // This represents all the quests as a flat array
   const AllQuestsFlat: Types.IQuestInfo[] = [...Object.values(AllQuests)].flat();
 
-  // this represents all the Lumbridge quests coming from state
+  //@ grab new quests here
+  // grab all quests coming from state
   const { LumbridgeQuestArray } = useSelector((state: Types.AllState) => state.Quests_Lumbridge);
-
-  // this represents all the Draynor quests coming from state
   const { DraynorQuestArray } = useSelector((state: Types.AllState) => state.Quests_Draynor);
+  const { WizardTowerQuestArray } = useSelector((state: Types.AllState) => state.Quests_WizardTower);
+
   const QuestPoints = useSelector((state: Types.AllState) => state.QuestPoints.CurrentQuestPoints);
 
-  const AllQuestsFromStateFlat = [...LumbridgeQuestArray, ...DraynorQuestArray];
   //@spread out future quests into the AllQuestsFromStateFlat array
+  const AllQuestsFromStateFlat = [...LumbridgeQuestArray, ...DraynorQuestArray, ...WizardTowerQuestArray];
   // AllQuestsFromStateFlat.length represents the total number of quests implemented
 
   // we establish an array of composite quests, pulling in the progress from state, and the static info from the summary
@@ -25,8 +26,8 @@ const QuestList = (props: Types.NoProps) => {
   const [completedQuestCounter, setCompletedQuestCounter] = useState<number>(0);
 
   useEffect(() => {
-    //@ This use effect combines the static quest info from constants with the dynamic quest info from state,
-    //@ and increments a count of completed quests
+    //* This use effect combines the static quest info from constants with the dynamic quest info from state,
+    //* and increments a count of completed quests
     // console.log(AllQuestsFromStateFlat);
     let tempCompArray: Types.ICompositeQuestInfo[] = [];
     let questCompleteCounter: number = 0;
@@ -56,7 +57,8 @@ const QuestList = (props: Types.NoProps) => {
     setCompositeQuestArray(tempCompArray);
     // console.log(questCompleteCounter);
     // console.log(AllQuestsFromStateFlat.length);
-  }, [LumbridgeQuestArray, DraynorQuestArray]);
+    //@ add new quest arrays here
+  }, [LumbridgeQuestArray, DraynorQuestArray, WizardTowerQuestArray]);
 
   return (
     <div className="card border border-dark border-2 rounded-3 }" style={{ overflowY: "auto", position: "relative", height: "33%" }}>

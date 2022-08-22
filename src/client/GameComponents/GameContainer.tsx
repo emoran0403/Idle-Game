@@ -943,6 +943,8 @@ const GameContainer = (props: Types.GameContainerProps) => {
       // call resolveCombat and destructure the properties
       let { damageToPlayer, damageToEnemy } = resolveCombat(Target, CurrentStyle, playerLocation, Experience, currentEquipment);
       // define the enemy for readability
+      //! set damage to enemey to zero lesser demon in wizard tower if the player is trying to use melee
+      //* overwrite the damage to player variable here
       let thisEnemy = Enemies[playerLocation as keyof Types.IAllEnemies][Target as keyof Types.IEnemyLocations] as Types.IEnemySummary;
 
       console.log({

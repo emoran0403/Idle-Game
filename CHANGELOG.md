@@ -16,6 +16,23 @@
 
 <!-- Currently in Development -->
 
+<!--
+<div align="center">
+  <h1>The Cooking update</h1>
+  <p>Version 1.2.2</p>
+  <p>Released 2022-MM-DD</p>
+
+  <a href="https://ejmdev-idlescape.herokuapp.com/">Play now</a>
+</div>
+# ADDED
+# CHANGED
+# DEPRECATED
+# REMOVED
+# FIXED
+- Some magic was worked, and now the Quest list component will show quests located at the Wizards' Tower.
+- The lesser demon realized how weak he was and will no longer attack back.
+# SECURITY -->
+
 <!-- Currently in Production -->
 
 <div align="center">
