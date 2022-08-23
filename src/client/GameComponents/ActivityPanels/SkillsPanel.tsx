@@ -502,8 +502,6 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
     }
   };
 
-  //!
-  //!
   /**
    *
    * @param resourceArray The array of resources for the Runecrafting skill at the current location.
@@ -608,8 +606,6 @@ const SkillsPanel = (props: Types.SkillsPanelCompProps) => {
       return;
     }
   };
-  //!
-  //!
 
   /**
    * Combines hatchet info from state with info from constants to populate a selector tag.

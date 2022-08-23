@@ -33,6 +33,8 @@
 //! how can i use dev and prod vars on .env and on heroku?
 
 //# Fixes
+* {SkillsPanel} Firemaking skill shows up on all locations??? lol
+ - arrayOfLogsFromBank.length controls if the player can firemake in the area - maybe make an array of locations where firemaking is available?
 * {Game Container} clean up runecrafting tick function
 * fix admin buttons in App
 * Logic - experience and levels is displaying too high for some reason :/
