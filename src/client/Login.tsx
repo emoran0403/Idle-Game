@@ -11,7 +11,7 @@ const Loginpage = (props: Types.LoginCompProps) => {
   // const [password, setPassword] = useState<string>("");
   // const [username, setUsername] = useState<string>("");
   //@======PRODUCTION ABOVE, DEV BELOW============================================
-  const [password, setPassword] = useState<string>("");
+  const [password, setPassword] = useState<string>("1111111111");
   const [username, setUsername] = useState<string>("bigwow");
   //@=============================================================================
 

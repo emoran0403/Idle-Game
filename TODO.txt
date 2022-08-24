@@ -33,6 +33,7 @@
 //! how can i use dev and prod vars on .env and on heroku?
 
 //# Fixes
+* {QuestPanel} - wizard tower - heart of stone is locked behind combat req
 * {SkillsPanel} Firemaking skill shows up on all locations??? lol
  - arrayOfLogsFromBank.length controls if the player can firemake in the area - maybe make an array of locations where firemaking is available?
 * {Game Container} clean up runecrafting tick function

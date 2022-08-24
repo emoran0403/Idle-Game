@@ -184,7 +184,8 @@ const QuestPanel = (props: Types.QuestPanelCompProps) => {
     if (combatLevel <= quest.combatRequirements - 10) {
       meetsLevelRequirements = false;
     }
-
+    //! i am checking this, but internet went out lol
+    console.log({ combatLevel, cbreq: quest.combatRequirements });
     const arrayOfSkillNamesFromQuestReqs = Object.keys(quest.levelRequirements);
     /**
      * we initialize arrayOfSkillNamesFromQuestReqs to get an array of skill names.
