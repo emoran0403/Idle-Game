@@ -115,7 +115,7 @@ Implement additional locations and their associated quests / skills / enemies
 Implement additional features
 
 - [ ] Grand Exchange API allowing players to 'buy' and 'sell' items at Runescape prices
-- [ ] Clue Scrols and their Slider Puzzles
+- [ ] Clue Scrolls and their Slider Puzzles
 - [ ] Bosses
 - [ ] High Scores page
 - [ ] In game player to player chat
