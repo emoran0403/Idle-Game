@@ -16,13 +16,16 @@
   - [Tech Stack](#tech-stack)
   - [Deployment](#deployment)
 - [Roadmap](#roadmap)
-- [License](#license)
 - [Contact](#contact)
 - [Acknowledgements](#acknowledgements)
 
 <!-- About the Project -->
 
 ## About the Project
+
+### Overview
+
+IdleScape is an idle / incremental game based on the MMORPG Runescape. The player tells the game what they want to do, and the game executes those actions on an interval. The player can choose to train skills, go on quests, or engage in combat with various enemies. Options vary for each location the player may travel to.
 
 <!-- Screenshots -->
 
